@@ -1,0 +1,21 @@
+{
+  "dependencies": {
+    "@sanity/client": "^6.7.0",
+    "@sanity/document-internationalization": "^2.0.1",
+    "@sanity/types": "^3.18.1",
+    "@sanity/util": "^3.18.1",
+    "quicktype": "^23.0.76"
+  },
+  "name": "phrase",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "scripts": {
+    "generate-types": "quicktype example-data/created-jobs.json -o CreatedJobs.ts --just-types && quicktype example-data/created-project.json -o CreatedProject.ts --just-types"
+  }
+}

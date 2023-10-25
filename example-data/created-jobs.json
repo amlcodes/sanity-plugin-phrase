@@ -1,0 +1,194 @@
+{
+  "asyncRequest": {
+    "action": "IMPORT_JOB",
+    "dateCreated": "2023-10-25T21:19:50+0000",
+    "id": "889934"
+  },
+  "jobs": [
+    {
+      "workflowLevel": 1,
+      "workflowStep": {
+        "uid": "D25IPKc2Dg9F71qR1zCxw2",
+        "order": 10,
+        "id": "20041366",
+        "lqaEnabled": false,
+        "name": "Translation"
+      },
+      "imported": false,
+      "dateCreated": "2023-10-25T21:19:50+0000",
+      "notificationIntervalInMinutes": -1,
+      "updateSourceDate": null,
+      "dateDue": null,
+      "targetLang": "pt",
+      "continuous": false,
+      "jobAssignedEmailTemplate": null,
+      "uid": "3vv9vR0eFek1o4Uk65Mw1j",
+      "status": "NEW",
+      "filename": "[Sanity.io] post slug.current db16b562-bd32-42fd-8c39-35eb3bd7ddb7.json",
+      "sourceFileUid": "OAFU2hbQOvWi7hWhD1ns0a",
+      "providers": []
+    },
+    {
+      "workflowLevel": 2,
+      "workflowStep": {
+        "uid": "YBiX40ZvYGML9aomJDKS72",
+        "order": 20,
+        "id": "20041367",
+        "lqaEnabled": false,
+        "name": "Revision"
+      },
+      "imported": false,
+      "dateCreated": "2023-10-25T21:19:50+0000",
+      "notificationIntervalInMinutes": -1,
+      "updateSourceDate": null,
+      "dateDue": null,
+      "targetLang": "pt",
+      "continuous": false,
+      "jobAssignedEmailTemplate": null,
+      "uid": "qUPw79sqj0jB0kHViBfiB9",
+      "status": "NEW",
+      "filename": "[Sanity.io] post slug.current db16b562-bd32-42fd-8c39-35eb3bd7ddb7.json",
+      "sourceFileUid": "OAFU2hbQOvWi7hWhD1ns0a",
+      "providers": []
+    },
+    {
+      "workflowLevel": 3,
+      "workflowStep": {
+        "uid": "eEplcJmzcArmbBsyhUA3y2",
+        "order": 30,
+        "id": "20041368",
+        "lqaEnabled": false,
+        "name": "Client review"
+      },
+      "imported": false,
+      "dateCreated": "2023-10-25T21:19:50+0000",
+      "notificationIntervalInMinutes": -1,
+      "updateSourceDate": null,
+      "dateDue": null,
+      "targetLang": "pt",
+      "continuous": false,
+      "jobAssignedEmailTemplate": null,
+      "uid": "6HOS6oteQ28641OO6R5qJ4",
+      "status": "NEW",
+      "filename": "[Sanity.io] post slug.current db16b562-bd32-42fd-8c39-35eb3bd7ddb7.json",
+      "sourceFileUid": "OAFU2hbQOvWi7hWhD1ns0a",
+      "providers": []
+    },
+    {
+      "workflowLevel": 4,
+      "workflowStep": {
+        "uid": "L3bd6vkTD7bf1ie1lV0mWm",
+        "order": 40,
+        "id": "20041369",
+        "lqaEnabled": true,
+        "name": "Quality assessment"
+      },
+      "imported": false,
+      "dateCreated": "2023-10-25T21:19:50+0000",
+      "notificationIntervalInMinutes": -1,
+      "updateSourceDate": null,
+      "dateDue": null,
+      "targetLang": "pt",
+      "continuous": false,
+      "jobAssignedEmailTemplate": null,
+      "uid": "tMhhZbdFCfVo8psheVs3s0",
+      "status": "NEW",
+      "filename": "[Sanity.io] post slug.current db16b562-bd32-42fd-8c39-35eb3bd7ddb7.json",
+      "sourceFileUid": "OAFU2hbQOvWi7hWhD1ns0a",
+      "providers": []
+    },
+    {
+      "workflowLevel": 1,
+      "workflowStep": {
+        "uid": "D25IPKc2Dg9F71qR1zCxw2",
+        "order": 10,
+        "id": "20041366",
+        "lqaEnabled": false,
+        "name": "Translation"
+      },
+      "imported": false,
+      "dateCreated": "2023-10-25T21:19:50+0000",
+      "notificationIntervalInMinutes": -1,
+      "updateSourceDate": null,
+      "dateDue": null,
+      "targetLang": "es",
+      "continuous": false,
+      "jobAssignedEmailTemplate": null,
+      "uid": "4iz3Ho9yju9u29srYhT8A1",
+      "status": "NEW",
+      "filename": "[Sanity.io] post slug.current db16b562-bd32-42fd-8c39-35eb3bd7ddb7.json",
+      "sourceFileUid": "OAFU2hbQOvWi7hWhD1ns0a",
+      "providers": []
+    },
+    {
+      "workflowLevel": 2,
+      "workflowStep": {
+        "uid": "YBiX40ZvYGML9aomJDKS72",
+        "order": 20,
+        "id": "20041367",
+        "lqaEnabled": false,
+        "name": "Revision"
+      },
+      "imported": false,
+      "dateCreated": "2023-10-25T21:19:50+0000",
+      "notificationIntervalInMinutes": -1,
+      "updateSourceDate": null,
+      "dateDue": null,
+      "targetLang": "es",
+      "continuous": false,
+      "jobAssignedEmailTemplate": null,
+      "uid": "pXuluyAP17Qh14uOx711kN",
+      "status": "NEW",
+      "filename": "[Sanity.io] post slug.current db16b562-bd32-42fd-8c39-35eb3bd7ddb7.json",
+      "sourceFileUid": "OAFU2hbQOvWi7hWhD1ns0a",
+      "providers": []
+    },
+    {
+      "workflowLevel": 3,
+      "workflowStep": {
+        "uid": "eEplcJmzcArmbBsyhUA3y2",
+        "order": 30,
+        "id": "20041368",
+        "lqaEnabled": false,
+        "name": "Client review"
+      },
+      "imported": false,
+      "dateCreated": "2023-10-25T21:19:50+0000",
+      "notificationIntervalInMinutes": -1,
+      "updateSourceDate": null,
+      "dateDue": null,
+      "targetLang": "es",
+      "continuous": false,
+      "jobAssignedEmailTemplate": null,
+      "uid": "kzknSfto14NRiWwB7wjgf7",
+      "status": "NEW",
+      "filename": "[Sanity.io] post slug.current db16b562-bd32-42fd-8c39-35eb3bd7ddb7.json",
+      "sourceFileUid": "OAFU2hbQOvWi7hWhD1ns0a",
+      "providers": []
+    },
+    {
+      "workflowLevel": 4,
+      "workflowStep": {
+        "uid": "L3bd6vkTD7bf1ie1lV0mWm",
+        "order": 40,
+        "id": "20041369",
+        "lqaEnabled": true,
+        "name": "Quality assessment"
+      },
+      "imported": false,
+      "dateCreated": "2023-10-25T21:19:50+0000",
+      "notificationIntervalInMinutes": -1,
+      "updateSourceDate": null,
+      "dateDue": null,
+      "targetLang": "es",
+      "continuous": false,
+      "jobAssignedEmailTemplate": null,
+      "uid": "zco6R4qAttFP7BN540O4T1",
+      "status": "NEW",
+      "filename": "[Sanity.io] post slug.current db16b562-bd32-42fd-8c39-35eb3bd7ddb7.json",
+      "sourceFileUid": "OAFU2hbQOvWi7hWhD1ns0a",
+      "providers": []
+    }
+  ],
+  "unsupportedFiles": []
+}

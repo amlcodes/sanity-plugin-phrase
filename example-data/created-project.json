@@ -1,0 +1,128 @@
+{
+  "internalId": 8,
+  "progress": {
+    "overdueCount": 0,
+    "totalCount": 0,
+    "finishedCount": 0
+  },
+  "dateCreated": "2023-10-25T21:19:49+0000",
+  "references": [],
+  "id": "35843",
+  "analyseSettings": {
+    "id": "106316"
+  },
+  "targetLangs": [
+    "es",
+    "pt"
+  ],
+  "financialSettings": {
+    "id": "53308"
+  },
+  "subDomain": null,
+  "sourceLang": "en",
+  "businessUnit": null,
+  "purchaseOrder": null,
+  "dateDue": null,
+  "name": "[Sanity.io] post slug.current db16b562-bd32-42fd-8c39-35eb3bd7ddb7",
+  "type": "PROJECT",
+  "owner": {
+    "userName": "hdoro",
+    "uid": "uonuQNieqGoM5N3rlxffY0",
+    "id": "20015355",
+    "firstName": "henrique",
+    "lastName": "doro",
+    "role": "ADMIN",
+    "email": "henrique.doro@tinloof.com"
+  },
+  "uid": "hYEWko4NRpFj3lwD9mPsx3",
+  "createdBy": {
+    "userName": "hdoro",
+    "uid": "uonuQNieqGoM5N3rlxffY0",
+    "id": "20015355",
+    "firstName": "henrique",
+    "lastName": "doro",
+    "role": "ADMIN",
+    "email": "henrique.doro@tinloof.com"
+  },
+  "client": null,
+  "status": "NEW",
+  "note": null,
+  "qualityAssuranceSettings": {
+    "id": "60892"
+  },
+  "costCenter": null,
+  "domain": null,
+  "isPublishedOnJobBoard": false,
+  "archived": false,
+  "shared": false,
+  "userRole": "ADMIN",
+  "accessSettings": {
+    "id": "49790"
+  },
+  "mtSettingsPerLanguageList": [
+    {
+      "machineTranslateSettings": {
+        "type": "MEMSOURCE_TRANSLATE_SETTINGS",
+        "uid": "znA52MFuHDGN0izX9sSbx1",
+        "id": "20079195",
+        "name": "Phrase Language AI"
+      },
+      "targetLang": "pt"
+    },
+    {
+      "machineTranslateSettings": {
+        "type": "MEMSOURCE_TRANSLATE_SETTINGS",
+        "uid": "znA52MFuHDGN0izX9sSbx1",
+        "id": "20079195",
+        "name": "Phrase Language AI"
+      },
+      "targetLang": "es"
+    }
+  ],
+  "workflowSteps": [
+    {
+      "workflowLevel": 1,
+      "abbreviation": "T",
+      "workflowStep": {
+        "uid": "D25IPKc2Dg9F71qR1zCxw2",
+        "id": "20041366"
+      },
+      "id": 36719,
+      "lqaProfileUid": null,
+      "name": "Translation"
+    },
+    {
+      "workflowLevel": 2,
+      "abbreviation": "R",
+      "workflowStep": {
+        "uid": "YBiX40ZvYGML9aomJDKS72",
+        "id": "20041367"
+      },
+      "id": 36720,
+      "lqaProfileUid": null,
+      "name": "Revision"
+    },
+    {
+      "workflowLevel": 3,
+      "abbreviation": "CR",
+      "workflowStep": {
+        "uid": "eEplcJmzcArmbBsyhUA3y2",
+        "id": "20041368"
+      },
+      "id": 36721,
+      "lqaProfileUid": null,
+      "name": "Client review"
+    },
+    {
+      "workflowLevel": 4,
+      "abbreviation": "LQA",
+      "workflowStep": {
+        "uid": "L3bd6vkTD7bf1ie1lV0mWm",
+        "id": "20041369"
+      },
+      "id": 36722,
+      "lqaProfileUid": "XJk2FoC1Mbn83ixcXw0Q15",
+      "name": "Quality assessment"
+    }
+  ]
+}

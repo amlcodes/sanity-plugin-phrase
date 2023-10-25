@@ -1,0 +1,224 @@
+[
+  {
+    "_createdAt": "2023-10-17T21:50:58Z",
+    "_id": "phrase.translation.db16b562-bd32-42fd-8c39-35eb3bd7ddb7.pt",
+    "_rev": "T1lOlhDpTBo4zpIQo1p1SW",
+    "_type": "post",
+    "_updatedAt": "2023-10-17T21:50:58Z",
+    "author": {
+      "_ref": "d0d00e98-81e5-40d1-aed4-f2bdd5b085bf",
+      "_type": "reference"
+    },
+    "body": [
+      {
+        "_key": "752a5e9caa86",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "5514cfa700ca0",
+            "_type": "span",
+            "marks": [],
+            "text": "The integration of Phrase.com with Sanity.io presents an exciting development for content creators and developers. Phrase.com is a powerful translation management system (TMS) that helps streamline the localization process, while Sanity.io is a popular headless CMS or content platform designed to offer flexibility and scalability. Together, this integration enables seamless translation workflows within the Sanity.io environment."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      }
+    ],
+    "language": "en",
+    "slug": {
+      "_type": "slug",
+      "current": "the-new-sanity-io-phrase-integration"
+    },
+    "title": "The new Sanity.io Phrase integration",
+    "phrase": {
+      "_type": "phrase.metadata",
+      "path": "slug.current",
+      "jobs": [
+        {
+          "_type": "phrase.job",
+          "_key": "3vv9vR0eFek1o4Uk65Mw1j",
+          "uid": "3vv9vR0eFek1o4Uk65Mw1j",
+          "status": "NEW",
+          "dateDue": null,
+          "dateCreated": "2023-10-25T21:19:50+0000",
+          "workflowLevel": 1,
+          "workflowStep": {
+            "uid": "D25IPKc2Dg9F71qR1zCxw2",
+            "order": 10,
+            "id": "20041366",
+            "lqaEnabled": false,
+            "name": "Translation"
+          },
+          "providers": []
+        },
+        {
+          "_type": "phrase.job",
+          "_key": "qUPw79sqj0jB0kHViBfiB9",
+          "uid": "qUPw79sqj0jB0kHViBfiB9",
+          "status": "NEW",
+          "dateDue": null,
+          "dateCreated": "2023-10-25T21:19:50+0000",
+          "workflowLevel": 2,
+          "workflowStep": {
+            "uid": "YBiX40ZvYGML9aomJDKS72",
+            "order": 20,
+            "id": "20041367",
+            "lqaEnabled": false,
+            "name": "Revision"
+          },
+          "providers": []
+        },
+        {
+          "_type": "phrase.job",
+          "_key": "6HOS6oteQ28641OO6R5qJ4",
+          "uid": "6HOS6oteQ28641OO6R5qJ4",
+          "status": "NEW",
+          "dateDue": null,
+          "dateCreated": "2023-10-25T21:19:50+0000",
+          "workflowLevel": 3,
+          "workflowStep": {
+            "uid": "eEplcJmzcArmbBsyhUA3y2",
+            "order": 30,
+            "id": "20041368",
+            "lqaEnabled": false,
+            "name": "Client review"
+          },
+          "providers": []
+        },
+        {
+          "_type": "phrase.job",
+          "_key": "tMhhZbdFCfVo8psheVs3s0",
+          "uid": "tMhhZbdFCfVo8psheVs3s0",
+          "status": "NEW",
+          "dateDue": null,
+          "dateCreated": "2023-10-25T21:19:50+0000",
+          "workflowLevel": 4,
+          "workflowStep": {
+            "uid": "L3bd6vkTD7bf1ie1lV0mWm",
+            "order": 40,
+            "id": "20041369",
+            "lqaEnabled": true,
+            "name": "Quality assessment"
+          },
+          "providers": []
+        }
+      ],
+      "targetLang": "pt",
+      "filename": "[Sanity.io] post slug.current db16b562-bd32-42fd-8c39-35eb3bd7ddb7.json",
+      "sourceFileUid": "OAFU2hbQOvWi7hWhD1ns0a",
+      "dateCreated": "2023-10-25T21:19:50+0000"
+    }
+  },
+  {
+    "_createdAt": "2023-10-17T21:50:58Z",
+    "_id": "phrase.translation.db16b562-bd32-42fd-8c39-35eb3bd7ddb7.es",
+    "_rev": "T1lOlhDpTBo4zpIQo1p1SW",
+    "_type": "post",
+    "_updatedAt": "2023-10-17T21:50:58Z",
+    "author": {
+      "_ref": "d0d00e98-81e5-40d1-aed4-f2bdd5b085bf",
+      "_type": "reference"
+    },
+    "body": [
+      {
+        "_key": "752a5e9caa86",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "5514cfa700ca0",
+            "_type": "span",
+            "marks": [],
+            "text": "The integration of Phrase.com with Sanity.io presents an exciting development for content creators and developers. Phrase.com is a powerful translation management system (TMS) that helps streamline the localization process, while Sanity.io is a popular headless CMS or content platform designed to offer flexibility and scalability. Together, this integration enables seamless translation workflows within the Sanity.io environment."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      }
+    ],
+    "language": "en",
+    "slug": {
+      "_type": "slug",
+      "current": "the-new-sanity-io-phrase-integration"
+    },
+    "title": "The new Sanity.io Phrase integration",
+    "phrase": {
+      "_type": "phrase.metadata",
+      "path": "slug.current",
+      "jobs": [
+        {
+          "_type": "phrase.job",
+          "_key": "4iz3Ho9yju9u29srYhT8A1",
+          "uid": "4iz3Ho9yju9u29srYhT8A1",
+          "status": "NEW",
+          "dateDue": null,
+          "dateCreated": "2023-10-25T21:19:50+0000",
+          "workflowLevel": 1,
+          "workflowStep": {
+            "uid": "D25IPKc2Dg9F71qR1zCxw2",
+            "order": 10,
+            "id": "20041366",
+            "lqaEnabled": false,
+            "name": "Translation"
+          },
+          "providers": []
+        },
+        {
+          "_type": "phrase.job",
+          "_key": "pXuluyAP17Qh14uOx711kN",
+          "uid": "pXuluyAP17Qh14uOx711kN",
+          "status": "NEW",
+          "dateDue": null,
+          "dateCreated": "2023-10-25T21:19:50+0000",
+          "workflowLevel": 2,
+          "workflowStep": {
+            "uid": "YBiX40ZvYGML9aomJDKS72",
+            "order": 20,
+            "id": "20041367",
+            "lqaEnabled": false,
+            "name": "Revision"
+          },
+          "providers": []
+        },
+        {
+          "_type": "phrase.job",
+          "_key": "kzknSfto14NRiWwB7wjgf7",
+          "uid": "kzknSfto14NRiWwB7wjgf7",
+          "status": "NEW",
+          "dateDue": null,
+          "dateCreated": "2023-10-25T21:19:50+0000",
+          "workflowLevel": 3,
+          "workflowStep": {
+            "uid": "eEplcJmzcArmbBsyhUA3y2",
+            "order": 30,
+            "id": "20041368",
+            "lqaEnabled": false,
+            "name": "Client review"
+          },
+          "providers": []
+        },
+        {
+          "_type": "phrase.job",
+          "_key": "zco6R4qAttFP7BN540O4T1",
+          "uid": "zco6R4qAttFP7BN540O4T1",
+          "status": "NEW",
+          "dateDue": null,
+          "dateCreated": "2023-10-25T21:19:50+0000",
+          "workflowLevel": 4,
+          "workflowStep": {
+            "uid": "L3bd6vkTD7bf1ie1lV0mWm",
+            "order": 40,
+            "id": "20041369",
+            "lqaEnabled": true,
+            "name": "Quality assessment"
+          },
+          "providers": []
+        }
+      ],
+      "targetLang": "es",
+      "filename": "[Sanity.io] post slug.current db16b562-bd32-42fd-8c39-35eb3bd7ddb7.json",
+      "sourceFileUid": "OAFU2hbQOvWi7hWhD1ns0a",
+      "dateCreated": "2023-10-25T21:19:50+0000"
+    }
+  }
+]
