@@ -1,0 +1,89 @@
+{
+  "_createdAt": "2023-10-17T21:50:58Z",
+  "_id": "db16b562-bd32-42fd-8c39-35eb3bd7ddb7",
+  "_rev": "T1lOlhDpTBo4zpIQo1p1SW",
+  "_type": "post",
+  "_updatedAt": "2023-10-17T21:50:58Z",
+  "author": {
+    "_ref": "d0d00e98-81e5-40d1-aed4-f2bdd5b085bf",
+    "_type": "reference"
+  },
+  "body": [
+    {
+      "_key": "752a5e9caa86",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "5514cfa700ca0",
+          "_type": "span",
+          "marks": [],
+          "text": "The integration of Phrase.com with Sanity.io presents an exciting development for content creators and developers. Phrase.com is a powerful translation management system (TMS) that helps streamline the localization process, while Sanity.io is a popular headless CMS or content platform designed to offer flexibility and scalability. Together, this integration enables seamless translation workflows within the Sanity.io environment."
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "20fa17d3e809",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "680b067c1713",
+          "_type": "span",
+          "marks": [],
+          "text": "\nWith the integration, users of Sanity.io can easily manage and translate their content for multiple languages using Phrase.com. The translation process becomes more efficient as content creators can directly send their text for translation, receive translations back, and seamlessly update their Sanity.io project with the localized content. "
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "e865c4802fc3",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "c2f7d17ad0a4",
+          "_type": "span",
+          "marks": [],
+          "text": "This integration eliminates the need for manual copy-pasting of translated content, saving time and reducing the risk of errors.\n"
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "d38c07987d60",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "ca62521f57a7",
+          "_type": "span",
+          "marks": [],
+          "text": "Additionally, the combination of Phrase.com's translation quality assurance tools and Sanity.io's content management capabilities provides a comprehensive solution for multilingual content management. Content creators can maintain consistency and accuracy across different language versions by leveraging Phrase.com's terminology management, translation memory, and proofreading features, while still enjoying the flexibility and ease of use provided by Sanity.io.\n"
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "052b1803ce03",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "41a4ff74bcae",
+          "_type": "span",
+          "marks": [],
+          "text": "Overall, the integration of Phrase.com with Sanity.io empowers teams to efficiently manage translation workflows, collaborate on global content creation, and deliver localized experiences. This integration marks a significant step towards simplifying the localization process for developers and content creators, making it easier to reach a global audience in multiple languages while maintaining the efficiency and flexibility offered by Sanity.io."
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    }
+  ],
+  "language": "en",
+  "slug": {
+    "_type": "slug",
+    "current": "the-new-sanity-io-phrase-integration"
+  },
+  "title": "The new Sanity.io Phrase integration"
+}

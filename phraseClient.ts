@@ -1,9 +1,6 @@
 import { CreatedJobs } from './types/CreatedJobs'
 import { CreatedProject } from './types/CreatedProject'
 
-const AUTH_TOKEN =
-  'BhJ2GEYbIpHNKiAJ1PCWEfLl0MKKpJvrgJgq5bkTkxriBacJQ09W1Aeb4TNZo1Rsg'
-
 const createPhraseClient = (region: 'us' | 'eur', token?: string) => {
   const BASE_URL = `https://${
     region === 'us' ? 'us.' : ''
@@ -90,4 +87,4 @@ const createPhraseClient = (region: 'us' | 'eur', token?: string) => {
   }
 }
 
-export const client = createPhraseClient('us', AUTH_TOKEN)
+export const client = createPhraseClient('us', process.env.PHRASE_TOKEN)

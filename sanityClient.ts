@@ -1,4 +1,8 @@
 import { createClient } from '@sanity/client'
 
-// @TODO: configure
-export const sanityClient = createClient({})
+export const sanityClient = createClient({
+  projectId: process.env.SANITY_PROJECT_ID,
+  dataset: process.env.SANITY_DATASET,
+  token: process.env.SANITY_WRITE_TOKEN,
+  apiVersion: '2023-10-26',
+})

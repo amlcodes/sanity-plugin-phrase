@@ -1,11 +1,11 @@
 import { Path, SanityDocument } from '@sanity/types'
-import { fromString, get, numEqualSegments, toString } from '@sanity/util/paths'
+import { fromString, get, toString } from '@sanity/util/paths'
 import fs from 'fs'
-import { Job } from './types/CreatedJobs'
-import { client } from './phraseClient'
-import { sanityClient } from './sanityClient'
 import ensureDocNotLocked from './ensureDocNotLocked'
 import lockDocument from './lockDocument'
+import { client } from './phraseClient'
+import { sanityClient } from './sanityClient'
+import { Job } from './types/CreatedJobs'
 
 function pathToString(path: Path) {
   if (path.length === 0) return 'root'
@@ -62,7 +62,7 @@ function createPTDs(jobs: Job[], sanityDocument: SanityDocument, path: Path) {
   return PTDs
 }
 
-async function createTranslation({
+export default async function createTranslations({
   document,
   inputPath,
   templateUid,
@@ -94,8 +94,11 @@ async function createTranslation({
   })
   const projectId = project.uid
   console.log({ project, projectId })
-  fs.writeFileSync('created-project.json', JSON.stringify(project, null, 2))
-  // const project = JSON.parse(fs.readFileSync('created-project.json', 'utf-8'))
+  fs.writeFileSync(
+    'example-data/created-project.json',
+    JSON.stringify(project, null, 2),
+  )
+  // const project = JSON.parse(fs.readFileSync('example-data/created-project.json', 'utf-8'))
   // const projectId = project.uid
 
   const filename = `${translationName}.json`
@@ -113,9 +116,12 @@ async function createTranslation({
     throw new Error('Failed creating jobs')
   }
 
-  fs.writeFileSync('created-jobs.json', JSON.stringify(jobsRes, null, 2))
+  fs.writeFileSync(
+    'example-data/created-jobs.json',
+    JSON.stringify(jobsRes, null, 2),
+  )
   const PTDs = createPTDs(jobsRes.jobs, document, path)
-  fs.writeFileSync('PTDs.json', JSON.stringify(PTDs, null, 2))
+  fs.writeFileSync('example-data/PTDs.json', JSON.stringify(PTDs, null, 2))
 
   const transaction = sanityClient.transaction()
   // Create PTDs in Sanity
@@ -143,40 +149,3 @@ async function createTranslation({
     )
   })
 }
-
-createTranslation({
-  templateUid: '1dIg0Pc1d8kLUFyM0tgdmt',
-  document: {
-    _createdAt: '2023-10-17T21:50:58Z',
-    _id: 'db16b562-bd32-42fd-8c39-35eb3bd7ddb7',
-    _rev: 'T1lOlhDpTBo4zpIQo1p1SW',
-    _type: 'post',
-    _updatedAt: '2023-10-17T21:50:58Z',
-    author: {
-      _ref: 'd0d00e98-81e5-40d1-aed4-f2bdd5b085bf',
-      _type: 'reference',
-    },
-    body: [
-      {
-        _key: '752a5e9caa86',
-        _type: 'block',
-        children: [
-          {
-            _key: '5514cfa700ca0',
-            _type: 'span',
-            marks: [],
-            text: 'The integration of Phrase.com with Sanity.io presents an exciting development for content creators and developers. Phrase.com is a powerful translation management system (TMS) that helps streamline the localization process, while Sanity.io is a popular headless CMS or content platform designed to offer flexibility and scalability. Together, this integration enables seamless translation workflows within the Sanity.io environment.',
-          },
-        ],
-        markDefs: [],
-        style: 'normal',
-      },
-    ],
-    language: 'en',
-    slug: {
-      _type: 'slug',
-      current: 'the-new-sanity-io-phrase-integration',
-    },
-    title: 'The new Sanity.io Phrase integration',
-  },
-})
