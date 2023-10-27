@@ -1,9 +1,9 @@
 {
   "_createdAt": "2023-10-17T21:50:58Z",
-  "_id": "db16b562-bd32-42fd-8c39-35eb3bd7ddb7",
-  "_rev": "T1lOlhDpTBo4zpIQo1p1SW",
+  "_id": "drafts.db16b562-bd32-42fd-8c39-35eb3bd7ddb7",
+  "_rev": "1568d2ab-1ca3-40ee-9bbd-d555a388b694",
   "_type": "post",
-  "_updatedAt": "2023-10-17T21:50:58Z",
+  "_updatedAt": "2023-10-27T17:46:18.014Z",
   "author": {
     "_ref": "d0d00e98-81e5-40d1-aed4-f2bdd5b085bf",
     "_type": "reference"
@@ -16,12 +16,56 @@
         {
           "_key": "5514cfa700ca0",
           "_type": "span",
+          "marks": ["strong"],
+          "text": "The "
+        },
+        {
+          "_key": "bad0edfa3cf8",
+          "_type": "span",
+          "marks": ["em", "strong"],
+          "text": "integration"
+        },
+        {
+          "_key": "dadb2cb3dd2a",
+          "_type": "span",
+          "marks": ["strong"],
+          "text": " of "
+        },
+        {
+          "_key": "9c51bce6f329",
+          "_type": "span",
+          "marks": ["8833d1d38d58"],
+          "text": "Phrase.com"
+        },
+        {
+          "_key": "48d5f3afdd31",
+          "_type": "span",
           "marks": [],
-          "text": "The integration of Phrase.com with Sanity.io presents an exciting development for content creators and developers. Phrase.com is a powerful translation management system (TMS) that helps streamline the localization process, while Sanity.io is a popular headless CMS or content platform designed to offer flexibility and scalability. Together, this integration enables seamless translation workflows within the Sanity.io environment."
+          "text": " with Sanity.io presents an exciting development for "
+        },
+        {
+          "asset": {
+            "_type": "reference",
+            "_ref": "image-477b098e271d8be8c14178c1fc194c5386eeb21f-512x512-png"
+          },
+          "_key": "3714adfcee8e",
+          "_type": "image"
+        },
+        {
+          "_key": "11bef27f38ce",
+          "_type": "span",
+          "marks": [],
+          "text": " content creators and developers. Phrase.com is a powerful  translation management system (TMS) that helps streamline the localization process, while Sanity.io is a popular headless CMS or content platform designed to offer flexibility and scalability. Together, this integration enables seamless translation workflows within the Sanity.io environment."
         }
       ],
-      "markDefs": [],
-      "style": "normal"
+      "markDefs": [
+        {
+          "_type": "link",
+          "_key": "8833d1d38d58",
+          "href": "https://www.npmjs.com/package/@portabletext/to-html"
+        }
+      ],
+      "style": "h4"
     },
     {
       "_key": "20fa17d3e809",

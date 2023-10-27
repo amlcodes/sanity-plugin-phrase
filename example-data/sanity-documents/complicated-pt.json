@@ -1,0 +1,471 @@
+{
+  "_createdAt": "2023-10-17T21:50:58Z",
+  "_id": "drafts.db16b562-bd32-42fd-8c39-35eb3bd7ddb7",
+  "_rev": "230abca7-704a-47eb-a96d-a1d21b800666",
+  "_type": "post",
+  "_updatedAt": "2023-10-27T18:43:48.257Z",
+  "author": {
+    "_ref": "d0d00e98-81e5-40d1-aed4-f2bdd5b085bf",
+    "_type": "reference"
+  },
+  "body": [
+    {
+      "_key": "752a5e9caa86",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "5514cfa700ca0",
+          "_type": "span",
+          "marks": ["strong"],
+          "text": "The "
+        },
+        {
+          "_key": "bad0edfa3cf8",
+          "_type": "span",
+          "marks": ["em", "strong"],
+          "text": "integration"
+        },
+        {
+          "_key": "dadb2cb3dd2a",
+          "_type": "span",
+          "marks": ["strong"],
+          "text": " of "
+        },
+        {
+          "_key": "9c51bce6f329",
+          "_type": "span",
+          "marks": ["8833d1d38d58"],
+          "text": "Phrase.com"
+        },
+        {
+          "_key": "48d5f3afdd31",
+          "_type": "span",
+          "marks": [],
+          "text": " with Sanity.io presents an exciting development for "
+        },
+        {
+          "_key": "3714adfcee8e",
+          "_type": "image",
+          "asset": {
+            "_ref": "image-477b098e271d8be8c14178c1fc194c5386eeb21f-512x512-png",
+            "_type": "reference"
+          }
+        },
+        {
+          "_key": "11bef27f38ce",
+          "_type": "span",
+          "marks": [],
+          "text": " content creators and developers. Phrase.com is a powerful  translation management system (TMS) that helps streamline the localization process, while Sanity.io is a popular headless CMS or content platform design"
+        },
+        {
+          "_key": "5dc350eb6060",
+          "_type": "image",
+          "asset": {
+            "_ref": "image-477b098e271d8be8c14178c1fc194c5386eeb21f-512x512-png",
+            "_type": "reference"
+          }
+        },
+        {
+          "_key": "c0ca3d9bf54b",
+          "_type": "span",
+          "marks": [],
+          "text": "ed to offer fle"
+        },
+        {
+          "_key": "ebfe2570dc4a",
+          "_type": "span",
+          "marks": ["strong", "em"],
+          "text": "x"
+        },
+        {
+          "_key": "542412de0f53",
+          "_type": "span",
+          "marks": ["em"],
+          "text": "i"
+        },
+        {
+          "_key": "13e93483283d",
+          "_type": "span",
+          "marks": ["em", "strong"],
+          "text": "b"
+        },
+        {
+          "_key": "574b19029a4b",
+          "_type": "span",
+          "marks": ["strong"],
+          "text": "i"
+        },
+        {
+          "_key": "c9841c0169f2",
+          "_type": "span",
+          "marks": ["em", "strong"],
+          "text": "lity and scalability. Together, this integration "
+        },
+        {
+          "_key": "7d76affaa982",
+          "_type": "span",
+          "marks": ["strong"],
+          "text": "enables"
+        },
+        {
+          "_key": "af764589ec33",
+          "_type": "span",
+          "marks": ["em", "strong"],
+          "text": " seamless translation workflows within the Sanity.io environment."
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "8833d1d38d58",
+          "_type": "link",
+          "href": "https://www.npmjs.com/package/@portabletext/to-html"
+        }
+      ],
+      "style": "h4"
+    },
+    {
+      "_key": "20fa17d3e809",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "680b067c1713",
+          "_type": "span",
+          "marks": [],
+          "text": "\nWith the integration, users of Sanity.io can easily manage and translate their content for multiple languages using Phrase.com. The translation process becomes more efficient as content creators can directly send their text for translation, receive translations back, and seamlessly update their Sanity.io project with the localized content. "
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "e865c4802fc3",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "c2f7d17ad0a4",
+          "_type": "span",
+          "marks": [],
+          "text": "This integration eliminates the need for manual copy-pasting of translated content, saving time and reducing the risk of errors.\n"
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "d38c07987d60",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "ca62521f57a7",
+          "_type": "span",
+          "marks": [],
+          "text": "Additionally, the combination of Phrase.com's translation quality assurance tools and Sanity.io's content management capabilities provides a comprehensive solution for multilingual content management. Content creators can maintain consistency and accuracy across different language versions by leveraging Phrase.com's terminology management, translation memory, and proofreading features, while still enjoying the flexibility and ease of use provided by Sanity.io.\n"
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "052b1803ce03",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "41a4ff74bcae",
+          "_type": "span",
+          "marks": [],
+          "text": "Overall, the integration of Phrase.com with Sanity.io empowers teams to efficiently manage translation workflows, collaborate on global content creation, and deliver localized experiences. This integration marks a significant step towards simplifying the localization process for developers and content creators, making it easier to reach a global audience in multiple languages while maintaining the efficiency and flexibility offered by Sanity.io."
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "7ce5e3e1f4c0",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "3e82fa19dcb7",
+          "_type": "span",
+          "marks": [],
+          "text": ""
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "34c6e21cb404",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "396198f59a14",
+          "_type": "span",
+          "marks": ["strong"],
+          "text": "Random content:"
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "2bfd78b7ac1d",
+      "_type": "block",
+      "markDefs": [],
+      "style": "normal",
+      "children": [
+        {
+          "_key": "d71071d1fd19",
+          "_type": "span",
+          "marks": [],
+          "text": "List #1"
+        }
+      ],
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "e2a9ce863331",
+      "_type": "block",
+      "markDefs": [],
+      "style": "normal",
+      "level": 2,
+      "listItem": "bullet",
+      "children": [
+        {
+          "_key": "dc4c01600381",
+          "_type": "span",
+          "marks": [],
+          "text": "List 1.1"
+        }
+      ]
+    },
+    {
+      "_key": "70f1a6c94deb",
+      "_type": "block",
+      "markDefs": [
+        {
+          "_type": "link",
+          "_key": "60caabd2d2e3",
+          "href": "https://mulungood.com"
+        }
+      ],
+      "style": "normal",
+      "level": 3,
+      "listItem": "bullet",
+      "children": [
+        {
+          "_key": "cf34a11d9524",
+          "_type": "span",
+          "marks": [],
+          "text": "List 1.1.1 with "
+        },
+        {
+          "text": "formatting, ",
+          "_key": "2f91a408021d",
+          "_type": "span",
+          "marks": ["strong"]
+        },
+        {
+          "_key": "4462e80e0543",
+          "_type": "span",
+          "marks": ["strong", "60caabd2d2e3"],
+          "text": "links"
+        },
+        {
+          "_key": "a9bc49e436a1",
+          "_type": "span",
+          "marks": ["strong"],
+          "text": " and "
+        },
+        {
+          "_key": "d414eeeb4028",
+          "_type": "span",
+          "marks": ["strong", "em"],
+          "text": "inline blocks"
+        },
+        {
+          "_key": "8112b58a2c80",
+          "_type": "span",
+          "marks": ["strong"],
+          "text": ": "
+        },
+        {
+          "_key": "a384fbe1220d",
+          "_type": "image",
+          "asset": {
+            "_type": "reference",
+            "_ref": "image-477b098e271d8be8c14178c1fc194c5386eeb21f-512x512-png"
+          }
+        },
+        {
+          "text": "",
+          "_key": "5bda972a8d53",
+          "_type": "span",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "16cc1a19bc18",
+      "_type": "block",
+      "markDefs": [],
+      "style": "normal",
+      "level": 2,
+      "listItem": "bullet",
+      "children": [
+        {
+          "_key": "42a6a80fbae2",
+          "_type": "span",
+          "marks": [],
+          "text": "List 1.2"
+        }
+      ]
+    },
+    {
+      "_key": "748a990aea04",
+      "_type": "block",
+      "markDefs": [],
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet",
+      "children": [
+        {
+          "_key": "0b86d698edd6",
+          "_type": "span",
+          "marks": [],
+          "text": "List #2"
+        }
+      ]
+    },
+    {
+      "_key": "4918328db022",
+      "_type": "block",
+      "markDefs": [],
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet",
+      "children": [
+        {
+          "_key": "4020b75f24ac",
+          "_type": "span",
+          "marks": [],
+          "text": "List #3"
+        }
+      ]
+    },
+    {
+      "_key": "93ad95183f56",
+      "_type": "block",
+      "markDefs": [],
+      "style": "h1",
+      "level": 1,
+      "listItem": "bullet",
+      "children": [
+        {
+          "_key": "9a17a69ea755",
+          "_type": "span",
+          "marks": [],
+          "text": "List 4 (h1)"
+        }
+      ]
+    },
+    {
+      "_key": "38b8e5ff03e6",
+      "_type": "block",
+      "markDefs": [],
+      "style": "h2",
+      "level": 2,
+      "listItem": "bullet",
+      "children": [
+        {
+          "_key": "ddef47cc00d3",
+          "_type": "span",
+          "marks": [],
+          "text": "List 4.1 (h2)"
+        }
+      ]
+    },
+    {
+      "_key": "baf82b417192",
+      "_type": "block",
+      "markDefs": [],
+      "style": "h3",
+      "level": 3,
+      "listItem": "bullet",
+      "children": [
+        {
+          "_key": "03b566a582b7",
+          "_type": "span",
+          "marks": [],
+          "text": "4.1.1 (h3)"
+        }
+      ]
+    },
+    {
+      "_key": "00c30a2a7ed3",
+      "_type": "block",
+      "markDefs": [],
+      "style": "h4",
+      "level": 4,
+      "listItem": "bullet",
+      "children": [
+        {
+          "_key": "d4f49fb2f80b",
+          "_type": "span",
+          "marks": [],
+          "text": "4.1.1.1 (h4)"
+        }
+      ]
+    },
+    {
+      "_key": "c90c64e3fbab",
+      "_type": "block",
+      "markDefs": [],
+      "style": "blockquote",
+      "level": 5,
+      "listItem": "bullet",
+      "children": [
+        {
+          "_key": "a842c39c8dfa",
+          "_type": "span",
+          "marks": [],
+          "text": "4.1.1.1.1 (quote)"
+        }
+      ]
+    },
+    {
+      "_key": "13fdcb068a65",
+      "_type": "block",
+      "markDefs": [],
+      "style": "blockquote",
+      "children": [
+        {
+          "_key": "28864fd6f824",
+          "_type": "span",
+          "marks": [],
+          "text": ""
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "_key": "b7302849606f",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_type": "span",
+          "_key": "a43ae3e4d58f",
+          "text": "And some random text! (above is an empty quote)",
+          "marks": []
+        }
+      ]
+    }
+  ],
+  "language": "en",
+  "slug": {
+    "_type": "slug",
+    "current": "the-new-sanity-io-phrase-integration"
+  },
+  "title": "The new Sanity.io Phrase integration"
+}
