@@ -57,14 +57,10 @@ const createPhraseClient = (region: 'us' | 'eur', token?: string) => {
           type: 'application/json',
         })
 
-        // Construct a File object from the Blob
-        const file = new File([blob], 'data.json', {
-          type: 'application/octet-stream',
-        })
         const res = await request({
           method: 'POST',
           endpoint: `projects/${props.projectUid}/jobs`,
-          body: file,
+          body: blob,
           headers: {
             Memsource: JSON.stringify({
               targetLangs: props.targetLangs,

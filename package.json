@@ -4,7 +4,10 @@
     "@sanity/document-internationalization": "^2.0.1",
     "@sanity/types": "^3.18.1",
     "@sanity/util": "^3.18.1",
-    "quicktype": "^23.0.76"
+    "parse5": "^7.1.2",
+    "quicktype": "^23.0.76",
+    "tsx": "^3.14.0",
+    "vitest": "^0.34.6"
   },
   "name": "phrase",
   "module": "index.ts",
@@ -16,6 +19,7 @@
     "typescript": "^5.0.0"
   },
   "scripts": {
-    "generate-types": "quicktype example-data/created-jobs.json -o CreatedJobs.ts --just-types && quicktype example-data/created-project.json -o CreatedProject.ts --just-types"
+    "generate-types": "quicktype example-data/created-jobs.json -o CreatedJobs.ts --just-types && quicktype example-data/created-project.json -o CreatedProject.ts --just-types",
+    "playground": "tsx playground.ts"
   }
 }

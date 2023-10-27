@@ -1,4 +1,4 @@
-import { Path, SanityDocument } from '@sanity/types'
+import { Path, SanityDocument, Schema } from '@sanity/types'
 import { fromString, get, toString } from '@sanity/util/paths'
 import fs from 'fs'
 import ensureDocNotLocked from './ensureDocNotLocked'
@@ -6,6 +6,7 @@ import lockDocument from './lockDocument'
 import { client } from './phraseClient'
 import { sanityClient } from './sanityClient'
 import { Job } from './types/CreatedJobs'
+import sanityToPhrase from './sanityToPhrase'
 
 function pathToString(path: Path) {
   if (path.length === 0) return 'root'
@@ -66,14 +67,15 @@ export default async function createTranslations({
   document,
   inputPath,
   templateUid,
+  schema,
 }: {
   document: SanityDocument
   inputPath?: Path | string
   templateUid: string
+  schema: Schema
 }) {
   const path =
     typeof inputPath === 'string' ? fromString(inputPath) : inputPath || []
-  const dataToTranslate = path ? get(document, path) : document
 
   const translationName = getTranslationName(document, path)
 
@@ -106,6 +108,7 @@ export default async function createTranslations({
   // @TODO: make configurable
   const targetLangs = project.targetLangs
 
+  const dataToTranslate = sanityToPhrase(get(document, path), schema)
   const jobsRes = await client.jobs.create({
     projectUid: projectId,
     targetLangs: targetLangs,

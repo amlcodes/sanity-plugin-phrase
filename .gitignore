@@ -170,3 +170,7 @@ dist
 
 # IntelliJ based IDEs
 .idea
+
+next-app-test
+test-studio
+test-output
