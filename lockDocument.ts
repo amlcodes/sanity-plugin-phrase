@@ -1,33 +1,56 @@
 import { Path } from '@sanity/types'
 import { sanityClient } from './sanityClient'
+import {
+  SanityDocumentWithPhraseMetadata,
+  SanityTranslationDocPair,
+} from './types'
 
 export default async function lockDocument({
   pathKey,
   translationName,
   path,
-  docIds,
+  freshDocuments,
 }: {
   pathKey: string
   translationName: string
   path: Path
-  /** Which ID variations of this document are in Sanity (draft & published) */
-  docIds: string[]
+  freshDocuments: SanityTranslationDocPair[]
 }) {
   const transaction = sanityClient.transaction()
-  for (const id of docIds) {
-    transaction.patch(id, (patch) => {
-      return patch
-        .setIfMissing({ phraseTranslations: [] })
-        .insert('replace', `phraseTranslations[${pathKey}]`, [
-          {
-            _type: 'phrase.mainMetadata',
-            _key: pathKey,
-            projectName: translationName,
-            path,
-            status: 'CREATING',
-          },
-        ])
+  const docs = freshDocuments.flatMap(
+    (d) =>
+      [d.draft, d.published].filter(
+        Boolean,
+      ) as SanityDocumentWithPhraseMetadata[],
+  )
+
+  for (const doc of docs) {
+    transaction.patch(doc._id, (patch) => {
+      const basePatch = patch.setIfMissing({ phraseTranslations: [] })
+      const phraseMetadata = {
+        _type: 'phrase.mainMetadata',
+        _key: pathKey,
+        projectName: translationName,
+        path,
+        status: 'CREATING',
+      }
+
+      if (doc.phraseTranslations?.some((t) => t._key === pathKey)) {
+        return basePatch.insert(
+          'replace',
+          `phraseTranslations[_key == "${pathKey}"]`,
+          [phraseMetadata],
+        )
+      }
+      return basePatch.append('phraseTranslations', [phraseMetadata])
     })
   }
-  await transaction.commit()
+
+  try {
+    await transaction.commit()
+  } catch (error) {
+    throw new Error(`Failed to lock document, preventing action on Phrase.`, {
+      cause: error,
+    })
+  }
 }

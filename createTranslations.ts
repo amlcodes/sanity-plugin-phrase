@@ -1,12 +1,13 @@
-import { Path, SanityDocument, Schema } from '@sanity/types'
+import { Path, SanityDocument } from '@sanity/types'
 import { fromString, get, toString } from '@sanity/util/paths'
 import fs from 'fs'
 import ensureDocNotLocked from './ensureDocNotLocked'
 import lockDocument from './lockDocument'
 import { client } from './phraseClient'
+import queryFreshDocuments from './queryFreshDocuments'
 import { sanityClient } from './sanityClient'
-import { Job } from './types/CreatedJobs'
 import sanityToPhrase from './sanityToPhrase'
+import { Job } from './types/CreatedJobs'
 
 function pathToString(path: Path) {
   if (path.length === 0) return 'root'
@@ -67,12 +68,10 @@ export default async function createTranslations({
   document,
   inputPath,
   templateUid,
-  schema,
 }: {
   document: SanityDocument
   inputPath?: Path | string
   templateUid: string
-  schema: Schema
 }) {
   const path =
     typeof inputPath === 'string' ? fromString(inputPath) : inputPath || []
@@ -81,10 +80,13 @@ export default async function createTranslations({
 
   const pathKey = pathToString(path)
   // Before going ahead with Phrase, make sure there's no pending translation
-  const { docIds } = await ensureDocNotLocked(document, path)
+  const { freshDocuments, freshDocumentsByLang } = await queryFreshDocuments(
+    document._id,
+  )
+  await ensureDocNotLocked(freshDocuments, path)
   // And lock it to prevent race conditions
   await lockDocument({
-    docIds,
+    freshDocuments,
     path,
     pathKey,
     translationName,
@@ -108,7 +110,7 @@ export default async function createTranslations({
   // @TODO: make configurable
   const targetLangs = project.targetLangs
 
-  const dataToTranslate = sanityToPhrase(get(document, path), schema)
+  const dataToTranslate = sanityToPhrase(get(document, path))
   const jobsRes = await client.jobs.create({
     projectUid: projectId,
     targetLangs: targetLangs,
