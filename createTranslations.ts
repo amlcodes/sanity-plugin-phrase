@@ -59,7 +59,14 @@ export default async function createTranslations(
     projectUid: projectId,
     targetLangs: targetLangs,
     filename: filename,
-    dataToTranslate,
+    // @TODO: handle non-object dataToTranslate
+    dataToTranslate: {
+      ...dataToTranslate,
+      _sanityContext:
+        '<div><h1>Translate me!</h1> <p>Find the preview for this content by clicking below:</p> <p><a style="display: inline-block; background: papayawhip; padding: 0.5em 1em;" href="https://mulungood.com">See preview</a></p>',
+      // @TODO: what other fields must we remove?
+      phraseTranslations: undefined,
+    },
   })
 
   if (!jobsRes) {
@@ -75,10 +82,13 @@ export default async function createTranslations(
   // %%%%% DEBUG %%%%%
 
   const PTDs = createPTDs({
-    jobs: jobsRes.jobs,
-    sourceDoc: document,
+    ...request,
     path,
+    jobs: jobsRes.jobs,
+    freshDocumentsByLang,
+    freshSourceDoc: freshDocumentsById[sourceDoc._id],
   })
+
   // %%%%% DEBUG %%%%%
   fs.writeFileSync('example-data/PTDs.json', JSON.stringify(PTDs, null, 2))
   // %%%%% DEBUG %%%%%

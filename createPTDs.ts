@@ -6,12 +6,12 @@ import { Job, SanityTranslationDocPair, TranslationRequest } from './types'
  */
 export function createPTDs({
   jobs,
-  sourceDoc,
+  freshSourceDoc,
   path,
   freshDocumentsByLang,
 }: TranslationRequest & {
   jobs: Job[]
-  sourceDoc: SanityDocument
+  freshSourceDoc: SanityDocument
   freshDocumentsByLang: Record<string, SanityTranslationDocPair>
 }) {
   const jobCollections = jobs.reduce(
@@ -26,7 +26,7 @@ export function createPTDs({
     const targetLangDoc =
       freshDocumentsByLang[targetLang]?.draft ||
       freshDocumentsByLang[targetLang]?.published ||
-      sourceDoc
+      freshSourceDoc
 
     // @TODO: for content in `path`, use `sourceDoc` instead as we'd rather have the original language as the reference in previews for linguists.
     // Will need some sort of deep merging - how does `@sanity/mutator` does it?
@@ -51,7 +51,7 @@ export function createPTDs({
     return {
       ...targetLangDoc,
       // @TODO: can we rely on ID paths or should we split by `-`?
-      _id: `phrase.translation.${sourceDoc._id}.${targetLang}`,
+      _id: `phrase.translation.${freshSourceDoc._id}.${targetLang}`,
       phrase: {
         _type: 'phrase.ptd.meta',
         path,
