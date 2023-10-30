@@ -1,10 +1,9 @@
 import { sanityClient } from './sanityClient'
-import { SanityTranslationDocPair } from './types'
-
-// @TODO: implementation
-function undraftId(id: string) {
-  return id.replace('drafts.', '')
-}
+import {
+  SanityDocumentWithPhraseMetadata,
+  SanityTranslationDocPair,
+} from './types'
+import { undraftId } from './utils'
 
 export default async function queryFreshDocuments(docId: string) {
   // @TODO: make query configurable by users
@@ -27,8 +26,15 @@ export default async function queryFreshDocuments(docId: string) {
       ...acc,
       [t.lang]: t,
     }),
-    {} as Record<string, (typeof freshDocuments)[0]>,
+    {} as Record<string, SanityTranslationDocPair>,
   )
 
-  return { freshDocumentsByLang, freshDocuments }
+  const freshDocumentsById = freshDocuments.reduce((acc, t) => {
+    if (t.draft) acc[t.draft._id] = t.draft
+    if (t.published) acc[t.published._id] = t.published
+
+    return acc
+  }, {} as Record<string, SanityDocumentWithPhraseMetadata>)
+
+  return { freshDocumentsByLang, freshDocumentsById, freshDocuments }
 }

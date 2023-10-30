@@ -29,12 +29,19 @@ const createPhraseClient = (region: 'us' | 'eur', token?: string) => {
 
   return {
     projects: {
-      create: async (props: { name: string; templateUid: string }) => {
+      create: async (props: {
+        name: string
+        templateUid: string
+        targetLangs?: string[]
+        sourceLang?: string
+      }) => {
         const res = await request({
           method: 'POST',
           endpoint: `projects/applyTemplate/${props.templateUid}`,
           body: JSON.stringify({
             name: props.name,
+            targetLangs: props.targetLangs,
+            sourceLang: props.sourceLang,
           }),
           headers: {
             'Content-Type': 'application/json',

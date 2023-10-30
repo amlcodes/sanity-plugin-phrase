@@ -1,5 +1,5 @@
 import { Path } from '@sanity/types'
-import pathsIntersect from './pathsIntersect'
+import { pathsIntersect } from './utils'
 import { SanityTranslationDocPair } from './types'
 
 export default function ensureDocNotLocked(

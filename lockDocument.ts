@@ -28,7 +28,7 @@ export default async function lockDocument({
     transaction.patch(doc._id, (patch) => {
       const basePatch = patch.setIfMissing({ phraseTranslations: [] })
       const phraseMetadata = {
-        _type: 'phrase.mainMetadata',
+        _type: 'phrase.mainDoc.meta',
         _key: pathKey,
         projectName: translationName,
         path,

@@ -1,89 +1,33 @@
-import { Path, SanityDocument } from '@sanity/types'
-import { fromString, get, toString } from '@sanity/util/paths'
+import { Path } from '@sanity/types'
+import { fromString, get } from '@sanity/util/paths'
 import fs from 'fs'
+import { createPTDs } from './createPTDs'
 import ensureDocNotLocked from './ensureDocNotLocked'
 import lockDocument from './lockDocument'
 import { client } from './phraseClient'
 import queryFreshDocuments from './queryFreshDocuments'
 import { sanityClient } from './sanityClient'
 import sanityToPhrase from './sanityToPhrase'
-import { Job } from './types/CreatedJobs'
+import { TranslationRequest } from './types'
+import { getTranslationName, pathToString } from './utils'
 
-function pathToString(path: Path) {
-  if (path.length === 0) return 'root'
-
-  return toString(path)
-}
-
-// @TODO create friendlier names
-function getTranslationName(sanityDocument: SanityDocument, path: Path) {
-  return `[Sanity.io] ${sanityDocument._type} ${pathToString(path)} ${
-    sanityDocument._id
-  }`
-}
-
-/**
- * PTD: Parallel Translation Document
- */
-function createPTDs(jobs: Job[], sanityDocument: SanityDocument, path: Path) {
-  const jobCollections = jobs.reduce(
-    (acc, job) => ({
-      ...acc,
-      [job.targetLang]: [...(acc[job.targetLang] || []), job],
-    }),
-    {} as Record<string, Job[]>,
-  )
-
-  const PTDs = Object.entries(jobCollections).map(([targetLang, jobs]) => {
-    return {
-      ...sanityDocument,
-      // @TODO: can we rely on ID paths or should we split by `-`?
-      _id: `phrase.translation.${sanityDocument._id}.${targetLang}`,
-      phrase: {
-        _type: 'phrase.ptdMetadata',
-        path,
-        jobs: jobs.map((j) => ({
-          _type: 'phrase.job',
-          _key: j.uid,
-          uid: j.uid,
-          status: j.status,
-          dateDue: j.dateDue,
-          dateCreated: j.dateCreated,
-          workflowLevel: j.workflowLevel,
-          workflowStep: j.workflowStep,
-          providers: j.providers,
-        })),
-        targetLang,
-        filename: jobs[0].filename,
-        sourceFileUid: jobs[0].sourceFileUid,
-        dateCreated: jobs[0].dateCreated,
-      },
-    }
-  })
-
-  return PTDs
-}
-
-export default async function createTranslations({
-  document,
-  inputPath,
-  templateUid,
-}: {
-  document: SanityDocument
-  inputPath?: Path | string
-  templateUid: string
-}) {
+export default async function createTranslations(
+  request: Omit<TranslationRequest, 'path'> & { path?: Path | string },
+) {
+  const { sourceDoc, path: inputPath, targetLangs, templateUid } = request
   const path =
     typeof inputPath === 'string' ? fromString(inputPath) : inputPath || []
 
-  const translationName = getTranslationName(document, path)
-
   const pathKey = pathToString(path)
+  const { freshDocuments, freshDocumentsByLang, freshDocumentsById } =
+    await queryFreshDocuments(sourceDoc._id)
+
   // Before going ahead with Phrase, make sure there's no pending translation
-  const { freshDocuments, freshDocumentsByLang } = await queryFreshDocuments(
-    document._id,
-  )
   await ensureDocNotLocked(freshDocuments, path)
+
+  const translationName = getTranslationName({ ...request, path })
+  const filename = `${translationName}.json`
+
   // And lock it to prevent race conditions
   await lockDocument({
     freshDocuments,
@@ -95,38 +39,49 @@ export default async function createTranslations({
   const project = await client.projects.create({
     name: translationName,
     templateUid,
+    targetLangs,
+    sourceLang: sourceDoc.lang,
   })
   const projectId = project.uid
+
+  // %%%%% DEBUG %%%%%
   console.log({ project, projectId })
   fs.writeFileSync(
     'example-data/created-project.json',
     JSON.stringify(project, null, 2),
   )
-  // const project = JSON.parse(fs.readFileSync('example-data/created-project.json', 'utf-8'))
-  // const projectId = project.uid
+  // %%%%% DEBUG %%%%%
 
-  const filename = `${translationName}.json`
-
-  // @TODO: make configurable
-  const targetLangs = project.targetLangs
-
+  const document = freshDocumentsById[sourceDoc._id]
   const dataToTranslate = sanityToPhrase(get(document, path))
+
   const jobsRes = await client.jobs.create({
     projectUid: projectId,
     targetLangs: targetLangs,
     filename: filename,
     dataToTranslate,
   })
+
   if (!jobsRes) {
+    // @TODO unlock on error in Phrase
     throw new Error('Failed creating jobs')
   }
 
+  // %%%%% DEBUG %%%%%
   fs.writeFileSync(
     'example-data/created-jobs.json',
     JSON.stringify(jobsRes, null, 2),
   )
-  const PTDs = createPTDs(jobsRes.jobs, document, path)
+  // %%%%% DEBUG %%%%%
+
+  const PTDs = createPTDs({
+    jobs: jobsRes.jobs,
+    sourceDoc: document,
+    path,
+  })
+  // %%%%% DEBUG %%%%%
   fs.writeFileSync('example-data/PTDs.json', JSON.stringify(PTDs, null, 2))
+  // %%%%% DEBUG %%%%%
 
   const transaction = sanityClient.transaction()
   // Create PTDs in Sanity
@@ -140,7 +95,7 @@ export default async function createTranslations({
       `phraseTranslations[${pathToString(path)}]`,
       [
         {
-          _type: 'phrase.mainMetadata',
+          _type: 'phrase.mainDoc.meta',
           _key: pathKey,
           projectId,
           projectName: translationName,
