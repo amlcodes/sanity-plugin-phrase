@@ -17,6 +17,20 @@ const docEn = {
   title: 'EN Title',
   body: [
     {
+      _key: 'block-0',
+      _type: 'block',
+      children: [
+        {
+          _key: '680b067c1713',
+          _type: 'span',
+          marks: [],
+          text: 'EN block #0',
+        },
+      ],
+      markDefs: [],
+      style: 'normal',
+    },
+    {
       _key: 'block-1',
       _type: 'block',
       children: [
@@ -58,6 +72,20 @@ const docEn = {
       markDefs: [],
       style: 'normal',
     },
+    {
+      _key: 'block-4',
+      _type: 'block',
+      children: [
+        {
+          _key: 'c2f7d17ad0a4',
+          _type: 'span',
+          marks: [],
+          text: 'EN block #4',
+        },
+      ],
+      markDefs: [],
+      style: 'normal',
+    },
   ],
 }
 
@@ -85,14 +113,14 @@ const docPt: any = {
       style: 'normal',
     },
     {
-      _key: 'block-2',
+      _key: 'block-3',
       _type: 'block',
       children: [
         {
           _key: 'c2f7d17ad0a4',
           _type: 'span',
           marks: [],
-          text: 'PT block #2',
+          text: 'PT block #3',
         },
       ],
       markDefs: [],
@@ -125,6 +153,37 @@ describe('Document merging', () => {
     })
   })
 
+  test('manual merge | new element in array (at the start, body[block-0])', () => {
+    expect(
+      mergeDocs(docPt, docEn, ['body', { _key: 'block-0' }]),
+    ).toStrictEqual({
+      ...docPt,
+      body: [docEn.body.find((b) => b._key === 'block-0'), ...docPt.body],
+    })
+  })
+
+  test('manual merge | new element in array (at the middle, body[block-2])', () => {
+    expect(
+      mergeDocs(docPt, docEn, ['body', { _key: 'block-2' }]),
+    ).toStrictEqual({
+      ...docPt,
+      body: [
+        ...docPt.body.slice(0, 2),
+        docEn.body.find((b) => b._key === 'block-2'),
+        ...docPt.body.slice(2),
+      ],
+    })
+  })
+
+  test('manual merge | new element in array (at the end, body[block-4])', () => {
+    expect(
+      mergeDocs(docPt, docEn, ['body', { _key: 'block-4' }]),
+    ).toStrictEqual({
+      ...docPt,
+      body: [...docPt.body, docEn.body.find((b) => b._key === 'block-4')],
+    })
+  })
+
   test('manual merge | specific array elements', () => {
     for (const block of docPt.body) {
       expect(
@@ -139,6 +198,20 @@ describe('Document merging', () => {
         }),
       })
     }
+  })
+
+  test('manual merge | new root-level field (slug)', () => {
+    expect(mergeDocs(docPt, docEn, ['slug'])).toStrictEqual({
+      ...docPt,
+      slug: docEn.slug,
+    })
+  })
+
+  test('manual merge | nested field in missing root-level field (slug.current)', () => {
+    expect(mergeDocs(docPt, docEn, ['slug', 'current'])).toStrictEqual({
+      ...docPt,
+      slug: docEn.slug,
+    })
   })
 
   exampleDocuments.forEach(({ filename, document }) => {
