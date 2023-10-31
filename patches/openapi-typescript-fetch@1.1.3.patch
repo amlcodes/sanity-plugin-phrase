@@ -1,0 +1,26 @@
+diff --git a/dist/cjs/fetcher.js b/dist/cjs/fetcher.js
+index f336c251f01b4f4de4327f4a3b27d07cb3ad29e6..5e04a32cc7cec2b1377a021e1f007c01fd948f45 100644
+--- a/dist/cjs/fetcher.js
++++ b/dist/cjs/fetcher.js
+@@ -84,7 +84,7 @@ function getFetchParams(request) {
+     const payload = Object.assign(Array.isArray(request.payload) ? [] : {}, request.payload);
+     const path = getPath(request.path, payload);
+     const query = getQuery(request.method, payload, request.queryParams);
+-    const body = getBody(request.method, payload);
++    const body = request.init && request.init.body ? request.init.body : getBody(request.method, payload);
+     const headers = getHeaders(body, (_a = request.init) === null || _a === void 0 ? void 0 : _a.headers);
+     const url = request.baseUrl + path + query;
+     const init = Object.assign(Object.assign({}, request.init), { method: request.method.toUpperCase(), headers,
+diff --git a/dist/esm/fetcher.js b/dist/esm/fetcher.js
+index 8a3fac620cd8211c708d94a871d5e33908341c46..5c892d194f4d2a123944b7cf77c1887bc46e3a36 100644
+--- a/dist/esm/fetcher.js
++++ b/dist/esm/fetcher.js
+@@ -81,7 +81,7 @@ function getFetchParams(request) {
+     const payload = Object.assign(Array.isArray(request.payload) ? [] : {}, request.payload);
+     const path = getPath(request.path, payload);
+     const query = getQuery(request.method, payload, request.queryParams);
+-    const body = getBody(request.method, payload);
++    const body = request.init && request.init.body ? request.init.body : getBody(request.method, payload);
+     const headers = getHeaders(body, (_a = request.init) === null || _a === void 0 ? void 0 : _a.headers);
+     const url = request.baseUrl + path + query;
+     const init = Object.assign(Object.assign({}, request.init), { method: request.method.toUpperCase(), headers,

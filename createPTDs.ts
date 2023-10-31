@@ -1,5 +1,5 @@
 import { SanityDocument } from '@sanity/types'
-import { Job, SanityTranslationDocPair, TranslationRequest } from './types'
+import { Phrase, SanityTranslationDocPair, TranslationRequest } from './types'
 
 /**
  * PTD: Parallel Translation Document
@@ -10,17 +10,18 @@ export function createPTDs({
   path,
   freshDocumentsByLang,
 }: TranslationRequest & {
-  jobs: Job[]
+  jobs: Phrase['JobPart'][]
   freshSourceDoc: SanityDocument
   freshDocumentsByLang: Record<string, SanityTranslationDocPair>
 }) {
-  const jobCollections = jobs.reduce(
-    (acc, job) => ({
+  const jobCollections = jobs.reduce((acc, job) => {
+    if (!job.targetLang) return acc
+
+    return {
       ...acc,
       [job.targetLang]: [...(acc[job.targetLang] || []), job],
-    }),
-    {} as Record<string, Job[]>,
-  )
+    }
+  }, {} as Record<string, Phrase['JobPart'][]>)
 
   const PTDs = Object.entries(jobCollections).map(([targetLang, jobs]) => {
     const targetLangDoc =

@@ -1,93 +1,63 @@
-import { CreatedJobs } from './types/CreatedJobs'
-import { CreatedProject } from './types/CreatedProject'
+import { Fetcher } from 'openapi-typescript-fetch'
+import { paths } from './types/phraseOpenAPI'
 
 const createPhraseClient = (region: 'us' | 'eur', token?: string) => {
+  const fetcher = Fetcher.for<paths>()
   const BASE_URL = `https://${
     region === 'us' ? 'us.' : ''
-  }cloud.memsource.com/web/api2/v1`
-
-  function request<M extends 'GET' | 'POST' | undefined = 'GET'>({
-    method = 'GET',
-    endpoint,
-    // body,
-    ...requestOptions
-  }: {
-    method?: M
-    endpoint: string
-    // body: M extends 'POST' ? Record<string, any> : never
-  } & Omit<RequestInit, 'method'>) {
-    return fetch(`${BASE_URL}/${endpoint}`, {
-      ...requestOptions,
-      method,
+  }cloud.memsource.com/web`
+  fetcher.configure({
+    baseUrl: BASE_URL,
+    init: {
       headers: {
-        ...(requestOptions.headers || {}),
-        // 'Content-Type': 'application/json',
         Authorization: `ApiToken ${token}`,
       },
-    })
-  }
+    },
+  })
 
+  const createJobFetcher = fetcher
+    .path('/api2/v1/projects/{projectUid}/jobs')
+    .method('post')
+    .create()
   return {
     projects: {
-      create: async (props: {
-        name: string
-        templateUid: string
-        targetLangs?: string[]
-        sourceLang?: string
-      }) => {
-        const res = await request({
-          method: 'POST',
-          endpoint: `projects/applyTemplate/${props.templateUid}`,
-          body: JSON.stringify({
-            name: props.name,
-            targetLangs: props.targetLangs,
-            sourceLang: props.sourceLang,
-          }),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        })
-        if (res.status !== 201) {
-          throw new Error('Project creation failed')
-        }
-        return (await res.json()) as CreatedProject
-      },
+      create: fetcher
+        .path('/api2/v2/projects/applyTemplate/{templateUid}')
+        .method('post')
+        .create(),
     },
     jobs: {
-      create: async (props: {
-        projectUid: string
-        targetLangs: string[]
-        filename: string
-        dataToTranslate: unknown
-      }) => {
+      create: async (
+        props: Parameters<typeof createJobFetcher>[0] & {
+          targetLangs: string[]
+          filename: string
+          dataToTranslate: unknown
+        },
+      ) => {
         const blob = new Blob([JSON.stringify(props.dataToTranslate)], {
           type: 'application/json',
         })
 
-        const res = await request({
-          method: 'POST',
-          endpoint: `projects/${props.projectUid}/jobs`,
-          body: blob,
-          headers: {
-            Memsource: JSON.stringify({
-              targetLangs: props.targetLangs,
-              useProjectFileImportSettings: true,
-            }),
-            'Content-Disposition': `inline; filename="${props.filename}"`,
-            'Content-Type': 'application/octet-stream',
+        return createJobFetcher(
+          {
+            projectUid: props.projectUid,
           },
-        })
-        if (res.status !== 201) {
-          throw new Error(
-            `Job creation failed (status ${res.status} ${
-              res.statusText
-            } - ${await res.text()})`,
-          )
-        }
-        return (await res.json()) as CreatedJobs
+          {
+            body: blob,
+            method: 'POST',
+            headers: {
+              Memsource: JSON.stringify({
+                targetLangs: props.targetLangs,
+                useProjectFileImportSettings: true,
+              }),
+              'Content-Disposition': `inline; filename="${props.filename}"`,
+              'Content-Type': 'application/octet-stream',
+            },
+          },
+        )
       },
     },
   }
 }
 
-export const client = createPhraseClient('us', process.env.PHRASE_TOKEN)
+export const phraseClient = createPhraseClient('us', process.env.PHRASE_TOKEN)

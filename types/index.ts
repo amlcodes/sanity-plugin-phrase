@@ -5,9 +5,11 @@ import {
   PortableTextTextBlock,
   SanityDocument,
 } from '@sanity/types'
+import { definitions } from './phraseOpenAPI'
 
-export * from './CreatedJobs'
-export * from './CreatedProject'
+export type Phrase = {
+  JobPart: definitions['JobPartReference']
+}
 
 export type SerializedPtBlock = {
   _type: 'block'

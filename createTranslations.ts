@@ -4,7 +4,7 @@ import fs from 'fs'
 import { createPTDs } from './createPTDs'
 import ensureDocNotLocked from './ensureDocNotLocked'
 import lockDocument from './lockDocument'
-import { client } from './phraseClient'
+import { phraseClient } from './phraseClient'
 import queryFreshDocuments from './queryFreshDocuments'
 import { sanityClient } from './sanityClient'
 import sanityToPhrase from './sanityToPhrase'
@@ -36,13 +36,17 @@ export default async function createTranslations(
     translationName,
   })
 
-  const project = await client.projects.create({
+  const project = await phraseClient.projects.create({
     name: translationName,
     templateUid,
     targetLangs,
     sourceLang: sourceDoc.lang,
   })
-  const projectId = project.uid
+  if (!project.ok || !project.data.uid) {
+    // @TODO unlock on error in Phrase
+    throw new Error('Failed creating project')
+  }
+  const projectId = project.data.uid
 
   // %%%%% DEBUG %%%%%
   console.log({ project, projectId })
@@ -55,7 +59,7 @@ export default async function createTranslations(
   const document = freshDocumentsById[sourceDoc._id]
   const dataToTranslate = sanityToPhrase(get(document, path))
 
-  const jobsRes = await client.jobs.create({
+  const jobsRes = await phraseClient.jobs.create({
     projectUid: projectId,
     targetLangs: targetLangs,
     filename: filename,
@@ -69,7 +73,7 @@ export default async function createTranslations(
     },
   })
 
-  if (!jobsRes) {
+  if (!jobsRes.ok || !jobsRes.data?.jobs) {
     // @TODO unlock on error in Phrase
     throw new Error('Failed creating jobs')
   }
@@ -84,7 +88,7 @@ export default async function createTranslations(
   const PTDs = createPTDs({
     ...request,
     path,
-    jobs: jobsRes.jobs,
+    jobs: jobsRes.data.jobs,
     freshDocumentsByLang,
     freshSourceDoc: freshDocumentsById[sourceDoc._id],
   })
