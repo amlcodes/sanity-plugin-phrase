@@ -15,6 +15,12 @@ const docEn = {
     current: 'the-new-sanity-io-phrase-integration',
   },
   title: 'EN Title',
+  arrayNotInPt: [
+    { _key: 'block-0', title: 'Array item in EN - #0' },
+    { _key: 'block-1', title: 'Array item in EN - #1' },
+    { _key: 'block-2', title: 'Array item in EN - #2' },
+    { _key: 'block-3', title: 'Array item in EN - #3' },
+  ],
   body: [
     {
       _key: 'block-0',
@@ -200,6 +206,15 @@ describe('Document merging', () => {
     }
   })
 
+  test('manual merge | new element in missing array', () => {
+    expect(
+      mergeDocs(docPt, docEn, ['arrayNotInPt', { _key: 'block-0' }]),
+    ).toStrictEqual({
+      ...docPt,
+      arrayNotInPt: [docEn.arrayNotInPt.find((b) => b._key === 'block-0')],
+    })
+  })
+
   test('manual merge | new root-level field (slug)', () => {
     expect(mergeDocs(docPt, docEn, ['slug'])).toStrictEqual({
       ...docPt,
@@ -243,7 +258,7 @@ describe('Document merging', () => {
           }),
         ],
       }
-      test(`${filename} | specific block`, () => {
+      test(`auto merge (${filename}) | specific block`, () => {
         expect(
           mergeDocs(
             document,

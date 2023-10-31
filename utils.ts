@@ -63,7 +63,13 @@ export function mergeDocs(
         {
           id: originalDoc._id,
           setIfMissing: {
-            [arrayToJSONMatchPath(parentPath)]: changedParentValue,
+            [arrayToJSONMatchPath(parentPath)]: Array.isArray(
+              changedParentValue,
+            )
+              ? // When an array, don't copy other properties
+                []
+              : // When an object, copy all properties
+                changedParentValue,
           },
         },
       ]
