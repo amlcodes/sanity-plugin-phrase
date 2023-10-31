@@ -1,6 +1,7 @@
 import { SanityDocument } from '@sanity/types'
 import { Phrase, SanityTranslationDocPair, TranslationRequest } from './types'
 import { mergeDocs } from './utils'
+import { i18nAdapter } from './i18nAdapter'
 
 /**
  * PTD: Parallel Translation Document
@@ -36,31 +37,34 @@ export function createPTDs({
     // For content in `path`, use `sourceDoc` instead as we'd rather have the original language as the reference in previews for linguists.
     const baseDoc = mergeDocs(targetLangDoc, freshSourceDoc, path)
 
-    return {
-      ...baseDoc,
-      // @TODO: can we rely on ID paths or should we split by `-`?
-      _id: `phrase.translation.${freshSourceDoc._id}.${targetLang}`,
-      phrase: {
-        _type: 'phrase.ptd.meta',
-        path,
-        jobs: jobs.map((j) => ({
-          _type: 'phrase.job',
-          _key: j.uid,
-          uid: j.uid,
-          status: j.status,
-          dateDue: j.dateDue,
-          dateCreated: j.dateCreated,
-          workflowLevel: j.workflowLevel,
-          workflowStep: j.workflowStep,
-          providers: j.providers,
-        })),
-        targetLang,
-        sourceLang: sourceDoc.lang,
-        filename: jobs[0].filename,
-        sourceFileUid: jobs[0].sourceFileUid,
-        dateCreated: jobs[0].dateCreated,
+    return i18nAdapter.injectDocumentLang(
+      {
+        ...baseDoc,
+        // @TODO: can we rely on ID paths or should we split by `-`?
+        _id: `phrase.translation.${freshSourceDoc._id}.${targetLang}`,
+        phrase: {
+          _type: 'phrase.ptd.meta',
+          path,
+          jobs: jobs.map((j) => ({
+            _type: 'phrase.job',
+            _key: j.uid,
+            uid: j.uid,
+            status: j.status,
+            dateDue: j.dateDue,
+            dateCreated: j.dateCreated,
+            workflowLevel: j.workflowLevel,
+            workflowStep: j.workflowStep,
+            providers: j.providers,
+          })),
+          targetLang,
+          sourceLang: sourceDoc.lang,
+          filename: jobs[0].filename,
+          sourceFileUid: jobs[0].sourceFileUid,
+          dateCreated: jobs[0].dateCreated,
+        },
       },
-    }
+      targetLang,
+    )
   })
 
   return PTDs

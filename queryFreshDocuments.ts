@@ -1,25 +1,16 @@
+import { i18nAdapter } from './i18nAdapter'
 import { sanityClient } from './sanityClient'
 import {
   SanityDocumentWithPhraseMetadata,
   SanityTranslationDocPair,
+  TranslationRequest,
 } from './types'
-import { undraftId } from './utils'
 
-export default async function queryFreshDocuments(docId: string) {
-  // @TODO: make query configurable by users
-  const freshDocuments = await sanityClient.fetch<SanityTranslationDocPair[]>(
-    /* groq */ `
-  *[_type == "translation.metadata" && references($undraftedId)][0]
-    .translations[]{
-      "lang": _key,
-      "published": value->,
-      "draft": *[_id == ("drafts." + ^.value._ref)][0],
-    }
-  `,
-    {
-      undraftedId: undraftId(docId),
-    },
-  )
+export default async function queryFreshDocuments(props: TranslationRequest) {
+  const freshDocuments = await i18nAdapter.getFreshDocuments({
+    ...props,
+    sanityClient,
+  })
 
   const freshDocumentsByLang = freshDocuments.reduce(
     (acc, t) => ({

@@ -19,13 +19,14 @@ export default async function createTranslations(
     typeof inputPath === 'string' ? fromString(inputPath) : inputPath || []
 
   const pathKey = pathToString(path)
+  const configuredRequest = { ...request, path }
   const { freshDocuments, freshDocumentsByLang, freshDocumentsById } =
-    await queryFreshDocuments(sourceDoc._id)
+    await queryFreshDocuments(configuredRequest)
 
   // Before going ahead with Phrase, make sure there's no pending translation
   await ensureDocNotLocked(freshDocuments, path)
 
-  const translationName = getTranslationName({ ...request, path })
+  const translationName = getTranslationName(configuredRequest)
   const filename = `${translationName}.json`
 
   // And lock it to prevent race conditions
