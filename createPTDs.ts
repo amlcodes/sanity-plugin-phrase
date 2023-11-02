@@ -9,7 +9,7 @@ import { i18nAdapter } from './i18nAdapter'
 export function createPTDs({
   jobs,
   freshSourceDoc,
-  path,
+  paths,
   freshDocumentsByLang,
   sourceDoc,
 }: TranslationRequest & {
@@ -35,7 +35,11 @@ export function createPTDs({
       freshSourceDoc
 
     // For content in `path`, use `sourceDoc` instead as we'd rather have the original language as the reference in previews for linguists.
-    const baseDoc = mergeDocs(targetLangDoc, freshSourceDoc, path)
+    const baseDoc = mergeDocs({
+      originalDoc: targetLangDoc,
+      changedDoc: freshSourceDoc,
+      paths,
+    })
 
     return i18nAdapter.injectDocumentLang(
       {
@@ -44,7 +48,7 @@ export function createPTDs({
         _id: `phrase.translation.${freshSourceDoc._id}.${targetLang}`,
         phrase: {
           _type: 'phrase.ptd.meta',
-          path,
+          path: paths,
           jobs: jobs.map((j) => ({
             _type: 'phrase.job',
             _key: j.uid,

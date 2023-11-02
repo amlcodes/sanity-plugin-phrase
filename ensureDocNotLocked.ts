@@ -1,19 +1,30 @@
-import { Path } from '@sanity/types'
+import { SanityTranslationDocPair, TranslationRequest } from './types'
 import { pathsIntersect } from './utils'
-import { SanityTranslationDocPair } from './types'
 
-export default function ensureDocNotLocked(
-  freshDocuments: SanityTranslationDocPair[],
-  path: Path,
-) {
+export default function ensureDocNotLocked({
+  paths,
+  freshDocuments,
+}: TranslationRequest & {
+  freshDocuments: SanityTranslationDocPair[]
+}) {
   if (
     freshDocuments.some((d) => {
       const allMeta = [
         ...(d.draft?.phraseTranslations || []),
         ...(d.published?.phraseTranslations || []),
       ]
-      const allPaths = allMeta.map((m) => m.path)
-      return allPaths.some((p) => pathsIntersect(p, path))
+      const ongoingPaths = allMeta.flatMap((m) => {
+        // Ignore completed translations
+        if (m.status === 'COMPLETED') return []
+
+        return m.paths
+      })
+
+      return ongoingPaths.some((ongoingPath) =>
+        paths.some((requestedPath) =>
+          pathsIntersect(ongoingPath, requestedPath),
+        ),
+      )
     })
   ) {
     throw new Error('Translation already pending for this path')

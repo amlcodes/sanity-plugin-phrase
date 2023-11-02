@@ -1,21 +1,21 @@
-import { Path } from '@sanity/types'
 import { sanityClient } from './sanityClient'
 import {
+  MainDocTranslationMetadata,
   SanityDocumentWithPhraseMetadata,
   SanityTranslationDocPair,
+  TranslationRequest,
 } from './types'
+import { getTranslationKey, getTranslationName } from './utils'
 
-export default async function lockDocument({
-  pathKey,
-  translationName,
-  path,
-  freshDocuments,
-}: {
-  pathKey: string
-  translationName: string
-  path: Path
-  freshDocuments: SanityTranslationDocPair[]
-}) {
+export default async function lockDocument(
+  props: TranslationRequest & {
+    freshDocuments: SanityTranslationDocPair[]
+  },
+) {
+  const { paths, freshDocuments, sourceDoc } = props
+  const { name: translationName, filename } = getTranslationName(props)
+  const translationKey = getTranslationKey(paths, sourceDoc._rev)
+
   const transaction = sanityClient.transaction()
   const docs = freshDocuments.flatMap(
     (d) =>
@@ -27,18 +27,21 @@ export default async function lockDocument({
   for (const doc of docs) {
     transaction.patch(doc._id, (patch) => {
       const basePatch = patch.setIfMissing({ phraseTranslations: [] })
-      const phraseMetadata = {
+      const phraseMetadata: MainDocTranslationMetadata = {
         _type: 'phrase.mainDoc.meta',
-        _key: pathKey,
+        _key: translationKey,
+        _createdAt: new Date().toISOString(),
+        sourceDocRev: props.sourceDoc._rev,
         projectName: translationName,
-        path,
+        filename,
+        paths,
         status: 'CREATING',
       }
 
-      if (doc.phraseTranslations?.some((t) => t._key === pathKey)) {
+      if (doc.phraseTranslations?.some((t) => t._key === translationKey)) {
         return basePatch.insert(
           'replace',
-          `phraseTranslations[_key == "${pathKey}"]`,
+          `phraseTranslations[_key == "${translationKey}"]`,
           [phraseMetadata],
         )
       }

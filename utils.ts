@@ -1,5 +1,5 @@
 import { Mutation, arrayToJSONMatchPath } from '@sanity/mutator'
-import { PatchMutationOperation, Path, SanityDocument } from '@sanity/types'
+import { PatchOperations, Path, SanityDocument } from '@sanity/types'
 import { get, numEqualSegments, toString } from '@sanity/util/paths'
 import { TranslationRequest } from './types'
 
@@ -7,15 +7,28 @@ export function pathsIntersect(a: Path, b: Path) {
   return JSON.stringify(a) === JSON.stringify(b) || numEqualSegments(a, b) > 0
 }
 
+const ROOT_PATH_STR = '__root'
+
 export function pathToString(path: Path) {
-  if (path.length === 0) return 'root'
+  if (path.length === 0) return ROOT_PATH_STR
 
   return toString(path)
 }
 
+export function getTranslationKey(paths: Path[], _rev: string) {
+  return [...paths.map(pathToString), _rev].join('::')
+}
+
 // @TODO create friendlier names - requires schema
-export function getTranslationName({ sourceDoc, path }: TranslationRequest) {
-  return `[Sanity.io] ${sourceDoc._type} ${pathToString(path)} ${sourceDoc._id}`
+export function getTranslationName({ sourceDoc, paths }: TranslationRequest) {
+  const name = `[Sanity.io] ${sourceDoc._type} ${getTranslationKey(
+    paths,
+    sourceDoc._rev,
+  )} ${sourceDoc._id}`
+  return {
+    name,
+    filename: `${name}.json`,
+  }
 }
 
 // @TODO: sturdier implementation
@@ -35,14 +48,16 @@ function keepOriginalId(
   }
 }
 
-export function mergeDocs(
-  originalDoc: SanityDocument,
-  changedDoc: SanityDocument,
-  path: Path,
-) {
-  if (path.length === 0) return keepOriginalId(originalDoc, changedDoc)
-
-  let patches: PatchMutationOperation[] = []
+function getPatchOperations({
+  originalDoc,
+  changedDoc,
+  path,
+}: {
+  originalDoc: SanityDocument
+  changedDoc: SanityDocument
+  path: Path
+}): PatchOperations[] {
+  let patches: PatchOperations[] = []
 
   path.forEach((segment, i) => {
     const parentPath = path.slice(0, i)
@@ -61,7 +76,6 @@ export function mergeDocs(
       patches = [
         ...patches,
         {
-          id: originalDoc._id,
           setIfMissing: {
             [arrayToJSONMatchPath(parentPath)]: Array.isArray(
               changedParentValue,
@@ -88,7 +102,6 @@ export function mergeDocs(
       patches = [
         ...patches,
         {
-          id: originalDoc._id,
           insert: {
             items: [get(changedDoc, path)],
             before: arrayToJSONMatchPath([...parentPath, indexInParent]),
@@ -102,7 +115,6 @@ export function mergeDocs(
       patches = [
         ...patches,
         {
-          id: originalDoc._id,
           set: {
             [arrayToJSONMatchPath(path)]: get(changedDoc, path),
           },
@@ -110,17 +122,33 @@ export function mergeDocs(
       ]
     }
   })
-  /**
-   * @TODO how to deal with edition of nested content when sourceDoc doesn't have parent paths?
-   * Ex: sourceDoc has no `slug`, and `path` is `['slug', 'current']`. Currently, we just ignore it.
-   * Should we copy the whole parent from `targetDoc` up until it exists in the sourceDoc's path?
-   */
+
+  return patches
+}
+
+export function mergeDocs({
+  originalDoc,
+  changedDoc,
+  paths,
+}: {
+  originalDoc: SanityDocument
+  changedDoc: SanityDocument
+  paths: Path[]
+}) {
+  if (paths.length === 0) return keepOriginalId(originalDoc, changedDoc)
+
+  const patches = paths.flatMap((path) =>
+    getPatchOperations({ originalDoc, changedDoc, path }),
+  )
+  console.log(patches)
 
   return keepOriginalId(
     originalDoc,
     Mutation.applyAll(originalDoc, [
       new Mutation({
-        mutations: patches.map((patch) => ({ patch })),
+        mutations: patches.map((patch) => ({
+          patch: { ...patch, id: originalDoc._id },
+        })),
       }),
     ]) as SanityDocument,
   )

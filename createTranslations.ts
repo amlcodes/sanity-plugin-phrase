@@ -1,40 +1,41 @@
 import { Path } from '@sanity/types'
-import { fromString, get } from '@sanity/util/paths'
+import { fromString } from '@sanity/util/paths'
 import fs from 'fs'
 import { createPTDs } from './createPTDs'
 import ensureDocNotLocked from './ensureDocNotLocked'
+import getDataToTranslate from './getDataToTranslate'
 import lockDocument from './lockDocument'
 import { phraseClient } from './phraseClient'
 import queryFreshDocuments from './queryFreshDocuments'
 import { sanityClient } from './sanityClient'
-import sanityToPhrase from './sanityToPhrase'
 import { TranslationRequest } from './types'
-import { getTranslationName, pathToString } from './utils'
+import { getTranslationKey, getTranslationName } from './utils'
 
 export default async function createTranslations(
-  request: Omit<TranslationRequest, 'path'> & { path?: Path | string },
+  request: Omit<TranslationRequest, 'path'> & { paths?: (Path | string)[] },
 ) {
-  const { sourceDoc, path: inputPath, targetLangs, templateUid } = request
-  const path =
-    typeof inputPath === 'string' ? fromString(inputPath) : inputPath || []
+  const { sourceDoc, paths: inputPaths, targetLangs, templateUid } = request
+  const paths = (inputPaths || [[]]).map((p) =>
+    typeof p === 'string' ? fromString(p) : p || [],
+  )
 
-  const pathKey = pathToString(path)
-  const configuredRequest = { ...request, path }
+  const configuredRequest = { ...request, path: paths }
   const { freshDocuments, freshDocumentsByLang, freshDocumentsById } =
     await queryFreshDocuments(configuredRequest)
 
   // Before going ahead with Phrase, make sure there's no pending translation
-  await ensureDocNotLocked(freshDocuments, path)
+  ensureDocNotLocked({
+    ...configuredRequest,
+    freshDocuments,
+  })
 
-  const translationName = getTranslationName(configuredRequest)
-  const filename = `${translationName}.json`
+  const { name: translationName, filename } =
+    getTranslationName(configuredRequest)
 
   // And lock it to prevent race conditions
   await lockDocument({
+    ...configuredRequest,
     freshDocuments,
-    path,
-    pathKey,
-    translationName,
   })
 
   const project = await phraseClient.projects.create({
@@ -57,21 +58,15 @@ export default async function createTranslations(
   )
   // %%%%% DEBUG %%%%%
 
-  const document = freshDocumentsById[sourceDoc._id]
-  const dataToTranslate = sanityToPhrase(get(document, path))
-
   const jobsRes = await phraseClient.jobs.create({
     projectUid: projectId,
     targetLangs: targetLangs,
     filename: filename,
     // @TODO: handle non-object dataToTranslate
-    dataToTranslate: {
-      ...dataToTranslate,
-      _sanityContext:
-        '<div><h1>Translate me!</h1> <p>Find the preview for this content by clicking below:</p> <p><a style="display: inline-block; background: papayawhip; padding: 0.5em 1em;" href="https://mulungood.com">See preview</a></p>',
-      // @TODO: what other fields must we remove?
-      phraseTranslations: undefined,
-    },
+    dataToTranslate: getDataToTranslate({
+      ...configuredRequest,
+      freshDocumentsById,
+    }),
   })
 
   if (!jobsRes.ok || !jobsRes.data?.jobs) {
@@ -86,12 +81,13 @@ export default async function createTranslations(
   )
   // %%%%% DEBUG %%%%%
 
+  const freshSourceDoc = freshDocumentsById[sourceDoc._id]
   const PTDs = createPTDs({
     ...request,
-    path,
+    paths,
     jobs: jobsRes.data.jobs,
     freshDocumentsByLang,
-    freshSourceDoc: freshDocumentsById[sourceDoc._id],
+    freshSourceDoc,
   })
 
   // %%%%% DEBUG %%%%%
@@ -103,24 +99,14 @@ export default async function createTranslations(
   PTDs.forEach((doc) => transaction.createOrReplace(doc))
 
   // And
-  transaction.patch(document._id, (patch) => {
+  transaction.patch(freshSourceDoc._id, (patch) => {
     patch.setIfMissing({ phraseTranslations: [] })
-    return patch.insert(
-      'replace',
-      `phraseTranslations[${pathToString(path)}]`,
-      [
-        {
-          _type: 'phrase.mainDoc.meta',
-          _key: pathKey,
-          projectId,
-          projectName: translationName,
-          filename,
-          targetLangs,
-          path,
-          // @TODO: rethink this status
-          status: 'CREATED',
-        },
-      ],
-    )
+    const translationKey = getTranslationKey(paths, sourceDoc._rev)
+    const basePath = `phraseTranslations.activeTranslatons[${translationKey}]`
+    return patch.set({
+      [`${basePath}.status`]: 'CREATED',
+      [`${basePath}.projectId`]: projectId,
+      [`${basePath}.targetLangs`]: targetLangs,
+    })
   })
 }

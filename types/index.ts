@@ -6,6 +6,7 @@ import {
   SanityDocument,
 } from '@sanity/types'
 import { definitions } from './phraseOpenAPI'
+import { toString } from '@sanity/util/paths'
 
 export type Phrase = {
   JobPart: definitions['JobPartReference']
@@ -29,19 +30,28 @@ export enum SerializedPtHtmlTag {
   BLOCK = 'c-b',
 }
 
+export type MainDocTranslationMetadata = {
+  _type: 'phrase.mainDoc.meta'
+  /** @see getTranslationKey */
+  _key: string
+  _createdAt: string
+  sourceDocRev: string
+  projectName: string
+  filename: string
+  paths: Path[]
+} & (
+  | {
+      status: 'CREATING'
+    }
+  | {
+      status: 'CREATED' | 'COMPLETED'
+      targetLangs: string[]
+      projectId: string
+    }
+)
+
 export type SanityDocumentWithPhraseMetadata = SanityDocument & {
-  phraseTranslations?:
-    | {
-        _type: 'phrase.mainDoc.meta'
-        _key: string
-        projectName: string
-        path: Path
-        status: 'CREATING' | 'CREATED'
-        targetLangs?: string[]
-        filename?: string
-        projectId?: string
-      }[]
-    | null
+  phraseTranslations?: MainDocTranslationMetadata[] | null
 }
 
 export type SanityTranslationDocPair = {
@@ -52,12 +62,42 @@ export type SanityTranslationDocPair = {
 
 export interface TranslationRequest {
   sourceDoc: {
+    _rev: string
     _id: string
     _type: string
     lang: string
   }
-  path: Path
+  paths: Path[]
   targetLangs: string[]
   templateUid: string
   // @TODO: schema
+}
+
+export type DataToTranslate = {
+  _sanityRev: string
+  /** HTML content to show in Phrase's "Context note" in-editor panel */
+  _sanityContext?: string
+  /**
+   * The formatted content sent to Phrase by field path.
+   * Keys are the result of `@sanity/util/paths`'s `toString(path)` and need to be decoded back to `Path` before usage.
+   *
+   * @example
+   * // Document-level translations (entire document)
+   * {
+   *  contentByPath: {
+   *    __root: {
+   *      _id: 'document-id' // ...
+   *    }
+   *  }
+   * }
+   *
+   * // Field-level translations
+   * {
+   *  contentByPath: {
+   *    title: 'Document title',
+   *    "body[_key == 'block-1'].cta": { _type: 'cta', title: 'CTA title' }
+   *  }
+   * }
+   **/
+  contentByPath: Record<ReturnType<typeof toString>, unknown>
 }
