@@ -112,7 +112,7 @@ export default async function createTranslations(
   })
 
   fs.writeFileSync(
-    './transaction.json',
+    'example-data/gitignored/transaction.json',
     JSON.stringify(transaction.toJSON(), null, 2),
   )
   const res = await transaction.commit()

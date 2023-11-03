@@ -1,12 +1,13 @@
 import { Fetcher } from 'openapi-typescript-fetch'
-import { paths } from './types/phraseOpenAPI'
-import { DataToTranslate } from './types'
+import { operations, paths } from './types/phraseOpenAPI'
+import { ContentInPhrase } from './types'
 
 const createPhraseClient = (region: 'us' | 'eur', token?: string) => {
   const fetcher = Fetcher.for<paths>()
   const BASE_URL = `https://${
     region === 'us' ? 'us.' : ''
   }cloud.memsource.com/web`
+
   fetcher.configure({
     baseUrl: BASE_URL,
     init: {
@@ -20,6 +21,7 @@ const createPhraseClient = (region: 'us' | 'eur', token?: string) => {
     .path('/api2/v1/projects/{projectUid}/jobs')
     .method('post')
     .create()
+
   return {
     projects: {
       create: fetcher
@@ -28,11 +30,27 @@ const createPhraseClient = (region: 'us' | 'eur', token?: string) => {
         .create(),
     },
     jobs: {
+      getPreview: async (
+        props: operations['filePreviewJob']['parameters']['path'],
+      ) => {
+        const res = await fetch(
+          `${BASE_URL}/api2/v1/projects/${props.projectUid}/jobs/${props.jobUid}/preview`,
+          {
+            headers: {
+              Authorization: `ApiToken ${token}`,
+            },
+          },
+        )
+        if (!res.ok) throw new Error('Failed to get preview')
+
+        const json = JSON.parse(await res.text()) as ContentInPhrase
+        return json
+      },
       create: async (
         props: Parameters<typeof createJobFetcher>[0] & {
           targetLangs: string[]
           filename: string
-          dataToTranslate: DataToTranslate
+          dataToTranslate: ContentInPhrase
         },
       ) => {
         const blob = new Blob([JSON.stringify(props.dataToTranslate)], {

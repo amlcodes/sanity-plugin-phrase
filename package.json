@@ -23,8 +23,7 @@
     "typescript": "^5.0.0"
   },
   "scripts": {
-    "openapi-types": "openapi-typescript https://cloud.memsource.com/web/internal/v1/docs/latest/yaml?internal=false --output phraseSchema.d.ts",
-    "playground": "tsx playground.ts"
+    "openapi-types": "openapi-typescript https://cloud.memsource.com/web/internal/v1/docs/latest/yaml?internal=false --output phraseSchema.d.ts"
   },
   "pnpm": {
     "patchedDependencies": {

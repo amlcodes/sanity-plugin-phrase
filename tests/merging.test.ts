@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'bun:test'
 // import { describe, expect, test } from 'vitest'
-import { mergeDocs } from '../utils'
+import { mergeDocs } from '../mergeDocs'
 import { exampleDocuments } from './exampleDocuments'
 
 const docEn = {

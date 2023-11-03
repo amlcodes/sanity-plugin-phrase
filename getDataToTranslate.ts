@@ -1,7 +1,7 @@
 import { get } from '@sanity/util/paths'
 import sanityToPhrase from './sanityToPhrase'
 import {
-  DataToTranslate,
+  ContentInPhrase,
   SanityDocumentWithPhraseMetadata,
   TranslationRequest,
 } from './types'
@@ -13,7 +13,7 @@ export default function getDataToTranslate({
   paths,
 }: TranslationRequest & {
   freshDocumentsById: Record<string, SanityDocumentWithPhraseMetadata>
-}): DataToTranslate {
+}): ContentInPhrase {
   const document = freshDocumentsById[sourceDoc._id]
   return {
     _sanityRev: sourceDoc._rev,

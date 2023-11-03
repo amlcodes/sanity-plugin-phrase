@@ -5,12 +5,20 @@ import {
   PortableTextTextBlock,
   SanityDocument,
 } from '@sanity/types'
-import { definitions } from './phraseOpenAPI'
-import { toString } from '@sanity/util/paths'
 import { phraseClient } from '../phraseClient'
+import { pathToString } from '../utils'
+import { definitions } from './phraseOpenAPI'
 
 export type Phrase = {
   JobPart: definitions['JobPartReference']
+  JobInWebhook: Omit<Phrase['JobPart'], 'filename'> & {
+    fileName: string
+    project: {
+      id: string
+      uid: string
+      lastWorkflowLevel?: number | null
+    }
+  }
   CreatedProject: Awaited<
     ReturnType<typeof phraseClient.projects.create>
   >['data']
@@ -107,7 +115,7 @@ export interface TranslationRequest {
   // @TODO: schema
 }
 
-export type DataToTranslate = {
+export type ContentInPhrase = {
   _sanityRev: string
   /** HTML content to show in Phrase's "Context note" in-editor panel */
   _sanityContext?: string
@@ -133,5 +141,5 @@ export type DataToTranslate = {
    *  }
    * }
    **/
-  contentByPath: Record<ReturnType<typeof toString>, unknown>
+  contentByPath: Record<ReturnType<typeof pathToString>, unknown>
 }

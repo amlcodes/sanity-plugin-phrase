@@ -1,6 +1,7 @@
 import { SanityDocument } from '@sanity/types'
 import { Phrase, SanityTranslationDocPair, TranslationRequest } from './types'
-import { makeKeyFriendly, mergeDocs, undraftId } from './utils'
+import { makeKeyFriendly, undraftId } from './utils'
+import { mergeDocs } from './mergeDocs'
 import { i18nAdapter } from './i18nAdapter'
 
 /**
