@@ -1,18 +1,20 @@
 import { SanityDocument } from '@sanity/types'
 import { Phrase, SanityTranslationDocPair, TranslationRequest } from './types'
-import { mergeDocs } from './utils'
+import { makeKeyFriendly, mergeDocs, undraftId } from './utils'
 import { i18nAdapter } from './i18nAdapter'
 
 /**
  * PTD: Parallel Translation Document
  */
 export function createPTDs({
+  project,
   jobs,
   freshSourceDoc,
   paths,
   freshDocumentsByLang,
   sourceDoc,
 }: TranslationRequest & {
+  project: Phrase['CreatedProject']
   jobs: Phrase['JobPart'][]
   freshSourceDoc: SanityDocument
   freshDocumentsByLang: Record<string, SanityTranslationDocPair>
@@ -45,13 +47,15 @@ export function createPTDs({
       {
         ...baseDoc,
         // @TODO: can we rely on ID paths or should we split by `-`?
-        _id: `phrase.translation.${freshSourceDoc._id}.${targetLang}`,
-        phrase: {
+        _id: `${
+          undraftId(freshSourceDoc._id) !== freshSourceDoc._id ? 'drafts.' : ''
+        }phrase-translation--${undraftId(freshSourceDoc._id)}--${targetLang}`,
+        phrasePtd: {
           _type: 'phrase.ptd.meta',
-          path: paths,
+          paths,
           jobs: jobs.map((j) => ({
             _type: 'phrase.job',
-            _key: j.uid,
+            _key: makeKeyFriendly(j.uid || 'invalid-job'),
             uid: j.uid,
             status: j.status,
             dateDue: j.dateDue,
@@ -60,6 +64,7 @@ export function createPTDs({
             workflowStep: j.workflowStep,
             providers: j.providers,
           })),
+          projectUid: project.uid || 'invalid-project',
           targetLang,
           sourceLang: sourceDoc.lang,
           filename: jobs[0].filename,

@@ -1,7 +1,7 @@
 import { Mutation, arrayToJSONMatchPath } from '@sanity/mutator'
 import { PatchOperations, Path, SanityDocument } from '@sanity/types'
 import { get, numEqualSegments, toString } from '@sanity/util/paths'
-import { TranslationRequest } from './types'
+import { Phrase, TranslationRequest } from './types'
 
 export function pathsIntersect(a: Path, b: Path) {
   return JSON.stringify(a) === JSON.stringify(b) || numEqualSegments(a, b) > 0
@@ -15,13 +15,19 @@ export function pathToString(path: Path) {
   return toString(path)
 }
 
-export function getTranslationKey(paths: Path[], _rev: string) {
-  return [...paths.map(pathToString), _rev].join('::')
+export function makeKeyFriendly(str: string) {
+  return str.replace('-', '_')
 }
+
+export function getTranslationKey(paths: Path[], _rev: string) {
+  return [...paths.map(pathToString), _rev].map(makeKeyFriendly).join('__')
+}
+
+const FILENAME_PREFIX = '[Sanity.io]'
 
 // @TODO create friendlier names - requires schema
 export function getTranslationName({ sourceDoc, paths }: TranslationRequest) {
-  const name = `[Sanity.io] ${sourceDoc._type} ${getTranslationKey(
+  const name = `${FILENAME_PREFIX} ${sourceDoc._type} ${getTranslationKey(
     paths,
     sourceDoc._rev,
   )} ${sourceDoc._id}`
@@ -29,6 +35,10 @@ export function getTranslationName({ sourceDoc, paths }: TranslationRequest) {
     name,
     filename: `${name}.json`,
   }
+}
+
+export function jobComesFromSanity(job: Pick<Phrase['JobPart'], 'filename'>) {
+  return job?.filename?.startsWith(FILENAME_PREFIX)
 }
 
 // @TODO: sturdier implementation

@@ -12,14 +12,14 @@ import { TranslationRequest } from './types'
 import { getTranslationKey, getTranslationName } from './utils'
 
 export default async function createTranslations(
-  request: Omit<TranslationRequest, 'path'> & { paths?: (Path | string)[] },
+  request: Omit<TranslationRequest, 'paths'> & { paths?: (Path | string)[] },
 ) {
   const { sourceDoc, paths: inputPaths, targetLangs, templateUid } = request
   const paths = (inputPaths || [[]]).map((p) =>
     typeof p === 'string' ? fromString(p) : p || [],
   )
 
-  const configuredRequest = { ...request, path: paths }
+  const configuredRequest: TranslationRequest = { ...request, paths }
   const { freshDocuments, freshDocumentsByLang, freshDocumentsById } =
     await queryFreshDocuments(configuredRequest)
 
@@ -48,10 +48,10 @@ export default async function createTranslations(
     // @TODO unlock on error in Phrase
     throw new Error('Failed creating project')
   }
-  const projectId = project.data.uid
+  const projectUid = project.data.uid
 
   // %%%%% DEBUG %%%%%
-  console.log({ project, projectId })
+  console.log({ project, projectUid })
   fs.writeFileSync(
     'example-data/created-project.json',
     JSON.stringify(project, null, 2),
@@ -59,7 +59,7 @@ export default async function createTranslations(
   // %%%%% DEBUG %%%%%
 
   const jobsRes = await phraseClient.jobs.create({
-    projectUid: projectId,
+    projectUid: projectUid,
     targetLangs: targetLangs,
     filename: filename,
     // @TODO: handle non-object dataToTranslate
@@ -84,6 +84,7 @@ export default async function createTranslations(
   const freshSourceDoc = freshDocumentsById[sourceDoc._id]
   const PTDs = createPTDs({
     ...request,
+    project: project.data,
     paths,
     jobs: jobsRes.data.jobs,
     freshDocumentsByLang,
@@ -105,8 +106,15 @@ export default async function createTranslations(
     const basePath = `phraseTranslations.activeTranslatons[${translationKey}]`
     return patch.set({
       [`${basePath}.status`]: 'CREATED',
-      [`${basePath}.projectId`]: projectId,
+      [`${basePath}.projectId`]: projectUid,
       [`${basePath}.targetLangs`]: targetLangs,
     })
   })
+
+  fs.writeFileSync(
+    './transaction.json',
+    JSON.stringify(transaction.toJSON(), null, 2),
+  )
+  const res = await transaction.commit()
+  console.log('\n\n\nFinal transaction res', res)
 }

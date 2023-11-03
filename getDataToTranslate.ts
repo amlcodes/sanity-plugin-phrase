@@ -1,9 +1,11 @@
-import { get, toString } from '@sanity/util/paths'
+import { get } from '@sanity/util/paths'
+import sanityToPhrase from './sanityToPhrase'
 import {
   DataToTranslate,
   SanityDocumentWithPhraseMetadata,
   TranslationRequest,
 } from './types'
+import { pathToString } from './utils'
 
 export default function getDataToTranslate({
   freshDocumentsById,
@@ -26,7 +28,10 @@ export default function getDataToTranslate({
         </p>
       `,
     contentByPath: Object.fromEntries(
-      paths.map((path) => [toString(path), get(document, path)]),
+      paths.map((path) => [
+        pathToString(path),
+        sanityToPhrase(get(document, path)),
+      ]),
     ),
   }
 }

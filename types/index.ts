@@ -7,9 +7,13 @@ import {
 } from '@sanity/types'
 import { definitions } from './phraseOpenAPI'
 import { toString } from '@sanity/util/paths'
+import { phraseClient } from '../phraseClient'
 
 export type Phrase = {
   JobPart: definitions['JobPartReference']
+  CreatedProject: Awaited<
+    ReturnType<typeof phraseClient.projects.create>
+  >['data']
 }
 
 export type SerializedPtBlock = {
@@ -46,12 +50,42 @@ export type MainDocTranslationMetadata = {
   | {
       status: 'CREATED' | 'COMPLETED'
       targetLangs: string[]
-      projectId: string
+      projectUid: string
     }
 )
 
+export type PhraseJobInfo = Pick<
+  Phrase['JobPart'],
+  | 'uid'
+  | 'status'
+  | 'dateDue'
+  | 'dateCreated'
+  | 'workflowLevel'
+  | 'workflowStep'
+  | 'providers'
+> & {
+  _type: 'phrase.job'
+  _key: string
+}
+
+export type PtdTranslationMetadata = {
+  _type: 'phrase.ptd.meta'
+  sourceFileUid?: string
+  dateCreated?: string
+  targetLang: string
+  sourceLang: string
+  filename?: string
+  jobs: PhraseJobInfo[]
+  paths: Path[]
+  projectUid: string
+}
+
 export type SanityDocumentWithPhraseMetadata = SanityDocument & {
+  /** For main documents (source and translated) only */
   phraseTranslations?: MainDocTranslationMetadata[] | null
+
+  /** For PTDs (Phrase Translation Documents) only */
+  phrasePtd?: PtdTranslationMetadata
 }
 
 export type SanityTranslationDocPair = {
