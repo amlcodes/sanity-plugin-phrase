@@ -1,0 +1,51 @@
+{
+  "jobParts": [
+    {
+      "id": 367292,
+      "uid": "sKzhMYIw9wE5eJ5V89jWr3",
+      "internalId": "1",
+      "task": "4cfmIUhZol03FEEO0_dc1",
+      "fileName": "[Sanity.io] post __root::f242ef07-dfc8-4c1c-a853-3bad5e28a700 drafts.db16b562-bd32-42fd-8c39-35eb3bd7ddb7.json",
+      "targetLang": "pt",
+      "workflowLevel": 1,
+      "status": "NEW",
+      "wordsCount": 335,
+      "beginIndex": 0,
+      "endIndex": 66,
+      "isParentJobSplit": false,
+      "dateDue": null,
+      "dateCreated": "2023-11-03T15:40:54Z",
+      "project": {
+        "id": 36561,
+        "uid": "5DM0yiE9YGRgu2GP2SdQ12",
+        "lastWorkflowLevel": 2
+      },
+      "assignedTo": []
+    },
+    {
+      "id": 367293,
+      "uid": "M7SuwK7MXKrrcBj7uWM970",
+      "internalId": "1",
+      "task": "4cfmIUhZol03FEEO0_dc1",
+      "fileName": "[Sanity.io] post __root::f242ef07-dfc8-4c1c-a853-3bad5e28a700 drafts.db16b562-bd32-42fd-8c39-35eb3bd7ddb7.json",
+      "targetLang": "pt",
+      "workflowLevel": 2,
+      "status": "NEW",
+      "wordsCount": 335,
+      "beginIndex": 0,
+      "endIndex": 66,
+      "isParentJobSplit": false,
+      "dateDue": null,
+      "dateCreated": "2023-11-03T15:40:54Z",
+      "project": {
+        "id": 36561,
+        "uid": "5DM0yiE9YGRgu2GP2SdQ12",
+        "lastWorkflowLevel": 2
+      },
+      "assignedTo": []
+    }
+  ],
+  "event": "JOB_CREATED",
+  "timestamp": 1699026057,
+  "eventUid": "OyjVnqgqjXq5blIbACS0x2"
+}

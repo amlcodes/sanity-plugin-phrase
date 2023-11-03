@@ -1,0 +1,46 @@
+{
+  "jobParts": [
+    {
+      "id": 367639,
+      "uid": "fDVRUm35dXV68lOGB55ec2",
+      "internalId": "1",
+      "task": "d7vmIUhZolKf1GEO0_dc1",
+      "fileName": "[Sanity.io] post __root__9c0ac4c3_faa5-4144-8d72-5c2f058e611a drafts.a80f2791-d4e4-45eb-84d0-1a59fe78edbc.json",
+      "targetLang": "pt",
+      "workflowLevel": 1,
+      "status": "NEW",
+      "wordsCount": 4,
+      "beginIndex": 0,
+      "endIndex": 0,
+      "isParentJobSplit": false,
+      "dateDue": null,
+      "dateCreated": "2023-11-03T18:51:41Z",
+      "project": {
+        "id": 36590,
+        "uid": "1k06sGrqh0d5uE7u0ON0xV0",
+        "lastWorkflowLevel": 2
+      },
+      "assignedTo": [
+        {
+          "linguist": {
+            "id": 20015355,
+            "uid": "uonuQNieqGoM5N3rlxffY0",
+            "firstName": "henrique",
+            "lastName": "doro",
+            "userName": "hdoro",
+            "email": "henrique.doro@tinloof.com",
+            "role": "ADMIN",
+            "timezone": "Europe/London",
+            "active": true,
+            "deleted": false,
+            "terminologist": false,
+            "dateCreated": "2023-10-17T14:04:17Z"
+          }
+        }
+      ]
+    }
+  ],
+  "event": "JOB_ASSIGNED",
+  "timestamp": 1699037622,
+  "eventUid": "2ydIaQ0b1iGEoQlGd8tpoc"
+}
