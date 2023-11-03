@@ -36,6 +36,10 @@ export function undraftId(id: string) {
   return id.replace('drafts.', '')
 }
 
+export function draftId(id: string) {
+  return `drafts.${undraftId(id)}`
+}
+
 function keepOriginalId(
   originalDoc: SanityDocument,
   changedDoc: SanityDocument,

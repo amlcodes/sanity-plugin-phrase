@@ -1,5 +1,6 @@
 import { Fetcher } from 'openapi-typescript-fetch'
 import { paths } from './types/phraseOpenAPI'
+import { DataToTranslate } from './types'
 
 const createPhraseClient = (region: 'us' | 'eur', token?: string) => {
   const fetcher = Fetcher.for<paths>()
@@ -31,7 +32,7 @@ const createPhraseClient = (region: 'us' | 'eur', token?: string) => {
         props: Parameters<typeof createJobFetcher>[0] & {
           targetLangs: string[]
           filename: string
-          dataToTranslate: unknown
+          dataToTranslate: DataToTranslate
         },
       ) => {
         const blob = new Blob([JSON.stringify(props.dataToTranslate)], {
