@@ -1,8 +1,8 @@
 import { SanityDocument } from '@sanity/types'
-import { Phrase, SanityTranslationDocPair, TranslationRequest } from './types'
-import { makeKeyFriendly, undraftId } from './utils'
-import { mergeDocs } from './mergeDocs'
 import { i18nAdapter } from './i18nAdapter'
+import { mergeDocs } from './mergeDocs'
+import { Phrase, SanityTranslationDocPair, TranslationRequest } from './types'
+import { getPtdId, isDraft, makeKeyFriendly, undraftId } from './utils'
 
 /**
  * PTD: Parallel Translation Document
@@ -47,12 +47,14 @@ export function createPTDs({
     return i18nAdapter.injectDocumentLang(
       {
         ...baseDoc,
-        // @TODO: can we rely on ID paths or should we split by `-`?
-        _id: `${
-          undraftId(freshSourceDoc._id) !== freshSourceDoc._id ? 'drafts.' : ''
-        }phrase-translation--${undraftId(freshSourceDoc._id)}--${targetLang}`,
+        _id: getPtdId({ paths, sourceDoc, targetLang }),
         phraseMeta: {
           _type: 'phrase.ptd.meta',
+          sourceDoc: {
+            _type: 'reference',
+            _ref: undraftId(sourceDoc._id),
+            _weak: isDraft(sourceDoc._id) ? true : undefined,
+          },
           paths,
           jobs: jobs.map((j) => ({
             _type: 'phrase.job',

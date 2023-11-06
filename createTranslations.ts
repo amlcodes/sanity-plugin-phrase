@@ -109,7 +109,7 @@ export default async function createTranslations(
     } as Pick<SanityDocumentWithPhraseMetadata, 'phraseMeta'>)
 
     const translationKey = getTranslationKey(paths, sourceDoc._rev)
-    const basePath = `phraseMeta.translations[${translationKey}]`
+    const basePath = `phraseMeta.translations[_key == "${translationKey}"]`
     return patch.set({
       [`${basePath}.status`]: 'CREATED',
       [`${basePath}.projectId`]: projectUid,
