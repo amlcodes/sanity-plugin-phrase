@@ -48,6 +48,8 @@ export function createPTDs({
       {
         ...baseDoc,
         _id: getPtdId({ paths, sourceDoc, targetLang }),
+        // @ts-expect-error
+        _rev: undefined,
         phraseMeta: {
           _type: 'phrase.ptd.meta',
           sourceDoc: {
