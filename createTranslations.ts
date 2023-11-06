@@ -8,7 +8,7 @@ import lockDocument from './lockDocument'
 import { phraseClient } from './phraseClient'
 import queryFreshDocuments from './queryFreshDocuments'
 import { sanityClient } from './sanityClient'
-import { TranslationRequest } from './types'
+import { SanityDocumentWithPhraseMetadata, TranslationRequest } from './types'
 import { getTranslationKey, getTranslationName } from './utils'
 
 export default async function createTranslations(
@@ -99,11 +99,17 @@ export default async function createTranslations(
   // Create PTDs in Sanity
   PTDs.forEach((doc) => transaction.createOrReplace(doc))
 
-  // And
+  // And mark this translation as CREATED
   transaction.patch(freshSourceDoc._id, (patch) => {
-    patch.setIfMissing({ phraseTranslations: [] })
+    patch.setIfMissing({
+      phraseMeta: {
+        _type: 'phrase.main.meta',
+        translations: [],
+      },
+    } as Pick<SanityDocumentWithPhraseMetadata, 'phraseMeta'>)
+
     const translationKey = getTranslationKey(paths, sourceDoc._rev)
-    const basePath = `phraseTranslations.activeTranslatons[${translationKey}]`
+    const basePath = `phraseMeta.translations[${translationKey}]`
     return patch.set({
       [`${basePath}.status`]: 'CREATED',
       [`${basePath}.projectId`]: projectUid,

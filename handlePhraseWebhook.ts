@@ -114,8 +114,8 @@ export default async function handlePhraseWebhook(payload: PhraseWebhook) {
 
   const PTDs = await sanityClient.fetch<SanityDocumentWithPhraseMetadata[]>(
     /* groq */ `*[
-      phrasePtd.projectUid in $projectUids &&
-      count(phrasePtd.jobs[uid in $jobUids]) > 0
+      phraseMeta.projectUid in $projectUids &&
+      count(phraseMeta.jobs[uid in $jobUids]) > 0
     ]`,
     {
       projectUids,
@@ -130,17 +130,21 @@ export default async function handlePhraseWebhook(payload: PhraseWebhook) {
 
   // For each PTD, find the last job in the workflow - that's the freshest preview possible
   const jobsToRefreshData = PTDs.reduce((acc, doc) => {
-    if (!doc.phrasePtd?.jobs?.length) return acc
+    if (
+      doc.phraseMeta?._type !== 'phrase.ptd.meta' ||
+      !doc.phraseMeta.jobs?.length
+    )
+      return acc
 
-    const lastJobInWorkflow = sortJobsByWorkflowLevel(doc.phrasePtd.jobs)[0]
+    const lastJobInWorkflow = sortJobsByWorkflowLevel(doc.phraseMeta.jobs)[0]
     if (!lastJobInWorkflow.uid) return acc
 
     return {
       ...acc,
       [lastJobInWorkflow.uid]: {
         ...(acc[lastJobInWorkflow.uid] || {}),
-        projectUid: doc.phrasePtd.projectUid,
-        targetLang: doc.phrasePtd.targetLang,
+        projectUid: doc.phraseMeta.projectUid,
+        targetLang: doc.phraseMeta.targetLang,
         ptdIds: [...(acc[lastJobInWorkflow.uid]?.ptdIds || []), doc._id],
       },
     }
@@ -187,14 +191,17 @@ export default async function handlePhraseWebhook(payload: PhraseWebhook) {
     const finalDoc = i18nAdapter.injectDocumentLang(
       {
         ...updatedContent,
-        phrasePtd: doc.phrasePtd
-          ? {
-              ...doc.phrasePtd,
-              jobs: doc.phrasePtd.jobs.map((job) => updateJobInPtd(job, jobs)),
-            }
-          : undefined,
+        phraseMeta:
+          doc.phraseMeta?._type === 'phrase.ptd.meta'
+            ? {
+                ...doc.phraseMeta,
+                jobs: doc.phraseMeta.jobs.map((job) =>
+                  updateJobInPtd(job, jobs),
+                ),
+              }
+            : undefined,
       },
-      doc.phrasePtd?.targetLang || (doc.language as string),
+      (doc.phraseMeta as any)?.targetLang || (doc.language as string),
     )
 
     return {

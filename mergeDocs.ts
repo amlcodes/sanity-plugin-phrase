@@ -4,14 +4,7 @@ import { get } from '@sanity/util/paths'
 import phraseToSanity from './phraseToSanity'
 
 // @TODO: do we include language & i18n adapter specific things here?
-const STATIC_KEYS = [
-  '_id',
-  '_rev',
-  '_type',
-  // @TODO: do we keep phrase metadata here?
-  'phrasePtd',
-  'phraseTranslations',
-]
+const STATIC_KEYS = ['_id', '_rev', '_type', 'phraseMeta']
 
 // @TODO: try using sanity-diff-patch instead. It has a basePath property we could perhaps leverage
 export function mergeDocs({
@@ -168,7 +161,6 @@ export function getPatchOperations({
   return patches
 }
 
-// @TODO: what about phrasePtd and phraseTranslations?
 function keepStaticValues(
   originalDoc: SanityDocument,
   changedDoc: SanityDocument,

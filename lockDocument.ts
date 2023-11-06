@@ -26,9 +26,15 @@ export default async function lockDocument(
 
   for (const doc of docs) {
     transaction.patch(doc._id, (patch) => {
-      const basePatch = patch.setIfMissing({ phraseTranslations: [] })
-      const phraseMetadata: MainDocTranslationMetadata = {
-        _type: 'phrase.mainDoc.meta',
+      patch.setIfMissing({
+        phraseMeta: {
+          _type: 'phrase.main.meta',
+          translations: [],
+        },
+      } as Pick<SanityDocumentWithPhraseMetadata, 'phraseMeta'>)
+
+      const translationMetadata: MainDocTranslationMetadata = {
+        _type: 'phrase.mainDoc.translation',
         _key: translationKey,
         _createdAt: new Date().toISOString(),
         sourceDocRev: props.sourceDoc._rev,
@@ -37,15 +43,17 @@ export default async function lockDocument(
         paths,
         status: 'CREATING',
       }
-
-      if (doc.phraseTranslations?.some((t) => t._key === translationKey)) {
-        return basePatch.insert(
+      if (
+        doc.phraseMeta?._type === 'phrase.main.meta' &&
+        doc.phraseMeta.translations?.some((t) => t._key === translationKey)
+      ) {
+        return patch.insert(
           'replace',
-          `phraseTranslations[_key == "${translationKey}"]`,
-          [phraseMetadata],
+          `phraseMeta.translations[_key == "${translationKey}"]`,
+          [translationMetadata],
         )
       }
-      return basePatch.append('phraseTranslations', [phraseMetadata])
+      return patch.append('phraseMeta.translations', [translationMetadata])
     })
   }
 

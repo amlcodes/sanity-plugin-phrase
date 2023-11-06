@@ -51,7 +51,7 @@ export function createPTDs({
         _id: `${
           undraftId(freshSourceDoc._id) !== freshSourceDoc._id ? 'drafts.' : ''
         }phrase-translation--${undraftId(freshSourceDoc._id)}--${targetLang}`,
-        phrasePtd: {
+        phraseMeta: {
           _type: 'phrase.ptd.meta',
           paths,
           jobs: jobs.map((j) => ({

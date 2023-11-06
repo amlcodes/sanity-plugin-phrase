@@ -10,8 +10,12 @@ export default function ensureDocNotLocked({
   if (
     freshDocuments.some((d) => {
       const allMeta = [
-        ...(d.draft?.phraseTranslations || []),
-        ...(d.published?.phraseTranslations || []),
+        ...((d.draft?.phraseMeta?._type === 'phrase.main.meta' &&
+          d.draft.phraseMeta.translations) ||
+          []),
+        ...((d.published?.phraseMeta?._type === 'phrase.main.meta' &&
+          d.published.phraseMeta.translations) ||
+          []),
       ]
       const ongoingPaths = allMeta.flatMap((m) => {
         // Ignore completed translations

@@ -43,7 +43,7 @@ export enum SerializedPtHtmlTag {
 }
 
 export type MainDocTranslationMetadata = {
-  _type: 'phrase.mainDoc.meta'
+  _type: 'phrase.mainDoc.translation'
   /** @see getTranslationKey */
   _key: string
   _createdAt: string
@@ -62,6 +62,12 @@ export type MainDocTranslationMetadata = {
     }
 )
 
+/** For main documents (source and translated) only */
+export type MainDocPhraseMetadata = {
+  _type: 'phrase.main.meta'
+  translations: MainDocTranslationMetadata[]
+}
+
 export type PhraseJobInfo = Pick<
   Phrase['JobPart'],
   | 'uid'
@@ -76,7 +82,8 @@ export type PhraseJobInfo = Pick<
   _key: string
 }
 
-export type PtdTranslationMetadata = {
+/** For PTDs (Phrase Translation Documents) only */
+export type PtdPhraseMetadata = {
   _type: 'phrase.ptd.meta'
   sourceFileUid?: string
   dateCreated?: string
@@ -89,11 +96,7 @@ export type PtdTranslationMetadata = {
 }
 
 export type SanityDocumentWithPhraseMetadata = SanityDocument & {
-  /** For main documents (source and translated) only */
-  phraseTranslations?: MainDocTranslationMetadata[] | null
-
-  /** For PTDs (Phrase Translation Documents) only */
-  phrasePtd?: PtdTranslationMetadata
+  phraseMeta?: MainDocPhraseMetadata | PtdPhraseMetadata
 }
 
 export type SanityTranslationDocPair = {
