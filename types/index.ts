@@ -3,6 +3,7 @@ import {
   PortableTextObject,
   PortableTextSpan,
   PortableTextTextBlock,
+  Reference,
   SanityDocument,
 } from '@sanity/types'
 import { phraseClient } from '../phraseClient'
@@ -85,6 +86,7 @@ export type PhraseJobInfo = Pick<
 /** For PTDs (Phrase Translation Documents) only */
 export type PtdPhraseMetadata = {
   _type: 'phrase.ptd.meta'
+  sourceDoc: Reference
   sourceFileUid?: string
   dateCreated?: string
   targetLang: string

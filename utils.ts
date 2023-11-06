@@ -2,8 +2,16 @@ import { Path } from '@sanity/types'
 import { fromString, numEqualSegments, toString } from '@sanity/util/paths'
 import { Phrase, TranslationRequest } from './types'
 
-export function pathsIntersect(a: Path, b: Path) {
-  return JSON.stringify(a) === JSON.stringify(b) || numEqualSegments(a, b) > 0
+export function translationsIntersect(a: Path, b: Path) {
+  if (JSON.stringify(a) === JSON.stringify(b)) return true
+
+  const count = numEqualSegments(a, b)
+
+  const smaller = a.length > b.length ? b : a
+  const longer = a.length > b.length ? a : b
+
+  const shareSameRoot = smaller.every((segment, i) => segment === longer[i])
+  return count > 0 && shareSameRoot
 }
 
 const ROOT_PATH_STR = '__root'
@@ -64,6 +72,23 @@ export function draftId(id: string) {
   return `drafts.${undraftId(id)}`
 }
 
+export function isDraft(id: string) {
+  return undraftId(id) !== id
+}
+
 export function dedupeArray<T>(arr: T[]) {
   return Array.from(new Set(arr))
+}
+
+export function getPtdId({
+  targetLang,
+  sourceDoc,
+  paths,
+}: Pick<TranslationRequest, 'sourceDoc' | 'paths'> & { targetLang: string }) {
+  return `${
+    undraftId(sourceDoc._id) !== sourceDoc._id ? 'drafts.' : ''
+  }phrase-translation--${targetLang}--${getTranslationKey(
+    paths,
+    sourceDoc._rev,
+  )}`
 }
