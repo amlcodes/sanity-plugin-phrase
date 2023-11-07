@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'bun:test'
 // import { describe, expect, test } from 'vitest'
-import phraseToSanity from '../phraseToSanity'
-import sanityToPhrase from '../sanityToPhrase'
+import phraseToSanity from '../src/phraseToSanity'
+import sanityToPhrase from '../src/sanityToPhrase'
 import { exampleDocuments } from './exampleDocuments'
 
 describe('Sanity -> Phrase -> Sanity: should be equal', () => {

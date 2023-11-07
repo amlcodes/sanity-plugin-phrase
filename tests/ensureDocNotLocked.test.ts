@@ -1,8 +1,8 @@
 import { Path } from '@sanity/types'
 import { describe, expect, test } from 'bun:test'
-import ensureDocNotLocked from '../ensureDocNotLocked'
+import ensureDocNotLocked from '../src/ensureDocNotLocked'
 import example from '../example-data/ensureDocNotLocked.json'
-import { SanityTranslationDocPair } from '../types'
+import { SanityTranslationDocPair } from '../src/types'
 
 const exampleFreshDocuments = example as (SanityTranslationDocPair & {
   unlocked?: { paths: Path[]; label: string }[]

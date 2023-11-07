@@ -1,4 +1,4 @@
-import { sanityClient } from '../sanityClient'
+import { sanityClient } from '../src/sanityClient'
 
 async function unlockForTesting() {
   const ids = await sanityClient.fetch<string[]>(`*[defined(phraseMeta)]._id`)

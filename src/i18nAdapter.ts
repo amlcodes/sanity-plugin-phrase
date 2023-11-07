@@ -6,6 +6,11 @@ import {
 } from './types'
 import { draftId, undraftId } from './utils'
 
+/**
+ * @TODO:
+ * - getTranslatedReferences
+ * - getOrCreateTranslatedDocuments
+ */
 type I18nAdapter = {
   getFreshDocuments: (
     props: TranslationRequest & { sanityClient: SanityClient },
