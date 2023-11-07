@@ -2,16 +2,17 @@ import { Path } from '@sanity/types'
 import { fromString } from '@sanity/util/paths'
 import fs from 'fs'
 import { createPTDs } from './createPTDs'
-import ensureDocNotLocked from '../ensureDocNotLocked'
+import ensureDocNotLocked from './ensureDocNotLocked'
 import getDataToTranslate from './getDataToTranslate'
 import lockDocument from './lockDocument'
-import { phraseClient } from './phraseClient'
 import queryFreshDocuments from './queryFreshDocuments'
 import { sanityClient } from './sanityClient'
 import { SanityDocumentWithPhraseMetadata, TranslationRequest } from './types'
 import { getTranslationKey, getTranslationName } from './utils'
+import { PhraseClient } from './createPhraseClient'
 
 export default async function createTranslations(
+  phraseClient: PhraseClient,
   request: Omit<TranslationRequest, 'paths'> & { paths?: (Path | string)[] },
 ) {
   const { sourceDoc, paths: inputPaths, targetLangs, templateUid } = request

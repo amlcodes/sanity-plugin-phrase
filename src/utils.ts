@@ -1,5 +1,6 @@
 import { Path } from '@sanity/types'
 import { fromString, numEqualSegments, toString } from '@sanity/util/paths'
+import { FILENAME_PREFIX, ROOT_PATH_STR } from './constants'
 import { Phrase, TranslationRequest } from './types'
 
 export function translationsIntersect(a: Path, b: Path) {
@@ -13,8 +14,6 @@ export function translationsIntersect(a: Path, b: Path) {
   const shareSameRoot = smaller.every((segment, i) => segment === longer[i])
   return count > 0 && shareSameRoot
 }
-
-const ROOT_PATH_STR = '__root'
 
 export function pathToString(path: Path) {
   if (path.length === 0) return ROOT_PATH_STR
@@ -35,8 +34,6 @@ export function makeKeyFriendly(str: string) {
 export function getTranslationKey(paths: Path[], _rev: string) {
   return [...paths.map(pathToString), _rev].map(makeKeyFriendly).join('__')
 }
-
-const FILENAME_PREFIX = '[Sanity.io]'
 
 // @TODO create friendlier names - requires schema
 export function getTranslationName({ sourceDoc, paths }: TranslationRequest) {

@@ -6,9 +6,10 @@ import {
   Reference,
   SanityDocument,
 } from '@sanity/types'
-import { phraseClient } from '../phraseClient'
 import { pathToString } from '../utils'
 import { definitions } from './phraseOpenAPI'
+import { CREDENTIALS_DOC_ID } from '../constants'
+import { PhraseClient } from '../createPhraseClient'
 
 export type Phrase = {
   JobPart: definitions['JobPartReference']
@@ -21,7 +22,7 @@ export type Phrase = {
     }
   }
   CreatedProject: Awaited<
-    ReturnType<typeof phraseClient.projects.create>
+    ReturnType<PhraseClient['projects']['create']>
   >['data']
 }
 
@@ -147,4 +148,14 @@ export type ContentInPhrase = {
    * }
    **/
   contentByPath: Record<ReturnType<typeof pathToString>, unknown>
+}
+
+export interface PhraseCredentialsDocument extends SanityDocument {
+  _id: typeof CREDENTIALS_DOC_ID
+  _type: typeof CREDENTIALS_DOC_ID
+  userName?: string
+  password?: string
+  token?: string
+  /** ISO date */
+  expires?: string
 }

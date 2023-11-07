@@ -2,7 +2,12 @@ import { Fetcher } from 'openapi-typescript-fetch'
 import { operations, paths } from './types/phraseOpenAPI'
 import { ContentInPhrase } from './types'
 
-const createPhraseClient = (region: 'us' | 'eur', token?: string) => {
+export type PhraseDatacenterRegion = 'us' | 'eur'
+
+export const createPhraseClient = (
+  region: PhraseDatacenterRegion,
+  token?: string,
+) => {
   const fetcher = Fetcher.for<paths>()
   const BASE_URL = `https://${
     region === 'us' ? 'us.' : ''
@@ -23,6 +28,7 @@ const createPhraseClient = (region: 'us' | 'eur', token?: string) => {
     .create()
 
   return {
+    login: fetcher.path('/api2/v1/auth/login').method('post').create(),
     projects: {
       create: fetcher
         .path('/api2/v2/projects/applyTemplate/{templateUid}')
@@ -79,4 +85,4 @@ const createPhraseClient = (region: 'us' | 'eur', token?: string) => {
   }
 }
 
-export const phraseClient = createPhraseClient('us', process.env.PHRASE_TOKEN)
+export type PhraseClient = ReturnType<typeof createPhraseClient>

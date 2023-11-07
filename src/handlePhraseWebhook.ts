@@ -1,7 +1,8 @@
 import fs from 'fs'
 import { diffPatch } from 'sanity-diff-patch'
+import createAuthedPhraseClient from './createAuthedPhraseClient'
+import { PhraseDatacenterRegion } from './createPhraseClient'
 import { i18nAdapter } from './i18nAdapter'
-import { phraseClient } from './phraseClient'
 import phraseDocumentToSanityDocument from './phraseDocumentToSanityDocument'
 import { sanityClient } from './sanityClient'
 import {
@@ -72,7 +73,11 @@ function updateJobInPtd(
   }
 }
 
-export default async function handlePhraseWebhook(payload: PhraseWebhook) {
+export default async function handlePhraseWebhook(
+  region: PhraseDatacenterRegion,
+  payload: PhraseWebhook,
+) {
+  const phraseClient = await createAuthedPhraseClient(region)
   if (
     !payload.event ||
     !(
