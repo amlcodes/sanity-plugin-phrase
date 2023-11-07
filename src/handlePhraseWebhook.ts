@@ -7,6 +7,7 @@ import phraseDocumentToSanityDocument from './phraseDocumentToSanityDocument'
 import { sanityClient } from './sanityClient'
 import {
   ContentInPhrase,
+  CrossSystemLangCode,
   Phrase,
   PhraseJobInfo,
   SanityDocumentWithPhraseMetadata,
@@ -153,7 +154,7 @@ export default async function handlePhraseWebhook(
         ptdIds: [...(acc[lastJobInWorkflow.uid]?.ptdIds || []), doc._id],
       },
     }
-  }, {} as { [jobUid: string]: { projectUid: string; targetLang: string; ptdIds: string[] } })
+  }, {} as { [jobUid: string]: { projectUid: string; targetLang: CrossSystemLangCode; ptdIds: string[] } })
 
   const refreshedJobData = await Promise.all(
     Object.entries(jobsToRefreshData).map(
@@ -162,7 +163,7 @@ export default async function handlePhraseWebhook(
           contentInPhrase: ContentInPhrase
           jobUid: string
           projectUid: string
-          targetLang: string
+          targetLang: CrossSystemLangCode
           ptdIds: string[]
         }>(async (resolve, reject) => {
           try {
@@ -206,7 +207,9 @@ export default async function handlePhraseWebhook(
               }
             : undefined,
       },
-      (doc.phraseMeta as any)?.targetLang || (doc.language as string),
+      (doc.phraseMeta as any)?.targetLang ||
+        i18nAdapter.getDocumentLang(doc) ||
+        undefined,
     )
 
     return {

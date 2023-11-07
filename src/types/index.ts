@@ -59,7 +59,7 @@ export type MainDocTranslationMetadata = {
     }
   | {
       status: 'CREATED' | 'COMPLETED'
-      targetLangs: string[]
+      targetLangs: CrossSystemLangCode[]
       projectUid: string
     }
 )
@@ -90,8 +90,8 @@ export type PtdPhraseMetadata = {
   sourceDoc: Reference
   sourceFileUid?: string
   dateCreated?: string
-  targetLang: string
-  sourceLang: string
+  targetLang: CrossSystemLangCode
+  sourceLang: CrossSystemLangCode
   filename?: string
   jobs: PhraseJobInfo[]
   paths: Path[]
@@ -103,7 +103,7 @@ export type SanityDocumentWithPhraseMetadata = SanityDocument & {
 }
 
 export type SanityTranslationDocPair = {
-  lang: string
+  lang: CrossSystemLangCode
   draft?: SanityDocumentWithPhraseMetadata | null
   published?: SanityDocumentWithPhraseMetadata | null
 }
@@ -113,10 +113,10 @@ export interface TranslationRequest {
     _rev: string
     _id: string
     _type: string
-    lang: string
+    lang: CrossSystemLangCode
   }
   paths: Path[]
-  targetLangs: string[]
+  targetLangs: CrossSystemLangCode[]
   templateUid: string
   // @TODO: schema
 }
@@ -159,3 +159,17 @@ export interface PhraseCredentialsDocument extends SanityDocument {
   /** ISO date */
   expires?: string
 }
+
+export type CrossSystemLangCode = {
+  /** Whatever language code set by the i18nAdapter */
+  sanity: SanityLangCode
+  /**
+   * Phrase uses a non-standard variation of IETF language tags.
+   * @see https://en.wikipedia.org/wiki/IETF_language_tag
+   * @docs https://cloud.memsource.com/web/docs/api#operation/listOfLanguages
+   **/
+  phrase: PhraseLangCode
+}
+
+export type PhraseLangCode = string
+export type SanityLangCode = string

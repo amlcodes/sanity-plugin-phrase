@@ -10,13 +10,15 @@ import { diffPatch } from 'sanity-diff-patch'
 import { fromString } from '@sanity/util/paths'
 
 export async function getStaleTranslations({
-  freshDocumentsByLang,
+  freshDocuments,
   sourceDoc,
 }: TranslationRequest & {
-  freshDocumentsByLang: Record<string, SanityTranslationDocPair>
+  freshDocuments: SanityTranslationDocPair[]
 }) {
-  const sourceDocs = freshDocumentsByLang[sourceDoc.lang]
-  const sourceDocToConsider = sourceDocs.draft || sourceDocs.published
+  const sourceDocPair = freshDocuments.find(
+    (d) => d.lang.phrase === sourceDoc.lang.phrase,
+  )
+  const sourceDocToConsider = sourceDocPair?.draft || sourceDocPair?.published
 
   if (!sourceDocToConsider) {
     return {
@@ -64,13 +66,13 @@ export async function getStaleTranslations({
 
   const changesByVersion = {
     draft:
-      sourceDocs.draft &&
+      sourceDocPair.draft &&
       collatedHistory.draft &&
-      getSourceChanges(sourceDocs.draft, collatedHistory.draft),
+      getSourceChanges(sourceDocPair.draft, collatedHistory.draft),
     published:
-      sourceDocs.published &&
+      sourceDocPair.published &&
       collatedHistory.published &&
-      getSourceChanges(sourceDocs.published, collatedHistory.published),
+      getSourceChanges(sourceDocPair.published, collatedHistory.published),
   }
   console.log({ changesByVersion })
 }

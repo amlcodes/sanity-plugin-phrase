@@ -1,6 +1,8 @@
 import { SanityClient } from '@sanity/client'
 import {
+  PhraseLangCode,
   SanityDocumentWithPhraseMetadata,
+  SanityLangCode,
   SanityTranslationDocPair,
   TranslationRequest,
 } from './types'
@@ -12,21 +14,35 @@ import { draftId, undraftId } from './utils'
  * - getOrCreateTranslatedDocuments
  */
 type I18nAdapter = {
-  getFreshDocuments: (
+  /**
+   * Given the current translation request, fetches the fresh versions of the
+   * requested document and target languages.
+   *
+   * It should return documents for ALL requested languages, so this function should
+   * create them if they don't exist.
+   */
+  getOrCreateTranslatedDocuments: (
     props: TranslationRequest & { sanityClient: SanityClient },
   ) => Promise<SanityTranslationDocPair[]>
+
+  langAdapter: {
+    toSanity: (phraseLang: PhraseLangCode) => SanityLangCode
+    toPhrase: (sanityLang: SanityLangCode) => PhraseLangCode
+  }
+
   injectDocumentLang: (
     document: SanityDocumentWithPhraseMetadata,
-    /** Language identifier as set in Phrase
-     * @example `en`, `cz`, `en_ax`, `pt_br`, `es_419`, etc.
-     */
-    lang: string,
+    lang: SanityLangCode,
   ) => SanityDocumentWithPhraseMetadata
+  getDocumentLang: (
+    document: SanityDocumentWithPhraseMetadata,
+  ) => SanityLangCode | null
 }
 
 export const i18nAdapter: I18nAdapter = {
-  injectDocumentLang: (document, lang) => ({ ...document, language: lang }),
-  getFreshDocuments: async (props) => {
+  injectDocumentLang: (document, language) => ({ ...document, language }),
+  getDocumentLang: (document) => (document?.language as string) || null,
+  getOrCreateTranslatedDocuments: async (props) => {
     const freshDocuments = await props.sanityClient.fetch<
       SanityTranslationDocPair[] | SanityTranslationDocPair
     >(
@@ -60,5 +76,9 @@ export const i18nAdapter: I18nAdapter = {
     if (!freshDocuments) throw new Error('Failed fetching fresh documents')
 
     return Array.isArray(freshDocuments) ? freshDocuments : [freshDocuments]
+  },
+  langAdapter: {
+    toPhrase: (sanityLang) => sanityLang.replace(/_/g, '-'),
+    toSanity: (phraseLang) => phraseLang.replace(/-/g, '_'),
   },
 }

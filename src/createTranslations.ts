@@ -7,43 +7,74 @@ import getDataToTranslate from './getDataToTranslate'
 import lockDocument from './lockDocument'
 import queryFreshDocuments from './queryFreshDocuments'
 import { sanityClient } from './sanityClient'
-import { SanityDocumentWithPhraseMetadata, TranslationRequest } from './types'
-import { getTranslationKey, getTranslationName } from './utils'
+import {
+  SanityDocumentWithPhraseMetadata,
+  SanityLangCode,
+  TranslationRequest,
+} from './types'
+import { getTranslationKey, getTranslationName, langAdapter } from './utils'
 import { PhraseClient } from './createPhraseClient'
 
-export default async function createTranslations(
-  phraseClient: PhraseClient,
-  request: Omit<TranslationRequest, 'paths'> & { paths?: (Path | string)[] },
-) {
-  const { sourceDoc, paths: inputPaths, targetLangs, templateUid } = request
+type InputRequest = Omit<
+  TranslationRequest,
+  'paths' | 'targetLangs' | 'sourceDoc'
+> & {
+  paths?: (Path | string)[]
+  targetLangs: SanityLangCode[]
+  sourceDoc: Omit<TranslationRequest['sourceDoc'], 'targetLang'> & {
+    targetLang: SanityLangCode
+  }
+}
+
+function formatRequest(request: InputRequest): TranslationRequest {
+  const { paths: inputPaths, targetLangs: inputTargetLangs } = request
+
   const paths = (inputPaths || [[]]).map((p) =>
     typeof p === 'string' ? fromString(p) : p || [],
   )
+  const targetLangs = langAdapter.sanityToCrossSystem(inputTargetLangs)
 
-  const configuredRequest: TranslationRequest = { ...request, paths }
-  const { freshDocuments, freshDocumentsByLang, freshDocumentsById } =
-    await queryFreshDocuments(configuredRequest)
+  return {
+    ...request,
+    paths,
+    targetLangs,
+    sourceDoc: {
+      ...request.sourceDoc,
+      lang: langAdapter.sanityToCrossSystem(request.sourceDoc.targetLang),
+    },
+  }
+}
+
+export default async function createTranslations(
+  phraseClient: PhraseClient,
+  inputRequest: InputRequest,
+) {
+  const request = formatRequest(inputRequest)
+  const { sourceDoc, targetLangs, paths } = request
+
+  const { freshDocuments, freshDocumentsById } = await queryFreshDocuments(
+    request,
+  )
 
   // Before going ahead with Phrase, make sure there's no pending translation
   ensureDocNotLocked({
-    ...configuredRequest,
+    ...request,
     freshDocuments,
   })
 
-  const { name: translationName, filename } =
-    getTranslationName(configuredRequest)
+  const { name: translationName, filename } = getTranslationName(request)
 
   // And lock it to prevent race conditions
   await lockDocument({
-    ...configuredRequest,
+    ...request,
     freshDocuments,
   })
 
   const project = await phraseClient.projects.create({
     name: translationName,
-    templateUid,
-    targetLangs,
-    sourceLang: sourceDoc.lang,
+    templateUid: request.templateUid,
+    targetLangs: langAdapter.crossSystemToPhrase(targetLangs),
+    sourceLang: sourceDoc.lang.phrase,
   })
   if (!project.ok || !project.data.uid) {
     // @TODO unlock on error in Phrase
@@ -60,12 +91,12 @@ export default async function createTranslations(
   // %%%%% DEBUG %%%%%
 
   const jobsRes = await phraseClient.jobs.create({
-    projectUid: projectUid,
-    targetLangs: targetLangs,
-    filename: filename,
+    projectUid,
+    filename,
+    targetLangs: langAdapter.crossSystemToPhrase(targetLangs),
     // @TODO: handle non-object dataToTranslate
     dataToTranslate: getDataToTranslate({
-      ...configuredRequest,
+      ...request,
       freshDocumentsById,
     }),
   })
@@ -88,8 +119,8 @@ export default async function createTranslations(
     project: project.data,
     paths,
     jobs: jobsRes.data.jobs,
-    freshDocumentsByLang,
     freshSourceDoc,
+    freshDocuments,
   })
 
   // %%%%% DEBUG %%%%%

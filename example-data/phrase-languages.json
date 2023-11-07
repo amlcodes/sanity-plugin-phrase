@@ -1,0 +1,7319 @@
+{
+  "languages": [
+    {
+      "android": "ab",
+      "rfc": "ab",
+      "code": "ab",
+      "androidBcp": "b+ab",
+      "name": "Abkhaz"
+    },
+    {
+      "android": "ace",
+      "rfc": "ace",
+      "code": "ace",
+      "androidBcp": "b+ace",
+      "name": "Acehnese"
+    },
+    {
+      "android": "ace-Arab",
+      "rfc": "ace-Arab",
+      "code": "ace_arab",
+      "androidBcp": "b+ace+Arab",
+      "name": "Acehnese (Arabic)"
+    },
+    {
+      "android": "ace-Latn",
+      "rfc": "ace-Latn",
+      "code": "ace_latn",
+      "androidBcp": "b+ace+Latn",
+      "name": "Acehnese (Latin)"
+    },
+    {
+      "android": "ach",
+      "rfc": "ach",
+      "code": "ach",
+      "androidBcp": "b+ach",
+      "name": "Acholi"
+    },
+    {
+      "android": "fub",
+      "rfc": "fub",
+      "code": "fub",
+      "androidBcp": "b+fub",
+      "name": "Adamawa Fulfulde"
+    },
+    {
+      "android": "aa",
+      "rfc": "aa",
+      "code": "aa",
+      "androidBcp": "b+aa",
+      "name": "Afar"
+    },
+    {
+      "android": "af",
+      "rfc": "af",
+      "code": "af",
+      "androidBcp": "b+af",
+      "name": "Afrikaans"
+    },
+    {
+      "android": "af-rNA",
+      "rfc": "af-NA",
+      "code": "af_na",
+      "androidBcp": "b+af+NA",
+      "name": "Afrikaans (Namibia)"
+    },
+    {
+      "android": "af-rZA",
+      "rfc": "af-ZA",
+      "code": "af_za",
+      "androidBcp": "b+af+ZA",
+      "name": "Afrikaans (South Africa)"
+    },
+    {
+      "android": "ak",
+      "rfc": "ak",
+      "code": "ak",
+      "androidBcp": "b+ak",
+      "name": "Akan"
+    },
+    {
+      "android": "ak-rGH",
+      "rfc": "ak-GH",
+      "code": "ak_gh",
+      "androidBcp": "b+ak+GH",
+      "name": "Akan (Ghana)"
+    },
+    {
+      "android": "sq",
+      "rfc": "sq",
+      "code": "sq",
+      "androidBcp": "b+sq",
+      "name": "Albanian"
+    },
+    {
+      "android": "sq-rAL",
+      "rfc": "sq-AL",
+      "code": "sq_al",
+      "androidBcp": "b+sq+AL",
+      "name": "Albanian (Albania)"
+    },
+    {
+      "android": "sq-rXK",
+      "rfc": "sq-XK",
+      "code": "sq_xk",
+      "androidBcp": "b+sq+XK",
+      "name": "Albanian (Kosovo)"
+    },
+    {
+      "android": "am",
+      "rfc": "am",
+      "code": "am",
+      "androidBcp": "b+am",
+      "name": "Amharic"
+    },
+    {
+      "android": "am-rET",
+      "rfc": "am-ET",
+      "code": "am_et",
+      "androidBcp": "b+am+ET",
+      "name": "Amharic (Ethiopia)"
+    },
+    {
+      "android": "ar",
+      "rfc": "ar",
+      "code": "ar",
+      "androidBcp": "b+ar",
+      "name": "Arabic"
+    },
+    {
+      "android": "ar-rDZ",
+      "rfc": "ar-DZ",
+      "code": "ar_dz",
+      "androidBcp": "b+ar+DZ",
+      "name": "Arabic (Algeria)"
+    },
+    {
+      "android": "ar-Arabizi",
+      "rfc": "ar-Arabizi",
+      "code": "ar_arabizi",
+      "androidBcp": "b+ar+Arabizi",
+      "name": "Arabic (Arabizi)"
+    },
+    {
+      "android": "ar-rBH",
+      "rfc": "ar-BH",
+      "code": "ar_bh",
+      "androidBcp": "b+ar+BH",
+      "name": "Arabic (Bahrain)"
+    },
+    {
+      "android": "ar-rKM",
+      "rfc": "ar-KM",
+      "code": "ar_km",
+      "androidBcp": "b+ar+KM",
+      "name": "Arabic (Comoros)"
+    },
+    {
+      "android": "ar-rDJ",
+      "rfc": "ar-DJ",
+      "code": "ar_dj",
+      "androidBcp": "b+ar+DJ",
+      "name": "Arabic (Djibouti)"
+    },
+    {
+      "android": "ar-rEG",
+      "rfc": "ar-EG",
+      "code": "ar_eg",
+      "androidBcp": "b+ar+EG",
+      "name": "Arabic (Egypt)"
+    },
+    {
+      "android": "ar-rER",
+      "rfc": "ar-ER",
+      "code": "ar_er",
+      "androidBcp": "b+ar+ER",
+      "name": "Arabic (Eritrea)"
+    },
+    {
+      "android": "ar-rIQ",
+      "rfc": "ar-IQ",
+      "code": "ar_iq",
+      "androidBcp": "b+ar+IQ",
+      "name": "Arabic (Iraq)"
+    },
+    {
+      "android": "ar-rIL",
+      "rfc": "ar-IL",
+      "code": "ar_il",
+      "androidBcp": "b+ar+IL",
+      "name": "Arabic (Israel)"
+    },
+    {
+      "android": "ar-rJO",
+      "rfc": "ar-JO",
+      "code": "ar_jo",
+      "androidBcp": "b+ar+JO",
+      "name": "Arabic (Jordan)"
+    },
+    {
+      "android": "ar-rKW",
+      "rfc": "ar-KW",
+      "code": "ar_kw",
+      "androidBcp": "b+ar+KW",
+      "name": "Arabic (Kuwait)"
+    },
+    {
+      "android": "ar-Latn",
+      "rfc": "ar-Latn",
+      "code": "ar_latn",
+      "androidBcp": "b+ar+Latn",
+      "name": "Arabic (Latin)"
+    },
+    {
+      "android": "ar-rLB",
+      "rfc": "ar-LB",
+      "code": "ar_lb",
+      "androidBcp": "b+ar+LB",
+      "name": "Arabic (Lebanon)"
+    },
+    {
+      "android": "ar-rLY",
+      "rfc": "ar-LY",
+      "code": "ar_ly",
+      "androidBcp": "b+ar+LY",
+      "name": "Arabic (Libya)"
+    },
+    {
+      "android": "ar-rMR",
+      "rfc": "ar-MR",
+      "code": "ar_mr",
+      "androidBcp": "b+ar+MR",
+      "name": "Arabic (Mauritania)"
+    },
+    {
+      "android": "ar-Mod",
+      "rfc": "ar-Mod",
+      "code": "ar_mod",
+      "androidBcp": "b+ar+Mod",
+      "name": "Arabic (Modern)"
+    },
+    {
+      "android": "ar-rMA",
+      "rfc": "ar-MA",
+      "code": "ar_ma",
+      "androidBcp": "b+ar+MA",
+      "name": "Arabic (Morocco)"
+    },
+    {
+      "android": "ar-rOM",
+      "rfc": "ar-OM",
+      "code": "ar_om",
+      "androidBcp": "b+ar+OM",
+      "name": "Arabic (Oman)"
+    },
+    {
+      "android": "ar-rPS",
+      "rfc": "ar-PS",
+      "code": "ar_ps",
+      "androidBcp": "b+ar+PS",
+      "name": "Arabic (Palestine, State of)"
+    },
+    {
+      "android": "ar-rQA",
+      "rfc": "ar-QA",
+      "code": "ar_qa",
+      "androidBcp": "b+ar+QA",
+      "name": "Arabic (Qatar)"
+    },
+    {
+      "android": "ar-rSA",
+      "rfc": "ar-SA",
+      "code": "ar_sa",
+      "androidBcp": "b+ar+SA",
+      "name": "Arabic (Saudi Arabia)"
+    },
+    {
+      "android": "ar-rSN",
+      "rfc": "ar-SN",
+      "code": "ar_sn",
+      "androidBcp": "b+ar+SN",
+      "name": "Arabic (Senegal)"
+    },
+    {
+      "android": "ar-rSO",
+      "rfc": "ar-SO",
+      "code": "ar_so",
+      "androidBcp": "b+ar+SO",
+      "name": "Arabic (Somalia)"
+    },
+    {
+      "android": "ar-rSS",
+      "rfc": "ar-SS",
+      "code": "ar_ss",
+      "androidBcp": "b+ar+SS",
+      "name": "Arabic (South Sudan)"
+    },
+    {
+      "android": "ar-rSD",
+      "rfc": "ar-SD",
+      "code": "ar_sd",
+      "androidBcp": "b+ar+SD",
+      "name": "Arabic (Sudan)"
+    },
+    {
+      "android": "ar-rSY",
+      "rfc": "ar-SY",
+      "code": "ar_sy",
+      "androidBcp": "b+ar+SY",
+      "name": "Arabic (Syria)"
+    },
+    {
+      "android": "ar-rTN",
+      "rfc": "ar-TN",
+      "code": "ar_tn",
+      "androidBcp": "b+ar+TN",
+      "name": "Arabic (Tunisia)"
+    },
+    {
+      "android": "ar-rAE",
+      "rfc": "ar-AE",
+      "code": "ar_ae",
+      "androidBcp": "b+ar+AE",
+      "name": "Arabic (United Arab Emirates)"
+    },
+    {
+      "android": "ar-r145",
+      "rfc": "ar-145",
+      "code": "ar_145",
+      "androidBcp": "b+ar+145",
+      "name": "Arabic (Western Asia)"
+    },
+    {
+      "android": "ar-rEH",
+      "rfc": "ar-EH",
+      "code": "ar_eh",
+      "androidBcp": "b+ar+EH",
+      "name": "Arabic (Western Sahara)"
+    },
+    {
+      "android": "ar-rYE",
+      "rfc": "ar-YE",
+      "code": "ar_ye",
+      "androidBcp": "b+ar+YE",
+      "name": "Arabic (Yemen)"
+    },
+    {
+      "android": "pga",
+      "rfc": "pga",
+      "code": "pga",
+      "androidBcp": "b+pga",
+      "name": "Arabic Juba"
+    },
+    {
+      "android": "pga-Latn",
+      "rfc": "pga-Latn",
+      "code": "pga_latn",
+      "androidBcp": "b+pga+Latn",
+      "name": "Arabic Juba (Latin)"
+    },
+    {
+      "android": "apc",
+      "rfc": "apc",
+      "code": "apc",
+      "androidBcp": "b+apc",
+      "name": "Arabic North Levantine"
+    },
+    {
+      "android": "an",
+      "rfc": "an",
+      "code": "an",
+      "androidBcp": "b+an",
+      "name": "Aragonese"
+    },
+    {
+      "android": "arc",
+      "rfc": "arc",
+      "code": "arc",
+      "androidBcp": "b+arc",
+      "name": "Aramaic"
+    },
+    {
+      "android": "hy",
+      "rfc": "hy",
+      "code": "hy",
+      "androidBcp": "b+hy",
+      "name": "Armenian"
+    },
+    {
+      "android": "hy-rAM",
+      "rfc": "hy-AM",
+      "code": "hy_am",
+      "androidBcp": "b+hy+AM",
+      "name": "Armenian (Armenia)"
+    },
+    {
+      "android": "hy-Latn",
+      "rfc": "hy-Latn",
+      "code": "hy_latn",
+      "androidBcp": "b+hy+Latn",
+      "name": "Armenian (Latin)"
+    },
+    {
+      "android": "hy-Latn-rAM",
+      "rfc": "hy-Latn-AM",
+      "code": "hy_latn_am",
+      "androidBcp": "b+hy+Latn+AM",
+      "name": "Armenian (Latin, Armenia)"
+    },
+    {
+      "android": "rup",
+      "rfc": "rup",
+      "code": "rup",
+      "androidBcp": "b+rup",
+      "name": "Aromanian"
+    },
+    {
+      "android": "as",
+      "rfc": "as",
+      "code": "as",
+      "androidBcp": "b+as",
+      "name": "Assamese"
+    },
+    {
+      "android": "as-rIN",
+      "rfc": "as-IN",
+      "code": "as_in",
+      "androidBcp": "b+as+IN",
+      "name": "Assamese (India)"
+    },
+    {
+      "android": "as-Latn",
+      "rfc": "as-Latn",
+      "code": "as_latn",
+      "androidBcp": "b+as+Latn",
+      "name": "Assamese (Latin)"
+    },
+    {
+      "android": "ast",
+      "rfc": "ast",
+      "code": "ast",
+      "androidBcp": "b+ast",
+      "name": "Asturian"
+    },
+    {
+      "android": "av",
+      "rfc": "av",
+      "code": "av",
+      "androidBcp": "b+av",
+      "name": "Avaric"
+    },
+    {
+      "android": "quy",
+      "rfc": "quy",
+      "code": "quy",
+      "androidBcp": "b+quy",
+      "name": "Ayacucho Quechua"
+    },
+    {
+      "android": "ay",
+      "rfc": "ay",
+      "code": "ay",
+      "androidBcp": "b+ay",
+      "name": "Aymara"
+    },
+    {
+      "android": "az-Arab",
+      "rfc": "az-Arab",
+      "code": "az_arab",
+      "androidBcp": "b+az+Arab",
+      "name": "Azerbaijani (Arabic)"
+    },
+    {
+      "android": "az-Arab-rIR",
+      "rfc": "az-Arab-IR",
+      "code": "az_arab_ir",
+      "androidBcp": "b+az+Arab+IR",
+      "name": "Azerbaijani (Arabic, Iran)"
+    },
+    {
+      "android": "az-Cyrl",
+      "rfc": "az-Cyrl",
+      "code": "az_cyrl",
+      "androidBcp": "b+az+Cyrl",
+      "name": "Azerbaijani (Cyrillic)"
+    },
+    {
+      "android": "az-Cyrl-rAZ",
+      "rfc": "az-Cyrl-AZ",
+      "code": "az_cyrl_az",
+      "androidBcp": "b+az+Cyrl+AZ",
+      "name": "Azerbaijani (Cyrillic, Azerbaijan)"
+    },
+    {
+      "android": "az-Latn",
+      "rfc": "az-Latn",
+      "code": "az_latn",
+      "androidBcp": "b+az+Latn",
+      "name": "Azerbaijani (Latin)"
+    },
+    {
+      "android": "az-Latn-rAZ",
+      "rfc": "az-Latn-AZ",
+      "code": "az_latn_az",
+      "androidBcp": "b+az+Latn+AZ",
+      "name": "Azerbaijani (Latin, Azerbaijan)"
+    },
+    {
+      "android": "az",
+      "rfc": "az",
+      "code": "az",
+      "androidBcp": "b+az",
+      "name": "Azeri (Latin)"
+    },
+    {
+      "android": "ban",
+      "rfc": "ban",
+      "code": "ban",
+      "androidBcp": "b+ban",
+      "name": "Balinese"
+    },
+    {
+      "android": "bal",
+      "rfc": "bal",
+      "code": "bal",
+      "androidBcp": "b+bal",
+      "name": "Balochi"
+    },
+    {
+      "android": "bm",
+      "rfc": "bm",
+      "code": "bm",
+      "androidBcp": "b+bm",
+      "name": "Bambara"
+    },
+    {
+      "android": "bm-Latn-rML",
+      "rfc": "bm-Latn-ML",
+      "code": "bm_latn_ml",
+      "androidBcp": "b+bm+Latn+ML",
+      "name": "Bambara (Latin, Mali)"
+    },
+    {
+      "android": "bjn",
+      "rfc": "bjn",
+      "code": "bjn",
+      "androidBcp": "b+bjn",
+      "name": "Banjar"
+    },
+    {
+      "android": "bjn-Arab",
+      "rfc": "bjn-Arab",
+      "code": "bjn_arab",
+      "androidBcp": "b+bjn+Arab",
+      "name": "Banjar (Arabic)"
+    },
+    {
+      "android": "bjn-Latn",
+      "rfc": "bjn-Latn",
+      "code": "bjn_latn",
+      "androidBcp": "b+bjn+Latn",
+      "name": "Banjar (Latin)"
+    },
+    {
+      "android": "bci",
+      "rfc": "bci",
+      "code": "bci",
+      "androidBcp": "b+bci",
+      "name": "Baoulé"
+    },
+    {
+      "android": "bfa",
+      "rfc": "bfa",
+      "code": "bfa",
+      "androidBcp": "b+bfa",
+      "name": "Bari"
+    },
+    {
+      "android": "ba",
+      "rfc": "ba",
+      "code": "ba",
+      "androidBcp": "b+ba",
+      "name": "Bashkir"
+    },
+    {
+      "android": "ba-rRU",
+      "rfc": "ba-RU",
+      "code": "ba_ru",
+      "androidBcp": "b+ba+RU",
+      "name": "Bashkir (Russia)"
+    },
+    {
+      "android": "eu",
+      "rfc": "eu",
+      "code": "eu",
+      "androidBcp": "b+eu",
+      "name": "Basque"
+    },
+    {
+      "android": "eu-rES",
+      "rfc": "eu-ES",
+      "code": "eu_es",
+      "androidBcp": "b+eu+ES",
+      "name": "Basque (Spain)"
+    },
+    {
+      "android": "be",
+      "rfc": "be",
+      "code": "be",
+      "androidBcp": "b+be",
+      "name": "Belarusian"
+    },
+    {
+      "android": "be-rBY",
+      "rfc": "be-BY",
+      "code": "be_by",
+      "androidBcp": "b+be+BY",
+      "name": "Belarusian (Belarus)"
+    },
+    {
+      "android": "bem",
+      "rfc": "bem",
+      "code": "bem",
+      "androidBcp": "b+bem",
+      "name": "Bemba"
+    },
+    {
+      "android": "bn",
+      "rfc": "bn",
+      "code": "bn",
+      "androidBcp": "b+bn",
+      "name": "Bengali"
+    },
+    {
+      "android": "bn-rBD",
+      "rfc": "bn-BD",
+      "code": "bn_bd",
+      "androidBcp": "b+bn+BD",
+      "name": "Bengali (Bangladesh)"
+    },
+    {
+      "android": "bn-rIN",
+      "rfc": "bn-IN",
+      "code": "bn_in",
+      "androidBcp": "b+bn+IN",
+      "name": "Bengali (India)"
+    },
+    {
+      "android": "bn-Latn",
+      "rfc": "bn-Latn",
+      "code": "bn_latn",
+      "androidBcp": "b+bn+Latn",
+      "name": "Bengali (Latin)"
+    },
+    {
+      "android": "bho",
+      "rfc": "bho",
+      "code": "bho",
+      "androidBcp": "b+bho",
+      "name": "Bhojpuri"
+    },
+    {
+      "android": "bh",
+      "rfc": "bh",
+      "code": "bh",
+      "androidBcp": "b+bh",
+      "name": "Bihari"
+    },
+    {
+      "android": "bik",
+      "rfc": "bik",
+      "code": "bik",
+      "androidBcp": "b+bik",
+      "name": "Bikol"
+    },
+    {
+      "android": "bi",
+      "rfc": "bi",
+      "code": "bi",
+      "androidBcp": "b+bi",
+      "name": "Bislama"
+    },
+    {
+      "android": "byn",
+      "rfc": "byn",
+      "code": "byn",
+      "androidBcp": "b+byn",
+      "name": "Blin"
+    },
+    {
+      "android": "byn-rER",
+      "rfc": "byn-ER",
+      "code": "byn_er",
+      "androidBcp": "b+byn+ER",
+      "name": "Blin (Eritrea)"
+    },
+    {
+      "android": "bs",
+      "rfc": "bs",
+      "code": "bs",
+      "androidBcp": "b+bs",
+      "name": "Bosnian"
+    },
+    {
+      "android": "bs-rBA",
+      "rfc": "bs-BA",
+      "code": "bs_ba",
+      "androidBcp": "b+bs+BA",
+      "name": "Bosnian (Bosnia and Herzegovina)"
+    },
+    {
+      "android": "bs-Cyrl",
+      "rfc": "bs-Cyrl",
+      "code": "bs_cyrl",
+      "androidBcp": "b+bs+Cyrl",
+      "name": "Bosnian (Cyrillic)"
+    },
+    {
+      "android": "bs-Cyrl-rBA",
+      "rfc": "bs-Cyrl-BA",
+      "code": "bs_cyrl_ba",
+      "androidBcp": "b+bs+Cyrl+BA",
+      "name": "Bosnian (Cyrillic, Bosnia and Herzegovina)"
+    },
+    {
+      "android": "bs-Latn",
+      "rfc": "bs-Latn",
+      "code": "bs_latn",
+      "androidBcp": "b+bs+Latn",
+      "name": "Bosnian (Latin)"
+    },
+    {
+      "android": "bs-Latn-rBA",
+      "rfc": "bs-Latn-BA",
+      "code": "bs_latn_ba",
+      "androidBcp": "b+bs+Latn+BA",
+      "name": "Bosnian (Latin, Bosnia and Herzegovina)"
+    },
+    {
+      "android": "br",
+      "rfc": "br",
+      "code": "br",
+      "androidBcp": "b+br",
+      "name": "Breton"
+    },
+    {
+      "android": "bg",
+      "rfc": "bg",
+      "code": "bg",
+      "androidBcp": "b+bg",
+      "name": "Bulgarian"
+    },
+    {
+      "android": "bg-rBG",
+      "rfc": "bg-BG",
+      "code": "bg_bg",
+      "androidBcp": "b+bg+BG",
+      "name": "Bulgarian (Bulgaria)"
+    },
+    {
+      "android": "bg-Latn",
+      "rfc": "bg-Latn",
+      "code": "bg_latn",
+      "androidBcp": "b+bg+Latn",
+      "name": "Bulgarian (Latin)"
+    },
+    {
+      "android": "bg-Latn-rBG",
+      "rfc": "bg-Latn-BG",
+      "code": "bg_latn_bg",
+      "androidBcp": "b+bg+Latn+BG",
+      "name": "Bulgarian (Latin, Bulgaria)"
+    },
+    {
+      "android": "bwr",
+      "rfc": "bwr",
+      "code": "bwr",
+      "androidBcp": "b+bwr",
+      "name": "Bura-Pabir"
+    },
+    {
+      "android": "my",
+      "rfc": "my",
+      "code": "my",
+      "androidBcp": "b+my",
+      "name": "Burmese"
+    },
+    {
+      "android": "my-rMM",
+      "rfc": "my-MM",
+      "code": "my_mm",
+      "androidBcp": "b+my+MM",
+      "name": "Burmese (Myanmar)"
+    },
+    {
+      "android": "bua",
+      "rfc": "bua",
+      "code": "bua",
+      "androidBcp": "b+bua",
+      "name": "Buryat"
+    },
+    {
+      "android": "yue",
+      "rfc": "yue",
+      "code": "yue",
+      "androidBcp": "b+yue",
+      "name": "Cantonese (Traditional)"
+    },
+    {
+      "android": "rmc",
+      "rfc": "rmc",
+      "code": "rmc",
+      "androidBcp": "b+rmc",
+      "name": "Carpathian Romani"
+    },
+    {
+      "android": "rmc-Cyrl",
+      "rfc": "rmc-Cyrl",
+      "code": "rmc_cyrl",
+      "androidBcp": "b+rmc+Cyrl",
+      "name": "Carpathian Romani (Cyrillic)"
+    },
+    {
+      "android": "rmc-Latn",
+      "rfc": "rmc-Latn",
+      "code": "rmc_latn",
+      "androidBcp": "b+rmc+Latn",
+      "name": "Carpathian Romani (Latin)"
+    },
+    {
+      "android": "ca",
+      "rfc": "ca",
+      "code": "ca",
+      "androidBcp": "b+ca",
+      "name": "Catalan"
+    },
+    {
+      "android": "ca-rES",
+      "rfc": "ca-ES",
+      "code": "ca_es",
+      "androidBcp": "b+ca+ES",
+      "name": "Catalan (Spain)"
+    },
+    {
+      "android": "ca-Es-Valencia",
+      "rfc": "ca-Es-Valencia",
+      "code": "ca_es_valencia",
+      "androidBcp": "b+ca+Es+Valencia",
+      "name": "Catalan (Spain, Valencia)"
+    },
+    {
+      "android": "ceb",
+      "rfc": "ceb",
+      "code": "ceb",
+      "androidBcp": "b+ceb",
+      "name": "Cebuano"
+    },
+    {
+      "android": "ceb-rPH",
+      "rfc": "ceb-PH",
+      "code": "ceb_ph",
+      "androidBcp": "b+ceb+PH",
+      "name": "Cebuano (Philippines)"
+    },
+    {
+      "android": "ckb",
+      "rfc": "ckb",
+      "code": "ckb",
+      "androidBcp": "b+ckb",
+      "name": "Central Kurdish"
+    },
+    {
+      "android": "ku-Arab-rIQ",
+      "rfc": "ku-Arab-IQ",
+      "code": "ku_arab_iq",
+      "androidBcp": "b+ku+Arab+IQ",
+      "name": "Central Kurdish (Iraq)"
+    },
+    {
+      "android": "shu",
+      "rfc": "shu",
+      "code": "shu",
+      "androidBcp": "b+shu",
+      "name": "Chadian Arabic"
+    },
+    {
+      "android": "shu-rTD",
+      "rfc": "shu-TD",
+      "code": "shu_td",
+      "androidBcp": "b+shu+TD",
+      "name": "Chadian Arabic (Chad)"
+    },
+    {
+      "android": "shu-Latn",
+      "rfc": "shu-Latn",
+      "code": "shu_latn",
+      "androidBcp": "b+shu+Latn",
+      "name": "Chadian Arabic (Latin)"
+    },
+    {
+      "android": "shu-Latn-rNG",
+      "rfc": "shu-Latn-NG",
+      "code": "shu_latn_ng",
+      "androidBcp": "b+shu+Latn+NG",
+      "name": "Chadian Arabic (Latin, Nigeria)"
+    },
+    {
+      "android": "cld",
+      "rfc": "cld",
+      "code": "cld",
+      "androidBcp": "b+cld",
+      "name": "Chaldean"
+    },
+    {
+      "android": "ch",
+      "rfc": "ch",
+      "code": "ch",
+      "androidBcp": "b+ch",
+      "name": "Chamorro"
+    },
+    {
+      "android": "cbk",
+      "rfc": "cbk",
+      "code": "cbk",
+      "androidBcp": "b+cbk",
+      "name": "Chavacano"
+    },
+    {
+      "android": "ce",
+      "rfc": "ce",
+      "code": "ce",
+      "androidBcp": "b+ce",
+      "name": "Chechen"
+    },
+    {
+      "android": "ce-rRU",
+      "rfc": "ce-RU",
+      "code": "ce_ru",
+      "androidBcp": "b+ce+RU",
+      "name": "Chechen (Russia)"
+    },
+    {
+      "android": "chr",
+      "rfc": "chr",
+      "code": "chr",
+      "androidBcp": "b+chr",
+      "name": "Cherokee"
+    },
+    {
+      "android": "ny",
+      "rfc": "ny",
+      "code": "ny",
+      "androidBcp": "b+ny",
+      "name": "Chewa"
+    },
+    {
+      "android": "ny-rMW",
+      "rfc": "ny-MW",
+      "code": "ny_mw",
+      "androidBcp": "b+ny+MW",
+      "name": "Chewa (Malawi)"
+    },
+    {
+      "android": "ny-rZM",
+      "rfc": "ny-ZM",
+      "code": "ny_zm",
+      "androidBcp": "b+ny+ZM",
+      "name": "Chewa (Zambia)"
+    },
+    {
+      "android": "zh",
+      "rfc": "zh",
+      "code": "zh",
+      "androidBcp": "b+zh",
+      "name": "Chinese"
+    },
+    {
+      "android": "zh-rCN",
+      "rfc": "zh-CN",
+      "code": "zh_cn",
+      "androidBcp": "b+zh+CN",
+      "name": "Chinese (China)"
+    },
+    {
+      "android": "zh-rHK",
+      "rfc": "zh-HK",
+      "code": "zh_hk",
+      "androidBcp": "b+zh+HK",
+      "name": "Chinese (Hong Kong)"
+    },
+    {
+      "android": "zh-rMO",
+      "rfc": "zh-MO",
+      "code": "zh_mo",
+      "androidBcp": "b+zh+MO",
+      "name": "Chinese (Macau SAR)"
+    },
+    {
+      "android": "zh-rMY",
+      "rfc": "zh-MY",
+      "code": "zh_my",
+      "androidBcp": "b+zh+MY",
+      "name": "Chinese (Malaysia)"
+    },
+    {
+      "android": "zh-Hans",
+      "rfc": "zh-Hans",
+      "code": "zh_hans",
+      "androidBcp": "b+zh+Hans",
+      "name": "Chinese (Simplified Han)"
+    },
+    {
+      "android": "zh-Hans-rCN",
+      "rfc": "zh-Hans-CN",
+      "code": "zh_hans_cn",
+      "androidBcp": "b+zh+Hans+CN",
+      "name": "Chinese (Simplified Han, China)"
+    },
+    {
+      "android": "zh-Hans-rMY",
+      "rfc": "zh-Hans-MY",
+      "code": "zh_hans_my",
+      "androidBcp": "b+zh+Hans+MY",
+      "name": "Chinese (Simplified Han, Malaysia)"
+    },
+    {
+      "android": "zh-Hans-rSG",
+      "rfc": "zh-Hans-SG",
+      "code": "zh_hans_sg",
+      "androidBcp": "b+zh+Hans+SG",
+      "name": "Chinese (Simplified Han, Singapore)"
+    },
+    {
+      "android": "zh-rSG",
+      "rfc": "zh-SG",
+      "code": "zh_sg",
+      "androidBcp": "b+zh+SG",
+      "name": "Chinese (Singapore)"
+    },
+    {
+      "android": "zh-rTW",
+      "rfc": "zh-TW",
+      "code": "zh_tw",
+      "androidBcp": "b+zh+TW",
+      "name": "Chinese (Taiwan)"
+    },
+    {
+      "android": "zh-Hant",
+      "rfc": "zh-Hant",
+      "code": "zh_hant",
+      "androidBcp": "b+zh+Hant",
+      "name": "Chinese (Traditional Han)"
+    },
+    {
+      "android": "zh-Hant-rHK",
+      "rfc": "zh-Hant-HK",
+      "code": "zh_hant_hk",
+      "androidBcp": "b+zh+Hant+HK",
+      "name": "Chinese (Traditional Han, Hong Kong)"
+    },
+    {
+      "android": "zh-Hant-rTW",
+      "rfc": "zh-Hant-TW",
+      "code": "zh_hant_tw",
+      "androidBcp": "b+zh+Hant+TW",
+      "name": "Chinese (Traditional Han, Taiwan)"
+    },
+    {
+      "android": "ctg",
+      "rfc": "ctg",
+      "code": "ctg",
+      "androidBcp": "b+ctg",
+      "name": "Chittagonian"
+    },
+    {
+      "android": "ctg-rBD",
+      "rfc": "ctg-BD",
+      "code": "ctg_bd",
+      "androidBcp": "b+ctg+BD",
+      "name": "Chittagonian (Bangladesh)"
+    },
+    {
+      "android": "cjk",
+      "rfc": "cjk",
+      "code": "cjk",
+      "androidBcp": "b+cjk",
+      "name": "Chokwe"
+    },
+    {
+      "android": "cjk-rAO",
+      "rfc": "cjk-AO",
+      "code": "cjk_ao",
+      "androidBcp": "b+cjk+AO",
+      "name": "Chokwe (Angola)"
+    },
+    {
+      "android": "chk",
+      "rfc": "chk",
+      "code": "chk",
+      "androidBcp": "b+chk",
+      "name": "Chuukese"
+    },
+    {
+      "android": "cv",
+      "rfc": "cv",
+      "code": "cv",
+      "androidBcp": "b+cv",
+      "name": "Chuvash"
+    },
+    {
+      "android": "ckl",
+      "rfc": "ckl",
+      "code": "ckl",
+      "androidBcp": "b+ckl",
+      "name": "Cibak"
+    },
+    {
+      "android": "cor",
+      "rfc": "cor",
+      "code": "cor",
+      "androidBcp": "b+cor",
+      "name": "Cornish"
+    },
+    {
+      "android": "co",
+      "rfc": "co",
+      "code": "co",
+      "androidBcp": "b+co",
+      "name": "Corsican"
+    },
+    {
+      "android": "co-rFR",
+      "rfc": "co-FR",
+      "code": "co_fr",
+      "androidBcp": "b+co+FR",
+      "name": "Corsican (France)"
+    },
+    {
+      "android": "cr",
+      "rfc": "cr",
+      "code": "cr",
+      "androidBcp": "b+cr",
+      "name": "Cree"
+    },
+    {
+      "android": "crp",
+      "rfc": "crp",
+      "code": "crp",
+      "androidBcp": "b+crp",
+      "name": "Creoles and pidgins"
+    },
+    {
+      "android": "crh",
+      "rfc": "crh",
+      "code": "crh",
+      "androidBcp": "b+crh",
+      "name": "Crimean Tatar"
+    },
+    {
+      "android": "crh-Cyrl",
+      "rfc": "crh-Cyrl",
+      "code": "crh_cyrl",
+      "androidBcp": "b+crh+Cyrl",
+      "name": "Crimean Tatar (Cyrillic)"
+    },
+    {
+      "android": "crh-Latn",
+      "rfc": "crh-Latn",
+      "code": "crh_latn",
+      "androidBcp": "b+crh+Latn",
+      "name": "Crimean Tatar (Latin)"
+    },
+    {
+      "android": "hr",
+      "rfc": "hr",
+      "code": "hr",
+      "androidBcp": "b+hr",
+      "name": "Croatian"
+    },
+    {
+      "android": "hr-rBA",
+      "rfc": "hr-BA",
+      "code": "hr_ba",
+      "androidBcp": "b+hr+BA",
+      "name": "Croatian (Bosnia and Herzegovina)"
+    },
+    {
+      "android": "hr-rHR",
+      "rfc": "hr-HR",
+      "code": "hr_hr",
+      "androidBcp": "b+hr+HR",
+      "name": "Croatian (Croatia)"
+    },
+    {
+      "android": "quz",
+      "rfc": "quz",
+      "code": "quz",
+      "androidBcp": "b+quz",
+      "name": "Cusco Quechua"
+    },
+    {
+      "android": "quz-rPE",
+      "rfc": "quz-PE",
+      "code": "quz_pe",
+      "androidBcp": "b+quz+PE",
+      "name": "Cusco Quechua (Peru)"
+    },
+    {
+      "android": "cs",
+      "rfc": "cs",
+      "code": "cs",
+      "androidBcp": "b+cs",
+      "name": "Czech"
+    },
+    {
+      "android": "cs-rCZ",
+      "rfc": "cs-CZ",
+      "code": "cs_cz",
+      "androidBcp": "b+cs+CZ",
+      "name": "Czech (Czech Republic)"
+    },
+    {
+      "android": "dag",
+      "rfc": "dag",
+      "code": "dag",
+      "androidBcp": "b+dag",
+      "name": "Dagbani"
+    },
+    {
+      "android": "da",
+      "rfc": "da",
+      "code": "da",
+      "androidBcp": "b+da",
+      "name": "Danish"
+    },
+    {
+      "android": "da-rDK",
+      "rfc": "da-DK",
+      "code": "da_dk",
+      "androidBcp": "b+da+DK",
+      "name": "Danish (Denmark)"
+    },
+    {
+      "android": "prs",
+      "rfc": "prs",
+      "code": "prs",
+      "androidBcp": "b+prs",
+      "name": "Dari"
+    },
+    {
+      "android": "prs-rAF",
+      "rfc": "prs-AF",
+      "code": "prs_af",
+      "androidBcp": "b+prs+AF",
+      "name": "Dari (Afghanistan)"
+    },
+    {
+      "android": "dv-rMV",
+      "rfc": "dv-MV",
+      "code": "dv_mv",
+      "androidBcp": "b+dv+MV",
+      "name": "Dhivehi (Maldives)"
+    },
+    {
+      "android": "din",
+      "rfc": "din",
+      "code": "din",
+      "androidBcp": "b+din",
+      "name": "Dinka"
+    },
+    {
+      "android": "din-rSS",
+      "rfc": "din-SS",
+      "code": "din_ss",
+      "androidBcp": "b+din+SS",
+      "name": "Dinka (South Sudan)"
+    },
+    {
+      "android": "dv",
+      "rfc": "dv",
+      "code": "dv",
+      "androidBcp": "b+dv",
+      "name": "Divehi"
+    },
+    {
+      "android": "doi",
+      "rfc": "doi",
+      "code": "doi",
+      "androidBcp": "b+doi",
+      "name": "Dogri"
+    },
+    {
+      "android": "nl",
+      "rfc": "nl",
+      "code": "nl",
+      "androidBcp": "b+nl",
+      "name": "Dutch"
+    },
+    {
+      "android": "nl-rBE",
+      "rfc": "nl-BE",
+      "code": "nl_be",
+      "androidBcp": "b+nl+BE",
+      "name": "Dutch (Belgium)"
+    },
+    {
+      "android": "nl-rCW",
+      "rfc": "nl-CW",
+      "code": "nl_cw",
+      "androidBcp": "b+nl+CW",
+      "name": "Dutch (Curaçao)"
+    },
+    {
+      "android": "nl-rNL",
+      "rfc": "nl-NL",
+      "code": "nl_nl",
+      "androidBcp": "b+nl+NL",
+      "name": "Dutch (Netherlands)"
+    },
+    {
+      "android": "nl-rSR",
+      "rfc": "nl-SR",
+      "code": "nl_sr",
+      "androidBcp": "b+nl+SR",
+      "name": "Dutch (Suriname)"
+    },
+    {
+      "android": "nl-r001",
+      "rfc": "nl-001",
+      "code": "nl_001",
+      "androidBcp": "b+nl+001",
+      "name": "Dutch (World)"
+    },
+    {
+      "android": "dyu",
+      "rfc": "dyu",
+      "code": "dyu",
+      "androidBcp": "b+dyu",
+      "name": "Dyula"
+    },
+    {
+      "android": "dyu-rCI",
+      "rfc": "dyu-CI",
+      "code": "dyu_ci",
+      "androidBcp": "b+dyu+CI",
+      "name": "Dyula (Ivory Coast)"
+    },
+    {
+      "android": "dz",
+      "rfc": "dz",
+      "code": "dz",
+      "androidBcp": "b+dz",
+      "name": "Dzongkha"
+    },
+    {
+      "android": "eky",
+      "rfc": "eky",
+      "code": "eky",
+      "androidBcp": "b+eky",
+      "name": "Eastern Kayah"
+    },
+    {
+      "android": "emk",
+      "rfc": "emk",
+      "code": "emk",
+      "androidBcp": "b+emk",
+      "name": "Eastern Maninkakan"
+    },
+    {
+      "android": "mhr",
+      "rfc": "mhr",
+      "code": "mhr",
+      "androidBcp": "b+mhr",
+      "name": "Eastern Mari"
+    },
+    {
+      "android": "bin",
+      "rfc": "bin",
+      "code": "bin",
+      "androidBcp": "b+bin",
+      "name": "Edo"
+    },
+    {
+      "android": "bin-rNG",
+      "rfc": "bin-NG",
+      "code": "bin_ng",
+      "androidBcp": "b+bin+NG",
+      "name": "Edo (Nigeria)"
+    },
+    {
+      "android": "en",
+      "rfc": "en",
+      "code": "en",
+      "androidBcp": "b+en",
+      "name": "English"
+    },
+    {
+      "android": "en-rAL",
+      "rfc": "en-AL",
+      "code": "en_al",
+      "androidBcp": "b+en+AL",
+      "name": "English (Albania)"
+    },
+    {
+      "android": "en-rDZ",
+      "rfc": "en-DZ",
+      "code": "en_dz",
+      "androidBcp": "b+en+DZ",
+      "name": "English (Algeria)"
+    },
+    {
+      "android": "en-rAS",
+      "rfc": "en-AS",
+      "code": "en_as",
+      "androidBcp": "b+en+AS",
+      "name": "English (American Samoa)"
+    },
+    {
+      "android": "en-rAI",
+      "rfc": "en-AI",
+      "code": "en_ai",
+      "androidBcp": "b+en+AI",
+      "name": "English (Anguilla)"
+    },
+    {
+      "android": "en-rAQ",
+      "rfc": "en-AQ",
+      "code": "en_aq",
+      "androidBcp": "b+en+AQ",
+      "name": "English (Antarctica)"
+    },
+    {
+      "android": "en-rAG",
+      "rfc": "en-AG",
+      "code": "en_ag",
+      "androidBcp": "b+en+AG",
+      "name": "English (Antigua and Barbuda)"
+    },
+    {
+      "android": "en-rAM",
+      "rfc": "en-AM",
+      "code": "en_am",
+      "androidBcp": "b+en+AM",
+      "name": "English (Armenia)"
+    },
+    {
+      "android": "en-rAW",
+      "rfc": "en-AW",
+      "code": "en_aw",
+      "androidBcp": "b+en+AW",
+      "name": "English (Aruba)"
+    },
+    {
+      "android": "en-rAU",
+      "rfc": "en-AU",
+      "code": "en_au",
+      "androidBcp": "b+en+AU",
+      "name": "English (Australia)"
+    },
+    {
+      "android": "en-rAZ",
+      "rfc": "en-AZ",
+      "code": "en_az",
+      "androidBcp": "b+en+AZ",
+      "name": "English (Azerbaijan)"
+    },
+    {
+      "android": "en-rBS",
+      "rfc": "en-BS",
+      "code": "en_bs",
+      "androidBcp": "b+en+BS",
+      "name": "English (Bahamas)"
+    },
+    {
+      "android": "en-rBH",
+      "rfc": "en-BH",
+      "code": "en_bh",
+      "androidBcp": "b+en+BH",
+      "name": "English (Bahrain)"
+    },
+    {
+      "android": "en-rBD",
+      "rfc": "en-BD",
+      "code": "en_bd",
+      "androidBcp": "b+en+BD",
+      "name": "English (Bangladesh)"
+    },
+    {
+      "android": "en-rBB",
+      "rfc": "en-BB",
+      "code": "en_bb",
+      "androidBcp": "b+en+BB",
+      "name": "English (Barbados)"
+    },
+    {
+      "android": "en-rBE",
+      "rfc": "en-BE",
+      "code": "en_be",
+      "androidBcp": "b+en+BE",
+      "name": "English (Belgium)"
+    },
+    {
+      "android": "en-rBZ",
+      "rfc": "en-BZ",
+      "code": "en_bz",
+      "androidBcp": "b+en+BZ",
+      "name": "English (Belize)"
+    },
+    {
+      "android": "en-rBM",
+      "rfc": "en-BM",
+      "code": "en_bm",
+      "androidBcp": "b+en+BM",
+      "name": "English (Bermuda)"
+    },
+    {
+      "android": "en-rBT",
+      "rfc": "en-BT",
+      "code": "en_bt",
+      "androidBcp": "b+en+BT",
+      "name": "English (Bhutan)"
+    },
+    {
+      "android": "en-rBQ",
+      "rfc": "en-BQ",
+      "code": "en_bq",
+      "androidBcp": "b+en+BQ",
+      "name": "English (Bonaire, Sint Eustatius and Saba)"
+    },
+    {
+      "android": "en-rBA",
+      "rfc": "en-BA",
+      "code": "en_ba",
+      "androidBcp": "b+en+BA",
+      "name": "English (Bosnia and Herzegovina)"
+    },
+    {
+      "android": "en-rBW",
+      "rfc": "en-BW",
+      "code": "en_bw",
+      "androidBcp": "b+en+BW",
+      "name": "English (Botswana)"
+    },
+    {
+      "android": "en-rBR",
+      "rfc": "en-BR",
+      "code": "en_br",
+      "androidBcp": "b+en+BR",
+      "name": "English (Brazil)"
+    },
+    {
+      "android": "en-rIO",
+      "rfc": "en-IO",
+      "code": "en_io",
+      "androidBcp": "b+en+IO",
+      "name": "English (British Indian Ocean Territory)"
+    },
+    {
+      "android": "en-rBN",
+      "rfc": "en-BN",
+      "code": "en_bn",
+      "androidBcp": "b+en+BN",
+      "name": "English (Brunei)"
+    },
+    {
+      "android": "en-rKH",
+      "rfc": "en-KH",
+      "code": "en_kh",
+      "androidBcp": "b+en+KH",
+      "name": "English (Cambodia)"
+    },
+    {
+      "android": "en-rCA",
+      "rfc": "en-CA",
+      "code": "en_ca",
+      "androidBcp": "b+en+CA",
+      "name": "English (Canada)"
+    },
+    {
+      "android": "en-r029",
+      "rfc": "en-029",
+      "code": "en_029",
+      "androidBcp": "b+en+029",
+      "name": "English (Caribbean)"
+    },
+    {
+      "android": "en-rKY",
+      "rfc": "en-KY",
+      "code": "en_ky",
+      "androidBcp": "b+en+KY",
+      "name": "English (Cayman Islands)"
+    },
+    {
+      "android": "en-rCN",
+      "rfc": "en-CN",
+      "code": "en_cn",
+      "androidBcp": "b+en+CN",
+      "name": "English (China)"
+    },
+    {
+      "android": "en-rCX",
+      "rfc": "en-CX",
+      "code": "en_cx",
+      "androidBcp": "b+en+CX",
+      "name": "English (Christmas Island)"
+    },
+    {
+      "android": "en-rCC",
+      "rfc": "en-CC",
+      "code": "en_cc",
+      "androidBcp": "b+en+CC",
+      "name": "English (Cocos (Keeling) Islands)"
+    },
+    {
+      "android": "en-rCO",
+      "rfc": "en-CO",
+      "code": "en_co",
+      "androidBcp": "b+en+CO",
+      "name": "English (Colombia)"
+    },
+    {
+      "android": "en-rCK",
+      "rfc": "en-CK",
+      "code": "en_ck",
+      "androidBcp": "b+en+CK",
+      "name": "English (Cook Islands)"
+    },
+    {
+      "android": "en-rCW",
+      "rfc": "en-CW",
+      "code": "en_cw",
+      "androidBcp": "b+en+CW",
+      "name": "English (Curaçao)"
+    },
+    {
+      "android": "en-rCY",
+      "rfc": "en-CY",
+      "code": "en_cy",
+      "androidBcp": "b+en+CY",
+      "name": "English (Cyprus)"
+    },
+    {
+      "android": "en-rCZ",
+      "rfc": "en-CZ",
+      "code": "en_cz",
+      "androidBcp": "b+en+CZ",
+      "name": "English (Czech Republic)"
+    },
+    {
+      "android": "en-rDK",
+      "rfc": "en-DK",
+      "code": "en_dk",
+      "androidBcp": "b+en+DK",
+      "name": "English (Denmark)"
+    },
+    {
+      "android": "en-rDM",
+      "rfc": "en-DM",
+      "code": "en_dm",
+      "androidBcp": "b+en+DM",
+      "name": "English (Dominica)"
+    },
+    {
+      "android": "en-r151",
+      "rfc": "en-151",
+      "code": "en_151",
+      "androidBcp": "b+en+151",
+      "name": "English (Eastern Europe)"
+    },
+    {
+      "android": "en-rEG",
+      "rfc": "en-EG",
+      "code": "en_eg",
+      "androidBcp": "b+en+EG",
+      "name": "English (Egypt)"
+    },
+    {
+      "android": "en-rGQ",
+      "rfc": "en-GQ",
+      "code": "en_gq",
+      "androidBcp": "b+en+GQ",
+      "name": "English (Equatorial Guinea)"
+    },
+    {
+      "android": "en-rER",
+      "rfc": "en-ER",
+      "code": "en_er",
+      "androidBcp": "b+en+ER",
+      "name": "English (Eritrea)"
+    },
+    {
+      "android": "en-rET",
+      "rfc": "en-ET",
+      "code": "en_et",
+      "androidBcp": "b+en+ET",
+      "name": "English (Ethiopia)"
+    },
+    {
+      "android": "en-r150",
+      "rfc": "en-150",
+      "code": "en_150",
+      "androidBcp": "b+en+150",
+      "name": "English (Europe)"
+    },
+    {
+      "android": "en-rFK",
+      "rfc": "en-FK",
+      "code": "en_fk",
+      "androidBcp": "b+en+FK",
+      "name": "English (Falkland Islands (Malvinas))"
+    },
+    {
+      "android": "en-rFO",
+      "rfc": "en-FO",
+      "code": "en_fo",
+      "androidBcp": "b+en+FO",
+      "name": "English (Faroe Islands)"
+    },
+    {
+      "android": "en-rFJ",
+      "rfc": "en-FJ",
+      "code": "en_fj",
+      "androidBcp": "b+en+FJ",
+      "name": "English (Fiji)"
+    },
+    {
+      "android": "en-rFI",
+      "rfc": "en-FI",
+      "code": "en_fi",
+      "androidBcp": "b+en+FI",
+      "name": "English (Finland)"
+    },
+    {
+      "android": "en-rFR",
+      "rfc": "en-FR",
+      "code": "en_fr",
+      "androidBcp": "b+en+FR",
+      "name": "English (France)"
+    },
+    {
+      "android": "en-rGF",
+      "rfc": "en-GF",
+      "code": "en_gf",
+      "androidBcp": "b+en+GF",
+      "name": "English (French Guiana)"
+    },
+    {
+      "android": "en-rGM",
+      "rfc": "en-GM",
+      "code": "en_gm",
+      "androidBcp": "b+en+GM",
+      "name": "English (Gambia)"
+    },
+    {
+      "android": "en-rGE",
+      "rfc": "en-GE",
+      "code": "en_ge",
+      "androidBcp": "b+en+GE",
+      "name": "English (Georgia)"
+    },
+    {
+      "android": "en-rDE",
+      "rfc": "en-DE",
+      "code": "en_de",
+      "androidBcp": "b+en+DE",
+      "name": "English (Germany)"
+    },
+    {
+      "android": "en-rGH",
+      "rfc": "en-GH",
+      "code": "en_gh",
+      "androidBcp": "b+en+GH",
+      "name": "English (Ghana)"
+    },
+    {
+      "android": "en-rGI",
+      "rfc": "en-GI",
+      "code": "en_gi",
+      "androidBcp": "b+en+GI",
+      "name": "English (Gibraltar)"
+    },
+    {
+      "android": "en-rGL",
+      "rfc": "en-GL",
+      "code": "en_gl",
+      "androidBcp": "b+en+GL",
+      "name": "English (Greenland)"
+    },
+    {
+      "android": "en-rGD",
+      "rfc": "en-GD",
+      "code": "en_gd",
+      "androidBcp": "b+en+GD",
+      "name": "English (Grenada)"
+    },
+    {
+      "android": "en-rGP",
+      "rfc": "en-GP",
+      "code": "en_gp",
+      "androidBcp": "b+en+GP",
+      "name": "English (Guadeloupe)"
+    },
+    {
+      "android": "en-rGU",
+      "rfc": "en-GU",
+      "code": "en_gu",
+      "androidBcp": "b+en+GU",
+      "name": "English (Guam)"
+    },
+    {
+      "android": "en-rGG",
+      "rfc": "en-GG",
+      "code": "en_gg",
+      "androidBcp": "b+en+GG",
+      "name": "English (Guernsey)"
+    },
+    {
+      "android": "en-rGW",
+      "rfc": "en-GW",
+      "code": "en_gw",
+      "androidBcp": "b+en+GW",
+      "name": "English (Guinea-Bissau)"
+    },
+    {
+      "android": "en-rGY",
+      "rfc": "en-GY",
+      "code": "en_gy",
+      "androidBcp": "b+en+GY",
+      "name": "English (Guyana)"
+    },
+    {
+      "android": "en-rHT",
+      "rfc": "en-HT",
+      "code": "en_ht",
+      "androidBcp": "b+en+HT",
+      "name": "English (Haiti)"
+    },
+    {
+      "android": "en-rHM",
+      "rfc": "en-HM",
+      "code": "en_hm",
+      "androidBcp": "b+en+HM",
+      "name": "English (Heard Island and McDonald Islands)"
+    },
+    {
+      "android": "en-rHK",
+      "rfc": "en-HK",
+      "code": "en_hk",
+      "androidBcp": "b+en+HK",
+      "name": "English (Hong Kong)"
+    },
+    {
+      "android": "en-rHU",
+      "rfc": "en-HU",
+      "code": "en_hu",
+      "androidBcp": "b+en+HU",
+      "name": "English (Hungary)"
+    },
+    {
+      "android": "en-rIS",
+      "rfc": "en-IS",
+      "code": "en_is",
+      "androidBcp": "b+en+IS",
+      "name": "English (Iceland)"
+    },
+    {
+      "android": "en-rIN",
+      "rfc": "en-IN",
+      "code": "en_in",
+      "androidBcp": "b+en+IN",
+      "name": "English (India)"
+    },
+    {
+      "android": "en-rID",
+      "rfc": "en-ID",
+      "code": "en_id",
+      "androidBcp": "b+en+ID",
+      "name": "English (Indonesia)"
+    },
+    {
+      "android": "en-rIQ",
+      "rfc": "en-IQ",
+      "code": "en_iq",
+      "androidBcp": "b+en+IQ",
+      "name": "English (Iraq)"
+    },
+    {
+      "android": "en-rIE",
+      "rfc": "en-IE",
+      "code": "en_ie",
+      "androidBcp": "b+en+IE",
+      "name": "English (Ireland)"
+    },
+    {
+      "android": "en-rIM",
+      "rfc": "en-IM",
+      "code": "en_im",
+      "androidBcp": "b+en+IM",
+      "name": "English (Isle of Man)"
+    },
+    {
+      "android": "en-rIL",
+      "rfc": "en-IL",
+      "code": "en_il",
+      "androidBcp": "b+en+IL",
+      "name": "English (Israel)"
+    },
+    {
+      "android": "en-rIT",
+      "rfc": "en-IT",
+      "code": "en_it",
+      "androidBcp": "b+en+IT",
+      "name": "English (Italy)"
+    },
+    {
+      "android": "en-rJM",
+      "rfc": "en-JM",
+      "code": "en_jm",
+      "androidBcp": "b+en+JM",
+      "name": "English (Jamaica)"
+    },
+    {
+      "android": "en-rJP",
+      "rfc": "en-JP",
+      "code": "en_jp",
+      "androidBcp": "b+en+JP",
+      "name": "English (Japan)"
+    },
+    {
+      "android": "en-rJE",
+      "rfc": "en-JE",
+      "code": "en_je",
+      "androidBcp": "b+en+JE",
+      "name": "English (Jersey)"
+    },
+    {
+      "android": "en-rJO",
+      "rfc": "en-JO",
+      "code": "en_jo",
+      "androidBcp": "b+en+JO",
+      "name": "English (Jordan)"
+    },
+    {
+      "android": "en-rKZ",
+      "rfc": "en-KZ",
+      "code": "en_kz",
+      "androidBcp": "b+en+KZ",
+      "name": "English (Kazakhstan)"
+    },
+    {
+      "android": "en-rKE",
+      "rfc": "en-KE",
+      "code": "en_ke",
+      "androidBcp": "b+en+KE",
+      "name": "English (Kenya)"
+    },
+    {
+      "android": "en-rKM",
+      "rfc": "en-KM",
+      "code": "en_km",
+      "androidBcp": "b+en+KM",
+      "name": "English (Khmer)"
+    },
+    {
+      "android": "en-rKI",
+      "rfc": "en-KI",
+      "code": "en_ki",
+      "androidBcp": "b+en+KI",
+      "name": "English (Kiribati)"
+    },
+    {
+      "android": "en-rKW",
+      "rfc": "en-KW",
+      "code": "en_kw",
+      "androidBcp": "b+en+KW",
+      "name": "English (Kuwait)"
+    },
+    {
+      "android": "en-rLA",
+      "rfc": "en-LA",
+      "code": "en_la",
+      "androidBcp": "b+en+LA",
+      "name": "English (Lao People's Democratic Republic)"
+    },
+    {
+      "android": "en-rLB",
+      "rfc": "en-LB",
+      "code": "en_lb",
+      "androidBcp": "b+en+LB",
+      "name": "English (Lebanon)"
+    },
+    {
+      "android": "en-rLS",
+      "rfc": "en-LS",
+      "code": "en_ls",
+      "androidBcp": "b+en+LS",
+      "name": "English (Lesotho)"
+    },
+    {
+      "android": "en-rLR",
+      "rfc": "en-LR",
+      "code": "en_lr",
+      "androidBcp": "b+en+LR",
+      "name": "English (Liberia)"
+    },
+    {
+      "android": "en-rLY",
+      "rfc": "en-LY",
+      "code": "en_ly",
+      "androidBcp": "b+en+LY",
+      "name": "English (Libya)"
+    },
+    {
+      "android": "en-rMO",
+      "rfc": "en-MO",
+      "code": "en_mo",
+      "androidBcp": "b+en+MO",
+      "name": "English (Macau SAR)"
+    },
+    {
+      "android": "en-rMG",
+      "rfc": "en-MG",
+      "code": "en_mg",
+      "androidBcp": "b+en+MG",
+      "name": "English (Madagascar)"
+    },
+    {
+      "android": "en-rMW",
+      "rfc": "en-MW",
+      "code": "en_mw",
+      "androidBcp": "b+en+MW",
+      "name": "English (Malawi)"
+    },
+    {
+      "android": "en-rMY",
+      "rfc": "en-MY",
+      "code": "en_my",
+      "androidBcp": "b+en+MY",
+      "name": "English (Malaysia)"
+    },
+    {
+      "android": "en-rMV",
+      "rfc": "en-MV",
+      "code": "en_mv",
+      "androidBcp": "b+en+MV",
+      "name": "English (Maldives)"
+    },
+    {
+      "android": "en-rMT",
+      "rfc": "en-MT",
+      "code": "en_mt",
+      "androidBcp": "b+en+MT",
+      "name": "English (Malta)"
+    },
+    {
+      "android": "en-rMH",
+      "rfc": "en-MH",
+      "code": "en_mh",
+      "androidBcp": "b+en+MH",
+      "name": "English (Marshall Islands)"
+    },
+    {
+      "android": "en-rMQ",
+      "rfc": "en-MQ",
+      "code": "en_mq",
+      "androidBcp": "b+en+MQ",
+      "name": "English (Martinique)"
+    },
+    {
+      "android": "en-rMU",
+      "rfc": "en-MU",
+      "code": "en_mu",
+      "androidBcp": "b+en+MU",
+      "name": "English (Mauritius)"
+    },
+    {
+      "android": "en-rMX",
+      "rfc": "en-MX",
+      "code": "en_mx",
+      "androidBcp": "b+en+MX",
+      "name": "English (Mexico)"
+    },
+    {
+      "android": "en-rFM",
+      "rfc": "en-FM",
+      "code": "en_fm",
+      "androidBcp": "b+en+FM",
+      "name": "English (Micronesia (Federated States Of))"
+    },
+    {
+      "android": "en-rMN",
+      "rfc": "en-MN",
+      "code": "en_mn",
+      "androidBcp": "b+en+MN",
+      "name": "English (Mongolia)"
+    },
+    {
+      "android": "en-rME",
+      "rfc": "en-ME",
+      "code": "en_me",
+      "androidBcp": "b+en+ME",
+      "name": "English (Montenegro)"
+    },
+    {
+      "android": "en-rMS",
+      "rfc": "en-MS",
+      "code": "en_ms",
+      "androidBcp": "b+en+MS",
+      "name": "English (Montserrat)"
+    },
+    {
+      "android": "en-rMA",
+      "rfc": "en-MA",
+      "code": "en_ma",
+      "androidBcp": "b+en+MA",
+      "name": "English (Morocco)"
+    },
+    {
+      "android": "en-rMZ",
+      "rfc": "en-MZ",
+      "code": "en_mz",
+      "androidBcp": "b+en+MZ",
+      "name": "English (Mozambique)"
+    },
+    {
+      "android": "en-rMM",
+      "rfc": "en-MM",
+      "code": "en_mm",
+      "androidBcp": "b+en+MM",
+      "name": "English (Myanmar)"
+    },
+    {
+      "android": "en-rNA",
+      "rfc": "en-NA",
+      "code": "en_na",
+      "androidBcp": "b+en+NA",
+      "name": "English (Namibia)"
+    },
+    {
+      "android": "en-rNR",
+      "rfc": "en-NR",
+      "code": "en_nr",
+      "androidBcp": "b+en+NR",
+      "name": "English (Nauru)"
+    },
+    {
+      "android": "en-rNP",
+      "rfc": "en-NP",
+      "code": "en_np",
+      "androidBcp": "b+en+NP",
+      "name": "English (Nepal)"
+    },
+    {
+      "android": "en-rNL",
+      "rfc": "en-NL",
+      "code": "en_nl",
+      "androidBcp": "b+en+NL",
+      "name": "English (Netherlands)"
+    },
+    {
+      "android": "en-rNZ",
+      "rfc": "en-NZ",
+      "code": "en_nz",
+      "androidBcp": "b+en+NZ",
+      "name": "English (New Zealand)"
+    },
+    {
+      "android": "en-rNG",
+      "rfc": "en-NG",
+      "code": "en_ng",
+      "androidBcp": "b+en+NG",
+      "name": "English (Nigeria)"
+    },
+    {
+      "android": "en-rNU",
+      "rfc": "en-NU",
+      "code": "en_nu",
+      "androidBcp": "b+en+NU",
+      "name": "English (Niue)"
+    },
+    {
+      "android": "en-rNF",
+      "rfc": "en-NF",
+      "code": "en_nf",
+      "androidBcp": "b+en+NF",
+      "name": "English (Norfolk Island)"
+    },
+    {
+      "android": "en-rMK",
+      "rfc": "en-MK",
+      "code": "en_mk",
+      "androidBcp": "b+en+MK",
+      "name": "English (North Macedonia)"
+    },
+    {
+      "android": "en-r154",
+      "rfc": "en-154",
+      "code": "en_154",
+      "androidBcp": "b+en+154",
+      "name": "English (Northern Europe)"
+    },
+    {
+      "android": "en-rMP",
+      "rfc": "en-MP",
+      "code": "en_mp",
+      "androidBcp": "b+en+MP",
+      "name": "English (Northern Mariana Islands)"
+    },
+    {
+      "android": "en-rNO",
+      "rfc": "en-NO",
+      "code": "en_no",
+      "androidBcp": "b+en+NO",
+      "name": "English (Norway)"
+    },
+    {
+      "android": "en-rOM",
+      "rfc": "en-OM",
+      "code": "en_om",
+      "androidBcp": "b+en+OM",
+      "name": "English (Oman)"
+    },
+    {
+      "android": "en-rPK",
+      "rfc": "en-PK",
+      "code": "en_pk",
+      "androidBcp": "b+en+PK",
+      "name": "English (Pakistan)"
+    },
+    {
+      "android": "en-rPW",
+      "rfc": "en-PW",
+      "code": "en_pw",
+      "androidBcp": "b+en+PW",
+      "name": "English (Palau)"
+    },
+    {
+      "android": "en-rPG",
+      "rfc": "en-PG",
+      "code": "en_pg",
+      "androidBcp": "b+en+PG",
+      "name": "English (Papua New Guinea)"
+    },
+    {
+      "android": "en-rPE",
+      "rfc": "en-PE",
+      "code": "en_pe",
+      "androidBcp": "b+en+PE",
+      "name": "English (Peru)"
+    },
+    {
+      "android": "en-rPH",
+      "rfc": "en-PH",
+      "code": "en_ph",
+      "androidBcp": "b+en+PH",
+      "name": "English (Philippines)"
+    },
+    {
+      "android": "en-rPN",
+      "rfc": "en-PN",
+      "code": "en_pn",
+      "androidBcp": "b+en+PN",
+      "name": "English (Pitcairn)"
+    },
+    {
+      "android": "en-rPT",
+      "rfc": "en-PT",
+      "code": "en_pt",
+      "androidBcp": "b+en+PT",
+      "name": "English (Portugal)"
+    },
+    {
+      "android": "en-rPR",
+      "rfc": "en-PR",
+      "code": "en_pr",
+      "androidBcp": "b+en+PR",
+      "name": "English (Puerto Rico)"
+    },
+    {
+      "android": "en-rQA",
+      "rfc": "en-QA",
+      "code": "en_qa",
+      "androidBcp": "b+en+QA",
+      "name": "English (Qatar)"
+    },
+    {
+      "android": "en-rRU",
+      "rfc": "en-RU",
+      "code": "en_ru",
+      "androidBcp": "b+en+RU",
+      "name": "English (Russia)"
+    },
+    {
+      "android": "en-rRW",
+      "rfc": "en-RW",
+      "code": "en_rw",
+      "androidBcp": "b+en+RW",
+      "name": "English (Rwanda)"
+    },
+    {
+      "android": "en-rBL",
+      "rfc": "en-BL",
+      "code": "en_bl",
+      "androidBcp": "b+en+BL",
+      "name": "English (Saint Barthélemy)"
+    },
+    {
+      "android": "en-rSH",
+      "rfc": "en-SH",
+      "code": "en_sh",
+      "androidBcp": "b+en+SH",
+      "name": "English (Saint Helena)"
+    },
+    {
+      "android": "en-rKN",
+      "rfc": "en-KN",
+      "code": "en_kn",
+      "androidBcp": "b+en+KN",
+      "name": "English (Saint Kitts and Nevis)"
+    },
+    {
+      "android": "en-rLC",
+      "rfc": "en-LC",
+      "code": "en_lc",
+      "androidBcp": "b+en+LC",
+      "name": "English (Saint Lucia)"
+    },
+    {
+      "android": "en-rVC",
+      "rfc": "en-VC",
+      "code": "en_vc",
+      "androidBcp": "b+en+VC",
+      "name": "English (Saint Vincent and the Grenadines)"
+    },
+    {
+      "android": "en-rWS",
+      "rfc": "en-WS",
+      "code": "en_ws",
+      "androidBcp": "b+en+WS",
+      "name": "English (Samoa)"
+    },
+    {
+      "android": "en-rSA",
+      "rfc": "en-SA",
+      "code": "en_sa",
+      "androidBcp": "b+en+SA",
+      "name": "English (Saudi Arabia)"
+    },
+    {
+      "android": "en-rSC",
+      "rfc": "en-SC",
+      "code": "en_sc",
+      "androidBcp": "b+en+SC",
+      "name": "English (Seychelles)"
+    },
+    {
+      "android": "en-rSL",
+      "rfc": "en-SL",
+      "code": "en_sl",
+      "androidBcp": "b+en+SL",
+      "name": "English (Sierra Leone)"
+    },
+    {
+      "android": "en-rSG",
+      "rfc": "en-SG",
+      "code": "en_sg",
+      "androidBcp": "b+en+SG",
+      "name": "English (Singapore)"
+    },
+    {
+      "android": "en-rSX",
+      "rfc": "en-SX",
+      "code": "en_sx",
+      "androidBcp": "b+en+SX",
+      "name": "English (Sint Maarten)"
+    },
+    {
+      "android": "en-rSK",
+      "rfc": "en-SK",
+      "code": "en_sk",
+      "androidBcp": "b+en+SK",
+      "name": "English (Slovakia)"
+    },
+    {
+      "android": "en-rSI",
+      "rfc": "en-SI",
+      "code": "en_si",
+      "androidBcp": "b+en+SI",
+      "name": "English (Slovenia)"
+    },
+    {
+      "android": "en-rSB",
+      "rfc": "en-SB",
+      "code": "en_sb",
+      "androidBcp": "b+en+SB",
+      "name": "English (Solomon Islands)"
+    },
+    {
+      "android": "en-rSO",
+      "rfc": "en-SO",
+      "code": "en_so",
+      "androidBcp": "b+en+SO",
+      "name": "English (Somalia)"
+    },
+    {
+      "android": "en-rZA",
+      "rfc": "en-ZA",
+      "code": "en_za",
+      "androidBcp": "b+en+ZA",
+      "name": "English (South Africa)"
+    },
+    {
+      "android": "en-rGS",
+      "rfc": "en-GS",
+      "code": "en_gs",
+      "androidBcp": "b+en+GS",
+      "name": "English (South Georgia and the South Sandwich Islands)"
+    },
+    {
+      "android": "en-rKR",
+      "rfc": "en-KR",
+      "code": "en_kr",
+      "androidBcp": "b+en+KR",
+      "name": "English (South Korea)"
+    },
+    {
+      "android": "en-rSS",
+      "rfc": "en-SS",
+      "code": "en_ss",
+      "androidBcp": "b+en+SS",
+      "name": "English (South Sudan)"
+    },
+    {
+      "android": "en-r039",
+      "rfc": "en-039",
+      "code": "en_039",
+      "androidBcp": "b+en+039",
+      "name": "English (Southern Europe)"
+    },
+    {
+      "android": "en-rES",
+      "rfc": "en-ES",
+      "code": "en_es",
+      "androidBcp": "b+en+ES",
+      "name": "English (Spain)"
+    },
+    {
+      "android": "en-rLK",
+      "rfc": "en-LK",
+      "code": "en_lk",
+      "androidBcp": "b+en+LK",
+      "name": "English (Sri Lanka)"
+    },
+    {
+      "android": "en-rSD",
+      "rfc": "en-SD",
+      "code": "en_sd",
+      "androidBcp": "b+en+SD",
+      "name": "English (Sudan)"
+    },
+    {
+      "android": "en-rSR",
+      "rfc": "en-SR",
+      "code": "en_sr",
+      "androidBcp": "b+en+SR",
+      "name": "English (Suriname)"
+    },
+    {
+      "android": "en-rSZ",
+      "rfc": "en-SZ",
+      "code": "en_sz",
+      "androidBcp": "b+en+SZ",
+      "name": "English (Swaziland)"
+    },
+    {
+      "android": "en-rSE",
+      "rfc": "en-SE",
+      "code": "en_se",
+      "androidBcp": "b+en+SE",
+      "name": "English (Sweden)"
+    },
+    {
+      "android": "en-rCH",
+      "rfc": "en-CH",
+      "code": "en_ch",
+      "androidBcp": "b+en+CH",
+      "name": "English (Switzerland)"
+    },
+    {
+      "android": "en-rSY",
+      "rfc": "en-SY",
+      "code": "en_sy",
+      "androidBcp": "b+en+SY",
+      "name": "English (Syria)"
+    },
+    {
+      "android": "en-rTW",
+      "rfc": "en-TW",
+      "code": "en_tw",
+      "androidBcp": "b+en+TW",
+      "name": "English (Taiwan)"
+    },
+    {
+      "android": "en-rTZ",
+      "rfc": "en-TZ",
+      "code": "en_tz",
+      "androidBcp": "b+en+TZ",
+      "name": "English (Tanzania)"
+    },
+    {
+      "android": "en-rTH",
+      "rfc": "en-TH",
+      "code": "en_th",
+      "androidBcp": "b+en+TH",
+      "name": "English (Thailand)"
+    },
+    {
+      "android": "en-rTL",
+      "rfc": "en-TL",
+      "code": "en_tl",
+      "androidBcp": "b+en+TL",
+      "name": "English (Timor-Leste)"
+    },
+    {
+      "android": "en-rTK",
+      "rfc": "en-TK",
+      "code": "en_tk",
+      "androidBcp": "b+en+TK",
+      "name": "English (Tokelau)"
+    },
+    {
+      "android": "en-rTO",
+      "rfc": "en-TO",
+      "code": "en_to",
+      "androidBcp": "b+en+TO",
+      "name": "English (Tonga)"
+    },
+    {
+      "android": "en-rTT",
+      "rfc": "en-TT",
+      "code": "en_tt",
+      "androidBcp": "b+en+TT",
+      "name": "English (Trinidad)"
+    },
+    {
+      "android": "en-rTN",
+      "rfc": "en-TN",
+      "code": "en_tn",
+      "androidBcp": "b+en+TN",
+      "name": "English (Tunisia)"
+    },
+    {
+      "android": "en-rTR",
+      "rfc": "en-TR",
+      "code": "en_tr",
+      "androidBcp": "b+en+TR",
+      "name": "English (Turkey)"
+    },
+    {
+      "android": "en-rTM",
+      "rfc": "en-TM",
+      "code": "en_tm",
+      "androidBcp": "b+en+TM",
+      "name": "English (Turkmenistan)"
+    },
+    {
+      "android": "en-rTC",
+      "rfc": "en-TC",
+      "code": "en_tc",
+      "androidBcp": "b+en+TC",
+      "name": "English (Turks and Caicos Islands)"
+    },
+    {
+      "android": "en-rTV",
+      "rfc": "en-TV",
+      "code": "en_tv",
+      "androidBcp": "b+en+TV",
+      "name": "English (Tuvalu)"
+    },
+    {
+      "android": "en-rUG",
+      "rfc": "en-UG",
+      "code": "en_ug",
+      "androidBcp": "b+en+UG",
+      "name": "English (Uganda)"
+    },
+    {
+      "android": "en-rAE",
+      "rfc": "en-AE",
+      "code": "en_ae",
+      "androidBcp": "b+en+AE",
+      "name": "English (United Arab Emirates)"
+    },
+    {
+      "android": "en-rGB",
+      "rfc": "en-GB",
+      "code": "en_gb",
+      "androidBcp": "b+en+GB",
+      "name": "English (United Kingdom)"
+    },
+    {
+      "android": "en-rUM",
+      "rfc": "en-UM",
+      "code": "en_um",
+      "androidBcp": "b+en+UM",
+      "name": "English (United States Minor Outlying Islands)"
+    },
+    {
+      "android": "en-rUS",
+      "rfc": "en-US",
+      "code": "en_us",
+      "androidBcp": "b+en+US",
+      "name": "English (United States)"
+    },
+    {
+      "android": "en-rVU",
+      "rfc": "en-VU",
+      "code": "en_vu",
+      "androidBcp": "b+en+VU",
+      "name": "English (Vanuatu)"
+    },
+    {
+      "android": "en-rVN",
+      "rfc": "en-VN",
+      "code": "en_vn",
+      "androidBcp": "b+en+VN",
+      "name": "English (Vietnam)"
+    },
+    {
+      "android": "en-rVG",
+      "rfc": "en-VG",
+      "code": "en_vg",
+      "androidBcp": "b+en+VG",
+      "name": "English (Virgin Islands, British)"
+    },
+    {
+      "android": "en-rVI",
+      "rfc": "en-VI",
+      "code": "en_vi",
+      "androidBcp": "b+en+VI",
+      "name": "English (Virgin Islands, U.S.)"
+    },
+    {
+      "android": "en-r155",
+      "rfc": "en-155",
+      "code": "en_155",
+      "androidBcp": "b+en+155",
+      "name": "English (Western Europe)"
+    },
+    {
+      "android": "en-r001",
+      "rfc": "en-001",
+      "code": "en_001",
+      "androidBcp": "b+en+001",
+      "name": "English (World)"
+    },
+    {
+      "android": "en-rYE",
+      "rfc": "en-YE",
+      "code": "en_ye",
+      "androidBcp": "b+en+YE",
+      "name": "English (Yemen)"
+    },
+    {
+      "android": "en-rZM",
+      "rfc": "en-ZM",
+      "code": "en_zm",
+      "androidBcp": "b+en+ZM",
+      "name": "English (Zambia)"
+    },
+    {
+      "android": "en-rZW",
+      "rfc": "en-ZW",
+      "code": "en_zw",
+      "androidBcp": "b+en+ZW",
+      "name": "English (Zimbabwe)"
+    },
+    {
+      "android": "en-rAX",
+      "rfc": "en-AX",
+      "code": "en_ax",
+      "androidBcp": "b+en+AX",
+      "name": "English (Åland Islands)"
+    },
+    {
+      "android": "eo",
+      "rfc": "eo",
+      "code": "eo",
+      "androidBcp": "b+eo",
+      "name": "Esperanto"
+    },
+    {
+      "android": "et",
+      "rfc": "et",
+      "code": "et",
+      "androidBcp": "b+et",
+      "name": "Estonian"
+    },
+    {
+      "android": "et-rEE",
+      "rfc": "et-EE",
+      "code": "et_ee",
+      "androidBcp": "b+et+EE",
+      "name": "Estonian (Estonia)"
+    },
+    {
+      "android": "ee",
+      "rfc": "ee",
+      "code": "ee",
+      "androidBcp": "b+ee",
+      "name": "Ewe"
+    },
+    {
+      "android": "ee-rGH",
+      "rfc": "ee-GH",
+      "code": "ee_gh",
+      "androidBcp": "b+ee+GH",
+      "name": "Ewe (Ghana)"
+    },
+    {
+      "android": "ewo",
+      "rfc": "ewo",
+      "code": "ewo",
+      "androidBcp": "b+ewo",
+      "name": "Ewondo"
+    },
+    {
+      "android": "ewo-rCM",
+      "rfc": "ewo-CM",
+      "code": "ewo_cm",
+      "androidBcp": "b+ewo+CM",
+      "name": "Ewondo (Cameroon)"
+    },
+    {
+      "android": "fan",
+      "rfc": "fan",
+      "code": "fan",
+      "androidBcp": "b+fan",
+      "name": "Fang"
+    },
+    {
+      "android": "fat",
+      "rfc": "fat",
+      "code": "fat",
+      "androidBcp": "b+fat",
+      "name": "Fante"
+    },
+    {
+      "android": "gur",
+      "rfc": "gur",
+      "code": "gur",
+      "androidBcp": "b+gur",
+      "name": "Farefare"
+    },
+    {
+      "android": "gur-rGH",
+      "rfc": "gur-GH",
+      "code": "gur_gh",
+      "androidBcp": "b+gur+GH",
+      "name": "Farefare (Ghana)"
+    },
+    {
+      "android": "fo",
+      "rfc": "fo",
+      "code": "fo",
+      "androidBcp": "b+fo",
+      "name": "Faroese"
+    },
+    {
+      "android": "fo-rFO",
+      "rfc": "fo-FO",
+      "code": "fo_fo",
+      "androidBcp": "b+fo+FO",
+      "name": "Faroese (Faroe Islands)"
+    },
+    {
+      "android": "fa",
+      "rfc": "fa",
+      "code": "fa",
+      "androidBcp": "b+fa",
+      "name": "Farsi"
+    },
+    {
+      "android": "fa-rAF",
+      "rfc": "fa-AF",
+      "code": "fa_af",
+      "androidBcp": "b+fa+AF",
+      "name": "Farsi (Afghanistan)"
+    },
+    {
+      "android": "fa-rIR",
+      "rfc": "fa-IR",
+      "code": "fa_ir",
+      "androidBcp": "b+fa+IR",
+      "name": "Farsi (Iran)"
+    },
+    {
+      "android": "fa-Latn",
+      "rfc": "fa-Latn",
+      "code": "fa_latn",
+      "androidBcp": "b+fa+Latn",
+      "name": "Farsi (Latin)"
+    },
+    {
+      "android": "fa-Latn-rIR",
+      "rfc": "fa-Latn-IR",
+      "code": "fa_latn_ir",
+      "androidBcp": "b+fa+Latn+IR",
+      "name": "Farsi (Latin, Iran)"
+    },
+    {
+      "android": "fj",
+      "rfc": "fj",
+      "code": "fj",
+      "androidBcp": "b+fj",
+      "name": "Fijian"
+    },
+    {
+      "android": "fj-rFJ",
+      "rfc": "fj-FJ",
+      "code": "fj_fj",
+      "androidBcp": "b+fj+FJ",
+      "name": "Fijian (Fiji)"
+    },
+    {
+      "android": "fil",
+      "rfc": "fil",
+      "code": "fil",
+      "androidBcp": "b+fil",
+      "name": "Filipino"
+    },
+    {
+      "android": "fil-rPH",
+      "rfc": "fil-PH",
+      "code": "fil_ph",
+      "androidBcp": "b+fil+PH",
+      "name": "Filipino (Philippines)"
+    },
+    {
+      "android": "fi",
+      "rfc": "fi",
+      "code": "fi",
+      "androidBcp": "b+fi",
+      "name": "Finnish"
+    },
+    {
+      "android": "fi-rFI",
+      "rfc": "fi-FI",
+      "code": "fi_fi",
+      "androidBcp": "b+fi+FI",
+      "name": "Finnish (Finland)"
+    },
+    {
+      "android": "fon",
+      "rfc": "fon",
+      "code": "fon",
+      "androidBcp": "b+fon",
+      "name": "Fon"
+    },
+    {
+      "android": "fr",
+      "rfc": "fr",
+      "code": "fr",
+      "androidBcp": "b+fr",
+      "name": "French"
+    },
+    {
+      "android": "fr-rDZ",
+      "rfc": "fr-DZ",
+      "code": "fr_dz",
+      "androidBcp": "b+fr+DZ",
+      "name": "French (Algeria)"
+    },
+    {
+      "android": "fr-rAD",
+      "rfc": "fr-AD",
+      "code": "fr_ad",
+      "androidBcp": "b+fr+AD",
+      "name": "French (Andorra)"
+    },
+    {
+      "android": "fr-rBE",
+      "rfc": "fr-BE",
+      "code": "fr_be",
+      "androidBcp": "b+fr+BE",
+      "name": "French (Belgium)"
+    },
+    {
+      "android": "fr-rBJ",
+      "rfc": "fr-BJ",
+      "code": "fr_bj",
+      "androidBcp": "b+fr+BJ",
+      "name": "French (Benin)"
+    },
+    {
+      "android": "fr-rBF",
+      "rfc": "fr-BF",
+      "code": "fr_bf",
+      "androidBcp": "b+fr+BF",
+      "name": "French (Burkina Faso)"
+    },
+    {
+      "android": "fr-rBI",
+      "rfc": "fr-BI",
+      "code": "fr_bi",
+      "androidBcp": "b+fr+BI",
+      "name": "French (Burundi)"
+    },
+    {
+      "android": "fr-rCM",
+      "rfc": "fr-CM",
+      "code": "fr_cm",
+      "androidBcp": "b+fr+CM",
+      "name": "French (Cameroon)"
+    },
+    {
+      "android": "fr-rCA",
+      "rfc": "fr-CA",
+      "code": "fr_ca",
+      "androidBcp": "b+fr+CA",
+      "name": "French (Canada)"
+    },
+    {
+      "android": "fr-rCF",
+      "rfc": "fr-CF",
+      "code": "fr_cf",
+      "androidBcp": "b+fr+CF",
+      "name": "French (Central African Republic)"
+    },
+    {
+      "android": "fr-rTD",
+      "rfc": "fr-TD",
+      "code": "fr_td",
+      "androidBcp": "b+fr+TD",
+      "name": "French (Chad)"
+    },
+    {
+      "android": "fr-rKM",
+      "rfc": "fr-KM",
+      "code": "fr_km",
+      "androidBcp": "b+fr+KM",
+      "name": "French (Comoros)"
+    },
+    {
+      "android": "fr-rCG",
+      "rfc": "fr-CG",
+      "code": "fr_cg",
+      "androidBcp": "b+fr+CG",
+      "name": "French (Congo)"
+    },
+    {
+      "android": "fr-rCD",
+      "rfc": "fr-CD",
+      "code": "fr_cd",
+      "androidBcp": "b+fr+CD",
+      "name": "French (DR Congo)"
+    },
+    {
+      "android": "fr-rDJ",
+      "rfc": "fr-DJ",
+      "code": "fr_dj",
+      "androidBcp": "b+fr+DJ",
+      "name": "French (Djibouti)"
+    },
+    {
+      "android": "fr-rGQ",
+      "rfc": "fr-GQ",
+      "code": "fr_gq",
+      "androidBcp": "b+fr+GQ",
+      "name": "French (Equatorial Guinea)"
+    },
+    {
+      "android": "fr-rFR",
+      "rfc": "fr-FR",
+      "code": "fr_fr",
+      "androidBcp": "b+fr+FR",
+      "name": "French (France)"
+    },
+    {
+      "android": "fr-rGF",
+      "rfc": "fr-GF",
+      "code": "fr_gf",
+      "androidBcp": "b+fr+GF",
+      "name": "French (French Guiana)"
+    },
+    {
+      "android": "fr-rPF",
+      "rfc": "fr-PF",
+      "code": "fr_pf",
+      "androidBcp": "b+fr+PF",
+      "name": "French (French Polynesia)"
+    },
+    {
+      "android": "fr-rTF",
+      "rfc": "fr-TF",
+      "code": "fr_tf",
+      "androidBcp": "b+fr+TF",
+      "name": "French (French Southern Territories)"
+    },
+    {
+      "android": "fr-rGA",
+      "rfc": "fr-GA",
+      "code": "fr_ga",
+      "androidBcp": "b+fr+GA",
+      "name": "French (Gabon)"
+    },
+    {
+      "android": "fr-rGP",
+      "rfc": "fr-GP",
+      "code": "fr_gp",
+      "androidBcp": "b+fr+GP",
+      "name": "French (Guadeloupe)"
+    },
+    {
+      "android": "fr-rGN",
+      "rfc": "fr-GN",
+      "code": "fr_gn",
+      "androidBcp": "b+fr+GN",
+      "name": "French (Guinea)"
+    },
+    {
+      "android": "fr-rHT",
+      "rfc": "fr-HT",
+      "code": "fr_ht",
+      "androidBcp": "b+fr+HT",
+      "name": "French (Haiti)"
+    },
+    {
+      "android": "fr-rCI",
+      "rfc": "fr-CI",
+      "code": "fr_ci",
+      "androidBcp": "b+fr+CI",
+      "name": "French (Ivory Coast)"
+    },
+    {
+      "android": "fr-rLU",
+      "rfc": "fr-LU",
+      "code": "fr_lu",
+      "androidBcp": "b+fr+LU",
+      "name": "French (Luxembourg)"
+    },
+    {
+      "android": "fr-rMG",
+      "rfc": "fr-MG",
+      "code": "fr_mg",
+      "androidBcp": "b+fr+MG",
+      "name": "French (Madagascar)"
+    },
+    {
+      "android": "fr-rML",
+      "rfc": "fr-ML",
+      "code": "fr_ml",
+      "androidBcp": "b+fr+ML",
+      "name": "French (Mali)"
+    },
+    {
+      "android": "fr-rMQ",
+      "rfc": "fr-MQ",
+      "code": "fr_mq",
+      "androidBcp": "b+fr+MQ",
+      "name": "French (Martinique)"
+    },
+    {
+      "android": "fr-rMR",
+      "rfc": "fr-MR",
+      "code": "fr_mr",
+      "androidBcp": "b+fr+MR",
+      "name": "French (Mauritania)"
+    },
+    {
+      "android": "fr-rMU",
+      "rfc": "fr-MU",
+      "code": "fr_mu",
+      "androidBcp": "b+fr+MU",
+      "name": "French (Mauritius)"
+    },
+    {
+      "android": "fr-rYT",
+      "rfc": "fr-YT",
+      "code": "fr_yt",
+      "androidBcp": "b+fr+YT",
+      "name": "French (Mayotte)"
+    },
+    {
+      "android": "fr-rMC",
+      "rfc": "fr-MC",
+      "code": "fr_mc",
+      "androidBcp": "b+fr+MC",
+      "name": "French (Monaco)"
+    },
+    {
+      "android": "fr-rMA",
+      "rfc": "fr-MA",
+      "code": "fr_ma",
+      "androidBcp": "b+fr+MA",
+      "name": "French (Morocco)"
+    },
+    {
+      "android": "fr-rNC",
+      "rfc": "fr-NC",
+      "code": "fr_nc",
+      "androidBcp": "b+fr+NC",
+      "name": "French (New Caledonia)"
+    },
+    {
+      "android": "fr-rNE",
+      "rfc": "fr-NE",
+      "code": "fr_ne",
+      "androidBcp": "b+fr+NE",
+      "name": "French (Niger)"
+    },
+    {
+      "android": "fr-r015",
+      "rfc": "fr-015",
+      "code": "fr_015",
+      "androidBcp": "b+fr+015",
+      "name": "French (Northern Africa)"
+    },
+    {
+      "android": "fr-rRW",
+      "rfc": "fr-RW",
+      "code": "fr_rw",
+      "androidBcp": "b+fr+RW",
+      "name": "French (Rwanda)"
+    },
+    {
+      "android": "fr-rRE",
+      "rfc": "fr-RE",
+      "code": "fr_re",
+      "androidBcp": "b+fr+RE",
+      "name": "French (Réunion)"
+    },
+    {
+      "android": "fr-rBL",
+      "rfc": "fr-BL",
+      "code": "fr_bl",
+      "androidBcp": "b+fr+BL",
+      "name": "French (Saint Barthélemy)"
+    },
+    {
+      "android": "fr-rMF",
+      "rfc": "fr-MF",
+      "code": "fr_mf",
+      "androidBcp": "b+fr+MF",
+      "name": "French (Saint Martin (French part))"
+    },
+    {
+      "android": "fr-rPM",
+      "rfc": "fr-PM",
+      "code": "fr_pm",
+      "androidBcp": "b+fr+PM",
+      "name": "French (Saint Pierre And Miquelon)"
+    },
+    {
+      "android": "fr-rSN",
+      "rfc": "fr-SN",
+      "code": "fr_sn",
+      "androidBcp": "b+fr+SN",
+      "name": "French (Senegal)"
+    },
+    {
+      "android": "fr-rSC",
+      "rfc": "fr-SC",
+      "code": "fr_sc",
+      "androidBcp": "b+fr+SC",
+      "name": "French (Seychelles)"
+    },
+    {
+      "android": "fr-rCH",
+      "rfc": "fr-CH",
+      "code": "fr_ch",
+      "androidBcp": "b+fr+CH",
+      "name": "French (Switzerland)"
+    },
+    {
+      "android": "fr-rTG",
+      "rfc": "fr-TG",
+      "code": "fr_tg",
+      "androidBcp": "b+fr+TG",
+      "name": "French (Togo)"
+    },
+    {
+      "android": "fr-rTN",
+      "rfc": "fr-TN",
+      "code": "fr_tn",
+      "androidBcp": "b+fr+TN",
+      "name": "French (Tunisia)"
+    },
+    {
+      "android": "fr-rWF",
+      "rfc": "fr-WF",
+      "code": "fr_wf",
+      "androidBcp": "b+fr+WF",
+      "name": "French (Wallis and Futuna)"
+    },
+    {
+      "android": "fr-r001",
+      "rfc": "fr-001",
+      "code": "fr_001",
+      "androidBcp": "b+fr+001",
+      "name": "French (World)"
+    },
+    {
+      "android": "fur",
+      "rfc": "fur",
+      "code": "fur",
+      "androidBcp": "b+fur",
+      "name": "Friulian"
+    },
+    {
+      "android": "ff",
+      "rfc": "ff",
+      "code": "ff",
+      "androidBcp": "b+ff",
+      "name": "Fulah"
+    },
+    {
+      "android": "ff-Latn-rGM",
+      "rfc": "ff-Latn-GM",
+      "code": "ff_latn_gm",
+      "androidBcp": "b+ff+Latn+GM",
+      "name": "Fulah (Latin, Gambia)"
+    },
+    {
+      "android": "ff-Latn-rGN",
+      "rfc": "ff-Latn-GN",
+      "code": "ff_latn_gn",
+      "androidBcp": "b+ff+Latn+GN",
+      "name": "Fulah (Latin, Guinea)"
+    },
+    {
+      "android": "ff-Latn-rGW",
+      "rfc": "ff-Latn-GW",
+      "code": "ff_latn_gw",
+      "androidBcp": "b+ff+Latn+GW",
+      "name": "Fulah (Latin, Guinea-Bissau)"
+    },
+    {
+      "android": "fvr",
+      "rfc": "fvr",
+      "code": "fvr",
+      "androidBcp": "b+fvr",
+      "name": "Fur"
+    },
+    {
+      "android": "gag",
+      "rfc": "gag",
+      "code": "gag",
+      "androidBcp": "b+gag",
+      "name": "Gagauz"
+    },
+    {
+      "android": "gl",
+      "rfc": "gl",
+      "code": "gl",
+      "androidBcp": "b+gl",
+      "name": "Galician"
+    },
+    {
+      "android": "gl-rES",
+      "rfc": "gl-ES",
+      "code": "gl_es",
+      "androidBcp": "b+gl+ES",
+      "name": "Galician (Spain)"
+    },
+    {
+      "android": "mfi-rNG",
+      "rfc": "mfi-NG",
+      "code": "mfi_ng",
+      "androidBcp": "b+mfi+NG",
+      "name": "Gamargu (Nigeria)"
+    },
+    {
+      "android": "gan",
+      "rfc": "gan",
+      "code": "gan",
+      "androidBcp": "b+gan",
+      "name": "Gan Chinese"
+    },
+    {
+      "android": "lg",
+      "rfc": "lg",
+      "code": "lg",
+      "androidBcp": "b+lg",
+      "name": "Ganda"
+    },
+    {
+      "android": "lg-rUG",
+      "rfc": "lg-UG",
+      "code": "lg_ug",
+      "androidBcp": "b+lg+UG",
+      "name": "Ganda (Uganda)"
+    },
+    {
+      "android": "ka",
+      "rfc": "ka",
+      "code": "ka",
+      "androidBcp": "b+ka",
+      "name": "Georgian"
+    },
+    {
+      "android": "ka-rGE",
+      "rfc": "ka-GE",
+      "code": "ka_ge",
+      "androidBcp": "b+ka+GE",
+      "name": "Georgian (Georgia)"
+    },
+    {
+      "android": "de",
+      "rfc": "de",
+      "code": "de",
+      "androidBcp": "b+de",
+      "name": "German"
+    },
+    {
+      "android": "de-rAT",
+      "rfc": "de-AT",
+      "code": "de_at",
+      "androidBcp": "b+de+AT",
+      "name": "German (Austria)"
+    },
+    {
+      "android": "de-rBE",
+      "rfc": "de-BE",
+      "code": "de_be",
+      "androidBcp": "b+de+BE",
+      "name": "German (Belgium)"
+    },
+    {
+      "android": "de-rDK",
+      "rfc": "de-DK",
+      "code": "de_dk",
+      "androidBcp": "b+de+DK",
+      "name": "German (Denmark)"
+    },
+    {
+      "android": "de-rDE",
+      "rfc": "de-DE",
+      "code": "de_de",
+      "androidBcp": "b+de+DE",
+      "name": "German (Germany)"
+    },
+    {
+      "android": "de-rIT",
+      "rfc": "de-IT",
+      "code": "de_it",
+      "androidBcp": "b+de+IT",
+      "name": "German (Italy)"
+    },
+    {
+      "android": "de-rLI",
+      "rfc": "de-LI",
+      "code": "de_li",
+      "androidBcp": "b+de+LI",
+      "name": "German (Liechtenstein)"
+    },
+    {
+      "android": "de-rLU",
+      "rfc": "de-LU",
+      "code": "de_lu",
+      "androidBcp": "b+de+LU",
+      "name": "German (Luxembourg)"
+    },
+    {
+      "android": "de-rCH",
+      "rfc": "de-CH",
+      "code": "de_ch",
+      "androidBcp": "b+de+CH",
+      "name": "German (Switzerland)"
+    },
+    {
+      "android": "gil",
+      "rfc": "gil",
+      "code": "gil",
+      "androidBcp": "b+gil",
+      "name": "Gilbertese"
+    },
+    {
+      "android": "glw",
+      "rfc": "glw",
+      "code": "glw",
+      "androidBcp": "b+glw",
+      "name": "Glavda"
+    },
+    {
+      "android": "gom",
+      "rfc": "gom",
+      "code": "gom",
+      "androidBcp": "b+gom",
+      "name": "Goan Konkani"
+    },
+    {
+      "android": "gux",
+      "rfc": "gux",
+      "code": "gux",
+      "androidBcp": "b+gux",
+      "name": "Gourmanchéma"
+    },
+    {
+      "android": "el",
+      "rfc": "el",
+      "code": "el",
+      "androidBcp": "b+el",
+      "name": "Greek"
+    },
+    {
+      "android": "el-rCY",
+      "rfc": "el-CY",
+      "code": "el_cy",
+      "androidBcp": "b+el+CY",
+      "name": "Greek (Cyprus)"
+    },
+    {
+      "android": "el-rGR",
+      "rfc": "el-GR",
+      "code": "el_gr",
+      "androidBcp": "b+el+GR",
+      "name": "Greek (Greece)"
+    },
+    {
+      "android": "el-Latn",
+      "rfc": "el-Latn",
+      "code": "el_latn",
+      "androidBcp": "b+el+Latn",
+      "name": "Greek (Latin)"
+    },
+    {
+      "android": "el-Latn-rGR",
+      "rfc": "el-Latn-GR",
+      "code": "el_latn_gr",
+      "androidBcp": "b+el+Latn+GR",
+      "name": "Greek (Latin, Greece)"
+    },
+    {
+      "android": "kl",
+      "rfc": "kl",
+      "code": "kl",
+      "androidBcp": "b+kl",
+      "name": "Greenlandic"
+    },
+    {
+      "android": "kl-rGL",
+      "rfc": "kl-GL",
+      "code": "kl_gl",
+      "androidBcp": "b+kl+GL",
+      "name": "Greenlandic (Greenland)"
+    },
+    {
+      "android": "gn",
+      "rfc": "gn",
+      "code": "gn",
+      "androidBcp": "b+gn",
+      "name": "Guarani"
+    },
+    {
+      "android": "gu",
+      "rfc": "gu",
+      "code": "gu",
+      "androidBcp": "b+gu",
+      "name": "Gujarati"
+    },
+    {
+      "android": "gu-rIN",
+      "rfc": "gu-IN",
+      "code": "gu_in",
+      "androidBcp": "b+gu+IN",
+      "name": "Gujarati (India)"
+    },
+    {
+      "android": "afb",
+      "rfc": "afb",
+      "code": "afb",
+      "androidBcp": "b+afb",
+      "name": "Gulf Arabic"
+    },
+    {
+      "android": "afb-rSA",
+      "rfc": "afb-SA",
+      "code": "afb_sa",
+      "androidBcp": "b+afb+SA",
+      "name": "Gulf Arabic (Saudi Arabia)"
+    },
+    {
+      "android": "guw",
+      "rfc": "guw",
+      "code": "guw",
+      "androidBcp": "b+guw",
+      "name": "Gun"
+    },
+    {
+      "android": "guz",
+      "rfc": "guz",
+      "code": "guz",
+      "androidBcp": "b+guz",
+      "name": "Gusii"
+    },
+    {
+      "android": "guz-rKE",
+      "rfc": "guz-KE",
+      "code": "guz_ke",
+      "androidBcp": "b+guz+KE",
+      "name": "Gusii (Kenya)"
+    },
+    {
+      "android": "ayh",
+      "rfc": "ayh",
+      "code": "ayh",
+      "androidBcp": "b+ayh",
+      "name": "Hadrami Arabic"
+    },
+    {
+      "android": "ayh-rYE",
+      "rfc": "ayh-YE",
+      "code": "ayh_ye",
+      "androidBcp": "b+ayh+YE",
+      "name": "Hadrami Arabic (Yemen)"
+    },
+    {
+      "android": "ht",
+      "rfc": "ht",
+      "code": "ht",
+      "androidBcp": "b+ht",
+      "name": "Haitian Creole"
+    },
+    {
+      "android": "ht-rHT",
+      "rfc": "ht-HT",
+      "code": "ht_ht",
+      "androidBcp": "b+ht+HT",
+      "name": "Haitian Creole (Haiti)"
+    },
+    {
+      "android": "cnh",
+      "rfc": "cnh",
+      "code": "cnh",
+      "androidBcp": "b+cnh",
+      "name": "Haka Chin"
+    },
+    {
+      "android": "hak",
+      "rfc": "hak",
+      "code": "hak",
+      "androidBcp": "b+hak",
+      "name": "Hakka Chinese"
+    },
+    {
+      "android": "ha",
+      "rfc": "ha",
+      "code": "ha",
+      "androidBcp": "b+ha",
+      "name": "Hausa"
+    },
+    {
+      "android": "ha-Latn-rNE",
+      "rfc": "ha-Latn-NE",
+      "code": "ha_latn_ne",
+      "androidBcp": "b+ha+Latn+NE",
+      "name": "Hausa (Latin, Niger)"
+    },
+    {
+      "android": "ha-Latn-rNG",
+      "rfc": "ha-Latn-NG",
+      "code": "ha_latn_ng",
+      "androidBcp": "b+ha+Latn+NG",
+      "name": "Hausa (Latin, Nigeria)"
+    },
+    {
+      "android": "haw",
+      "rfc": "haw",
+      "code": "haw",
+      "androidBcp": "b+haw",
+      "name": "Hawaiian"
+    },
+    {
+      "android": "he",
+      "rfc": "he",
+      "code": "he",
+      "androidBcp": "b+he",
+      "name": "Hebrew"
+    },
+    {
+      "android": "he-rIL",
+      "rfc": "he-IL",
+      "code": "he_il",
+      "androidBcp": "b+he+IL",
+      "name": "Hebrew (Israel)"
+    },
+    {
+      "android": "hz-Latn",
+      "rfc": "hz-Latn",
+      "code": "hz",
+      "androidBcp": "b+hz+Latn",
+      "name": "Herero"
+    },
+    {
+      "android": "hi",
+      "rfc": "hi",
+      "code": "hi",
+      "androidBcp": "b+hi",
+      "name": "Hindi"
+    },
+    {
+      "android": "hi-rIN",
+      "rfc": "hi-IN",
+      "code": "hi_in",
+      "androidBcp": "b+hi+IN",
+      "name": "Hindi (India)"
+    },
+    {
+      "android": "hi-Latn",
+      "rfc": "hi-Latn",
+      "code": "hi_latn",
+      "androidBcp": "b+hi+Latn",
+      "name": "Hindi (Latin)"
+    },
+    {
+      "android": "hmn",
+      "rfc": "hmn",
+      "code": "hmn",
+      "androidBcp": "b+hmn",
+      "name": "Hmong"
+    },
+    {
+      "android": "mww",
+      "rfc": "mww",
+      "code": "mww",
+      "androidBcp": "b+mww",
+      "name": "Hmong Daw"
+    },
+    {
+      "android": "hnj",
+      "rfc": "hnj",
+      "code": "hnj",
+      "androidBcp": "b+hnj",
+      "name": "Hmong Njua"
+    },
+    {
+      "android": "hu",
+      "rfc": "hu",
+      "code": "hu",
+      "androidBcp": "b+hu",
+      "name": "Hungarian"
+    },
+    {
+      "android": "hu-rHU",
+      "rfc": "hu-HU",
+      "code": "hu_hu",
+      "androidBcp": "b+hu+HU",
+      "name": "Hungarian (Hungary)"
+    },
+    {
+      "android": "hup",
+      "rfc": "hup",
+      "code": "hup",
+      "androidBcp": "b+hup",
+      "name": "Hupa"
+    },
+    {
+      "android": "is",
+      "rfc": "is",
+      "code": "is",
+      "androidBcp": "b+is",
+      "name": "Icelandic"
+    },
+    {
+      "android": "is-rIS",
+      "rfc": "is-IS",
+      "code": "is_is",
+      "androidBcp": "b+is+IS",
+      "name": "Icelandic (Iceland)"
+    },
+    {
+      "android": "ig",
+      "rfc": "ig",
+      "code": "ig",
+      "androidBcp": "b+ig",
+      "name": "Igbo"
+    },
+    {
+      "android": "ig-rNG",
+      "rfc": "ig-NG",
+      "code": "ig_ng",
+      "androidBcp": "b+ig+NG",
+      "name": "Igbo (Nigeria)"
+    },
+    {
+      "android": "ilo",
+      "rfc": "ilo",
+      "code": "ilo",
+      "androidBcp": "b+ilo",
+      "name": "Ilocano"
+    },
+    {
+      "android": "ilo-rPH",
+      "rfc": "ilo-PH",
+      "code": "ilo_ph",
+      "androidBcp": "b+ilo+PH",
+      "name": "Ilocano (Philippines)"
+    },
+    {
+      "android": "hil",
+      "rfc": "hil",
+      "code": "hil",
+      "androidBcp": "b+hil",
+      "name": "Ilonggo"
+    },
+    {
+      "android": "hil-rPH",
+      "rfc": "hil-PH",
+      "code": "hil_ph",
+      "androidBcp": "b+hil+PH",
+      "name": "Ilonggo (Philippines)"
+    },
+    {
+      "android": "smn",
+      "rfc": "smn",
+      "code": "smn",
+      "androidBcp": "b+smn",
+      "name": "Inari Sami"
+    },
+    {
+      "android": "smn-rFI",
+      "rfc": "smn-FI",
+      "code": "smn_fi",
+      "androidBcp": "b+smn+FI",
+      "name": "Inari Sami (Finland)"
+    },
+    {
+      "android": "id",
+      "rfc": "id",
+      "code": "id",
+      "androidBcp": "b+id",
+      "name": "Indonesian"
+    },
+    {
+      "android": "id-rID",
+      "rfc": "id-ID",
+      "code": "id_id",
+      "androidBcp": "b+id+ID",
+      "name": "Indonesian (Indonesia)"
+    },
+    {
+      "android": "inh",
+      "rfc": "inh",
+      "code": "inh",
+      "androidBcp": "b+inh",
+      "name": "Ingush"
+    },
+    {
+      "android": "ia",
+      "rfc": "ia",
+      "code": "ia",
+      "androidBcp": "b+ia",
+      "name": "Interlingua"
+    },
+    {
+      "android": "iu",
+      "rfc": "iu",
+      "code": "iu",
+      "androidBcp": "b+iu",
+      "name": "Inuktitut"
+    },
+    {
+      "android": "iu-rCA",
+      "rfc": "iu-CA",
+      "code": "iu_ca",
+      "androidBcp": "b+iu+CA",
+      "name": "Inuktitut (Canada)"
+    },
+    {
+      "android": "ike",
+      "rfc": "ike",
+      "code": "ike",
+      "androidBcp": "b+ike",
+      "name": "Inuktitut (Eastern Canadian)"
+    },
+    {
+      "android": "iu-Latn",
+      "rfc": "iu-Latn",
+      "code": "iu_latn",
+      "androidBcp": "b+iu+Latn",
+      "name": "Inuktitut (Latin)"
+    },
+    {
+      "android": "iu-Cans",
+      "rfc": "iu-Cans",
+      "code": "iu_cans",
+      "androidBcp": "b+iu+Cans",
+      "name": "Inuktitut (Syllabics)"
+    },
+    {
+      "android": "iu-Cans-rCA",
+      "rfc": "iu-Cans-CA",
+      "code": "iu_cans_ca",
+      "androidBcp": "b+iu+Cans+CA",
+      "name": "Inuktitut (Syllabics, Canada)"
+    },
+    {
+      "android": "ikt",
+      "rfc": "ikt",
+      "code": "ikt",
+      "androidBcp": "b+ikt",
+      "name": "Inuktitut (Western Canadian)"
+    },
+    {
+      "android": "ga",
+      "rfc": "ga",
+      "code": "ga",
+      "androidBcp": "b+ga",
+      "name": "Irish"
+    },
+    {
+      "android": "ga-rIE",
+      "rfc": "ga-IE",
+      "code": "ga_ie",
+      "androidBcp": "b+ga+IE",
+      "name": "Irish (Ireland)"
+    },
+    {
+      "android": "iso",
+      "rfc": "iso",
+      "code": "iso",
+      "androidBcp": "b+iso",
+      "name": "Isoko"
+    },
+    {
+      "android": "it",
+      "rfc": "it",
+      "code": "it",
+      "androidBcp": "b+it",
+      "name": "Italian"
+    },
+    {
+      "android": "it-rIT",
+      "rfc": "it-IT",
+      "code": "it_it",
+      "androidBcp": "b+it+IT",
+      "name": "Italian (Italy)"
+    },
+    {
+      "android": "it-rSM",
+      "rfc": "it-SM",
+      "code": "it_sm",
+      "androidBcp": "b+it+SM",
+      "name": "Italian (San Marino)"
+    },
+    {
+      "android": "it-rCH",
+      "rfc": "it-CH",
+      "code": "it_ch",
+      "androidBcp": "b+it+CH",
+      "name": "Italian (Switzerland)"
+    },
+    {
+      "android": "it-rVA",
+      "rfc": "it-VA",
+      "code": "it_va",
+      "androidBcp": "b+it+VA",
+      "name": "Italian (Vatican City)"
+    },
+    {
+      "android": "ium",
+      "rfc": "ium",
+      "code": "ium",
+      "androidBcp": "b+ium",
+      "name": "Iu Mien"
+    },
+    {
+      "android": "jam",
+      "rfc": "jam",
+      "code": "jam",
+      "androidBcp": "b+jam",
+      "name": "Jamaican Creole English"
+    },
+    {
+      "android": "ja",
+      "rfc": "ja",
+      "code": "ja",
+      "androidBcp": "b+ja",
+      "name": "Japanese"
+    },
+    {
+      "android": "ja-rJP",
+      "rfc": "ja-JP",
+      "code": "ja_jp",
+      "androidBcp": "b+ja+JP",
+      "name": "Japanese (Japan)"
+    },
+    {
+      "android": "jra",
+      "rfc": "jra",
+      "code": "jra",
+      "androidBcp": "b+jra",
+      "name": "Jarai"
+    },
+    {
+      "android": "jv",
+      "rfc": "jv",
+      "code": "jv",
+      "androidBcp": "b+jv",
+      "name": "Javanese"
+    },
+    {
+      "android": "quc",
+      "rfc": "quc",
+      "code": "quc",
+      "androidBcp": "b+quc",
+      "name": "K'iche"
+    },
+    {
+      "android": "kbd",
+      "rfc": "kbd",
+      "code": "kbd",
+      "androidBcp": "b+kbd",
+      "name": "Kabardian"
+    },
+    {
+      "android": "kea",
+      "rfc": "kea",
+      "code": "kea",
+      "androidBcp": "b+kea",
+      "name": "Kabuverdianu"
+    },
+    {
+      "android": "kea-rCV",
+      "rfc": "kea-CV",
+      "code": "kea_cv",
+      "androidBcp": "b+kea+CV",
+      "name": "Kabuverdianu (Cabo Verde)"
+    },
+    {
+      "android": "kab",
+      "rfc": "kab",
+      "code": "kab",
+      "androidBcp": "b+kab",
+      "name": "Kabyle"
+    },
+    {
+      "android": "kab-Latn-rDZ",
+      "rfc": "kab-Latn-DZ",
+      "code": "kab_latn_dz",
+      "androidBcp": "b+kab+Latn+DZ",
+      "name": "Kabyle (Latin, Algeria)"
+    },
+    {
+      "android": "kac",
+      "rfc": "kac",
+      "code": "kac",
+      "androidBcp": "b+kac",
+      "name": "Kachin"
+    },
+    {
+      "android": "kac-rMM",
+      "rfc": "kac-MM",
+      "code": "kac_mm",
+      "androidBcp": "b+kac+MM",
+      "name": "Kachin (Myanmar)"
+    },
+    {
+      "android": "kln",
+      "rfc": "kln",
+      "code": "kln",
+      "androidBcp": "b+kln",
+      "name": "Kalenjin"
+    },
+    {
+      "android": "kln-rKE",
+      "rfc": "kln-KE",
+      "code": "kln_ke",
+      "androidBcp": "b+kln+KE",
+      "name": "Kalenjin (Kenya)"
+    },
+    {
+      "android": "kam",
+      "rfc": "kam",
+      "code": "kam",
+      "androidBcp": "b+kam",
+      "name": "Kamba"
+    },
+    {
+      "android": "kam-rKE",
+      "rfc": "kam-KE",
+      "code": "kam_ke",
+      "androidBcp": "b+kam+KE",
+      "name": "Kamba (Kenya)"
+    },
+    {
+      "android": "hig",
+      "rfc": "hig",
+      "code": "hig",
+      "androidBcp": "b+hig",
+      "name": "Kamwe"
+    },
+    {
+      "android": "kn",
+      "rfc": "kn",
+      "code": "kn",
+      "androidBcp": "b+kn",
+      "name": "Kannada"
+    },
+    {
+      "android": "kn-rIN",
+      "rfc": "kn-IN",
+      "code": "kn_in",
+      "androidBcp": "b+kn+IN",
+      "name": "Kannada (India)"
+    },
+    {
+      "android": "kr",
+      "rfc": "kr",
+      "code": "kr",
+      "androidBcp": "b+kr",
+      "name": "Kanuri"
+    },
+    {
+      "android": "kr-Latn",
+      "rfc": "kr-Latn",
+      "code": "kr_latn",
+      "androidBcp": "b+kr+Latn",
+      "name": "Kanuri (Latin)"
+    },
+    {
+      "android": "pam",
+      "rfc": "pam",
+      "code": "pam",
+      "androidBcp": "b+pam",
+      "name": "Kapampangan"
+    },
+    {
+      "android": "cak",
+      "rfc": "cak",
+      "code": "cak",
+      "androidBcp": "b+cak",
+      "name": "Kaqchikel"
+    },
+    {
+      "android": "kaa",
+      "rfc": "kaa",
+      "code": "kaa",
+      "androidBcp": "b+kaa",
+      "name": "Karakalpak"
+    },
+    {
+      "android": "krl",
+      "rfc": "krl",
+      "code": "krl",
+      "androidBcp": "b+krl",
+      "name": "Karelian"
+    },
+    {
+      "android": "kar",
+      "rfc": "kar",
+      "code": "kar",
+      "androidBcp": "b+kar",
+      "name": "Karen"
+    },
+    {
+      "android": "xsm",
+      "rfc": "xsm",
+      "code": "xsm",
+      "androidBcp": "b+xsm",
+      "name": "Kasem"
+    },
+    {
+      "android": "xsm-rGH",
+      "rfc": "xsm-GH",
+      "code": "xsm_gh",
+      "androidBcp": "b+xsm+GH",
+      "name": "Kasem (Ghana)"
+    },
+    {
+      "android": "ks",
+      "rfc": "ks",
+      "code": "ks",
+      "androidBcp": "b+ks",
+      "name": "Kashmiri"
+    },
+    {
+      "android": "ks-Arab",
+      "rfc": "ks-Arab",
+      "code": "ks_arab",
+      "androidBcp": "b+ks+Arab",
+      "name": "Kashmiri (Arabic)"
+    },
+    {
+      "android": "ks-Deva",
+      "rfc": "ks-Deva",
+      "code": "ks_deva",
+      "androidBcp": "b+ks+Deva",
+      "name": "Kashmiri (Devanagari)"
+    },
+    {
+      "android": "kk",
+      "rfc": "kk",
+      "code": "kk",
+      "androidBcp": "b+kk",
+      "name": "Kazakh"
+    },
+    {
+      "android": "kk-rKZ",
+      "rfc": "kk-KZ",
+      "code": "kk_kz",
+      "androidBcp": "b+kk+KZ",
+      "name": "Kazakh (Kazakhstan)"
+    },
+    {
+      "android": "kk-Latn",
+      "rfc": "kk-Latn",
+      "code": "kk_latn",
+      "androidBcp": "b+kk+Latn",
+      "name": "Kazakh (Latin)"
+    },
+    {
+      "android": "km",
+      "rfc": "km",
+      "code": "km",
+      "androidBcp": "b+km",
+      "name": "Khmer"
+    },
+    {
+      "android": "km-rKH",
+      "rfc": "km-KH",
+      "code": "km_kh",
+      "androidBcp": "b+km+KH",
+      "name": "Khmer (Cambodia)"
+    },
+    {
+      "android": "km-rVN",
+      "rfc": "km-VN",
+      "code": "km_vn",
+      "androidBcp": "b+km+VN",
+      "name": "Khmer (Vietnam)"
+    },
+    {
+      "android": "ki",
+      "rfc": "ki",
+      "code": "ki",
+      "androidBcp": "b+ki",
+      "name": "Kikuyu"
+    },
+    {
+      "android": "kmb",
+      "rfc": "kmb",
+      "code": "kmb",
+      "androidBcp": "b+kmb",
+      "name": "Kimbundu"
+    },
+    {
+      "android": "kmb-rAO",
+      "rfc": "kmb-AO",
+      "code": "kmb_ao",
+      "androidBcp": "b+kmb+AO",
+      "name": "Kimbundu (Angola)"
+    },
+    {
+      "android": "rw",
+      "rfc": "rw",
+      "code": "rw",
+      "androidBcp": "b+rw",
+      "name": "Kinyarwanda"
+    },
+    {
+      "android": "rw-rRW",
+      "rfc": "rw-RW",
+      "code": "rw_rw",
+      "androidBcp": "b+rw+RW",
+      "name": "Kinyarwanda (Rwanda)"
+    },
+    {
+      "android": "rn",
+      "rfc": "rn",
+      "code": "rn",
+      "androidBcp": "b+rn",
+      "name": "Kirundi"
+    },
+    {
+      "android": "rn-rBI",
+      "rfc": "rn-BI",
+      "code": "rn_bi",
+      "androidBcp": "b+rn+BI",
+      "name": "Kirundi (Buriundi)"
+    },
+    {
+      "android": "ktu",
+      "rfc": "ktu",
+      "code": "ktu",
+      "androidBcp": "b+ktu",
+      "name": "Kituba"
+    },
+    {
+      "android": "tlh",
+      "rfc": "tlh",
+      "code": "tlh",
+      "androidBcp": "b+tlh",
+      "name": "Klingon"
+    },
+    {
+      "android": "tlh-Latn",
+      "rfc": "tlh-Latn",
+      "code": "tlh_latn",
+      "androidBcp": "b+tlh+Latn",
+      "name": "Klingon (Latin)"
+    },
+    {
+      "android": "tlh-Piqd",
+      "rfc": "tlh-Piqd",
+      "code": "tlh_piqd",
+      "androidBcp": "b+tlh+Piqd",
+      "name": "Klingon (pIqaD)"
+    },
+    {
+      "android": "kv",
+      "rfc": "kv",
+      "code": "kv",
+      "androidBcp": "b+kv",
+      "name": "Komi"
+    },
+    {
+      "android": "kg",
+      "rfc": "kg",
+      "code": "kg",
+      "androidBcp": "b+kg",
+      "name": "Kongo"
+    },
+    {
+      "android": "kg-rAO",
+      "rfc": "kg-AO",
+      "code": "kg_ao",
+      "androidBcp": "b+kg+AO",
+      "name": "Kongo (Angola)"
+    },
+    {
+      "android": "kok",
+      "rfc": "kok",
+      "code": "kok",
+      "androidBcp": "b+kok",
+      "name": "Konkani"
+    },
+    {
+      "android": "kok-rIN",
+      "rfc": "kok-IN",
+      "code": "kok_in",
+      "androidBcp": "b+kok+IN",
+      "name": "Konkani (India)"
+    },
+    {
+      "android": "ko",
+      "rfc": "ko",
+      "code": "ko",
+      "androidBcp": "b+ko",
+      "name": "Korean"
+    },
+    {
+      "android": "ko-rKP",
+      "rfc": "ko-KP",
+      "code": "ko_kp",
+      "androidBcp": "b+ko+KP",
+      "name": "Korean (Korea, Democratic People's Republic Of)"
+    },
+    {
+      "android": "ko-rKR",
+      "rfc": "ko-KR",
+      "code": "ko_kr",
+      "androidBcp": "b+ko+KR",
+      "name": "Korean (South Korea)"
+    },
+    {
+      "android": "ko-rUS",
+      "rfc": "ko-US",
+      "code": "ko_us",
+      "androidBcp": "b+ko+US",
+      "name": "Korean (United States)"
+    },
+    {
+      "android": "khq",
+      "rfc": "khq",
+      "code": "khq",
+      "androidBcp": "b+khq",
+      "name": "Koyra Chiini Songhay"
+    },
+    {
+      "android": "khq-rML",
+      "rfc": "khq-ML",
+      "code": "khq_ml",
+      "androidBcp": "b+khq+ML",
+      "name": "Koyra Chiini Songhay (Mali)"
+    },
+    {
+      "android": "ses",
+      "rfc": "ses",
+      "code": "ses",
+      "androidBcp": "b+ses",
+      "name": "Koyraboro Senni Songhai"
+    },
+    {
+      "android": "kpe",
+      "rfc": "kpe",
+      "code": "kpe",
+      "androidBcp": "b+kpe",
+      "name": "Kpelle"
+    },
+    {
+      "android": "kri",
+      "rfc": "kri",
+      "code": "kri",
+      "androidBcp": "b+kri",
+      "name": "Krio"
+    },
+    {
+      "android": "kun",
+      "rfc": "kun",
+      "code": "kun",
+      "androidBcp": "b+kun",
+      "name": "Kunama"
+    },
+    {
+      "android": "ku",
+      "rfc": "ku",
+      "code": "ku",
+      "androidBcp": "b+ku",
+      "name": "Kurdish"
+    },
+    {
+      "android": "ku-Arab",
+      "rfc": "ku-Arab",
+      "code": "ku_arab",
+      "androidBcp": "b+ku+Arab",
+      "name": "Kurdish (Arabic)"
+    },
+    {
+      "android": "kj",
+      "rfc": "kj",
+      "code": "kj",
+      "androidBcp": "b+kj",
+      "name": "Kwanyama"
+    },
+    {
+      "android": "ky",
+      "rfc": "ky",
+      "code": "ky",
+      "androidBcp": "b+ky",
+      "name": "Kyrgyz"
+    },
+    {
+      "android": "ky-rKG",
+      "rfc": "ky-KG",
+      "code": "ky_kg",
+      "androidBcp": "b+ky+KG",
+      "name": "Kyrgyz (Kyrgyzstan)"
+    },
+    {
+      "android": "hia",
+      "rfc": "hia",
+      "code": "hia",
+      "androidBcp": "b+hia",
+      "name": "Lamang"
+    },
+    {
+      "android": "lo",
+      "rfc": "lo",
+      "code": "lo",
+      "androidBcp": "b+lo",
+      "name": "Lao"
+    },
+    {
+      "android": "lo-rLA",
+      "rfc": "lo-LA",
+      "code": "lo_la",
+      "androidBcp": "b+lo+LA",
+      "name": "Lao (Lao People's Democratic Republic)"
+    },
+    {
+      "android": "ltg",
+      "rfc": "ltg",
+      "code": "ltg",
+      "androidBcp": "b+ltg",
+      "name": "Latgalian"
+    },
+    {
+      "android": "la",
+      "rfc": "la",
+      "code": "la",
+      "androidBcp": "b+la",
+      "name": "Latin"
+    },
+    {
+      "android": "lv",
+      "rfc": "lv",
+      "code": "lv",
+      "androidBcp": "b+lv",
+      "name": "Latvian"
+    },
+    {
+      "android": "lv-rLV",
+      "rfc": "lv-LV",
+      "code": "lv_lv",
+      "androidBcp": "b+lv+LV",
+      "name": "Latvian (Latvia)"
+    },
+    {
+      "android": "lir",
+      "rfc": "lir",
+      "code": "lir",
+      "androidBcp": "b+lir",
+      "name": "Liberian English"
+    },
+    {
+      "android": "lij",
+      "rfc": "lij",
+      "code": "lij",
+      "androidBcp": "b+lij",
+      "name": "Ligurian"
+    },
+    {
+      "android": "lif",
+      "rfc": "lif",
+      "code": "lif",
+      "androidBcp": "b+lif",
+      "name": "Limbu"
+    },
+    {
+      "android": "li",
+      "rfc": "li",
+      "code": "li",
+      "androidBcp": "b+li",
+      "name": "Limburgish"
+    },
+    {
+      "android": "ln",
+      "rfc": "ln",
+      "code": "ln",
+      "androidBcp": "b+ln",
+      "name": "Lingala"
+    },
+    {
+      "android": "ln-rAO",
+      "rfc": "ln-AO",
+      "code": "ln_ao",
+      "androidBcp": "b+ln+AO",
+      "name": "Lingala (Angola)"
+    },
+    {
+      "android": "ln-rCF",
+      "rfc": "ln-CF",
+      "code": "ln_cf",
+      "androidBcp": "b+ln+CF",
+      "name": "Lingala (Central African Republic)"
+    },
+    {
+      "android": "ln-rCD",
+      "rfc": "ln-CD",
+      "code": "ln_cd",
+      "androidBcp": "b+ln+CD",
+      "name": "Lingala (Congo DRC)"
+    },
+    {
+      "android": "ln-rCG",
+      "rfc": "ln-CG",
+      "code": "ln_cg",
+      "androidBcp": "b+ln+CG",
+      "name": "Lingala (Congo)"
+    },
+    {
+      "android": "lt",
+      "rfc": "lt",
+      "code": "lt",
+      "androidBcp": "b+lt",
+      "name": "Lithuanian"
+    },
+    {
+      "android": "lt-rLT",
+      "rfc": "lt-LT",
+      "code": "lt_lt",
+      "androidBcp": "b+lt+LT",
+      "name": "Lithuanian (Lithuania)"
+    },
+    {
+      "android": "lmo",
+      "rfc": "lmo",
+      "code": "lmo",
+      "androidBcp": "b+lmo",
+      "name": "Lombard"
+    },
+    {
+      "android": "nds",
+      "rfc": "nds",
+      "code": "nds",
+      "androidBcp": "b+nds",
+      "name": "Low German"
+    },
+    {
+      "android": "dsb",
+      "rfc": "dsb",
+      "code": "dsb",
+      "androidBcp": "b+dsb",
+      "name": "Lower Sorbian"
+    },
+    {
+      "android": "lu",
+      "rfc": "lu",
+      "code": "lu",
+      "androidBcp": "b+lu",
+      "name": "Luba-Katanga"
+    },
+    {
+      "android": "lua",
+      "rfc": "lua",
+      "code": "lua",
+      "androidBcp": "b+lua",
+      "name": "Luba-Lulua"
+    },
+    {
+      "android": "smj",
+      "rfc": "smj",
+      "code": "smj",
+      "androidBcp": "b+smj",
+      "name": "Lule Sami"
+    },
+    {
+      "android": "smj-rNO",
+      "rfc": "smj-NO",
+      "code": "smj_no",
+      "androidBcp": "b+smj+NO",
+      "name": "Lule Sami (Norway)"
+    },
+    {
+      "android": "smj-rSE",
+      "rfc": "smj-SE",
+      "code": "smj_se",
+      "androidBcp": "b+smj+SE",
+      "name": "Lule Sami (Sweden)"
+    },
+    {
+      "android": "luo",
+      "rfc": "luo",
+      "code": "luo",
+      "androidBcp": "b+luo",
+      "name": "Luo"
+    },
+    {
+      "android": "luo-rKE",
+      "rfc": "luo-KE",
+      "code": "luo_ke",
+      "androidBcp": "b+luo+KE",
+      "name": "Luo (Kenya)"
+    },
+    {
+      "android": "lb",
+      "rfc": "lb",
+      "code": "lb",
+      "androidBcp": "b+lb",
+      "name": "Luxembourgish"
+    },
+    {
+      "android": "lb-rLU",
+      "rfc": "lb-LU",
+      "code": "lb_lu",
+      "androidBcp": "b+lb+LU",
+      "name": "Luxembourgish (Luxembourg)"
+    },
+    {
+      "android": "ymm",
+      "rfc": "ymm",
+      "code": "ymm",
+      "androidBcp": "b+ymm",
+      "name": "Maay"
+    },
+    {
+      "android": "mk",
+      "rfc": "mk",
+      "code": "mk",
+      "androidBcp": "b+mk",
+      "name": "Macedonian"
+    },
+    {
+      "android": "mk-rMK",
+      "rfc": "mk-MK",
+      "code": "mk_mk",
+      "androidBcp": "b+mk+MK",
+      "name": "Macedonian (North Macedonia)"
+    },
+    {
+      "android": "mad",
+      "rfc": "mad",
+      "code": "mad",
+      "androidBcp": "b+mad",
+      "name": "Madurese"
+    },
+    {
+      "android": "mdh",
+      "rfc": "mdh",
+      "code": "mdh",
+      "androidBcp": "b+mdh",
+      "name": "Maguindanao"
+    },
+    {
+      "android": "mai",
+      "rfc": "mai",
+      "code": "mai",
+      "androidBcp": "b+mai",
+      "name": "Maithili"
+    },
+    {
+      "android": "mg",
+      "rfc": "mg",
+      "code": "mg",
+      "androidBcp": "b+mg",
+      "name": "Malagasy"
+    },
+    {
+      "android": "mg-rMG",
+      "rfc": "mg-MG",
+      "code": "mg_mg",
+      "androidBcp": "b+mg+MG",
+      "name": "Malagasy (Madagascar)"
+    },
+    {
+      "android": "ms",
+      "rfc": "ms",
+      "code": "ms",
+      "androidBcp": "b+ms",
+      "name": "Malay"
+    },
+    {
+      "android": "ms-Arab",
+      "rfc": "ms-Arab",
+      "code": "ms_arab",
+      "androidBcp": "b+ms+Arab",
+      "name": "Malay (Arabic)"
+    },
+    {
+      "android": "ms-Arab-rMY",
+      "rfc": "ms-Arab-MY",
+      "code": "ms_arab_my",
+      "androidBcp": "b+ms+Arab+MY",
+      "name": "Malay (Arabic, Malaysia)"
+    },
+    {
+      "android": "ms-rBN",
+      "rfc": "ms-BN",
+      "code": "ms_bn",
+      "androidBcp": "b+ms+BN",
+      "name": "Malay (Brunei)"
+    },
+    {
+      "android": "ms-Latn-rMY",
+      "rfc": "ms-Latn-MY",
+      "code": "ms_latn_my",
+      "androidBcp": "b+ms+Latn+MY",
+      "name": "Malay (Latin, Malaysia)"
+    },
+    {
+      "android": "ms-Latn-rSG",
+      "rfc": "ms-Latn-SG",
+      "code": "ms_latn_sg",
+      "androidBcp": "b+ms+Latn+SG",
+      "name": "Malay (Latin, Singapore)"
+    },
+    {
+      "android": "ms-rMY",
+      "rfc": "ms-MY",
+      "code": "ms_my",
+      "androidBcp": "b+ms+MY",
+      "name": "Malay (Malaysia)"
+    },
+    {
+      "android": "ms-rSG",
+      "rfc": "ms-SG",
+      "code": "ms_sg",
+      "androidBcp": "b+ms+SG",
+      "name": "Malay (Singapore)"
+    },
+    {
+      "android": "ml",
+      "rfc": "ml",
+      "code": "ml",
+      "androidBcp": "b+ml",
+      "name": "Malayalam"
+    },
+    {
+      "android": "ml-rIN",
+      "rfc": "ml-IN",
+      "code": "ml_in",
+      "androidBcp": "b+ml+IN",
+      "name": "Malayalam (India)"
+    },
+    {
+      "android": "mt",
+      "rfc": "mt",
+      "code": "mt",
+      "androidBcp": "b+mt",
+      "name": "Maltese"
+    },
+    {
+      "android": "mt-rMT",
+      "rfc": "mt-MT",
+      "code": "mt_mt",
+      "androidBcp": "b+mt+MT",
+      "name": "Maltese (Malta)"
+    },
+    {
+      "android": "mam",
+      "rfc": "mam",
+      "code": "mam",
+      "androidBcp": "b+mam",
+      "name": "Mam"
+    },
+    {
+      "android": "tbf",
+      "rfc": "tbf",
+      "code": "tbf",
+      "androidBcp": "b+tbf",
+      "name": "Mandara"
+    },
+    {
+      "android": "man",
+      "rfc": "man",
+      "code": "man",
+      "androidBcp": "b+man",
+      "name": "Mandingo"
+    },
+    {
+      "android": "mnk",
+      "rfc": "mnk",
+      "code": "mnk",
+      "androidBcp": "b+mnk",
+      "name": "Mandinka"
+    },
+    {
+      "android": "mni",
+      "rfc": "mni",
+      "code": "mni",
+      "androidBcp": "b+mni",
+      "name": "Manipuri"
+    },
+    {
+      "android": "mni-Mtei",
+      "rfc": "mni-Mtei",
+      "code": "mni_mtei",
+      "androidBcp": "b+mni+Mtei",
+      "name": "Manipuri (Meitei Mayek)"
+    },
+    {
+      "android": "mi",
+      "rfc": "mi",
+      "code": "mi",
+      "androidBcp": "b+mi",
+      "name": "Maori"
+    },
+    {
+      "android": "mi-rNZ",
+      "rfc": "mi-NZ",
+      "code": "mi_nz",
+      "androidBcp": "b+mi+NZ",
+      "name": "Maori (New Zealand)"
+    },
+    {
+      "android": "mrw",
+      "rfc": "mrw",
+      "code": "mrw",
+      "androidBcp": "b+mrw",
+      "name": "Maranao"
+    },
+    {
+      "android": "mr",
+      "rfc": "mr",
+      "code": "mr",
+      "androidBcp": "b+mr",
+      "name": "Marathi"
+    },
+    {
+      "android": "mr-rIN",
+      "rfc": "mr-IN",
+      "code": "mr_in",
+      "androidBcp": "b+mr+IN",
+      "name": "Marathi (India)"
+    },
+    {
+      "android": "mrt",
+      "rfc": "mrt",
+      "code": "mrt",
+      "androidBcp": "b+mrt",
+      "name": "Marghi Central"
+    },
+    {
+      "android": "mh",
+      "rfc": "mh",
+      "code": "mh",
+      "androidBcp": "b+mh",
+      "name": "Marshallese"
+    },
+    {
+      "android": "myx",
+      "rfc": "myx",
+      "code": "myx",
+      "androidBcp": "b+myx",
+      "name": "Masaaba"
+    },
+    {
+      "android": "hlt",
+      "rfc": "hlt",
+      "code": "hlt",
+      "androidBcp": "b+hlt",
+      "name": "Matu Chin"
+    },
+    {
+      "android": "mfe",
+      "rfc": "mfe",
+      "code": "mfe",
+      "androidBcp": "b+mfe",
+      "name": "Mauritian Creole"
+    },
+    {
+      "android": "cdo",
+      "rfc": "cdo",
+      "code": "cdo",
+      "androidBcp": "b+cdo",
+      "name": "Min Dong Chinese"
+    },
+    {
+      "android": "min",
+      "rfc": "min",
+      "code": "min",
+      "androidBcp": "b+min",
+      "name": "Minangkabau"
+    },
+    {
+      "android": "min-Arab",
+      "rfc": "min-Arab",
+      "code": "min_arab",
+      "androidBcp": "b+min+Arab",
+      "name": "Minangkabau (Arabic)"
+    },
+    {
+      "android": "min-Latn",
+      "rfc": "min-Latn",
+      "code": "min_latn",
+      "androidBcp": "b+min+Latn",
+      "name": "Minangkabau (Latin)"
+    },
+    {
+      "android": "mxt",
+      "rfc": "mxt",
+      "code": "mxt",
+      "androidBcp": "b+mxt",
+      "name": "Mixtec, Jamiltepec"
+    },
+    {
+      "android": "lus",
+      "rfc": "lus",
+      "code": "lus",
+      "androidBcp": "b+lus",
+      "name": "Mizo"
+    },
+    {
+      "android": "lol",
+      "rfc": "lol",
+      "code": "lol",
+      "androidBcp": "b+lol",
+      "name": "Mongo"
+    },
+    {
+      "android": "mn",
+      "rfc": "mn",
+      "code": "mn",
+      "androidBcp": "b+mn",
+      "name": "Mongolian (Cyrillic)"
+    },
+    {
+      "android": "mn-rMN",
+      "rfc": "mn-MN",
+      "code": "mn_mn",
+      "androidBcp": "b+mn+MN",
+      "name": "Mongolian (Mongolia)"
+    },
+    {
+      "android": "cnr",
+      "rfc": "cnr",
+      "code": "cnr",
+      "androidBcp": "b+cnr",
+      "name": "Montenegrin"
+    },
+    {
+      "android": "cnr-Cyrl",
+      "rfc": "cnr-Cyrl",
+      "code": "cnr_cyrl",
+      "androidBcp": "b+cnr+Cyrl",
+      "name": "Montenegrin (Cyrillic)"
+    },
+    {
+      "android": "cnr-Latn",
+      "rfc": "cnr-Latn",
+      "code": "cnr_latn",
+      "androidBcp": "b+cnr+Latn",
+      "name": "Montenegrin (Latin)"
+    },
+    {
+      "android": "mos",
+      "rfc": "mos",
+      "code": "mos",
+      "androidBcp": "b+mos",
+      "name": "Mossi"
+    },
+    {
+      "android": "ars",
+      "rfc": "ars",
+      "code": "ars",
+      "androidBcp": "b+ars",
+      "name": "Najdi Arabic"
+    },
+    {
+      "android": "ars-rSA",
+      "rfc": "ars-SA",
+      "code": "ars_sa",
+      "androidBcp": "b+ars+SA",
+      "name": "Najdi Arabic (Saudi Arabia)"
+    },
+    {
+      "android": "nnb",
+      "rfc": "nnb",
+      "code": "nnb",
+      "androidBcp": "b+nnb",
+      "name": "Nande"
+    },
+    {
+      "android": "nv",
+      "rfc": "nv",
+      "code": "nv",
+      "androidBcp": "b+nv",
+      "name": "Navajo"
+    },
+    {
+      "android": "ndc",
+      "rfc": "ndc",
+      "code": "ndc",
+      "androidBcp": "b+ndc",
+      "name": "Ndau"
+    },
+    {
+      "android": "ne",
+      "rfc": "ne",
+      "code": "ne",
+      "androidBcp": "b+ne",
+      "name": "Nepali (India)"
+    },
+    {
+      "android": "ne-rNP",
+      "rfc": "ne-NP",
+      "code": "ne_np",
+      "androidBcp": "b+ne+NP",
+      "name": "Nepali (Nepal)"
+    },
+    {
+      "android": "new",
+      "rfc": "new",
+      "code": "new",
+      "androidBcp": "b+new",
+      "name": "Newari"
+    },
+    {
+      "android": "ngc",
+      "rfc": "ngc",
+      "code": "ngc",
+      "androidBcp": "b+ngc",
+      "name": "Ngombe"
+    },
+    {
+      "android": "fia",
+      "rfc": "fia",
+      "code": "fia",
+      "androidBcp": "b+fia",
+      "name": "Nobiin"
+    },
+    {
+      "android": "fia-Arab",
+      "rfc": "fia-Arab",
+      "code": "fia_arab",
+      "androidBcp": "b+fia+Arab",
+      "name": "Nobiin (Arabic)"
+    },
+    {
+      "android": "fia-Arab-rEG",
+      "rfc": "fia-Arab-EG",
+      "code": "fia_arab_eg",
+      "androidBcp": "b+fia+Arab+EG",
+      "name": "Nobiin (Arabic, Egypt)"
+    },
+    {
+      "android": "fia-Latn",
+      "rfc": "fia-Latn",
+      "code": "fia_latn",
+      "androidBcp": "b+fia+Latn",
+      "name": "Nobiin (Latin)"
+    },
+    {
+      "android": "kmr",
+      "rfc": "kmr",
+      "code": "kmr",
+      "androidBcp": "b+kmr",
+      "name": "Northern Kurdish"
+    },
+    {
+      "android": "kmr-rSY",
+      "rfc": "kmr-SY",
+      "code": "kmr_sy",
+      "androidBcp": "b+kmr+SY",
+      "name": "Northern Kurdish (Syria)"
+    },
+    {
+      "android": "kmr-rTR",
+      "rfc": "kmr-TR",
+      "code": "kmr_tr",
+      "androidBcp": "b+kmr+TR",
+      "name": "Northern Kurdish (Turkey)"
+    },
+    {
+      "android": "nd",
+      "rfc": "nd",
+      "code": "nd",
+      "androidBcp": "b+nd",
+      "name": "Northern Ndebele"
+    },
+    {
+      "android": "nd-rZW",
+      "rfc": "nd-ZW",
+      "code": "nd_zw",
+      "androidBcp": "b+nd+ZW",
+      "name": "Northern Ndebele (Zimbabwe)"
+    },
+    {
+      "android": "se",
+      "rfc": "se",
+      "code": "se",
+      "androidBcp": "b+se",
+      "name": "Northern Sami"
+    },
+    {
+      "android": "se-rFI",
+      "rfc": "se-FI",
+      "code": "se_fi",
+      "androidBcp": "b+se+FI",
+      "name": "Northern Sami (Finland)"
+    },
+    {
+      "android": "se-rNO",
+      "rfc": "se-NO",
+      "code": "se_no",
+      "androidBcp": "b+se+NO",
+      "name": "Northern Sami (Norway)"
+    },
+    {
+      "android": "se-rSE",
+      "rfc": "se-SE",
+      "code": "se_se",
+      "androidBcp": "b+se+SE",
+      "name": "Northern Sami (Sweden)"
+    },
+    {
+      "android": "nso",
+      "rfc": "nso",
+      "code": "nso",
+      "androidBcp": "b+nso",
+      "name": "Northern Sotho"
+    },
+    {
+      "android": "nso-rZA",
+      "rfc": "nso-ZA",
+      "code": "nso_za",
+      "androidBcp": "b+nso+ZA",
+      "name": "Northern Sotho (South Africa)"
+    },
+    {
+      "android": "no",
+      "rfc": "no",
+      "code": "no",
+      "androidBcp": "b+no",
+      "name": "Norwegian"
+    },
+    {
+      "android": "no-rNO",
+      "rfc": "no-NO",
+      "code": "no_no",
+      "androidBcp": "b+no+NO",
+      "name": "Norwegian (Norway)"
+    },
+    {
+      "android": "no-No-rNY",
+      "rfc": "no-No-NY",
+      "code": "no_no_ny",
+      "androidBcp": "b+no+No+NY",
+      "name": "Norwegian (Norway, Nynorsk)"
+    },
+    {
+      "android": "nb",
+      "rfc": "nb",
+      "code": "nb",
+      "androidBcp": "b+nb",
+      "name": "Norwegian Bokmal"
+    },
+    {
+      "android": "nb-rNO",
+      "rfc": "nb-NO",
+      "code": "nb_no",
+      "androidBcp": "b+nb+NO",
+      "name": "Norwegian Bokmal (Norway)"
+    },
+    {
+      "android": "nn",
+      "rfc": "nn",
+      "code": "nn",
+      "androidBcp": "b+nn",
+      "name": "Norwegian Nynorsk"
+    },
+    {
+      "android": "nn-rNO",
+      "rfc": "nn-NO",
+      "code": "nn_no",
+      "androidBcp": "b+nn+NO",
+      "name": "Norwegian Nynorsk (Norway)"
+    },
+    {
+      "android": "nus",
+      "rfc": "nus",
+      "code": "nus",
+      "androidBcp": "b+nus",
+      "name": "Nuer"
+    },
+    {
+      "android": "ii",
+      "rfc": "ii",
+      "code": "ii",
+      "androidBcp": "b+ii",
+      "name": "Nuosu"
+    },
+    {
+      "android": "nyn",
+      "rfc": "nyn",
+      "code": "nyn",
+      "androidBcp": "b+nyn",
+      "name": "Nyankole"
+    },
+    {
+      "android": "nuj",
+      "rfc": "nuj",
+      "code": "nuj",
+      "androidBcp": "b+nuj",
+      "name": "Nyole"
+    },
+    {
+      "android": "oc",
+      "rfc": "oc",
+      "code": "oc",
+      "androidBcp": "b+oc",
+      "name": "Occitan"
+    },
+    {
+      "android": "or",
+      "rfc": "or",
+      "code": "or",
+      "androidBcp": "b+or",
+      "name": "Oriya"
+    },
+    {
+      "android": "or-rIN",
+      "rfc": "or-IN",
+      "code": "or_in",
+      "androidBcp": "b+or+IN",
+      "name": "Oriya (India)"
+    },
+    {
+      "android": "or-Latn",
+      "rfc": "or-Latn",
+      "code": "or_latn",
+      "androidBcp": "b+or+Latn",
+      "name": "Oriya (Latin)"
+    },
+    {
+      "android": "or-Latn-rIN",
+      "rfc": "or-Latn-IN",
+      "code": "or_latn_in",
+      "androidBcp": "b+or+Latn+IN",
+      "name": "Oriya (Latin, India)"
+    },
+    {
+      "android": "om",
+      "rfc": "om",
+      "code": "om",
+      "androidBcp": "b+om",
+      "name": "Oromo"
+    },
+    {
+      "android": "om-rET",
+      "rfc": "om-ET",
+      "code": "om_et",
+      "androidBcp": "b+om+ET",
+      "name": "Oromo (Ethiopia)"
+    },
+    {
+      "android": "om-rKE",
+      "rfc": "om-KE",
+      "code": "om_ke",
+      "androidBcp": "b+om+KE",
+      "name": "Oromo (Kenya)"
+    },
+    {
+      "android": "os",
+      "rfc": "os",
+      "code": "os",
+      "androidBcp": "b+os",
+      "name": "Ossetian"
+    },
+    {
+      "android": "pau",
+      "rfc": "pau",
+      "code": "pau",
+      "androidBcp": "b+pau",
+      "name": "Palauan"
+    },
+    {
+      "android": "pag",
+      "rfc": "pag",
+      "code": "pag",
+      "androidBcp": "b+pag",
+      "name": "Pangasinan"
+    },
+    {
+      "android": "pap",
+      "rfc": "pap",
+      "code": "pap",
+      "androidBcp": "b+pap",
+      "name": "Papiamento"
+    },
+    {
+      "android": "ps",
+      "rfc": "ps",
+      "code": "ps",
+      "androidBcp": "b+ps",
+      "name": "Pashto"
+    },
+    {
+      "android": "ps-rAF",
+      "rfc": "ps-AF",
+      "code": "ps_af",
+      "androidBcp": "b+ps+AF",
+      "name": "Pashto (Afghanistan)"
+    },
+    {
+      "android": "pcd",
+      "rfc": "pcd",
+      "code": "pcd",
+      "androidBcp": "b+pcd",
+      "name": "Picard"
+    },
+    {
+      "android": "wes",
+      "rfc": "wes",
+      "code": "wes",
+      "androidBcp": "b+wes",
+      "name": "Pidgin"
+    },
+    {
+      "android": "wes-rCM",
+      "rfc": "wes-CM",
+      "code": "wes_cm",
+      "androidBcp": "b+wes+CM",
+      "name": "Pidgin (Cameroon)"
+    },
+    {
+      "android": "wes-rNG",
+      "rfc": "wes-NG",
+      "code": "wes_ng",
+      "androidBcp": "b+wes+NG",
+      "name": "Pidgin (Nigeria)"
+    },
+    {
+      "android": "pis",
+      "rfc": "pis",
+      "code": "pis",
+      "androidBcp": "b+pis",
+      "name": "Pijin"
+    },
+    {
+      "android": "pon",
+      "rfc": "pon",
+      "code": "pon",
+      "androidBcp": "b+pon",
+      "name": "Pohnpeian"
+    },
+    {
+      "android": "pl",
+      "rfc": "pl",
+      "code": "pl",
+      "androidBcp": "b+pl",
+      "name": "Polish"
+    },
+    {
+      "android": "pl-rPL",
+      "rfc": "pl-PL",
+      "code": "pl_pl",
+      "androidBcp": "b+pl+PL",
+      "name": "Polish (Poland)"
+    },
+    {
+      "android": "pt",
+      "rfc": "pt",
+      "code": "pt",
+      "androidBcp": "b+pt",
+      "name": "Portuguese"
+    },
+    {
+      "android": "pt-rAO",
+      "rfc": "pt-AO",
+      "code": "pt_ao",
+      "androidBcp": "b+pt+AO",
+      "name": "Portuguese (Angola)"
+    },
+    {
+      "android": "pt-rBR",
+      "rfc": "pt-BR",
+      "code": "pt_br",
+      "androidBcp": "b+pt+BR",
+      "name": "Portuguese (Brazil)"
+    },
+    {
+      "android": "pt-rCV",
+      "rfc": "pt-CV",
+      "code": "pt_cv",
+      "androidBcp": "b+pt+CV",
+      "name": "Portuguese (Cabo Verde)"
+    },
+    {
+      "android": "pt-rMZ",
+      "rfc": "pt-MZ",
+      "code": "pt_mz",
+      "androidBcp": "b+pt+MZ",
+      "name": "Portuguese (Mozambique)"
+    },
+    {
+      "android": "pt-rPT",
+      "rfc": "pt-PT",
+      "code": "pt_pt",
+      "androidBcp": "b+pt+PT",
+      "name": "Portuguese (Portugal)"
+    },
+    {
+      "android": "pt-rST",
+      "rfc": "pt-ST",
+      "code": "pt_st",
+      "androidBcp": "b+pt+ST",
+      "name": "Portuguese (Sao Tome and Principe)"
+    },
+    {
+      "android": "pt-rTL",
+      "rfc": "pt-TL",
+      "code": "pt_tl",
+      "androidBcp": "b+pt+TL",
+      "name": "Portuguese (Timor-Leste)"
+    },
+    {
+      "android": "pt-r001",
+      "rfc": "pt-001",
+      "code": "pt_001",
+      "androidBcp": "b+pt+001",
+      "name": "Portuguese (World)"
+    },
+    {
+      "android": "fuc",
+      "rfc": "fuc",
+      "code": "fuc",
+      "androidBcp": "b+fuc",
+      "name": "Pulaar"
+    },
+    {
+      "android": "pa",
+      "rfc": "pa",
+      "code": "pa",
+      "androidBcp": "b+pa",
+      "name": "Punjabi"
+    },
+    {
+      "android": "pa-Arab",
+      "rfc": "pa-Arab",
+      "code": "pa_arab",
+      "androidBcp": "b+pa+Arab",
+      "name": "Punjabi (Arabic)"
+    },
+    {
+      "android": "pa-Arab-rPK",
+      "rfc": "pa-Arab-PK",
+      "code": "pa_arab_pk",
+      "androidBcp": "b+pa+Arab+PK",
+      "name": "Punjabi (Arabic, Pakistan)"
+    },
+    {
+      "android": "pa-Guru",
+      "rfc": "pa-Guru",
+      "code": "pa_guru",
+      "androidBcp": "b+pa+Guru",
+      "name": "Punjabi (Gurmukhi)"
+    },
+    {
+      "android": "pa-Guru-rIN",
+      "rfc": "pa-Guru-IN",
+      "code": "pa_guru_in",
+      "androidBcp": "b+pa+Guru+IN",
+      "name": "Punjabi (Gurmukhi, India)"
+    },
+    {
+      "android": "pa-Guru-rPK",
+      "rfc": "pa-Guru-PK",
+      "code": "pa_guru_pk",
+      "androidBcp": "b+pa+Guru+PK",
+      "name": "Punjabi (Gurmukhi, Pakistan)"
+    },
+    {
+      "android": "pa-rIN",
+      "rfc": "pa-IN",
+      "code": "pa_in",
+      "androidBcp": "b+pa+IN",
+      "name": "Punjabi (India)"
+    },
+    {
+      "android": "pa-rPK",
+      "rfc": "pa-PK",
+      "code": "pa_pk",
+      "androidBcp": "b+pa+PK",
+      "name": "Punjabi (Pakistan)"
+    },
+    {
+      "android": "qu",
+      "rfc": "qu",
+      "code": "qu",
+      "androidBcp": "b+qu",
+      "name": "Quechua"
+    },
+    {
+      "android": "qu-rGT",
+      "rfc": "qu-GT",
+      "code": "qu_gt",
+      "androidBcp": "b+qu+GT",
+      "name": "Quechua (Guatemala)"
+    },
+    {
+      "android": "qu-rPE",
+      "rfc": "qu-PE",
+      "code": "qu_pe",
+      "androidBcp": "b+qu+PE",
+      "name": "Quechua (Peru)"
+    },
+    {
+      "android": "otq",
+      "rfc": "otq",
+      "code": "otq",
+      "androidBcp": "b+otq",
+      "name": "Querétaro Otomi"
+    },
+    {
+      "android": "kek",
+      "rfc": "kek",
+      "code": "kek",
+      "androidBcp": "b+kek",
+      "name": "Qʼeqchiʼ"
+    },
+    {
+      "android": "raj",
+      "rfc": "raj",
+      "code": "raj",
+      "androidBcp": "b+raj",
+      "name": "Rajasthani"
+    },
+    {
+      "android": "rm",
+      "rfc": "rm",
+      "code": "rm",
+      "androidBcp": "b+rm",
+      "name": "Rhaeto-Romanic"
+    },
+    {
+      "android": "rhg",
+      "rfc": "rhg",
+      "code": "rhg",
+      "androidBcp": "b+rhg",
+      "name": "Rohingya"
+    },
+    {
+      "android": "rhg-Beng",
+      "rfc": "rhg-Beng",
+      "code": "rhg_beng",
+      "androidBcp": "b+rhg+Beng",
+      "name": "Rohingya (Bangla)"
+    },
+    {
+      "android": "rhg-Rohg",
+      "rfc": "rhg-Rohg",
+      "code": "rhg_rohg",
+      "androidBcp": "b+rhg+Rohg",
+      "name": "Rohingya (Hanifi)"
+    },
+    {
+      "android": "rhg-Latn",
+      "rfc": "rhg-Latn",
+      "code": "rhg_latn",
+      "androidBcp": "b+rhg+Latn",
+      "name": "Rohingyalish"
+    },
+    {
+      "android": "rom",
+      "rfc": "rom",
+      "code": "rom",
+      "androidBcp": "b+rom",
+      "name": "Romani"
+    },
+    {
+      "android": "ro",
+      "rfc": "ro",
+      "code": "ro",
+      "androidBcp": "b+ro",
+      "name": "Romanian"
+    },
+    {
+      "android": "ro-rMD",
+      "rfc": "ro-MD",
+      "code": "ro_md",
+      "androidBcp": "b+ro+MD",
+      "name": "Romanian (Moldova)"
+    },
+    {
+      "android": "ro-rRO",
+      "rfc": "ro-RO",
+      "code": "ro_ro",
+      "androidBcp": "b+ro+RO",
+      "name": "Romanian (Romania)"
+    },
+    {
+      "android": "rm-rCH",
+      "rfc": "rm-CH",
+      "code": "rm_ch",
+      "androidBcp": "b+rm+CH",
+      "name": "Romansh (Switzerland)"
+    },
+    {
+      "android": "ru",
+      "rfc": "ru",
+      "code": "ru",
+      "androidBcp": "b+ru",
+      "name": "Russian"
+    },
+    {
+      "android": "ru-rBY",
+      "rfc": "ru-BY",
+      "code": "ru_by",
+      "androidBcp": "b+ru+BY",
+      "name": "Russian (Belarus)"
+    },
+    {
+      "android": "ru-rEE",
+      "rfc": "ru-EE",
+      "code": "ru_ee",
+      "androidBcp": "b+ru+EE",
+      "name": "Russian (Estonia)"
+    },
+    {
+      "android": "ru-rIL",
+      "rfc": "ru-IL",
+      "code": "ru_il",
+      "androidBcp": "b+ru+IL",
+      "name": "Russian (Israel)"
+    },
+    {
+      "android": "ru-rKZ",
+      "rfc": "ru-KZ",
+      "code": "ru_kz",
+      "androidBcp": "b+ru+KZ",
+      "name": "Russian (Kazakhstan)"
+    },
+    {
+      "android": "ru-rKG",
+      "rfc": "ru-KG",
+      "code": "ru_kg",
+      "androidBcp": "b+ru+KG",
+      "name": "Russian (Kyrgyzstan)"
+    },
+    {
+      "android": "ru-Latn",
+      "rfc": "ru-Latn",
+      "code": "ru_latn",
+      "androidBcp": "b+ru+Latn",
+      "name": "Russian (Latin)"
+    },
+    {
+      "android": "ru-Latn-rRU",
+      "rfc": "ru-Latn-RU",
+      "code": "ru_latn_ru",
+      "androidBcp": "b+ru+Latn+RU",
+      "name": "Russian (Latin, Russia)"
+    },
+    {
+      "android": "ru-rLV",
+      "rfc": "ru-LV",
+      "code": "ru_lv",
+      "androidBcp": "b+ru+LV",
+      "name": "Russian (Latvia)"
+    },
+    {
+      "android": "ru-rLT",
+      "rfc": "ru-LT",
+      "code": "ru_lt",
+      "androidBcp": "b+ru+LT",
+      "name": "Russian (Lithuania)"
+    },
+    {
+      "android": "ru-rMD",
+      "rfc": "ru-MD",
+      "code": "ru_md",
+      "androidBcp": "b+ru+MD",
+      "name": "Russian (Moldova)"
+    },
+    {
+      "android": "ru-rRU",
+      "rfc": "ru-RU",
+      "code": "ru_ru",
+      "androidBcp": "b+ru+RU",
+      "name": "Russian (Russia)"
+    },
+    {
+      "android": "ru-rTJ",
+      "rfc": "ru-TJ",
+      "code": "ru_tj",
+      "androidBcp": "b+ru+TJ",
+      "name": "Russian (Tajikistan)"
+    },
+    {
+      "android": "ru-rUA",
+      "rfc": "ru-UA",
+      "code": "ru_ua",
+      "androidBcp": "b+ru+UA",
+      "name": "Russian (Ukraine)"
+    },
+    {
+      "android": "ru-rUZ",
+      "rfc": "ru-UZ",
+      "code": "ru_uz",
+      "androidBcp": "b+ru+UZ",
+      "name": "Russian (Uzbek)"
+    },
+    {
+      "android": "rue",
+      "rfc": "rue",
+      "code": "rue",
+      "androidBcp": "b+rue",
+      "name": "Rusyn"
+    },
+    {
+      "android": "rcf",
+      "rfc": "rcf",
+      "code": "rcf",
+      "androidBcp": "b+rcf",
+      "name": "Réunion Creole"
+    },
+    {
+      "android": "sm",
+      "rfc": "sm",
+      "code": "sm",
+      "androidBcp": "b+sm",
+      "name": "Samoan"
+    },
+    {
+      "android": "sm-rWS",
+      "rfc": "sm-WS",
+      "code": "sm_ws",
+      "androidBcp": "b+sm+WS",
+      "name": "Samoan (Samoa)"
+    },
+    {
+      "android": "ayn",
+      "rfc": "ayn",
+      "code": "ayn",
+      "androidBcp": "b+ayn",
+      "name": "Sanaani Arabic"
+    },
+    {
+      "android": "ayn-rYE",
+      "rfc": "ayn-YE",
+      "code": "ayn_ye",
+      "androidBcp": "b+ayn+YE",
+      "name": "Sanaani Arabic (Yemen)"
+    },
+    {
+      "android": "sg",
+      "rfc": "sg",
+      "code": "sg",
+      "androidBcp": "b+sg",
+      "name": "Sango"
+    },
+    {
+      "android": "sg-rCF",
+      "rfc": "sg-CF",
+      "code": "sg_cf",
+      "androidBcp": "b+sg+CF",
+      "name": "Sango (Central African Republic)"
+    },
+    {
+      "android": "sa",
+      "rfc": "sa",
+      "code": "sa",
+      "androidBcp": "b+sa",
+      "name": "Sanskrit"
+    },
+    {
+      "android": "sat",
+      "rfc": "sat",
+      "code": "sat",
+      "androidBcp": "b+sat",
+      "name": "Santali"
+    },
+    {
+      "android": "sc",
+      "rfc": "sc",
+      "code": "sc",
+      "androidBcp": "b+sc",
+      "name": "Sardinian"
+    },
+    {
+      "android": "sc-rIT",
+      "rfc": "sc-IT",
+      "code": "sc_it",
+      "androidBcp": "b+sc+IT",
+      "name": "Sardinian (Italy)"
+    },
+    {
+      "android": "gd",
+      "rfc": "gd",
+      "code": "gd",
+      "androidBcp": "b+gd",
+      "name": "Scottish Gaelic"
+    },
+    {
+      "android": "gd-rIE",
+      "rfc": "gd-IE",
+      "code": "gd_ie",
+      "androidBcp": "b+gd+IE",
+      "name": "Scottish Gaelic (Ireland)"
+    },
+    {
+      "android": "gd-rGB",
+      "rfc": "gd-GB",
+      "code": "gd_gb",
+      "androidBcp": "b+gd+GB",
+      "name": "Scottish Gaelic (United Kingdom)"
+    },
+    {
+      "android": "seh",
+      "rfc": "seh",
+      "code": "seh",
+      "androidBcp": "b+seh",
+      "name": "Sena"
+    },
+    {
+      "android": "sr",
+      "rfc": "sr",
+      "code": "sr",
+      "androidBcp": "b+sr",
+      "name": "Serbian"
+    },
+    {
+      "android": "sr-rBA",
+      "rfc": "sr-BA",
+      "code": "sr_ba",
+      "androidBcp": "b+sr+BA",
+      "name": "Serbian (Bosnia and Herzegovina)"
+    },
+    {
+      "android": "sr-Cyrl",
+      "rfc": "sr-Cyrl",
+      "code": "sr_cyrl",
+      "androidBcp": "b+sr+Cyrl",
+      "name": "Serbian (Cyrillic)"
+    },
+    {
+      "android": "sr-Cyrl-rBA",
+      "rfc": "sr-Cyrl-BA",
+      "code": "sr_cyrl_ba",
+      "androidBcp": "b+sr+Cyrl+BA",
+      "name": "Serbian (Cyrillic, Bosnia and Herzegovina)"
+    },
+    {
+      "android": "sr-Cyrl-rME",
+      "rfc": "sr-Cyrl-ME",
+      "code": "sr_cyrl_me",
+      "androidBcp": "b+sr+Cyrl+ME",
+      "name": "Serbian (Cyrillic, Montenegro)"
+    },
+    {
+      "android": "sr-Cyrl-rRS",
+      "rfc": "sr-Cyrl-RS",
+      "code": "sr_cyrl_rs",
+      "androidBcp": "b+sr+Cyrl+RS",
+      "name": "Serbian (Cyrillic, Serbia)"
+    },
+    {
+      "android": "sr-Latn",
+      "rfc": "sr-Latn",
+      "code": "sr_latn",
+      "androidBcp": "b+sr+Latn",
+      "name": "Serbian (Latin)"
+    },
+    {
+      "android": "sr-Latn-rBA",
+      "rfc": "sr-Latn-BA",
+      "code": "sr_latn_ba",
+      "androidBcp": "b+sr+Latn+BA",
+      "name": "Serbian (Latin, Bosnia and Herzegovina)"
+    },
+    {
+      "android": "sr-Latn-rME",
+      "rfc": "sr-Latn-ME",
+      "code": "sr_latn_me",
+      "androidBcp": "b+sr+Latn+ME",
+      "name": "Serbian (Latin, Montenegro)"
+    },
+    {
+      "android": "sr-Latn-rCS",
+      "rfc": "sr-Latn-CS",
+      "code": "sr_latn_cs",
+      "androidBcp": "b+sr+Latn+CS",
+      "name": "Serbian (Latin, Serbia and Montenegro)"
+    },
+    {
+      "android": "sr-Latn-rRS",
+      "rfc": "sr-Latn-RS",
+      "code": "sr_latn_rs",
+      "androidBcp": "b+sr+Latn+RS",
+      "name": "Serbian (Latin, Serbia)"
+    },
+    {
+      "android": "sr-rME",
+      "rfc": "sr-ME",
+      "code": "sr_me",
+      "androidBcp": "b+sr+ME",
+      "name": "Serbian (Montenegro)"
+    },
+    {
+      "android": "sr-rRS",
+      "rfc": "sr-RS",
+      "code": "sr_rs",
+      "androidBcp": "b+sr+RS",
+      "name": "Serbian (Serbia)"
+    },
+    {
+      "android": "hbs",
+      "rfc": "hbs",
+      "code": "hbs",
+      "androidBcp": "b+hbs",
+      "name": "Serbo-Croatian"
+    },
+    {
+      "android": "crs",
+      "rfc": "crs",
+      "code": "crs",
+      "androidBcp": "b+crs",
+      "name": "Seselwa Creole French"
+    },
+    {
+      "android": "shn",
+      "rfc": "shn",
+      "code": "shn",
+      "androidBcp": "b+shn",
+      "name": "Shan"
+    },
+    {
+      "android": "shn-rMM",
+      "rfc": "shn-MM",
+      "code": "shn_mm",
+      "androidBcp": "b+shn+MM",
+      "name": "Shan (Myanmar)"
+    },
+    {
+      "android": "shr",
+      "rfc": "shr",
+      "code": "shr",
+      "androidBcp": "b+shr",
+      "name": "Shi"
+    },
+    {
+      "android": "sn",
+      "rfc": "sn",
+      "code": "sn",
+      "androidBcp": "b+sn",
+      "name": "Shona"
+    },
+    {
+      "android": "scn",
+      "rfc": "scn",
+      "code": "scn",
+      "androidBcp": "b+scn",
+      "name": "Sicilian"
+    },
+    {
+      "android": "sid",
+      "rfc": "sid",
+      "code": "sid",
+      "androidBcp": "b+sid",
+      "name": "Sidamo"
+    },
+    {
+      "android": "szl",
+      "rfc": "szl",
+      "code": "szl",
+      "androidBcp": "b+szl",
+      "name": "Silesian"
+    },
+    {
+      "android": "szl-rPL",
+      "rfc": "szl-PL",
+      "code": "szl_pl",
+      "androidBcp": "b+szl+PL",
+      "name": "Silesian (Poland)"
+    },
+    {
+      "android": "sd",
+      "rfc": "sd",
+      "code": "sd",
+      "androidBcp": "b+sd",
+      "name": "Sindhi"
+    },
+    {
+      "android": "sd-Arab",
+      "rfc": "sd-Arab",
+      "code": "sd_arab",
+      "androidBcp": "b+sd+Arab",
+      "name": "Sindhi (Arabic)"
+    },
+    {
+      "android": "sd-Arab-rPK",
+      "rfc": "sd-Arab-PK",
+      "code": "sd_arab_pk",
+      "androidBcp": "b+sd+Arab+PK",
+      "name": "Sindhi (Arabic, Pakistan)"
+    },
+    {
+      "android": "sd-Deva",
+      "rfc": "sd-Deva",
+      "code": "sd_deva",
+      "androidBcp": "b+sd+Deva",
+      "name": "Sindhi (Devanagari)"
+    },
+    {
+      "android": "sd-Deva-rPK",
+      "rfc": "sd-Deva-PK",
+      "code": "sd_deva_pk",
+      "androidBcp": "b+sd+Deva+PK",
+      "name": "Sindhi (Devanagari, Pakistan)"
+    },
+    {
+      "android": "si",
+      "rfc": "si",
+      "code": "si",
+      "androidBcp": "b+si",
+      "name": "Sinhala"
+    },
+    {
+      "android": "si-rLK",
+      "rfc": "si-LK",
+      "code": "si_lk",
+      "androidBcp": "b+si+LK",
+      "name": "Sinhala (Sri Lanka)"
+    },
+    {
+      "android": "sms",
+      "rfc": "sms",
+      "code": "sms",
+      "androidBcp": "b+sms",
+      "name": "Skolt Sami"
+    },
+    {
+      "android": "sms-rFI",
+      "rfc": "sms-FI",
+      "code": "sms_fi",
+      "androidBcp": "b+sms+FI",
+      "name": "Skolt Sami (Finland)"
+    },
+    {
+      "android": "sk",
+      "rfc": "sk",
+      "code": "sk",
+      "androidBcp": "b+sk",
+      "name": "Slovak"
+    },
+    {
+      "android": "sk-rSK",
+      "rfc": "sk-SK",
+      "code": "sk_sk",
+      "androidBcp": "b+sk+SK",
+      "name": "Slovak (Slovakia)"
+    },
+    {
+      "android": "sl",
+      "rfc": "sl",
+      "code": "sl",
+      "androidBcp": "b+sl",
+      "name": "Slovenian"
+    },
+    {
+      "android": "sl-rSL",
+      "rfc": "sl-SL",
+      "code": "sl_sl",
+      "androidBcp": "b+sl+SL",
+      "name": "Slovenian (Sierra Leone)"
+    },
+    {
+      "android": "sl-rSI",
+      "rfc": "sl-SI",
+      "code": "sl_si",
+      "androidBcp": "b+sl+SI",
+      "name": "Slovenian (Slovenia)"
+    },
+    {
+      "android": "so",
+      "rfc": "so",
+      "code": "so",
+      "androidBcp": "b+so",
+      "name": "Somali"
+    },
+    {
+      "android": "so-rDJ",
+      "rfc": "so-DJ",
+      "code": "so_dj",
+      "androidBcp": "b+so+DJ",
+      "name": "Somali (Djibouti)"
+    },
+    {
+      "android": "so-rET",
+      "rfc": "so-ET",
+      "code": "so_et",
+      "androidBcp": "b+so+ET",
+      "name": "Somali (Ethiopia)"
+    },
+    {
+      "android": "so-rKE",
+      "rfc": "so-KE",
+      "code": "so_ke",
+      "androidBcp": "b+so+KE",
+      "name": "Somali (Kenya)"
+    },
+    {
+      "android": "so-Latn-rSO",
+      "rfc": "so-Latn-SO",
+      "code": "so_latn_so",
+      "androidBcp": "b+so+Latn+SO",
+      "name": "Somali (Latin, Somalia)"
+    },
+    {
+      "android": "so-rSO",
+      "rfc": "so-SO",
+      "code": "so_so",
+      "androidBcp": "b+so+SO",
+      "name": "Somali (Somalia)"
+    },
+    {
+      "android": "snk",
+      "rfc": "snk",
+      "code": "snk",
+      "androidBcp": "b+snk",
+      "name": "Soninke"
+    },
+    {
+      "android": "wen",
+      "rfc": "wen",
+      "code": "wen",
+      "androidBcp": "b+wen",
+      "name": "Sorbian"
+    },
+    {
+      "android": "sdh",
+      "rfc": "sdh",
+      "code": "sdh",
+      "androidBcp": "b+sdh",
+      "name": "Southern Kurdish"
+    },
+    {
+      "android": "sdh-Arab",
+      "rfc": "sdh-Arab",
+      "code": "sdh_arab",
+      "androidBcp": "b+sdh+Arab",
+      "name": "Southern Kurdish (Arabic)"
+    },
+    {
+      "android": "nan",
+      "rfc": "nan",
+      "code": "nan",
+      "androidBcp": "b+nan",
+      "name": "Southern Min"
+    },
+    {
+      "android": "nan-rTW",
+      "rfc": "nan-TW",
+      "code": "nan_tw",
+      "androidBcp": "b+nan+TW",
+      "name": "Southern Min (Taiwan)"
+    },
+    {
+      "android": "nr",
+      "rfc": "nr",
+      "code": "nr",
+      "androidBcp": "b+nr",
+      "name": "Southern Ndebele"
+    },
+    {
+      "android": "sma",
+      "rfc": "sma",
+      "code": "sma",
+      "androidBcp": "b+sma",
+      "name": "Southern Sami"
+    },
+    {
+      "android": "sma-rNO",
+      "rfc": "sma-NO",
+      "code": "sma_no",
+      "androidBcp": "b+sma+NO",
+      "name": "Southern Sami (Norway)"
+    },
+    {
+      "android": "sma-rSE",
+      "rfc": "sma-SE",
+      "code": "sma_se",
+      "androidBcp": "b+sma+SE",
+      "name": "Southern Sami (Sweden)"
+    },
+    {
+      "android": "st",
+      "rfc": "st",
+      "code": "st",
+      "androidBcp": "b+st",
+      "name": "Southern Sotho"
+    },
+    {
+      "android": "st-rLS",
+      "rfc": "st-LS",
+      "code": "st_ls",
+      "androidBcp": "b+st+LS",
+      "name": "Southern Sotho (Lesotho)"
+    },
+    {
+      "android": "st-rZA",
+      "rfc": "st-ZA",
+      "code": "st_za",
+      "androidBcp": "b+st+ZA",
+      "name": "Southern Sotho (South Africa)"
+    },
+    {
+      "android": "es",
+      "rfc": "es",
+      "code": "es",
+      "androidBcp": "b+es",
+      "name": "Spanish"
+    },
+    {
+      "android": "es-rAD",
+      "rfc": "es-AD",
+      "code": "es_ad",
+      "androidBcp": "b+es+AD",
+      "name": "Spanish (Andorra)"
+    },
+    {
+      "android": "es-rAR",
+      "rfc": "es-AR",
+      "code": "es_ar",
+      "androidBcp": "b+es+AR",
+      "name": "Spanish (Argentina)"
+    },
+    {
+      "android": "es-rAW",
+      "rfc": "es-AW",
+      "code": "es_aw",
+      "androidBcp": "b+es+AW",
+      "name": "Spanish (Aruba)"
+    },
+    {
+      "android": "es-rBB",
+      "rfc": "es-BB",
+      "code": "es_bb",
+      "androidBcp": "b+es+BB",
+      "name": "Spanish (Barbados)"
+    },
+    {
+      "android": "es-rBZ",
+      "rfc": "es-BZ",
+      "code": "es_bz",
+      "androidBcp": "b+es+BZ",
+      "name": "Spanish (Belize)"
+    },
+    {
+      "android": "es-rBO",
+      "rfc": "es-BO",
+      "code": "es_bo",
+      "androidBcp": "b+es+BO",
+      "name": "Spanish (Bolivia)"
+    },
+    {
+      "android": "es-rCL",
+      "rfc": "es-CL",
+      "code": "es_cl",
+      "androidBcp": "b+es+CL",
+      "name": "Spanish (Chile)"
+    },
+    {
+      "android": "es-rCO",
+      "rfc": "es-CO",
+      "code": "es_co",
+      "androidBcp": "b+es+CO",
+      "name": "Spanish (Colombia)"
+    },
+    {
+      "android": "es-rCR",
+      "rfc": "es-CR",
+      "code": "es_cr",
+      "androidBcp": "b+es+CR",
+      "name": "Spanish (Costa Rica)"
+    },
+    {
+      "android": "es-rCU",
+      "rfc": "es-CU",
+      "code": "es_cu",
+      "androidBcp": "b+es+CU",
+      "name": "Spanish (Cuba)"
+    },
+    {
+      "android": "es-rDO",
+      "rfc": "es-DO",
+      "code": "es_do",
+      "androidBcp": "b+es+DO",
+      "name": "Spanish (Dominican Republic)"
+    },
+    {
+      "android": "es-rEC",
+      "rfc": "es-EC",
+      "code": "es_ec",
+      "androidBcp": "b+es+EC",
+      "name": "Spanish (Ecuador)"
+    },
+    {
+      "android": "es-rSV",
+      "rfc": "es-SV",
+      "code": "es_sv",
+      "androidBcp": "b+es+SV",
+      "name": "Spanish (El Salvador)"
+    },
+    {
+      "android": "es-rGQ",
+      "rfc": "es-GQ",
+      "code": "es_gq",
+      "androidBcp": "b+es+GQ",
+      "name": "Spanish (Equatorial Guinea)"
+    },
+    {
+      "android": "es-rGT",
+      "rfc": "es-GT",
+      "code": "es_gt",
+      "androidBcp": "b+es+GT",
+      "name": "Spanish (Guatemala)"
+    },
+    {
+      "android": "es-rHN",
+      "rfc": "es-HN",
+      "code": "es_hn",
+      "androidBcp": "b+es+HN",
+      "name": "Spanish (Honduras)"
+    },
+    {
+      "android": "es-rJM",
+      "rfc": "es-JM",
+      "code": "es_jm",
+      "androidBcp": "b+es+JM",
+      "name": "Spanish (Jamaica)"
+    },
+    {
+      "android": "es-r419",
+      "rfc": "es-419",
+      "code": "es_419",
+      "androidBcp": "b+es+419",
+      "name": "Spanish (Latin America)"
+    },
+    {
+      "android": "es-rMX",
+      "rfc": "es-MX",
+      "code": "es_mx",
+      "androidBcp": "b+es+MX",
+      "name": "Spanish (Mexico)"
+    },
+    {
+      "android": "es-rNI",
+      "rfc": "es-NI",
+      "code": "es_ni",
+      "androidBcp": "b+es+NI",
+      "name": "Spanish (Nicaragua)"
+    },
+    {
+      "android": "es-rPA",
+      "rfc": "es-PA",
+      "code": "es_pa",
+      "androidBcp": "b+es+PA",
+      "name": "Spanish (Panama)"
+    },
+    {
+      "android": "es-rPY",
+      "rfc": "es-PY",
+      "code": "es_py",
+      "androidBcp": "b+es+PY",
+      "name": "Spanish (Paraguay)"
+    },
+    {
+      "android": "es-rPE",
+      "rfc": "es-PE",
+      "code": "es_pe",
+      "androidBcp": "b+es+PE",
+      "name": "Spanish (Peru)"
+    },
+    {
+      "android": "es-rPR",
+      "rfc": "es-PR",
+      "code": "es_pr",
+      "androidBcp": "b+es+PR",
+      "name": "Spanish (Puerto Rico)"
+    },
+    {
+      "android": "es-rES",
+      "rfc": "es-ES",
+      "code": "es_es",
+      "androidBcp": "b+es+ES",
+      "name": "Spanish (Spain)"
+    },
+    {
+      "android": "es-rTT",
+      "rfc": "es-TT",
+      "code": "es_tt",
+      "androidBcp": "b+es+TT",
+      "name": "Spanish (Trinidad and Tobago)"
+    },
+    {
+      "android": "es-rUS",
+      "rfc": "es-US",
+      "code": "es_us",
+      "androidBcp": "b+es+US",
+      "name": "Spanish (United States)"
+    },
+    {
+      "android": "es-rUY",
+      "rfc": "es-UY",
+      "code": "es_uy",
+      "androidBcp": "b+es+UY",
+      "name": "Spanish (Uruguay)"
+    },
+    {
+      "android": "es-rVE",
+      "rfc": "es-VE",
+      "code": "es_ve",
+      "androidBcp": "b+es+VE",
+      "name": "Spanish (Venezuela)"
+    },
+    {
+      "android": "es-r001",
+      "rfc": "es-001",
+      "code": "es_001",
+      "androidBcp": "b+es+001",
+      "name": "Spanish (World)"
+    },
+    {
+      "android": "zgh",
+      "rfc": "zgh",
+      "code": "zgh",
+      "androidBcp": "b+zgh",
+      "name": "Standard Moroccan Tamazight"
+    },
+    {
+      "android": "zgh-rDZ",
+      "rfc": "zgh-DZ",
+      "code": "zgh_dz",
+      "androidBcp": "b+zgh+DZ",
+      "name": "Standard Moroccan Tamazight (Algeria)"
+    },
+    {
+      "android": "su",
+      "rfc": "su",
+      "code": "su",
+      "androidBcp": "b+su",
+      "name": "Sundanese"
+    },
+    {
+      "android": "sw",
+      "rfc": "sw",
+      "code": "sw",
+      "androidBcp": "b+sw",
+      "name": "Swahili"
+    },
+    {
+      "android": "sw-rCD",
+      "rfc": "sw-CD",
+      "code": "sw_cd",
+      "androidBcp": "b+sw+CD",
+      "name": "Swahili (Congo DRC)"
+    },
+    {
+      "android": "sw-rKE",
+      "rfc": "sw-KE",
+      "code": "sw_ke",
+      "androidBcp": "b+sw+KE",
+      "name": "Swahili (Kenya)"
+    },
+    {
+      "android": "sw-rTZ",
+      "rfc": "sw-TZ",
+      "code": "sw_tz",
+      "androidBcp": "b+sw+TZ",
+      "name": "Swahili (Tanzania)"
+    },
+    {
+      "android": "sw-rUG",
+      "rfc": "sw-UG",
+      "code": "sw_ug",
+      "androidBcp": "b+sw+UG",
+      "name": "Swahili (Uganda)"
+    },
+    {
+      "android": "ss",
+      "rfc": "ss",
+      "code": "ss",
+      "androidBcp": "b+ss",
+      "name": "Swati"
+    },
+    {
+      "android": "ss-rSZ",
+      "rfc": "ss-SZ",
+      "code": "ss_sz",
+      "androidBcp": "b+ss+SZ",
+      "name": "Swati (Swaziland)"
+    },
+    {
+      "android": "sv",
+      "rfc": "sv",
+      "code": "sv",
+      "androidBcp": "b+sv",
+      "name": "Swedish"
+    },
+    {
+      "android": "sv-rFI",
+      "rfc": "sv-FI",
+      "code": "sv_fi",
+      "androidBcp": "b+sv+FI",
+      "name": "Swedish (Finland)"
+    },
+    {
+      "android": "sv-rSK",
+      "rfc": "sv-SK",
+      "code": "sv_sk",
+      "androidBcp": "b+sv+SK",
+      "name": "Swedish (Slovakia)"
+    },
+    {
+      "android": "sv-rSE",
+      "rfc": "sv-SE",
+      "code": "sv_se",
+      "androidBcp": "b+sv+SE",
+      "name": "Swedish (Sweden)"
+    },
+    {
+      "android": "sv-rAX",
+      "rfc": "sv-AX",
+      "code": "sv_ax",
+      "androidBcp": "b+sv+AX",
+      "name": "Swedish (Åland Islands)"
+    },
+    {
+      "android": "syl",
+      "rfc": "syl",
+      "code": "syl",
+      "androidBcp": "b+syl",
+      "name": "Sylheti"
+    },
+    {
+      "android": "syr",
+      "rfc": "syr",
+      "code": "syr",
+      "androidBcp": "b+syr",
+      "name": "Syriac"
+    },
+    {
+      "android": "syr-rSY",
+      "rfc": "syr-SY",
+      "code": "syr_sy",
+      "androidBcp": "b+syr+SY",
+      "name": "Syriac (Syria)"
+    },
+    {
+      "android": "acq",
+      "rfc": "acq",
+      "code": "acq",
+      "androidBcp": "b+acq",
+      "name": "Ta'izzi-Adeni Arabic"
+    },
+    {
+      "android": "acq-rYE",
+      "rfc": "acq-YE",
+      "code": "acq_ye",
+      "androidBcp": "b+acq+YE",
+      "name": "Ta'izzi-Adeni Arabic (Yemen)"
+    },
+    {
+      "android": "tl",
+      "rfc": "tl",
+      "code": "tl",
+      "androidBcp": "b+tl",
+      "name": "Tagalog"
+    },
+    {
+      "android": "tl-rPH",
+      "rfc": "tl-PH",
+      "code": "tl_ph",
+      "androidBcp": "b+tl+PH",
+      "name": "Tagalog (Philippines)"
+    },
+    {
+      "android": "ty",
+      "rfc": "ty",
+      "code": "ty",
+      "androidBcp": "b+ty",
+      "name": "Tahitian"
+    },
+    {
+      "android": "tg",
+      "rfc": "tg",
+      "code": "tg",
+      "androidBcp": "b+tg",
+      "name": "Tajik"
+    },
+    {
+      "android": "tg-Cyrl",
+      "rfc": "tg-Cyrl",
+      "code": "tg_cyrl",
+      "androidBcp": "b+tg+Cyrl",
+      "name": "Tajik (Cyrillic)"
+    },
+    {
+      "android": "tg-Cyrl-rTJ",
+      "rfc": "tg-Cyrl-TJ",
+      "code": "tg_cyrl_tj",
+      "androidBcp": "b+tg+Cyrl+TJ",
+      "name": "Tajik (Cyrillic, Tajikistan)"
+    },
+    {
+      "android": "tg-rTJ",
+      "rfc": "tg-TJ",
+      "code": "tg_tj",
+      "androidBcp": "b+tg+TJ",
+      "name": "Tajik (Tajikistan)"
+    },
+    {
+      "android": "taq",
+      "rfc": "taq",
+      "code": "taq",
+      "androidBcp": "b+taq",
+      "name": "Tamasheq"
+    },
+    {
+      "android": "taq-rML",
+      "rfc": "taq-ML",
+      "code": "taq_ml",
+      "androidBcp": "b+taq+ML",
+      "name": "Tamasheq (Mali)"
+    },
+    {
+      "android": "tzm",
+      "rfc": "tzm",
+      "code": "tzm",
+      "androidBcp": "b+tzm",
+      "name": "Tamazight"
+    },
+    {
+      "android": "ta",
+      "rfc": "ta",
+      "code": "ta",
+      "androidBcp": "b+ta",
+      "name": "Tamil"
+    },
+    {
+      "android": "ta-rIN",
+      "rfc": "ta-IN",
+      "code": "ta_in",
+      "androidBcp": "b+ta+IN",
+      "name": "Tamil (India)"
+    },
+    {
+      "android": "ta-Latn",
+      "rfc": "ta-Latn",
+      "code": "ta_latn",
+      "androidBcp": "b+ta+Latn",
+      "name": "Tamil (Latin)"
+    },
+    {
+      "android": "ta-Latn-rIN",
+      "rfc": "ta-Latn-IN",
+      "code": "ta_latn_in",
+      "androidBcp": "b+ta+Latn+IN",
+      "name": "Tamil (Latin, India)"
+    },
+    {
+      "android": "ta-rMY",
+      "rfc": "ta-MY",
+      "code": "ta_my",
+      "androidBcp": "b+ta+MY",
+      "name": "Tamil (Malaysia)"
+    },
+    {
+      "android": "ta-rSG",
+      "rfc": "ta-SG",
+      "code": "ta_sg",
+      "androidBcp": "b+ta+SG",
+      "name": "Tamil (Singapore)"
+    },
+    {
+      "android": "ta-rLK",
+      "rfc": "ta-LK",
+      "code": "ta_lk",
+      "androidBcp": "b+ta+LK",
+      "name": "Tamil (Sri Lanka)"
+    },
+    {
+      "android": "tt",
+      "rfc": "tt",
+      "code": "tt",
+      "androidBcp": "b+tt",
+      "name": "Tatar"
+    },
+    {
+      "android": "tt-rRU",
+      "rfc": "tt-RU",
+      "code": "tt_ru",
+      "androidBcp": "b+tt+RU",
+      "name": "Tatar (Russia)"
+    },
+    {
+      "android": "tsg",
+      "rfc": "tsg",
+      "code": "tsg",
+      "androidBcp": "b+tsg",
+      "name": "Tausug"
+    },
+    {
+      "android": "tsg-rPH",
+      "rfc": "tsg-PH",
+      "code": "tsg_ph",
+      "androidBcp": "b+tsg+PH",
+      "name": "Tausug (Philippines)"
+    },
+    {
+      "android": "tuq",
+      "rfc": "tuq",
+      "code": "tuq",
+      "androidBcp": "b+tuq",
+      "name": "Tedaga"
+    },
+    {
+      "android": "te",
+      "rfc": "te",
+      "code": "te",
+      "androidBcp": "b+te",
+      "name": "Telugu"
+    },
+    {
+      "android": "te-rIN",
+      "rfc": "te-IN",
+      "code": "te_in",
+      "androidBcp": "b+te+IN",
+      "name": "Telugu (India)"
+    },
+    {
+      "android": "te-Latn",
+      "rfc": "te-Latn",
+      "code": "te_latn",
+      "androidBcp": "b+te+Latn",
+      "name": "Telugu (Latin)"
+    },
+    {
+      "android": "te-Latn-rIN",
+      "rfc": "te-Latn-IN",
+      "code": "te_latn_in",
+      "androidBcp": "b+te+Latn+IN",
+      "name": "Telugu (Latin, India)"
+    },
+    {
+      "android": "dtk",
+      "rfc": "dtk",
+      "code": "dtk",
+      "androidBcp": "b+dtk",
+      "name": "Tene Kan Dogon"
+    },
+    {
+      "android": "teo",
+      "rfc": "teo",
+      "code": "teo",
+      "androidBcp": "b+teo",
+      "name": "Teso"
+    },
+    {
+      "android": "teo-rUG",
+      "rfc": "teo-UG",
+      "code": "teo_ug",
+      "androidBcp": "b+teo+UG",
+      "name": "Teso (Uganda)"
+    },
+    {
+      "android": "tet",
+      "rfc": "tet",
+      "code": "tet",
+      "androidBcp": "b+tet",
+      "name": "Tetum"
+    },
+    {
+      "android": "th",
+      "rfc": "th",
+      "code": "th",
+      "androidBcp": "b+th",
+      "name": "Thai"
+    },
+    {
+      "android": "th-rTH",
+      "rfc": "th-TH",
+      "code": "th_th",
+      "androidBcp": "b+th+TH",
+      "name": "Thai (Thailand)"
+    },
+    {
+      "android": "bo",
+      "rfc": "bo",
+      "code": "bo",
+      "androidBcp": "b+bo",
+      "name": "Tibetan"
+    },
+    {
+      "android": "tig",
+      "rfc": "tig",
+      "code": "tig",
+      "androidBcp": "b+tig",
+      "name": "Tigre"
+    },
+    {
+      "android": "tig-rER",
+      "rfc": "tig-ER",
+      "code": "tig_er",
+      "androidBcp": "b+tig+ER",
+      "name": "Tigre (Eritrea)"
+    },
+    {
+      "android": "ti",
+      "rfc": "ti",
+      "code": "ti",
+      "androidBcp": "b+ti",
+      "name": "Tigrinya"
+    },
+    {
+      "android": "ti-rER",
+      "rfc": "ti-ER",
+      "code": "ti_er",
+      "androidBcp": "b+ti+ER",
+      "name": "Tigrinya (Eritrea)"
+    },
+    {
+      "android": "ti-rET",
+      "rfc": "ti-ET",
+      "code": "ti_et",
+      "androidBcp": "b+ti+ET",
+      "name": "Tigrinya (Ethiopia)"
+    },
+    {
+      "android": "tob",
+      "rfc": "tob",
+      "code": "tob",
+      "androidBcp": "b+tob",
+      "name": "Toba"
+    },
+    {
+      "android": "tpi",
+      "rfc": "tpi",
+      "code": "tpi",
+      "androidBcp": "b+tpi",
+      "name": "Tok Pisin"
+    },
+    {
+      "android": "to",
+      "rfc": "to",
+      "code": "to",
+      "androidBcp": "b+to",
+      "name": "Tongan"
+    },
+    {
+      "android": "to-rNZ",
+      "rfc": "to-NZ",
+      "code": "to_nz",
+      "androidBcp": "b+to+NZ",
+      "name": "Tongan (New Zealand)"
+    },
+    {
+      "android": "to-rTO",
+      "rfc": "to-TO",
+      "code": "to_to",
+      "androidBcp": "b+to+TO",
+      "name": "Tongan (Tonga)"
+    },
+    {
+      "android": "fit",
+      "rfc": "fit",
+      "code": "fit",
+      "androidBcp": "b+fit",
+      "name": "Tornedalen Finnish"
+    },
+    {
+      "android": "tcs",
+      "rfc": "tcs",
+      "code": "tcs",
+      "androidBcp": "b+tcs",
+      "name": "Torres Strait Creole"
+    },
+    {
+      "android": "ts",
+      "rfc": "ts",
+      "code": "ts",
+      "androidBcp": "b+ts",
+      "name": "Tsonga"
+    },
+    {
+      "android": "ts-rZA",
+      "rfc": "ts-ZA",
+      "code": "ts_za",
+      "androidBcp": "b+ts+ZA",
+      "name": "Tsonga (South Africa)"
+    },
+    {
+      "android": "tn",
+      "rfc": "tn",
+      "code": "tn",
+      "androidBcp": "b+tn",
+      "name": "Tswana"
+    },
+    {
+      "android": "tn-rBW",
+      "rfc": "tn-BW",
+      "code": "tn_bw",
+      "androidBcp": "b+tn+BW",
+      "name": "Tswana (Botswana)"
+    },
+    {
+      "android": "tn-rZA",
+      "rfc": "tn-ZA",
+      "code": "tn_za",
+      "androidBcp": "b+tn+ZA",
+      "name": "Tswana (South Africa)"
+    },
+    {
+      "android": "tcy",
+      "rfc": "tcy",
+      "code": "tcy",
+      "androidBcp": "b+tcy",
+      "name": "Tulu"
+    },
+    {
+      "android": "tum",
+      "rfc": "tum",
+      "code": "tum",
+      "androidBcp": "b+tum",
+      "name": "Tumbuka"
+    },
+    {
+      "android": "tum-Latn",
+      "rfc": "tum-Latn",
+      "code": "tum_latn",
+      "androidBcp": "b+tum+Latn",
+      "name": "Tumbuka (Latin)"
+    },
+    {
+      "android": "tr",
+      "rfc": "tr",
+      "code": "tr",
+      "androidBcp": "b+tr",
+      "name": "Turkish"
+    },
+    {
+      "android": "tr-rTR",
+      "rfc": "tr-TR",
+      "code": "tr_tr",
+      "androidBcp": "b+tr+TR",
+      "name": "Turkish (Turkey)"
+    },
+    {
+      "android": "tk",
+      "rfc": "tk",
+      "code": "tk",
+      "androidBcp": "b+tk",
+      "name": "Turkmen"
+    },
+    {
+      "android": "tk-rIQ",
+      "rfc": "tk-IQ",
+      "code": "tk_iq",
+      "androidBcp": "b+tk+IQ",
+      "name": "Turkmen (Iraq)"
+    },
+    {
+      "android": "tk-rTM",
+      "rfc": "tk-TM",
+      "code": "tk_tm",
+      "androidBcp": "b+tk+TM",
+      "name": "Turkmen (Turkmenistan)"
+    },
+    {
+      "android": "tw",
+      "rfc": "tw",
+      "code": "tw",
+      "androidBcp": "b+tw",
+      "name": "Twi"
+    },
+    {
+      "android": "ug",
+      "rfc": "ug",
+      "code": "ug",
+      "androidBcp": "b+ug",
+      "name": "Uighur"
+    },
+    {
+      "android": "ug-Arab",
+      "rfc": "ug-Arab",
+      "code": "ug_arab",
+      "androidBcp": "b+ug+Arab",
+      "name": "Uighur (Arabic)"
+    },
+    {
+      "android": "ug-rCN",
+      "rfc": "ug-CN",
+      "code": "ug_cn",
+      "androidBcp": "b+ug+CN",
+      "name": "Uighur (China)"
+    },
+    {
+      "android": "uk",
+      "rfc": "uk",
+      "code": "uk",
+      "androidBcp": "b+uk",
+      "name": "Ukrainian"
+    },
+    {
+      "android": "uk-Latn",
+      "rfc": "uk-Latn",
+      "code": "uk_latn",
+      "androidBcp": "b+uk+Latn",
+      "name": "Ukrainian (Latin)"
+    },
+    {
+      "android": "uk-Latn-rUA",
+      "rfc": "uk-Latn-UA",
+      "code": "uk_latn_ua",
+      "androidBcp": "b+uk+Latn+UA",
+      "name": "Ukrainian (Latin, Ukraine)"
+    },
+    {
+      "android": "uk-rUA",
+      "rfc": "uk-UA",
+      "code": "uk_ua",
+      "androidBcp": "b+uk+UA",
+      "name": "Ukrainian (Ukraine)"
+    },
+    {
+      "android": "umb",
+      "rfc": "umb",
+      "code": "umb",
+      "androidBcp": "b+umb",
+      "name": "Umbundu"
+    },
+    {
+      "android": "umb-rAO",
+      "rfc": "umb-AO",
+      "code": "umb_ao",
+      "androidBcp": "b+umb+AO",
+      "name": "Umbundu (Angola)"
+    },
+    {
+      "android": "hsb",
+      "rfc": "hsb",
+      "code": "hsb",
+      "androidBcp": "b+hsb",
+      "name": "Upper Sorbian"
+    },
+    {
+      "android": "ur",
+      "rfc": "ur",
+      "code": "ur",
+      "androidBcp": "b+ur",
+      "name": "Urdu"
+    },
+    {
+      "android": "ur-rIN",
+      "rfc": "ur-IN",
+      "code": "ur_in",
+      "androidBcp": "b+ur+IN",
+      "name": "Urdu (India)"
+    },
+    {
+      "android": "ur-Latn",
+      "rfc": "ur-Latn",
+      "code": "ur_latn",
+      "androidBcp": "b+ur+Latn",
+      "name": "Urdu (Latin)"
+    },
+    {
+      "android": "ur-rPK",
+      "rfc": "ur-PK",
+      "code": "ur_pk",
+      "androidBcp": "b+ur+PK",
+      "name": "Urdu (Pakistan)"
+    },
+    {
+      "android": "ur-rLK",
+      "rfc": "ur-LK",
+      "code": "ur_lk",
+      "androidBcp": "b+ur+LK",
+      "name": "Urdu (Sri Lanka)"
+    },
+    {
+      "android": "uz",
+      "rfc": "uz",
+      "code": "uz",
+      "androidBcp": "b+uz",
+      "name": "Uzbek"
+    },
+    {
+      "android": "uz-Cyrl",
+      "rfc": "uz-Cyrl",
+      "code": "uz_cyrl",
+      "androidBcp": "b+uz+Cyrl",
+      "name": "Uzbek (Cyrillic)"
+    },
+    {
+      "android": "uz-Cyrl-rUZ",
+      "rfc": "uz-Cyrl-UZ",
+      "code": "uz_cyrl_uz",
+      "androidBcp": "b+uz+Cyrl+UZ",
+      "name": "Uzbek (Cyrillic, Uzbekistan)"
+    },
+    {
+      "android": "uz-Latn",
+      "rfc": "uz-Latn",
+      "code": "uz_latn",
+      "androidBcp": "b+uz+Latn",
+      "name": "Uzbek (Latin)"
+    },
+    {
+      "android": "uz-Latn-rUZ",
+      "rfc": "uz-Latn-UZ",
+      "code": "uz_latn_uz",
+      "androidBcp": "b+uz+Latn+UZ",
+      "name": "Uzbek (Latin, Uzbekistan)"
+    },
+    {
+      "android": "uz-rUZ",
+      "rfc": "uz-UZ",
+      "code": "uz_uz",
+      "androidBcp": "b+uz+UZ",
+      "name": "Uzbek (Uzbekistan)"
+    },
+    {
+      "android": "ve",
+      "rfc": "ve",
+      "code": "ve",
+      "androidBcp": "b+ve",
+      "name": "Venda"
+    },
+    {
+      "android": "vec",
+      "rfc": "vec",
+      "code": "vec",
+      "androidBcp": "b+vec",
+      "name": "Venetian"
+    },
+    {
+      "android": "vi",
+      "rfc": "vi",
+      "code": "vi",
+      "androidBcp": "b+vi",
+      "name": "Vietnamese"
+    },
+    {
+      "android": "vi-rVN",
+      "rfc": "vi-VN",
+      "code": "vi_vn",
+      "androidBcp": "b+vi+VN",
+      "name": "Vietnamese (Vietnam)"
+    },
+    {
+      "android": "rmy",
+      "rfc": "rmy",
+      "code": "rmy",
+      "androidBcp": "b+rmy",
+      "name": "Vlax Romani"
+    },
+    {
+      "android": "rmy-Cyrl",
+      "rfc": "rmy-Cyrl",
+      "code": "rmy_cyrl",
+      "androidBcp": "b+rmy+Cyrl",
+      "name": "Vlax Romani (Cyrillic)"
+    },
+    {
+      "android": "rmy-Latn",
+      "rfc": "rmy-Latn",
+      "code": "rmy_latn",
+      "androidBcp": "b+rmy+Latn",
+      "name": "Vlax Romani (Latin)"
+    },
+    {
+      "android": "wa",
+      "rfc": "wa",
+      "code": "wa",
+      "androidBcp": "b+wa",
+      "name": "Walloon"
+    },
+    {
+      "android": "mfi",
+      "rfc": "mfi",
+      "code": "mfi",
+      "androidBcp": "b+mfi",
+      "name": "Wandala"
+    },
+    {
+      "android": "mfi-rCM",
+      "rfc": "mfi-CM",
+      "code": "mfi_cm",
+      "androidBcp": "b+mfi+CM",
+      "name": "Wandala (Cameroon)"
+    },
+    {
+      "android": "war",
+      "rfc": "war",
+      "code": "war",
+      "androidBcp": "b+war",
+      "name": "Waray"
+    },
+    {
+      "android": "cy",
+      "rfc": "cy",
+      "code": "cy",
+      "androidBcp": "b+cy",
+      "name": "Welsh"
+    },
+    {
+      "android": "cy-rGB",
+      "rfc": "cy-GB",
+      "code": "cy_gb",
+      "androidBcp": "b+cy+GB",
+      "name": "Welsh (United Kingdom)"
+    },
+    {
+      "android": "vls",
+      "rfc": "vls",
+      "code": "vls",
+      "androidBcp": "b+vls",
+      "name": "West Flemish"
+    },
+    {
+      "android": "cja",
+      "rfc": "cja",
+      "code": "cja",
+      "androidBcp": "b+cja",
+      "name": "Western Cham"
+    },
+    {
+      "android": "cja-rKH",
+      "rfc": "cja-KH",
+      "code": "cja_kh",
+      "androidBcp": "b+cja+KH",
+      "name": "Western Cham (Cambodia)"
+    },
+    {
+      "android": "fy",
+      "rfc": "fy",
+      "code": "fy",
+      "androidBcp": "b+fy",
+      "name": "Western Frisian"
+    },
+    {
+      "android": "kyu",
+      "rfc": "kyu",
+      "code": "kyu",
+      "androidBcp": "b+kyu",
+      "name": "Western Kayah"
+    },
+    {
+      "android": "wo",
+      "rfc": "wo",
+      "code": "wo",
+      "androidBcp": "b+wo",
+      "name": "Wolof"
+    },
+    {
+      "android": "wo-rSN",
+      "rfc": "wo-SN",
+      "code": "wo_sn",
+      "androidBcp": "b+wo+SN",
+      "name": "Wolof (Senegal)"
+    },
+    {
+      "android": "xh",
+      "rfc": "xh",
+      "code": "xh",
+      "androidBcp": "b+xh",
+      "name": "Xhosa"
+    },
+    {
+      "android": "xh-rZA",
+      "rfc": "xh-ZA",
+      "code": "xh_za",
+      "androidBcp": "b+xh+ZA",
+      "name": "Xhosa (South Africa)"
+    },
+    {
+      "android": "yao",
+      "rfc": "yao",
+      "code": "yao",
+      "androidBcp": "b+yao",
+      "name": "Yao"
+    },
+    {
+      "android": "yi",
+      "rfc": "yi",
+      "code": "yi",
+      "androidBcp": "b+yi",
+      "name": "Yiddish"
+    },
+    {
+      "android": "yo",
+      "rfc": "yo",
+      "code": "yo",
+      "androidBcp": "b+yo",
+      "name": "Yoruba"
+    },
+    {
+      "android": "yo-rNG",
+      "rfc": "yo-NG",
+      "code": "yo_ng",
+      "androidBcp": "b+yo+NG",
+      "name": "Yoruba (Nigeria)"
+    },
+    {
+      "android": "yua",
+      "rfc": "yua",
+      "code": "yua",
+      "androidBcp": "b+yua",
+      "name": "Yucatec Maya"
+    },
+    {
+      "android": "ypk",
+      "rfc": "ypk",
+      "code": "ypk",
+      "androidBcp": "b+ypk",
+      "name": "Yupik"
+    },
+    {
+      "android": "zne",
+      "rfc": "zne",
+      "code": "zne",
+      "androidBcp": "b+zne",
+      "name": "Zande"
+    },
+    {
+      "android": "dje",
+      "rfc": "dje",
+      "code": "dje",
+      "androidBcp": "b+dje",
+      "name": "Zarma"
+    },
+    {
+      "android": "zza",
+      "rfc": "zza",
+      "code": "zza",
+      "androidBcp": "b+zza",
+      "name": "Zaza"
+    },
+    {
+      "android": "za",
+      "rfc": "za",
+      "code": "za",
+      "androidBcp": "b+za",
+      "name": "Zhuang"
+    },
+    {
+      "android": "zom",
+      "rfc": "zom",
+      "code": "zom",
+      "androidBcp": "b+zom",
+      "name": "Zou"
+    },
+    {
+      "android": "zu",
+      "rfc": "zu",
+      "code": "zu",
+      "androidBcp": "b+zu",
+      "name": "Zulu"
+    },
+    {
+      "android": "zu-rZA",
+      "rfc": "zu-ZA",
+      "code": "zu_za",
+      "androidBcp": "b+zu+ZA",
+      "name": "Zulu (South Africa)"
+    },
+    {
+      "android": "zyp",
+      "rfc": "zyp",
+      "code": "zyp",
+      "androidBcp": "b+zyp",
+      "name": "Zyphe"
+    }
+  ]
+}

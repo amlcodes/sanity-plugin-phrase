@@ -1,5 +1,5 @@
 import { Path } from '@sanity/types'
-import { TranslationRequest } from '../types'
+import { CrossSystemLangCode, TranslationRequest } from '../types'
 import { pathToString } from './paths'
 
 export function makeKeyFriendly(str: string) {
@@ -26,10 +26,12 @@ export function getPtdId({
   targetLang,
   sourceDoc,
   paths,
-}: Pick<TranslationRequest, 'sourceDoc' | 'paths'> & { targetLang: string }) {
+}: Pick<TranslationRequest, 'sourceDoc' | 'paths'> & {
+  targetLang: CrossSystemLangCode
+}) {
   return `${
     undraftId(sourceDoc._id) !== sourceDoc._id ? 'drafts.' : ''
-  }phrase-translation--${targetLang}--${getTranslationKey(
+  }phrase-translation--${targetLang.phrase}--${getTranslationKey(
     paths,
     sourceDoc._rev,
   )}`
