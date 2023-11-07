@@ -8,7 +8,7 @@ import {
 } from '@sanity/types'
 import { pathToString } from '../utils'
 import { definitions } from './phraseOpenAPI'
-import { CREDENTIALS_DOC_ID } from '../constants'
+import { CREDENTIALS_DOC_ID } from '../utils/constants'
 import { PhraseClient } from '../createPhraseClient'
 
 export type Phrase = {

@@ -1,4 +1,4 @@
-import { CREDENTIALS_DOC_ID, CREDENTIALS_DOC_TYPE } from '../src/constants'
+import { CREDENTIALS_DOC_ID, CREDENTIALS_DOC_TYPE } from '../src/utils'
 import { sanityClient } from '../src/sanityClient'
 
 async function createCredentialsDoc() {

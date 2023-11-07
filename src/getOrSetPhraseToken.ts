@@ -1,10 +1,10 @@
-import { CREDENTIALS_DOC_ID } from './constants'
 import {
   PhraseDatacenterRegion,
   createPhraseClient,
 } from './createPhraseClient'
 import { sanityClient } from './sanityClient'
 import { PhraseCredentialsDocument } from './types'
+import { CREDENTIALS_DOC_ID } from './utils'
 
 export default async function getOrSetPhraseToken(
   region: PhraseDatacenterRegion,
