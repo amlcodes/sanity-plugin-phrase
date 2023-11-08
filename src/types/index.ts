@@ -89,6 +89,7 @@ export type PhraseJobInfo = Pick<
 export type PtdPhraseMetadata = {
   _type: 'phrase.ptd.meta'
   sourceDoc: Reference
+  targetDoc: Reference
   sourceFileUid?: string
   dateCreated?: string
   targetLang: CrossSystemLangCode
