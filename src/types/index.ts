@@ -1,3 +1,4 @@
+import { SanityClient } from '@sanity/client'
 import {
   Path,
   PortableTextObject,
@@ -6,10 +7,10 @@ import {
   Reference,
   SanityDocument,
 } from '@sanity/types'
-import { pathToString } from '../utils'
-import { definitions } from './phraseOpenAPI'
-import { CREDENTIALS_DOC_ID } from '../utils/constants'
 import { PhraseClient } from '../createPhraseClient'
+import { pathToString } from '../utils'
+import { CREDENTIALS_DOC_ID } from '../utils/constants'
+import { definitions } from './phraseOpenAPI'
 
 export type Phrase = {
   JobPart: definitions['JobPartReference']
@@ -173,3 +174,38 @@ export type CrossSystemLangCode = {
 
 export type PhraseLangCode = string
 export type SanityLangCode = string
+
+export type DocPairFromAdapter = Omit<SanityTranslationDocPair, 'lang'> & {
+  lang: SanityLangCode
+}
+
+/**
+ * @TODO:
+ * - getTranslatedReferences
+ * - getOrCreateTranslatedDocuments
+ */
+export type I18nAdapter = {
+  /**
+   * Given the current translation request, fetches the fresh versions of the
+   * requested document and target languages.
+   *
+   * It should return documents for ALL requested languages, so this function should
+   * create them if they don't exist.
+   */
+  getOrCreateTranslatedDocuments: (
+    props: TranslationRequest & { sanityClient: SanityClient },
+  ) => Promise<DocPairFromAdapter[]>
+
+  langAdapter: {
+    toSanity: (phraseLang: PhraseLangCode) => SanityLangCode
+    toPhrase: (sanityLang: SanityLangCode) => PhraseLangCode
+  }
+
+  injectDocumentLang: (
+    document: SanityDocumentWithPhraseMetadata,
+    lang: SanityLangCode,
+  ) => SanityDocumentWithPhraseMetadata
+  getDocumentLang: (
+    document: SanityDocumentWithPhraseMetadata,
+  ) => SanityLangCode | null
+}

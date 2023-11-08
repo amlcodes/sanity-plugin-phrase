@@ -2,7 +2,7 @@ import fs from 'fs'
 import { diffPatch } from 'sanity-diff-patch'
 import createAuthedPhraseClient from './createAuthedPhraseClient'
 import { PhraseDatacenterRegion } from './createPhraseClient'
-import { i18nAdapter } from './i18nAdapter'
+import { i18nAdapter } from './adapters'
 import phraseDocumentToSanityDocument from './phraseDocumentToSanityDocument'
 import { sanityClient } from './sanityClient'
 import {

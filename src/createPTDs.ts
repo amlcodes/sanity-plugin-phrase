@@ -1,5 +1,5 @@
 import { SanityDocument } from '@sanity/types'
-import { i18nAdapter } from './i18nAdapter'
+import { i18nAdapter } from './adapters'
 import { mergeDocs } from './mergeDocs'
 import {
   Phrase,

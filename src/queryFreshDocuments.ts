@@ -1,4 +1,4 @@
-import { i18nAdapter } from './i18nAdapter'
+import { i18nAdapter } from './adapters'
 import { sanityClient } from './sanityClient'
 import { SanityDocumentWithPhraseMetadata, TranslationRequest } from './types'
 

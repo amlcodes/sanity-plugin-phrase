@@ -7,7 +7,7 @@ import {
   TranslationRequest,
 } from '../types'
 import { getTranslationKey } from './ids'
-import { i18nAdapter } from '../i18nAdapter'
+import { i18nAdapter } from '../adapters'
 export * from './ids'
 export * from './paths'
 export * from './constants'
