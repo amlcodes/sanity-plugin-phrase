@@ -5,7 +5,7 @@ import { createPTDs } from './createPTDs'
 import ensureDocNotLocked from './ensureDocNotLocked'
 import getDataToTranslate from './getDataToTranslate'
 import lockDocument from './lockDocument'
-import queryFreshDocuments from './queryFreshDocuments'
+import getOrCreateTranslatedDocuments from './getOrCreateTranslatedDocuments'
 import { sanityClient } from './sanityClient'
 import {
   SanityDocumentWithPhraseMetadata,
@@ -21,8 +21,8 @@ type InputRequest = Omit<
 > & {
   paths?: (Path | string)[]
   targetLangs: SanityLangCode[]
-  sourceDoc: Omit<TranslationRequest['sourceDoc'], 'targetLang'> & {
-    targetLang: SanityLangCode
+  sourceDoc: Omit<TranslationRequest['sourceDoc'], 'lang'> & {
+    lang: SanityLangCode
   }
 }
 
@@ -40,7 +40,7 @@ function formatRequest(request: InputRequest): TranslationRequest {
     targetLangs,
     sourceDoc: {
       ...request.sourceDoc,
-      lang: langAdapter.sanityToCrossSystem(request.sourceDoc.targetLang),
+      lang: langAdapter.sanityToCrossSystem(request.sourceDoc.lang),
     },
   }
 }
@@ -52,9 +52,8 @@ export default async function createTranslations(
   const request = formatRequest(inputRequest)
   const { sourceDoc, targetLangs, paths } = request
 
-  const { freshDocuments, freshDocumentsById } = await queryFreshDocuments(
-    request,
-  )
+  const { freshDocuments, freshDocumentsById } =
+    await getOrCreateTranslatedDocuments(request)
 
   // Before going ahead with Phrase, make sure there's no pending translation
   ensureDocNotLocked({

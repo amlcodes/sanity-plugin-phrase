@@ -5,6 +5,7 @@ import { draftId, isDraft, undraftId } from '../utils'
 
 // @TODO make configurable
 const languageField = 'language'
+const weakReferences = true
 
 // https://github.com/sanity-io/document-internationalization/blob/main/src/constants.ts
 const METADATA_SCHEMA_NAME = `translation.metadata`
@@ -111,7 +112,6 @@ export const documentInternationalizationAdapter: I18nAdapter = {
       transaction.create(doc)
     })
 
-    const weakReferences = true
     const sourceReference = createTranslationReference(
       sourceDoc.lang.sanity,
       sourceDoc._id,
@@ -180,7 +180,7 @@ function createTranslationReference(
     _type: 'internationalizedArrayReferenceValue',
     value: {
       _type: 'reference',
-      _ref: ref,
+      _ref: undraftId(ref),
       _weak: true,
       // If the user has configured weakReferences, we won't want to strengthen them
       ...(strengthenOnPublish ? { _strengthenOnPublish: { type } } : {}),
