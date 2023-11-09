@@ -75,11 +75,21 @@ export function createPTDs({
               _type: 'reference',
               _ref: undraftId(sourceDoc._id),
               _weak: isDraft(sourceDoc._id) ? true : undefined,
+              _strengthenOnPublish: isDraft(sourceDoc._id)
+                ? {
+                    type: sourceDoc._type,
+                  }
+                : undefined,
             },
             targetDoc: {
               _type: 'reference',
               _ref: undraftId(targetLangDoc._id),
               _weak: isDraft(targetLangDoc._id) ? true : undefined,
+              _strengthenOnPublish: isDraft(sourceDoc._id)
+                ? {
+                    type: sourceDoc._type,
+                  }
+                : undefined,
             },
             paths,
             jobs: jobs.map((j) => ({
