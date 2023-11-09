@@ -65,18 +65,22 @@ export default async function handlePhraseWebhook(
     return 'Invalid webhook payload or ignored event'
   }
 
-  if (payload.event === 'JOB_CREATED') {
-    // @TODO: do we need to deal with creations or can we depend entirely on `createPTDs`?
-    return
-  }
-
   if (payload.event === 'JOB_DELETED') {
     // @TODO: deal with deletions - probably marking status as DELETED_IN_PHRASE
     return
+  }
+
+  if (payload.event === 'JOB_CREATED') {
+    // wait ~5s to have all language target documents, PTDs & referenced content in Sanity before proceeding
+    await sleep(5000)
   }
 
   await refreshPtdsFromPhraseData({
     phraseClient,
     jobsInWebhook: payload.jobParts || [],
   })
+}
+
+async function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
 }

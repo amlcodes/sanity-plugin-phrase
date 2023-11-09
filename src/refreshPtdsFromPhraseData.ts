@@ -90,6 +90,9 @@ export default async function refreshPtdsFromPhraseData(
           ptdIds: string[]
         }>(async (resolve, reject) => {
           try {
+            /**
+             * @TODO: replace with downloading target file instead of preview
+             */
             const contentInPhrase = await props.phraseClient.jobs.getPreview({
               projectUid,
               jobUid,
@@ -108,13 +111,14 @@ export default async function refreshPtdsFromPhraseData(
     ),
   )
 
-  const PTDsToUpdate = PTDs.map((doc) => {
+  const PTDsToUpdate = PTDs.map(async (doc) => {
     const phraseDoc = refreshedJobData.find((job) =>
       job.ptdIds.includes(doc._id),
     )?.contentInPhrase
 
+    // @TODO: better structure this
     const updatedContent = phraseDoc
-      ? phraseDocumentToSanityDocument(phraseDoc, doc)
+      ? await phraseDocumentToSanityDocument(phraseDoc, doc)
       : doc
 
     const finalDoc = i18nAdapter.injectDocumentLang(

@@ -4,28 +4,7 @@ import { collate } from 'sanity'
 import { sanityClient } from './sanityClient'
 import { SanityDocumentWithPhraseMetadata } from './types'
 import { draftId, isDraft, undraftId } from './utils'
-
-/**
- * Can contain duplicates.
- */
-function parseAllReferences(data: unknown, state: Reference[]): Reference[] {
-  if (Array.isArray(data)) {
-    return [...state, ...data.flatMap((a) => parseAllReferences(a, state))]
-  }
-
-  if (typeof data === 'object' && data !== null) {
-    if ('_type' in data && data._type === 'reference') {
-      return [...state, data as Reference]
-    }
-
-    return [
-      ...state,
-      ...Object.values(data).flatMap((a) => parseAllReferences(a, state)),
-    ]
-  }
-
-  return state
-}
+import { parseAllReferences } from './parseAllReferences'
 
 /**
  * @TODO How can we improve this? We're currently over-fecthing from Sanity.
@@ -94,10 +73,7 @@ export default async function getAllDocReferences(
     doc: SanityDocumentWithPhraseMetadata,
     currentDepth: number,
   ) {
-    const docReferences = parseAllReferences(
-      { ...doc, phraseMetadata: undefined },
-      [],
-    )
+    const docReferences = parseAllReferences(doc, [])
 
     addDocReferences(doc, docReferences, currentDepth)
     docReferences.forEach((ref) => addRefOccurrence(ref, currentDepth))

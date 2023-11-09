@@ -85,6 +85,17 @@ export type PhraseJobInfo = Pick<
   _key: string
 }
 
+export interface ReferenceMap {
+  [referencedSourceLangDocId: string]:
+    | 'untranslatable' // for document types that aren't localized
+    | 'doc-not-found'
+    | {
+        targetLanguageDocId: string | null
+        _type: string
+        state: 'draft' | 'published' | 'both'
+      }
+}
+
 /** For PTDs (Phrase Translation Documents) only */
 export type PtdPhraseMetadata = {
   _type: 'phrase.ptd.meta'
@@ -98,6 +109,9 @@ export type PtdPhraseMetadata = {
   jobs: PhraseJobInfo[]
   paths: Path[]
   projectUid: string
+
+  /** Cache of resolved documents referenced by the current PTD */
+  referenceMap?: ReferenceMap
 }
 
 export type SanityDocumentWithPhraseMetadata = SanityDocument & {
@@ -196,6 +210,12 @@ export type I18nAdapter = {
   getOrCreateTranslatedDocuments: (
     props: TranslationRequest & { sanityClient: SanityClient },
   ) => Promise<DocPairFromAdapter[]>
+
+  getTranslatedReferences: (props: {
+    sanityClient: SanityClient
+    references: string[]
+    targetLanguage: SanityLangCode
+  }) => Promise<ReferenceMap>
 
   langAdapter: {
     toSanity: (phraseLang: PhraseLangCode) => SanityLangCode

@@ -1,6 +1,6 @@
 import { KeyedObject, Reference } from '@sanity/types'
 import { uuid } from '@sanity/uuid'
-import { DocPairFromAdapter, I18nAdapter } from '../types'
+import { DocPairFromAdapter, I18nAdapter, ReferenceMap } from '../types'
 import { draftId, isDraft, undraftId } from '../utils'
 
 // @TODO make configurable
@@ -16,6 +16,57 @@ export const documentInternationalizationAdapter: I18nAdapter = {
     ...document,
     [languageField]: language,
   }),
+  getTranslatedReferences: async ({
+    sanityClient,
+    references,
+    targetLanguage,
+  }) => {
+    // @TODO: finish getting reference map - not sure how to get translation.metadata of drafts 🤔
+    // Using previewDrafts for now for simplicity
+    const fetched = await sanityClient
+      .withConfig({ perspective: 'previewDrafts' })
+      .fetch<{ _id: string; _type: string; translation?: Reference }[]>(
+        /* groq */ `*[_id in $ids] {
+      _id,
+      _type,
+      "translation": *[_type == "translation.metadata" && references(^._id)]
+        [0].${TRANSLATIONS_ARRAY_NAME}[_key == $targetLanguage][0].value,
+    }`,
+        {
+          ids: references.map((ref) => undraftId(ref)),
+          targetLanguage,
+        },
+      )
+
+    return references.reduce((refMap, ref) => {
+      const refDoc = fetched.find((doc) => doc._id === undraftId(ref))
+
+      if (!refDoc) {
+        return {
+          ...refMap,
+          [ref]: 'doc-not-found',
+        }
+      }
+
+      // @TODO: make configurable
+      const TRANSLATABLE_TYPES = ['post']
+      if (!TRANSLATABLE_TYPES.includes(refDoc._type)) {
+        return {
+          ...refMap,
+          [ref]: 'untranslatable',
+        }
+      }
+
+      return {
+        ...refMap,
+        [ref]: {
+          targetLanguageDocId: refDoc.translation?._ref || null,
+          _type: refDoc._type,
+          state: 'both', // @TODO how to?
+        },
+      }
+    }, {} as ReferenceMap)
+  },
   getDocumentLang: (document) => (document?.[languageField] as string) || null,
   getOrCreateTranslatedDocuments: async (props) => {
     const { sanityClient, sourceDoc } = props
