@@ -54,11 +54,11 @@ function serializeBlock(block: PortableTextTextBlock): SerializedPtBlock {
 
   const serializedHtml = children
     .map((child) => {
-      const tag =
-        child._type === 'span'
-          ? SerializedPtHtmlTag.SPAN
-          : SerializedPtHtmlTag.BLOCK
-      return `<${tag} data-key="${child._key}">${child.text}</${tag}>`
+      if (child._type === 'span') {
+        return `<${SerializedPtHtmlTag.SPAN} data-key="${child._key}">${child.text}</${SerializedPtHtmlTag.SPAN}>`
+      }
+
+      return `<${SerializedPtHtmlTag.BLOCK} data-key="${child._key}"></${SerializedPtHtmlTag.BLOCK}>`
     })
     .join('\n')
 

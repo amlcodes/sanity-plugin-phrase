@@ -3,8 +3,31 @@ import { parse } from 'parse5'
 import { Element, TextNode } from 'parse5/dist/tree-adapters/default'
 import { SerializedPtBlock, SerializedPtHtmlTag } from './types'
 
+/**
+ * Sligthly reduce the possibility of error states for PT blocks by auto-closing tags not yet properly closed in the Phrase editor.
+ *
+ * Assumptions:
+ * - No nested tags
+ * - No self-closing tags
+ */
+function autocloseTags(html: string): string {
+  const tags = Object.values(SerializedPtHtmlTag)
+
+  return html.replace(
+    new RegExp(`<(${tags.join('|')})[^>]*>[^<]*`, 'g'),
+    (match, tag, index, newHtml) => {
+      const subsequentStr = newHtml.slice(index + match.length)
+      if (!subsequentStr.startsWith(`</${tag}>`)) {
+        return `${match}</${tag}>`
+      }
+
+      return match
+    },
+  )
+}
+
 function deserializeBlock(block: SerializedPtBlock): PortableTextBlock {
-  const parsed = parse(block.serializedHtml)
+  const parsed = parse(autocloseTags(block.serializedHtml))
   const html = parsed.childNodes[0] as Element
   const body = html?.childNodes?.find((n) => n.nodeName === 'body') as Element
 
