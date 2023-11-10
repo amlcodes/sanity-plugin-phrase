@@ -2,6 +2,11 @@ import { PortableTextBlock } from '@sanity/types'
 import { parse } from 'parse5'
 import { Element, TextNode } from 'parse5/dist/tree-adapters/default'
 import { SerializedPtBlock, SerializedPtHtmlTag } from './types'
+import { decodeHTML } from 'entities'
+
+function decodeStringFromPhrase(str: string) {
+  return decodeHTML(str)
+}
 
 /**
  * Sligthly reduce the possibility of error states for PT blocks by auto-closing tags not yet properly closed in the Phrase editor.
@@ -34,7 +39,9 @@ function deserializeBlock(block: SerializedPtBlock): PortableTextBlock {
   const children = (body?.childNodes || []).flatMap((n) => {
     if (n.nodeName === SerializedPtHtmlTag.SPAN) {
       const key = (n.attrs || []).find((a) => a.name === 'data-key')?.value
-      const text = (n.childNodes[0] as TextNode)?.value || ''
+      const text = decodeStringFromPhrase(
+        (n.childNodes[0] as TextNode)?.value || '',
+      )
       const spanMeta = block._spanMeta[key || '']
       if (!spanMeta) return []
 
@@ -77,6 +84,10 @@ export default function phraseToSanity<C = unknown>(content: C): C {
         phraseToSanity(value),
       ]),
     ) as C
+  }
+
+  if (typeof content === 'string') {
+    return decodeStringFromPhrase(content) as C
   }
 
   return content

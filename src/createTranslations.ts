@@ -61,6 +61,8 @@ export default async function createTranslations(
     freshDocuments,
   })
 
+  // @TODO: ensure revs match - ask user to retry if the document changed during the process
+
   const { name: translationName, filename } = getTranslationName(request)
 
   // And lock it to prevent race conditions
@@ -130,21 +132,23 @@ export default async function createTranslations(
   // Create PTDs in Sanity
   PTDs.forEach((doc) => transaction.createOrReplace(doc))
 
-  // And mark this translation as CREATED
-  transaction.patch(freshSourceDoc._id, (patch) => {
-    patch.setIfMissing({
-      phraseMeta: {
-        _type: 'phrase.main.meta',
-        translations: [],
-      },
-    } as Pick<SanityDocumentWithPhraseMetadata, 'phraseMeta'>)
+  Object.keys(freshDocumentsById).forEach((id) => {
+    // And mark this translation as CREATED for each of the source & target documents
+    transaction.patch(id, (patch) => {
+      patch.setIfMissing({
+        phraseMeta: {
+          _type: 'phrase.main.meta',
+          translations: [],
+        },
+      } as Pick<SanityDocumentWithPhraseMetadata, 'phraseMeta'>)
 
-    const translationKey = getTranslationKey(paths, sourceDoc._rev)
-    const basePath = `phraseMeta.translations[_key == "${translationKey}"]`
-    return patch.set({
-      [`${basePath}.status`]: 'CREATED',
-      [`${basePath}.projectId`]: projectUid,
-      [`${basePath}.targetLangs`]: targetLangs,
+      const translationKey = getTranslationKey(paths, sourceDoc._rev)
+      const basePath = `phraseMeta.translations[_key == "${translationKey}"]`
+      return patch.set({
+        [`${basePath}.status`]: 'CREATED',
+        [`${basePath}.projectId`]: projectUid,
+        [`${basePath}.targetLangs`]: targetLangs,
+      })
     })
   })
 

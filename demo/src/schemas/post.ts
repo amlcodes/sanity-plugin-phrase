@@ -110,6 +110,14 @@ export async function isUniqueOtherThanLanguage(
   const client = getClient({ apiVersion })
   const id = document._id.replace(/^drafts\./, '')
 
+  if (
+    typeof document.phraseMeta === 'object' &&
+    '_type' in document.phraseMeta &&
+    document.phraseMeta._type === 'phrase.ptd.meta'
+  ) {
+    return true
+  }
+
   const usedInOtherDocument = await client.fetch<boolean>(
     /* groq */ `defined(*[
       !(_id in [$draft, $published]) &&

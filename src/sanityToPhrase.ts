@@ -1,5 +1,10 @@
 import { PortableTextTextBlock } from '@sanity/types'
 import { SerializedPtBlock, SerializedPtHtmlTag } from './types'
+import { encodeHTML } from 'entities'
+
+function prepareStringForPhrase(str: string) {
+  return encodeHTML(str)
+}
 
 /**
  * How it works:
@@ -55,7 +60,11 @@ function serializeBlock(block: PortableTextTextBlock): SerializedPtBlock {
   const serializedHtml = children
     .map((child) => {
       if (child._type === 'span') {
-        return `<${SerializedPtHtmlTag.SPAN} data-key="${child._key}">${child.text}</${SerializedPtHtmlTag.SPAN}>`
+        return `<${SerializedPtHtmlTag.SPAN} data-key="${
+          child._key
+        }">${prepareStringForPhrase((child.text as string) || '')}</${
+          SerializedPtHtmlTag.SPAN
+        }>`
       }
 
       return `<${SerializedPtHtmlTag.BLOCK} data-key="${child._key}"></${SerializedPtHtmlTag.BLOCK}>`
@@ -92,5 +101,9 @@ export default function sanityToPhrase<C = unknown>(content: C): C {
     ) as C
   }
 
-  return content
+  if (typeof content === 'string') {
+    return prepareStringForPhrase(content) as C
+  }
+
+  return content as C
 }

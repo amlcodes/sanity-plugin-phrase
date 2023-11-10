@@ -5,6 +5,7 @@
     "@sanity/mutator": "^3.18.1",
     "@sanity/util": "^3.18.1",
     "@sanity/uuid": "^3.0.2",
+    "entities": "^4.5.0",
     "openapi-typescript-fetch": "^1.1.3",
     "p-map": "^6.0.0",
     "parse5": "^7.1.2",

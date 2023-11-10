@@ -111,42 +111,44 @@ export default async function refreshPtdsFromPhraseData(
     ),
   )
 
-  const PTDsToUpdate = PTDs.map(async (doc) => {
-    const phraseDoc = refreshedJobData.find((job) =>
-      job.ptdIds.includes(doc._id),
-    )?.contentInPhrase
+  const PTDsToUpdate = await Promise.all(
+    PTDs.map(async (doc) => {
+      const phraseDoc = refreshedJobData.find((job) =>
+        job.ptdIds.includes(doc._id),
+      )?.contentInPhrase
 
-    // @TODO: better structure this
-    const updatedContent = phraseDoc
-      ? await phraseDocumentToSanityDocument(phraseDoc, doc)
-      : doc
+      // @TODO: better structure this
+      const updatedContent = phraseDoc
+        ? await phraseDocumentToSanityDocument(phraseDoc, doc)
+        : doc
 
-    const finalDoc = i18nAdapter.injectDocumentLang(
-      {
-        ...updatedContent,
-        phraseMeta:
-          doc.phraseMeta?._type === 'phrase.ptd.meta'
-            ? {
-                ...doc.phraseMeta,
-                jobs: doc.phraseMeta.jobs.map((job) =>
-                  updateJobInPtd(job, jobs),
-                ),
-              }
-            : undefined,
-      },
-      (doc.phraseMeta?._type === 'phrase.ptd.meta'
-        ? doc.phraseMeta?.targetLang.sanity
-        : i18nAdapter.getDocumentLang(doc)) ||
-        // @TODO: how to deal with missing targetLang? Can this ever happen?
-        '',
-    )
+      const finalDoc = i18nAdapter.injectDocumentLang(
+        {
+          ...updatedContent,
+          phraseMeta:
+            doc.phraseMeta?._type === 'phrase.ptd.meta'
+              ? {
+                  ...doc.phraseMeta,
+                  jobs: doc.phraseMeta.jobs.map((job) =>
+                    updateJobInPtd(job, jobs),
+                  ),
+                }
+              : undefined,
+        },
+        (doc.phraseMeta?._type === 'phrase.ptd.meta'
+          ? doc.phraseMeta?.targetLang.sanity
+          : i18nAdapter.getDocumentLang(doc)) ||
+          // @TODO: how to deal with missing targetLang? Can this ever happen?
+          '',
+      )
 
-    return {
-      originalDoc: doc,
-      doc: finalDoc,
-      patches: diffPatch(doc, finalDoc),
-    }
-  })
+      return {
+        originalDoc: doc,
+        doc: finalDoc,
+        patches: diffPatch(doc, finalDoc),
+      }
+    }),
+  )
 
   const transaction = sanityClient.transaction()
 
