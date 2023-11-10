@@ -9,12 +9,10 @@ export const createPhraseClient = (
   token?: string,
 ) => {
   const fetcher = Fetcher.for<paths>()
-  const BASE_URL = `https://${
-    region === 'us' ? 'us.' : ''
-  }cloud.memsource.com/web`
+  const baseUrl = getPhraseBaseUrl(region)
 
   fetcher.configure({
-    baseUrl: BASE_URL,
+    baseUrl,
     init: {
       headers: {
         Authorization: `ApiToken ${token}`,
@@ -40,7 +38,7 @@ export const createPhraseClient = (
         props: operations['filePreviewJob']['parameters']['path'],
       ) => {
         const res = await fetch(
-          `${BASE_URL}/api2/v1/projects/${props.projectUid}/jobs/${props.jobUid}/preview`,
+          `${baseUrl}/api2/v1/projects/${props.projectUid}/jobs/${props.jobUid}/preview`,
           {
             headers: {
               Authorization: `ApiToken ${token}`,
@@ -86,3 +84,7 @@ export const createPhraseClient = (
 }
 
 export type PhraseClient = ReturnType<typeof createPhraseClient>
+
+export function getPhraseBaseUrl(region: string) {
+  return `https://${region === 'us' ? 'us.' : ''}cloud.memsource.com/web`
+}

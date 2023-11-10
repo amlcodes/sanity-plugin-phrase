@@ -26,9 +26,12 @@ export function getPtdId({
   targetLang,
   sourceDoc,
   paths,
-}: Pick<TranslationRequest, 'sourceDoc' | 'paths'> & {
+}: {
+  paths: TranslationRequest['paths']
+  sourceDoc: Pick<TranslationRequest['sourceDoc'], '_id' | '_rev'>
   targetLang: CrossSystemLangCode
 }) {
+  // @TODO: is it safe not to include the source document's ID? Is _rev unique system-wide?
   return `${
     undraftId(sourceDoc._id) !== sourceDoc._id ? 'drafts.' : ''
   }phrase-translation--${targetLang.phrase}--${getTranslationKey(

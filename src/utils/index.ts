@@ -11,6 +11,7 @@ import { i18nAdapter } from '../adapters'
 export * from './ids'
 export * from './paths'
 export * from './constants'
+export * from './phrase'
 
 // @TODO create friendlier names - requires schema
 export function getTranslationName({ sourceDoc, paths }: TranslationRequest) {
@@ -99,4 +100,14 @@ export const langAdapter = {
       ? PhraseLangCode[]
       : PhraseLangCode
   },
+}
+
+const displayNames = new Intl.DisplayNames(['en'], { type: 'language' })
+
+export function getReadableLanguageName(lang: string) {
+  try {
+    return displayNames.of(lang) || lang
+  } catch (error) {
+    return lang
+  }
 }

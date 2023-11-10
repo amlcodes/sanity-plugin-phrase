@@ -2,6 +2,7 @@ import { SlugValidationContext } from '@sanity/types'
 import { defineField, defineType } from 'sanity'
 
 import { apiVersion } from '~/lib/sanity.api'
+import PhraseDocDashboard from '~/plugin-dist/PhraseDocDashboard/PhraseDocDashboard'
 import { draftId, getReadableLanguageName, undraftId } from '~/utils'
 
 export default defineType({
@@ -9,6 +10,15 @@ export default defineType({
   title: 'Post',
   type: 'document',
   fields: [
+    defineField({
+      name: 'phraseDashboard',
+      title: 'Phrase Dashboard',
+      type: 'string',
+      components: {
+        field: PhraseDocDashboard,
+      },
+      readOnly: true,
+    }),
     defineField({
       name: 'title',
       title: 'Title',

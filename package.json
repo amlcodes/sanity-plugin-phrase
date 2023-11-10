@@ -2,13 +2,17 @@
   "dependencies": {
     "@sanity/client": "^6.7.0",
     "@sanity/document-internationalization": "^2.0.1",
+    "@sanity/icons": "^2.7.0",
     "@sanity/mutator": "^3.18.1",
+    "@sanity/ui": "^1.9.0",
     "@sanity/util": "^3.18.1",
     "@sanity/uuid": "^3.0.2",
     "entities": "^4.5.0",
     "openapi-typescript-fetch": "^1.1.3",
     "p-map": "^6.0.0",
     "parse5": "^7.1.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "sanity": "^3.19.0",
     "sanity-diff-patch": "^3.0.2"
   },
@@ -17,6 +21,8 @@
   "type": "module",
   "devDependencies": {
     "@sanity/types": "^3.18.1",
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
     "bun-types": "latest",
     "openapi-typescript": "5.4.1",
     "tsx": "^3.14.0",
@@ -26,10 +32,11 @@
     "typescript": "^5.0.0"
   },
   "scripts": {
-    "build:demo": "bun build --outdir=demo/src/plugin-dist --format=esm --splitting --external=sanity --external=@sanity/client --external=@sanity/document-internationalization --external=@sanity/mutator --external=@sanity/util --external=@sanity/uuid ./src/createTranslations.ts ./src/handlePhraseWebhook.ts",
+    "build:demo": "bun build --outdir=demo/src/plugin-dist --format=esm --splitting --external=sanity --external=@sanity/client --external=@sanity/document-internationalization --external=@sanity/mutator --external=@sanity/util --external=@sanity/uuid --external=@sanity/ui --external=react --external=react-dom ./src/index.ts ./src/PhraseDocDashboard/PhraseDocDashboard",
     "dev:demo": "bun run build:demo -- --watch",
     "openapi-types": "openapi-typescript https://cloud.memsource.com/web/internal/v1/docs/latest/yaml?internal=false --output phraseSchema.d.ts",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "unlockForTesting": "bun dev/unlockForTesting.ts --remove-ptds --remove-translated"
   },
   "pnpm": {
     "patchedDependencies": {

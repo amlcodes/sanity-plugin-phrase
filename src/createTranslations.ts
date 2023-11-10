@@ -141,7 +141,7 @@ export default async function createTranslations(inputRequest: InputRequest) {
       const basePath = `phraseMeta.translations[_key == "${translationKey}"]`
       return patch.set({
         [`${basePath}.status`]: 'CREATED',
-        [`${basePath}.projectId`]: projectUid,
+        [`${basePath}.projectUid`]: projectUid,
         [`${basePath}.targetLangs`]: targetLangs,
       })
     })

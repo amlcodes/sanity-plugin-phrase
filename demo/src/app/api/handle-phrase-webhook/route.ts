@@ -1,6 +1,6 @@
 import { writeToken } from '~/lib/sanity.api'
 import { client } from '~/lib/sanity.client'
-import handlePhraseWebhook from '~/plugin-dist/handlePhraseWebhook'
+import { handlePhraseWebhook } from '~/plugin-dist'
 
 export async function POST(request: Request) {
   const body = await request.json()
