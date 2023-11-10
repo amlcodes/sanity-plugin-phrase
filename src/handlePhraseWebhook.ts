@@ -1,5 +1,5 @@
+import { SanityClient } from 'sanity'
 import createAuthedPhraseClient from './createAuthedPhraseClient'
-import { PhraseDatacenterRegion } from './createPhraseClient'
 import refreshPtdsFromPhraseData from './refreshPtdsFromPhraseData'
 import { Phrase } from './types'
 
@@ -46,10 +46,10 @@ type PhraseWebhook =
   | JobStatusChangedWebhook
 
 export default async function handlePhraseWebhook(
-  region: PhraseDatacenterRegion,
+  sanityClient: SanityClient,
   payload: PhraseWebhook,
 ) {
-  const phraseClient = await createAuthedPhraseClient(region)
+  const phraseClient = await createAuthedPhraseClient(sanityClient)
   if (
     !payload.event ||
     !(
@@ -67,7 +67,7 @@ export default async function handlePhraseWebhook(
 
   if (payload.event === 'JOB_DELETED') {
     // @TODO: deal with deletions - probably marking status as DELETED_IN_PHRASE
-    return
+    return true
   }
 
   if (payload.event === 'JOB_CREATED') {
@@ -76,9 +76,12 @@ export default async function handlePhraseWebhook(
   }
 
   await refreshPtdsFromPhraseData({
+    sanityClient,
     phraseClient,
     jobsInWebhook: payload.jobParts || [],
   })
+
+  return true
 }
 
 async function sleep(ms: number) {

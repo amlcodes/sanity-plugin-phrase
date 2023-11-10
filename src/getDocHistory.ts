@@ -1,4 +1,4 @@
-import { sanityClient } from './sanityClient'
+import { SanityClient } from 'sanity'
 import { SanityDocumentWithPhraseMetadata } from './types'
 
 /**
@@ -16,10 +16,10 @@ import { SanityDocumentWithPhraseMetadata } from './types'
  *
  * @docs https://www.sanity.io/docs/history-api
  */
-export default async function getDocHistory({
-  docId,
-  ...a
-}: { docId: string } & ({ rev: string } | { date: Date })) {
+export default async function getDocHistory(
+  sanityClient: SanityClient,
+  { docId, ...a }: { docId: string } & ({ rev: string } | { date: Date }),
+) {
   const queryParams =
     'rev' in a ? `?revision=${a.rev}` : `?time=${a.date.toISOString()}`
   const { documents } = await sanityClient.request<{

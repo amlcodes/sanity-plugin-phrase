@@ -1,4 +1,3 @@
-import { sanityClient } from './sanityClient'
 import {
   MainDocTranslationMetadata,
   SanityDocumentWithPhraseMetadata,
@@ -16,7 +15,7 @@ export default async function lockDocument(
   const { name: translationName, filename } = getTranslationName(props)
   const translationKey = getTranslationKey(paths, sourceDoc._rev)
 
-  const transaction = sanityClient.transaction()
+  const transaction = props.sanityClient.transaction()
   const docs = freshDocuments.flatMap(
     (d) =>
       [d.draft, d.published].filter(

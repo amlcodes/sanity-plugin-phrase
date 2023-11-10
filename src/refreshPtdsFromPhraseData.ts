@@ -1,9 +1,8 @@
-import fs from 'fs'
+// import fs from 'fs'
 import { diffPatch } from 'sanity-diff-patch'
 import { i18nAdapter } from './adapters'
 import { PhraseClient } from './createPhraseClient'
 import phraseDocumentToSanityDocument from './phraseDocumentToSanityDocument'
-import { sanityClient } from './sanityClient'
 import {
   ContentInPhrase,
   CrossSystemLangCode,
@@ -13,13 +12,16 @@ import {
   SanityDocumentWithPhraseMetadata,
 } from './types'
 import { dedupeArray, jobComesFromSanity } from './utils'
+import { SanityClient } from 'sanity'
 
 export default async function refreshPtdsFromPhraseData(
-  props: { phraseClient: PhraseClient } & (
+  props: { sanityClient: SanityClient; phraseClient: PhraseClient } & (
     | { jobsInWebhook: Phrase['JobInWebhook'][] }
     | { ptdMetadata: PtdPhraseMetadata }
   ),
 ) {
+  const { sanityClient, phraseClient } = props
+
   const jobs =
     'jobsInWebhook' in props
       ? // In the webhook payload, exclude jobs not coming from Sanity
@@ -93,7 +95,7 @@ export default async function refreshPtdsFromPhraseData(
             /**
              * @TODO: replace with downloading target file instead of preview
              */
-            const contentInPhrase = await props.phraseClient.jobs.getPreview({
+            const contentInPhrase = await phraseClient.jobs.getPreview({
               projectUid,
               jobUid,
             })
@@ -160,18 +162,18 @@ export default async function refreshPtdsFromPhraseData(
 
   const res = await transaction.commit()
 
-  fs.writeFileSync(
-    'example-data/gitignored/fetchedPTDs.json',
-    JSON.stringify(PTDs, null, 2),
-  )
-  fs.writeFileSync(
-    'example-data/gitignored/updatedPTDs.json',
-    JSON.stringify(PTDsToUpdate, null, 2),
-  )
-  fs.writeFileSync(
-    'example-data/gitignored/refreshedJobData.json',
-    JSON.stringify(refreshedJobData, null, 2),
-  )
+  // fs.writeFileSync(
+  //   'example-data/gitignored/fetchedPTDs.json',
+  //   JSON.stringify(PTDs, null, 2),
+  // )
+  // fs.writeFileSync(
+  //   'example-data/gitignored/updatedPTDs.json',
+  //   JSON.stringify(PTDsToUpdate, null, 2),
+  // )
+  // fs.writeFileSync(
+  //   'example-data/gitignored/refreshedJobData.json',
+  //   JSON.stringify(refreshedJobData, null, 2),
+  // )
 }
 
 /** Later steps come first */

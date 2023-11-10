@@ -1,19 +1,17 @@
 import { Path } from '@sanity/types'
 import { fromString } from '@sanity/util/paths'
-import fs from 'fs'
+// import fs from 'fs'
 import { createPTDs } from './createPTDs'
 import ensureDocNotLocked from './ensureDocNotLocked'
 import getDataToTranslate from './getDataToTranslate'
-import lockDocument from './lockDocument'
 import getOrCreateTranslatedDocuments from './getOrCreateTranslatedDocuments'
-import { sanityClient } from './sanityClient'
+import lockDocument from './lockDocument'
 import {
   SanityDocumentWithPhraseMetadata,
   SanityLangCode,
   TranslationRequest,
 } from './types'
 import { getTranslationKey, getTranslationName, langAdapter } from './utils'
-import { PhraseClient } from './createPhraseClient'
 
 type InputRequest = Omit<
   TranslationRequest,
@@ -45,10 +43,7 @@ function formatRequest(request: InputRequest): TranslationRequest {
   }
 }
 
-export default async function createTranslations(
-  phraseClient: PhraseClient,
-  inputRequest: InputRequest,
-) {
+export default async function createTranslations(inputRequest: InputRequest) {
   const request = formatRequest(inputRequest)
   const { sourceDoc, targetLangs, paths } = request
 
@@ -71,7 +66,7 @@ export default async function createTranslations(
     freshDocuments,
   })
 
-  const project = await phraseClient.projects.create({
+  const project = await request.phraseClient.projects.create({
     name: translationName,
     templateUid: request.templateUid,
     targetLangs: langAdapter.crossSystemToPhrase(targetLangs),
@@ -85,13 +80,13 @@ export default async function createTranslations(
 
   // %%%%% DEBUG %%%%%
   console.log({ project, projectUid })
-  fs.writeFileSync(
-    'example-data/created-project.json',
-    JSON.stringify(project, null, 2),
-  )
+  // fs.writeFileSync(
+  //   'example-data/created-project.json',
+  //   JSON.stringify(project, null, 2),
+  // )
   // %%%%% DEBUG %%%%%
 
-  const jobsRes = await phraseClient.jobs.create({
+  const jobsRes = await request.phraseClient.jobs.create({
     projectUid,
     filename,
     targetLangs: langAdapter.crossSystemToPhrase(targetLangs),
@@ -108,10 +103,10 @@ export default async function createTranslations(
   }
 
   // %%%%% DEBUG %%%%%
-  fs.writeFileSync(
-    'example-data/created-jobs.json',
-    JSON.stringify(jobsRes, null, 2),
-  )
+  // fs.writeFileSync(
+  //   'example-data/created-jobs.json',
+  //   JSON.stringify(jobsRes, null, 2),
+  // )
   // %%%%% DEBUG %%%%%
 
   const freshSourceDoc = freshDocumentsById[sourceDoc._id]
@@ -125,10 +120,10 @@ export default async function createTranslations(
   })
 
   // %%%%% DEBUG %%%%%
-  fs.writeFileSync('example-data/PTDs.json', JSON.stringify(PTDs, null, 2))
+  // fs.writeFileSync('example-data/PTDs.json', JSON.stringify(PTDs, null, 2))
   // %%%%% DEBUG %%%%%
 
-  const transaction = sanityClient.transaction()
+  const transaction = request.sanityClient.transaction()
   // Create PTDs in Sanity
   PTDs.forEach((doc) => transaction.createOrReplace(doc))
 
@@ -152,10 +147,10 @@ export default async function createTranslations(
     })
   })
 
-  fs.writeFileSync(
-    'example-data/gitignored/transaction.json',
-    JSON.stringify(transaction.toJSON(), null, 2),
-  )
+  // fs.writeFileSync(
+  //   'example-data/gitignored/transaction.json',
+  //   JSON.stringify(transaction.toJSON(), null, 2),
+  // )
   const res = await transaction.commit()
   console.log('\n\n\nFinal transaction res', res)
 }

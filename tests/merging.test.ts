@@ -299,7 +299,7 @@ describe('Document merging', () => {
       const manuallyMerged = {
         ...document,
         body: [
-          ...document.body.map((block, idx) => {
+          ...(document.body as any[]).map((block, idx) => {
             if (idx === changedBlockIdx) {
               return changedBlock
             }

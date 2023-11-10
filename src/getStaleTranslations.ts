@@ -12,6 +12,7 @@ import { fromString } from '@sanity/util/paths'
 export async function getStaleTranslations({
   freshDocuments,
   sourceDoc,
+  sanityClient,
 }: TranslationRequest & {
   freshDocuments: SanityTranslationDocPair[]
 }) {
@@ -53,7 +54,7 @@ export async function getStaleTranslations({
       new Date(b._createdAt).valueOf() - new Date(a._createdAt).valueOf(),
   )
 
-  const docsInHistory = await getDocHistory({
+  const docsInHistory = await getDocHistory(sanityClient, {
     // @TODO replace with proper values (unsure how)
     docId: sourceDoc._id,
     date: new Date(newestToOldest[0]._createdAt),

@@ -1,16 +1,16 @@
 import { Reference, SanityDocument } from '@sanity/types'
 import pMap from 'p-map'
-import { collate } from 'sanity'
-import { sanityClient } from './sanityClient'
+import { SanityClient, collate } from 'sanity'
+import { parseAllReferences } from './parseAllReferences'
 import { SanityDocumentWithPhraseMetadata } from './types'
 import { draftId, isDraft, undraftId } from './utils'
-import { parseAllReferences } from './parseAllReferences'
 
 /**
  * @TODO How can we improve this? We're currently over-fecthing from Sanity.
  * One possible improvement is skipping published docs if drafts are present.
  */
 export default async function getAllDocReferences(
+  sanityClient: SanityClient,
   document: SanityDocumentWithPhraseMetadata,
   maxDepth: number = 3,
 ) {

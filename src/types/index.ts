@@ -7,7 +7,7 @@ import {
   Reference,
   SanityDocument,
 } from '@sanity/types'
-import { PhraseClient } from '../createPhraseClient'
+import { PhraseClient, PhraseDatacenterRegion } from '../createPhraseClient'
 import { pathToString } from '../utils'
 import { CREDENTIALS_DOC_ID } from '../utils/constants'
 import { definitions } from './phraseOpenAPI'
@@ -125,6 +125,8 @@ export type SanityTranslationDocPair = {
 }
 
 export interface TranslationRequest {
+  phraseClient: PhraseClient
+  sanityClient: SanityClient
   sourceDoc: {
     _rev: string
     _id: string
@@ -174,6 +176,7 @@ export interface PhraseCredentialsDocument extends SanityDocument {
   token?: string
   /** ISO date */
   expires?: string
+  region: PhraseDatacenterRegion
 }
 
 export type CrossSystemLangCode = {
@@ -208,7 +211,7 @@ export type I18nAdapter = {
    * create them if they don't exist.
    */
   getOrCreateTranslatedDocuments: (
-    props: TranslationRequest & { sanityClient: SanityClient },
+    props: TranslationRequest,
   ) => Promise<DocPairFromAdapter[]>
 
   getTranslatedReferences: (props: {

@@ -1,12 +1,10 @@
-import {
-  PhraseDatacenterRegion,
-  createPhraseClient,
-} from './createPhraseClient'
+import { SanityClient } from 'sanity'
+import { createPhraseClient } from './createPhraseClient'
 import getOrSetPhraseToken from './getOrSetPhraseToken'
 
 export default async function createAuthedPhraseClient(
-  region: PhraseDatacenterRegion,
+  sanityClient: SanityClient,
 ) {
-  const phraseToken = await getOrSetPhraseToken(region)
-  return createPhraseClient(region, phraseToken)
+  const { token, region } = await getOrSetPhraseToken(sanityClient)
+  return createPhraseClient(region, token)
 }

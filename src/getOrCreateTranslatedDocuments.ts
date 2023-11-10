@@ -1,5 +1,4 @@
 import { i18nAdapter } from './adapters'
-import { sanityClient } from './sanityClient'
 import {
   SanityDocumentWithPhraseMetadata,
   SanityTranslationDocPair,
@@ -11,10 +10,7 @@ export default async function getOrCreateTranslatedDocuments(
   props: TranslationRequest,
 ) {
   const freshDocumentsSource = await i18nAdapter.getOrCreateTranslatedDocuments(
-    {
-      ...props,
-      sanityClient,
-    },
+    props,
   )
   const freshDocuments = freshDocumentsSource.map(
     (d) =>

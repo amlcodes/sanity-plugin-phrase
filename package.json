@@ -26,7 +26,10 @@
     "typescript": "^5.0.0"
   },
   "scripts": {
-    "openapi-types": "openapi-typescript https://cloud.memsource.com/web/internal/v1/docs/latest/yaml?internal=false --output phraseSchema.d.ts"
+    "build:demo": "bun build --outdir=demo/src/plugin-dist --format=esm --splitting --external=sanity --external=@sanity/client --external=@sanity/document-internationalization --external=@sanity/mutator --external=@sanity/util --external=@sanity/uuid ./src/createTranslations.ts ./src/handlePhraseWebhook.ts",
+    "dev:demo": "bun run build:demo -- --watch",
+    "openapi-types": "openapi-typescript https://cloud.memsource.com/web/internal/v1/docs/latest/yaml?internal=false --output phraseSchema.d.ts",
+    "type-check": "tsc --noEmit"
   },
   "pnpm": {
     "patchedDependencies": {

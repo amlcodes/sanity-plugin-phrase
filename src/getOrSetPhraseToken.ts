@@ -1,14 +1,9 @@
-import {
-  PhraseDatacenterRegion,
-  createPhraseClient,
-} from './createPhraseClient'
-import { sanityClient } from './sanityClient'
+import { SanityClient } from 'sanity'
+import { createPhraseClient } from './createPhraseClient'
 import { PhraseCredentialsDocument } from './types'
 import { CREDENTIALS_DOC_ID } from './utils'
 
-export default async function getOrSetPhraseToken(
-  region: PhraseDatacenterRegion,
-) {
+export default async function getOrSetPhraseToken(sanityClient: SanityClient) {
   const phraseCredentials =
     await sanityClient.fetch<PhraseCredentialsDocument | null>(
       '*[_id == $id][0]',
@@ -17,15 +12,23 @@ export default async function getOrSetPhraseToken(
       },
     )
 
-  if (!phraseCredentials?.userName || !phraseCredentials?.password) {
+  if (
+    !phraseCredentials?.userName ||
+    !phraseCredentials?.password ||
+    !phraseCredentials?.region
+  ) {
     throw new Error('Phrase credentials not found')
   }
 
   if (tokenStillValid(phraseCredentials)) {
-    return phraseCredentials.token as string
+    return {
+      token: phraseCredentials.token as string,
+      region: phraseCredentials.region,
+    }
   }
 
-  const freshCredentials = await getFreshCredentials(region, {
+  const freshCredentials = await getFreshCredentials({
+    region: phraseCredentials.region,
     userName: phraseCredentials.userName,
     password: phraseCredentials.password,
   })
@@ -37,19 +40,21 @@ export default async function getOrSetPhraseToken(
     expires: freshCredentials.expires,
   })
 
-  return freshCredentials.token as string
+  return {
+    token: freshCredentials.token as string,
+    region: phraseCredentials.region,
+  }
 }
 
 const ONE_HOUR = 1000 * 60 * 60
 
 async function getFreshCredentials(
-  region: PhraseDatacenterRegion,
   credentials: Pick<
     Required<PhraseCredentialsDocument>,
-    'userName' | 'password'
+    'userName' | 'password' | 'region'
   >,
 ) {
-  const unauthedClient = createPhraseClient(region)
+  const unauthedClient = createPhraseClient(credentials.region)
   const res = await unauthedClient.login({
     password: credentials.password,
     userName: credentials.userName,

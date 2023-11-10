@@ -1,46 +1,51 @@
 {
   "jobParts": [
     {
-      "id": 367639,
-      "uid": "fDVRUm35dXV68lOGB55ec2",
+      "id": 373799,
+      "uid": "bzm2LviS3nWAeRGjcEI281",
       "internalId": "1",
-      "task": "d7vmIUhZolKf1GEO0_dc1",
-      "fileName": "[Sanity.io] post __root__9c0ac4c3_faa5-4144-8d72-5c2f058e611a drafts.a80f2791-d4e4-45eb-84d0-1a59fe78edbc.json",
+      "task": "N3yHQKytDvpUOVkp_dc1",
+      "fileName": "[Sanity.io] post __root__WgP4APm0i0FcIV3twu7ysp a2bafcca-fc41-4f4b-85c4-adb3307993d2.json",
       "targetLang": "pt",
       "workflowLevel": 1,
       "status": "NEW",
-      "wordsCount": 4,
+      "wordsCount": 369,
       "beginIndex": 0,
-      "endIndex": 0,
+      "endIndex": 69,
       "isParentJobSplit": false,
       "dateDue": null,
-      "dateCreated": "2023-11-03T18:51:41Z",
+      "dateCreated": "2023-11-10T18:13:51Z",
       "project": {
-        "id": 36590,
-        "uid": "1k06sGrqh0d5uE7u0ON0xV0",
+        "id": 37121,
+        "uid": "E0EX18x72NIcwQKC3MgMDd",
         "lastWorkflowLevel": 2
       },
-      "assignedTo": [
-        {
-          "linguist": {
-            "id": 20015355,
-            "uid": "uonuQNieqGoM5N3rlxffY0",
-            "firstName": "henrique",
-            "lastName": "doro",
-            "userName": "hdoro",
-            "email": "henrique.doro@tinloof.com",
-            "role": "ADMIN",
-            "timezone": "Europe/London",
-            "active": true,
-            "deleted": false,
-            "terminologist": false,
-            "dateCreated": "2023-10-17T14:04:17Z"
-          }
-        }
-      ]
+      "assignedTo": []
+    },
+    {
+      "id": 373800,
+      "uid": "6P8YPjf8qWrB6lmnq0O0k9",
+      "internalId": "1",
+      "task": "N3yHQKytDvpUOVkp_dc1",
+      "fileName": "[Sanity.io] post __root__WgP4APm0i0FcIV3twu7ysp a2bafcca-fc41-4f4b-85c4-adb3307993d2.json",
+      "targetLang": "pt",
+      "workflowLevel": 2,
+      "status": "NEW",
+      "wordsCount": 369,
+      "beginIndex": 0,
+      "endIndex": 69,
+      "isParentJobSplit": false,
+      "dateDue": null,
+      "dateCreated": "2023-11-10T18:13:51Z",
+      "project": {
+        "id": 37121,
+        "uid": "E0EX18x72NIcwQKC3MgMDd",
+        "lastWorkflowLevel": 2
+      },
+      "assignedTo": []
     }
   ],
-  "event": "JOB_ASSIGNED",
-  "timestamp": 1699037622,
-  "eventUid": "2ydIaQ0b1iGEoQlGd8tpoc"
+  "event": "JOB_CREATED",
+  "timestamp": 1699640035,
+  "eventUid": "tL1CpNLKAIRgvqYFq5pmj5"
 }

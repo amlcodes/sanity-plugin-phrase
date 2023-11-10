@@ -1,9 +1,10 @@
+import { SanityClient } from 'sanity'
 import { PhraseClient } from './createPhraseClient'
 import refreshPtdsFromPhraseData from './refreshPtdsFromPhraseData'
-import { sanityClient } from './sanityClient'
 import { SanityDocumentWithPhraseMetadata } from './types'
 
 export default async function refreshPtdById(
+  sanityClient: SanityClient,
   phraseClient: PhraseClient,
   id: string,
 ) {
@@ -22,5 +23,6 @@ export default async function refreshPtdById(
   await refreshPtdsFromPhraseData({
     phraseClient,
     ptdMetadata,
+    sanityClient,
   })
 }
