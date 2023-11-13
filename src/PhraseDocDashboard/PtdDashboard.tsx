@@ -5,6 +5,7 @@ import { Button, Card, Flex, Heading, Stack, Text } from '@sanity/ui'
 import { useState } from 'react'
 import { useClient, useSchema } from 'sanity'
 import {
+  EndpointActionTypes,
   PtdPhraseMetadata,
   SanityDocumentWithPhraseMetadata,
   TranslationRequest,
@@ -12,6 +13,8 @@ import {
 import { getProjectURL, ptdMetadataExtractor } from '../utils'
 import { TranslationInfo } from './TranslationInfo'
 import { useOpenInSidePane } from './useOpenInSidepane'
+
+const API_ENDPOINT = '/api/phrase'
 
 export default function PtdDocDashboard({
   document: ptdDocument,
@@ -43,9 +46,12 @@ export default function PtdDocDashboard({
 
   async function handleRefresh() {
     setState('refreshing')
-    const res = await fetch('/api/refresh-ptd', {
+    const res = await fetch(API_ENDPOINT, {
       method: 'POST',
-      body: JSON.stringify({ id: ptdDocument._id }),
+      body: JSON.stringify({
+        action: EndpointActionTypes.REFRESH_PTD,
+        ptdId: ptdDocument._id,
+      }),
     })
     if (!res.ok) {
       setError({

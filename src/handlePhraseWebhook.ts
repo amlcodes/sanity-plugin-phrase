@@ -38,7 +38,7 @@ type JobStatusChangedWebhook = {
   jobParts: Phrase['JobInWebhook'][]
 }
 
-type PhraseWebhook =
+export type PhraseWebhook =
   | JobTargetUpdatedWebhook
   | JobDeletedWebhook
   | JobAssignedWebhook

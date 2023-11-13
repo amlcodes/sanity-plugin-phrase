@@ -246,3 +246,8 @@ export type CreateTranslationsInput = Omit<
     lang: SanityLangCode
   }
 }
+
+export enum EndpointActionTypes {
+  REFRESH_PTD = 'REFRESH_PTD',
+  CREATE_TRANSLATIONS = 'CREATE_TRANSLATIONS',
+}

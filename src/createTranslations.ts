@@ -16,7 +16,12 @@ function formatRequest(request: CreateTranslationsInput): TranslationRequest {
   ).map((p) =>
     typeof p === 'string' ? fromString(p) : p || [],
   ) as TranslationRequest['paths']
-  const targetLangs = langAdapter.sanityToCrossSystem(inputTargetLangs)
+  const targetLangs = langAdapter.sanityToCrossSystem(
+    // Don't allow translating to the same language as the source
+    inputTargetLangs.filter(
+      (lang) => !!lang && request.sourceDoc.lang !== lang,
+    ),
+  )
 
   return {
     ...request,

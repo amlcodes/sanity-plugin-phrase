@@ -12,9 +12,9 @@ export default function UntranslatedDocDashboard(props: {
   openDialog: () => void
 }) {
   const docLang = i18nAdapter.getDocumentLang(props.document)
-  const [state, setState] = useState<'idle' | 'loading' | 'error' | 'success'>(
-    'idle',
-  )
+  const [state, setState] = useState<
+    'idle' | 'submitting' | 'error' | 'success'
+  >('idle')
   const documentId = props.document._id
 
   if (!docLang) return null

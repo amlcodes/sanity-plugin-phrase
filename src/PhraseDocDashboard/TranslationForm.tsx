@@ -2,6 +2,7 @@ import { CloseIcon } from '@sanity/icons'
 import {
   Box,
   Button,
+  Card,
   Checkbox,
   Flex,
   Select,
@@ -17,6 +18,7 @@ import getAllDocReferences from '../getAllDocReferences'
 import {
   CreateTranslationsInput,
   SanityDocumentWithPhraseMetadata,
+  SanityLangCode,
 } from '../types'
 import {
   getDateDaysFromNow,
@@ -25,14 +27,15 @@ import {
 } from '../utils'
 import { PhraseMonogram } from './PhraseLogo'
 
-// @TODO: make configurable
-const TARGET_LANGUAGES = ['es', 'en', 'pt']
+// @TODO: make configurable & remove source from it
+const TARGET_LANGUAGES = ['es', 'pt']
 const PROJECT_TEMPLATES = [
   {
     templateUid: '1dIg0Pc1d8kLUFyM0tgdmt',
     label: '[Sanity.io] Default template',
   },
 ]
+const API_ENDPOINT = '/api/phrase'
 
 type FormValue = Pick<
   CreateTranslationsInput,
@@ -59,15 +62,17 @@ export default function TranslationForm({
   paths,
   document,
   onCancel,
+  sourceLang,
 }: {
   paths: Path[]
   document: SanityDocumentWithPhraseMetadata
   onCancel: () => void
+  sourceLang: SanityLangCode
 }) {
   const schema = useSchema()
-  const [state, setState] = useState<'idle' | 'loading' | 'error' | 'success'>(
-    'idle',
-  )
+  const [state, setState] = useState<
+    'idle' | 'submitting' | 'error' | 'success'
+  >('idle')
 
   const sanityClient = useClient()
   const sourceDocId = document._id
@@ -107,7 +112,39 @@ export default function TranslationForm({
   if (!references) return <Spinner />
 
   async function handleSubmit() {
-    // Do something
+    if (validation !== true) return
+
+    setState('submitting')
+
+    // @TODO: handle references
+    // const refs = references?.chosenDocs
+    const input: Omit<
+      CreateTranslationsInput,
+      'phraseClient' | 'sanityClient'
+    > = {
+      sourceDoc: {
+        _id: sourceDocId,
+        _rev: document._rev,
+        _type: document._type,
+        lang: sourceLang,
+      },
+      targetLangs: formValue.targetLangs,
+      templateUid: formValue.templateUid,
+      dateDue: formValue.dateDue,
+      paths,
+    }
+    const res = await fetch(API_ENDPOINT, {
+      body: JSON.stringify(input),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+
+    if (!res.ok) {
+      return setState('error')
+    }
+    setState('success')
   }
 
   return (
@@ -182,60 +219,69 @@ export default function TranslationForm({
           ))}
         </Stack>
       </FormField>
-      <FormField title="Referenced documents to translate">
-        {references.refs.length > 0 ? (
-          <Stack space={3}>
-            {references.refs.map((ref) => (
-              <Stack key={ref.id} space={2}>
-                <ReferencePreview
-                  reference={{
-                    _ref: ref.id,
-                    _type: ref.type,
-                  }}
-                  parentDocId={document._id}
-                  schemaType={schema.get(ref.type) as SchemaType}
-                  referenceOpen={false}
-                />
-                <Flex gap={3} align="center">
-                  {formValue.targetLangs.map((lang) => (
-                    <Flex gap={2} align="center" key={lang} as="label">
-                      <Checkbox
-                        name="referencedDocuments"
-                        id={`${ref.id}-${lang}`}
-                        style={{ display: 'block' }}
-                        checked={
-                          references.chosenDocs?.[ref.id]?.includes(lang) ||
-                          false
-                        }
-                        onChange={(e) => {
-                          // @ts-expect-error for some reason, .checked is showing as inexistent
-                          const checked = e.currentTarget.checked
+      {formValue.targetLangs.length > 0 ? (
+        <FormField title="Referenced documents to translate">
+          {references.refs.length > 0 ? (
+            <Stack space={3}>
+              {references.refs.map((ref) => (
+                <Stack key={ref.id} space={2}>
+                  <ReferencePreview
+                    reference={{
+                      _ref: ref.id,
+                      _type: ref.type,
+                    }}
+                    parentDocId={document._id}
+                    schemaType={schema.get(ref.type) as SchemaType}
+                    referenceOpen={false}
+                  />
+                  <Flex gap={3} align="center">
+                    {formValue.targetLangs.map((lang) => (
+                      <Flex gap={2} align="center" key={lang} as="label">
+                        <Checkbox
+                          name="referencedDocuments"
+                          id={`${ref.id}-${lang}`}
+                          style={{ display: 'block' }}
+                          checked={
+                            references.chosenDocs?.[ref.id]?.includes(lang) ||
+                            false
+                          }
+                          onChange={(e) => {
+                            // @ts-expect-error for some reason, .checked is showing as inexistent
+                            const checked = e.currentTarget.checked
 
-                          const refLangs = references.chosenDocs?.[ref.id] || []
-                          setReferences({
-                            ...references,
-                            chosenDocs: {
-                              ...(references.chosenDocs || {}),
-                              [ref.id]: checked
-                                ? refLangs.includes(lang)
-                                  ? refLangs
-                                  : [...refLangs, lang]
-                                : refLangs.filter((l) => l !== lang),
-                            },
-                          })
-                        }}
-                      />
-                      <Text>{getReadableLanguageName(lang)}</Text>
-                    </Flex>
-                  ))}
-                </Flex>
-              </Stack>
-            ))}
-          </Stack>
-        ) : (
-          <Text>No references found</Text>
-        )}
-      </FormField>
+                            const refLangs =
+                              references.chosenDocs?.[ref.id] || []
+                            setReferences({
+                              ...references,
+                              chosenDocs: {
+                                ...(references.chosenDocs || {}),
+                                [ref.id]: checked
+                                  ? refLangs.includes(lang)
+                                    ? refLangs
+                                    : [...refLangs, lang]
+                                  : refLangs.filter((l) => l !== lang),
+                              },
+                            })
+                          }}
+                        />
+                        <Text>{getReadableLanguageName(lang)}</Text>
+                      </Flex>
+                    ))}
+                  </Flex>
+                </Stack>
+              ))}
+            </Stack>
+          ) : (
+            <Card tone="transparent" border radius={2} padding={3}>
+              <Text muted>No references found</Text>
+            </Card>
+          )}
+        </FormField>
+      ) : (
+        <Card tone="transparent" border radius={2} padding={3}>
+          <Text muted>Choose 1 or more target languages</Text>
+        </Card>
+      )}
       <Flex gap={2} align="center">
         <Button
           text="Cancel"
@@ -248,12 +294,17 @@ export default function TranslationForm({
           text="Send to Phrase"
           icon={PhraseMonogram}
           tone="primary"
-          disabled={validation !== true || state === 'loading'}
+          disabled={validation !== true || state === 'submitting'}
           onClick={handleSubmit}
           mode="ghost"
           style={{ flex: 1 }}
         />
       </Flex>
+      {validation !== true && (
+        <Card padding={3} border radius={2} tone="caution">
+          <Text>{validation}</Text>
+        </Card>
+      )}
     </Stack>
   )
 }

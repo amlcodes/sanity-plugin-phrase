@@ -14,11 +14,11 @@ export default function PhraseDocDashboard(props: StringFieldProps) {
   const document = useFormValue([]) as SanityDocumentWithPhraseMetadata
   const [pathsToTranslate, setPathsToTranslate] = useState<
     TranslationRequest['paths'] | null
-  >([[]])
+  >(null)
 
-  const docLang = i18nAdapter.getDocumentLang(document)
+  const sourceLang = i18nAdapter.getDocumentLang(document)
 
-  if (!document || !docLang) return null
+  if (!document || !sourceLang) return null
 
   return (
     <Card>
@@ -44,7 +44,7 @@ export default function PhraseDocDashboard(props: StringFieldProps) {
             _id: undraftId(document._id),
             _rev: document._rev,
             _type: document._type,
-            lang: langAdapter.sanityToCrossSystem(docLang),
+            lang: langAdapter.sanityToCrossSystem(sourceLang),
           }
           const ongoingTranslations = document.phraseMeta.translations?.filter(
             (translations) => translations.status !== 'COMPLETED',
@@ -74,6 +74,7 @@ export default function PhraseDocDashboard(props: StringFieldProps) {
               onCancel={() => setPathsToTranslate(null)}
               document={document}
               paths={pathsToTranslate}
+              sourceLang={sourceLang}
             />
           </Box>
         </Dialog>
