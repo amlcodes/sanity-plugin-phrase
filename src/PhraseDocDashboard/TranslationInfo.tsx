@@ -24,7 +24,7 @@ export function TranslationInfo({
   paneParentDocId,
 }: {
   targetLang: CrossSystemLangCode
-  paths: Path[]
+  paths: TranslationRequest['paths']
   sourceDoc: TranslationRequest['sourceDoc']
   paneParentDocId: string
   ptdMetadata: 'loading' | PtdPhraseMetadata | undefined
@@ -45,7 +45,7 @@ export function TranslationInfo({
 
   return (
     <Flex align="flex-start">
-      <Stack space={3} style={{ flex: 1 }} paddingTop={3}>
+      <Stack space={3} style={{ flex: 1 }} paddingTop={3} paddingBottom={2}>
         <Text size={2} weight="semibold">
           {label}
         </Text>

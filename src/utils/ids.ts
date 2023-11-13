@@ -39,3 +39,7 @@ export function getPtdId({
     sourceDoc._rev,
   )}`
 }
+
+export function isPtdId(id: string) {
+  return undraftId(id).startsWith('phrase-translation--')
+}

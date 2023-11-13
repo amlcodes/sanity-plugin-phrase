@@ -1,6 +1,7 @@
 'use client'
 
 import dynamic from 'next/dynamic'
+import { usePathname } from 'next/navigation'
 import { suspend } from 'suspend-react'
 
 const LiveQueryProvider = dynamic(() => import('next-sanity/preview'))
@@ -15,11 +16,25 @@ export default function PreviewProvider({
   children: React.ReactNode
   token?: string
 }) {
+  const pathname = usePathname()
+
+  if (pathname.startsWith('/studio')) return null
+
   const { client } = suspend(() => import('~/lib/sanity.client'), [UniqueKey])
   if (!token) throw new TypeError('Missing token')
   return (
     <LiveQueryProvider client={client} token={token} logger={console}>
       {children}
+      <div
+        style={{
+          position: 'fixed',
+          bottom: '1em',
+          left: '1em',
+          background: '',
+        }}
+      >
+        Preview mode
+      </div>
     </LiveQueryProvider>
   )
 }

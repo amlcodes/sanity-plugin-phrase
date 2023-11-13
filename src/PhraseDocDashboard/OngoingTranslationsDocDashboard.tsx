@@ -1,4 +1,3 @@
-import { Path } from '@sanity/types'
 import { Button, Card, Flex, Heading, Stack } from '@sanity/ui'
 import { useDocumentStore } from 'sanity'
 import {
@@ -14,7 +13,7 @@ export default function OngoingTranslationsDocDashboard(props: {
   sourceDoc: TranslationRequest['sourceDoc']
 }) {
   return (
-    <Card padding={4} border radius={1}>
+    <Card paddingX={3} padding={4} border radius={2}>
       <Heading as="h2">This document has translations in progress</Heading>
       <Stack space={4} marginTop={4}>
         {props.ongoingTranslations.map((translation) => {
@@ -51,7 +50,7 @@ function OngoingTranslationCard({
   if (translation.status !== 'CREATED') return null
 
   return (
-    <Card padding={3} border>
+    <Card padding={3} border radius={1}>
       <Stack space={4}>
         <Flex align="center" gap={2}>
           <Heading size={1} as="h3" style={{ flex: 1 }}>
@@ -90,12 +89,12 @@ export function TranslationInfoInSourceDoc({
   sourceDoc,
 }: {
   targetLang: CrossSystemLangCode
-  paths: Path[]
+  paths: TranslationRequest['paths']
   sourceDoc: TranslationRequest['sourceDoc']
 }) {
   const ptdId = getPtdId({
     targetLang: targetLang,
-    paths: paths,
+    paths,
     sourceDoc,
   })
   const documentStore = useDocumentStore()

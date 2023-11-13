@@ -53,7 +53,7 @@ export type MainDocTranslationMetadata = {
   sourceDocRev: string
   projectName: string
   filename: string
-  paths: Path[]
+  paths: TranslationRequest['paths']
 } & (
   | {
       status: 'CREATING'
@@ -134,9 +134,10 @@ export interface TranslationRequest {
     _type: string
     lang: CrossSystemLangCode
   }
-  paths: Path[]
+  paths: [Path, ...Path[]]
   targetLangs: CrossSystemLangCode[]
   templateUid: string
+  dateDue?: string
   // @TODO: schema
 }
 
@@ -233,4 +234,15 @@ export type I18nAdapter = {
   getDocumentLang: (
     document: SanityDocumentWithPhraseMetadata,
   ) => SanityLangCode | null
+}
+
+export type CreateTranslationsInput = Omit<
+  TranslationRequest,
+  'paths' | 'targetLangs' | 'sourceDoc'
+> & {
+  paths?: (Path | string)[]
+  targetLangs: SanityLangCode[]
+  sourceDoc: Omit<TranslationRequest['sourceDoc'], 'lang'> & {
+    lang: SanityLangCode
+  }
 }

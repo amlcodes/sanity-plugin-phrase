@@ -11,13 +11,13 @@ import { draftId, isDraft, undraftId } from './utils'
  */
 export default async function getAllDocReferences(
   sanityClient: SanityClient,
-  document: SanityDocumentWithPhraseMetadata,
+  parentDocument: SanityDocumentWithPhraseMetadata,
   maxDepth: number = 3,
 ) {
   let state = {
     referenced: {
-      [document._id]: {
-        doc: document,
+      [parentDocument._id]: {
+        doc: parentDocument,
         references: [],
         occurrences: [],
         maxDepth: 0,
@@ -128,13 +128,17 @@ export default async function getAllDocReferences(
     )
   }
 
-  await fetchDocReferences(document, 1)
+  await fetchDocReferences(parentDocument, 1)
 
   return collate(
-    Object.values(state.referenced).map((a) => ({
-      ...a.doc,
-      __occurrences: a.occurrences,
-      __references: a.references,
-    })),
+    Object.values(state.referenced).flatMap((a) => {
+      if (a.doc._id === parentDocument._id) return []
+
+      return {
+        ...a.doc,
+        __occurrences: a.occurrences,
+        __references: a.references,
+      }
+    }),
   )
 }

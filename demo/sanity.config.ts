@@ -1,4 +1,7 @@
-import { documentInternationalization } from '@sanity/document-internationalization'
+import {
+  documentInternationalization,
+  DocumentInternationalizationMenu,
+} from '@sanity/document-internationalization'
 import { SanityDocument } from '@sanity/types'
 import { visionTool } from '@sanity/vision'
 import { defineConfig } from 'sanity'
@@ -13,6 +16,7 @@ import {
   projectId,
 } from '~/lib/sanity.api'
 import { getDocPath } from '~/lib/urls'
+import { isPtdId } from '~/plugin-dist'
 import { schemaTypes } from '~/schemas'
 import { LANGUAGES, TRANSLATABLE_SCHEMAS, undraftId } from '~/utils'
 
@@ -29,6 +33,13 @@ const iframeOptions = {
   urlSecretId: previewSecretId,
   reload: { button: true },
 } satisfies IframeOptions
+
+const intlPlugin = documentInternationalization({
+  // @ts-expect-error
+  supportedLanguages: LANGUAGES,
+  // @ts-expect-error
+  schemaTypes: TRANSLATABLE_SCHEMAS,
+})
 
 export default defineConfig({
   basePath: '/studio',
@@ -67,6 +78,7 @@ export default defineConfig({
               .child(
                 S.documentList()
                   .id('post')
+                  .title('Posts')
                   .schemaType('post')
                   .filter(
                     '_type == "post" && phraseMeta._type != "phrase.ptd.meta"',
@@ -85,11 +97,27 @@ export default defineConfig({
     // https://www.sanity.io/docs/the-vision-plugin
     visionTool({ defaultApiVersion: apiVersion }),
 
-    documentInternationalization({
-      // @ts-expect-error
-      supportedLanguages: LANGUAGES,
-      // @ts-expect-error
-      schemaTypes: TRANSLATABLE_SCHEMAS,
-    }),
+    {
+      ...intlPlugin,
+      document: {
+        ...intlPlugin.document,
+        unstable_languageFilter: undefined,
+      },
+    },
   ],
+  document: {
+    unstable_languageFilter: (prev, ctx) => {
+      const { schemaType, documentId } = ctx
+
+      return TRANSLATABLE_SCHEMAS.includes(schemaType as any) &&
+        documentId &&
+        !isPtdId(documentId)
+        ? [
+            ...prev,
+            (props) =>
+              DocumentInternationalizationMenu({ ...props, documentId }),
+          ]
+        : prev
+    },
+  },
 })

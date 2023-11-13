@@ -1,35 +1,21 @@
-import { Path } from '@sanity/types'
 import { fromString } from '@sanity/util/paths'
-// import fs from 'fs'
 import { createPTDs } from './createPTDs'
 import ensureDocNotLocked from './ensureDocNotLocked'
 import getDataToTranslate from './getDataToTranslate'
 import getOrCreateTranslatedDocuments from './getOrCreateTranslatedDocuments'
 import lockDocument from './lockDocument'
-import {
-  SanityDocumentWithPhraseMetadata,
-  SanityLangCode,
-  TranslationRequest,
-} from './types'
+import { SanityDocumentWithPhraseMetadata, TranslationRequest } from './types'
 import { getTranslationKey, getTranslationName, langAdapter } from './utils'
+import { CreateTranslationsInput } from './types'
 
-type InputRequest = Omit<
-  TranslationRequest,
-  'paths' | 'targetLangs' | 'sourceDoc'
-> & {
-  paths?: (Path | string)[]
-  targetLangs: SanityLangCode[]
-  sourceDoc: Omit<TranslationRequest['sourceDoc'], 'lang'> & {
-    lang: SanityLangCode
-  }
-}
-
-function formatRequest(request: InputRequest): TranslationRequest {
+function formatRequest(request: CreateTranslationsInput): TranslationRequest {
   const { paths: inputPaths, targetLangs: inputTargetLangs } = request
 
-  const paths = (inputPaths || [[]]).map((p) =>
+  const paths = (
+    Array.isArray(inputPaths) && inputPaths.length > 0 ? inputPaths : [[]]
+  ).map((p) =>
     typeof p === 'string' ? fromString(p) : p || [],
-  )
+  ) as TranslationRequest['paths']
   const targetLangs = langAdapter.sanityToCrossSystem(inputTargetLangs)
 
   return {
@@ -43,7 +29,9 @@ function formatRequest(request: InputRequest): TranslationRequest {
   }
 }
 
-export default async function createTranslations(inputRequest: InputRequest) {
+export default async function createTranslations(
+  inputRequest: CreateTranslationsInput,
+) {
   const request = formatRequest(inputRequest)
   const { sourceDoc, targetLangs, paths } = request
 
@@ -71,6 +59,7 @@ export default async function createTranslations(inputRequest: InputRequest) {
     templateUid: request.templateUid,
     targetLangs: langAdapter.crossSystemToPhrase(targetLangs),
     sourceLang: sourceDoc.lang.phrase,
+    dateDue: request.dateDue,
   })
   if (!project.ok || !project.data.uid) {
     // @TODO unlock on error in Phrase

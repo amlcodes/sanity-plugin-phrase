@@ -4,6 +4,7 @@ const UNDESIRED_KEYS = ['phraseMeta']
 
 /**
  * Can contain duplicates.
+ * Ignores images.
  */
 export function parseAllReferences(
   data: unknown,
@@ -15,6 +16,14 @@ export function parseAllReferences(
 
   if (typeof data === 'object' && data !== null) {
     if ('_type' in data && data._type === 'reference') {
+      // Ignore images
+      if (
+        !('_ref' in data) ||
+        typeof data._ref !== 'string' ||
+        data._ref.startsWith('image-')
+      )
+        return state
+
       return [...state, data as Reference]
     }
 

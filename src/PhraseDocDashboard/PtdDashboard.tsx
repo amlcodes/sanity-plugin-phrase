@@ -58,11 +58,11 @@ export default function PtdDocDashboard({
   }
 
   return (
-    <Card padding={3} border>
+    <Card paddingX={3} paddingY={4} border radius={2}>
       <Stack space={4}>
-        <Flex align="center" gap={3}>
-          <Stack space={2}>
-            <Heading size={1} as="h2" style={{ flex: 1 }}>
+        <Flex align="flex-start" gap={5}>
+          <Stack space={3}>
+            <Heading size={2} as="h2" style={{ flex: 1 }}>
               This is a Phrase Translation document
             </Heading>
             {schemaType && (
@@ -106,7 +106,7 @@ export default function PtdDocDashboard({
           ptdMetadata={ptdMetadata}
           targetLang={ptdMetadata.targetLang}
         />
-        <Flex>
+        <Flex gap={2}>
           <Button
             text="Refresh translation"
             tone="primary"

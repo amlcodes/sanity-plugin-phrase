@@ -111,3 +111,13 @@ export function getReadableLanguageName(lang: string) {
     return lang
   }
 }
+
+const ONE_DAY = 1000 * 60 * 60 * 24
+
+export function getDateDaysFromNow(dayCount: number) {
+  return new Date(new Date().valueOf() + ONE_DAY * dayCount)
+}
+
+export function getIsoDay(date: Date) {
+  return date.toISOString().split('T')[0]
+}
