@@ -6,11 +6,41 @@ import {
   PortableTextTextBlock,
   Reference,
   SanityDocument,
-} from '@sanity/types'
+} from 'sanity'
 import { PhraseClient, PhraseDatacenterRegion } from '../createPhraseClient'
 import { pathToString } from '../utils'
 import { CREDENTIALS_DOC_ID } from '../utils/constants'
 import { definitions } from './phraseOpenAPI'
+
+export type PhraseLangCode = string
+export type SanityLangCode = string
+
+export type CrossSystemLangCode = {
+  /** Whatever language code set by the i18nAdapter */
+  sanity: SanityLangCode
+  /**
+   * Phrase uses a non-standard variation of IETF language tags.
+   * @see https://en.wikipedia.org/wiki/IETF_language_tag
+   * @docs https://cloud.memsource.com/web/docs/api#operation/listOfLanguages
+   **/
+  phrase: PhraseLangCode
+}
+
+export interface TranslationRequest {
+  phraseClient: PhraseClient
+  sanityClient: SanityClient
+  sourceDoc: {
+    _rev: string
+    _id: string
+    _type: string
+    lang: CrossSystemLangCode
+  }
+  paths: [Path, ...Path[]]
+  targetLangs: CrossSystemLangCode[]
+  templateUid: string
+  dateDue?: string
+  // @TODO: schema
+}
 
 export type Phrase = {
   JobPart: definitions['JobPartReference']
@@ -41,7 +71,9 @@ export type SerializedPtBlock = {
 }
 
 export enum SerializedPtHtmlTag {
+  // eslint-disable-next-line no-unused-vars
   SPAN = 's',
+  // eslint-disable-next-line no-unused-vars
   BLOCK = 'c-b',
 }
 
@@ -107,7 +139,7 @@ export type PtdPhraseMetadata = {
   sourceLang: CrossSystemLangCode
   filename?: string
   jobs: PhraseJobInfo[]
-  paths: Path[]
+  paths: TranslationRequest['paths']
   projectUid: string
 
   /** Cache of resolved documents referenced by the current PTD */
@@ -123,22 +155,6 @@ export type SanityTranslationDocPair = {
   lang: CrossSystemLangCode
   draft?: SanityDocumentWithPhraseMetadata | null
   published?: SanityDocumentWithPhraseMetadata | null
-}
-
-export interface TranslationRequest {
-  phraseClient: PhraseClient
-  sanityClient: SanityClient
-  sourceDoc: {
-    _rev: string
-    _id: string
-    _type: string
-    lang: CrossSystemLangCode
-  }
-  paths: [Path, ...Path[]]
-  targetLangs: CrossSystemLangCode[]
-  templateUid: string
-  dateDue?: string
-  // @TODO: schema
 }
 
 export type ContentInPhrase = {
@@ -181,29 +197,10 @@ export interface PhraseCredentialsDocument extends SanityDocument {
   region: PhraseDatacenterRegion
 }
 
-export type CrossSystemLangCode = {
-  /** Whatever language code set by the i18nAdapter */
-  sanity: SanityLangCode
-  /**
-   * Phrase uses a non-standard variation of IETF language tags.
-   * @see https://en.wikipedia.org/wiki/IETF_language_tag
-   * @docs https://cloud.memsource.com/web/docs/api#operation/listOfLanguages
-   **/
-  phrase: PhraseLangCode
-}
-
-export type PhraseLangCode = string
-export type SanityLangCode = string
-
 export type DocPairFromAdapter = Omit<SanityTranslationDocPair, 'lang'> & {
   lang: SanityLangCode
 }
 
-/**
- * @TODO:
- * - getTranslatedReferences
- * - getOrCreateTranslatedDocuments
- */
 export type I18nAdapter = {
   /**
    * Given the current translation request, fetches the fresh versions of the
@@ -248,6 +245,8 @@ export type CreateTranslationsInput = Omit<
 }
 
 export enum EndpointActionTypes {
+  // eslint-disable-next-line no-unused-vars
   REFRESH_PTD = 'REFRESH_PTD',
+  // eslint-disable-next-line no-unused-vars
   CREATE_TRANSLATIONS = 'CREATE_TRANSLATIONS',
 }

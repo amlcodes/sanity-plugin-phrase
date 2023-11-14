@@ -1,5 +1,5 @@
 import type { PortableTextBlock } from '@portabletext/types'
-import type { ImageAsset, Slug } from '@sanity/types'
+import type { ImageAsset, Slug } from 'sanity'
 import { type SanityClient } from 'next-sanity'
 
 import { SupportedLanguage } from '~/utils'

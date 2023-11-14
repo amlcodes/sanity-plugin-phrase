@@ -1,5 +1,4 @@
 import { EyeOpenIcon } from '@sanity/icons'
-import { Path } from '@sanity/types'
 import { Badge, Button, Flex, Spinner, Stack, Text } from '@sanity/ui'
 import { useSchema } from 'sanity'
 import {

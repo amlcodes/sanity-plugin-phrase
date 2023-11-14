@@ -197,7 +197,6 @@ export default function TranslationForm({
           onChange={(e) =>
             setFormValue({
               ...formValue,
-              // @ts-expect-error for some reason, .value is showing as inexistent
               templateUid: e.currentTarget.value,
             })
           }
@@ -220,7 +219,6 @@ export default function TranslationForm({
           onChange={(e) =>
             setFormValue({
               ...formValue,
-              // @ts-expect-error for some reason, .value is showing as inexistent
               dateDue: e.currentTarget.value,
             })
           }
@@ -236,7 +234,6 @@ export default function TranslationForm({
                 style={{ display: 'block' }}
                 checked={formValue.targetLangs.includes(lang)}
                 onChange={(e) => {
-                  // @ts-expect-error for some reason, .checked is showing as inexistent
                   const checked = e.currentTarget.checked
 
                   setFormValue({
@@ -283,7 +280,6 @@ export default function TranslationForm({
                             false
                           }
                           onChange={(e) => {
-                            // @ts-expect-error for some reason, .checked is showing as inexistent
                             const checked = e.currentTarget.checked
 
                             const refLangs =

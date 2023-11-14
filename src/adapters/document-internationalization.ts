@@ -1,4 +1,4 @@
-import { KeyedObject, Reference } from '@sanity/types'
+import { KeyedObject, Reference } from 'sanity'
 import { uuid } from '@sanity/uuid'
 import { DocPairFromAdapter, I18nAdapter, ReferenceMap } from '../types'
 import { draftId, isDraft, undraftId } from '../utils'
@@ -10,6 +10,11 @@ const weakReferences = true
 // https://github.com/sanity-io/document-internationalization/blob/main/src/constants.ts
 const METADATA_SCHEMA_NAME = `translation.metadata`
 const TRANSLATIONS_ARRAY_NAME = `translations`
+
+type TranslationReference = KeyedObject & {
+  _type: 'internationalizedArrayReferenceValue'
+  value: Reference
+}
 
 export const documentInternationalizationAdapter: I18nAdapter = {
   injectDocumentLang: (document, language) => ({
@@ -237,9 +242,4 @@ function createTranslationReference(
       ...(strengthenOnPublish ? { _strengthenOnPublish: { type } } : {}),
     },
   }
-}
-
-type TranslationReference = KeyedObject & {
-  _type: 'internationalizedArrayReferenceValue'
-  value: Reference
 }

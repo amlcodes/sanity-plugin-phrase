@@ -1,4 +1,4 @@
-import { Path } from '@sanity/types'
+import { Path } from 'sanity'
 import { fromString, numEqualSegments, toString } from '@sanity/util/paths'
 import { ROOT_PATH_STR } from './constants'
 

@@ -1,4 +1,4 @@
-import { Path } from '@sanity/types'
+import { Path } from 'sanity'
 import { describe, expect, test } from 'bun:test'
 import ensureDocNotLocked from '../src/ensureDocNotLocked'
 import example from '../example-data/ensureDocNotLocked.json'

@@ -30,12 +30,14 @@ export function jobComesFromSanity(
     | Pick<Phrase['JobPart'], 'filename'>
     | Pick<Phrase['JobInWebhook'], 'fileName'>,
 ) {
-  const name =
-    'filename' in job
-      ? job.filename
-      : 'fileName' in job
-      ? job.fileName
-      : undefined
+  const name = (() => {
+    if ('filename' in job) return job.filename
+
+    if ('fileName' in job) return job.fileName
+
+    return undefined
+  })()
+
   return name && name.startsWith(FILENAME_PREFIX)
 }
 
@@ -44,7 +46,7 @@ export function dedupeArray<T>(arr: T[]) {
 }
 
 export const langAdapter = {
-  sanityToCrossSystem: function sanityToCrossSystemLangCodes<
+  sanityToCrossSystem: function sanityToCrossSystem<
     V extends SanityLangCode | SanityLangCode[],
   >(value: V) {
     if (Array.isArray(value)) {
@@ -59,7 +61,7 @@ export const langAdapter = {
       phrase: i18nAdapter.langAdapter.toPhrase(value),
     } as V extends Array<any> ? CrossSystemLangCode[] : CrossSystemLangCode
   },
-  phraseToCrossSystem: function phraseToCrossSystemLangCodes<
+  phraseToCrossSystem: function phraseToCrossSystem<
     V extends PhraseLangCode | PhraseLangCode[],
   >(value: V) {
     if (Array.isArray(value)) {
@@ -74,7 +76,7 @@ export const langAdapter = {
       sanity: i18nAdapter.langAdapter.toSanity(value),
     } as V extends Array<any> ? CrossSystemLangCode[] : CrossSystemLangCode
   },
-  crossSystemToSanity: function crossSystemToSanityLangCodes<
+  crossSystemToSanity: function crossSystemToSanity<
     V extends CrossSystemLangCode | CrossSystemLangCode[],
   >(value: V) {
     if (Array.isArray(value)) {
@@ -87,7 +89,7 @@ export const langAdapter = {
       ? SanityLangCode[]
       : SanityLangCode
   },
-  crossSystemToPhrase: function crossSystemToPhraseLangCodes<
+  crossSystemToPhrase: function crossSystemToPhrase<
     V extends CrossSystemLangCode | CrossSystemLangCode[],
   >(value: V) {
     if (Array.isArray(value)) {

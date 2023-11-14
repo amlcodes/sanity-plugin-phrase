@@ -1,4 +1,4 @@
-import { SanityDocument } from '@sanity/types'
+import { SanityDocument } from 'sanity'
 
 import { SupportedLanguage } from '~/utils'
 

@@ -4,207 +4,207 @@
  */
 
 export interface paths {
-  "/api2/v1/additionalWorkflowSteps/{id}": {
-    delete: operations["deleteAWFStep"];
-  };
-  "/api2/v1/additionalWorkflowSteps": {
-    get: operations["listAWFSteps"];
-    post: operations["createAWFStep"];
-  };
-  "/api2/v1/analyses/bulk": {
-    delete: operations["bulkDeleteAnalyses"];
-  };
-  "/api2/v1/analyses/{analyseUid}": {
-    delete: operations["delete"];
-  };
-  "/api2/v1/analyses/byProviders": {
-    post: operations["createAnalysesForProviders"];
-  };
-  "/api2/v1/analyses/byLanguages": {
-    post: operations["createAnalysesForLangs"];
-  };
-  "/api2/v1/analyses/recalculate": {
-    post: operations["recalculate"];
-  };
-  "/api2/v1/analyses/{analyseUid}/analyseLanguageParts/{analyseLanguagePartId}": {
+  '/api2/v1/additionalWorkflowSteps/{id}': {
+    delete: operations['deleteAWFStep']
+  }
+  '/api2/v1/additionalWorkflowSteps': {
+    get: operations['listAWFSteps']
+    post: operations['createAWFStep']
+  }
+  '/api2/v1/analyses/bulk': {
+    delete: operations['bulkDeleteAnalyses']
+  }
+  '/api2/v1/analyses/{analyseUid}': {
+    delete: operations['delete']
+  }
+  '/api2/v1/analyses/byProviders': {
+    post: operations['createAnalysesForProviders']
+  }
+  '/api2/v1/analyses/byLanguages': {
+    post: operations['createAnalysesForLangs']
+  }
+  '/api2/v1/analyses/recalculate': {
+    post: operations['recalculate']
+  }
+  '/api2/v1/analyses/{analyseUid}/analyseLanguageParts/{analyseLanguagePartId}': {
     /** Returns analysis language pair */
-    get: operations["getAnalyseLanguagePart"];
-  };
-  "/api2/v1/analyses/{analyseUid}/analyseLanguageParts/{analyseLanguagePartId}/jobs": {
+    get: operations['getAnalyseLanguagePart']
+  }
+  '/api2/v1/analyses/{analyseUid}/analyseLanguageParts/{analyseLanguagePartId}/jobs': {
     /** Returns list of job's analyses */
-    get: operations["listJobParts"];
-  };
-  "/api2/v1/analyses/{analyseUid}/jobs/{jobUid}": {
+    get: operations['listJobParts']
+  }
+  '/api2/v1/analyses/{analyseUid}/jobs/{jobUid}': {
     /** Returns job's analyse */
-    get: operations["getJobPartAnalyse"];
-  };
-  "/api2/v1/analyses/{analyseUid}/download": {
-    get: operations["downloadAnalyse"];
-  };
-  "/api2/v1/async/{asyncRequestId}": {
-    get: operations["getAsyncRequest"];
-  };
-  "/api2/v1/async": {
-    get: operations["listPendingRequests"];
-  };
-  "/api2/v1/async/status": {
-    get: operations["getCurrentLimitStatus"];
-  };
-  "/api2/v1/auth/login": {
-    post: operations["login"];
-  };
-  "/api2/v1/auth/logout": {
-    post: operations["logout"];
-  };
-  "/api2/v1/auth/loginToSession": {
-    post: operations["loginToSession"];
-  };
-  "/api2/v1/auth/loginOther": {
+    get: operations['getJobPartAnalyse']
+  }
+  '/api2/v1/analyses/{analyseUid}/download': {
+    get: operations['downloadAnalyse']
+  }
+  '/api2/v1/async/{asyncRequestId}': {
+    get: operations['getAsyncRequest']
+  }
+  '/api2/v1/async': {
+    get: operations['listPendingRequests']
+  }
+  '/api2/v1/async/status': {
+    get: operations['getCurrentLimitStatus']
+  }
+  '/api2/v1/auth/login': {
+    post: operations['login']
+  }
+  '/api2/v1/auth/logout': {
+    post: operations['logout']
+  }
+  '/api2/v1/auth/loginToSession': {
+    post: operations['loginToSession']
+  }
+  '/api2/v1/auth/loginOther': {
     /** Available only for admin */
-    post: operations["loginOther"];
-  };
-  "/api2/v1/auth/whoAmI": {
-    get: operations["whoAmI"];
-  };
-  "/api2/v1/auth/loginWithGoogle": {
-    post: operations["loginByGoogle"];
-  };
-  "/api2/v1/auth/loginWithApple/refreshToken": {
-    post: operations["loginByAppleWithRefreshToken"];
-  };
-  "/api2/v1/auth/loginWithApple/code": {
-    post: operations["loginByAppleWithCode"];
-  };
-  "/api2/v1/auth/refreshAppleToken": {
-    get: operations["refreshAppleToken"];
-  };
-  "/api2/v1/bilingualFiles/compare": {
+    post: operations['loginOther']
+  }
+  '/api2/v1/auth/whoAmI': {
+    get: operations['whoAmI']
+  }
+  '/api2/v1/auth/loginWithGoogle': {
+    post: operations['loginByGoogle']
+  }
+  '/api2/v1/auth/loginWithApple/refreshToken': {
+    post: operations['loginByAppleWithRefreshToken']
+  }
+  '/api2/v1/auth/loginWithApple/code': {
+    post: operations['loginByAppleWithCode']
+  }
+  '/api2/v1/auth/refreshAppleToken': {
+    get: operations['refreshAppleToken']
+  }
+  '/api2/v1/bilingualFiles/compare': {
     /** Compares bilingual file to job state. Returns list of compared segments. */
-    post: operations["compareBilingualFile"];
-  };
-  "/api2/v1/bilingualFiles/preview": {
+    post: operations['compareBilingualFile']
+  }
+  '/api2/v1/bilingualFiles/preview': {
     /** Supports mxliff format */
-    post: operations["getPreviewFile"];
-  };
-  "/api2/v1/bilingualFiles/convert": {
-    post: operations["convertBilingualFile"];
-  };
-  "/api2/v1/businessUnits/{businessUnitUid}": {
-    get: operations["getBusinessUnit"];
-    put: operations["updateBusinessUnit"];
-    delete: operations["deleteBusinessUnit"];
-  };
-  "/api2/v1/businessUnits": {
-    get: operations["listBusinessUnits"];
-    post: operations["createBusinessUnit"];
-  };
-  "/api2/v1/clients/{clientUid}": {
-    get: operations["getClient"];
-    put: operations["updateClient"];
-    delete: operations["deleteClient"];
-  };
-  "/api2/v1/clients": {
-    get: operations["listClients"];
-    post: operations["createClient"];
-  };
-  "/api2/v1/connectors/{connectorId}": {
-    get: operations["getConnector"];
+    post: operations['getPreviewFile']
+  }
+  '/api2/v1/bilingualFiles/convert': {
+    post: operations['convertBilingualFile']
+  }
+  '/api2/v1/businessUnits/{businessUnitUid}': {
+    get: operations['getBusinessUnit']
+    put: operations['updateBusinessUnit']
+    delete: operations['deleteBusinessUnit']
+  }
+  '/api2/v1/businessUnits': {
+    get: operations['listBusinessUnits']
+    post: operations['createBusinessUnit']
+  }
+  '/api2/v1/clients/{clientUid}': {
+    get: operations['getClient']
+    put: operations['updateClient']
+    delete: operations['deleteClient']
+  }
+  '/api2/v1/clients': {
+    get: operations['listClients']
+    post: operations['createClient']
+  }
+  '/api2/v1/connectors/{connectorId}': {
+    get: operations['getConnector']
     /** Edit selected connector */
-    put: operations["editConnector"];
-  };
-  "/api2/v1/connectors": {
-    get: operations["getConnectorList"];
-  };
-  "/api2/v1/connectors/{connectorId}/folders/{folder}": {
+    put: operations['editConnector']
+  }
+  '/api2/v1/connectors': {
+    get: operations['getConnectorList']
+  }
+  '/api2/v1/connectors/{connectorId}/folders/{folder}': {
     /** List files in a subfolder of the selected connector */
-    get: operations["getFolder"];
+    get: operations['getFolder']
     /** Upload a file to a subfolder of the selected connector */
-    post: operations["uploadFile"];
-  };
-  "/api2/v1/connectors/{connectorId}/folders": {
+    post: operations['uploadFile']
+  }
+  '/api2/v1/connectors/{connectorId}/folders': {
     /** List files in a root folder of the selected connector */
-    get: operations["getRootFolder"];
-  };
-  "/api2/v1/connectors/{connectorId}/folders/{folder}/files/{file}": {
+    get: operations['getRootFolder']
+  }
+  '/api2/v1/connectors/{connectorId}/folders/{folder}/files/{file}': {
     /** Download a file from a subfolder of the selected connector */
-    get: operations["getFile"];
-  };
-  "/api2/v1/jobs/{jobUid}/conversations": {
-    get: operations["listAllConversations"];
-  };
-  "/api2/v1/jobs/conversations/find": {
-    post: operations["findConversations"];
-  };
-  "/api2/v1/costCenters/{costCenterUid}": {
-    get: operations["getCostCenter"];
-    put: operations["updateCostCenter"];
-    delete: operations["deleteCostCenter"];
-  };
-  "/api2/v1/costCenters": {
-    get: operations["listCostCenters"];
-    post: operations["createCostCenter"];
-  };
-  "/api2/v1/customFields/{fieldUid}": {
-    get: operations["getCustomField"];
-  };
-  "/api2/v1/customFields": {
-    get: operations["getCustomFieldList"];
-    post: operations["createCustomField"];
-  };
-  "/api2/v1/customFields/{fieldUid}/options": {
-    get: operations["getCustomFieldOptionList"];
-  };
-  "/api2/v1/customFileTypes": {
-    get: operations["getAllCustomFileType"];
-    post: operations["createCustomFileTypes"];
-    delete: operations["deleteBatchCustomFileType"];
-  };
-  "/api2/v1/customFileTypes/{customFileTypeUid}": {
-    get: operations["getCustomFileType"];
-    put: operations["updateCustomFileType"];
-    delete: operations["deleteCustomFileType"];
-  };
-  "/api2/v1/customFileTypes/find": {
+    get: operations['getFile']
+  }
+  '/api2/v1/jobs/{jobUid}/conversations': {
+    get: operations['listAllConversations']
+  }
+  '/api2/v1/jobs/conversations/find': {
+    post: operations['findConversations']
+  }
+  '/api2/v1/costCenters/{costCenterUid}': {
+    get: operations['getCostCenter']
+    put: operations['updateCostCenter']
+    delete: operations['deleteCostCenter']
+  }
+  '/api2/v1/costCenters': {
+    get: operations['listCostCenters']
+    post: operations['createCostCenter']
+  }
+  '/api2/v1/customFields/{fieldUid}': {
+    get: operations['getCustomField']
+  }
+  '/api2/v1/customFields': {
+    get: operations['getCustomFieldList']
+    post: operations['createCustomField']
+  }
+  '/api2/v1/customFields/{fieldUid}/options': {
+    get: operations['getCustomFieldOptionList']
+  }
+  '/api2/v1/customFileTypes': {
+    get: operations['getAllCustomFileType']
+    post: operations['createCustomFileTypes']
+    delete: operations['deleteBatchCustomFileType']
+  }
+  '/api2/v1/customFileTypes/{customFileTypeUid}': {
+    get: operations['getCustomFileType']
+    put: operations['updateCustomFileType']
+    delete: operations['deleteCustomFileType']
+  }
+  '/api2/v1/customFileTypes/find': {
     /** If no matching custom file type is found it returns status 200 and empty body. */
-    get: operations["findCustomFileType"];
-  };
-  "/api2/v1/netRateSchemes/{netRateSchemeUid}": {
-    get: operations["getDiscountScheme"];
-    put: operations["updateDiscountScheme"];
-  };
-  "/api2/v1/netRateSchemes": {
-    get: operations["getDiscountSchemes"];
-    post: operations["createDiscountScheme"];
-  };
-  "/api2/v1/netRateSchemes/{netRateSchemeUid}/workflowStepNetSchemes/{netRateSchemeWorkflowStepId}": {
-    get: operations["getDiscountSchemeWorkflowStep"];
-    put: operations["editDiscountSchemeWorkflowStep"];
-  };
-  "/api2/v1/netRateSchemes/{netRateSchemeUid}/workflowStepNetSchemes": {
-    get: operations["getDiscountSchemeWorkflowSteps"];
-  };
-  "/api2/v1/domains/{domainUid}": {
-    get: operations["getDomain"];
-    put: operations["updateDomain"];
-    delete: operations["deleteDomain"];
-  };
-  "/api2/v1/domains": {
-    get: operations["listDomains"];
-    post: operations["createDomain"];
-  };
-  "/api2/v1/emailTemplates/{templateUid}": {
-    get: operations["getOrgEmailTemplate"];
-  };
-  "/api2/v1/emailTemplates": {
-    get: operations["listOrgEmailTemplates"];
-  };
-  "/api2/v1/projects/{projectUid}/fileHandovers": {
+    get: operations['findCustomFileType']
+  }
+  '/api2/v1/netRateSchemes/{netRateSchemeUid}': {
+    get: operations['getDiscountScheme']
+    put: operations['updateDiscountScheme']
+  }
+  '/api2/v1/netRateSchemes': {
+    get: operations['getDiscountSchemes']
+    post: operations['createDiscountScheme']
+  }
+  '/api2/v1/netRateSchemes/{netRateSchemeUid}/workflowStepNetSchemes/{netRateSchemeWorkflowStepId}': {
+    get: operations['getDiscountSchemeWorkflowStep']
+    put: operations['editDiscountSchemeWorkflowStep']
+  }
+  '/api2/v1/netRateSchemes/{netRateSchemeUid}/workflowStepNetSchemes': {
+    get: operations['getDiscountSchemeWorkflowSteps']
+  }
+  '/api2/v1/domains/{domainUid}': {
+    get: operations['getDomain']
+    put: operations['updateDomain']
+    delete: operations['deleteDomain']
+  }
+  '/api2/v1/domains': {
+    get: operations['listDomains']
+    post: operations['createDomain']
+  }
+  '/api2/v1/emailTemplates/{templateUid}': {
+    get: operations['getOrgEmailTemplate']
+  }
+  '/api2/v1/emailTemplates': {
+    get: operations['listOrgEmailTemplates']
+  }
+  '/api2/v1/projects/{projectUid}/fileHandovers': {
     /**
      * For downloading multiple files as ZIP file provide multiple IDs in query parameters.
      * * For example `?jobUid={id1}&jobUid={id2}`
      * * When no files matched given IDs error 404 is returned, otherwise ZIP file will include those that were found
      */
-    get: operations["getHandoverFiles"];
+    get: operations['getHandoverFiles']
     /**
      * For following jobs the handover file is not supported:
      * * Continuous jobs
@@ -212,272 +212,272 @@ export interface paths {
      * * Split jobs
      * * Multilingual jobs
      */
-    put: operations["uploadHandoverFile"];
-    delete: operations["deleteHandoverFile"];
-  };
-  "/api2/v1/files": {
-    get: operations["getFiles"];
+    put: operations['uploadHandoverFile']
+    delete: operations['deleteHandoverFile']
+  }
+  '/api2/v1/files': {
+    get: operations['getFiles']
     /** Accepts multipart/form-data, application/octet-stream or application/json. */
-    post: operations["createUrlFile"];
-  };
-  "/api2/v1/files/{fileUid}": {
+    post: operations['createUrlFile']
+  }
+  '/api2/v1/files/{fileUid}': {
     /** Get uploaded file as <b>octet-stream</b> or as <b>json</b> based on 'Accept' header */
-    get: operations["getFileJson"];
-    delete: operations["deletesFile"];
-  };
-  "/api2/v1/glossaries/{glossaryUid}": {
-    get: operations["getGlossary"];
+    get: operations['getFileJson']
+    delete: operations['deletesFile']
+  }
+  '/api2/v1/glossaries/{glossaryUid}': {
+    get: operations['getGlossary']
     /** Languages can only be added, their removal is not supported */
-    put: operations["updateGlossary"];
-    delete: operations["deleteGlossary"];
-  };
-  "/api2/v1/glossaries": {
-    get: operations["listGlossaries"];
-    post: operations["createGlossary"];
-  };
-  "/api2/v1/glossaries/{glossaryUid}/activate": {
-    put: operations["activateGlossary"];
-  };
-  "/api2/v1/projects/{projectUid}/jobs/{jobUid}/transMemories/searchSegment": {
+    put: operations['updateGlossary']
+    delete: operations['deleteGlossary']
+  }
+  '/api2/v1/glossaries': {
+    get: operations['listGlossaries']
+    post: operations['createGlossary']
+  }
+  '/api2/v1/glossaries/{glossaryUid}/activate': {
+    put: operations['activateGlossary']
+  }
+  '/api2/v1/projects/{projectUid}/jobs/{jobUid}/transMemories/searchSegment': {
     /**
      * Returns at most <i>maxSegments</i>
      *             records with <i>score >= scoreThreshold</i> and at most <i>maxSubsegments</i> records which are subsegment,
      *             i.e. the source text is substring of the query text.
      */
-    post: operations["searchSegmentByJob"];
-  };
-  "/api2/v1/jobs/{jobUid}/conversations/lqas/{conversationId}/comments/{commentId}": {
-    delete: operations["deleteLQAComment"];
-  };
-  "/api2/v1/jobs/{jobUid}/conversations/lqas/{conversationId}": {
-    get: operations["getLQAConversation"];
-    delete: operations["deleteLQAConversation"];
-  };
-  "/api2/v1/jobs/{jobUid}/conversations/lqas": {
-    get: operations["listLQAConversations"];
-  };
-  "/api2/v1/languages": {
-    get: operations["listOfLanguages"];
-  };
-  "/api2/v1/lqa/assessments/reports": {
+    post: operations['searchSegmentByJob']
+  }
+  '/api2/v1/jobs/{jobUid}/conversations/lqas/{conversationId}/comments/{commentId}': {
+    delete: operations['deleteLQAComment']
+  }
+  '/api2/v1/jobs/{jobUid}/conversations/lqas/{conversationId}': {
+    get: operations['getLQAConversation']
+    delete: operations['deleteLQAConversation']
+  }
+  '/api2/v1/jobs/{jobUid}/conversations/lqas': {
+    get: operations['listLQAConversations']
+  }
+  '/api2/v1/languages': {
+    get: operations['listOfLanguages']
+  }
+  '/api2/v1/lqa/assessments/reports': {
     /**
      * Returns a single xlsx report or ZIP archive with multiple reports.
      * If any given jobPart is not from LQA workflow step, reports from successive workflow steps may be returned
      * If none were found returns 404 error, otherwise returns those that were found.
      */
-    get: operations["downloadLqaReports"];
-  };
-  "/api2/v1/lqa/profiles": {
-    get: operations["getLqaProfiles"];
-    post: operations["createLqaProfile"];
-  };
-  "/api2/v1/lqa/profiles/{profileUid}": {
-    get: operations["getLqaProfile"];
-    put: operations["updateLqaProfile"];
-    delete: operations["deleteLqaProfile"];
-  };
-  "/api2/v1/lqa/profiles/defaultValues": {
-    get: operations["getLqaProfileDefaultValues"];
-  };
-  "/api2/v1/lqa/profiles/{profileUid}/default": {
-    post: operations["makeDefault"];
-  };
-  "/api2/v1/lqa/profiles/{profileUid}/duplicate": {
-    post: operations["duplicateProfile"];
-  };
-  "/api2/v1/lqa/profiles/authors": {
-    get: operations["getLqaProfileAuthors"];
-  };
-  "/api2/v1/machineTranslateSettings/{mtsUid}/status": {
-    get: operations["getStatus"];
-  };
-  "/api2/v1/machineTranslateSettings": {
-    get: operations["getList"];
-  };
-  "/api2/v1/machineTranslateSettings/{mtsUid}": {
-    get: operations["getMTSettings"];
-  };
-  "/api2/v1/machineTranslateSettings/thirdPartyEngines": {
-    get: operations["getThirdPartyEnginesList"];
-  };
-  "/api2/v1/machineTranslateSettings/types": {
-    get: operations["getMTTypes"];
-  };
-  "/api2/v1/machineTranslations/{mtSettingsUid}/translate": {
-    post: operations["machineTranslation"];
-  };
-  "/api2/v1/mappings/tasks/{id}": {
-    get: operations["getMappingForTask"];
-  };
-  "/api2/v1/importSettings/default": {
-    get: operations["getImportSettings"];
-  };
-  "/api2/v1/importSettings/{uid}": {
-    get: operations["getImportSettings_1"];
-    delete: operations["deleteImportSettings"];
-  };
-  "/api2/v1/importSettings": {
-    get: operations["listImportSettings"];
-    put: operations["editImportSettings"];
+    get: operations['downloadLqaReports']
+  }
+  '/api2/v1/lqa/profiles': {
+    get: operations['getLqaProfiles']
+    post: operations['createLqaProfile']
+  }
+  '/api2/v1/lqa/profiles/{profileUid}': {
+    get: operations['getLqaProfile']
+    put: operations['updateLqaProfile']
+    delete: operations['deleteLqaProfile']
+  }
+  '/api2/v1/lqa/profiles/defaultValues': {
+    get: operations['getLqaProfileDefaultValues']
+  }
+  '/api2/v1/lqa/profiles/{profileUid}/default': {
+    post: operations['makeDefault']
+  }
+  '/api2/v1/lqa/profiles/{profileUid}/duplicate': {
+    post: operations['duplicateProfile']
+  }
+  '/api2/v1/lqa/profiles/authors': {
+    get: operations['getLqaProfileAuthors']
+  }
+  '/api2/v1/machineTranslateSettings/{mtsUid}/status': {
+    get: operations['getStatus']
+  }
+  '/api2/v1/machineTranslateSettings': {
+    get: operations['getList']
+  }
+  '/api2/v1/machineTranslateSettings/{mtsUid}': {
+    get: operations['getMTSettings']
+  }
+  '/api2/v1/machineTranslateSettings/thirdPartyEngines': {
+    get: operations['getThirdPartyEnginesList']
+  }
+  '/api2/v1/machineTranslateSettings/types': {
+    get: operations['getMTTypes']
+  }
+  '/api2/v1/machineTranslations/{mtSettingsUid}/translate': {
+    post: operations['machineTranslation']
+  }
+  '/api2/v1/mappings/tasks/{id}': {
+    get: operations['getMappingForTask']
+  }
+  '/api2/v1/importSettings/default': {
+    get: operations['getImportSettings']
+  }
+  '/api2/v1/importSettings/{uid}': {
+    get: operations['getImportSettings_1']
+    delete: operations['deleteImportSettings']
+  }
+  '/api2/v1/importSettings': {
+    get: operations['listImportSettings']
+    put: operations['editImportSettings']
     /**
      * Pre-defined import settings is handy for [Create Job](#operation/createJob).
      *                   See [supported file types](https://wiki.memsource.com/wiki/API_File_Type_List)
      */
-    post: operations["createImportSettings"];
-  };
-  "/api2/v1/jobs/{jobUid}/conversations/plains/{conversationId}": {
-    get: operations["getPlainConversation"];
-    put: operations["updatePlainConversation"];
-    delete: operations["deletePlainConversation"];
-  };
-  "/api2/v1/jobs/{jobUid}/conversations/plains": {
-    get: operations["listPlainConversations"];
-  };
-  "/api2/v1/jobs/{jobUid}/conversations/plains/{conversationId}/comments/{commentId}": {
-    delete: operations["deletePlainComment"];
-  };
-  "/api2/v1/projects/{projectUid}": {
-    get: operations["getProject"];
-    delete: operations["deleteProject"];
-    patch: operations["patchProject"];
-  };
-  "/api2/v1/projects/{projectUid}/assignableTemplates": {
-    get: operations["assignableTemplates"];
-  };
-  "/api2/v1/projects/{projectUid}/applyTemplate/{templateUid}/assignProviders": {
-    post: operations["assignLinguistsFromTemplate"];
-  };
-  "/api2/v1/projects/{projectUid}/applyTemplate/{templateUid}/assignProviders/forJobParts": {
-    post: operations["assignLinguistsFromTemplateToJobParts"];
-  };
-  "/api2/v1/projects": {
-    get: operations["listProjects"];
-  };
-  "/api2/v1/projects/{projectUid}/workflowSteps": {
-    post: operations["addWorkflowSteps"];
-  };
-  "/api2/v1/projects/{projectUid}/targetLangs": {
+    post: operations['createImportSettings']
+  }
+  '/api2/v1/jobs/{jobUid}/conversations/plains/{conversationId}': {
+    get: operations['getPlainConversation']
+    put: operations['updatePlainConversation']
+    delete: operations['deletePlainConversation']
+  }
+  '/api2/v1/jobs/{jobUid}/conversations/plains': {
+    get: operations['listPlainConversations']
+  }
+  '/api2/v1/jobs/{jobUid}/conversations/plains/{conversationId}/comments/{commentId}': {
+    delete: operations['deletePlainComment']
+  }
+  '/api2/v1/projects/{projectUid}': {
+    get: operations['getProject']
+    delete: operations['deleteProject']
+    patch: operations['patchProject']
+  }
+  '/api2/v1/projects/{projectUid}/assignableTemplates': {
+    get: operations['assignableTemplates']
+  }
+  '/api2/v1/projects/{projectUid}/applyTemplate/{templateUid}/assignProviders': {
+    post: operations['assignLinguistsFromTemplate']
+  }
+  '/api2/v1/projects/{projectUid}/applyTemplate/{templateUid}/assignProviders/forJobParts': {
+    post: operations['assignLinguistsFromTemplateToJobParts']
+  }
+  '/api2/v1/projects': {
+    get: operations['listProjects']
+  }
+  '/api2/v1/projects/{projectUid}/workflowSteps': {
+    post: operations['addWorkflowSteps']
+  }
+  '/api2/v1/projects/{projectUid}/targetLangs': {
     /** Add target languages to project */
-    post: operations["addTargetLanguageToProject"];
-  };
-  "/api2/v1/projects/{projectUid}/assignVendor": {
+    post: operations['addTargetLanguageToProject']
+  }
+  '/api2/v1/projects/{projectUid}/assignVendor': {
     /**
      * To unassign Vendor from Project, use empty body:
      * ```
      * {}
      * ```
      */
-    post: operations["assignVendorToProject"];
-  };
-  "/api2/v1/projects/{projectUid}/clone": {
-    post: operations["cloneProject"];
-  };
-  "/api2/v1/projects/{projectUid}/providers": {
-    get: operations["getProjectAssignments"];
-  };
-  "/api2/v1/projects/{projectUid}/setStatus": {
-    post: operations["setProjectStatus"];
-  };
-  "/api2/v1/projects/{projectUid}/financialSettings": {
-    get: operations["getFinancialSettings"];
-    put: operations["setFinancialSettings"];
-  };
-  "/api2/v1/projects/{projectUid}/qaSettingsChecks": {
+    post: operations['assignVendorToProject']
+  }
+  '/api2/v1/projects/{projectUid}/clone': {
+    post: operations['cloneProject']
+  }
+  '/api2/v1/projects/{projectUid}/providers': {
+    get: operations['getProjectAssignments']
+  }
+  '/api2/v1/projects/{projectUid}/setStatus': {
+    post: operations['setProjectStatus']
+  }
+  '/api2/v1/projects/{projectUid}/financialSettings': {
+    get: operations['getFinancialSettings']
+    put: operations['setFinancialSettings']
+  }
+  '/api2/v1/projects/{projectUid}/qaSettingsChecks': {
     /** Returns enabled quality assurance settings. */
-    get: operations["enabledQualityChecks"];
-  };
-  "/api2/v1/projects/{projectUid}/lqaSettings": {
-    get: operations["getProjectSettings"];
-  };
-  "/api2/v1/projects/{projectUid}/mtSettings": {
-    get: operations["getMtSettingsForProject"];
+    get: operations['enabledQualityChecks']
+  }
+  '/api2/v1/projects/{projectUid}/lqaSettings': {
+    get: operations['getProjectSettings']
+  }
+  '/api2/v1/projects/{projectUid}/mtSettings': {
+    get: operations['getMtSettingsForProject']
     /**
      * This will erase all mtSettings per language for project.
      *         To remove all machine translate settings from project call without a machineTranslateSettings parameter.
      */
-    put: operations["setMtSettingsForProject"];
-  };
-  "/api2/v1/projects/{projectUid}/quotes": {
-    get: operations["getQuotesForProject"];
-  };
-  "/api2/v1/projects/{projectUid}/mtSettingsPerLanguage": {
+    put: operations['setMtSettingsForProject']
+  }
+  '/api2/v1/projects/{projectUid}/quotes': {
+    get: operations['getQuotesForProject']
+  }
+  '/api2/v1/projects/{projectUid}/mtSettingsPerLanguage': {
     /** This will erase mtSettings for project */
-    put: operations["setMtSettingsPerLanguageForProject"];
-  };
-  "/api2/v1/projects/{projectUid}/analyseSettings": {
-    get: operations["getAnalyseSettingsForProject"];
-  };
-  "/api2/v1/projects/{projectUid}/importSettings": {
-    get: operations["getImportSettings_2"];
-    put: operations["editImportSettings_1"];
-  };
-  "/api2/v1/projects/{projectUid}/fileNamingSettings": {
-    get: operations["getFileNamingSettings"];
-    put: operations["updateFileNamingSettings"];
-  };
-  "/api2/v1/projects/{projectUid}/customFields": {
-    get: operations["getCustomFieldsPage"];
-    put: operations["editCustomFields"];
-    post: operations["createCustomFields"];
-  };
-  "/api2/v1/projects/{projectUid}/customFields/{fieldInstanceUid}": {
-    get: operations["getCustomField_1"];
-    put: operations["editCustomField"];
-    delete: operations["deleteCustomField_1"];
-  };
-  "/api2/v1/projects/{projectUid}/jobs/{jobUid}/setStatus": {
-    post: operations["setStatus"];
-  };
-  "/api2/v1/projects/{projectUid}/jobs/{jobUid}": {
-    get: operations["getPart"];
-    put: operations["editPart"];
-    patch: operations["patchPart"];
-  };
-  "/api2/v1/projects/{projectUid}/jobs/{jobUid}/pseudoTranslate": {
-    post: operations["pseudoTranslateJobPart"];
-  };
-  "/api2/v1/projects/{projectUid}/jobs/translations": {
-    delete: operations["deleteAllTranslations"];
-  };
-  "/api2/v1/projects/{projectUid}/jobs/{jobUid}/qualityAssurances/ignoredWarnings": {
-    post: operations["addIgnoredWarnings"];
-    delete: operations["deleteIgnoredWarnings"];
-  };
-  "/api2/v1/projects/{projectUid}/jobs/{jobUid}/importSettings": {
-    get: operations["getImportSettings_3"];
-    put: operations["editJobImportSettings"];
-  };
-  "/api2/v1/projects/{projectUid}/jobs/{jobUid}/statusChanges": {
-    get: operations["statusChanges"];
-  };
-  "/api2/v1/projects/{projectUid}/jobs/copySourceToTarget": {
-    post: operations["copySourceToTarget"];
-  };
-  "/api2/v1/projects/{projectUid}/jobs/{jobUid}/copySourceToTarget": {
-    post: operations["copySourceToTargetJobPart"];
-  };
-  "/api2/v1/projects/{projectUid}/jobs/{jobUid}/translationResources": {
-    get: operations["getTranslationResources"];
-  };
-  "/api2/v1/projects/{projectUid}/jobs/{jobUid}/segments": {
-    get: operations["listSegments"];
-  };
-  "/api2/v1/projects/{projectUid}/jobs/{jobUid}/original": {
-    get: operations["getOriginalFile"];
-  };
-  "/api2/v1/projects/{projectUid}/jobs/{jobUid}/preview": {
-    get: operations["filePreviewJob"];
+    put: operations['setMtSettingsPerLanguageForProject']
+  }
+  '/api2/v1/projects/{projectUid}/analyseSettings': {
+    get: operations['getAnalyseSettingsForProject']
+  }
+  '/api2/v1/projects/{projectUid}/importSettings': {
+    get: operations['getImportSettings_2']
+    put: operations['editImportSettings_1']
+  }
+  '/api2/v1/projects/{projectUid}/fileNamingSettings': {
+    get: operations['getFileNamingSettings']
+    put: operations['updateFileNamingSettings']
+  }
+  '/api2/v1/projects/{projectUid}/customFields': {
+    get: operations['getCustomFieldsPage']
+    put: operations['editCustomFields']
+    post: operations['createCustomFields']
+  }
+  '/api2/v1/projects/{projectUid}/customFields/{fieldInstanceUid}': {
+    get: operations['getCustomField_1']
+    put: operations['editCustomField']
+    delete: operations['deleteCustomField_1']
+  }
+  '/api2/v1/projects/{projectUid}/jobs/{jobUid}/setStatus': {
+    post: operations['setStatus']
+  }
+  '/api2/v1/projects/{projectUid}/jobs/{jobUid}': {
+    get: operations['getPart']
+    put: operations['editPart']
+    patch: operations['patchPart']
+  }
+  '/api2/v1/projects/{projectUid}/jobs/{jobUid}/pseudoTranslate': {
+    post: operations['pseudoTranslateJobPart']
+  }
+  '/api2/v1/projects/{projectUid}/jobs/translations': {
+    delete: operations['deleteAllTranslations']
+  }
+  '/api2/v1/projects/{projectUid}/jobs/{jobUid}/qualityAssurances/ignoredWarnings': {
+    post: operations['addIgnoredWarnings']
+    delete: operations['deleteIgnoredWarnings']
+  }
+  '/api2/v1/projects/{projectUid}/jobs/{jobUid}/importSettings': {
+    get: operations['getImportSettings_3']
+    put: operations['editJobImportSettings']
+  }
+  '/api2/v1/projects/{projectUid}/jobs/{jobUid}/statusChanges': {
+    get: operations['statusChanges']
+  }
+  '/api2/v1/projects/{projectUid}/jobs/copySourceToTarget': {
+    post: operations['copySourceToTarget']
+  }
+  '/api2/v1/projects/{projectUid}/jobs/{jobUid}/copySourceToTarget': {
+    post: operations['copySourceToTargetJobPart']
+  }
+  '/api2/v1/projects/{projectUid}/jobs/{jobUid}/translationResources': {
+    get: operations['getTranslationResources']
+  }
+  '/api2/v1/projects/{projectUid}/jobs/{jobUid}/segments': {
+    get: operations['listSegments']
+  }
+  '/api2/v1/projects/{projectUid}/jobs/{jobUid}/original': {
+    get: operations['getOriginalFile']
+  }
+  '/api2/v1/projects/{projectUid}/jobs/{jobUid}/preview': {
+    get: operations['filePreviewJob']
     /** Takes bilingual file (.mxliff only) as argument. If not passed, data will be taken from database */
-    post: operations["filePreview"];
-  };
-  "/api2/v1/projects/{projectUid}/jobs/{jobUid}/targetFileWarnings": {
+    post: operations['filePreview']
+  }
+  '/api2/v1/projects/{projectUid}/jobs/{jobUid}/targetFileWarnings': {
     /** This call will return target file's warnings. This means even for other jobs that were created via 'split jobs' etc. */
-    get: operations["getCompletedFileWarnings"];
-  };
-  "/api2/v1/projects/{projectUid}/jobs/{jobUid}/previewUrl": {
-    get: operations["previewUrls"];
-  };
-  "/api2/v1/projects/{projectUid}/jobs": {
+    get: operations['getCompletedFileWarnings']
+  }
+  '/api2/v1/projects/{projectUid}/jobs/{jobUid}/previewUrl': {
+    get: operations['previewUrls']
+  }
+  '/api2/v1/projects/{projectUid}/jobs': {
     /**
      * Job file can be provided directly in the message body or downloaded from connector.
      *
@@ -589,9 +589,9 @@ export interface paths {
      * }
      * ```
      */
-    post: operations["createJob"];
-  };
-  "/api2/v1/projects/{projectUid}/jobs/connectorTask": {
+    post: operations['createJob']
+  }
+  '/api2/v1/projects/{projectUid}/jobs/connectorTask': {
     /**
      * Creates the job in project specified by path param projectUid. Source file is defined by downloadTaskId parameter. That is value of finished download async task
      * [Connector - Download file (async)](#operation/getFile_1).
@@ -686,9 +686,9 @@ export interface paths {
      * }
      * ```
      */
-    post: operations["createJobFromAsyncDownloadTask"];
-  };
-  "/api2/v1/projects/{projectUid}/jobs/source": {
+    post: operations['createJobFromAsyncDownloadTask']
+  }
+  '/api2/v1/projects/{projectUid}/jobs/source': {
     /**
      * API updated source file for specified job
      *
@@ -738,9 +738,9 @@ export interface paths {
      * }
      * ```
      */
-    post: operations["updateSource"];
-  };
-  "/api2/v1/projects/{projectUid}/jobs/target": {
+    post: operations['updateSource']
+  }
+  '/api2/v1/projects/{projectUid}/jobs/target': {
     /**
      * API update target file for specified job
      *
@@ -787,39 +787,39 @@ export interface paths {
      * }
      * ```
      */
-    post: operations["updateTarget"];
-  };
-  "/api2/v1/projects/{projectUid}/jobs/batch": {
+    post: operations['updateTarget']
+  }
+  '/api2/v1/projects/{projectUid}/jobs/batch': {
     /** Returns only jobs which were updated by the batch operation. */
-    put: operations["editParts"];
-    delete: operations["deleteParts"];
-  };
-  "/api2/v1/projects/{projectUid}/jobs/humanTranslate": {
-    post: operations["humanTranslate"];
-  };
-  "/api2/v1/projects/{projectUid}/jobs/notifyAssigned": {
-    post: operations["notifyAssigned"];
-  };
-  "/api2/v1/projects/{projectUid}/jobs/compare": {
-    post: operations["comparePart"];
-  };
-  "/api2/v1/projects/{projectUid}/jobs/bilingualFile": {
-    post: operations["getBilingualFile"];
-  };
-  "/api2/v1/projects/{projectUid}/jobs/{jobUid}/qualityAssurances/ignoreChecks": {
-    post: operations["updateIgnoredChecks"];
-  };
-  "/api2/v1/projects/{projectUid}/jobs/{jobUid}/workflowStep": {
-    get: operations["getPartsWorkflowStep"];
-  };
-  "/api2/v1/projects/{projectUid}/jobs/search": {
-    post: operations["searchPartsInProject"];
-  };
-  "/api2/v1/projects/{projectUid}/jobs/segmentsCount": {
+    put: operations['editParts']
+    delete: operations['deleteParts']
+  }
+  '/api2/v1/projects/{projectUid}/jobs/humanTranslate': {
+    post: operations['humanTranslate']
+  }
+  '/api2/v1/projects/{projectUid}/jobs/notifyAssigned': {
+    post: operations['notifyAssigned']
+  }
+  '/api2/v1/projects/{projectUid}/jobs/compare': {
+    post: operations['comparePart']
+  }
+  '/api2/v1/projects/{projectUid}/jobs/bilingualFile': {
+    post: operations['getBilingualFile']
+  }
+  '/api2/v1/projects/{projectUid}/jobs/{jobUid}/qualityAssurances/ignoreChecks': {
+    post: operations['updateIgnoredChecks']
+  }
+  '/api2/v1/projects/{projectUid}/jobs/{jobUid}/workflowStep': {
+    get: operations['getPartsWorkflowStep']
+  }
+  '/api2/v1/projects/{projectUid}/jobs/search': {
+    post: operations['searchPartsInProject']
+  }
+  '/api2/v1/projects/{projectUid}/jobs/segmentsCount': {
     /** Provides segments count (progress data) */
-    post: operations["getSegmentsCount"];
-  };
-  "/api2/v1/projects/{projectUid}/jobs/{jobUid}/split": {
+    post: operations['getSegmentsCount']
+  }
+  '/api2/v1/projects/{projectUid}/jobs/{jobUid}/split': {
     /**
      * Splits job by one of the following methods:
      * * **After specific segments** - fill in `segmentOrdinals`
@@ -830,119 +830,119 @@ export interface paths {
      *
      * Only one option at a time is allowed.
      */
-    post: operations["split"];
-  };
-  "/api2/v1/projects/{projectUid}/jobs/{jobUid}/termBases/createByJob": {
+    post: operations['split']
+  }
+  '/api2/v1/projects/{projectUid}/jobs/{jobUid}/termBases/createByJob': {
     /** Create new term in the write term base assigned to the job */
-    post: operations["createTermByJob"];
-  };
-  "/api2/v1/projects/{projectUid}/references": {
-    get: operations["listReferenceFiles"];
-    delete: operations["batchDeleteReferenceFiles"];
-  };
-  "/api2/v1/projects/{projectUid}/references/{referenceFileId}": {
-    get: operations["downloadReference"];
-  };
-  "/api2/v1/projects/{projectUid}/references/download": {
-    post: operations["batchDownloadReferenceFiles"];
-  };
-  "/api2/v1/projects/{projectUid}/references/creators": {
+    post: operations['createTermByJob']
+  }
+  '/api2/v1/projects/{projectUid}/references': {
+    get: operations['listReferenceFiles']
+    delete: operations['batchDeleteReferenceFiles']
+  }
+  '/api2/v1/projects/{projectUid}/references/{referenceFileId}': {
+    get: operations['downloadReference']
+  }
+  '/api2/v1/projects/{projectUid}/references/download': {
+    post: operations['batchDownloadReferenceFiles']
+  }
+  '/api2/v1/projects/{projectUid}/references/creators': {
     /**
      * The result is not paged and returns up to 50 users.
      *                 If the requested user is not included, the search can be narrowed down with the `userName` parameter.
      */
-    get: operations["listReferenceFileCreators"];
-  };
-  "/api2/v1/projectTemplates/{projectTemplateUid}/transMemories/relevant": {
-    get: operations["relevantTransMemories"];
-  };
-  "/api2/v1/projectTemplates/{projectTemplateUid}/qaSettings": {
-    get: operations["getProjectTemplateQASettings"];
-    put: operations["setProjectTemplateQASettings"];
-  };
-  "/api2/v1/projectTemplates": {
-    get: operations["getProjectTemplates"];
-    post: operations["createProjectTemplate"];
-  };
-  "/api2/v1/projectTemplates/{projectTemplateUid}": {
+    get: operations['listReferenceFileCreators']
+  }
+  '/api2/v1/projectTemplates/{projectTemplateUid}/transMemories/relevant': {
+    get: operations['relevantTransMemories']
+  }
+  '/api2/v1/projectTemplates/{projectTemplateUid}/qaSettings': {
+    get: operations['getProjectTemplateQASettings']
+    put: operations['setProjectTemplateQASettings']
+  }
+  '/api2/v1/projectTemplates': {
+    get: operations['getProjectTemplates']
+    post: operations['createProjectTemplate']
+  }
+  '/api2/v1/projectTemplates/{projectTemplateUid}': {
     /** Note: importSettings in response is deprecated and will be always null */
-    get: operations["getProjectTemplate"];
-    put: operations["editProjectTemplate"];
-    delete: operations["deleteProjectTemplate"];
-  };
-  "/api2/v1/projectTemplates/{projectTemplateUid}/analyseSettings": {
-    get: operations["getAnalyseSettingsForProjectTemplate"];
-    put: operations["updateAnalyseSettingsForProjectTemplate"];
-  };
-  "/api2/v1/projectTemplates/{projectTemplateUid}/importSettings": {
-    get: operations["getImportSettingsForProjectTemplate"];
-    put: operations["editProjectTemplateImportSettings"];
-  };
-  "/api2/v1/projectTemplates/{projectTemplateUid}/mtSettings": {
-    get: operations["getMachineTranslateSettingsForProjectTemplate"];
-  };
-  "/api2/v1/projectTemplates/{projectTemplateUid}/termBases": {
-    get: operations["getProjectTemplateTermBases"];
-    put: operations["setProjectTemplateTermBases"];
-  };
-  "/api2/v1/projectTemplates/{projectTemplateUid}/accessSettings": {
-    get: operations["getProjectTemplateAccessSettings"];
-    put: operations["editProjectTemplateAccessSettings"];
-  };
-  "/api2/v1/projectTemplates/{projectTemplateUid}/customFields": {
-    get: operations["getCustomFieldsPage_1"];
-    put: operations["editCustomFields_1"];
-    post: operations["createCustomFields_1"];
-  };
-  "/api2/v1/projectTemplates/{projectTemplateUid}/customFields/{fieldInstanceUid}": {
-    get: operations["getCustomField_2"];
-    put: operations["editCustomField_1"];
-    delete: operations["deleteCustomField_2"];
-  };
-  "/api2/v1/projects/{projectUid}/termBases": {
-    get: operations["getProjectTermBases"];
-    put: operations["setProjectTermBases"];
-  };
-  "/api2/v1/projects/{projectUid}/termBases/relevant": {
-    get: operations["relevantTermBases"];
-  };
-  "/api2/v1/projects/{projectUid}/transMemories/relevant": {
-    get: operations["relevantTransMemories_1"];
-  };
-  "/api2/v1/projects/{projectUid}/transMemories/searchSegmentInProject": {
+    get: operations['getProjectTemplate']
+    put: operations['editProjectTemplate']
+    delete: operations['deleteProjectTemplate']
+  }
+  '/api2/v1/projectTemplates/{projectTemplateUid}/analyseSettings': {
+    get: operations['getAnalyseSettingsForProjectTemplate']
+    put: operations['updateAnalyseSettingsForProjectTemplate']
+  }
+  '/api2/v1/projectTemplates/{projectTemplateUid}/importSettings': {
+    get: operations['getImportSettingsForProjectTemplate']
+    put: operations['editProjectTemplateImportSettings']
+  }
+  '/api2/v1/projectTemplates/{projectTemplateUid}/mtSettings': {
+    get: operations['getMachineTranslateSettingsForProjectTemplate']
+  }
+  '/api2/v1/projectTemplates/{projectTemplateUid}/termBases': {
+    get: operations['getProjectTemplateTermBases']
+    put: operations['setProjectTemplateTermBases']
+  }
+  '/api2/v1/projectTemplates/{projectTemplateUid}/accessSettings': {
+    get: operations['getProjectTemplateAccessSettings']
+    put: operations['editProjectTemplateAccessSettings']
+  }
+  '/api2/v1/projectTemplates/{projectTemplateUid}/customFields': {
+    get: operations['getCustomFieldsPage_1']
+    put: operations['editCustomFields_1']
+    post: operations['createCustomFields_1']
+  }
+  '/api2/v1/projectTemplates/{projectTemplateUid}/customFields/{fieldInstanceUid}': {
+    get: operations['getCustomField_2']
+    put: operations['editCustomField_1']
+    delete: operations['deleteCustomField_2']
+  }
+  '/api2/v1/projects/{projectUid}/termBases': {
+    get: operations['getProjectTermBases']
+    put: operations['setProjectTermBases']
+  }
+  '/api2/v1/projects/{projectUid}/termBases/relevant': {
+    get: operations['relevantTermBases']
+  }
+  '/api2/v1/projects/{projectUid}/transMemories/relevant': {
+    get: operations['relevantTransMemories_1']
+  }
+  '/api2/v1/projects/{projectUid}/transMemories/searchSegmentInProject': {
     /**
      * Returns at most <i>maxSegments</i>
      *             records with <i>score >= scoreThreshold</i> and at most <i>maxSubsegments</i> records which are subsegment,
      *             i.e. the source text is substring of the query text.
      */
-    post: operations["searchSegment_1"];
-  };
-  "/api2/v1/quotes/{quoteUid}": {
-    get: operations["get_2"];
-    delete: operations["deleteQuote"];
-  };
-  "/api2/v1/quotes/email": {
-    post: operations["emailQuotes"];
-  };
-  "/api2/v1/scim/ServiceProviderConfig": {
-    get: operations["getServiceProviderConfigDto"];
-  };
-  "/api2/v1/scim/ResourceTypes": {
-    get: operations["getResourceTypes"];
-  };
-  "/api2/v1/scim/Schemas": {
-    get: operations["getSchemas"];
-  };
-  "/api2/v1/scim/Schemas/{schemaUrn}": {
-    get: operations["getSchemaByUrn"];
-  };
-  "/api2/v1/scim/Users/{userId}": {
-    get: operations["getScimUser"];
-    put: operations["editUser"];
-    delete: operations["deleteUser"];
-    patch: operations["patchUser"];
-  };
-  "/api2/v1/scim/Users": {
+    post: operations['searchSegment_1']
+  }
+  '/api2/v1/quotes/{quoteUid}': {
+    get: operations['get_2']
+    delete: operations['deleteQuote']
+  }
+  '/api2/v1/quotes/email': {
+    post: operations['emailQuotes']
+  }
+  '/api2/v1/scim/ServiceProviderConfig': {
+    get: operations['getServiceProviderConfigDto']
+  }
+  '/api2/v1/scim/ResourceTypes': {
+    get: operations['getResourceTypes']
+  }
+  '/api2/v1/scim/Schemas': {
+    get: operations['getSchemas']
+  }
+  '/api2/v1/scim/Schemas/{schemaUrn}': {
+    get: operations['getSchemaByUrn']
+  }
+  '/api2/v1/scim/Users/{userId}': {
+    get: operations['getScimUser']
+    put: operations['editUser']
+    delete: operations['deleteUser']
+    patch: operations['patchUser']
+  }
+  '/api2/v1/scim/Users': {
     /**
      * This operation supports <a href="http://ldapwiki.com/wiki/SCIM%20Filtering" target="_blank">SCIM Filter</a>,
      * <a href="http://ldapwiki.com/wiki/SCIM%20Search%20Request" target="_blank">SCIM attributes</a> and
@@ -957,7 +957,7 @@ export interface paths {
      *   - `emails.value`
      *   - `meta.created`
      */
-    get: operations["searchUsers"];
+    get: operations['searchUsers']
     /**
      * Supported schema: `"urn:ietf:params:scim:schemas:core:2.0:User"`
      *
@@ -983,336 +983,336 @@ export interface paths {
      * }
      * ```
      */
-    post: operations["createUserSCIM"];
-  };
-  "/api2/v1/segmentationRules/{segRuleId}": {
-    get: operations["getSegmentationRule"];
-    put: operations["updatesSegmentationRule"];
-    delete: operations["deletesSegmentationRule"];
-  };
-  "/api2/v1/segmentationRules": {
-    get: operations["getListOfSegmentationRules"];
+    post: operations['createUserSCIM']
+  }
+  '/api2/v1/segmentationRules/{segRuleId}': {
+    get: operations['getSegmentationRule']
+    put: operations['updatesSegmentationRule']
+    delete: operations['deletesSegmentationRule']
+  }
+  '/api2/v1/segmentationRules': {
+    get: operations['getListOfSegmentationRules']
     /** Creates new Segmentation Rule with file and segRule JSON Object as header parameter. The same object is used for GET action. */
-    post: operations["createSegmentationRule"];
-  };
-  "/api2/v1/spellCheck/check/{jobUid}": {
+    post: operations['createSegmentationRule']
+  }
+  '/api2/v1/spellCheck/check/{jobUid}': {
     /** Spell check using the settings from the project of the job */
-    post: operations["checkByJob"];
-  };
-  "/api2/v1/spellCheck/suggest": {
+    post: operations['checkByJob']
+  }
+  '/api2/v1/spellCheck/suggest': {
     /** Spell check suggest using the users's spell check dictionary */
-    post: operations["suggest"];
-  };
-  "/api2/v1/spellCheck/words": {
-    post: operations["addWord"];
-  };
-  "/api2/v1/spellCheck/check": {
+    post: operations['suggest']
+  }
+  '/api2/v1/spellCheck/words': {
+    post: operations['addWord']
+  }
+  '/api2/v1/spellCheck/check': {
     /** Spell check using the settings of the user's organization */
-    post: operations["check"];
-  };
-  "/api2/v1/subDomains/{subDomainUid}": {
-    get: operations["getSubDomain"];
-    put: operations["updateSubDomain"];
-    delete: operations["deleteSubDomain"];
-  };
-  "/api2/v1/subDomains": {
-    get: operations["listSubDomains"];
-    post: operations["createSubDomain"];
-  };
-  "/api2/v1/termBases/{termBaseUid}": {
-    get: operations["getTermBase"];
+    post: operations['check']
+  }
+  '/api2/v1/subDomains/{subDomainUid}': {
+    get: operations['getSubDomain']
+    put: operations['updateSubDomain']
+    delete: operations['deleteSubDomain']
+  }
+  '/api2/v1/subDomains': {
+    get: operations['listSubDomains']
+    post: operations['createSubDomain']
+  }
+  '/api2/v1/termBases/{termBaseUid}': {
+    get: operations['getTermBase']
     /** It is possible to add new languages only */
-    put: operations["updateTermBase"];
-    delete: operations["deleteTermBase"];
-  };
-  "/api2/v1/termBases": {
-    get: operations["listTermBases"];
-    post: operations["createTermBase"];
-  };
-  "/api2/v1/termBases/{termBaseUid}/upload": {
+    put: operations['updateTermBase']
+    delete: operations['deleteTermBase']
+  }
+  '/api2/v1/termBases': {
+    get: operations['listTermBases']
+    post: operations['createTermBase']
+  }
+  '/api2/v1/termBases/{termBaseUid}/upload': {
     /**
      * Terms can be imported from XLS/XLSX and TBX file formats into a term base.
      * See <a target="_blank" href="https://support.phrase.com/hc/en-us/articles/5709733372188">Phrase Help Center</a>
      */
-    post: operations["importTermBase"];
-  };
-  "/api2/v1/termBases/{termBaseUid}/concepts": {
-    get: operations["listConcepts"];
-    post: operations["createConcept"];
-    delete: operations["deleteConcepts"];
-  };
-  "/api2/v1/termBases/{termBaseUid}/concepts/{conceptUid}": {
-    get: operations["getConcept"];
-    put: operations["updateConcept"];
-  };
-  "/api2/v1/termBases/{termBaseUid}/terms": {
+    post: operations['importTermBase']
+  }
+  '/api2/v1/termBases/{termBaseUid}/concepts': {
+    get: operations['listConcepts']
+    post: operations['createConcept']
+    delete: operations['deleteConcepts']
+  }
+  '/api2/v1/termBases/{termBaseUid}/concepts/{conceptUid}': {
+    get: operations['getConcept']
+    put: operations['updateConcept']
+  }
+  '/api2/v1/termBases/{termBaseUid}/terms': {
     /** Set conceptId to assign the term to an existing concept, otherwise a new concept will be created. */
-    post: operations["createTerm"];
+    post: operations['createTerm']
     /** Deletes all terms */
-    delete: operations["clearTermBase"];
-  };
-  "/api2/v1/termBases/{termBaseUid}/terms/{termId}": {
-    get: operations["getTerm"];
-    put: operations["updateTerm"];
-    delete: operations["deleteTerm"];
-  };
-  "/api2/v1/termBases/{termBaseUid}/concepts/{conceptId}": {
-    delete: operations["deleteConcept"];
-  };
-  "/api2/v1/termBases/{termBaseUid}/concepts/{conceptId}/terms": {
-    get: operations["listTermsOfConcept"];
-  };
-  "/api2/v1/termBases/{termBaseUid}/lastBackgroundTask": {
-    get: operations["getLastBackgroundTask"];
-  };
-  "/api2/v1/termBases/{termBaseUid}/browse": {
-    post: operations["browseTerms"];
-  };
-  "/api2/v1/termBases/{termBaseUid}/search": {
-    post: operations["searchTerms"];
-  };
-  "/api2/v1/termBases/{termBaseUid}/export": {
-    get: operations["exportTermBase"];
-  };
-  "/api2/v1/termBases/{termBaseUid}/metadata": {
-    get: operations["getTermBaseMetadata"];
-  };
-  "/api2/v1/transMemories": {
-    get: operations["listTransMemories"];
-    post: operations["createTransMemory"];
-  };
-  "/api2/v1/transMemories/{transMemoryUid}": {
-    get: operations["getTransMemory"];
-    put: operations["editTransMemory"];
-    delete: operations["deleteTransMemory"];
-  };
-  "/api2/v1/transMemories/{transMemoryUid}/targetLanguages": {
-    post: operations["addTargetLangToTransMemory"];
-  };
-  "/api2/v1/transMemories/extractCleaned": {
+    delete: operations['clearTermBase']
+  }
+  '/api2/v1/termBases/{termBaseUid}/terms/{termId}': {
+    get: operations['getTerm']
+    put: operations['updateTerm']
+    delete: operations['deleteTerm']
+  }
+  '/api2/v1/termBases/{termBaseUid}/concepts/{conceptId}': {
+    delete: operations['deleteConcept']
+  }
+  '/api2/v1/termBases/{termBaseUid}/concepts/{conceptId}/terms': {
+    get: operations['listTermsOfConcept']
+  }
+  '/api2/v1/termBases/{termBaseUid}/lastBackgroundTask': {
+    get: operations['getLastBackgroundTask']
+  }
+  '/api2/v1/termBases/{termBaseUid}/browse': {
+    post: operations['browseTerms']
+  }
+  '/api2/v1/termBases/{termBaseUid}/search': {
+    post: operations['searchTerms']
+  }
+  '/api2/v1/termBases/{termBaseUid}/export': {
+    get: operations['exportTermBase']
+  }
+  '/api2/v1/termBases/{termBaseUid}/metadata': {
+    get: operations['getTermBaseMetadata']
+  }
+  '/api2/v1/transMemories': {
+    get: operations['listTransMemories']
+    post: operations['createTransMemory']
+  }
+  '/api2/v1/transMemories/{transMemoryUid}': {
+    get: operations['getTransMemory']
+    put: operations['editTransMemory']
+    delete: operations['deleteTransMemory']
+  }
+  '/api2/v1/transMemories/{transMemoryUid}/targetLanguages': {
+    post: operations['addTargetLangToTransMemory']
+  }
+  '/api2/v1/transMemories/extractCleaned': {
     /** Returns a ZIP file containing the cleaned translation memories in the specified outputFormat. */
-    post: operations["exportCleanedTMs"];
-  };
-  "/api2/v1/transMemories/downloadCleaned/{asyncRequestId}": {
-    get: operations["downloadCleanedTM"];
-  };
-  "/api2/v1/transMemories/{transMemoryUid}/segments": {
-    post: operations["insertToTransMemory"];
-    delete: operations["clearTransMemory"];
-  };
-  "/api2/v1/transMemories/{transMemoryUid}/relatedProjects": {
-    get: operations["getRelatedProjects"];
-  };
-  "/api2/v1/transMemories/{transMemoryUid}/metadata": {
-    get: operations["getMetadata"];
-  };
-  "/api2/v1/transMemories/{transMemoryUid}/segments/{segmentId}": {
-    put: operations["updateTranslation"];
+    post: operations['exportCleanedTMs']
+  }
+  '/api2/v1/transMemories/downloadCleaned/{asyncRequestId}': {
+    get: operations['downloadCleanedTM']
+  }
+  '/api2/v1/transMemories/{transMemoryUid}/segments': {
+    post: operations['insertToTransMemory']
+    delete: operations['clearTransMemory']
+  }
+  '/api2/v1/transMemories/{transMemoryUid}/relatedProjects': {
+    get: operations['getRelatedProjects']
+  }
+  '/api2/v1/transMemories/{transMemoryUid}/metadata': {
+    get: operations['getMetadata']
+  }
+  '/api2/v1/transMemories/{transMemoryUid}/segments/{segmentId}': {
+    put: operations['updateTranslation']
     /** Not recommended for bulk removal of segments */
-    delete: operations["deleteSourceAndTranslations"];
-  };
-  "/api2/v1/transMemories/{transMemoryUid}/segments/{segmentId}/lang/{lang}": {
+    delete: operations['deleteSourceAndTranslations']
+  }
+  '/api2/v1/transMemories/{transMemoryUid}/segments/{segmentId}/lang/{lang}': {
     /** Not recommended for bulk removal of segments */
-    delete: operations["deleteTranslation"];
-  };
-  "/api2/v1/transMemories/{transMemoryUid}/lastBackgroundTask": {
-    get: operations["getBackgroundTasks_1"];
-  };
-  "/api2/v1/transMemories/{transMemoryUid}/wildCardSearch": {
-    post: operations["wildcardSearch"];
-  };
-  "/api2/v1/transMemories/downloadExport/{asyncRequestId}": {
-    get: operations["downloadSearchResult"];
-  };
-  "/api2/v1/transMemories/{transMemoryUid}/exportByQueryAsync": {
+    delete: operations['deleteTranslation']
+  }
+  '/api2/v1/transMemories/{transMemoryUid}/lastBackgroundTask': {
+    get: operations['getBackgroundTasks_1']
+  }
+  '/api2/v1/transMemories/{transMemoryUid}/wildCardSearch': {
+    post: operations['wildcardSearch']
+  }
+  '/api2/v1/transMemories/downloadExport/{asyncRequestId}': {
+    get: operations['downloadSearchResult']
+  }
+  '/api2/v1/transMemories/{transMemoryUid}/exportByQueryAsync': {
     /** Use [this API](#operation/downloadSearchResult) to download result */
-    post: operations["exportByQueryAsync"];
-  };
-  "/api2/v1/transMemories/{transMemoryUid}/search": {
-    post: operations["search"];
-  };
-  "/api2/v1/projects/{projectUid}/jobs/{jobUid}/translations/translateWithMachineTranslation": {
+    post: operations['exportByQueryAsync']
+  }
+  '/api2/v1/transMemories/{transMemoryUid}/search': {
+    post: operations['search']
+  }
+  '/api2/v1/projects/{projectUid}/jobs/{jobUid}/translations/translateWithMachineTranslation': {
     /** Configured machine translate settings is used */
-    post: operations["machineTranslationJob"];
-  };
-  "/api2/v1/priceLists/{priceListUid}": {
-    get: operations["getPriceList"];
-    put: operations["updatePriceList"];
-    delete: operations["deletePriceList"];
-  };
-  "/api2/v1/priceLists": {
-    get: operations["getListOfPriceList"];
-    post: operations["createPriceList"];
-  };
-  "/api2/v1/priceLists/{priceListUid}/priceSets": {
-    get: operations["getPricesWithWorkflowSteps"];
-    post: operations["createLanguagePair"];
-    delete: operations["deleteLanguagePairs"];
-  };
-  "/api2/v1/priceLists/{priceListUid}/priceSets/{sourceLanguage}/{targetLanguage}": {
-    delete: operations["deleteLanguagePair"];
-  };
-  "/api2/v1/priceLists/{priceListUid}/priceSets/minimumPrices": {
-    post: operations["setMinimumPriceForSet"];
-  };
-  "/api2/v1/priceLists/{priceListUid}/priceSets/prices": {
+    post: operations['machineTranslationJob']
+  }
+  '/api2/v1/priceLists/{priceListUid}': {
+    get: operations['getPriceList']
+    put: operations['updatePriceList']
+    delete: operations['deletePriceList']
+  }
+  '/api2/v1/priceLists': {
+    get: operations['getListOfPriceList']
+    post: operations['createPriceList']
+  }
+  '/api2/v1/priceLists/{priceListUid}/priceSets': {
+    get: operations['getPricesWithWorkflowSteps']
+    post: operations['createLanguagePair']
+    delete: operations['deleteLanguagePairs']
+  }
+  '/api2/v1/priceLists/{priceListUid}/priceSets/{sourceLanguage}/{targetLanguage}': {
+    delete: operations['deleteLanguagePair']
+  }
+  '/api2/v1/priceLists/{priceListUid}/priceSets/minimumPrices': {
+    post: operations['setMinimumPriceForSet']
+  }
+  '/api2/v1/priceLists/{priceListUid}/priceSets/prices': {
     /** If object contains only price, all languages and workflow steps will be updated */
-    post: operations["setPrices"];
-  };
-  "/api2/v1/users/{userUid}": {
-    delete: operations["deleteUser_1"];
-  };
-  "/api2/v1/users/{userUid}/projects": {
+    post: operations['setPrices']
+  }
+  '/api2/v1/users/{userUid}': {
+    delete: operations['deleteUser_1']
+  }
+  '/api2/v1/users/{userUid}/projects': {
     /** List projects in which the user is assigned to at least one job matching the criteria */
-    get: operations["listAssignedProjects"];
-  };
-  "/api2/v1/users/{userUid}/updatePassword": {
+    get: operations['listAssignedProjects']
+  }
+  '/api2/v1/users/{userUid}/updatePassword': {
     /**
      * * Password length must be between 8 and 255
      * * Password must not be same as the username
      */
-    post: operations["updatePassword"];
-  };
-  "/api2/v1/users/{userUid}/emailLoginInformation": {
-    post: operations["sendLoginInfo"];
-  };
-  "/api2/v1/users/{userUid}/undelete": {
-    post: operations["cancelDeletion"];
-  };
-  "/api2/v1/users/{userUid}/loginStatistics": {
-    get: operations["loginActivity"];
-  };
-  "/api2/v1/users": {
-    get: operations["getListOfUsersFiltered"];
-  };
-  "/api2/v1/users/{userUid}/jobs": {
-    get: operations["listJobs"];
-  };
-  "/api2/v1/users/{userUid}/workflowSteps": {
-    get: operations["listWorkflowSteps"];
-  };
-  "/api2/v1/users/{userUid}/targetLangs": {
-    get: operations["listTargetLangs"];
-  };
-  "/api2/v1/users/lastLogins": {
-    get: operations["user-lastLogins"];
-  };
-  "/api2/v1/vendors/{vendorUid}": {
-    get: operations["getVendor"];
-  };
-  "/api2/v1/vendors": {
-    get: operations["listVendors"];
-    post: operations["createVendor"];
-  };
-  "/api2/v1/webhooksCalls": {
-    get: operations["getWebhookCallsList"];
-  };
-  "/api2/v1/webhooksCalls/replay": {
+    post: operations['updatePassword']
+  }
+  '/api2/v1/users/{userUid}/emailLoginInformation': {
+    post: operations['sendLoginInfo']
+  }
+  '/api2/v1/users/{userUid}/undelete': {
+    post: operations['cancelDeletion']
+  }
+  '/api2/v1/users/{userUid}/loginStatistics': {
+    get: operations['loginActivity']
+  }
+  '/api2/v1/users': {
+    get: operations['getListOfUsersFiltered']
+  }
+  '/api2/v1/users/{userUid}/jobs': {
+    get: operations['listJobs']
+  }
+  '/api2/v1/users/{userUid}/workflowSteps': {
+    get: operations['listWorkflowSteps']
+  }
+  '/api2/v1/users/{userUid}/targetLangs': {
+    get: operations['listTargetLangs']
+  }
+  '/api2/v1/users/lastLogins': {
+    get: operations['user-lastLogins']
+  }
+  '/api2/v1/vendors/{vendorUid}': {
+    get: operations['getVendor']
+  }
+  '/api2/v1/vendors': {
+    get: operations['listVendors']
+    post: operations['createVendor']
+  }
+  '/api2/v1/webhooksCalls': {
+    get: operations['getWebhookCallsList']
+  }
+  '/api2/v1/webhooksCalls/replay': {
     /** Replays given list of Webhook Calls in specified order in the request */
-    post: operations["replayWebhookCalls"];
-  };
-  "/api2/v1/webhooksCalls/replay/latest": {
+    post: operations['replayWebhookCalls']
+  }
+  '/api2/v1/webhooksCalls/replay/latest': {
     /** Replays specified number of last Webhook calls from oldest to the newest one */
-    post: operations["replayLast"];
-  };
-  "/api2/v1/workflowSteps": {
-    get: operations["listWFSteps"];
-    post: operations["createWFStep"];
-  };
-  "/api2/v1/workflowSteps/{workflowStepUid}": {
-    put: operations["editWFStep"];
-  };
-  "/api2/v2/analyses": {
+    post: operations['replayLast']
+  }
+  '/api2/v1/workflowSteps': {
+    get: operations['listWFSteps']
+    post: operations['createWFStep']
+  }
+  '/api2/v1/workflowSteps/{workflowStepUid}': {
+    put: operations['editWFStep']
+  }
+  '/api2/v2/analyses': {
     /** Returns created analyses - batching analyses by number of segments (api.segment.count.approximation, default 100000), in case request contains more segments than maximum (api.segment.max.count, default 300000), returns 400 bad request. */
-    post: operations["createAnalyseAsync_1"];
-  };
-  "/api2/v2/analyses/{analyseUid}": {
+    post: operations['createAnalyseAsync_1']
+  }
+  '/api2/v2/analyses/{analyseUid}': {
     /**
      * If no netRateScheme is provided in
      * request, then netRateScheme associated with provider will be used if it exists, otherwise it will remain the same
      * as it was.
      */
-    put: operations["editAnalysis"];
-  };
-  "/api2/v2/analyses/bulk": {
+    put: operations['editAnalysis']
+  }
+  '/api2/v2/analyses/bulk': {
     /**
      * If no netRateScheme is provided in request, then netRateScheme associated with provider will
      * be used if it exists, otherwise it will remain the same as it was.
      */
-    put: operations["analyses-batchEdit-v2"];
-  };
-  "/api2/v2/bilingualFiles": {
+    put: operations['analyses-batchEdit-v2']
+  }
+  '/api2/v2/bilingualFiles': {
     /** Returns updated job parts and projects */
-    post: operations["uploadBilingualFileV2"];
-  };
-  "/api2/v2/connectors/{connectorId}/folders/{folder}/files/{file}/tasks/{taskId}": {
+    post: operations['uploadBilingualFileV2']
+  }
+  '/api2/v2/connectors/{connectorId}/folders/{folder}/files/{file}/tasks/{taskId}': {
     /** Download the file by referencing successfully finished async download request [Connector - Download file (async)](#operation/getFile_1). */
-    get: operations["getPreparedFile"];
-  };
-  "/api2/v2/connectors/{connectorId}/folders/{folder}/files/{fileName}/upload": {
+    get: operations['getPreparedFile']
+  }
+  '/api2/v2/connectors/{connectorId}/folders/{folder}/files/{fileName}/upload': {
     /** Upload a file to a subfolder of the selected connector */
-    post: operations["uploadFile_1"];
-  };
-  "/api2/v2/connectors/{connectorId}/folders/{folder}/files/{file}": {
+    post: operations['uploadFile_1']
+  }
+  '/api2/v2/connectors/{connectorId}/folders/{folder}/files/{file}': {
     /**
      * Create an asynchronous request to download a file from a (sub)folder of the selected connector.
      * After a callback with successful response is received, prepared file can be downloaded by [Download prepared file](#operation/getPreparedFile)
      * or [Create job from connector asynchronous download task](#operation/createJobFromAsyncDownloadTask).
      */
-    post: operations["getFile_1"];
-  };
-  "/api2/v2/jobs/workflowChanges": {
-    post: operations["downloadWorkflowChanges"];
-  };
-  "/api2/v2/jobs/{jobUid}/conversations/lqas": {
-    post: operations["createLqaConversation_1"];
-  };
-  "/api2/v2/jobs/{jobUid}/conversations/lqas/{conversationId}": {
-    put: operations["updateLqaConversation_1"];
-  };
-  "/api2/v2/jobs/{jobUid}/conversations/lqas/{conversationId}/comments": {
-    post: operations["addLQAComment_1"];
-  };
-  "/api2/v2/jobs/{jobUid}/conversations/lqas/{conversationId}/comments/{commentId}": {
-    put: operations["updateLQAComment_1"];
-  };
-  "/api2/v2/lqa/profiles/authors": {
-    get: operations["getLqaProfileAuthorsV2"];
-  };
-  "/api2/v2/projects/{projectUid}/providers/suggest": {
-    post: operations["listProviders_3"];
-  };
-  "/api2/v2/projects/{projectUid}/qaSettings": {
-    put: operations["setProjectQASettingsV2"];
-  };
-  "/api2/v2/projects/applyTemplate/{templateUid}": {
-    post: operations["createProjectFromTemplateV2"];
-  };
-  "/api2/v2/projects/applyTemplate/async/{templateUid}": {
-    post: operations["createProjectFromTemplateV2Async"];
-  };
-  "/api2/v2/projects/{projectUid}/accessSettings": {
-    get: operations["getProjectAccessSettingsV2"];
-    put: operations["editProjectAccessSettingsV2"];
-  };
-  "/api2/v2/projects/{projectUid}/workflowSteps": {
-    get: operations["getProjectWorkflowStepsV2"];
-  };
-  "/api2/v2/projects/{projectUid}": {
-    put: operations["editProjectV2"];
-  };
-  "/api2/v2/projects/{projectUid}/jobs": {
-    get: operations["listPartsV2"];
-  };
-  "/api2/v2/projects/{projectUid}/jobs/qualityAssurances/settings": {
+    post: operations['getFile_1']
+  }
+  '/api2/v2/jobs/workflowChanges': {
+    post: operations['downloadWorkflowChanges']
+  }
+  '/api2/v2/jobs/{jobUid}/conversations/lqas': {
+    post: operations['createLqaConversation_1']
+  }
+  '/api2/v2/jobs/{jobUid}/conversations/lqas/{conversationId}': {
+    put: operations['updateLqaConversation_1']
+  }
+  '/api2/v2/jobs/{jobUid}/conversations/lqas/{conversationId}/comments': {
+    post: operations['addLQAComment_1']
+  }
+  '/api2/v2/jobs/{jobUid}/conversations/lqas/{conversationId}/comments/{commentId}': {
+    put: operations['updateLQAComment_1']
+  }
+  '/api2/v2/lqa/profiles/authors': {
+    get: operations['getLqaProfileAuthorsV2']
+  }
+  '/api2/v2/projects/{projectUid}/providers/suggest': {
+    post: operations['listProviders_3']
+  }
+  '/api2/v2/projects/{projectUid}/qaSettings': {
+    put: operations['setProjectQASettingsV2']
+  }
+  '/api2/v2/projects/applyTemplate/{templateUid}': {
+    post: operations['createProjectFromTemplateV2']
+  }
+  '/api2/v2/projects/applyTemplate/async/{templateUid}': {
+    post: operations['createProjectFromTemplateV2Async']
+  }
+  '/api2/v2/projects/{projectUid}/accessSettings': {
+    get: operations['getProjectAccessSettingsV2']
+    put: operations['editProjectAccessSettingsV2']
+  }
+  '/api2/v2/projects/{projectUid}/workflowSteps': {
+    get: operations['getProjectWorkflowStepsV2']
+  }
+  '/api2/v2/projects/{projectUid}': {
+    put: operations['editProjectV2']
+  }
+  '/api2/v2/projects/{projectUid}/jobs': {
+    get: operations['listPartsV2']
+  }
+  '/api2/v2/projects/{projectUid}/jobs/qualityAssurances/settings': {
     /** Returns enabled quality assurance checks and settings. */
-    get: operations["enabledQualityChecksForJob"];
-  };
-  "/api2/v2/projects/{projectUid}/jobs/{jobUid}/qualityAssurances/settings": {
+    get: operations['enabledQualityChecksForJob']
+  }
+  '/api2/v2/projects/{projectUid}/jobs/{jobUid}/qualityAssurances/settings': {
     /** Returns enabled quality assurance checks and settings for job. */
-    get: operations["enabledQualityChecksForJob_1"];
-  };
-  "/api2/v2/projects/{projectUid}/jobs/webEditor": {
+    get: operations['enabledQualityChecksForJob_1']
+  }
+  '/api2/v2/projects/{projectUid}/jobs/webEditor': {
     /**
      * Possible warning codes are:
      *   - `NOT_ACCEPTED_BY_LINGUIST` - Job is not accepted by linguist
@@ -1389,39 +1389,39 @@ export interface paths {
      * }
      * ```
      */
-    post: operations["webEditorLinkV2"];
-  };
-  "/api2/v2/projects/{projectUid}/jobs/pseudoTranslate": {
-    post: operations["pseudoTranslate_1"];
-  };
-  "/api2/v2/projects/{projectUid}/jobs/preTranslate": {
-    post: operations["preTranslate_1"];
-  };
-  "/api2/v2/projects/{projectUid}/jobs/translations": {
-    delete: operations["deleteAllTranslations_1"];
-  };
-  "/api2/v2/projects/{projectUid}/jobs/{jobUid}/providers/suggest": {
-    post: operations["listProviders_4"];
-  };
-  "/api2/v2/projects/{projectUid}/jobs/{jobUid}/targetFile": {
+    post: operations['webEditorLinkV2']
+  }
+  '/api2/v2/projects/{projectUid}/jobs/pseudoTranslate': {
+    post: operations['pseudoTranslate_1']
+  }
+  '/api2/v2/projects/{projectUid}/jobs/preTranslate': {
+    post: operations['preTranslate_1']
+  }
+  '/api2/v2/projects/{projectUid}/jobs/translations': {
+    delete: operations['deleteAllTranslations_1']
+  }
+  '/api2/v2/projects/{projectUid}/jobs/{jobUid}/providers/suggest': {
+    post: operations['listProviders_4']
+  }
+  '/api2/v2/projects/{projectUid}/jobs/{jobUid}/targetFile': {
     /**
      * This call will create async request for downloading target file with translation that can be downloaded when
      *     finished. This means even for other jobs that were created via 'split jobs' etc.
      */
-    put: operations["completedFile_1"];
-  };
-  "/api2/v2/projects/{projectUid}/jobs/{jobUid}/downloadTargetFile/{asyncRequestId}": {
+    put: operations['completedFile_1']
+  }
+  '/api2/v2/projects/{projectUid}/jobs/{jobUid}/downloadTargetFile/{asyncRequestId}': {
     /**
      * This call will return target file with translation. This means even for other jobs that were created via
      *     'split jobs' etc.
      */
-    get: operations["downloadCompletedFile"];
-  };
-  "/api2/v2/projects/{projectUid}/jobs/qualityAssurances/ignoredWarnings": {
-    post: operations["addIgnoredWarnings_1"];
-    delete: operations["deleteIgnoredWarnings_1"];
-  };
-  "/api2/v2/projects/{projectUid}/references": {
+    get: operations['downloadCompletedFile']
+  }
+  '/api2/v2/projects/{projectUid}/jobs/qualityAssurances/ignoredWarnings': {
+    post: operations['addIgnoredWarnings_1']
+    delete: operations['deleteIgnoredWarnings_1']
+  }
+  '/api2/v2/projects/{projectUid}/references': {
     /**
      * The `json` request part allows sending additional data as JSON,
      * such as a text note that will be used for all the given reference files.
@@ -1435,2865 +1435,2836 @@ export interface paths {
      * }
      * ```
      */
-    post: operations["createReferenceFiles"];
-  };
-  "/api2/v2/projectTemplates/{projectTemplateUid}/transMemories": {
+    post: operations['createReferenceFiles']
+  }
+  '/api2/v2/projectTemplates/{projectTemplateUid}/transMemories': {
     /**
      * If user wants to edit “All target languages” or "All workflow steps”,
      *                        but there are already varied TM settings for individual languages or steps,
      *                        then the user risks to overwrite these individual choices.
      */
-    put: operations["setProjectTemplateTransMemoriesV2"];
-  };
-  "/api2/v2/quotes": {
+    put: operations['setProjectTemplateTransMemoriesV2']
+  }
+  '/api2/v2/quotes': {
     /** Either WorkflowSettings or Units must be sent for billingUnit "Hour". */
-    post: operations["createQuoteV2"];
-  };
-  "/api2/v2/termBases/{termBaseUid}/upload": {
+    post: operations['createQuoteV2']
+  }
+  '/api2/v2/termBases/{termBaseUid}/upload': {
     /**
      * Terms can be imported from XLS/XLSX and TBX file formats into a term base.
      * See <a target="_blank" href="https://support.phrase.com/hc/en-us/articles/5709733372188">Phrase Help Center</a>
      */
-    post: operations["importTermBaseV2"];
-  };
-  "/api2/v2/transMemories/{transMemoryUid}/export": {
+    post: operations['importTermBaseV2']
+  }
+  '/api2/v2/transMemories/{transMemoryUid}/export': {
     /** Use [this API](#operation/downloadSearchResult) to download result */
-    post: operations["exportV2"];
-  };
-  "/api2/v2/transMemories/{transMemoryUid}/segments": {
+    post: operations['exportV2']
+  }
+  '/api2/v2/transMemories/{transMemoryUid}/segments': {
     /** This call is **asynchronous**, use [this API](#operation/getAsyncRequest) to check the result */
-    delete: operations["clearTransMemoryV2"];
-  };
-  "/api2/v2/transMemories/{transMemoryUid}/import": {
-    post: operations["importTransMemoryV2"];
-  };
-  "/api2/v2/webhooks": {
-    get: operations["getWebHookList_1"];
-    post: operations["createWebHook_1"];
-  };
-  "/api2/v2/webhooks/{webHookUid}": {
-    get: operations["getWebHook_1"];
-    put: operations["updateWebHook_1"];
-    delete: operations["deleteWebHook_1"];
-  };
-  "/api2/v2/webhooks/previews": {
-    get: operations["getWebhookPreviews"];
-  };
-  "/api2/v2/webhooks/{webhookUid}/test": {
-    post: operations["sendTestWebhook"];
-  };
-  "/api2/v2/projects/{projectUid}/jobs/{jobUid}/termBases/searchInTextByJob": {
+    delete: operations['clearTransMemoryV2']
+  }
+  '/api2/v2/transMemories/{transMemoryUid}/import': {
+    post: operations['importTransMemoryV2']
+  }
+  '/api2/v2/webhooks': {
+    get: operations['getWebHookList_1']
+    post: operations['createWebHook_1']
+  }
+  '/api2/v2/webhooks/{webHookUid}': {
+    get: operations['getWebHook_1']
+    put: operations['updateWebHook_1']
+    delete: operations['deleteWebHook_1']
+  }
+  '/api2/v2/webhooks/previews': {
+    get: operations['getWebhookPreviews']
+  }
+  '/api2/v2/webhooks/{webhookUid}/test': {
+    post: operations['sendTestWebhook']
+  }
+  '/api2/v2/projects/{projectUid}/jobs/{jobUid}/termBases/searchInTextByJob': {
     /** Search in text in all read term bases assigned to the job */
-    post: operations["searchTermsInTextByJobV2"];
-  };
-  "/api2/v2/projects/{projectUid}/jobs/{jobUid}/termBases/searchByJob": {
+    post: operations['searchTermsInTextByJobV2']
+  }
+  '/api2/v2/projects/{projectUid}/jobs/{jobUid}/termBases/searchByJob': {
     /** Search all read term bases assigned to the job */
-    post: operations["searchTermsByJob_1"];
-  };
-  "/api2/v3/analyses/{analyseUid}": {
-    get: operations["getAnalyseV3"];
-  };
-  "/api2/v3/auth/login": {
-    post: operations["login_1"];
-  };
-  "/api2/v3/auth/loginToSession": {
-    post: operations["loginToSession_2"];
-  };
-  "/api2/v3/auth/loginOther": {
+    post: operations['searchTermsByJob_1']
+  }
+  '/api2/v3/analyses/{analyseUid}': {
+    get: operations['getAnalyseV3']
+  }
+  '/api2/v3/auth/login': {
+    post: operations['login_1']
+  }
+  '/api2/v3/auth/loginToSession': {
+    post: operations['loginToSession_2']
+  }
+  '/api2/v3/auth/loginOther': {
     /** Available only for admin */
-    post: operations["loginOther_1"];
-  };
-  "/api2/v3/jobs": {
+    post: operations['loginOther_1']
+  }
+  '/api2/v3/jobs': {
     /** Allows partial update, not breaking whole batch if single job fails and returns list of errors */
-    patch: operations["patchUpdateJobParts"];
-  };
-  "/api2/v3/projects/{projectUid}/jobs/{jobUid}/transMemories/search": {
-    post: operations["searchByJob3"];
-  };
-  "/api2/v3/projects/{projectUid}/jobs/{jobUid}/transMemories/wildCardSearch": {
-    post: operations["wildCardSearchByJob3"];
-  };
-  "/api2/v3/jobs/{jobUid}/conversations/plains/{conversationId}/comments": {
-    post: operations["addPlainComment_2"];
-  };
-  "/api2/v3/jobs/{jobUid}/conversations/plains": {
-    post: operations["createSegmentTargetConversation_1"];
-  };
-  "/api2/v3/jobs/{jobUid}/conversations/plains/{conversationId}/comments/{commentId}": {
-    put: operations["updatePlainComment_1"];
-  };
-  "/api2/v3/projects/{projectUid}/preTranslateSettings": {
-    get: operations["getPreTranslateSettingsForProject_2"];
-    put: operations["editProjectPreTranslateSettings_2"];
-  };
-  "/api2/v3/projects/{projectUid}/analyses": {
-    get: operations["listByProjectV3"];
-  };
-  "/api2/v3/projects": {
-    post: operations["createProjectV3"];
-  };
-  "/api2/v3/projects/{projectUid}/jobs/{jobUid}/qualityAssurances/run": {
+    patch: operations['patchUpdateJobParts']
+  }
+  '/api2/v3/projects/{projectUid}/jobs/{jobUid}/transMemories/search': {
+    post: operations['searchByJob3']
+  }
+  '/api2/v3/projects/{projectUid}/jobs/{jobUid}/transMemories/wildCardSearch': {
+    post: operations['wildCardSearchByJob3']
+  }
+  '/api2/v3/jobs/{jobUid}/conversations/plains/{conversationId}/comments': {
+    post: operations['addPlainComment_2']
+  }
+  '/api2/v3/jobs/{jobUid}/conversations/plains': {
+    post: operations['createSegmentTargetConversation_1']
+  }
+  '/api2/v3/jobs/{jobUid}/conversations/plains/{conversationId}/comments/{commentId}': {
+    put: operations['updatePlainComment_1']
+  }
+  '/api2/v3/projects/{projectUid}/preTranslateSettings': {
+    get: operations['getPreTranslateSettingsForProject_2']
+    put: operations['editProjectPreTranslateSettings_2']
+  }
+  '/api2/v3/projects/{projectUid}/analyses': {
+    get: operations['listByProjectV3']
+  }
+  '/api2/v3/projects': {
+    post: operations['createProjectV3']
+  }
+  '/api2/v3/projects/{projectUid}/jobs/{jobUid}/qualityAssurances/run': {
     /** Call "Get QA settings" endpoint to get the list of enabled QA checks */
-    post: operations["runQaForJobPartV3"];
-  };
-  "/api2/v3/projects/{projectUid}/jobs/qualityAssurances/run": {
+    post: operations['runQaForJobPartV3']
+  }
+  '/api2/v3/projects/{projectUid}/jobs/qualityAssurances/run': {
     /** Call "Get QA settings" endpoint to get the list of enabled QA checks */
-    post: operations["runQaForJobPartsV3"];
-  };
-  "/api2/v3/projects/{projectUid}/jobs/qualityAssurances/segments/run": {
+    post: operations['runQaForJobPartsV3']
+  }
+  '/api2/v3/projects/{projectUid}/jobs/qualityAssurances/segments/run': {
     /** By default runs only fast running checks. Source and target language of jobs have to match. */
-    post: operations["runQaForSegmentsV3"];
-  };
-  "/api2/v3/projects/{projectUid}/jobs/{jobUid}/analyses": {
-    get: operations["listPartAnalyseV3"];
-  };
-  "/api2/v3/projects/{projectUid}/jobs/export": {
-    post: operations["exportToOnlineRepository"];
-  };
-  "/api2/v3/projectTemplates/{projectTemplateUid}/preTranslateSettings": {
-    get: operations["getPreTranslateSettingsForProjectTemplate_2"];
-    put: operations["updatePreTranslateSettingsForProjectTemplate_2"];
-  };
-  "/api2/v3/projectTemplates/{projectTemplateUid}/transMemories": {
-    get: operations["getProjectTemplateTransMemories_2"];
-  };
-  "/api2/v3/projects/{projectUid}/transMemories": {
-    get: operations["getProjectTransMemories_1"];
+    post: operations['runQaForSegmentsV3']
+  }
+  '/api2/v3/projects/{projectUid}/jobs/{jobUid}/analyses': {
+    get: operations['listPartAnalyseV3']
+  }
+  '/api2/v3/projects/{projectUid}/jobs/export': {
+    post: operations['exportToOnlineRepository']
+  }
+  '/api2/v3/projectTemplates/{projectTemplateUid}/preTranslateSettings': {
+    get: operations['getPreTranslateSettingsForProjectTemplate_2']
+    put: operations['updatePreTranslateSettingsForProjectTemplate_2']
+  }
+  '/api2/v3/projectTemplates/{projectTemplateUid}/transMemories': {
+    get: operations['getProjectTemplateTransMemories_2']
+  }
+  '/api2/v3/projects/{projectUid}/transMemories': {
+    get: operations['getProjectTransMemories_1']
     /**
      * If user wants to edit “All target languages” or "All workflow steps”,
      *                        but there are already varied TM settings for individual languages or steps,
      *                        then the user risks to overwrite these individual choices.
      */
-    put: operations["setProjectTransMemoriesV3"];
-  };
-  "/api2/v3/users": {
-    post: operations["createUserV3"];
-  };
-  "/api2/v3/users/{userUid}": {
-    get: operations["getUserV3"];
-    put: operations["updateUserV3"];
-  };
-  "/api2/v3/users/{userUid}/disableTwoFactorAuth": {
-    post: operations["disableTwoFactorAuthV3"];
-  };
+    put: operations['setProjectTransMemoriesV3']
+  }
+  '/api2/v3/users': {
+    post: operations['createUserV3']
+  }
+  '/api2/v3/users/{userUid}': {
+    get: operations['getUserV3']
+    put: operations['updateUserV3']
+  }
+  '/api2/v3/users/{userUid}/disableTwoFactorAuth': {
+    post: operations['disableTwoFactorAuthV3']
+  }
 }
 
 export interface definitions {
   UserReference: {
-    firstName?: string;
-    lastName?: string;
-    userName?: string;
-    email?: string;
+    firstName?: string
+    lastName?: string
+    userName?: string
+    email?: string
     /** @enum {string} */
     role?:
-      | "SYS_ADMIN"
-      | "SYS_ADMIN_READ"
-      | "ADMIN"
-      | "PROJECT_MANAGER"
-      | "LINGUIST"
-      | "GUEST"
-      | "SUBMITTER";
-    id?: string;
-    uid?: string;
-  };
+      | 'SYS_ADMIN'
+      | 'SYS_ADMIN_READ'
+      | 'ADMIN'
+      | 'PROJECT_MANAGER'
+      | 'LINGUIST'
+      | 'GUEST'
+      | 'SUBMITTER'
+    id?: string
+    uid?: string
+  }
   AdditionalWorkflowStepDto: {
-    id?: string;
-    name?: string;
-  };
+    id?: string
+    name?: string
+  }
   AdditionalWorkflowStepRequestDto: {
     /** @description Name of the additional workflow step */
-    name: string;
-  };
+    name: string
+  }
   PageDtoAdditionalWorkflowStepDto: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["AdditionalWorkflowStepDto"][];
-  };
+    numberOfElements?: number
+    content?: definitions['AdditionalWorkflowStepDto'][]
+  }
   AsyncAnalyseResponseDto: {
-    asyncRequest?: definitions["AsyncRequestDto"];
-    analyse?: definitions["ObjectReference"];
-  };
+    asyncRequest?: definitions['AsyncRequestDto']
+    analyse?: definitions['ObjectReference']
+  }
   AsyncRequestDto: {
-    id?: string;
-    createdBy?: definitions["UserReference"];
+    id?: string
+    createdBy?: definitions['UserReference']
     /** Format: date-time */
-    dateCreated?: string;
+    dateCreated?: string
     /** @enum {string} */
     action?:
-      | "PRE_ANALYSE"
-      | "POST_ANALYSE"
-      | "COMPARE_ANALYSE"
-      | "PARENT_ANALYSE"
-      | "PRE_TRANSLATE"
-      | "ASYNC_TRANSLATE"
-      | "IMPORT_JOB"
-      | "IMPORT_FILE"
-      | "ALIGN"
-      | "EXPORT_TMX_BY_QUERY"
-      | "EXPORT_TMX"
-      | "IMPORT_TMX"
-      | "IMPORT_TBX"
-      | "INSERT_INTO_TM"
-      | "DELETE_TM"
-      | "CLEAR_TM"
-      | "QA"
-      | "QA_V3"
-      | "UPDATE_CONTINUOUS_JOB"
-      | "UPDATE_SOURCE"
-      | "UPDATE_TARGET"
-      | "EXTRACT_CLEANED_TMS"
-      | "GLOSSARY_PUT"
-      | "GLOSSARY_DELETE"
-      | "CREATE_PROJECT"
-      | "EXPORT_COMPLETE_FILE"
-      | "IMPORT_ANNOTATIONS"
-      | "FILE_FLOW_CONVERTER_IMPORT"
-      | "FILE_FLOW_MT_PRETRANSLATE";
-    asyncResponse?: definitions["AsyncResponseDto"];
-    parent?: definitions["AsyncRequestDto"];
-    project?: definitions["ProjectReference"];
-  };
+      | 'PRE_ANALYSE'
+      | 'POST_ANALYSE'
+      | 'COMPARE_ANALYSE'
+      | 'PARENT_ANALYSE'
+      | 'PRE_TRANSLATE'
+      | 'ASYNC_TRANSLATE'
+      | 'IMPORT_JOB'
+      | 'IMPORT_FILE'
+      | 'ALIGN'
+      | 'EXPORT_TMX_BY_QUERY'
+      | 'EXPORT_TMX'
+      | 'IMPORT_TMX'
+      | 'IMPORT_TBX'
+      | 'INSERT_INTO_TM'
+      | 'DELETE_TM'
+      | 'CLEAR_TM'
+      | 'QA'
+      | 'QA_V3'
+      | 'UPDATE_CONTINUOUS_JOB'
+      | 'UPDATE_SOURCE'
+      | 'UPDATE_TARGET'
+      | 'EXTRACT_CLEANED_TMS'
+      | 'GLOSSARY_PUT'
+      | 'GLOSSARY_DELETE'
+      | 'CREATE_PROJECT'
+      | 'EXPORT_COMPLETE_FILE'
+      | 'IMPORT_ANNOTATIONS'
+      | 'FILE_FLOW_CONVERTER_IMPORT'
+      | 'FILE_FLOW_MT_PRETRANSLATE'
+    asyncResponse?: definitions['AsyncResponseDto']
+    parent?: definitions['AsyncRequestDto']
+    project?: definitions['ProjectReference']
+  }
   AsyncResponseDto: {
     /** Format: date-time */
-    dateCreated?: string;
-    errorCode?: string;
-    errorDesc?: string;
-    errorDetails?: definitions["ErrorDetailDto"][];
-    warnings?: definitions["ErrorDetailDto"][];
+    dateCreated?: string
+    errorCode?: string
+    errorDesc?: string
+    errorDetails?: definitions['ErrorDetailDto'][]
+    warnings?: definitions['ErrorDetailDto'][]
     /** Format: int64 */
-    acceptedSegmentsCount?: number;
-  };
+    acceptedSegmentsCount?: number
+  }
   ErrorDetailDto: {
     /** @description Code, e.g. NOT_FOUND. */
-    code?: string;
+    code?: string
     /** @description Related arguments, e.g. number => "hello world" */
-    args?: { [key: string]: { [key: string]: unknown } };
+    args?: {[key: string]: {[key: string]: unknown}}
     /** @description Optional human-readable message. */
-    message?: string;
-  };
-  ObjectReference: { [key: string]: unknown };
+    message?: string
+  }
+  ObjectReference: {[key: string]: unknown}
   ProjectReference: {
-    uid?: string;
+    uid?: string
     /** Format: int32 */
-    innerId?: number;
-    name?: string;
-    businessUnit?: definitions["BusinessUnitReference"];
-    domain?: definitions["DomainReference"];
-    subDomain?: definitions["SubDomainReference"];
-    client?: definitions["ClientReference"];
-    costCenter?: definitions["CostCenterReference"];
+    innerId?: number
+    name?: string
+    businessUnit?: definitions['BusinessUnitReference']
+    domain?: definitions['DomainReference']
+    subDomain?: definitions['SubDomainReference']
+    client?: definitions['ClientReference']
+    costCenter?: definitions['CostCenterReference']
     /** Format: date-time */
-    dueDate?: string;
+    dueDate?: string
     /** Format: date-time */
-    createdDate?: string;
-    createdBy?: definitions["UserReference"];
-    owner?: definitions["UserReference"];
-    vendor?: definitions["VendorUserReference"];
-    purchaseOrder?: string;
-    sourceLang?: string;
-    targetLangs?: string[];
-    status?: string;
-    progress?: definitions["ProgressReference"];
-    metadata?: definitions["MetadataReference"][];
-    note?: string;
-    deleted?: boolean;
-    archived?: boolean;
-  };
+    createdDate?: string
+    createdBy?: definitions['UserReference']
+    owner?: definitions['UserReference']
+    vendor?: definitions['VendorUserReference']
+    purchaseOrder?: string
+    sourceLang?: string
+    targetLangs?: string[]
+    status?: string
+    progress?: definitions['ProgressReference']
+    metadata?: definitions['MetadataReference'][]
+    note?: string
+    deleted?: boolean
+    archived?: boolean
+  }
   IdReference: {
-    id: string;
-  };
+    id: string
+  }
   UidReference: {
-    uid: string;
-  };
+    uid: string
+  }
   AnalyseJobReference: {
-    uid?: string;
-    filename?: string;
-    innerId?: string;
-  };
+    uid?: string
+    filename?: string
+    innerId?: string
+  }
   AnalyseLanguagePartDto: {
-    id?: string;
-    sourceLang?: string;
-    targetLang?: string;
-    data?: definitions["DataDtoV1"];
-    discountedData?: definitions["DataDtoV1"];
-    jobs?: definitions["AnalyseJobReference"][];
-  };
+    id?: string
+    sourceLang?: string
+    targetLang?: string
+    data?: definitions['DataDtoV1']
+    discountedData?: definitions['DataDtoV1']
+    jobs?: definitions['AnalyseJobReference'][]
+  }
   CountsDto: {
     /** Format: double */
-    segments?: number;
+    segments?: number
     /** Format: double */
-    words?: number;
+    words?: number
     /** Format: double */
-    characters?: number;
+    characters?: number
     /** Format: double */
-    normalizedPages?: number;
+    normalizedPages?: number
     /** Format: double */
-    percent?: number;
+    percent?: number
     /** Format: double */
-    editingTime?: number;
-  };
+    editingTime?: number
+  }
   DataDtoV1: {
-    available?: boolean;
-    all?: definitions["CountsDto"];
-    repetitions?: definitions["CountsDto"];
-    transMemoryMatches?: definitions["MatchCounts101Dto"];
-    machineTranslationMatches?: definitions["MatchCountsDto"];
-    nonTranslatablesMatches?: definitions["MatchCountsNTDtoV1"];
-    internalFuzzyMatches?: definitions["MatchCountsDto"];
-  };
+    available?: boolean
+    all?: definitions['CountsDto']
+    repetitions?: definitions['CountsDto']
+    transMemoryMatches?: definitions['MatchCounts101Dto']
+    machineTranslationMatches?: definitions['MatchCountsDto']
+    nonTranslatablesMatches?: definitions['MatchCountsNTDtoV1']
+    internalFuzzyMatches?: definitions['MatchCountsDto']
+  }
   MatchCounts101Dto: {
-    match100?: definitions["CountsDto"];
-    match95?: definitions["CountsDto"];
-    match85?: definitions["CountsDto"];
-    match75?: definitions["CountsDto"];
-    match50?: definitions["CountsDto"];
-    match0?: definitions["CountsDto"];
-    match101?: definitions["CountsDto"];
-  };
+    match100?: definitions['CountsDto']
+    match95?: definitions['CountsDto']
+    match85?: definitions['CountsDto']
+    match75?: definitions['CountsDto']
+    match50?: definitions['CountsDto']
+    match0?: definitions['CountsDto']
+    match101?: definitions['CountsDto']
+  }
   MatchCountsDto: {
-    match100?: definitions["CountsDto"];
-    match95?: definitions["CountsDto"];
-    match85?: definitions["CountsDto"];
-    match75?: definitions["CountsDto"];
-    match50?: definitions["CountsDto"];
-    match0?: definitions["CountsDto"];
-  };
+    match100?: definitions['CountsDto']
+    match95?: definitions['CountsDto']
+    match85?: definitions['CountsDto']
+    match75?: definitions['CountsDto']
+    match50?: definitions['CountsDto']
+    match0?: definitions['CountsDto']
+  }
   MatchCountsNTDtoV1: {
-    match100?: definitions["CountsDto"];
-    match99?: definitions["CountsDto"];
-  };
+    match100?: definitions['CountsDto']
+    match99?: definitions['CountsDto']
+  }
   NetRateSchemeReference: {
-    id?: string;
-    uid?: string;
-    name?: string;
+    id?: string
+    uid?: string
+    name?: string
     /** Format: date-time */
-    dateCreated?: string;
-    createdBy?: definitions["UserReference"];
-  };
+    dateCreated?: string
+    createdBy?: definitions['UserReference']
+  }
   AsyncAnalyseListResponseDto: {
-    analyses?: definitions["AsyncAnalyseResponseDto"][];
-  };
+    analyses?: definitions['AsyncAnalyseResponseDto'][]
+  }
   CreateAnalyseListAsyncDto: {
-    jobs: definitions["UidReference"][];
+    jobs: definitions['UidReference'][]
     /**
      * @description default: PreAnalyse
      * @enum {string}
      */
-    type?: "PreAnalyse" | "PostAnalyse" | "Compare";
+    type?: 'PreAnalyse' | 'PostAnalyse' | 'Compare'
     /** @description Default: true */
-    includeFuzzyRepetitions?: boolean;
+    includeFuzzyRepetitions?: boolean
     /** @description Default: false */
-    separateFuzzyRepetitions?: boolean;
+    separateFuzzyRepetitions?: boolean
     /** @description Default: true */
-    includeConfirmedSegments?: boolean;
+    includeConfirmedSegments?: boolean
     /** @description Default: true */
-    includeNumbers?: boolean;
+    includeNumbers?: boolean
     /** @description Default: true */
-    includeLockedSegments?: boolean;
+    includeLockedSegments?: boolean
     /** @description Default: true */
-    countSourceUnits?: boolean;
+    countSourceUnits?: boolean
     /** @description Default: true. Works only for type=PreAnalyse. */
-    includeTransMemory?: boolean;
+    includeTransMemory?: boolean
     /** @description Default: false. Works only for type=PreAnalyse. */
-    includeNonTranslatables?: boolean;
+    includeNonTranslatables?: boolean
     /** @description Default: false. Works only for type=PreAnalyse. */
-    includeMachineTranslationMatches?: boolean;
+    includeMachineTranslationMatches?: boolean
     /** @description Default: false. Works only for type=PostAnalyse. */
-    transMemoryPostEditing?: boolean;
+    transMemoryPostEditing?: boolean
     /** @description Default: false. Works only for type=PostAnalyse. */
-    nonTranslatablePostEditing?: boolean;
+    nonTranslatablePostEditing?: boolean
     /** @description Default: false. Works only for type=PostAnalyse. */
-    machineTranslatePostEditing?: boolean;
-    name?: string;
-    netRateScheme?: definitions["IdReference"];
+    machineTranslatePostEditing?: boolean
+    name?: string
+    netRateScheme?: definitions['IdReference']
     /**
      * Format: int32
      * @description Required for type=Compare
      */
-    compareWorkflowLevel?: number;
+    compareWorkflowLevel?: number
     /**
      * @description Default: false. Use default project settings. Will be overwritten with setting sent
      *         in the API call.
      */
-    useProjectAnalysisSettings?: boolean;
-    callbackUrl?: string;
-  };
+    useProjectAnalysisSettings?: boolean
+    callbackUrl?: string
+  }
   AnalyseRecalculateResponseDto: {
-    analyses?: definitions["AsyncAnalyseResponseDto"][];
-  };
+    analyses?: definitions['AsyncAnalyseResponseDto'][]
+  }
   AnalyseRecalculateRequestDto: {
-    analyses: definitions["IdReference"][];
-    callbackUrl?: string;
-  };
+    analyses: definitions['IdReference'][]
+    callbackUrl?: string
+  }
   AnalyseJobDto: {
-    uid?: string;
-    filename?: string;
-    data?: definitions["DataDtoV1"];
-    discountedData?: definitions["DataDtoV1"];
-  };
+    uid?: string
+    filename?: string
+    data?: definitions['DataDtoV1']
+    discountedData?: definitions['DataDtoV1']
+  }
   PageDtoAnalyseJobDto: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["AnalyseJobDto"][];
-  };
-  CleanupTask: { [key: string]: unknown };
-  InputStream: { [key: string]: unknown };
+    numberOfElements?: number
+    content?: definitions['AnalyseJobDto'][]
+  }
+  CleanupTask: {[key: string]: unknown}
+  InputStream: {[key: string]: unknown}
   InputStreamLength: {
-    stream?: definitions["InputStream"];
+    stream?: definitions['InputStream']
     /** Format: int64 */
-    length?: number;
-    name?: string;
-    characterEncoding?: string;
-    extension?: string;
-    cleanupTask?: definitions["CleanupTask"];
-  };
+    length?: number
+    name?: string
+    characterEncoding?: string
+    extension?: string
+    cleanupTask?: definitions['CleanupTask']
+  }
   BulkDeleteAnalyseDto: {
-    analyses: definitions["IdReference"][];
+    analyses: definitions['IdReference'][]
     /** @description Default: false */
-    purge?: boolean;
-  };
+    purge?: boolean
+  }
   PageDtoAsyncRequestDto: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["AsyncRequestDto"][];
-  };
+    numberOfElements?: number
+    content?: definitions['AsyncRequestDto'][]
+  }
   AsyncRequestStatusDto: {
     /** @description Current count of running requests and the allowed limit */
-    concurrentRequests?: definitions["ConcurrentRequestsDto"];
-  };
+    concurrentRequests?: definitions['ConcurrentRequestsDto']
+  }
   ConcurrentRequestsDto: {
     /**
      * Format: int32
      * @description Max number of allowed concurrent request, null value means no limit
      */
-    limit?: number;
+    limit?: number
     /**
      * Format: int32
      * @description Current count of running concurrent requests
      */
-    count?: number;
-  };
+    count?: number
+  }
   LoginResponseDto: {
-    user?: definitions["UserReference"];
-    token?: string;
+    user?: definitions['UserReference']
+    token?: string
     /** Format: date-time */
-    expires?: string;
+    expires?: string
     /** Format: date-time */
-    lastInvalidateAllSessionsPerformed?: string;
-  };
+    lastInvalidateAllSessionsPerformed?: string
+  }
   LoginDto: {
-    userName: string;
-    password: string;
+    userName: string
+    password: string
     /** @description Required only for 2-factor authentication */
-    code?: string;
-  };
+    code?: string
+  }
   LoginToSessionResponseDto: {
-    user?: definitions["UserReference"];
-    cookie?: string;
-    csrfToken?: string;
-  };
+    user?: definitions['UserReference']
+    cookie?: string
+    csrfToken?: string
+  }
   LoginToSessionDto: {
-    userName: string;
-    password: string;
-    rememberMe?: boolean;
-  };
+    userName: string
+    password: string
+    rememberMe?: boolean
+  }
   LoginOtherDto: {
-    userName: string;
-  };
+    userName: string
+  }
   EditionDto: {
-    id?: string;
-    name?: string;
-    title?: string;
-  };
+    id?: string
+    name?: string
+    title?: string
+  }
   FeaturesDto: {
-    icuEnabled?: boolean;
-    rejectJobs?: boolean;
-    qaHighlightsEnabled?: boolean;
-    lqaBulkCommentsCreation?: boolean;
-    mtForTMAbove100Enabled?: boolean;
-    mqmQualityEstimationEnabled?: boolean;
-  };
+    icuEnabled?: boolean
+    rejectJobs?: boolean
+    qaHighlightsEnabled?: boolean
+    lqaBulkCommentsCreation?: boolean
+    mtForTMAbove100Enabled?: boolean
+    mqmQualityEstimationEnabled?: boolean
+  }
   LoginUserDto: {
-    user?: definitions["UserReference"];
-    csrfToken?: string;
-    organization?: definitions["OrganizationReference"];
-    edition?: definitions["EditionDto"];
-    features?: definitions["FeaturesDto"];
-  };
+    user?: definitions['UserReference']
+    csrfToken?: string
+    organization?: definitions['OrganizationReference']
+    edition?: definitions['EditionDto']
+    features?: definitions['FeaturesDto']
+  }
   OrganizationReference: {
-    uid?: string;
-    name?: string;
-  };
+    uid?: string
+    name?: string
+  }
   LoginWithGoogleDto: {
-    idToken: string;
-  };
+    idToken: string
+  }
   LoginWithAppleDto: {
-    codeOrRefreshToken: string;
-  };
+    codeOrRefreshToken: string
+  }
   AppleTokenResponseDto: {
-    access_token?: string;
-    token_type?: string;
-    expires_in?: string;
-    refresh_token?: string;
-    id_token?: string;
-  };
+    access_token?: string
+    token_type?: string
+    expires_in?: string
+    refresh_token?: string
+    id_token?: string
+  }
   ComparedSegmentDto: {
-    uid?: string;
+    uid?: string
     /** @enum {string} */
-    state?: "Miss" | "Diff";
-  };
+    state?: 'Miss' | 'Diff'
+  }
   ComparedSegmentsDto: {
-    segments?: definitions["ComparedSegmentDto"][];
-  };
+    segments?: definitions['ComparedSegmentDto'][]
+  }
   JobPartReference: {
-    uid?: string;
+    uid?: string
     /** @enum {string} */
     status?:
-      | "NEW"
-      | "ACCEPTED"
-      | "DECLINED"
-      | "REJECTED"
-      | "DELIVERED"
-      | "EMAILED"
-      | "COMPLETED"
-      | "CANCELLED";
-    providers?: definitions["ProviderReference"][];
-    targetLang?: string;
+      | 'NEW'
+      | 'ACCEPTED'
+      | 'DECLINED'
+      | 'REJECTED'
+      | 'DELIVERED'
+      | 'EMAILED'
+      | 'COMPLETED'
+      | 'CANCELLED'
+    providers?: definitions['ProviderReference'][]
+    targetLang?: string
     /** Format: int32 */
-    workflowLevel?: number;
-    workflowStep?: definitions["WorkflowStepReference"];
-    filename?: string;
+    workflowLevel?: number
+    workflowStep?: definitions['WorkflowStepReference']
+    filename?: string
     /** Format: date-time */
-    dateDue?: string;
+    dateDue?: string
     /** Format: date-time */
-    dateCreated?: string;
+    dateCreated?: string
     /** Format: date-time */
-    updateSourceDate?: string;
-    imported?: boolean;
-    jobAssignedEmailTemplate?: definitions["ObjectReference"];
+    updateSourceDate?: string
+    imported?: boolean
+    jobAssignedEmailTemplate?: definitions['ObjectReference']
     /** Format: int32 */
-    notificationIntervalInMinutes?: number;
-    continuous?: boolean;
-    sourceFileUid?: string;
-  };
+    notificationIntervalInMinutes?: number
+    continuous?: boolean
+    sourceFileUid?: string
+  }
   ProjectJobPartsDto: {
-    jobs?: definitions["JobPartReference"][];
-    project?: definitions["ProjectReference"];
-  };
+    jobs?: definitions['JobPartReference'][]
+    project?: definitions['ProjectReference']
+  }
   ProviderReference: {
-    type: string;
-    id?: string;
-    uid?: string;
-  };
-  USER: definitions["ProviderReference"] & {
-    userName?: string;
-    firstName?: string;
-    lastName?: string;
-    email?: string;
-    active?: boolean;
-  };
-  VENDOR: definitions["ProviderReference"] & {
-    name?: string;
+    type: string
+    id?: string
+    uid?: string
+  }
+  USER: definitions['ProviderReference'] & {
+    userName?: string
+    firstName?: string
+    lastName?: string
+    email?: string
+    active?: boolean
+  }
+  VENDOR: definitions['ProviderReference'] & {
+    name?: string
     /** Format: int64 */
-    defaultProjectOwnerId?: number;
-  };
+    defaultProjectOwnerId?: number
+  }
   WorkflowStepReference: {
-    name?: string;
-    id?: string;
-    uid?: string;
+    name?: string
+    id?: string
+    uid?: string
     /** Format: int32 */
-    order?: number;
-    lqaEnabled?: boolean;
-  };
+    order?: number
+    lqaEnabled?: boolean
+  }
   BusinessUnitDto: {
-    id?: string;
-    uid?: string;
-    name?: string;
-    createdBy?: definitions["UserReference"];
-  };
+    id?: string
+    uid?: string
+    name?: string
+    createdBy?: definitions['UserReference']
+  }
   PageDtoBusinessUnitDto: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["BusinessUnitDto"][];
-  };
+    numberOfElements?: number
+    content?: definitions['BusinessUnitDto'][]
+  }
   BusinessUnitEditDto: {
-    name: string;
-  };
+    name: string
+  }
   ClientReference: {
-    id?: string;
-    uid?: string;
-    name?: string;
-  };
+    id?: string
+    uid?: string
+    name?: string
+  }
   ClientDto: {
-    id?: string;
-    uid?: string;
-    name?: string;
-    externalId?: string;
-    note?: string;
+    id?: string
+    uid?: string
+    name?: string
+    externalId?: string
+    note?: string
     /** @description Default: false */
-    displayNoteInProject?: boolean;
-    priceList?: definitions["PriceListReference"];
-    netRateScheme?: definitions["NetRateSchemeReference"];
-    createdBy?: definitions["UserReference"];
-  };
+    displayNoteInProject?: boolean
+    priceList?: definitions['PriceListReference']
+    netRateScheme?: definitions['NetRateSchemeReference']
+    createdBy?: definitions['UserReference']
+  }
   PriceListReference: {
-    id?: string;
-    name?: string;
-    uid?: string;
-  };
+    id?: string
+    name?: string
+    uid?: string
+  }
   ClientEditDto: {
-    name: string;
-    externalId?: string;
-    note?: string;
+    name: string
+    externalId?: string
+    note?: string
     /** @description Default: false */
-    displayNoteInProject?: boolean;
-    priceList?: definitions["IdReference"];
-    netRateScheme?: definitions["IdReference"];
-  };
+    displayNoteInProject?: boolean
+    priceList?: definitions['IdReference']
+    netRateScheme?: definitions['IdReference']
+  }
   PageDtoClientDto: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["ClientDto"][];
-  };
+    numberOfElements?: number
+    content?: definitions['ClientDto'][]
+  }
   AutomatedProjectSettingsDto: {
-    id?: string;
-    name?: string;
-    organization?: definitions["NameDto"];
-    active?: boolean;
-    sourceLang?: string;
-    targetLangs?: string[];
-    connector?: definitions["NameDto"];
-    remoteFolder?: string;
-  };
+    id?: string
+    name?: string
+    organization?: definitions['NameDto']
+    active?: boolean
+    sourceLang?: string
+    targetLangs?: string[]
+    connector?: definitions['NameDto']
+    remoteFolder?: string
+  }
   ConnectorDto: {
-    id?: string;
-    name?: string;
+    id?: string
+    name?: string
     /** @enum {string} */
     type?:
-      | "DROPBOX"
-      | "GOOGLE"
-      | "FTP"
-      | "WORDPRESS"
-      | "GITHUB"
-      | "SFTP"
-      | "DRUPAL"
-      | "BOX"
-      | "GIT"
-      | "ZENDESK"
-      | "ONEDRIVE"
-      | "GITLAB"
-      | "MARKETO"
-      | "HUBSPOT"
-      | "HELPSCOUT"
-      | "SALESFORCE"
-      | "BITBUCKET"
-      | "BITBUCKETSERVER"
-      | "BRAZE"
-      | "SHAREPOINT"
-      | "AZURE"
-      | "SITECORE"
-      | "KENTICO"
-      | "KENTICO_KONTENT"
-      | "MAGENTO"
-      | "CONTENTFULENTRYLEVEL"
-      | "CONTENTFUL"
-      | "CONTENTSTACK"
-      | "JOOMLA"
-      | "CONFLUENCE"
-      | "TRIDION"
-      | "TYPO3"
-      | "AEM_PLUGIN"
-      | "DRUPAL_PLUGIN"
-      | "AMAZON_S3"
-      | "PARDOT"
-      | "PHRASE";
-    organization?: definitions["NameDto"];
-    createdBy?: definitions["NameDto"];
+      | 'DROPBOX'
+      | 'GOOGLE'
+      | 'FTP'
+      | 'WORDPRESS'
+      | 'GITHUB'
+      | 'SFTP'
+      | 'DRUPAL'
+      | 'BOX'
+      | 'GIT'
+      | 'ZENDESK'
+      | 'ONEDRIVE'
+      | 'GITLAB'
+      | 'MARKETO'
+      | 'HUBSPOT'
+      | 'HELPSCOUT'
+      | 'SALESFORCE'
+      | 'BITBUCKET'
+      | 'BITBUCKETSERVER'
+      | 'BRAZE'
+      | 'SHAREPOINT'
+      | 'AZURE'
+      | 'SITECORE'
+      | 'KENTICO'
+      | 'KENTICO_KONTENT'
+      | 'MAGENTO'
+      | 'CONTENTFULENTRYLEVEL'
+      | 'CONTENTFUL'
+      | 'CONTENTSTACK'
+      | 'JOOMLA'
+      | 'CONFLUENCE'
+      | 'TRIDION'
+      | 'TYPO3'
+      | 'AEM_PLUGIN'
+      | 'DRUPAL_PLUGIN'
+      | 'AMAZON_S3'
+      | 'PARDOT'
+      | 'PHRASE'
+    organization?: definitions['NameDto']
+    createdBy?: definitions['NameDto']
     /** Format: date-time */
-    createdAt?: string;
-    localToken?: string;
-    automatedProjectSettings?: definitions["AutomatedProjectSettingsDto"][];
-  };
+    createdAt?: string
+    localToken?: string
+    automatedProjectSettings?: definitions['AutomatedProjectSettingsDto'][]
+  }
   NameDto: {
-    id?: string;
-    name?: string;
-  };
+    id?: string
+    name?: string
+  }
   ConnectorCreateResponseDto: {
-    id?: string;
-    name?: string;
-    type?: string;
+    id?: string
+    name?: string
+    type?: string
     /** Format: date-time */
-    created?: string;
-    status?: string;
-    linkedAccount?: string;
-  };
+    created?: string
+    status?: string
+    linkedAccount?: string
+  }
   AbstractConnectorDto: {
     /** @description Name of the connector */
-    name: string;
+    name: string
     /** @description Connector type */
-    type: string;
-  };
-  AdobeExperienceManager: definitions["AbstractConnectorDto"] & {
-    urlRewriteFind?: string;
-    urlRewriteReplace?: string;
-    host: string;
-  };
-  AmazonS3: definitions["AbstractConnectorDto"] & {
-    apiKey: string;
-    apiSecret: string;
-  };
-  BitbucketServer: definitions["AbstractConnectorDto"] & {
-    host: string;
-    commitMessage?: string;
-    token: string;
-  };
-  Contentstack: definitions["AbstractConnectorDto"] & {
-    authType: string;
-    region?: string;
-    nonLocalizableBlocksUids?: string;
-    targetLangsFieldId?: string;
-    apiKey: string;
-    sourceLang?: string;
+    type: string
+  }
+  AdobeExperienceManager: definitions['AbstractConnectorDto'] & {
+    urlRewriteFind?: string
+    urlRewriteReplace?: string
+    host: string
+  }
+  AmazonS3: definitions['AbstractConnectorDto'] & {
+    apiKey: string
+    apiSecret: string
+  }
+  BitbucketServer: definitions['AbstractConnectorDto'] & {
+    host: string
+    commitMessage?: string
+    token: string
+  }
+  Contentstack: definitions['AbstractConnectorDto'] & {
+    authType: string
+    region?: string
+    nonLocalizableBlocksUids?: string
+    targetLangsFieldId?: string
+    apiKey: string
+    sourceLang?: string
     /** @description Default false */
-    translateUrls?: boolean;
+    translateUrls?: boolean
     /** @description Default false */
-    translateTags?: boolean;
-    managementToken?: string;
-    password?: string;
-    userName?: string;
-    stackWFObserved?: string;
-    stackWFUponImport?: string;
-    stackWFExportSource?: string;
-    stackWFExportTranslate?: string;
-  };
-  Ftp: definitions["AbstractConnectorDto"] & {
-    userName: string;
-    password: string;
-    host: string;
+    translateTags?: boolean
+    managementToken?: string
+    password?: string
+    userName?: string
+    stackWFObserved?: string
+    stackWFUponImport?: string
+    stackWFExportSource?: string
+    stackWFExportTranslate?: string
+  }
+  Ftp: definitions['AbstractConnectorDto'] & {
+    userName: string
+    password: string
+    host: string
     /** Format: int32 */
-    port: number;
+    port: number
     /** @description Default TLS_IF_AVAILABLE */
-    encryption?: string;
-  };
-  Git: definitions["AbstractConnectorDto"] & {
-    userName: string;
-    password: string;
-    host: string;
-    commitMessage?: string;
-    sshKeyName?: string;
-    sshKey?: string;
-    sshPassPhrase?: string;
-  };
-  GitLab: definitions["AbstractConnectorDto"] & {
-    commitMessage?: string;
-    host: string;
-    token: string;
-  };
-  Google: definitions["AbstractConnectorDto"] & {
-    code?: string;
-    redirectUri?: string;
+    encryption?: string
+  }
+  Git: definitions['AbstractConnectorDto'] & {
+    userName: string
+    password: string
+    host: string
+    commitMessage?: string
+    sshKeyName?: string
+    sshKey?: string
+    sshPassPhrase?: string
+  }
+  GitLab: definitions['AbstractConnectorDto'] & {
+    commitMessage?: string
+    host: string
+    token: string
+  }
+  Google: definitions['AbstractConnectorDto'] & {
+    code?: string
+    redirectUri?: string
     /** @enum {string} */
     encryption?:
-      | "NOT_USED"
-      | "INSECURE"
-      | "IMPLICIT_TLS_REQUIRED"
-      | "EXPLICIT_TLS_REQUIRED"
-      | "TLS_IF_AVAILABLE";
-    oauthClientId?: string;
-  };
-  Joomla: definitions["AbstractConnectorDto"] & {
-    host: string;
-    token: string;
-  };
-  Kentico: definitions["AbstractConnectorDto"] & {
-    userName: string;
-    password: string;
-    host: string;
-    sourceLang?: string;
-  };
-  Magento: definitions["AbstractConnectorDto"] & {
-    host: string;
-    token: string;
-  };
-  Marketo: definitions["AbstractConnectorDto"] & {
-    apiKey: string;
-    apiSecret: string;
-    identityURL: string;
-    connectorType: string;
-    variables?: definitions["VariableDto"][];
-    segmentationMapping?: definitions["MarketoSegmentationMappingDto"];
-    translateTokens?: boolean;
-    debugMode?: boolean;
-  };
+      | 'NOT_USED'
+      | 'INSECURE'
+      | 'IMPLICIT_TLS_REQUIRED'
+      | 'EXPLICIT_TLS_REQUIRED'
+      | 'TLS_IF_AVAILABLE'
+    oauthClientId?: string
+  }
+  Joomla: definitions['AbstractConnectorDto'] & {
+    host: string
+    token: string
+  }
+  Kentico: definitions['AbstractConnectorDto'] & {
+    userName: string
+    password: string
+    host: string
+    sourceLang?: string
+  }
+  Magento: definitions['AbstractConnectorDto'] & {
+    host: string
+    token: string
+  }
+  Marketo: definitions['AbstractConnectorDto'] & {
+    apiKey: string
+    apiSecret: string
+    identityURL: string
+    connectorType: string
+    variables?: definitions['VariableDto'][]
+    segmentationMapping?: definitions['MarketoSegmentationMappingDto']
+    translateTokens?: boolean
+    debugMode?: boolean
+  }
   MarketoSegmentMappingDto: {
     /** Format: int64 */
-    segmentId?: number;
-    locale?: string;
-    source?: boolean;
-  };
+    segmentId?: number
+    locale?: string
+    source?: boolean
+  }
   MarketoSegmentationMappingDto: {
     /** Format: int64 */
-    segmentationId?: number;
-    segmentsMapping?: definitions["MarketoSegmentMappingDto"][];
-  };
-  MicrosoftAzure: definitions["AbstractConnectorDto"] & {
+    segmentationId?: number
+    segmentsMapping?: definitions['MarketoSegmentMappingDto'][]
+  }
+  MicrosoftAzure: definitions['AbstractConnectorDto'] & {
     /** @description Microsoft azure connection string */
-    connectionString: string;
-  };
-  Sftp: definitions["AbstractConnectorDto"] & {
-    host: string;
+    connectionString: string
+  }
+  Sftp: definitions['AbstractConnectorDto'] & {
+    host: string
     /** Format: int32 */
-    port: number;
-    userName: string;
-    password: string;
-    sshKeyName?: string;
-    sshKey?: string;
-    sshPassPhrase?: string;
-  };
-  Sitecore: definitions["AbstractConnectorDto"] & {
-    userName: string;
-    password: string;
-    host: string;
-    sitecoreDatabase: string;
-    sourceLang?: string;
+    port: number
+    userName: string
+    password: string
+    sshKeyName?: string
+    sshKey?: string
+    sshPassPhrase?: string
+  }
+  Sitecore: definitions['AbstractConnectorDto'] & {
+    userName: string
+    password: string
+    host: string
+    sitecoreDatabase: string
+    sourceLang?: string
     /** @enum {string} */
-    authenticationType?: "STANDARD" | "OWIN";
-  };
-  Tridion: definitions["AbstractConnectorDto"] & {
-    host: string;
+    authenticationType?: 'STANDARD' | 'OWIN'
+  }
+  Tridion: definitions['AbstractConnectorDto'] & {
+    host: string
     /** Format: int32 */
-    port: number;
-    userName: string;
-    password: string;
-    sshKeyName?: string;
-    sshKey?: string;
-    sshPassPhrase?: string;
-  };
-  Typo3: definitions["AbstractConnectorDto"] & {
-    host: string;
-    sourceLang?: string;
-    token: string;
-  };
+    port: number
+    userName: string
+    password: string
+    sshKeyName?: string
+    sshKey?: string
+    sshPassPhrase?: string
+  }
+  Typo3: definitions['AbstractConnectorDto'] & {
+    host: string
+    sourceLang?: string
+    token: string
+  }
   VariableDto: {
-    name?: string;
-    value?: string;
-  };
-  Wordpress: definitions["AbstractConnectorDto"] & {
-    basicAuthUserName: string;
-    basicAuthPassword: string;
-    host: string;
+    name?: string
+    value?: string
+  }
+  Wordpress: definitions['AbstractConnectorDto'] & {
+    basicAuthUserName: string
+    basicAuthPassword: string
+    host: string
     /** @description Memsource plugin token */
-    token: string;
-  };
+    token: string
+  }
   ConnectorErrorDetailDto: {
-    code?: string;
-    message?: string;
-    messageCode?: string;
-    args?: { [key: string]: { [key: string]: unknown } };
-    skipPrefix?: boolean;
-  };
+    code?: string
+    message?: string
+    messageCode?: string
+    args?: {[key: string]: {[key: string]: unknown}}
+    skipPrefix?: boolean
+  }
   ConnectorErrorsDto: {
-    errors?: definitions["ConnectorErrorDetailDto"][];
-  };
+    errors?: definitions['ConnectorErrorDetailDto'][]
+  }
   UploadResultDto: {
-    id?: string;
-    name?: string;
-    folder?: string;
-    encodedName?: string;
+    id?: string
+    name?: string
+    folder?: string
+    encodedName?: string
     /** Format: int64 */
-    size?: number;
-    error?: string;
-    asyncTaskId?: string;
-    errors?: definitions["ConnectorErrorsDto"];
-  };
+    size?: number
+    error?: string
+    asyncTaskId?: string
+    errors?: definitions['ConnectorErrorsDto']
+  }
   ConnectorListDto: {
-    connectors?: definitions["ConnectorDto"][];
+    connectors?: definitions['ConnectorDto'][]
     /** Format: int32 */
-    totalCount?: number;
-  };
+    totalCount?: number
+  }
   ErrorDto: {
-    code?: string;
-    message?: string;
-  };
+    code?: string
+    message?: string
+  }
   FileDto: {
-    id?: string;
-    name?: string;
-    encodedName?: string;
-    contentType?: string;
-    note?: string;
+    id?: string
+    name?: string
+    encodedName?: string
+    contentType?: string
+    note?: string
     /** Format: int64 */
-    size?: number;
-    directory?: boolean;
+    size?: number
+    directory?: boolean
     /** Format: date-time */
-    lastModified?: string;
+    lastModified?: string
     /** Format: date-time */
-    dueDate?: string;
-    selected?: boolean;
-    error?: definitions["ErrorDto"];
-  };
+    dueDate?: string
+    selected?: boolean
+    error?: definitions['ErrorDto']
+  }
   FileListDto: {
-    files?: definitions["FileDto"][];
-    currentFolder?: string;
-    encodedCurrentFolder?: string;
-    rootFolder?: boolean;
-    lastChangedFiles?: definitions["FileDto"][];
-  };
+    files?: definitions['FileDto'][]
+    currentFolder?: string
+    encodedCurrentFolder?: string
+    rootFolder?: boolean
+    lastChangedFiles?: definitions['FileDto'][]
+  }
   CommentDto: {
-    id?: string;
-    text?: string;
-    createdBy?: definitions["MentionableUserDto"];
+    id?: string
+    text?: string
+    createdBy?: definitions['MentionableUserDto']
     /** Format: date-time */
-    dateCreated?: string;
+    dateCreated?: string
     /** Format: date-time */
-    dateModified?: string;
-    mentions?: definitions["MentionDto"][];
-  };
+    dateModified?: string
+    mentions?: definitions['MentionDto'][]
+  }
   CommonConversationDto: {
-    id?: string;
+    id?: string
     /** @description Field references differs based on the Conversation Type. */
-    type?: string;
+    type?: string
     /** Format: date-time */
-    dateCreated?: string;
+    dateCreated?: string
     /** Format: date-time */
-    dateModified?: string;
+    dateModified?: string
     /** Format: date-time */
-    dateEdited?: string;
-    createdBy?: definitions["MentionableUserDto"];
-    comments?: definitions["CommentDto"][];
-    status?: definitions["StatusDto"];
-    deleted?: boolean;
-  };
+    dateEdited?: string
+    createdBy?: definitions['MentionableUserDto']
+    comments?: definitions['CommentDto'][]
+    status?: definitions['StatusDto']
+    deleted?: boolean
+  }
   ConversationListDto: {
-    conversations?: definitions["CommonConversationDto"][];
-  };
+    conversations?: definitions['CommonConversationDto'][]
+  }
   JobRoleDto: {
     /** @enum {string} */
-    type: "PROJECT_OWNER" | "JOB_OWNER" | "PROVIDER" | "GUEST";
+    type: 'PROJECT_OWNER' | 'JOB_OWNER' | 'PROVIDER' | 'GUEST'
     /** @description not null only for `PROVIDER` type and project with defined workflow steps */
-    workflowStep?: definitions["ProjectWorkflowStepDtoV2"];
+    workflowStep?: definitions['ProjectWorkflowStepDtoV2']
     /**
      * @description not null only for shared projects
      * @enum {string}
      */
-    organizationType?: "VENDOR" | "BUYER";
-  };
-  LQA: definitions["CommonConversationDto"] & {
-    references?: definitions["LQAReferences"];
-    lqaDescription?: string;
-  };
+    organizationType?: 'VENDOR' | 'BUYER'
+  }
+  LQA: definitions['CommonConversationDto'] & {
+    references?: definitions['LQAReferences']
+    lqaDescription?: string
+  }
   LQAReference: {
     /** Format: int32 */
-    errorCategoryId: number;
+    errorCategoryId: number
     /** Format: int32 */
-    severityId: number;
-    user?: definitions["IdReference"];
+    severityId: number
+    user?: definitions['IdReference']
     /**
      * @description Default: `NOT_REPEATED`
      * @enum {string}
      */
-    repeated?: "REPEATED" | "NOT_REPEATED";
-  };
+    repeated?: 'REPEATED' | 'NOT_REPEATED'
+  }
   LQAReferences: {
-    taskId?: string;
-    jobPartUid?: string;
+    taskId?: string
+    jobPartUid?: string
     /** Format: int32 */
-    transGroupId: number;
-    segmentId: string;
-    conversationTitle?: string;
+    transGroupId: number
+    segmentId: string
+    conversationTitle?: string
     /** Format: int32 */
-    conversationTitleOffset?: number;
-    commentedText?: string;
-    correlation?: definitions["ReferenceCorrelation"];
-    lqa: definitions["LQAReference"][];
-  };
+    conversationTitleOffset?: number
+    commentedText?: string
+    correlation?: definitions['ReferenceCorrelation']
+    lqa: definitions['LQAReference'][]
+  }
   MentionDto: {
     /** @enum {string} */
-    mentionType: "USER" | "GROUP";
+    mentionType: 'USER' | 'GROUP'
     /** @enum {string} */
-    mentionGroupType?:
-      | "JOB"
-      | "OWNERS"
-      | "PROVIDERS"
-      | "GUESTS"
-      | "WORKFLOW_STEP";
-    uidReference?: definitions["UidReference"];
-    userReferences?: definitions["MentionableUserDto"][];
-    mentionableGroup?: definitions["MentionableGroupDto"];
-    tag?: string;
-  };
+    mentionGroupType?: 'JOB' | 'OWNERS' | 'PROVIDERS' | 'GUESTS' | 'WORKFLOW_STEP'
+    uidReference?: definitions['UidReference']
+    userReferences?: definitions['MentionableUserDto'][]
+    mentionableGroup?: definitions['MentionableGroupDto']
+    tag?: string
+  }
   MentionableGroupDto: {
     /** @enum {string} */
-    groupType?: "JOB" | "OWNERS" | "PROVIDERS" | "GUESTS" | "WORKFLOW_STEP";
-    groupName?: string;
-    groupReference?: definitions["UidReference"];
-  };
+    groupType?: 'JOB' | 'OWNERS' | 'PROVIDERS' | 'GUESTS' | 'WORKFLOW_STEP'
+    groupName?: string
+    groupReference?: definitions['UidReference']
+  }
   MentionableUserDto: {
-    firstName?: string;
-    lastName?: string;
-    userName?: string;
-    email?: string;
+    firstName?: string
+    lastName?: string
+    userName?: string
+    email?: string
     /** @enum {string} */
     role?:
-      | "SYS_ADMIN"
-      | "SYS_ADMIN_READ"
-      | "ADMIN"
-      | "PROJECT_MANAGER"
-      | "LINGUIST"
-      | "GUEST"
-      | "SUBMITTER";
-    id?: string;
-    uid?: string;
-    unavailable?: boolean;
-    jobRoles?: definitions["JobRoleDto"][];
-  };
+      | 'SYS_ADMIN'
+      | 'SYS_ADMIN_READ'
+      | 'ADMIN'
+      | 'PROJECT_MANAGER'
+      | 'LINGUIST'
+      | 'GUEST'
+      | 'SUBMITTER'
+    id?: string
+    uid?: string
+    unavailable?: boolean
+    jobRoles?: definitions['JobRoleDto'][]
+  }
   PlainReferences: {
-    taskId?: string;
-    jobPartUid?: string;
+    taskId?: string
+    jobPartUid?: string
     /** Format: int32 */
-    transGroupId: number;
-    segmentId: string;
-    conversationTitle?: string;
+    transGroupId: number
+    segmentId: string
+    conversationTitle?: string
     /** Format: int32 */
-    conversationTitleOffset?: number;
-    commentedText?: string;
-    correlation?: definitions["ReferenceCorrelation"];
-  };
+    conversationTitleOffset?: number
+    commentedText?: string
+    correlation?: definitions['ReferenceCorrelation']
+  }
   ProjectWorkflowStepDtoV2: {
     /** Format: int32 */
-    id?: number;
-    abbreviation?: string;
-    name?: string;
+    id?: number
+    abbreviation?: string
+    name?: string
     /** Format: int32 */
-    workflowLevel?: number;
-    workflowStep?: definitions["WorkflowStepReferenceV2"];
-  };
+    workflowLevel?: number
+    workflowStep?: definitions['WorkflowStepReferenceV2']
+  }
   ReferenceCorrelation: {
-    uid?: string;
+    uid?: string
     /** @enum {string} */
-    role?: "PARENT";
-  };
-  SEGMENT_TARGET: definitions["CommonConversationDto"] & {
-    references?: definitions["PlainReferences"];
-  };
+    role?: 'PARENT'
+  }
+  SEGMENT_TARGET: definitions['CommonConversationDto'] & {
+    references?: definitions['PlainReferences']
+  }
   StatusDto: {
     /** @enum {string} */
-    name?: "resolved" | "unresolved";
-    by?: definitions["MentionableUserDto"];
+    name?: 'resolved' | 'unresolved'
+    by?: definitions['MentionableUserDto']
     /** Format: date-time */
-    date?: string;
-  };
+    date?: string
+  }
   WorkflowStepReferenceV2: {
-    name?: string;
-    uid?: string;
-    id?: string;
+    name?: string
+    uid?: string
+    id?: string
     /** Format: int32 */
-    order?: number;
-    lqaEnabled?: boolean;
-  };
+    order?: number
+    lqaEnabled?: boolean
+  }
   FindConversationsDto: {
-    jobs: definitions["UidReference"][];
-    since?: string;
+    jobs: definitions['UidReference'][]
+    since?: string
     /** @description Default: false */
-    includeDeleted?: boolean;
-  };
+    includeDeleted?: boolean
+  }
   CostCenterDto: {
-    id?: string;
-    uid?: string;
-    name?: string;
-    createdBy?: definitions["UserReference"];
-  };
+    id?: string
+    uid?: string
+    name?: string
+    createdBy?: definitions['UserReference']
+  }
   CostCenterEditDto: {
-    name?: string;
-  };
+    name?: string
+  }
   PageDtoCostCenterDto: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["CostCenterDto"][];
-  };
+    numberOfElements?: number
+    content?: definitions['CostCenterDto'][]
+  }
   CustomFieldDto: {
-    uid?: string;
-    name?: string;
+    uid?: string
+    name?: string
     /** @enum {string} */
-    type?:
-      | "MULTI_SELECT"
-      | "SINGLE_SELECT"
-      | "STRING"
-      | "NUMBER"
-      | "URL"
-      | "DATE";
-    allowedEntities?: "PROJECT"[];
-    options?: definitions["CustomFieldOptionsTruncatedDto"];
+    type?: 'MULTI_SELECT' | 'SINGLE_SELECT' | 'STRING' | 'NUMBER' | 'URL' | 'DATE'
+    allowedEntities?: 'PROJECT'[]
+    options?: definitions['CustomFieldOptionsTruncatedDto']
     /** Format: date-time */
-    createdAt?: string;
-    createdBy?: definitions["UserReference"];
+    createdAt?: string
+    createdBy?: definitions['UserReference']
     /** Format: date-time */
-    lastModified?: string;
-    lastModifiedBy?: definitions["UserReference"];
+    lastModified?: string
+    lastModifiedBy?: definitions['UserReference']
     /** Format: date-time */
-    requiredFrom?: string;
-    required?: boolean;
-    description?: string;
-  };
+    requiredFrom?: string
+    required?: boolean
+    description?: string
+  }
   CustomFieldOptionDto: {
-    uid?: string;
-    value?: string;
-  };
+    uid?: string
+    value?: string
+  }
   CustomFieldOptionsTruncatedDto: {
     /**
      * @description Truncated list of options with size 5.
      *     To get all options use endpoint for getting options of the specific field
      */
-    truncatedOptions?: definitions["CustomFieldOptionDto"][];
+    truncatedOptions?: definitions['CustomFieldOptionDto'][]
     /** Format: int32 */
-    remainingCount?: number;
-  };
+    remainingCount?: number
+  }
   CreateCustomFieldDto: {
-    name: string;
-    allowedEntities: "PROJECT"[];
-    options?: string[];
+    name: string
+    allowedEntities: 'PROJECT'[]
+    options?: string[]
     /** @enum {string} */
-    type?:
-      | "MULTI_SELECT"
-      | "SINGLE_SELECT"
-      | "STRING"
-      | "NUMBER"
-      | "URL"
-      | "DATE";
-    required?: boolean;
-    description?: string;
-  };
+    type?: 'MULTI_SELECT' | 'SINGLE_SELECT' | 'STRING' | 'NUMBER' | 'URL' | 'DATE'
+    required?: boolean
+    description?: string
+  }
   PageDtoCustomFieldDto: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["CustomFieldDto"][];
-  };
+    numberOfElements?: number
+    content?: definitions['CustomFieldDto'][]
+  }
   PageDtoCustomFieldOptionDto: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["CustomFieldOptionDto"][];
-  };
+    numberOfElements?: number
+    content?: definitions['CustomFieldOptionDto'][]
+  }
   AndroidSettingsDto: {
-    tagRegexp?: string;
+    tagRegexp?: string
     /** @description Default: `false` */
-    icuSubFilter?: boolean;
-  };
+    icuSubFilter?: boolean
+  }
   AsciidocSettingsDto: {
-    tagRegexp?: string;
+    tagRegexp?: string
     /** @description Default: `false` */
-    htmlInPassthrough?: boolean;
-    nontranslatableMonospaceCustomStylesRegexp?: string;
+    htmlInPassthrough?: boolean
+    nontranslatableMonospaceCustomStylesRegexp?: string
     /** @description Default: `.*` */
-    extractCustomDocumentAttributeNameRegexp?: string;
+    extractCustomDocumentAttributeNameRegexp?: string
     /** @description Default: `false` */
-    extractBtnMenuLabels?: boolean;
-  };
+    extractBtnMenuLabels?: boolean
+  }
   CsvSettingsDto: {
     /** @description Default: , */
-    delimiter?: string;
+    delimiter?: string
     /**
      * @description Default: COMMA
      * @enum {string}
      */
-    delimiterType?: "TAB" | "COMMA" | "SEMICOLON" | "OTHER";
+    delimiterType?: 'TAB' | 'COMMA' | 'SEMICOLON' | 'OTHER'
     /** @description Default: false */
-    htmlSubFilter?: boolean;
-    tagRegexp?: string;
-    importColumns?: string;
-    contextNoteColumns?: string;
-    contextKeyColumn?: string;
-    maxLenColumn?: string;
-    importRows?: string;
-  };
+    htmlSubFilter?: boolean
+    tagRegexp?: string
+    importColumns?: string
+    contextNoteColumns?: string
+    contextKeyColumn?: string
+    maxLenColumn?: string
+    importRows?: string
+  }
   CustomFileTypeDto: {
-    uid?: string;
-    name?: string;
-    filenamePattern?: string;
-    type?: string;
-    createdBy?: definitions["UserReference"];
+    uid?: string
+    name?: string
+    filenamePattern?: string
+    type?: string
+    createdBy?: definitions['UserReference']
     /** Format: date-time */
-    dateCreated?: string;
-    fileImportSettings?: definitions["FileImportSettingsDto"];
-    supportsContinuousJob?: boolean;
-  };
+    dateCreated?: string
+    fileImportSettings?: definitions['FileImportSettingsDto']
+    supportsContinuousJob?: boolean
+  }
   DitaSettingsDto: {
-    includeTags?: string;
-    excludeTags?: string;
-    inlineTags?: string;
-    inlineTagsNonTranslatable?: string;
-    tagRegexp?: string;
-  };
+    includeTags?: string
+    excludeTags?: string
+    inlineTags?: string
+    inlineTagsNonTranslatable?: string
+    tagRegexp?: string
+  }
   DocBookSettingsDto: {
-    includeTags?: string;
-    excludeTags?: string;
-    inlineTags?: string;
-    inlineTagsNonTranslatable?: string;
-    tagRegexp?: string;
-  };
+    includeTags?: string
+    excludeTags?: string
+    inlineTags?: string
+    inlineTagsNonTranslatable?: string
+    tagRegexp?: string
+  }
   DocSettingsDto: {
     /** @description Default: false */
-    comments?: boolean;
+    comments?: boolean
     /** @description Default: true */
-    index?: boolean;
+    index?: boolean
     /** @description Default: false */
-    other?: boolean;
-    tagRegexp?: string;
+    other?: boolean
+    tagRegexp?: string
     /** @description Default: false */
-    hyperlinkTarget?: boolean;
+    hyperlinkTarget?: boolean
     /** @description Default: false */
-    joinSimilarRuns?: boolean;
-    targetFont?: string;
+    joinSimilarRuns?: boolean
+    targetFont?: string
     /** @description Default: false */
-    properties?: boolean;
+    properties?: boolean
     /** @description Default: false */
-    hidden?: boolean;
+    hidden?: boolean
     /** @description Default: true */
-    headerFooter?: boolean;
-  };
+    headerFooter?: boolean
+  }
   FileImportSettingsDto: {
-    inputCharset?: string;
-    outputCharset?: string;
-    zipCharset?: string;
-    fileFormat?: string;
-    autodetectMultilingualFiles?: boolean;
-    targetLength?: boolean;
+    inputCharset?: string
+    outputCharset?: string
+    zipCharset?: string
+    fileFormat?: string
+    autodetectMultilingualFiles?: boolean
+    targetLength?: boolean
     /** Format: int32 */
-    targetLengthMax?: number;
-    targetLengthPercent?: boolean;
+    targetLengthMax?: number
+    targetLengthPercent?: boolean
     /** Format: double */
-    targetLengthPercentValue?: number;
-    android?: definitions["AndroidSettingsDto"];
-    idml?: definitions["IdmlSettingsDto"];
-    xls?: definitions["XlsSettingsDto"];
-    multilingualXml?: definitions["MultilingualXmlSettingsDto"];
-    php?: definitions["PhpSettingsDto"];
-    resx?: definitions["ResxSettingsDto"];
-    json?: definitions["JsonSettingsDto"];
-    html?: definitions["HtmlSettingsDto"];
-    multilingualXls?: definitions["MultilingualXlsSettingsDto"];
-    multilingualCsv?: definitions["MultilingualCsvSettingsDto"];
-    csv?: definitions["CsvSettingsDto"];
-    txt?: definitions["TxtSettingsDto"];
-    xlf2?: definitions["Xlf2SettingsDto"];
-    quarkTag?: definitions["QuarkTagSettingsDto"];
-    pdf?: definitions["PdfSettingsDto"];
-    tmMatch?: definitions["TMMatchSettingsDto"];
-    xml?: definitions["XmlSettingsDto"];
-    mif?: definitions["MifSettingsDto"];
-    properties?: definitions["PropertiesSettingsDto"];
-    doc?: definitions["DocSettingsDto"];
-    xlf?: definitions["XlfSettingsDto"];
-    sdlXlf?: definitions["SdlXlfSettingsDto"];
-    ttx?: definitions["TtxSettingsDto"];
-    ppt?: definitions["PptSettingsDto"];
-    yaml?: definitions["YamlSettingsDto"];
-    dita?: definitions["DitaSettingsDto"];
-    docBook?: definitions["DocBookSettingsDto"];
-    po?: definitions["PoSettingsDto"];
-    mac?: definitions["MacSettingsDto"];
-    md?: definitions["MdSettingsDto"];
-    psd?: definitions["PsdSettingsDto"];
-    asciidoc?: definitions["AsciidocSettingsDto"];
-    segRule?: definitions["SegRuleReference"];
-    targetSegRule?: definitions["SegRuleReference"];
-  };
+    targetLengthPercentValue?: number
+    android?: definitions['AndroidSettingsDto']
+    idml?: definitions['IdmlSettingsDto']
+    xls?: definitions['XlsSettingsDto']
+    multilingualXml?: definitions['MultilingualXmlSettingsDto']
+    php?: definitions['PhpSettingsDto']
+    resx?: definitions['ResxSettingsDto']
+    json?: definitions['JsonSettingsDto']
+    html?: definitions['HtmlSettingsDto']
+    multilingualXls?: definitions['MultilingualXlsSettingsDto']
+    multilingualCsv?: definitions['MultilingualCsvSettingsDto']
+    csv?: definitions['CsvSettingsDto']
+    txt?: definitions['TxtSettingsDto']
+    xlf2?: definitions['Xlf2SettingsDto']
+    quarkTag?: definitions['QuarkTagSettingsDto']
+    pdf?: definitions['PdfSettingsDto']
+    tmMatch?: definitions['TMMatchSettingsDto']
+    xml?: definitions['XmlSettingsDto']
+    mif?: definitions['MifSettingsDto']
+    properties?: definitions['PropertiesSettingsDto']
+    doc?: definitions['DocSettingsDto']
+    xlf?: definitions['XlfSettingsDto']
+    sdlXlf?: definitions['SdlXlfSettingsDto']
+    ttx?: definitions['TtxSettingsDto']
+    ppt?: definitions['PptSettingsDto']
+    yaml?: definitions['YamlSettingsDto']
+    dita?: definitions['DitaSettingsDto']
+    docBook?: definitions['DocBookSettingsDto']
+    po?: definitions['PoSettingsDto']
+    mac?: definitions['MacSettingsDto']
+    md?: definitions['MdSettingsDto']
+    psd?: definitions['PsdSettingsDto']
+    asciidoc?: definitions['AsciidocSettingsDto']
+    segRule?: definitions['SegRuleReference']
+    targetSegRule?: definitions['SegRuleReference']
+  }
   HtmlSettingsDto: {
     /** @description Default: true */
-    breakTagCreatesSegment?: boolean;
+    breakTagCreatesSegment?: boolean
     /** @description Default: true */
-    unknownTagCreatesTag?: boolean;
+    unknownTagCreatesTag?: boolean
     /** @description Default: false */
-    preserveWhitespace?: boolean;
+    preserveWhitespace?: boolean
     /** @description Default: true */
-    importComments?: boolean;
+    importComments?: boolean
     /** @description Example: "script,blockquote" */
-    excludeElements?: string;
-    tagRegexp?: string;
-    charEntitiesToTags?: string;
-    translateMetaTagRegexp?: string;
+    excludeElements?: string
+    tagRegexp?: string
+    charEntitiesToTags?: string
+    translateMetaTagRegexp?: string
     /** @description Default: true */
-    importDefaultMetaTags?: boolean;
-    translatableAttributes?: string;
+    importDefaultMetaTags?: boolean
+    translatableAttributes?: string
     /** @description Default: true */
-    importDefaultAttributes?: boolean;
+    importDefaultAttributes?: boolean
     /** @description Example: "code" */
-    nonTranslatableInlineElements?: string;
+    nonTranslatableInlineElements?: string
     /** @description Example: "span" */
-    translatableInlineElements?: string;
+    translatableInlineElements?: string
     /** @description Default: false */
-    updateLang?: boolean;
+    updateLang?: boolean
     /** @description Default: `false` */
-    escapeDisabled?: boolean;
-  };
+    escapeDisabled?: boolean
+  }
   IdmlSettingsDto: {
     /** @description Default: false */
-    extractNotes?: boolean;
+    extractNotes?: boolean
     /** @description Default: true */
-    simplifyCodes?: boolean;
+    simplifyCodes?: boolean
     /** @description Default: true */
-    extractMasterSpreads?: boolean;
+    extractMasterSpreads?: boolean
     /** @description Default: true */
-    extractLockedLayers?: boolean;
+    extractLockedLayers?: boolean
     /** @description Default: false */
-    extractInvisibleLayers?: boolean;
+    extractInvisibleLayers?: boolean
     /** @description Default: false */
-    extractHiddenConditionalText?: boolean;
+    extractHiddenConditionalText?: boolean
     /** @description Default: false */
-    extractHyperlinks?: boolean;
+    extractHyperlinks?: boolean
     /** @description Default: false */
-    keepKerning?: boolean;
+    keepKerning?: boolean
     /** @description Default: false */
-    keepTracking?: boolean;
-    targetFont?: string;
+    keepTracking?: boolean
+    targetFont?: string
     /** @description Default: true */
-    replaceFont?: boolean;
+    replaceFont?: boolean
     /** @description Default: false */
-    removeXmlElements?: boolean;
-    tagRegexp?: string;
+    removeXmlElements?: boolean
+    tagRegexp?: string
     /** @description Default: true */
-    extractCrossReferenceFormats?: boolean;
+    extractCrossReferenceFormats?: boolean
     /** @description Default: true */
-    extractVariables?: boolean;
-  };
+    extractVariables?: boolean
+  }
   JsonSettingsDto: {
-    tagRegexp?: string;
+    tagRegexp?: string
     /** @description Default: true */
-    htmlSubFilter?: boolean;
+    htmlSubFilter?: boolean
     /** @description Default: false */
-    icuSubFilter?: boolean;
-    excludeKeyRegexp?: string;
-    includeKeyRegexp?: string;
-    contextNotePath?: string;
-    maxLenPath?: string;
-    contextKeyPath?: string;
-  };
+    icuSubFilter?: boolean
+    excludeKeyRegexp?: string
+    includeKeyRegexp?: string
+    contextNotePath?: string
+    maxLenPath?: string
+    contextKeyPath?: string
+  }
   MacSettingsDto: {
     /** @description Default: false */
-    htmlSubfilter?: boolean;
-    tagRegexp?: string;
+    htmlSubfilter?: boolean
+    tagRegexp?: string
     /** @description Default: `false` */
-    icuSubFilter?: boolean;
-  };
+    icuSubFilter?: boolean
+  }
   MdSettingsDto: {
     /** @description Default: true */
-    hardLineBreaksSegments?: boolean;
+    hardLineBreaksSegments?: boolean
     /** @description Default: false */
-    preserveWhiteSpaces?: boolean;
-    tagRegexp?: string;
-    customElements?: string;
-    ignoredBlockPrefixes?: string;
+    preserveWhiteSpaces?: boolean
+    tagRegexp?: string
+    customElements?: string
+    ignoredBlockPrefixes?: string
     /**
      * @description Default: PLAIN
      * @enum {string}
      */
-    flavor?: "PLAIN" | "PHP" | "GITHUB";
+    flavor?: 'PLAIN' | 'PHP' | 'GITHUB'
     /** @description Default: false */
-    processJekyllFrontMatter?: boolean;
+    processJekyllFrontMatter?: boolean
     /** @description Default: true */
-    extractCodeBlocks?: boolean;
-    notEscapedCharacters?: string;
+    extractCodeBlocks?: boolean
+    notEscapedCharacters?: string
     /** @description Default: false */
-    excludeCodeElements?: boolean;
-  };
+    excludeCodeElements?: boolean
+  }
   MetadataField: {
     /** @enum {string} */
-    type?: "CLIENT" | "DOMAIN" | "SUBDOMAIN" | "FILENAME";
-  };
+    type?: 'CLIENT' | 'DOMAIN' | 'SUBDOMAIN' | 'FILENAME'
+  }
   MetadataPrioritySettingsDto: {
-    prioritizedFields: definitions["MetadataField"][];
-  };
+    prioritizedFields: definitions['MetadataField'][]
+  }
   MifSettingsDto: {
     /** @description Default: true */
-    extractBodyPages?: boolean;
+    extractBodyPages?: boolean
     /** @description Default: false */
-    extractReferencePages?: boolean;
+    extractReferencePages?: boolean
     /** @description Default: true */
-    extractMasterPages?: boolean;
+    extractMasterPages?: boolean
     /** @description Default: false */
-    extractHiddenPages?: boolean;
+    extractHiddenPages?: boolean
     /** @description Default: false */
-    extractVariables?: boolean;
+    extractVariables?: boolean
     /** @description Default: true */
-    extractIndexMarkers?: boolean;
+    extractIndexMarkers?: boolean
     /** @description Default: false */
-    extractLinks?: boolean;
+    extractLinks?: boolean
     /** @description Default: false */
-    extractXRefDef?: boolean;
+    extractXRefDef?: boolean
     /** @description Default: true */
-    extractPgfNumFormat?: boolean;
+    extractPgfNumFormat?: boolean
     /** @description Default: true */
-    extractCustomReferencePages?: boolean;
+    extractCustomReferencePages?: boolean
     /** @description Default: false */
-    extractDefaultReferencePages?: boolean;
+    extractDefaultReferencePages?: boolean
     /** @description Default: true */
-    extractUsedVariables?: boolean;
+    extractUsedVariables?: boolean
     /** @description Default: false */
-    extractHiddenCondText?: boolean;
+    extractHiddenCondText?: boolean
     /** @description Default: true */
-    extractUsedXRefDef?: boolean;
+    extractUsedXRefDef?: boolean
     /** @description Default: true */
-    extractUsedPgfNumFormat?: boolean;
-    tagRegexp?: string;
-  };
+    extractUsedPgfNumFormat?: boolean
+    tagRegexp?: string
+  }
   MultilingualCsvSettingsDto: {
-    sourceColumns?: string;
-    targetColumns?: string;
-    contextNoteColumns?: string;
-    contextKeyColumns?: string;
-    tagRegexp?: string;
+    sourceColumns?: string
+    targetColumns?: string
+    contextNoteColumns?: string
+    contextKeyColumns?: string
+    tagRegexp?: string
     /** @description Default: false */
-    htmlSubFilter?: boolean;
+    htmlSubFilter?: boolean
     /** @description Default: true */
-    segmentation?: boolean;
+    segmentation?: boolean
     /** @description Default: , */
-    delimiter?: string;
+    delimiter?: string
     /**
      * @description Default: COMMA
      * @enum {string}
      */
-    delimiterType?: "TAB" | "COMMA" | "SEMICOLON" | "OTHER";
-    importRows?: string;
-    maxLenColumns?: string;
+    delimiterType?: 'TAB' | 'COMMA' | 'SEMICOLON' | 'OTHER'
+    importRows?: string
+    maxLenColumns?: string
     /** @description Format: "language":"column"; example: {"en": "A", "sk": "B"} */
-    allTargetColumns?: { [key: string]: string };
+    allTargetColumns?: {[key: string]: string}
     /** @enum {string} */
-    nonEmptySegmentAction?: "NONE" | "CONFIRM" | "LOCK" | "CONFIRM_LOCK";
-    saveConfirmedSegmentsToTm?: boolean;
-  };
+    nonEmptySegmentAction?: 'NONE' | 'CONFIRM' | 'LOCK' | 'CONFIRM_LOCK'
+    saveConfirmedSegmentsToTm?: boolean
+  }
   MultilingualXlsSettingsDto: {
-    sourceColumn?: string;
+    sourceColumn?: string
     /** @description Format: "language":"column"; example: {"en": "A", "sk": "B"} */
-    targetColumns?: { [key: string]: string };
-    contextNoteColumn?: string;
-    contextKeyColumn?: string;
-    tagRegexp?: string;
+    targetColumns?: {[key: string]: string}
+    contextNoteColumn?: string
+    contextKeyColumn?: string
+    tagRegexp?: string
     /** @description Default: false */
-    htmlSubFilter?: boolean;
+    htmlSubFilter?: boolean
     /** @description Default: true */
-    segmentation?: boolean;
-    importRows?: string;
-    maxLenColumn?: string;
+    segmentation?: boolean
+    importRows?: string
+    maxLenColumn?: string
     /** @enum {string} */
-    nonEmptySegmentAction?: "NONE" | "CONFIRM" | "LOCK" | "CONFIRM_LOCK";
-    saveConfirmedSegmentsToTm?: boolean;
-  };
+    nonEmptySegmentAction?: 'NONE' | 'CONFIRM' | 'LOCK' | 'CONFIRM_LOCK'
+    saveConfirmedSegmentsToTm?: boolean
+  }
   MultilingualXmlSettingsDto: {
-    translatableElementsXPath?: string;
-    sourceElementsXPath?: string;
+    translatableElementsXPath?: string
+    sourceElementsXPath?: string
     /**
      * @description 'Format: "language":"xpath";
      *             example = '{"en": "tuv[@lang='en']/seg", "sk": "tuv[@lang='sk']/seg"}
      */
-    targetElementsXPaths?: { [key: string]: string };
-    inlineElementsNonTranslatableXPath?: string;
-    tagRegexp?: string;
+    targetElementsXPaths?: {[key: string]: string}
+    inlineElementsNonTranslatableXPath?: string
+    tagRegexp?: string
     /** @description Default: `true` */
-    segmentation?: boolean;
+    segmentation?: boolean
     /** @description Default: `false` */
-    htmlSubFilter?: boolean;
-    contextKeyXPath?: string;
-    contextNoteXPath?: string;
-    maxLenXPath?: string;
+    htmlSubFilter?: boolean
+    contextKeyXPath?: string
+    contextNoteXPath?: string
+    maxLenXPath?: string
     /** @description Default: `false` */
-    preserveWhitespace?: boolean;
-    preserveCharEntities?: string;
-    xslUrl?: string;
+    preserveWhitespace?: boolean
+    preserveCharEntities?: string
+    xslUrl?: string
     /** @description UID of uploaded XSL file, overrides xslUrl */
-    xslFile?: string;
+    xslFile?: string
     /** @enum {string} */
-    nonEmptySegmentAction?: "NONE" | "CONFIRM" | "LOCK" | "CONFIRM_LOCK";
-    saveConfirmedSegmentsToTm?: boolean;
+    nonEmptySegmentAction?: 'NONE' | 'CONFIRM' | 'LOCK' | 'CONFIRM_LOCK'
+    saveConfirmedSegmentsToTm?: boolean
     /** @description Default: `false` */
-    icuSubFilter?: boolean;
-  };
+    icuSubFilter?: boolean
+  }
   PdfSettingsDto: {
     /**
      * @description Default: TRANS_PDF
      * @enum {string}
      */
-    filter?: "TRANS_PDF" | "DEFAULT";
-  };
+    filter?: 'TRANS_PDF' | 'DEFAULT'
+  }
   PhpSettingsDto: {
-    tagRegexp?: string;
+    tagRegexp?: string
     /** @description Default: false */
-    htmlSubFilter?: boolean;
-  };
+    htmlSubFilter?: boolean
+  }
   PoSettingsDto: {
-    tagRegexp?: string;
+    tagRegexp?: string
     /** @description Default: true */
-    exportMultiline?: boolean;
+    exportMultiline?: boolean
     /** @description Default: false */
-    htmlSubFilter?: boolean;
+    htmlSubFilter?: boolean
     /** @description Default: false */
-    segment?: boolean;
-    markupSubFilterTranslatable?: string;
-    markupSubFilterNonTranslatable?: string;
+    segment?: boolean
+    markupSubFilterTranslatable?: string
+    markupSubFilterNonTranslatable?: string
     /** @enum {string} */
-    contextKeySuffixType?:
-      | "MSGCTXT"
-      | "MSGID"
-      | "MSGCTXT_AND_MSGID"
-      | "MSGCTXT_OR_MSGID";
-    saveConfirmedSegments?: boolean;
+    contextKeySuffixType?: 'MSGCTXT' | 'MSGID' | 'MSGCTXT_AND_MSGID' | 'MSGCTXT_OR_MSGID'
+    saveConfirmedSegments?: boolean
     /** @enum {string} */
-    importSetSegmentConfirmedWhen?: "FUZZY" | "NONFUZZY";
+    importSetSegmentConfirmedWhen?: 'FUZZY' | 'NONFUZZY'
     /** @enum {string} */
-    importSetSegmentLockedWhen?: "FUZZY" | "NONFUZZY";
+    importSetSegmentLockedWhen?: 'FUZZY' | 'NONFUZZY'
     /** @enum {string} */
-    exportConfirmedLocked?: "FUZZY" | "NONFUZZY";
+    exportConfirmedLocked?: 'FUZZY' | 'NONFUZZY'
     /** @enum {string} */
-    exportConfirmedNotLocked?: "FUZZY" | "NONFUZZY";
+    exportConfirmedNotLocked?: 'FUZZY' | 'NONFUZZY'
     /** @enum {string} */
-    exportNotConfirmedLocked?: "FUZZY" | "NONFUZZY";
+    exportNotConfirmedLocked?: 'FUZZY' | 'NONFUZZY'
     /** @enum {string} */
-    exportNotConfirmedNotLocked?: "FUZZY" | "NONFUZZY";
+    exportNotConfirmedNotLocked?: 'FUZZY' | 'NONFUZZY'
     /** @description Default: `false` */
-    icuSubFilter?: boolean;
-  };
+    icuSubFilter?: boolean
+  }
   PptSettingsDto: {
     /** @description Default: false */
-    hiddenSlides?: boolean;
+    hiddenSlides?: boolean
     /** @description Default: false */
-    other?: boolean;
+    other?: boolean
     /** @description Default: false */
-    notes?: boolean;
+    notes?: boolean
     /** @description Default: false */
-    masterSlides?: boolean;
-  };
+    masterSlides?: boolean
+  }
   PropertiesSettingsDto: {
-    tagRegexp?: string;
-  };
+    tagRegexp?: string
+  }
   PsdSettingsDto: {
     /** @description Default: true */
-    extractHiddenLayers?: boolean;
+    extractHiddenLayers?: boolean
     /** @description Default: true */
-    extractLockedLayers?: boolean;
-    tagRegexp?: string;
-  };
+    extractLockedLayers?: boolean
+    tagRegexp?: string
+  }
   QuarkTagSettingsDto: {
     /** @description Default: false */
-    removeKerningTrackingTags?: boolean;
-    tagRegexp?: string;
-  };
+    removeKerningTrackingTags?: boolean
+    tagRegexp?: string
+  }
   ResxSettingsDto: {
-    tagRegexp?: string;
-    htmlSubFilter?: boolean;
-  };
+    tagRegexp?: string
+    htmlSubFilter?: boolean
+  }
   SdlXlfSettingsDto: {
     /** @description Default: false */
-    icuSubFilter?: boolean;
+    icuSubFilter?: boolean
     /** @description Default: translate=no */
-    skipImportRules?: string;
-    importAsConfirmedRules?: string;
+    skipImportRules?: string
+    importAsConfirmedRules?: string
     /** @description Default: locked=true */
-    importAsLockedRules?: string;
+    importAsLockedRules?: string
     /** @description Default: locked=true */
-    exportAttrsWhenConfirmedAndLocked?: string;
-    exportAttrsWhenConfirmedAndNotLocked?: string;
+    exportAttrsWhenConfirmedAndLocked?: string
+    exportAttrsWhenConfirmedAndNotLocked?: string
     /** @description Default: locked=true */
-    exportAttrsWhenNotConfirmedAndLocked?: string;
-    exportAttrsWhenNotConfirmedAndNotLocked?: string;
+    exportAttrsWhenNotConfirmedAndLocked?: string
+    exportAttrsWhenNotConfirmedAndNotLocked?: string
     /** @description Default: true */
-    saveConfirmedSegments?: boolean;
-    tagRegexp?: string;
-  };
+    saveConfirmedSegments?: boolean
+    tagRegexp?: string
+  }
   SegRuleReference: {
-    id?: string;
-    uid?: string;
-    language?: string;
-    name?: string;
-    filename?: string;
-    primary?: boolean;
-  };
+    id?: string
+    uid?: string
+    language?: string
+    name?: string
+    filename?: string
+    primary?: boolean
+  }
   TMMatchSettingsDto: {
     /**
      * @description Default: PREV_AND_NEXT_SEGMENT
      * @enum {string}
      */
-    contextType?:
-      | "AUTO"
-      | "PREV_AND_NEXT_SEGMENT"
-      | "SEGMENT_KEY"
-      | "NO_CONTEXT";
+    contextType?: 'AUTO' | 'PREV_AND_NEXT_SEGMENT' | 'SEGMENT_KEY' | 'NO_CONTEXT'
     /** @description Default: false */
-    prevOrNextSegment?: boolean;
+    prevOrNextSegment?: boolean
     /** @description Default: false */
-    penalizeMultiContextMatch?: boolean;
+    penalizeMultiContextMatch?: boolean
     /** @description Default: true */
-    ignoreTagMetadata?: boolean;
-    metadataPriority?: definitions["MetadataPrioritySettingsDto"];
-  };
+    ignoreTagMetadata?: boolean
+    metadataPriority?: definitions['MetadataPrioritySettingsDto']
+  }
   TtxSettingsDto: {
     /** @description Default: true */
-    saveConfirmedSegments?: boolean;
-  };
+    saveConfirmedSegments?: boolean
+  }
   TxtSettingsDto: {
-    tagRegexp?: string;
-    translatableTextRegexp?: string;
-    contextKey?: string;
+    tagRegexp?: string
+    translatableTextRegexp?: string
+    contextKey?: string
     /** @description Default: false */
-    regexpCapturingGroups?: boolean;
-  };
+    regexpCapturingGroups?: boolean
+  }
   Xlf2SettingsDto: {
     /** @description Default: false */
-    icuSubFilter?: boolean;
+    icuSubFilter?: boolean
     /** @description Default: true */
-    importNotes?: boolean;
+    importNotes?: boolean
     /** @description Default: true */
-    saveConfirmedSegments?: boolean;
+    saveConfirmedSegments?: boolean
     /** @description Default: true */
-    segmentation?: boolean;
+    segmentation?: boolean
     /** @description Default: false */
-    lineBreakTags?: boolean;
+    lineBreakTags?: boolean
     /** @description Default: true */
-    preserveWhitespace?: boolean;
+    preserveWhitespace?: boolean
     /** @description Default: true */
-    copySourceToTargetIfNotImported?: boolean;
+    copySourceToTargetIfNotImported?: boolean
     /** @description Default: true */
-    respectTranslateAttr?: boolean;
-    skipImportRules?: string;
+    respectTranslateAttr?: boolean
+    skipImportRules?: string
     /** @description Default: state=final */
-    importAsConfirmedRules?: string;
-    importAsLockedRules?: string;
+    importAsConfirmedRules?: string
+    importAsLockedRules?: string
     /** @description Default: state=final */
-    exportAttrsWhenConfirmedAndLocked?: string;
+    exportAttrsWhenConfirmedAndLocked?: string
     /** @description Default: state=final */
-    exportAttrsWhenConfirmedAndNotLocked?: string;
-    exportAttrsWhenNotConfirmedAndLocked?: string;
-    exportAttrsWhenNotConfirmedAndNotLocked?: string;
-    contextKeyXPath?: string;
-    preserveCharEntities?: string;
-    xslUrl?: string;
+    exportAttrsWhenConfirmedAndNotLocked?: string
+    exportAttrsWhenNotConfirmedAndLocked?: string
+    exportAttrsWhenNotConfirmedAndNotLocked?: string
+    contextKeyXPath?: string
+    preserveCharEntities?: string
+    xslUrl?: string
     /** @description UID of uploaded XSL file, overrides xslUrl */
-    xslFile?: string;
-    tagRegexp?: string;
-  };
+    xslFile?: string
+    tagRegexp?: string
+  }
   XlfSettingsDto: {
     /** @description Default: false */
-    icuSubFilter?: boolean;
+    icuSubFilter?: boolean
     /** @description Default: true */
-    importNotes?: boolean;
+    importNotes?: boolean
     /** @description Default: true */
-    segmentation?: boolean;
+    segmentation?: boolean
     /** @description Default: translate=no; examples: translate=no;approved=no;state=needs-adaptation */
-    skipImportRules?: string;
+    skipImportRules?: string
     /** @description Multiple rules must be separated by semicolon */
-    importAsConfirmedRules?: string;
-    importAsLockedRules?: string;
-    exportAttrsWhenConfirmedAndLocked?: string;
-    exportAttrsWhenConfirmedAndNotLocked?: string;
-    exportAttrsWhenNotConfirmedAndLocked?: string;
-    exportAttrsWhenNotConfirmedAndNotLocked?: string;
+    importAsConfirmedRules?: string
+    importAsLockedRules?: string
+    exportAttrsWhenConfirmedAndLocked?: string
+    exportAttrsWhenConfirmedAndNotLocked?: string
+    exportAttrsWhenNotConfirmedAndLocked?: string
+    exportAttrsWhenNotConfirmedAndNotLocked?: string
     /** @description Default: true */
-    saveConfirmedSegments?: boolean;
+    saveConfirmedSegments?: boolean
     /** @description Default: false */
-    lineBreakTags?: boolean;
+    lineBreakTags?: boolean
     /** @description Default: true */
-    preserveWhitespace?: boolean;
-    contextType?: string;
-    preserveCharEntities?: string;
+    preserveWhitespace?: boolean
+    contextType?: string
+    preserveCharEntities?: string
     /** @description Default: true */
-    copySourceToTargetIfNotImported?: boolean;
-    importXPath?: string;
-    importAsConfirmedXPath?: string;
-    importAsLockedXPath?: string;
-    xslUrl?: string;
+    copySourceToTargetIfNotImported?: boolean
+    importXPath?: string
+    importAsConfirmedXPath?: string
+    importAsLockedXPath?: string
+    xslUrl?: string
     /** @description UID of uploaded XSL file, overrides xslUrl */
-    xslFile?: string;
-    tagRegexp?: string;
-  };
+    xslFile?: string
+    tagRegexp?: string
+  }
   XlsSettingsDto: {
     /** @description Default: false */
-    sheetNames?: boolean;
+    sheetNames?: boolean
     /** @description Default: false */
-    hidden?: boolean;
+    hidden?: boolean
     /** @description Default: false */
-    comments?: boolean;
+    comments?: boolean
     /** @description Default: false */
-    other?: boolean;
+    other?: boolean
     /**
      * @description Default: DownRight
      * @enum {string}
      */
-    cellFlow?: "DownRight" | "RightDown" | "DownLeft" | "LeftDown";
+    cellFlow?: 'DownRight' | 'RightDown' | 'DownLeft' | 'LeftDown'
     /** @description Default: false */
-    htmlSubfilter?: boolean;
-    tagRegexp?: string;
-    specifiedColumns?: string;
-  };
+    htmlSubfilter?: boolean
+    tagRegexp?: string
+    specifiedColumns?: string
+  }
   XmlSettingsDto: {
     /**
      * @description Default: `"PLAIN"`
      * @enum {string}
      */
-    rulesFormat?: "PLAIN" | "XPATH";
+    rulesFormat?: 'PLAIN' | 'XPATH'
     /** @description Default: `"*"`, example: `"para,heading"` */
-    includeElementsPlain?: string;
+    includeElementsPlain?: string
     /** @description Example: `"script,par"` */
-    excludeElementsPlain?: string;
+    excludeElementsPlain?: string
     /** @description Example: `"title"` */
-    includeAttributesPlain?: string;
+    includeAttributesPlain?: string
     /** @description Example: `"lang,href"` */
-    excludeAttributesPlain?: string;
+    excludeAttributesPlain?: string
     /** @description Example: `"tt,b"` */
-    inlineElementsNonTranslatablePlain?: string;
-    inlineElementsPlain?: string;
+    inlineElementsNonTranslatablePlain?: string
+    inlineElementsPlain?: string
     /** @description Default: `false` */
-    inlineElementsAutoPlain?: boolean;
+    inlineElementsAutoPlain?: boolean
     /** @description Example: `"tt,b"` */
-    htmlSubfilterElementsPlain?: string;
+    htmlSubfilterElementsPlain?: string
     /** @description Default: `false` */
-    entities?: boolean;
-    lockElementsPlain?: string;
-    lockAttributesPlain?: string;
-    includeXPath?: string;
-    inlineElementsXpath?: string;
-    inlineElementsNonTranslatableXPath?: string;
+    entities?: boolean
+    lockElementsPlain?: string
+    lockAttributesPlain?: string
+    includeXPath?: string
+    inlineElementsXpath?: string
+    inlineElementsNonTranslatableXPath?: string
     /** @description Default: `false` */
-    inlineElementsAutoXPath?: boolean;
-    htmlSubfilterElementsXpath?: string;
-    lockXPath?: string;
+    inlineElementsAutoXPath?: boolean
+    htmlSubfilterElementsXpath?: string
+    lockXPath?: string
     /** @description Default: `true` */
-    segmentation?: boolean;
-    tagRegexp?: string;
-    contextNoteXpath?: string;
-    maxLenXPath?: string;
-    preserveWhitespaceXPath?: string;
-    preserveCharEntities?: string;
-    contextKeyXPath?: string;
-    xslUrl?: string;
+    segmentation?: boolean
+    tagRegexp?: string
+    contextNoteXpath?: string
+    maxLenXPath?: string
+    preserveWhitespaceXPath?: string
+    preserveCharEntities?: string
+    contextKeyXPath?: string
+    xslUrl?: string
     /** @description UID of uploaded XSL file, overrides `xslUrl` */
-    xslFile?: string;
+    xslFile?: string
     /** @description Default: `true` */
-    importComments?: boolean;
+    importComments?: boolean
     /** @description Default: `false` */
-    icuSubFilter?: boolean;
-    assistantProfile?: string;
-  };
+    icuSubFilter?: boolean
+    assistantProfile?: string
+  }
   YamlSettingsDto: {
     /** @description Default: false */
-    htmlSubFilter?: boolean;
-    tagRegexp?: string;
-    includeKeyRegexp?: string;
-    excludeValueRegexp?: string;
-    contextPath?: string;
-    contextKeyPath?: string;
+    htmlSubFilter?: boolean
+    tagRegexp?: string
+    includeKeyRegexp?: string
+    excludeValueRegexp?: string
+    contextPath?: string
+    contextKeyPath?: string
     /** @description Default: false */
-    markdownSubfilter?: boolean;
+    markdownSubfilter?: boolean
     /** @description Default: false */
-    updateRootElementLang?: boolean;
+    updateRootElementLang?: boolean
     /** @enum {string} */
-    localeFormat?:
-      | "MEMSOURCE"
-      | "RFC_5646"
-      | "ANDROID_QUALIFIER"
-      | "ANDROID_QUALIFIER_BCP";
+    localeFormat?: 'MEMSOURCE' | 'RFC_5646' | 'ANDROID_QUALIFIER' | 'ANDROID_QUALIFIER_BCP'
     /** @description Default: true */
-    indentEmptyLinesInString?: boolean;
+    indentEmptyLinesInString?: boolean
     /** @description Default: `false` */
-    icuSubFilter?: boolean;
-  };
+    icuSubFilter?: boolean
+  }
   CreateCustomFileTypeDto: {
-    name: string;
-    filenamePattern: string;
+    name: string
+    filenamePattern: string
     /** @enum {string} */
-    type: "html" | "json" | "xml" | "multiling_xml" | "txt";
-    fileImportSettings?: definitions["FileImportSettingsCreateDto"];
-  };
+    type: 'html' | 'json' | 'xml' | 'multiling_xml' | 'txt'
+    fileImportSettings?: definitions['FileImportSettingsCreateDto']
+  }
   FileImportSettingsCreateDto: {
-    inputCharset?: string;
-    outputCharset?: string;
-    zipCharset?: string;
+    inputCharset?: string
+    outputCharset?: string
+    zipCharset?: string
     /**
      * @description default: auto-detect
      * @enum {string}
      */
     fileFormat?:
-      | "doc"
-      | "ppt"
-      | "xls"
-      | "xlf"
-      | "xlf2"
-      | "sdlxlif"
-      | "ttx"
-      | "html"
-      | "xml"
-      | "mif"
-      | "tmx"
-      | "idml"
-      | "dita"
-      | "json"
-      | "po"
-      | "ts"
-      | "icml"
-      | "yaml"
-      | "properties"
-      | "csv"
-      | "android_string"
-      | "desktop_entry"
-      | "mac_strings"
-      | "pdf"
-      | "windows_rc"
-      | "xml_properties"
-      | "joomla_ini"
-      | "magento_csv"
-      | "dtd"
-      | "mozilla_properties"
-      | "plist"
-      | "plain_text"
-      | "srt"
-      | "sub"
-      | "sbv"
-      | "wiki"
-      | "resx"
-      | "resjson"
-      | "chrome_json"
-      | "epub"
-      | "svg"
-      | "docbook"
-      | "wpxliff"
-      | "multiling_xml"
-      | "multiling_xls"
-      | "mqxliff"
-      | "php"
-      | "psd"
-      | "tag"
-      | "md"
-      | "vtt";
+      | 'doc'
+      | 'ppt'
+      | 'xls'
+      | 'xlf'
+      | 'xlf2'
+      | 'sdlxlif'
+      | 'ttx'
+      | 'html'
+      | 'xml'
+      | 'mif'
+      | 'tmx'
+      | 'idml'
+      | 'dita'
+      | 'json'
+      | 'po'
+      | 'ts'
+      | 'icml'
+      | 'yaml'
+      | 'properties'
+      | 'csv'
+      | 'android_string'
+      | 'desktop_entry'
+      | 'mac_strings'
+      | 'pdf'
+      | 'windows_rc'
+      | 'xml_properties'
+      | 'joomla_ini'
+      | 'magento_csv'
+      | 'dtd'
+      | 'mozilla_properties'
+      | 'plist'
+      | 'plain_text'
+      | 'srt'
+      | 'sub'
+      | 'sbv'
+      | 'wiki'
+      | 'resx'
+      | 'resjson'
+      | 'chrome_json'
+      | 'epub'
+      | 'svg'
+      | 'docbook'
+      | 'wpxliff'
+      | 'multiling_xml'
+      | 'multiling_xls'
+      | 'mqxliff'
+      | 'php'
+      | 'psd'
+      | 'tag'
+      | 'md'
+      | 'vtt'
     /** @description Try to use multilingual variants for auto-detected CSV and Excel files. Default: true */
-    autodetectMultilingualFiles?: boolean;
+    autodetectMultilingualFiles?: boolean
     /** @description Default: false */
-    targetLength?: boolean;
+    targetLength?: boolean
     /**
      * Format: int32
      * @description default: 1000
      */
-    targetLengthMax?: number;
+    targetLengthMax?: number
     /** @description Default: false */
-    targetLengthPercent?: boolean;
+    targetLengthPercent?: boolean
     /**
      * Format: double
      * @description default: 130
      */
-    targetLengthPercentValue?: number;
+    targetLengthPercentValue?: number
     /** Format: int64 */
-    segmentationRuleId?: number;
+    segmentationRuleId?: number
     /** Format: int64 */
-    targetSegmentationRuleId?: number;
-    android?: definitions["AndroidSettingsDto"];
-    csv?: definitions["CsvSettingsDto"];
-    dita?: definitions["DitaSettingsDto"];
-    docBook?: definitions["DocBookSettingsDto"];
-    doc?: definitions["DocSettingsDto"];
-    html?: definitions["HtmlSettingsDto"];
-    idml?: definitions["IdmlSettingsDto"];
-    json?: definitions["JsonSettingsDto"];
-    mac?: definitions["MacSettingsDto"];
-    md?: definitions["MdSettingsDto"];
-    mif?: definitions["MifSettingsDto"];
-    multilingualXls?: definitions["MultilingualXlsSettingsDto"];
-    multilingualCsv?: definitions["MultilingualCsvSettingsDto"];
-    multilingualXml?: definitions["MultilingualXmlSettingsDto"];
-    pdf?: definitions["PdfSettingsDto"];
-    php?: definitions["PhpSettingsDto"];
-    po?: definitions["PoSettingsDto"];
-    ppt?: definitions["PptSettingsDto"];
-    properties?: definitions["PropertiesSettingsDto"];
-    psd?: definitions["PsdSettingsDto"];
-    quarkTag?: definitions["QuarkTagSettingsDto"];
-    resx?: definitions["ResxSettingsDto"];
-    sdlXlf?: definitions["SdlXlfSettingsDto"];
-    tmMatch?: definitions["TMMatchSettingsDto"];
-    ttx?: definitions["TtxSettingsDto"];
-    txt?: definitions["TxtSettingsDto"];
-    xlf2?: definitions["Xlf2SettingsDto"];
-    xlf?: definitions["XlfSettingsDto"];
-    xls?: definitions["XlsSettingsDto"];
-    xml?: definitions["XmlSettingsDto"];
-    yaml?: definitions["YamlSettingsDto"];
-    asciidoc?: definitions["AsciidocSettingsDto"];
-  };
+    targetSegmentationRuleId?: number
+    android?: definitions['AndroidSettingsDto']
+    csv?: definitions['CsvSettingsDto']
+    dita?: definitions['DitaSettingsDto']
+    docBook?: definitions['DocBookSettingsDto']
+    doc?: definitions['DocSettingsDto']
+    html?: definitions['HtmlSettingsDto']
+    idml?: definitions['IdmlSettingsDto']
+    json?: definitions['JsonSettingsDto']
+    mac?: definitions['MacSettingsDto']
+    md?: definitions['MdSettingsDto']
+    mif?: definitions['MifSettingsDto']
+    multilingualXls?: definitions['MultilingualXlsSettingsDto']
+    multilingualCsv?: definitions['MultilingualCsvSettingsDto']
+    multilingualXml?: definitions['MultilingualXmlSettingsDto']
+    pdf?: definitions['PdfSettingsDto']
+    php?: definitions['PhpSettingsDto']
+    po?: definitions['PoSettingsDto']
+    ppt?: definitions['PptSettingsDto']
+    properties?: definitions['PropertiesSettingsDto']
+    psd?: definitions['PsdSettingsDto']
+    quarkTag?: definitions['QuarkTagSettingsDto']
+    resx?: definitions['ResxSettingsDto']
+    sdlXlf?: definitions['SdlXlfSettingsDto']
+    tmMatch?: definitions['TMMatchSettingsDto']
+    ttx?: definitions['TtxSettingsDto']
+    txt?: definitions['TxtSettingsDto']
+    xlf2?: definitions['Xlf2SettingsDto']
+    xlf?: definitions['XlfSettingsDto']
+    xls?: definitions['XlsSettingsDto']
+    xml?: definitions['XmlSettingsDto']
+    yaml?: definitions['YamlSettingsDto']
+    asciidoc?: definitions['AsciidocSettingsDto']
+  }
   PageDtoCustomFileTypeDto: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["CustomFileTypeDto"][];
-  };
+    numberOfElements?: number
+    content?: definitions['CustomFileTypeDto'][]
+  }
   UpdateCustomFileTypeDto: {
-    name?: string;
-    filenamePattern?: string;
+    name?: string
+    filenamePattern?: string
     /** @enum {string} */
-    type?: "html" | "json" | "xml" | "multiling_xml" | "txt";
-    fileImportSettings?: definitions["FileImportSettingsCreateDto"];
-  };
+    type?: 'html' | 'json' | 'xml' | 'multiling_xml' | 'txt'
+    fileImportSettings?: definitions['FileImportSettingsCreateDto']
+  }
   DeleteCustomFileTypeDto: {
-    customFileTypes: definitions["UidReference"][];
-  };
+    customFileTypes: definitions['UidReference'][]
+  }
   DiscountSettingsDto: {
     /** Format: double */
-    repetition?: number;
+    repetition?: number
     /** Format: double */
-    tm101?: number;
+    tm101?: number
     /** Format: double */
-    tm100?: number;
+    tm100?: number
     /** Format: double */
-    tm95?: number;
+    tm95?: number
     /** Format: double */
-    tm85?: number;
+    tm85?: number
     /** Format: double */
-    tm75?: number;
+    tm75?: number
     /** Format: double */
-    tm50?: number;
+    tm50?: number
     /** Format: double */
-    tm0?: number;
+    tm0?: number
     /** Format: double */
-    mt100?: number;
+    mt100?: number
     /** Format: double */
-    mt95?: number;
+    mt95?: number
     /** Format: double */
-    mt85?: number;
+    mt85?: number
     /** Format: double */
-    mt75?: number;
+    mt75?: number
     /** Format: double */
-    mt50?: number;
+    mt50?: number
     /** Format: double */
-    mt0?: number;
+    mt0?: number
     /** Format: double */
-    nt100?: number;
+    nt100?: number
     /** Format: double */
-    nt99?: number;
+    nt99?: number
     /** Format: double */
-    nt85?: number;
+    nt85?: number
     /** Format: double */
-    nt75?: number;
+    nt75?: number
     /** Format: double */
-    nt50?: number;
+    nt50?: number
     /** Format: double */
-    nt0?: number;
+    nt0?: number
     /** Format: double */
-    if100?: number;
+    if100?: number
     /** Format: double */
-    if95?: number;
+    if95?: number
     /** Format: double */
-    if85?: number;
+    if85?: number
     /** Format: double */
-    if75?: number;
+    if75?: number
     /** Format: double */
-    if50?: number;
+    if50?: number
     /** Format: double */
-    if0?: number;
-  };
+    if0?: number
+  }
   NetRateScheme: {
-    id?: string;
-    uid?: string;
-    name?: string;
-    organization?: definitions["OrganizationReference"];
+    id?: string
+    uid?: string
+    name?: string
+    organization?: definitions['OrganizationReference']
     /** Format: date-time */
-    dateCreated?: string;
-    createdBy?: definitions["UserReference"];
-    workflowStepNetSchemes?: definitions["NetRateSchemeWorkflowStepReference"][];
-    rates?: definitions["DiscountSettingsDto"];
-  };
+    dateCreated?: string
+    createdBy?: definitions['UserReference']
+    workflowStepNetSchemes?: definitions['NetRateSchemeWorkflowStepReference'][]
+    rates?: definitions['DiscountSettingsDto']
+  }
   NetRateSchemeWorkflowStepReference: {
-    id?: string;
-    workflowStep?: definitions["WorkflowStepReference"];
-  };
+    id?: string
+    workflowStep?: definitions['WorkflowStepReference']
+  }
   PageDtoNetRateSchemeReference: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["NetRateSchemeReference"][];
-  };
+    numberOfElements?: number
+    content?: definitions['NetRateSchemeReference'][]
+  }
   DiscountSchemeCreateDto: {
-    name: string;
-    rates?: definitions["DiscountSettingsDto"];
-    workflowStepNetSchemes?: definitions["NetRateSchemeWorkflowStepCreate"][];
-  };
+    name: string
+    rates?: definitions['DiscountSettingsDto']
+    workflowStepNetSchemes?: definitions['NetRateSchemeWorkflowStepCreate'][]
+  }
   NetRateSchemeWorkflowStepCreate: {
-    workflowStep: definitions["IdReference"];
-    rates?: definitions["DiscountSettingsDto"];
-  };
+    workflowStep: definitions['IdReference']
+    rates?: definitions['DiscountSettingsDto']
+  }
   NetRateSchemeEdit: {
-    name: string;
-    rates?: definitions["DiscountSettingsDto"];
-  };
+    name: string
+    rates?: definitions['DiscountSettingsDto']
+  }
   NetRateSchemeWorkflowStep: {
-    id?: string;
-    workflowStep?: definitions["WorkflowStepReference"];
-    rates?: definitions["DiscountSettingsDto"];
-  };
+    id?: string
+    workflowStep?: definitions['WorkflowStepReference']
+    rates?: definitions['DiscountSettingsDto']
+  }
   NetRateSchemeWorkflowStepEdit: {
-    rates?: definitions["DiscountSettingsDto"];
-  };
+    rates?: definitions['DiscountSettingsDto']
+  }
   PageDtoNetRateSchemeWorkflowStepReference: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["NetRateSchemeWorkflowStepReference"][];
-  };
+    numberOfElements?: number
+    content?: definitions['NetRateSchemeWorkflowStepReference'][]
+  }
   DomainDto: {
-    id?: string;
-    uid?: string;
-    name?: string;
-    createdBy?: definitions["UserReference"];
-  };
+    id?: string
+    uid?: string
+    name?: string
+    createdBy?: definitions['UserReference']
+  }
   PageDtoDomainDto: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["DomainDto"][];
-  };
+    numberOfElements?: number
+    content?: definitions['DomainDto'][]
+  }
   DomainEditDto: {
-    name?: string;
-  };
+    name?: string
+  }
   OrganizationEmailTemplateDto: {
-    id?: string;
-    uid?: string;
+    id?: string
+    uid?: string
     /** @enum {string} */
     type?:
-      | "JobAssigned"
-      | "JobStatusChanged"
-      | "NextWorkflowStep"
-      | "JobRejected"
-      | "LoginInfo"
-      | "ProjectTransferredToBuyer"
-      | "SharedProjectAssigned"
-      | "SharedProjectStatusChanged"
-      | "AutomatedProjectCreated"
-      | "AutomatedProjectSourceUpdated"
-      | "AutomatedProjectStatusChanged"
-      | "JobWidgetProjectQuotePrepared"
-      | "JobWidgetProjectQuotePreparationFailure"
-      | "JobWidgetProjectCreated"
-      | "JobWidgetProjectCompleted"
-      | "CmsQuoteReady"
-      | "CmsWorkCompleted"
-      | "CmsJobRejected"
-      | "QUOTE_UPDATED"
-      | "QUOTE_STATUS_CHANGED"
-      | "LQA_SHARE_REPORT";
-    name?: string;
-    subject?: string;
-    body?: string;
-    ccAddress?: string;
-    bccAddress?: string;
-  };
+      | 'JobAssigned'
+      | 'JobStatusChanged'
+      | 'NextWorkflowStep'
+      | 'JobRejected'
+      | 'LoginInfo'
+      | 'ProjectTransferredToBuyer'
+      | 'SharedProjectAssigned'
+      | 'SharedProjectStatusChanged'
+      | 'AutomatedProjectCreated'
+      | 'AutomatedProjectSourceUpdated'
+      | 'AutomatedProjectStatusChanged'
+      | 'JobWidgetProjectQuotePrepared'
+      | 'JobWidgetProjectQuotePreparationFailure'
+      | 'JobWidgetProjectCreated'
+      | 'JobWidgetProjectCompleted'
+      | 'CmsQuoteReady'
+      | 'CmsWorkCompleted'
+      | 'CmsJobRejected'
+      | 'QUOTE_UPDATED'
+      | 'QUOTE_STATUS_CHANGED'
+      | 'LQA_SHARE_REPORT'
+    name?: string
+    subject?: string
+    body?: string
+    ccAddress?: string
+    bccAddress?: string
+  }
   PageDtoOrganizationEmailTemplateDto: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["OrganizationEmailTemplateDto"][];
-  };
+    numberOfElements?: number
+    content?: definitions['OrganizationEmailTemplateDto'][]
+  }
   FileHandoverDto: {
     /** @description ID of the uploaded file */
-    fileId?: string;
+    fileId?: string
     /** @description Filename of the uploaded file */
-    filename?: string;
-  };
+    filename?: string
+  }
   JobPartReferences: {
-    jobs: definitions["UidReference"][];
-  };
+    jobs: definitions['UidReference'][]
+  }
   UploadedFileDto: {
-    uid?: string;
-    name?: string;
+    uid?: string
+    name?: string
     /** Format: int64 */
-    size?: number;
-    type?: string;
-  };
+    size?: number
+    type?: string
+  }
   RemoteUploadedFileDto: {
-    uid?: string;
-    name?: string;
+    uid?: string
+    name?: string
     /** Format: int64 */
-    size?: number;
-    type?: string;
-    url?: string;
-  };
+    size?: number
+    type?: string
+    url?: string
+  }
   PageDtoUploadedFileDto: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["UploadedFileDto"][];
-  };
+    numberOfElements?: number
+    content?: definitions['UploadedFileDto'][]
+  }
   GlossaryDto: {
-    id?: string;
-    uid?: string;
+    id?: string
+    uid?: string
     /** Format: int64 */
-    internalId?: number;
-    name: string;
-    langs?: string[];
-    createdBy?: definitions["UserReference"];
-    owner?: definitions["UserReference"];
+    internalId?: number
+    name: string
+    langs?: string[]
+    createdBy?: definitions['UserReference']
+    owner?: definitions['UserReference']
     /** Format: date-time */
-    dateCreated?: string;
+    dateCreated?: string
     /** Format: int32 */
-    profileCount?: number;
-    active?: boolean;
-    profiles?: definitions["MemsourceTranslateProfileSimpleDto"][];
-  };
+    profileCount?: number
+    active?: boolean
+    profiles?: definitions['MemsourceTranslateProfileSimpleDto'][]
+  }
   MachineTranslateSettingsLangsDto: {
     /** @description Id */
-    id?: string;
+    id?: string
     /** @description Source language for CUSTOMIZABLE engine */
-    sourceLang?: string;
+    sourceLang?: string
     /** @description List of target languages for the CUSTOMIZABLE engine */
-    targetLangs?: string[];
-  };
+    targetLangs?: string[]
+  }
   MemTransMachineTranslateSettingsDto: {
-    id?: string;
-    uid?: string;
-    baseName?: string;
-    name?: string;
-    type?: string;
-    category?: string;
-    default_?: boolean;
-    includeTags?: boolean;
-    mtQualityEstimation?: boolean;
-    enabled?: boolean;
-    glossarySupported?: boolean;
-    args?: { [key: string]: string };
-    langs?: definitions["MachineTranslateSettingsLangsDto"];
+    id?: string
+    uid?: string
+    baseName?: string
+    name?: string
+    type?: string
+    category?: string
+    default_?: boolean
+    includeTags?: boolean
+    mtQualityEstimation?: boolean
+    enabled?: boolean
+    glossarySupported?: boolean
+    args?: {[key: string]: string}
+    langs?: definitions['MachineTranslateSettingsLangsDto']
     /**
      * Format: int32
      * @description Unknown value is represented by value: -1
      */
-    charCount?: number;
-  };
+    charCount?: number
+  }
   MemsourceTranslateProfileSimpleDto: {
-    uid?: string;
-    name?: string;
+    uid?: string
+    name?: string
     /** Format: date-time */
-    dateCreated?: string;
-    createdBy?: definitions["UserReference"];
-    memsourceTranslate?: definitions["MemTransMachineTranslateSettingsDto"];
-    locked?: boolean;
-  };
+    dateCreated?: string
+    createdBy?: definitions['UserReference']
+    memsourceTranslate?: definitions['MemTransMachineTranslateSettingsDto']
+    locked?: boolean
+  }
   PageDtoGlossaryDto: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["GlossaryDto"][];
-  };
+    numberOfElements?: number
+    content?: definitions['GlossaryDto'][]
+  }
   GlossaryEditDto: {
-    name: string;
-    langs: string[];
+    name: string
+    langs: string[]
     /** @description Owner of the TM must be Admin or PM */
-    owner?: definitions["IdReference"];
-  };
+    owner?: definitions['IdReference']
+  }
   GlossaryActivationDto: {
-    active?: boolean;
-  };
+    active?: boolean
+  }
   SearchResponseListTmDto: {
-    searchResults?: definitions["SearchTMResponseDto"][];
-  };
+    searchResults?: definitions['SearchTMResponseDto'][]
+  }
   SearchTMClientDto: {
     /** Format: int64 */
-    id?: number;
-    name?: string;
-  };
+    id?: number
+    name?: string
+  }
   SearchTMDomainDto: {
     /** Format: int64 */
-    id?: number;
-    name?: string;
-  };
+    id?: number
+    name?: string
+  }
   SearchTMProjectDto: {
     /** Format: int64 */
-    id?: number;
-    uid?: string;
-    name?: string;
-  };
+    id?: number
+    uid?: string
+    name?: string
+  }
   SearchTMResponseDto: {
-    segmentId?: string;
-    source?: definitions["SearchTMSegmentDto"];
-    translations?: definitions["SearchTMSegmentDto"][];
-    transMemory?: definitions["SearchTMTransMemoryDto"];
+    segmentId?: string
+    source?: definitions['SearchTMSegmentDto']
+    translations?: definitions['SearchTMSegmentDto'][]
+    transMemory?: definitions['SearchTMTransMemoryDto']
     /** Format: double */
-    grossScore?: number;
+    grossScore?: number
     /** Format: double */
-    score?: number;
-    subSegment?: boolean;
-  };
+    score?: number
+    subSegment?: boolean
+  }
   SearchTMSegmentDto: {
-    id?: string;
-    text?: string;
-    lang?: string;
-    rtl?: boolean;
+    id?: string
+    text?: string
+    lang?: string
+    rtl?: boolean
     /** Format: int64 */
-    modifiedAt?: number;
+    modifiedAt?: number
     /** Format: int64 */
-    createdAt?: number;
-    modifiedBy?: definitions["UserReference"];
-    createdBy?: definitions["UserReference"];
-    filename?: string;
-    project?: definitions["SearchTMProjectDto"];
-    client?: definitions["SearchTMClientDto"];
-    domain?: definitions["SearchTMDomainDto"];
-    subDomain?: definitions["SearchTMSubDomainDto"];
-    tagMetadata?: definitions["TagMetadata"][];
-    previousSegment?: string;
-    nextSegment?: string;
-    key?: string;
-  };
+    createdAt?: number
+    modifiedBy?: definitions['UserReference']
+    createdBy?: definitions['UserReference']
+    filename?: string
+    project?: definitions['SearchTMProjectDto']
+    client?: definitions['SearchTMClientDto']
+    domain?: definitions['SearchTMDomainDto']
+    subDomain?: definitions['SearchTMSubDomainDto']
+    tagMetadata?: definitions['TagMetadata'][]
+    previousSegment?: string
+    nextSegment?: string
+    key?: string
+  }
   SearchTMSubDomainDto: {
     /** Format: int64 */
-    id?: number;
-    name?: string;
-  };
+    id?: number
+    name?: string
+  }
   SearchTMTransMemoryDto: {
-    uid?: string;
-    id?: string;
-    name?: string;
-    reverse?: boolean;
-  };
+    uid?: string
+    id?: string
+    name?: string
+    reverse?: boolean
+  }
   TagMetadata: {
-    id?: string;
-    type?: string;
-    content?: string;
-    transAttributes?: string;
-  };
+    id?: string
+    type?: string
+    content?: string
+    transAttributes?: string
+  }
   SearchTMByJobRequestDto: {
-    segment: string;
+    segment: string
     /** Format: int32 */
-    workflowLevel?: number;
+    workflowLevel?: number
     /** Format: double */
-    scoreThreshold?: number;
-    previousSegment?: string;
-    nextSegment?: string;
-    contextKey?: string;
+    scoreThreshold?: number
+    previousSegment?: string
+    nextSegment?: string
+    contextKey?: string
     /**
      * Format: int32
      * @description Default: 5
      */
-    maxSegments?: number;
+    maxSegments?: number
     /**
      * Format: int32
      * @description Default: 5
      */
-    maxSubSegments?: number;
-    tagMetadata?: definitions["TagMetadataDto"][];
-  };
+    maxSubSegments?: number
+    tagMetadata?: definitions['TagMetadataDto'][]
+  }
   TagMetadataDto: {
-    id?: string;
-    type?: string;
-    content?: string;
-    transAttributes?: string;
-  };
+    id?: string
+    type?: string
+    content?: string
+    transAttributes?: string
+  }
   LQAConversationDto: {
-    id?: string;
+    id?: string
     /** @description LQA */
-    type?: string;
+    type?: string
     /** Format: date-time */
-    dateCreated?: string;
+    dateCreated?: string
     /** Format: date-time */
-    dateModified?: string;
+    dateModified?: string
     /** Format: date-time */
-    dateEdited?: string;
-    createdBy?: definitions["MentionableUserDto"];
-    comments?: definitions["CommentDto"][];
-    status?: definitions["StatusDto"];
-    deleted?: boolean;
-    references?: definitions["LQAReferences"];
-    lqaDescription?: string;
-  };
+    dateEdited?: string
+    createdBy?: definitions['MentionableUserDto']
+    comments?: definitions['CommentDto'][]
+    status?: definitions['StatusDto']
+    deleted?: boolean
+    references?: definitions['LQAReferences']
+    lqaDescription?: string
+  }
   AddCommentDto: {
-    text: string;
-  };
+    text: string
+  }
   LQAConversationsListDto: {
-    conversations?: definitions["LQAConversationDto"][];
-  };
+    conversations?: definitions['LQAConversationDto'][]
+  }
   LanguageDto: {
-    code?: string;
-    name?: string;
-    rfc?: string;
-    android?: string;
-    androidBcp?: string;
-  };
+    code?: string
+    name?: string
+    rfc?: string
+    android?: string
+    androidBcp?: string
+  }
   /** @description envelope for list of languages */
   LanguageListDto: {
-    languages: definitions["LanguageDto"][];
-  };
+    languages: definitions['LanguageDto'][]
+  }
   AccuracyWeightsDto: {
-    accuracy?: definitions["ToggleableWeightDto"];
-    addition?: definitions["ToggleableWeightDto"];
-    omission?: definitions["ToggleableWeightDto"];
-    mistranslation?: definitions["ToggleableWeightDto"];
-    underTranslation?: definitions["ToggleableWeightDto"];
-    untranslated?: definitions["ToggleableWeightDto"];
-    improperTmMatch?: definitions["ToggleableWeightDto"];
-    overTranslation?: definitions["ToggleableWeightDto"];
-  };
+    accuracy?: definitions['ToggleableWeightDto']
+    addition?: definitions['ToggleableWeightDto']
+    omission?: definitions['ToggleableWeightDto']
+    mistranslation?: definitions['ToggleableWeightDto']
+    underTranslation?: definitions['ToggleableWeightDto']
+    untranslated?: definitions['ToggleableWeightDto']
+    improperTmMatch?: definitions['ToggleableWeightDto']
+    overTranslation?: definitions['ToggleableWeightDto']
+  }
   DesignWeightsDto: {
-    design?: definitions["ToggleableWeightDto"];
-    length?: definitions["ToggleableWeightDto"];
-    localFormatting?: definitions["ToggleableWeightDto"];
-    markup?: definitions["ToggleableWeightDto"];
-    missingText?: definitions["ToggleableWeightDto"];
-    truncation?: definitions["ToggleableWeightDto"];
-  };
+    design?: definitions['ToggleableWeightDto']
+    length?: definitions['ToggleableWeightDto']
+    localFormatting?: definitions['ToggleableWeightDto']
+    markup?: definitions['ToggleableWeightDto']
+    missingText?: definitions['ToggleableWeightDto']
+    truncation?: definitions['ToggleableWeightDto']
+  }
   /** @description Error categories and their importance weight. If not provided, defaults will be created. */
   ErrorCategoriesDto: {
-    accuracy?: definitions["AccuracyWeightsDto"];
-    fluency?: definitions["FluencyWeightsDto"];
-    terminology?: definitions["TerminologyWeightsDto"];
-    style?: definitions["StyleWeightsDto"];
-    localeConvention?: definitions["LocaleConventionWeightsDto"];
-    verity?: definitions["VerityWeightsDto"];
-    design?: definitions["DesignWeightsDto"];
-    other?: definitions["OtherWeightsDto"];
-  };
+    accuracy?: definitions['AccuracyWeightsDto']
+    fluency?: definitions['FluencyWeightsDto']
+    terminology?: definitions['TerminologyWeightsDto']
+    style?: definitions['StyleWeightsDto']
+    localeConvention?: definitions['LocaleConventionWeightsDto']
+    verity?: definitions['VerityWeightsDto']
+    design?: definitions['DesignWeightsDto']
+    other?: definitions['OtherWeightsDto']
+  }
   FluencyWeightsDto: {
-    fluency?: definitions["ToggleableWeightDto"];
-    punctuation?: definitions["ToggleableWeightDto"];
-    spelling?: definitions["ToggleableWeightDto"];
-    grammar?: definitions["ToggleableWeightDto"];
-    grammaticalRegister?: definitions["ToggleableWeightDto"];
-    inconsistency?: definitions["ToggleableWeightDto"];
-    crossReference?: definitions["ToggleableWeightDto"];
-    characterEncoding?: definitions["ToggleableWeightDto"];
-  };
+    fluency?: definitions['ToggleableWeightDto']
+    punctuation?: definitions['ToggleableWeightDto']
+    spelling?: definitions['ToggleableWeightDto']
+    grammar?: definitions['ToggleableWeightDto']
+    grammaticalRegister?: definitions['ToggleableWeightDto']
+    inconsistency?: definitions['ToggleableWeightDto']
+    crossReference?: definitions['ToggleableWeightDto']
+    characterEncoding?: definitions['ToggleableWeightDto']
+  }
   LocaleConventionWeightsDto: {
-    localeConvention?: definitions["ToggleableWeightDto"];
-    addressFormat?: definitions["ToggleableWeightDto"];
-    dateFormat?: definitions["ToggleableWeightDto"];
-    currencyFormat?: definitions["ToggleableWeightDto"];
-    measurementFormat?: definitions["ToggleableWeightDto"];
-    shortcutKey?: definitions["ToggleableWeightDto"];
-    telephoneFormat?: definitions["ToggleableWeightDto"];
-  };
+    localeConvention?: definitions['ToggleableWeightDto']
+    addressFormat?: definitions['ToggleableWeightDto']
+    dateFormat?: definitions['ToggleableWeightDto']
+    currencyFormat?: definitions['ToggleableWeightDto']
+    measurementFormat?: definitions['ToggleableWeightDto']
+    shortcutKey?: definitions['ToggleableWeightDto']
+    telephoneFormat?: definitions['ToggleableWeightDto']
+  }
   OtherWeightsDto: {
-    other?: definitions["ToggleableWeightDto"];
-  };
+    other?: definitions['ToggleableWeightDto']
+  }
   PassFailThresholdDto: {
     /**
      * Format: double
      * @description Minimum allowed LQA score in percentage in line with MQM scoring (1 - penalties/word-count)
      * @example 99
      */
-    minScorePercentage: number;
-  };
+    minScorePercentage: number
+  }
   /** @description Penalty points for each severity level. By default neutral is 0, minor is 1, major is 5, critical is 10. */
   PenaltyPointsDto: {
-    neutral?: definitions["SeverityDto"];
-    minor?: definitions["SeverityDto"];
-    major?: definitions["SeverityDto"];
-    critical?: definitions["SeverityDto"];
-  };
+    neutral?: definitions['SeverityDto']
+    minor?: definitions['SeverityDto']
+    major?: definitions['SeverityDto']
+    critical?: definitions['SeverityDto']
+  }
   SeverityDto: {
     /**
      * Format: int32
      * @description Code of the severity category
      */
-    code?: number;
+    code?: number
     /**
      * Format: double
      * @description Allowed values 0.0-100,000.0
      */
-    value?: number;
-  };
+    value?: number
+  }
   StyleWeightsDto: {
-    style?: definitions["ToggleableWeightDto"];
-    awkward?: definitions["ToggleableWeightDto"];
-    companyStyle?: definitions["ToggleableWeightDto"];
-    inconsistentStyle?: definitions["ToggleableWeightDto"];
-    thirdPartyStyle?: definitions["ToggleableWeightDto"];
-    unidiomatic?: definitions["ToggleableWeightDto"];
-  };
+    style?: definitions['ToggleableWeightDto']
+    awkward?: definitions['ToggleableWeightDto']
+    companyStyle?: definitions['ToggleableWeightDto']
+    inconsistentStyle?: definitions['ToggleableWeightDto']
+    thirdPartyStyle?: definitions['ToggleableWeightDto']
+    unidiomatic?: definitions['ToggleableWeightDto']
+  }
   TerminologyWeightsDto: {
-    terminology?: definitions["ToggleableWeightDto"];
-    inconsistentWithTb?: definitions["ToggleableWeightDto"];
-    inconsistentUseOfTerminology?: definitions["ToggleableWeightDto"];
-  };
+    terminology?: definitions['ToggleableWeightDto']
+    inconsistentWithTb?: definitions['ToggleableWeightDto']
+    inconsistentUseOfTerminology?: definitions['ToggleableWeightDto']
+  }
   ToggleableWeightDto: {
     /** @description If this error category is enabled, default false */
-    enabled?: boolean;
+    enabled?: boolean
     /**
      * Format: double
      * @description Weight of this error category (0.1 - 99.9)
      * @example 1
      */
-    weight?: number;
+    weight?: number
     /**
      * Format: int32
      * @description Code of the error category
      */
-    code?: number;
-  };
+    code?: number
+  }
   VerityWeightsDto: {
-    verity?: definitions["ToggleableWeightDto"];
-    cultureSpecificReference?: definitions["ToggleableWeightDto"];
-  };
+    verity?: definitions['ToggleableWeightDto']
+    cultureSpecificReference?: definitions['ToggleableWeightDto']
+  }
   LqaProfileDetailDto: {
     /**
      * @description UID of the profile
      * @example string
      */
-    uid: string;
+    uid: string
     /** @description Name of the profile */
-    name: string;
-    errorCategories: definitions["ErrorCategoriesDto"];
-    penaltyPoints: definitions["PenaltyPointsDto"];
-    passFailThreshold: definitions["PassFailThresholdDto"];
+    name: string
+    errorCategories: definitions['ErrorCategoriesDto']
+    penaltyPoints: definitions['PenaltyPointsDto']
+    passFailThreshold: definitions['PassFailThresholdDto']
     /** @description If profile is set as default for organization */
-    isDefault: boolean;
-    createdBy: definitions["UserReference"];
+    isDefault: boolean
+    createdBy: definitions['UserReference']
     /** Format: date-time */
-    dateCreated: string;
-    organization: definitions["UidReference"];
-  };
+    dateCreated: string
+    organization: definitions['UidReference']
+  }
   CreateLqaProfileDto: {
-    name: string;
-    errorCategories: definitions["ErrorCategoriesDto"];
-    penaltyPoints?: definitions["PenaltyPointsDto"];
-    passFailThreshold?: definitions["PassFailThresholdDto"];
-  };
+    name: string
+    errorCategories: definitions['ErrorCategoriesDto']
+    penaltyPoints?: definitions['PenaltyPointsDto']
+    passFailThreshold?: definitions['PassFailThresholdDto']
+  }
   LqaProfileReferenceDto: {
     /**
      * @description UID of the profile
      * @example string
      */
-    uid: string;
+    uid: string
     /** @description Name of the profile */
-    name: string;
+    name: string
     /** @description If profile is set as default for organization */
-    isDefault: boolean;
+    isDefault: boolean
     /** @description User who created the profile */
-    createdBy: definitions["UserReference"];
+    createdBy: definitions['UserReference']
     /**
      * Format: date-time
      * @description When profile was created
      */
-    dateCreated: string;
-    organization: definitions["UidReference"];
-  };
+    dateCreated: string
+    organization: definitions['UidReference']
+  }
   PageDtoLqaProfileReferenceDto: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["LqaProfileReferenceDto"][];
-  };
+    numberOfElements?: number
+    content?: definitions['LqaProfileReferenceDto'][]
+  }
   UpdateLqaProfileDto: {
-    name: string;
-    errorCategories: definitions["ErrorCategoriesDto"];
-    penaltyPoints?: definitions["PenaltyPointsDto"];
-    passFailThreshold?: definitions["PassFailThresholdDto"];
-  };
+    name: string
+    errorCategories: definitions['ErrorCategoriesDto']
+    penaltyPoints?: definitions['PenaltyPointsDto']
+    passFailThreshold?: definitions['PassFailThresholdDto']
+  }
   MachineTranslateStatusDto: {
-    uid?: string;
-    ok?: boolean;
-    error?: string;
-  };
+    uid?: string
+    ok?: boolean
+    error?: string
+  }
   MachineTranslateSettingsDto: {
-    id?: string;
-    uid?: string;
-    baseName?: string;
-    name?: string;
-    type?: string;
-    category?: string;
-    default_?: boolean;
-    includeTags?: boolean;
-    mtQualityEstimation?: boolean;
-    enabled?: boolean;
-    args?: { [key: string]: string };
-    langs?: definitions["MachineTranslateSettingsLangsDto"];
-  };
+    id?: string
+    uid?: string
+    baseName?: string
+    name?: string
+    type?: string
+    category?: string
+    default_?: boolean
+    includeTags?: boolean
+    mtQualityEstimation?: boolean
+    enabled?: boolean
+    args?: {[key: string]: string}
+    langs?: definitions['MachineTranslateSettingsLangsDto']
+  }
   MachineTranslateSettingsPbmDto: {
-    id?: string;
-    uid?: string;
-    baseName?: string;
-    name?: string;
-    type?: string;
-    default_?: boolean;
-    includeTags?: boolean;
-    mtQualityEstimation?: boolean;
-    args?: { [key: string]: string };
-    payForMtPossible?: boolean;
-    payForMtActive?: boolean;
+    id?: string
+    uid?: string
+    baseName?: string
+    name?: string
+    type?: string
+    default_?: boolean
+    includeTags?: boolean
+    mtQualityEstimation?: boolean
+    args?: {[key: string]: string}
+    payForMtPossible?: boolean
+    payForMtActive?: boolean
     /** Format: int32 */
-    charCount?: number;
+    charCount?: number
     /** Format: int32 */
-    sharingSettings?: number;
-    langs?: definitions["MachineTranslateSettingsLangsDto"];
-  };
+    sharingSettings?: number
+    langs?: definitions['MachineTranslateSettingsLangsDto']
+  }
   PageDtoMachineTranslateSettingsPbmDto: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["MachineTranslateSettingsPbmDto"][];
-  };
+    numberOfElements?: number
+    content?: definitions['MachineTranslateSettingsPbmDto'][]
+  }
   TypesDto: {
-    types?: string[];
-  };
+    types?: string[]
+  }
   MachineTranslateResponse: {
-    translations?: string[];
-  };
+    translations?: string[]
+  }
   TranslationRequestExtendedDto: {
-    sourceTexts: string[];
-    from: string;
-    to: string;
-    filename?: string;
-  };
+    sourceTexts: string[]
+    from: string
+    to: string
+    filename?: string
+  }
   TaskMappingDto: {
-    taskId?: string;
-    workflowLevel?: string;
-    resourcePath?: string;
-    project?: definitions["ObjectReference"];
-    job?: definitions["ObjectReference"];
-  };
+    taskId?: string
+    workflowLevel?: string
+    resourcePath?: string
+    project?: definitions['ObjectReference']
+    job?: definitions['ObjectReference']
+  }
   ProjectTermBaseReference: {
-    id?: string;
-    termBase?: definitions["ObjectReference"];
-    name?: string;
-    writeMode?: boolean;
-    targetLang?: string;
-    readMode?: boolean;
-    workflowStep?: definitions["ObjectReference"];
-  };
+    id?: string
+    termBase?: definitions['ObjectReference']
+    name?: string
+    writeMode?: boolean
+    targetLang?: string
+    readMode?: boolean
+    workflowStep?: definitions['ObjectReference']
+  }
   ProjectTranslationMemoryReference: {
-    id?: string;
-    transMem?: definitions["ObjectReference"];
-    name?: string;
-    workflowStep?: definitions["ObjectReference"];
-    targetLang?: string;
+    id?: string
+    transMem?: definitions['ObjectReference']
+    name?: string
+    workflowStep?: definitions['ObjectReference']
+    targetLang?: string
     /** Format: double */
-    penalty?: number;
-    readMode?: boolean;
-  };
+    penalty?: number
+    readMode?: boolean
+  }
   ImportSettingsDto: {
-    uid?: string;
-    name?: string;
-    createdBy?: definitions["UserReference"];
+    uid?: string
+    name?: string
+    createdBy?: definitions['UserReference']
     /** Format: date-time */
-    dateCreated?: string;
-    fileImportSettings?: definitions["FileImportSettingsDto"];
-  };
+    dateCreated?: string
+    fileImportSettings?: definitions['FileImportSettingsDto']
+  }
   ImportSettingsEditDto: {
-    uid: string;
-    name: string;
-    fileImportSettings: definitions["FileImportSettingsCreateDto"];
-  };
+    uid: string
+    name: string
+    fileImportSettings: definitions['FileImportSettingsCreateDto']
+  }
   ImportSettingsReference: {
-    uid?: string;
-    name?: string;
-    createdBy?: definitions["UserReference"];
+    uid?: string
+    name?: string
+    createdBy?: definitions['UserReference']
     /** Format: date-time */
-    dateCreated?: string;
-  };
+    dateCreated?: string
+  }
   PageDtoImportSettingsReference: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["ImportSettingsReference"][];
-  };
+    numberOfElements?: number
+    content?: definitions['ImportSettingsReference'][]
+  }
   ImportSettingsCreateDto: {
-    name: string;
-    fileImportSettings: definitions["FileImportSettingsCreateDto"];
-  };
+    name: string
+    fileImportSettings: definitions['FileImportSettingsCreateDto']
+  }
   BusinessUnitReference: {
-    name?: string;
-    id?: string;
-    uid?: string;
-  };
+    name?: string
+    id?: string
+    uid?: string
+  }
   DiscountSchemeReference: {
-    id?: string;
-    uid?: string;
-    name?: string;
+    id?: string
+    uid?: string
+    name?: string
     /** Format: date-time */
-    dateCreated?: string;
-    createdBy?: definitions["UserReference"];
-  };
+    dateCreated?: string
+    createdBy?: definitions['UserReference']
+  }
   DomainReference: {
-    name?: string;
-    id?: string;
-    uid?: string;
-  };
+    name?: string
+    id?: string
+    uid?: string
+  }
   SubDomainReference: {
-    name?: string;
-    id?: string;
-    uid?: string;
-  };
+    name?: string
+    id?: string
+    uid?: string
+  }
   FileNamingSettingsDto: {
-    renameCompleted?: boolean;
-    completedFilePattern?: string;
-    targetFolderPath?: string;
-  };
+    renameCompleted?: boolean
+    completedFilePattern?: string
+    targetFolderPath?: string
+  }
   VendorSecuritySettingsDto: {
     /** @description Default: `false` */
-    canChangeSharedJobDueDateEnabled?: boolean;
-    canChangeSharedJobDueDate?: definitions["UidReference"][];
+    canChangeSharedJobDueDateEnabled?: boolean
+    canChangeSharedJobDueDate?: definitions['UidReference'][]
     /** @description Default: `false` */
-    jobVendorsMayUploadReferences?: boolean;
-  };
+    jobVendorsMayUploadReferences?: boolean
+  }
   /** @description Machine translation related settings */
   MachineTranslationSettingsDto: {
     /** @description Pre-translate from machine translation. Default: false */
-    useMachineTranslation?: boolean;
+    useMachineTranslation?: boolean
     /** @description Lock section: 100% machine translation matches. Default: false */
-    lock100PercentMatches?: boolean;
+    lock100PercentMatches?: boolean
     /** @description Set segment status to confirmed for: 100% translation machine matches. Default: false */
-    confirm100PercentMatches?: boolean;
+    confirm100PercentMatches?: boolean
     /**
      * @description Do not put machine translations to target and use alt-trans fields (alt-trans in mxlf).
      * Default: false
      */
-    useAltTransOnly?: boolean;
+    useAltTransOnly?: boolean
     /** @description Display quality-estimated machine translation matches in Memsource Editor. Default: false */
-    mtQeMatchesInEditors?: boolean;
+    mtQeMatchesInEditors?: boolean
     /** @description Use machine translation for segments with a TM match of 100% or more. Default: false */
-    mtForTMAbove100?: boolean;
-  };
+    mtForTMAbove100?: boolean
+  }
   /** @description Non-translatables related settings */
   NonTranslatableSettingsDto: {
     /** @description Pre-translate non-translatables. Default: false */
-    preTranslateNonTranslatables?: boolean;
+    preTranslateNonTranslatables?: boolean
     /** @description Set segment status to confirmed for: 100% non-translatable matches. Default: false */
-    confirm100PercentMatches?: boolean;
+    confirm100PercentMatches?: boolean
     /** @description Lock section: 100% non-translatable matches. Default: false */
-    lock100PercentMatches?: boolean;
+    lock100PercentMatches?: boolean
     /** @description If non-translatables are enabled in Editors. */
-    nonTranslatablesInEditors?: boolean;
-  };
+    nonTranslatablesInEditors?: boolean
+  }
   /** @description Repetitions related settings */
   RepetitionsSettingsDto: {
     /** @description Propagate repetitions. Default: false */
-    autoPropagateRepetitions?: boolean;
+    autoPropagateRepetitions?: boolean
     /** @description Set segment status to confirmed for: Repetitions. Default: false */
-    confirmRepetitions?: boolean;
+    confirmRepetitions?: boolean
     /** @description Changes in 1st repetition propagate upon confirmation into subsequent locked repetitions. Default: false */
-    autoPropagateToLockedRepetitions?: boolean;
+    autoPropagateToLockedRepetitions?: boolean
     /** @description If auto-propagated subsequent repetitions should be locked. Default: false */
-    lockSubsequentRepetitions?: boolean;
-  };
+    lockSubsequentRepetitions?: boolean
+  }
   /** @description Translation memory related settings */
   TranslationMemorySettingsDto: {
     /** @description Pre-translate from translation memory. Default: false */
-    useTranslationMemory?: boolean;
+    useTranslationMemory?: boolean
     /**
      * Format: double
      * @description Pre-translation threshold percent
      */
-    translationMemoryThreshold?: number;
+    translationMemoryThreshold?: number
     /** @description Set segment status to confirmed for: 100% translation memory matches. Default: false */
-    confirm100PercentMatches?: boolean;
+    confirm100PercentMatches?: boolean
     /** @description Set segment status to confirmed for: 101% translation memory matches. Default: false */
-    confirm101PercentMatches?: boolean;
+    confirm101PercentMatches?: boolean
     /** @description Lock section: 100% translation memory matches. Default: false */
-    lock100PercentMatches?: boolean;
+    lock100PercentMatches?: boolean
     /** @description Lock section: 101% translation memory matches. Default: false */
-    lock101PercentMatches?: boolean;
-  };
-  MORAVIA: definitions["QACheckDtoV2"] & {
-    enabled?: boolean;
-    profile?: string;
-    ignorable?: boolean;
-    instant?: boolean;
-  };
-  NUMBER: definitions["QACheckDtoV2"] & {
-    ignorable?: boolean;
-    enabled?: boolean;
-    value?: definitions["Number"];
-    instant?: boolean;
-  };
-  Number: { [key: string]: unknown };
+    lock101PercentMatches?: boolean
+  }
+  MORAVIA: definitions['QACheckDtoV2'] & {
+    enabled?: boolean
+    profile?: string
+    ignorable?: boolean
+    instant?: boolean
+  }
+  NUMBER: definitions['QACheckDtoV2'] & {
+    ignorable?: boolean
+    enabled?: boolean
+    value?: definitions['Number']
+    instant?: boolean
+  }
+  Number: {[key: string]: unknown}
   QACheckDtoV2: {
     /** @enum {string} */
-    type: "VOID" | "NUMBER" | "STRING" | "REGEX" | "MORAVIA";
+    type: 'VOID' | 'NUMBER' | 'STRING' | 'REGEX' | 'MORAVIA'
     /** @enum {string} */
     name:
-      | "emptyTarget"
-      | "inconsistentTranslation"
-      | "joinMarksInconsistency"
-      | "missingNumber"
-      | "segmentNotConfirmed"
-      | "nonConformingTerms"
-      | "multipleSpaces"
-      | "endPunctuation"
-      | "targetLength"
-      | "absoluteTargetLength"
-      | "relativeTargetLength"
-      | "inconsistentFormatting"
-      | "unresolvedComment"
-      | "emptyPairTags"
-      | "strictJobStatus"
-      | "forbiddenStringsEnabled"
-      | "excludeLockedSegments"
-      | "ignoreNotApprovedTerms"
-      | "spellCheck"
-      | "repeatedWords"
-      | "inconsistentTagContent"
-      | "emptyTagContent"
-      | "malformed"
-      | "forbiddenTerms"
-      | "targetLengthPercent"
-      | "targetLengthPerSegment"
-      | "newerAtLowerLevel"
-      | "leadingAndTrailingSpaces"
-      | "targetSourceIdentical"
-      | "ignoreInAllWorkflowSteps"
-      | "regexp"
-      | "unmodifiedFuzzyTranslation"
-      | "unmodifiedFuzzyTranslationTM"
-      | "unmodifiedFuzzyTranslationMTNT"
-      | "moravia"
-      | "extraNumbers"
-      | "nestedTags";
-  };
+      | 'emptyTarget'
+      | 'inconsistentTranslation'
+      | 'joinMarksInconsistency'
+      | 'missingNumber'
+      | 'segmentNotConfirmed'
+      | 'nonConformingTerms'
+      | 'multipleSpaces'
+      | 'endPunctuation'
+      | 'targetLength'
+      | 'absoluteTargetLength'
+      | 'relativeTargetLength'
+      | 'inconsistentFormatting'
+      | 'unresolvedComment'
+      | 'emptyPairTags'
+      | 'strictJobStatus'
+      | 'forbiddenStringsEnabled'
+      | 'excludeLockedSegments'
+      | 'ignoreNotApprovedTerms'
+      | 'spellCheck'
+      | 'repeatedWords'
+      | 'inconsistentTagContent'
+      | 'emptyTagContent'
+      | 'malformed'
+      | 'forbiddenTerms'
+      | 'targetLengthPercent'
+      | 'targetLengthPerSegment'
+      | 'newerAtLowerLevel'
+      | 'leadingAndTrailingSpaces'
+      | 'targetSourceIdentical'
+      | 'ignoreInAllWorkflowSteps'
+      | 'regexp'
+      | 'unmodifiedFuzzyTranslation'
+      | 'unmodifiedFuzzyTranslationTM'
+      | 'unmodifiedFuzzyTranslationMTNT'
+      | 'moravia'
+      | 'extraNumbers'
+      | 'nestedTags'
+  }
   QASettingsDtoV2: {
-    checks?: definitions["QACheckDtoV2"][];
-  };
-  REGEX: definitions["QACheckDtoV2"] & {
-    rules?: definitions["RegexpCheckRuleDtoV2"][];
-  };
+    checks?: definitions['QACheckDtoV2'][]
+  }
+  REGEX: definitions['QACheckDtoV2'] & {
+    rules?: definitions['RegexpCheckRuleDtoV2'][]
+  }
   RegexpCheckRuleDtoV2: {
-    description?: string;
-    sourceRegexp?: string;
-    targetRegexp?: string;
-    id?: string;
-    ignorable?: boolean;
-    instant?: boolean;
-  };
-  STRING: definitions["QACheckDtoV2"] & {
-    ignorable?: boolean;
-    enabled?: boolean;
-    value?: string;
-    instant?: boolean;
-  };
-  VOID: definitions["QACheckDtoV2"] & {
-    ignorable?: boolean;
-    enabled?: boolean;
-    instant?: boolean;
-  };
+    description?: string
+    sourceRegexp?: string
+    targetRegexp?: string
+    id?: string
+    ignorable?: boolean
+    instant?: boolean
+  }
+  STRING: definitions['QACheckDtoV2'] & {
+    ignorable?: boolean
+    enabled?: boolean
+    value?: string
+    instant?: boolean
+  }
+  VOID: definitions['QACheckDtoV2'] & {
+    ignorable?: boolean
+    enabled?: boolean
+    instant?: boolean
+  }
   EditQASettingsDtoV2: {
     /**
      * @description checks
@@ -4352,2816 +4323,2793 @@ export interface definitions {
      *             "name": "customQa"
      *         }
      */
-    checks?: { [key: string]: { [key: string]: unknown } }[];
-  };
+    checks?: {[key: string]: {[key: string]: unknown}}[]
+  }
   PlainConversationDto: {
-    id?: string;
+    id?: string
     /** @description SEGMENT_TARGET */
-    type?: string;
+    type?: string
     /** Format: date-time */
-    dateCreated?: string;
+    dateCreated?: string
     /** Format: date-time */
-    dateModified?: string;
+    dateModified?: string
     /** Format: date-time */
-    dateEdited?: string;
-    createdBy?: definitions["MentionableUserDto"];
-    comments?: definitions["CommentDto"][];
-    status?: definitions["StatusDto"];
-    deleted?: boolean;
-    references?: definitions["PlainReferences"];
-  };
+    dateEdited?: string
+    createdBy?: definitions['MentionableUserDto']
+    comments?: definitions['CommentDto'][]
+    status?: definitions['StatusDto']
+    deleted?: boolean
+    references?: definitions['PlainReferences']
+  }
   CreatePlainConversationDto: {
-    comment?: definitions["AddCommentDto"];
-    references: definitions["PlainReferences"];
-  };
+    comment?: definitions['AddCommentDto']
+    references: definitions['PlainReferences']
+  }
   EditPlainConversationDto: {
     /** @enum {string} */
-    status?: "resolved" | "unresolved";
-    correlation?: definitions["ReferenceCorrelation"];
-  };
+    status?: 'resolved' | 'unresolved'
+    correlation?: definitions['ReferenceCorrelation']
+  }
   PlainConversationsListDto: {
-    conversations?: definitions["PlainConversationDto"][];
-  };
+    conversations?: definitions['PlainConversationDto'][]
+  }
   /** @description Base projectDto */
   AbstractProjectDto: {
-    uid?: string;
+    uid?: string
     /** Format: int32 */
-    internalId?: number;
-    id?: string;
-    name?: string;
+    internalId?: number
+    id?: string
+    name?: string
     /** Format: date-time */
-    dateCreated?: string;
-    domain?: definitions["DomainReference"];
-    subDomain?: definitions["SubDomainReference"];
-    owner?: definitions["UserReference"];
-    sourceLang?: string;
-    targetLangs?: string[];
-    references?: definitions["ReferenceFileReference"][];
-    mtSettingsPerLanguageList?: definitions["MTSettingsPerLanguageReference"][];
+    dateCreated?: string
+    domain?: definitions['DomainReference']
+    subDomain?: definitions['SubDomainReference']
+    owner?: definitions['UserReference']
+    sourceLang?: string
+    targetLangs?: string[]
+    references?: definitions['ReferenceFileReference'][]
+    mtSettingsPerLanguageList?: definitions['MTSettingsPerLanguageReference'][]
     /** @description Response differs based on user's role */
-    userRole?: string;
-  };
-  "Admin, Project Manager": definitions["AbstractProjectDto"] & {
+    userRole?: string
+  }
+  'Admin, Project Manager': definitions['AbstractProjectDto'] & {
     /** @description Default: false */
-    shared?: boolean;
-    progress?: definitions["ProgressDto"];
-    client?: definitions["ClientReference"];
-    costCenter?: definitions["CostCenterReference"];
-    businessUnit?: definitions["BusinessUnitReference"];
+    shared?: boolean
+    progress?: definitions['ProgressDto']
+    client?: definitions['ClientReference']
+    costCenter?: definitions['CostCenterReference']
+    businessUnit?: definitions['BusinessUnitReference']
     /** Format: date-time */
-    dateDue?: string;
+    dateDue?: string
     /** @enum {string} */
     status?:
-      | "NEW"
-      | "ASSIGNED"
-      | "COMPLETED"
-      | "ACCEPTED_BY_VENDOR"
-      | "DECLINED_BY_VENDOR"
-      | "COMPLETED_BY_VENDOR"
-      | "CANCELLED";
-    purchaseOrder?: string;
+      | 'NEW'
+      | 'ASSIGNED'
+      | 'COMPLETED'
+      | 'ACCEPTED_BY_VENDOR'
+      | 'DECLINED_BY_VENDOR'
+      | 'COMPLETED_BY_VENDOR'
+      | 'CANCELLED'
+    purchaseOrder?: string
     /** @description Default: false */
-    isPublishedOnJobBoard?: boolean;
-    note?: string;
-    createdBy?: definitions["UserReference"];
-    qualityAssuranceSettings?: definitions["ObjectReference"];
-    workflowSteps?: definitions["ProjectWorkflowStepDto"][];
-    analyseSettings?: definitions["ObjectReference"];
-    accessSettings?: definitions["ObjectReference"];
-    financialSettings?: definitions["ObjectReference"];
-    archived?: boolean;
-  };
-  Buyer: definitions["AbstractProjectDto"] & {
+    isPublishedOnJobBoard?: boolean
+    note?: string
+    createdBy?: definitions['UserReference']
+    qualityAssuranceSettings?: definitions['ObjectReference']
+    workflowSteps?: definitions['ProjectWorkflowStepDto'][]
+    analyseSettings?: definitions['ObjectReference']
+    accessSettings?: definitions['ObjectReference']
+    financialSettings?: definitions['ObjectReference']
+    archived?: boolean
+  }
+  Buyer: definitions['AbstractProjectDto'] & {
     /** @description Default: false */
-    shared?: boolean;
-    progress?: definitions["ProgressDto"];
-    client?: definitions["ClientReference"];
-    costCenter?: definitions["CostCenterReference"];
-    businessUnit?: definitions["BusinessUnitReference"];
+    shared?: boolean
+    progress?: definitions['ProgressDto']
+    client?: definitions['ClientReference']
+    costCenter?: definitions['CostCenterReference']
+    businessUnit?: definitions['BusinessUnitReference']
     /** Format: date-time */
-    dateDue?: string;
+    dateDue?: string
     /** @enum {string} */
     status?:
-      | "NEW"
-      | "ASSIGNED"
-      | "COMPLETED"
-      | "ACCEPTED_BY_VENDOR"
-      | "DECLINED_BY_VENDOR"
-      | "COMPLETED_BY_VENDOR"
-      | "CANCELLED";
-    purchaseOrder?: string;
+      | 'NEW'
+      | 'ASSIGNED'
+      | 'COMPLETED'
+      | 'ACCEPTED_BY_VENDOR'
+      | 'DECLINED_BY_VENDOR'
+      | 'COMPLETED_BY_VENDOR'
+      | 'CANCELLED'
+    purchaseOrder?: string
     /** @description Default: false */
-    isPublishedOnJobBoard?: boolean;
-    note?: string;
-    createdBy?: definitions["UserReference"];
-    qualityAssuranceSettings?: definitions["ObjectReference"];
-    workflowSteps?: definitions["ProjectWorkflowStepDto"][];
-    analyseSettings?: definitions["ObjectReference"];
-    accessSettings?: definitions["ObjectReference"];
-    financialSettings?: definitions["ObjectReference"];
-    archived?: boolean;
-    vendorOwner?: definitions["USER"];
-    vendor?: definitions["VendorReference"];
-  };
+    isPublishedOnJobBoard?: boolean
+    note?: string
+    createdBy?: definitions['UserReference']
+    qualityAssuranceSettings?: definitions['ObjectReference']
+    workflowSteps?: definitions['ProjectWorkflowStepDto'][]
+    analyseSettings?: definitions['ObjectReference']
+    accessSettings?: definitions['ObjectReference']
+    financialSettings?: definitions['ObjectReference']
+    archived?: boolean
+    vendorOwner?: definitions['USER']
+    vendor?: definitions['VendorReference']
+  }
   BuyerReference: {
-    id?: string;
-    uid?: string;
-    name?: string;
-  };
+    id?: string
+    uid?: string
+    name?: string
+  }
   CostCenterReference: {
-    name?: string;
-    id?: string;
-    uid?: string;
-  };
-  Linguist: definitions["AbstractProjectDto"] & { [key: string]: unknown };
+    name?: string
+    id?: string
+    uid?: string
+  }
+  Linguist: definitions['AbstractProjectDto'] & {[key: string]: unknown}
   MTSettingsPerLanguageReference: {
     /** @description mtSettings is set for whole project if targetLang == null */
-    targetLang: string;
-    machineTranslateSettings?: definitions["MachineTranslateSettingsReference"];
-  };
+    targetLang: string
+    machineTranslateSettings?: definitions['MachineTranslateSettingsReference']
+  }
   MachineTranslateSettingsReference: {
-    id?: string;
-    uid?: string;
-    name?: string;
-    type?: string;
-  };
+    id?: string
+    uid?: string
+    name?: string
+    type?: string
+  }
   ProgressDto: {
     /** Format: int32 */
-    totalCount?: number;
+    totalCount?: number
     /** Format: int32 */
-    finishedCount?: number;
+    finishedCount?: number
     /** Format: int32 */
-    overdueCount?: number;
-  };
+    overdueCount?: number
+  }
   ProjectWorkflowStepDto: {
     /** Format: int64 */
-    id?: number;
-    abbreviation?: string;
-    name?: string;
+    id?: number
+    abbreviation?: string
+    name?: string
     /** Format: int32 */
-    workflowLevel?: number;
-    workflowStep?: definitions["ObjectReference"];
-    lqaProfileUid?: string;
-  };
+    workflowLevel?: number
+    workflowStep?: definitions['ObjectReference']
+    lqaProfileUid?: string
+  }
   ReferenceFileReference: {
-    id?: string;
-    uid?: string;
-    filename?: string;
-    note?: string;
+    id?: string
+    uid?: string
+    filename?: string
+    note?: string
     /** Format: date-time */
-    dateCreated?: string;
-    createdBy?: definitions["UserReference"];
-  };
-  Vendor: definitions["AbstractProjectDto"] & {
+    dateCreated?: string
+    createdBy?: definitions['UserReference']
+  }
+  Vendor: definitions['AbstractProjectDto'] & {
     /** @description Default: false */
-    shared?: boolean;
-    progress?: definitions["ProgressDto"];
-    client?: definitions["ClientReference"];
-    costCenter?: definitions["CostCenterReference"];
-    businessUnit?: definitions["BusinessUnitReference"];
+    shared?: boolean
+    progress?: definitions['ProgressDto']
+    client?: definitions['ClientReference']
+    costCenter?: definitions['CostCenterReference']
+    businessUnit?: definitions['BusinessUnitReference']
     /** Format: date-time */
-    dateDue?: string;
+    dateDue?: string
     /** @enum {string} */
     status?:
-      | "NEW"
-      | "ASSIGNED"
-      | "COMPLETED"
-      | "ACCEPTED_BY_VENDOR"
-      | "DECLINED_BY_VENDOR"
-      | "COMPLETED_BY_VENDOR"
-      | "CANCELLED";
-    purchaseOrder?: string;
+      | 'NEW'
+      | 'ASSIGNED'
+      | 'COMPLETED'
+      | 'ACCEPTED_BY_VENDOR'
+      | 'DECLINED_BY_VENDOR'
+      | 'COMPLETED_BY_VENDOR'
+      | 'CANCELLED'
+    purchaseOrder?: string
     /** @description Default: false */
-    isPublishedOnJobBoard?: boolean;
-    note?: string;
-    createdBy?: definitions["UserReference"];
-    qualityAssuranceSettings?: definitions["ObjectReference"];
-    workflowSteps?: definitions["ProjectWorkflowStepDto"][];
-    analyseSettings?: definitions["ObjectReference"];
-    accessSettings?: definitions["ObjectReference"];
-    financialSettings?: definitions["ObjectReference"];
-    archived?: boolean;
-    buyerOwner?: definitions["USER"];
-    buyer?: definitions["BuyerReference"];
-  };
+    isPublishedOnJobBoard?: boolean
+    note?: string
+    createdBy?: definitions['UserReference']
+    qualityAssuranceSettings?: definitions['ObjectReference']
+    workflowSteps?: definitions['ProjectWorkflowStepDto'][]
+    analyseSettings?: definitions['ObjectReference']
+    accessSettings?: definitions['ObjectReference']
+    financialSettings?: definitions['ObjectReference']
+    archived?: boolean
+    buyerOwner?: definitions['USER']
+    buyer?: definitions['BuyerReference']
+  }
   VendorReference: {
-    id?: string;
-    uid?: string;
-    name?: string;
-  };
+    id?: string
+    uid?: string
+    name?: string
+  }
   Providers: {
-    all?: definitions["ProviderReference"][];
-    relevant?: definitions["ProviderReference"][];
-  };
+    all?: definitions['ProviderReference'][]
+    relevant?: definitions['ProviderReference'][]
+  }
   AssignableTemplatesDto: {
-    assignableTemplates?: definitions["ProjectTemplateDto"][];
-  };
+    assignableTemplates?: definitions['ProjectTemplateDto'][]
+  }
   ProjectTemplateDto: {
-    id?: string;
-    name?: string;
-    templateName?: string;
-    sourceLang?: string;
-    targetLangs?: string[];
-    workflowSettings?: definitions["ProjectTemplateWorkflowSettingsDto"][];
-  };
+    id?: string
+    name?: string
+    templateName?: string
+    sourceLang?: string
+    targetLangs?: string[]
+    workflowSettings?: definitions['ProjectTemplateWorkflowSettingsDto'][]
+  }
   ProjectTemplateWorkflowSettingsAssignedToDto: {
-    targetLang?: string;
-    providers?: definitions["ProviderReference"][];
-  };
+    targetLang?: string
+    providers?: definitions['ProviderReference'][]
+  }
   ProjectTemplateWorkflowSettingsDto: {
-    workflowStep?: definitions["WorkflowStepReference"];
-    assignedTo?: definitions["ProjectTemplateWorkflowSettingsAssignedToDto"][];
-  };
+    workflowStep?: definitions['WorkflowStepReference']
+    assignedTo?: definitions['ProjectTemplateWorkflowSettingsAssignedToDto'][]
+  }
   JobPartsDto: {
-    jobs?: definitions["JobPartReference"][];
-  };
+    jobs?: definitions['JobPartReference'][]
+  }
   ProjectMTSettingsPerLangDto: {
-    targetLang: string;
-    machineTranslateSettings?: definitions["UidReference"];
-  };
+    targetLang: string
+    machineTranslateSettings?: definitions['UidReference']
+  }
   PageDtoAbstractProjectDto: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["AbstractProjectDto"][];
-  };
+    numberOfElements?: number
+    content?: definitions['AbstractProjectDto'][]
+  }
   PatchProjectDto: {
-    name?: string;
+    name?: string
     /** @enum {string} */
     status?:
-      | "NEW"
-      | "ASSIGNED"
-      | "COMPLETED"
-      | "ACCEPTED_BY_VENDOR"
-      | "DECLINED_BY_VENDOR"
-      | "COMPLETED_BY_VENDOR"
-      | "CANCELLED";
-    client?: definitions["IdReference"];
-    businessUnit?: definitions["IdReference"];
-    domain?: definitions["IdReference"];
-    subDomain?: definitions["IdReference"];
-    owner?: definitions["IdReference"];
-    purchaseOrder?: string;
+      | 'NEW'
+      | 'ASSIGNED'
+      | 'COMPLETED'
+      | 'ACCEPTED_BY_VENDOR'
+      | 'DECLINED_BY_VENDOR'
+      | 'COMPLETED_BY_VENDOR'
+      | 'CANCELLED'
+    client?: definitions['IdReference']
+    businessUnit?: definitions['IdReference']
+    domain?: definitions['IdReference']
+    subDomain?: definitions['IdReference']
+    owner?: definitions['IdReference']
+    purchaseOrder?: string
     /** Format: date-time */
-    dateDue?: string;
-    note?: string;
-    machineTranslateSettings?: definitions["UidReference"];
-    machineTranslateSettingsPerLangs?: definitions["ProjectMTSettingsPerLangDto"][];
-    archived?: boolean;
-  };
+    dateDue?: string
+    note?: string
+    machineTranslateSettings?: definitions['UidReference']
+    machineTranslateSettingsPerLangs?: definitions['ProjectMTSettingsPerLangDto'][]
+    archived?: boolean
+  }
   AddTargetLangDto: {
-    targetLangs?: string[];
-  };
+    targetLangs?: string[]
+  }
   AddWorkflowStepsDto: {
-    workflowSteps?: definitions["IdReference"][];
-  };
+    workflowSteps?: definitions['IdReference'][]
+  }
   AssignVendorDto: {
-    vendor?: definitions["IdReference"];
+    vendor?: definitions['IdReference']
     /** Format: date-time */
-    dateDue?: string;
-  };
+    dateDue?: string
+  }
   CloneProjectDto: {
-    name: string;
-  };
+    name: string
+  }
   PageDtoProviderReference: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["ProviderReference"][];
-  };
+    numberOfElements?: number
+    content?: definitions['ProviderReference'][]
+  }
   SetProjectStatusDto: {
     /** @enum {string} */
     status:
-      | "NEW"
-      | "ASSIGNED"
-      | "COMPLETED"
-      | "ACCEPTED_BY_VENDOR"
-      | "DECLINED_BY_VENDOR"
-      | "COMPLETED_BY_VENDOR"
-      | "CANCELLED";
-  };
+      | 'NEW'
+      | 'ASSIGNED'
+      | 'COMPLETED'
+      | 'ACCEPTED_BY_VENDOR'
+      | 'DECLINED_BY_VENDOR'
+      | 'COMPLETED_BY_VENDOR'
+      | 'CANCELLED'
+  }
   FinancialSettingsDto: {
-    netRateScheme?: definitions["NetRateSchemeReference"];
-    priceList?: definitions["PriceListReference"];
-  };
+    netRateScheme?: definitions['NetRateSchemeReference']
+    priceList?: definitions['PriceListReference']
+  }
   SetFinancialSettingsDto: {
-    netRateScheme?: definitions["IdReference"];
-    priceList?: definitions["IdReference"];
-  };
+    netRateScheme?: definitions['IdReference']
+    priceList?: definitions['IdReference']
+  }
   EnabledQualityChecksDto: {
     enabledChecks?: (
-      | "EmptyTranslation"
-      | "TrailingPunctuation"
-      | "Formatting"
-      | "JoinTags"
-      | "MissingNumbersV3"
-      | "MultipleSpacesV3"
-      | "NonConformingTerm"
-      | "NotConfirmed"
-      | "TranslationLength"
-      | "AbsoluteLength"
-      | "RelativeLength"
-      | "UnresolvedComment"
-      | "EmptyPairTags"
-      | "InconsistentTranslationTargetSource"
-      | "InconsistentTranslationSourceTarget"
-      | "ForbiddenString"
-      | "SpellCheck"
-      | "RepeatedWord"
-      | "InconsistentTagContent"
-      | "EmptyTagContent"
-      | "Malformed"
-      | "ForbiddenTerm"
-      | "NewerAtLowerLevel"
-      | "LeadingAndTrailingSpaces"
-      | "LeadingSpaces"
-      | "TrailingSpaces"
-      | "TargetSourceIdentical"
-      | "SourceOrTargetRegexp"
-      | "UnmodifiedFuzzyTranslation"
-      | "UnmodifiedFuzzyTranslationTM"
-      | "UnmodifiedFuzzyTranslationMTNT"
-      | "Moravia"
-      | "ExtraNumbersV3"
-      | "UnresolvedConversation"
-      | "NestedTags"
-      | "FuzzyInconsistencyTargetSource"
-      | "FuzzyInconsistencySourceTarget"
-      | "CustomQA"
-      | "MissingNonTranslatableAnnotation"
-    )[];
-  };
+      | 'EmptyTranslation'
+      | 'TrailingPunctuation'
+      | 'Formatting'
+      | 'JoinTags'
+      | 'MissingNumbersV3'
+      | 'MultipleSpacesV3'
+      | 'NonConformingTerm'
+      | 'NotConfirmed'
+      | 'TranslationLength'
+      | 'AbsoluteLength'
+      | 'RelativeLength'
+      | 'UnresolvedComment'
+      | 'EmptyPairTags'
+      | 'InconsistentTranslationTargetSource'
+      | 'InconsistentTranslationSourceTarget'
+      | 'ForbiddenString'
+      | 'SpellCheck'
+      | 'RepeatedWord'
+      | 'InconsistentTagContent'
+      | 'EmptyTagContent'
+      | 'Malformed'
+      | 'ForbiddenTerm'
+      | 'NewerAtLowerLevel'
+      | 'LeadingAndTrailingSpaces'
+      | 'LeadingSpaces'
+      | 'TrailingSpaces'
+      | 'TargetSourceIdentical'
+      | 'SourceOrTargetRegexp'
+      | 'UnmodifiedFuzzyTranslation'
+      | 'UnmodifiedFuzzyTranslationTM'
+      | 'UnmodifiedFuzzyTranslationMTNT'
+      | 'Moravia'
+      | 'ExtraNumbersV3'
+      | 'UnresolvedConversation'
+      | 'NestedTags'
+      | 'FuzzyInconsistencyTargetSource'
+      | 'FuzzyInconsistencySourceTarget'
+      | 'CustomQA'
+      | 'MissingNonTranslatableAnnotation'
+    )[]
+  }
   LqaErrorCategoryDto: {
     /** Format: int32 */
-    errorCategoryId?: number;
-    name?: string;
-    enabled?: boolean;
-    errorCategories?: definitions["LqaErrorCategoryDto"][];
-  };
+    errorCategoryId?: number
+    name?: string
+    enabled?: boolean
+    errorCategories?: definitions['LqaErrorCategoryDto'][]
+  }
   LqaSettingsDto: {
-    enabled?: boolean;
-    severities?: definitions["LqaSeverityDto"][];
-    categories?: definitions["LqaErrorCategoryDto"][];
-  };
+    enabled?: boolean
+    severities?: definitions['LqaSeverityDto'][]
+    categories?: definitions['LqaErrorCategoryDto'][]
+  }
   LqaSeverityDto: {
     /** Format: int32 */
-    severityId?: number;
-    name?: string;
+    severityId?: number
+    name?: string
     /** Format: int32 */
-    weight?: number;
-  };
+    weight?: number
+  }
   MTSettingsPerLanguageDto: {
     /** @description mtSettings is set for whole project if targetLang == null */
-    targetLang: string;
-    machineTranslateSettings?: definitions["MachineTranslateSettingsDto"];
-  };
+    targetLang: string
+    machineTranslateSettings?: definitions['MachineTranslateSettingsDto']
+  }
   MTSettingsPerLanguageListDto: {
-    mtSettingsPerLangList?: definitions["MTSettingsPerLanguageDto"][];
-  };
+    mtSettingsPerLangList?: definitions['MTSettingsPerLanguageDto'][]
+  }
   PageDtoQuoteDto: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["QuoteDto"][];
-  };
+    numberOfElements?: number
+    content?: definitions['QuoteDto'][]
+  }
   QuoteDto: {
     /** Format: int64 */
-    id?: number;
-    uid?: string;
-    name?: string;
+    id?: number
+    uid?: string
+    name?: string
     /** @enum {string} */
-    status?: "APPROVED" | "DECLINED" | "DRAFT" | "FOR_APPROVAL" | "NEW";
-    currency?: string;
+    status?: 'APPROVED' | 'DECLINED' | 'DRAFT' | 'FOR_APPROVAL' | 'NEW'
+    currency?: string
     /** @enum {string} */
-    billingUnit?: "Character" | "Word" | "Page" | "Hour";
-    createdBy?: definitions["UserReference"];
+    billingUnit?: 'Character' | 'Word' | 'Page' | 'Hour'
+    createdBy?: definitions['UserReference']
     /** Format: date-time */
-    dateCreated?: string;
+    dateCreated?: string
     /** Format: double */
-    totalPrice?: number;
-    netRateScheme?: definitions["NetRateSchemeReference"];
-    priceList?: definitions["PriceListReference"];
-    workflowStepList?: definitions["WorkflowStepReference"][];
-    provider?: definitions["ProviderReference"];
-    customerEmail?: string;
+    totalPrice?: number
+    netRateScheme?: definitions['NetRateSchemeReference']
+    priceList?: definitions['PriceListReference']
+    workflowStepList?: definitions['WorkflowStepReference'][]
+    provider?: definitions['ProviderReference']
+    customerEmail?: string
     /** @enum {string} */
-    quoteType?: "BUYER" | "PROVIDER";
-    editable?: boolean;
-    outdated?: boolean;
-  };
+    quoteType?: 'BUYER' | 'PROVIDER'
+    editable?: boolean
+    outdated?: boolean
+  }
   EditProjectMTSettPerLangDto: {
-    targetLang: string;
-    machineTranslateSettings?: definitions["IdReference"];
-  };
+    targetLang: string
+    machineTranslateSettings?: definitions['IdReference']
+  }
   EditProjectMTSettPerLangListDto: {
-    mtSettingsPerLangList?: definitions["EditProjectMTSettPerLangDto"][];
-  };
+    mtSettingsPerLangList?: definitions['EditProjectMTSettPerLangDto'][]
+  }
   EditProjectMTSettingsDto: {
-    machineTranslateSettings?: definitions["IdReference"];
-  };
+    machineTranslateSettings?: definitions['IdReference']
+  }
   AnalyseSettingsDto: {
     /** @enum {string} */
-    type?: "PreAnalyse" | "PostAnalyse" | "PreAnalyseTarget" | "Compare";
+    type?: 'PreAnalyse' | 'PostAnalyse' | 'PreAnalyseTarget' | 'Compare'
     /** @description Default: false */
-    includeFuzzyRepetitions?: boolean;
+    includeFuzzyRepetitions?: boolean
     /** @description Default: false */
-    separateFuzzyRepetitions?: boolean;
+    separateFuzzyRepetitions?: boolean
     /** @description Default: false */
-    includeNonTranslatables?: boolean;
+    includeNonTranslatables?: boolean
     /** @description Default: false */
-    includeMachineTranslationMatches?: boolean;
+    includeMachineTranslationMatches?: boolean
     /** @description Default: false */
-    includeConfirmedSegments?: boolean;
+    includeConfirmedSegments?: boolean
     /** @description Default: false */
-    includeNumbers?: boolean;
+    includeNumbers?: boolean
     /** @description Default: false */
-    includeLockedSegments?: boolean;
+    includeLockedSegments?: boolean
     /** @description Default: false */
-    countSourceUnits?: boolean;
+    countSourceUnits?: boolean
     /** @description Default: false */
-    includeTransMemory?: boolean;
-    namingPattern?: string;
+    includeTransMemory?: boolean
+    namingPattern?: string
     /** @description Default: false */
-    analyzeByLanguage?: boolean;
+    analyzeByLanguage?: boolean
     /** @description Default: false */
-    analyzeByProvider?: boolean;
+    analyzeByProvider?: boolean
     /** @description If automatic post analysis should be created after update source. Default: false */
-    allowAutomaticPostAnalysis?: boolean;
+    allowAutomaticPostAnalysis?: boolean
     /** @description Default: false */
-    transMemoryPostEditing?: boolean;
+    transMemoryPostEditing?: boolean
     /** @description Default: false */
-    nonTranslatablePostEditing?: boolean;
+    nonTranslatablePostEditing?: boolean
     /** @description Default: false */
-    machineTranslatePostEditing?: boolean;
-  };
+    machineTranslatePostEditing?: boolean
+  }
   CustomFieldInstanceDto: {
-    uid?: string;
-    customField?: definitions["CustomFieldDto"];
-    selectedOptions?: definitions["CustomFieldOptionDto"][];
-    value?: string;
+    uid?: string
+    customField?: definitions['CustomFieldDto']
+    selectedOptions?: definitions['CustomFieldOptionDto'][]
+    value?: string
     /** Format: date-time */
-    createdAt?: string;
-    createdBy?: definitions["UidReference"];
+    createdAt?: string
+    createdBy?: definitions['UidReference']
     /** Format: date-time */
-    updatedAt?: string;
-    updatedBy?: definitions["UidReference"];
-  };
+    updatedAt?: string
+    updatedBy?: definitions['UidReference']
+  }
   CustomFieldInstancesDto: {
-    customFieldInstances?: definitions["CustomFieldInstanceDto"][];
-  };
+    customFieldInstances?: definitions['CustomFieldInstanceDto'][]
+  }
   CreateCustomFieldInstanceDto: {
-    customField?: definitions["UidReference"];
-    selectedOptions?: definitions["UidReference"][];
-    value?: string;
-  };
+    customField?: definitions['UidReference']
+    selectedOptions?: definitions['UidReference'][]
+    value?: string
+  }
   CreateCustomFieldInstancesDto: {
-    customFieldInstances?: definitions["CreateCustomFieldInstanceDto"][];
-  };
+    customFieldInstances?: definitions['CreateCustomFieldInstanceDto'][]
+  }
   UpdateCustomFieldInstanceDto: {
-    selectedOptions?: definitions["UidReference"][];
-    value?: string;
-  };
+    selectedOptions?: definitions['UidReference'][]
+    value?: string
+  }
   UpdateCustomFieldInstanceWithUidDto: {
-    customFieldInstance?: definitions["UidReference"];
-    customField?: definitions["UidReference"];
-    selectedOptions?: definitions["UidReference"][];
-    value?: string;
-  };
+    customFieldInstance?: definitions['UidReference']
+    customField?: definitions['UidReference']
+    selectedOptions?: definitions['UidReference'][]
+    value?: string
+  }
   UpdateCustomFieldInstancesDto: {
-    addInstances?: definitions["CreateCustomFieldInstanceDto"][];
-    removeInstances?: definitions["UidReference"][];
-    updateInstances?: definitions["UpdateCustomFieldInstanceWithUidDto"][];
-  };
+    addInstances?: definitions['CreateCustomFieldInstanceDto'][]
+    removeInstances?: definitions['UidReference'][]
+    updateInstances?: definitions['UpdateCustomFieldInstanceWithUidDto'][]
+  }
   PageDtoCustomFieldInstanceDto: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["CustomFieldInstanceDto"][];
-  };
+    numberOfElements?: number
+    content?: definitions['CustomFieldInstanceDto'][]
+  }
   JobStatusChangeActionDto: {
     /** @enum {string} */
     requestedStatus?:
-      | "NEW"
-      | "ACCEPTED"
-      | "DECLINED"
-      | "REJECTED"
-      | "DELIVERED"
-      | "EMAILED"
-      | "COMPLETED"
-      | "CANCELLED";
+      | 'NEW'
+      | 'ACCEPTED'
+      | 'DECLINED'
+      | 'REJECTED'
+      | 'DELIVERED'
+      | 'EMAILED'
+      | 'COMPLETED'
+      | 'CANCELLED'
     /**
      * @description Default: false; Both project owner and job owner are notified;
      *                     the parameter is subordinated to notification settings in the project
      */
-    notifyOwner?: boolean;
+    notifyOwner?: boolean
     /**
      * @description Default: false;
      *         Controls both job status and email notifications to previous/next provider
      */
-    propagateStatus?: boolean;
-  };
+    propagateStatus?: boolean
+  }
   ContinuousJobInfoDto: {
     /** Format: date-time */
-    dateUpdated?: string;
-  };
+    dateUpdated?: string
+  }
   ImportStatusDto: {
     /** @enum {string} */
-    status?: "RUNNING" | "ERROR" | "OK";
-    errorMessage?: string;
-  };
+    status?: 'RUNNING' | 'ERROR' | 'OK'
+    errorMessage?: string
+  }
   JobPartExtendedDto: {
-    uid?: string;
+    uid?: string
     /** @description InnerId is a sequential number of a job in a project. Jobs created from the same file share the same innerId across workflow steps. */
-    innerId?: string;
+    innerId?: string
     /** @enum {string} */
     status?:
-      | "NEW"
-      | "ACCEPTED"
-      | "DECLINED"
-      | "REJECTED"
-      | "DELIVERED"
-      | "EMAILED"
-      | "COMPLETED"
-      | "CANCELLED";
-    providers?: definitions["ProviderReference"][];
-    sourceLang?: string;
-    targetLang?: string;
+      | 'NEW'
+      | 'ACCEPTED'
+      | 'DECLINED'
+      | 'REJECTED'
+      | 'DELIVERED'
+      | 'EMAILED'
+      | 'COMPLETED'
+      | 'CANCELLED'
+    providers?: definitions['ProviderReference'][]
+    sourceLang?: string
+    targetLang?: string
     /** Format: int32 */
-    workflowLevel?: number;
-    workflowStep?: definitions["ProjectWorkflowStepReference"];
-    filename?: string;
+    workflowLevel?: number
+    workflowStep?: definitions['ProjectWorkflowStepReference']
+    filename?: string
     /** Format: date-time */
-    dateDue?: string;
+    dateDue?: string
     /** Format: int32 */
-    wordsCount?: number;
+    wordsCount?: number
     /** Format: int32 */
-    beginIndex?: number;
+    beginIndex?: number
     /** Format: int32 */
-    endIndex?: number;
-    isParentJobSplit?: boolean;
+    endIndex?: number
+    isParentJobSplit?: boolean
     /** Format: date-time */
-    updateSourceDate?: string;
+    updateSourceDate?: string
     /** Format: date-time */
-    updateTargetDate?: string;
+    updateTargetDate?: string
     /** Format: date-time */
-    dateCreated?: string;
-    jobReference?: definitions["JobReference"];
-    project?: definitions["ProjectReference"];
+    dateCreated?: string
+    jobReference?: definitions['JobReference']
+    project?: definitions['ProjectReference']
     /** Format: int32 */
-    lastWorkflowLevel?: number;
-    workUnit?: definitions["ObjectReference"];
-    importStatus?: definitions["ImportStatusDto"];
-    imported?: boolean;
-    continuous?: boolean;
-    continuousJobInfo?: definitions["ContinuousJobInfoDto"];
-    originalFileDirectory?: string;
-  };
+    lastWorkflowLevel?: number
+    workUnit?: definitions['ObjectReference']
+    importStatus?: definitions['ImportStatusDto']
+    imported?: boolean
+    continuous?: boolean
+    continuousJobInfo?: definitions['ContinuousJobInfoDto']
+    originalFileDirectory?: string
+  }
   JobReference: {
-    uid?: string;
-    filename?: string;
-  };
+    uid?: string
+    filename?: string
+  }
   ProjectWorkflowStepReference: {
-    name?: string;
-    id?: string;
+    name?: string
+    id?: string
     /** Format: int32 */
-    order?: number;
+    order?: number
     /** Format: int32 */
-    workflowLevel?: number;
-  };
+    workflowLevel?: number
+  }
   JobPartReadyReferences: {
-    jobs?: definitions["UidReference"][];
-    getParts?: definitions["ClosureListJobPart"];
-  };
+    jobs?: definitions['UidReference'][]
+    getParts?: definitions['ClosureListJobPart']
+  }
   PseudoTranslateActionDto: {
-    replacement?: string;
-    prefix?: string;
-    suffix?: string;
+    replacement?: string
+    prefix?: string
+    suffix?: string
     /** Format: double */
-    length?: number;
+    length?: number
     /** Format: int32 */
-    keyHashPrefixLen?: number;
-    substitution?: definitions["SubstituteDto"][];
-  };
+    keyHashPrefixLen?: number
+    substitution?: definitions['SubstituteDto'][]
+  }
   SubstituteDto: {
-    source: string;
-    target: string;
-  };
+    source: string
+    target: string
+  }
   AsyncRequestWrapperDto: {
-    asyncRequest?: definitions["AsyncRequestDto"];
-  };
+    asyncRequest?: definitions['AsyncRequestDto']
+  }
   UpdateIgnoredSegment: {
-    uid: string;
-    warnings: definitions["UpdateIgnoredWarning"][];
-  };
+    uid: string
+    warnings: definitions['UpdateIgnoredWarning'][]
+  }
   UpdateIgnoredWarning: {
-    id: string;
-  };
+    id: string
+  }
   UpdateIgnoredWarningsDto: {
-    jobParts: definitions["UpdateIgnoredJobPartSegment"][];
-  };
+    jobParts: definitions['UpdateIgnoredJobPartSegment'][]
+  }
   JobPartStatusChangeDto: {
     /** @enum {string} */
     status?:
-      | "NEW"
-      | "ACCEPTED"
-      | "DECLINED"
-      | "REJECTED"
-      | "DELIVERED"
-      | "EMAILED"
-      | "COMPLETED"
-      | "CANCELLED";
+      | 'NEW'
+      | 'ACCEPTED'
+      | 'DECLINED'
+      | 'REJECTED'
+      | 'DELIVERED'
+      | 'EMAILED'
+      | 'COMPLETED'
+      | 'CANCELLED'
     /** Format: date-time */
-    changedDate?: string;
-    changedBy?: definitions["UserReference"];
-  };
+    changedDate?: string
+    changedBy?: definitions['UserReference']
+  }
   JobPartStatusChangesDto: {
-    statusChanges?: definitions["JobPartStatusChangeDto"][];
-  };
+    statusChanges?: definitions['JobPartStatusChangeDto'][]
+  }
   JobPartUpdateSingleDto: {
     /** @enum {string} */
     status:
-      | "NEW"
-      | "ACCEPTED"
-      | "DECLINED"
-      | "REJECTED"
-      | "DELIVERED"
-      | "EMAILED"
-      | "COMPLETED"
-      | "CANCELLED";
+      | 'NEW'
+      | 'ACCEPTED'
+      | 'DECLINED'
+      | 'REJECTED'
+      | 'DELIVERED'
+      | 'EMAILED'
+      | 'COMPLETED'
+      | 'CANCELLED'
     /** Format: date-time */
-    dateDue?: string;
-    providers?: definitions["ProviderReference"][];
-  };
+    dateDue?: string
+    providers?: definitions['ProviderReference'][]
+  }
   JobPartPatchSingleDto: {
     /** @enum {string} */
     status?:
-      | "NEW"
-      | "ACCEPTED"
-      | "DECLINED"
-      | "REJECTED"
-      | "DELIVERED"
-      | "EMAILED"
-      | "COMPLETED"
-      | "CANCELLED";
+      | 'NEW'
+      | 'ACCEPTED'
+      | 'DECLINED'
+      | 'REJECTED'
+      | 'DELIVERED'
+      | 'EMAILED'
+      | 'COMPLETED'
+      | 'CANCELLED'
     /** Format: date-time */
-    dateDue?: string;
-    providers?: definitions["ProviderReference"][];
-  };
+    dateDue?: string
+    providers?: definitions['ProviderReference'][]
+  }
   TranslationResourcesDto: {
-    machineTranslateSettings?: definitions["MachineTranslateSettingsReference"];
-    translationMemories?: definitions["ProjectTranslationMemoryReference"][];
-    termBases?: definitions["ProjectTermBaseReference"][];
-  };
+    machineTranslateSettings?: definitions['MachineTranslateSettingsReference']
+    translationMemories?: definitions['ProjectTranslationMemoryReference'][]
+    termBases?: definitions['ProjectTermBaseReference'][]
+  }
   JobSegmentDto: {
-    id?: string;
-    source?: string;
-    translation?: string;
+    id?: string
+    source?: string
+    translation?: string
     /** Format: int64 */
-    createdAt?: number;
+    createdAt?: number
     /** Format: int64 */
-    modifiedAt?: number;
-    createdBy?: definitions["UserReference"];
-    modifiedBy?: definitions["UserReference"];
+    modifiedAt?: number
+    createdBy?: definitions['UserReference']
+    modifiedBy?: definitions['UserReference']
     /** Format: int32 */
-    workflowLevel?: number;
-    workflowStep?: definitions["WorkflowStepDto"];
-  };
+    workflowLevel?: number
+    workflowStep?: definitions['WorkflowStepDto']
+  }
   SegmentListDto: {
-    segments?: definitions["JobSegmentDto"][];
-  };
+    segments?: definitions['JobSegmentDto'][]
+  }
   WorkflowStepDto: {
-    id?: string;
-    uid?: string;
-    name?: string;
-    abbr?: string;
+    id?: string
+    uid?: string
+    name?: string
+    abbr?: string
     /** Format: int32 */
-    order?: number;
-    lqaEnabled?: boolean;
-  };
+    order?: number
+    lqaEnabled?: boolean
+  }
   TargetFileWarningsDto: {
-    warnings?: string[];
-  };
+    warnings?: string[]
+  }
   PreviewUrlDto: {
     /** @enum {string} */
-    type?: "ORIGINAL" | "PDF";
-    url?: string;
-  };
+    type?: 'ORIGINAL' | 'PDF'
+    url?: string
+  }
   PreviewUrlsDto: {
-    previews?: definitions["PreviewUrlDto"][];
-  };
+    previews?: definitions['PreviewUrlDto'][]
+  }
   AsyncRequestReference: {
-    id?: string;
+    id?: string
     /** Format: date-time */
-    dateCreated?: string;
+    dateCreated?: string
     /** @enum {string} */
     action?:
-      | "PRE_ANALYSE"
-      | "POST_ANALYSE"
-      | "COMPARE_ANALYSE"
-      | "PARENT_ANALYSE"
-      | "PRE_TRANSLATE"
-      | "ASYNC_TRANSLATE"
-      | "IMPORT_JOB"
-      | "IMPORT_FILE"
-      | "ALIGN"
-      | "EXPORT_TMX_BY_QUERY"
-      | "EXPORT_TMX"
-      | "IMPORT_TMX"
-      | "IMPORT_TBX"
-      | "INSERT_INTO_TM"
-      | "DELETE_TM"
-      | "CLEAR_TM"
-      | "QA"
-      | "QA_V3"
-      | "UPDATE_CONTINUOUS_JOB"
-      | "UPDATE_SOURCE"
-      | "UPDATE_TARGET"
-      | "EXTRACT_CLEANED_TMS"
-      | "GLOSSARY_PUT"
-      | "GLOSSARY_DELETE"
-      | "CREATE_PROJECT"
-      | "EXPORT_COMPLETE_FILE"
-      | "IMPORT_ANNOTATIONS"
-      | "FILE_FLOW_CONVERTER_IMPORT"
-      | "FILE_FLOW_MT_PRETRANSLATE";
-  };
+      | 'PRE_ANALYSE'
+      | 'POST_ANALYSE'
+      | 'COMPARE_ANALYSE'
+      | 'PARENT_ANALYSE'
+      | 'PRE_TRANSLATE'
+      | 'ASYNC_TRANSLATE'
+      | 'IMPORT_JOB'
+      | 'IMPORT_FILE'
+      | 'ALIGN'
+      | 'EXPORT_TMX_BY_QUERY'
+      | 'EXPORT_TMX'
+      | 'IMPORT_TMX'
+      | 'IMPORT_TBX'
+      | 'INSERT_INTO_TM'
+      | 'DELETE_TM'
+      | 'CLEAR_TM'
+      | 'QA'
+      | 'QA_V3'
+      | 'UPDATE_CONTINUOUS_JOB'
+      | 'UPDATE_SOURCE'
+      | 'UPDATE_TARGET'
+      | 'EXTRACT_CLEANED_TMS'
+      | 'GLOSSARY_PUT'
+      | 'GLOSSARY_DELETE'
+      | 'CREATE_PROJECT'
+      | 'EXPORT_COMPLETE_FILE'
+      | 'IMPORT_ANNOTATIONS'
+      | 'FILE_FLOW_CONVERTER_IMPORT'
+      | 'FILE_FLOW_MT_PRETRANSLATE'
+  }
   JobListDto: {
-    unsupportedFiles?: string[];
-    jobs?: definitions["JobPartReference"][];
-    asyncRequest?: definitions["AsyncRequestReference"];
-  };
+    unsupportedFiles?: string[]
+    jobs?: definitions['JobPartReference'][]
+    asyncRequest?: definitions['AsyncRequestReference']
+  }
   JobCreateRemoteFileDto: {
-    connectorToken: string;
-    remoteFolder?: string;
-    remoteFileName: string;
-    remoteFileNameRegex?: boolean;
-    continuous?: boolean;
-  };
+    connectorToken: string
+    remoteFolder?: string
+    remoteFileName: string
+    remoteFileNameRegex?: boolean
+    continuous?: boolean
+  }
   JobCreateRequestDto: {
-    targetLangs: string[];
+    targetLangs: string[]
     /**
      * Format: date-time
      * @description only use for projects without workflows; otherwise specify in the workflowSettings object. Use ISO 8601 date format.
      */
-    due?: string;
-    workflowSettings?: definitions["WorkflowStepConfiguration"][];
+    due?: string
+    workflowSettings?: definitions['WorkflowStepConfiguration'][]
     /** @description only use for projects without workflows; otherwise specify in the workflowSettings object */
-    assignments?: definitions["ProvidersPerLanguage"][];
-    importSettings?: definitions["UidReference"];
+    assignments?: definitions['ProvidersPerLanguage'][]
+    importSettings?: definitions['UidReference']
     /** @description Default: false */
-    useProjectFileImportSettings?: boolean;
-    preTranslate?: boolean;
-    semanticMarkup?: boolean;
+    useProjectFileImportSettings?: boolean
+    preTranslate?: boolean
+    semanticMarkup?: boolean
     /** @description use to notify assigned providers, notificationIntervalInMinutes 0 or empty value means immediate notification to all providers */
-    notifyProvider?: definitions["NotifyProviderDto"];
-    callbackUrl?: string;
-    path?: string;
-    remoteFile?: definitions["JobCreateRemoteFileDto"];
-  };
+    notifyProvider?: definitions['NotifyProviderDto']
+    callbackUrl?: string
+    path?: string
+    remoteFile?: definitions['JobCreateRemoteFileDto']
+  }
   NotifyProviderDto: {
-    organizationEmailTemplate: definitions["IdReference"];
+    organizationEmailTemplate: definitions['IdReference']
     /** Format: int32 */
-    notificationIntervalInMinutes?: number;
-  };
+    notificationIntervalInMinutes?: number
+  }
   ProvidersPerLanguage: {
-    targetLang?: string;
-    providers?: definitions["ProviderReference"][];
-    assignedUsers?: definitions["User"][];
-  };
+    targetLang?: string
+    providers?: definitions['ProviderReference'][]
+    assignedUsers?: definitions['User'][]
+  }
   User: {
     /** Format: int64 */
-    id: number;
-  };
+    id: number
+  }
   WorkflowStepConfiguration: {
-    id?: string;
-    assignments: definitions["ProvidersPerLanguage"][];
+    id?: string
+    assignments: definitions['ProvidersPerLanguage'][]
     /**
      * Format: date-time
      * @description Use ISO 8601 date format.
      */
-    due?: string;
-    notifyProvider?: definitions["NotifyProviderDto"];
-  };
+    due?: string
+    notifyProvider?: definitions['NotifyProviderDto']
+  }
   JobPartUpdateSourceDto: {
-    uid?: string;
+    uid?: string
     /** @enum {string} */
     status?:
-      | "NEW"
-      | "ACCEPTED"
-      | "DECLINED"
-      | "REJECTED"
-      | "DELIVERED"
-      | "EMAILED"
-      | "COMPLETED"
-      | "CANCELLED";
-    targetLang?: string;
-    filename?: string;
+      | 'NEW'
+      | 'ACCEPTED'
+      | 'DECLINED'
+      | 'REJECTED'
+      | 'DELIVERED'
+      | 'EMAILED'
+      | 'COMPLETED'
+      | 'CANCELLED'
+    targetLang?: string
+    filename?: string
     /** Format: int32 */
-    workflowLevel?: number;
-    workflowStep?: definitions["WorkflowStepReference"];
-  };
+    workflowLevel?: number
+    workflowStep?: definitions['WorkflowStepReference']
+  }
   JobUpdateSourceResponseDto: {
-    asyncRequest?: definitions["AsyncRequestReference"];
-    jobs?: definitions["JobPartUpdateSourceDto"][];
-  };
+    asyncRequest?: definitions['AsyncRequestReference']
+    jobs?: definitions['JobPartUpdateSourceDto'][]
+  }
   ClosureListJobPart: {
-    delegate?: { [key: string]: unknown };
-    owner?: { [key: string]: unknown };
-    thisObject?: { [key: string]: unknown };
+    delegate?: {[key: string]: unknown}
+    owner?: {[key: string]: unknown}
+    thisObject?: {[key: string]: unknown}
     /** Format: int32 */
-    resolveStrategy?: number;
+    resolveStrategy?: number
     /** Format: int32 */
-    directive?: number;
-    parameterTypes?: unknown[];
+    directive?: number
+    parameterTypes?: unknown[]
     /** Format: int32 */
-    maximumNumberOfParameters?: number;
-  };
+    maximumNumberOfParameters?: number
+  }
   JobPartDeleteReferences: {
-    jobs: definitions["UidReference"][];
-    getParts?: definitions["ClosureListJobPart"];
-  };
+    jobs: definitions['UidReference'][]
+    getParts?: definitions['ClosureListJobPart']
+  }
   HumanTranslateJobsDto: {
-    jobs: definitions["UidReference"][];
-    humanTranslateSettings: definitions["IdReference"];
-    comment?: string;
-    glossaryId?: string;
-    usePreferredTranslators?: boolean;
+    jobs: definitions['UidReference'][]
+    humanTranslateSettings: definitions['IdReference']
+    comment?: string
+    glossaryId?: string
+    usePreferredTranslators?: boolean
     /** @enum {string} */
-    level?: "STANDARD" | "PRO";
-    callbackUrl?: string;
-  };
+    level?: 'STANDARD' | 'PRO'
+    callbackUrl?: string
+  }
   NotifyJobPartsRequestDto: {
-    jobs: definitions["UidReference"][];
-    emailTemplate: definitions["IdReference"];
-    cc?: string[];
-    bcc?: string[];
-  };
+    jobs: definitions['UidReference'][]
+    emailTemplate: definitions['IdReference']
+    cc?: string[]
+    bcc?: string[]
+  }
   GetBilingualFileDto: {
-    jobs?: definitions["UidReference"][];
-  };
+    jobs?: definitions['UidReference'][]
+  }
   JobPartUpdateBatchDto: {
-    jobs?: definitions["UidReference"][];
+    jobs?: definitions['UidReference'][]
     /** @enum {string} */
     status:
-      | "NEW"
-      | "ACCEPTED"
-      | "DECLINED"
-      | "REJECTED"
-      | "DELIVERED"
-      | "EMAILED"
-      | "COMPLETED"
-      | "CANCELLED";
+      | 'NEW'
+      | 'ACCEPTED'
+      | 'DECLINED'
+      | 'REJECTED'
+      | 'DELIVERED'
+      | 'EMAILED'
+      | 'COMPLETED'
+      | 'CANCELLED'
     /** Format: date-time */
-    dateDue?: string;
-    providers?: definitions["ProviderReference"][];
-  };
+    dateDue?: string
+    providers?: definitions['ProviderReference'][]
+  }
   SegmentReference: {
-    uid?: string;
-  };
+    uid?: string
+  }
   UpdateIgnoredChecksDto: {
-    segment: definitions["SegmentReference"];
+    segment: definitions['SegmentReference']
     warningTypes: (
-      | "EmptyTranslation"
-      | "TrailingPunctuation"
-      | "Formatting"
-      | "JoinTags"
-      | "MissingNumbersV3"
-      | "MultipleSpacesV3"
-      | "NonConformingTerm"
-      | "NotConfirmed"
-      | "TranslationLength"
-      | "AbsoluteLength"
-      | "RelativeLength"
-      | "UnresolvedComment"
-      | "EmptyPairTags"
-      | "InconsistentTranslationTargetSource"
-      | "InconsistentTranslationSourceTarget"
-      | "ForbiddenString"
-      | "SpellCheck"
-      | "RepeatedWord"
-      | "InconsistentTagContent"
-      | "EmptyTagContent"
-      | "Malformed"
-      | "ForbiddenTerm"
-      | "NewerAtLowerLevel"
-      | "LeadingAndTrailingSpaces"
-      | "LeadingSpaces"
-      | "TrailingSpaces"
-      | "TargetSourceIdentical"
-      | "SourceOrTargetRegexp"
-      | "UnmodifiedFuzzyTranslation"
-      | "UnmodifiedFuzzyTranslationTM"
-      | "UnmodifiedFuzzyTranslationMTNT"
-      | "Moravia"
-      | "ExtraNumbersV3"
-      | "UnresolvedConversation"
-      | "NestedTags"
-      | "FuzzyInconsistencyTargetSource"
-      | "FuzzyInconsistencySourceTarget"
-      | "CustomQA"
-      | "MissingNonTranslatableAnnotation"
-    )[];
-  };
+      | 'EmptyTranslation'
+      | 'TrailingPunctuation'
+      | 'Formatting'
+      | 'JoinTags'
+      | 'MissingNumbersV3'
+      | 'MultipleSpacesV3'
+      | 'NonConformingTerm'
+      | 'NotConfirmed'
+      | 'TranslationLength'
+      | 'AbsoluteLength'
+      | 'RelativeLength'
+      | 'UnresolvedComment'
+      | 'EmptyPairTags'
+      | 'InconsistentTranslationTargetSource'
+      | 'InconsistentTranslationSourceTarget'
+      | 'ForbiddenString'
+      | 'SpellCheck'
+      | 'RepeatedWord'
+      | 'InconsistentTagContent'
+      | 'EmptyTagContent'
+      | 'Malformed'
+      | 'ForbiddenTerm'
+      | 'NewerAtLowerLevel'
+      | 'LeadingAndTrailingSpaces'
+      | 'LeadingSpaces'
+      | 'TrailingSpaces'
+      | 'TargetSourceIdentical'
+      | 'SourceOrTargetRegexp'
+      | 'UnmodifiedFuzzyTranslation'
+      | 'UnmodifiedFuzzyTranslationTM'
+      | 'UnmodifiedFuzzyTranslationMTNT'
+      | 'Moravia'
+      | 'ExtraNumbersV3'
+      | 'UnresolvedConversation'
+      | 'NestedTags'
+      | 'FuzzyInconsistencyTargetSource'
+      | 'FuzzyInconsistencySourceTarget'
+      | 'CustomQA'
+      | 'MissingNonTranslatableAnnotation'
+    )[]
+  }
   SearchJobsDto: {
-    jobs?: definitions["JobPartExtendedDto"][];
-  };
+    jobs?: definitions['JobPartExtendedDto'][]
+  }
   SearchJobsRequestDto: {
     /** @description Max: 50 records */
-    jobs: definitions["UidReference"][];
-  };
+    jobs: definitions['UidReference'][]
+  }
   PreviousWorkflowDto: {
-    completed?: boolean;
-    counts?: definitions["SegmentsCountsDto"];
-  };
+    completed?: boolean
+    counts?: definitions['SegmentsCountsDto']
+  }
   QualityAssuranceDto: {
     /** Format: int64 */
-    segmentsCount?: number;
+    segmentsCount?: number
     /** Format: int64 */
-    warningsCount?: number;
+    warningsCount?: number
     /** Format: int64 */
-    ignoredWarningsCount?: number;
-  };
+    ignoredWarningsCount?: number
+  }
   SegmentsCountsDto: {
-    allConfirmed?: boolean;
+    allConfirmed?: boolean
     /** Format: int64 */
-    charsCount?: number;
+    charsCount?: number
     /** Format: int64 */
-    completedCharsCount?: number;
+    completedCharsCount?: number
     /** Format: int64 */
-    confirmedCharsCount?: number;
+    confirmedCharsCount?: number
     /** Format: int64 */
-    confirmedLockedCharsCount?: number;
+    confirmedLockedCharsCount?: number
     /** Format: int64 */
-    lockedCharsCount?: number;
+    lockedCharsCount?: number
     /** Format: int64 */
-    segmentsCount?: number;
+    segmentsCount?: number
     /** Format: int64 */
-    completedSegmentsCount?: number;
+    completedSegmentsCount?: number
     /** Format: int64 */
-    lockedSegmentsCount?: number;
+    lockedSegmentsCount?: number
     /** Format: int64 */
-    segmentGroupsCount?: number;
+    segmentGroupsCount?: number
     /** Format: int64 */
-    translatedSegmentsCount?: number;
+    translatedSegmentsCount?: number
     /** Format: int64 */
-    translatedLockedSegmentsCount?: number;
+    translatedLockedSegmentsCount?: number
     /** Format: int64 */
-    wordsCount?: number;
+    wordsCount?: number
     /** Format: int64 */
-    completedWordsCount?: number;
+    completedWordsCount?: number
     /** Format: int64 */
-    confirmedWordsCount?: number;
+    confirmedWordsCount?: number
     /** Format: int64 */
-    confirmedLockedWordsCount?: number;
+    confirmedLockedWordsCount?: number
     /** Format: int64 */
-    lockedWordsCount?: number;
+    lockedWordsCount?: number
     /** Format: int64 */
-    addedSegments?: number;
+    addedSegments?: number
     /** Format: int64 */
-    addedWords?: number;
+    addedWords?: number
     /** Format: int64 */
-    machineTranslationPostEditedSegmentsCount?: number;
+    machineTranslationPostEditedSegmentsCount?: number
     /** Format: int64 */
-    machineTranslationRelevantSegmentsCount?: number;
-    qualityAssurance?: definitions["QualityAssuranceDto"];
-    qualityAssuranceResolved?: boolean;
-  };
+    machineTranslationRelevantSegmentsCount?: number
+    qualityAssurance?: definitions['QualityAssuranceDto']
+    qualityAssuranceResolved?: boolean
+  }
   SegmentsCountsResponseDto: {
-    jobPartUid?: string;
-    counts?: definitions["SegmentsCountsDto"];
-    previousWorkflow?: definitions["PreviousWorkflowDto"];
-  };
+    jobPartUid?: string
+    counts?: definitions['SegmentsCountsDto']
+    previousWorkflow?: definitions['PreviousWorkflowDto']
+  }
   SegmentsCountsResponseListDto: {
-    segmentsCountsResults?: definitions["SegmentsCountsResponseDto"][];
-  };
+    segmentsCountsResults?: definitions['SegmentsCountsResponseDto'][]
+  }
   ImportStatusDtoV2: {
     /** @enum {string} */
-    status?: "RUNNING" | "ERROR" | "OK";
-    errorMessage?: string;
-  };
+    status?: 'RUNNING' | 'ERROR' | 'OK'
+    errorMessage?: string
+  }
   JobPartReferenceV2: {
-    uid?: string;
+    uid?: string
     /**
      * @description InnerId is a sequential number of a job in a project.
      *             Jobs created from the same file share the same innerId across workflow steps
      */
-    innerId?: string;
+    innerId?: string
     /** @enum {string} */
     status?:
-      | "NEW"
-      | "ACCEPTED"
-      | "DECLINED"
-      | "REJECTED"
-      | "DELIVERED"
-      | "EMAILED"
-      | "COMPLETED"
-      | "CANCELLED";
-    providers?: definitions["ProviderReference"][];
-    targetLang?: string;
-    workflowStep?: definitions["ProjectWorkflowStepReference"];
-    filename?: string;
-    originalFileDirectory?: string;
+      | 'NEW'
+      | 'ACCEPTED'
+      | 'DECLINED'
+      | 'REJECTED'
+      | 'DELIVERED'
+      | 'EMAILED'
+      | 'COMPLETED'
+      | 'CANCELLED'
+    providers?: definitions['ProviderReference'][]
+    targetLang?: string
+    workflowStep?: definitions['ProjectWorkflowStepReference']
+    filename?: string
+    originalFileDirectory?: string
     /** Format: date-time */
-    dateDue?: string;
+    dateDue?: string
     /** Format: date-time */
-    dateCreated?: string;
-    importStatus?: definitions["ImportStatusDtoV2"];
-    continuous?: boolean;
-    sourceFileUid?: string;
-    split?: boolean;
-    serverTaskId?: string;
-    owner?: definitions["UserReference"];
+    dateCreated?: string
+    importStatus?: definitions['ImportStatusDtoV2']
+    continuous?: boolean
+    sourceFileUid?: string
+    split?: boolean
+    serverTaskId?: string
+    owner?: definitions['UserReference']
     /** @description Default: false */
-    imported?: boolean;
-  };
+    imported?: boolean
+  }
   PageDtoJobPartReferenceV2: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["JobPartReferenceV2"][];
-  };
+    numberOfElements?: number
+    content?: definitions['JobPartReferenceV2'][]
+  }
   SplitJobActionDto: {
-    segmentOrdinals?: number[];
+    segmentOrdinals?: number[]
     /** Format: int32 */
-    partCount?: number;
+    partCount?: number
     /** Format: int32 */
-    partSize?: number;
+    partSize?: number
     /** Format: int32 */
-    wordCount?: number;
+    wordCount?: number
     /** @description Can be used only for PowerPoint files */
-    byDocumentPart?: boolean;
-  };
+    byDocumentPart?: boolean
+  }
   SearchResponseListTbDto: {
-    searchResults?: definitions["SearchResponseTbDto"][];
-  };
+    searchResults?: definitions['SearchResponseTbDto'][]
+  }
   SearchResponseTbDto: {
-    termBase?: definitions["TermBaseDto"];
-    conceptId?: string;
-    sourceTerm?: definitions["TermDto"];
-    translationTerms?: definitions["TermDto"][];
-  };
+    termBase?: definitions['TermBaseDto']
+    conceptId?: string
+    sourceTerm?: definitions['TermDto']
+    translationTerms?: definitions['TermDto'][]
+  }
   TermBaseDto: {
-    id?: string;
-    uid?: string;
+    id?: string
+    uid?: string
     /** Format: int64 */
-    internalId?: number;
-    name: string;
-    langs?: string[];
-    client?: definitions["ClientReference"];
-    domain?: definitions["DomainReference"];
-    subDomain?: definitions["SubDomainReference"];
-    businessUnit?: definitions["BusinessUnitReference"];
-    createdBy?: definitions["UserReference"];
-    owner?: definitions["UserReference"];
+    internalId?: number
+    name: string
+    langs?: string[]
+    client?: definitions['ClientReference']
+    domain?: definitions['DomainReference']
+    subDomain?: definitions['SubDomainReference']
+    businessUnit?: definitions['BusinessUnitReference']
+    createdBy?: definitions['UserReference']
+    owner?: definitions['UserReference']
     /** Format: date-time */
-    dateCreated?: string;
-    note?: string;
-    canShow?: boolean;
-  };
+    dateCreated?: string
+    note?: string
+    canShow?: boolean
+  }
   TermDto: {
-    id?: string;
-    text: string;
-    lang?: string;
-    rtl?: boolean;
+    id?: string
+    text: string
+    lang?: string
+    rtl?: boolean
     /** Format: date-time */
-    modifiedAt?: string;
+    modifiedAt?: string
     /** Format: date-time */
-    createdAt?: string;
-    modifiedBy?: definitions["UserReference"];
-    createdBy?: definitions["UserReference"];
-    caseSensitive?: boolean;
-    exactMatch?: boolean;
-    forbidden?: boolean;
-    preferred?: boolean;
+    createdAt?: string
+    modifiedBy?: definitions['UserReference']
+    createdBy?: definitions['UserReference']
+    caseSensitive?: boolean
+    exactMatch?: boolean
+    forbidden?: boolean
+    preferred?: boolean
     /** @enum {string} */
-    status?: "New" | "Approved";
-    conceptId?: string;
-    usage?: string;
-    note?: string;
-    writable?: boolean;
-    shortTranslation?: string;
-    termType?: string;
-    partOfSpeech?: string;
-    gender?: string;
-    number?: string;
-    definition?: string;
-    domain?: string;
-    subDomains?: string[];
-    url?: string;
-    conceptNote?: string;
-  };
+    status?: 'New' | 'Approved'
+    conceptId?: string
+    usage?: string
+    note?: string
+    writable?: boolean
+    shortTranslation?: string
+    termType?: string
+    partOfSpeech?: string
+    gender?: string
+    number?: string
+    definition?: string
+    domain?: string
+    subDomains?: string[]
+    url?: string
+    conceptNote?: string
+  }
   Match: {
     /** Format: int32 */
-    beginIndex?: number;
-    text?: string;
-  };
+    beginIndex?: number
+    text?: string
+  }
   TermPairDto: {
-    sourceTerm: definitions["TermDto"];
-    targetTerm: definitions["TermDto"];
-  };
+    sourceTerm: definitions['TermDto']
+    targetTerm: definitions['TermDto']
+  }
   CreateTermsDto: {
-    sourceTerm: definitions["TermCreateByJobDto"];
-    targetTerm: definitions["TermCreateByJobDto"];
-  };
+    sourceTerm: definitions['TermCreateByJobDto']
+    targetTerm: definitions['TermCreateByJobDto']
+  }
   TermCreateByJobDto: {
-    text: string;
+    text: string
     /** @description Default: false */
-    caseSensitive?: boolean;
+    caseSensitive?: boolean
     /** @description Default: false */
-    exactMatch?: boolean;
+    exactMatch?: boolean
     /** @description Default: false */
-    forbidden?: boolean;
+    forbidden?: boolean
     /** @description Default: false */
-    preferred?: boolean;
-    usage?: string;
-    note?: string;
-    shortTranslation?: string;
+    preferred?: boolean
+    usage?: string
+    note?: string
+    shortTranslation?: string
     /** @enum {string} */
-    termType?:
-      | "FULL_FORM"
-      | "SHORT_FORM"
-      | "ACRONYM"
-      | "ABBREVIATION"
-      | "PHRASE"
-      | "VARIANT";
+    termType?: 'FULL_FORM' | 'SHORT_FORM' | 'ACRONYM' | 'ABBREVIATION' | 'PHRASE' | 'VARIANT'
     /** @enum {string} */
-    partOfSpeech?: "ADJECTIVE" | "NOUN" | "VERB" | "ADVERB";
+    partOfSpeech?: 'ADJECTIVE' | 'NOUN' | 'VERB' | 'ADVERB'
     /** @enum {string} */
-    gender?: "MASCULINE" | "FEMININE" | "NEUTRAL";
+    gender?: 'MASCULINE' | 'FEMININE' | 'NEUTRAL'
     /** @enum {string} */
-    number?: "SINGULAR" | "PLURAL" | "UNCOUNTABLE";
-  };
+    number?: 'SINGULAR' | 'PLURAL' | 'UNCOUNTABLE'
+  }
   CreateReferenceFileNoteDto: {
-    note: string;
-  };
+    note: string
+  }
   ReferenceFileAccessDto: {
-    canCreate?: boolean;
-  };
+    canCreate?: boolean
+  }
   ReferenceFilePageDto: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["ReferenceFileReference"][];
-    access?: definitions["ReferenceFileAccessDto"];
-  };
+    numberOfElements?: number
+    content?: definitions['ReferenceFileReference'][]
+    access?: definitions['ReferenceFileAccessDto']
+  }
   ProjectReferenceFilesRequestDto: {
-    referenceFiles: definitions["IdReference"][];
-  };
+    referenceFiles: definitions['IdReference'][]
+  }
   UserReferencesDto: {
-    users?: definitions["UserReference"][];
-  };
+    users?: definitions['UserReference'][]
+  }
   TransMemoryDto: {
-    id?: string;
-    uid?: string;
+    id?: string
+    uid?: string
     /** Format: int32 */
-    internalId?: number;
-    name?: string;
-    sourceLang?: string;
-    targetLangs?: string[];
-    client?: definitions["ClientReference"];
-    businessUnit?: definitions["BusinessUnitReference"];
-    domain?: definitions["DomainReference"];
-    subDomain?: definitions["SubDomainReference"];
-    note?: string;
+    internalId?: number
+    name?: string
+    sourceLang?: string
+    targetLangs?: string[]
+    client?: definitions['ClientReference']
+    businessUnit?: definitions['BusinessUnitReference']
+    domain?: definitions['DomainReference']
+    subDomain?: definitions['SubDomainReference']
+    note?: string
     /** Format: date-time */
-    dateCreated?: string;
-    createdBy?: definitions["UserReference"];
-    owner?: definitions["UserReference"];
-  };
+    dateCreated?: string
+    createdBy?: definitions['UserReference']
+    owner?: definitions['UserReference']
+  }
   PageDtoTransMemoryDto: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["TransMemoryDto"][];
-  };
+    numberOfElements?: number
+    content?: definitions['TransMemoryDto'][]
+  }
   AssignmentPerTargetLangDto: {
-    targetLang?: string;
-    providers?: definitions["ProviderReference"][];
-  };
+    targetLang?: string
+    providers?: definitions['ProviderReference'][]
+  }
   ProjectTemplate: {
-    id?: string;
-    uid?: string;
-    templateName?: string;
-    name?: string;
-    sourceLang?: string;
-    targetLangs?: string[];
-    note?: string;
-    useDynamicTitle?: boolean;
-    dynamicTitle?: string;
-    owner?: definitions["UserReference"];
-    client?: definitions["ClientReference"];
-    domain?: definitions["DomainReference"];
-    subDomain?: definitions["SubDomainReference"];
-    vendor?: definitions["VendorReference"];
-    createdBy?: definitions["UserReference"];
+    id?: string
+    uid?: string
+    templateName?: string
+    name?: string
+    sourceLang?: string
+    targetLangs?: string[]
+    note?: string
+    useDynamicTitle?: boolean
+    dynamicTitle?: string
+    owner?: definitions['UserReference']
+    client?: definitions['ClientReference']
+    domain?: definitions['DomainReference']
+    subDomain?: definitions['SubDomainReference']
+    vendor?: definitions['VendorReference']
+    createdBy?: definitions['UserReference']
     /** Format: date-time */
-    dateCreated?: string;
-    modifiedBy?: definitions["UserReference"];
+    dateCreated?: string
+    modifiedBy?: definitions['UserReference']
     /**
      * Format: date-time
      * @description Deprecated - use dateTimeModified field instead
      * @example { "epochSeconds": 1624619701, "nano": 0 }
      */
-    dateModified?: string;
+    dateModified?: string
     /** Format: date-time */
-    dateTimeModified?: string;
-    workflowSteps?: definitions["WorkflowStepDto"][];
-    workflowSettings?: definitions["WorkflowStepSettingsDto"][];
-    businessUnit?: definitions["BusinessUnitReference"];
-    notifyProviders?: definitions["ProjectTemplateNotifyProviderDto"];
-    assignedTo?: definitions["AssignmentPerTargetLangDto"][];
+    dateTimeModified?: string
+    workflowSteps?: definitions['WorkflowStepDto'][]
+    workflowSettings?: definitions['WorkflowStepSettingsDto'][]
+    businessUnit?: definitions['BusinessUnitReference']
+    notifyProviders?: definitions['ProjectTemplateNotifyProviderDto']
+    assignedTo?: definitions['AssignmentPerTargetLangDto'][]
     /** @description Deprecated - always null */
-    importSettings?: definitions["UidReference"];
-  };
+    importSettings?: definitions['UidReference']
+  }
   ProjectTemplateNotifyProviderDto: {
-    organizationEmailTemplate: definitions["ObjectReference"];
+    organizationEmailTemplate: definitions['ObjectReference']
     /** Format: int32 */
-    notificationIntervalInMinutes?: number;
-  };
+    notificationIntervalInMinutes?: number
+  }
   WorkflowStepSettingsDto: {
-    workflowStep?: definitions["WorkflowStepReference"];
-    assignedTo?: definitions["ProjectTemplateWorkflowSettingsAssignedToDto"][];
-    notifyProvider?: definitions["ProjectTemplateNotifyProviderDto"];
-    lqaProfile?: definitions["UidReference"];
-  };
+    workflowStep?: definitions['WorkflowStepReference']
+    assignedTo?: definitions['ProjectTemplateWorkflowSettingsAssignedToDto'][]
+    notifyProvider?: definitions['ProjectTemplateNotifyProviderDto']
+    lqaProfile?: definitions['UidReference']
+  }
   ProjectTemplateCreateActionDto: {
-    project: definitions["UidReference"];
-    name: string;
-    importSettings?: definitions["UidReference"];
-    useDynamicTitle?: boolean;
-    dynamicTitle?: string;
-  };
+    project: definitions['UidReference']
+    name: string
+    importSettings?: definitions['UidReference']
+    useDynamicTitle?: boolean
+    dynamicTitle?: string
+  }
   ProjectTemplateEditDto: {
-    name?: string;
-    templateName: string;
-    sourceLang?: string;
-    targetLangs?: string[];
-    useDynamicTitle?: boolean;
-    dynamicTitle?: string;
+    name?: string
+    templateName: string
+    sourceLang?: string
+    targetLangs?: string[]
+    useDynamicTitle?: boolean
+    dynamicTitle?: string
     /**
      * @description use to notify assigned providers,
      *         notificationIntervalInMinutes 0 or empty value means immediate notification to all providers
      */
-    notifyProvider?: definitions["ProjectTemplateNotifyProviderDto"];
-    workFlowSettings?: definitions["WorkflowStepSettingsEditDto"][];
-    client?: definitions["IdReference"];
-    costCenter?: definitions["IdReference"];
-    businessUnit?: definitions["IdReference"];
-    domain?: definitions["IdReference"];
-    subDomain?: definitions["IdReference"];
-    vendor?: definitions["IdReference"];
-    importSettings?: definitions["UidReference"];
-    note?: string;
+    notifyProvider?: definitions['ProjectTemplateNotifyProviderDto']
+    workFlowSettings?: definitions['WorkflowStepSettingsEditDto'][]
+    client?: definitions['IdReference']
+    costCenter?: definitions['IdReference']
+    businessUnit?: definitions['IdReference']
+    domain?: definitions['IdReference']
+    subDomain?: definitions['IdReference']
+    vendor?: definitions['IdReference']
+    importSettings?: definitions['UidReference']
+    note?: string
     /** @description Default: false */
-    fileHandover?: boolean;
+    fileHandover?: boolean
     /** @description only use for projects without workflows; otherwise specify in the workflowSettings object */
-    assignedTo?: definitions["ProjectTemplateWorkflowSettingsAssignedToDto"][];
-  };
+    assignedTo?: definitions['ProjectTemplateWorkflowSettingsAssignedToDto'][]
+  }
   WorkflowStepSettingsEditDto: {
-    workflowStep?: definitions["IdReference"];
-    assignedTo?: definitions["ProjectTemplateWorkflowSettingsAssignedToDto"][];
-    notifyProvider?: definitions["ProjectTemplateNotifyProviderDto"];
-    lqaProfile?: definitions["UidReference"];
-  };
+    workflowStep?: definitions['IdReference']
+    assignedTo?: definitions['ProjectTemplateWorkflowSettingsAssignedToDto'][]
+    notifyProvider?: definitions['ProjectTemplateNotifyProviderDto']
+    lqaProfile?: definitions['UidReference']
+  }
   PageDtoProjectTemplateReference: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["ProjectTemplateReference"][];
-  };
+    numberOfElements?: number
+    content?: definitions['ProjectTemplateReference'][]
+  }
   ProjectTemplateReference: {
-    templateName?: string;
-    sourceLang?: string;
-    targetLangs?: string[];
-    id?: string;
-    uid?: string;
-    owner?: definitions["UserReference"];
-    domain?: definitions["DomainReference"];
-    subDomain?: definitions["SubDomainReference"];
-    costCenter?: definitions["CostCenterReference"];
-    businessUnit?: definitions["BusinessUnitReference"];
-    note?: string;
-    client?: definitions["ClientReference"];
-  };
+    templateName?: string
+    sourceLang?: string
+    targetLangs?: string[]
+    id?: string
+    uid?: string
+    owner?: definitions['UserReference']
+    domain?: definitions['DomainReference']
+    subDomain?: definitions['SubDomainReference']
+    costCenter?: definitions['CostCenterReference']
+    businessUnit?: definitions['BusinessUnitReference']
+    note?: string
+    client?: definitions['ClientReference']
+  }
   /** @description Base analyseSettingsDto */
   AbstractAnalyseSettingsDto: {
     /**
      * @description Response differs based on analyse type
      * @enum {string}
      */
-    type?: "PreAnalyse" | "PostAnalyse" | "PreAnalyseTarget" | "Compare";
+    type?: 'PreAnalyse' | 'PostAnalyse' | 'PreAnalyseTarget' | 'Compare'
     /** @description Default: false */
-    includeConfirmedSegments?: boolean;
+    includeConfirmedSegments?: boolean
     /** @description Default: false */
-    includeNumbers?: boolean;
+    includeNumbers?: boolean
     /** @description Default: false */
-    includeLockedSegments?: boolean;
+    includeLockedSegments?: boolean
     /** @description Default: false */
-    countSourceUnits?: boolean;
+    countSourceUnits?: boolean
     /** @description Default: false */
-    includeTransMemory?: boolean;
-    namingPattern?: string;
+    includeTransMemory?: boolean
+    namingPattern?: string
     /** @description Default: false */
-    analyzeByLanguage?: boolean;
+    analyzeByLanguage?: boolean
     /** @description Default: false */
-    analyzeByProvider?: boolean;
+    analyzeByProvider?: boolean
     /** @description If automatic post analysis should be created after update source. Default: false */
-    allowAutomaticPostAnalysis?: boolean;
-  };
-  PostAnalyse: definitions["AbstractAnalyseSettingsDto"] & {
+    allowAutomaticPostAnalysis?: boolean
+  }
+  PostAnalyse: definitions['AbstractAnalyseSettingsDto'] & {
     /** @description Default: false */
-    transMemoryPostEditing?: boolean;
+    transMemoryPostEditing?: boolean
     /** @description Default: false */
-    nonTranslatablePostEditing?: boolean;
+    nonTranslatablePostEditing?: boolean
     /** @description Default: false */
-    machineTranslatePostEditing?: boolean;
-  };
-  PreAnalyse: definitions["AbstractAnalyseSettingsDto"] & {
+    machineTranslatePostEditing?: boolean
+  }
+  PreAnalyse: definitions['AbstractAnalyseSettingsDto'] & {
     /** @description Default: false */
-    includeFuzzyRepetitions?: boolean;
+    includeFuzzyRepetitions?: boolean
     /** @description Default: false */
-    separateFuzzyRepetitions?: boolean;
+    separateFuzzyRepetitions?: boolean
     /** @description Default: false */
-    includeNonTranslatables?: boolean;
+    includeNonTranslatables?: boolean
     /** @description Default: false */
-    includeMachineTranslationMatches?: boolean;
-  };
-  "PreAnalyseTarget, Compare": definitions["AbstractAnalyseSettingsDto"] & {
+    includeMachineTranslationMatches?: boolean
+  }
+  'PreAnalyseTarget, Compare': definitions['AbstractAnalyseSettingsDto'] & {
     /** @description Default: false */
-    transMemoryPostEditing?: boolean;
+    transMemoryPostEditing?: boolean
     /** @description Default: false */
-    nonTranslatablePostEditing?: boolean;
+    nonTranslatablePostEditing?: boolean
     /** @description Default: false */
-    machineTranslatePostEditing?: boolean;
+    machineTranslatePostEditing?: boolean
     /** @description Default: false */
-    includeFuzzyRepetitions?: boolean;
+    includeFuzzyRepetitions?: boolean
     /** @description Default: false */
-    separateFuzzyRepetitions?: boolean;
+    separateFuzzyRepetitions?: boolean
     /** @description Default: false */
-    includeNonTranslatables?: boolean;
+    includeNonTranslatables?: boolean
     /** @description Default: false */
-    includeMachineTranslationMatches?: boolean;
-  };
+    includeMachineTranslationMatches?: boolean
+  }
   EditAnalyseSettingsDto: {
     /** @enum {string} */
-    type?: "PreAnalyse" | "PostAnalyse" | "PreAnalyseTarget" | "Compare";
+    type?: 'PreAnalyse' | 'PostAnalyse' | 'PreAnalyseTarget' | 'Compare'
     /** @description Default: false */
-    includeFuzzyRepetitions?: boolean;
+    includeFuzzyRepetitions?: boolean
     /** @description Default: false */
-    separateFuzzyRepetitions?: boolean;
+    separateFuzzyRepetitions?: boolean
     /** @description Default: false */
-    includeNonTranslatables?: boolean;
+    includeNonTranslatables?: boolean
     /** @description Default: false */
-    includeMachineTranslationMatches?: boolean;
+    includeMachineTranslationMatches?: boolean
     /** @description Default: false */
-    includeConfirmedSegments?: boolean;
+    includeConfirmedSegments?: boolean
     /** @description Default: false */
-    includeNumbers?: boolean;
+    includeNumbers?: boolean
     /** @description Default: false */
-    includeLockedSegments?: boolean;
+    includeLockedSegments?: boolean
     /** @description Default: false */
-    transMemoryPostEditing?: boolean;
+    transMemoryPostEditing?: boolean
     /** @description Default: false */
-    nonTranslatablePostEditing?: boolean;
+    nonTranslatablePostEditing?: boolean
     /** @description Default: false */
-    machineTranslatePostEditing?: boolean;
+    machineTranslatePostEditing?: boolean
     /** @description Default: false */
-    countSourceUnits?: boolean;
+    countSourceUnits?: boolean
     /** @description Default: false */
-    includeTransMemory?: boolean;
-    namingPattern?: string;
+    includeTransMemory?: boolean
+    namingPattern?: string
     /** @description Mutually exclusive with analyzeByProvider. Default: false */
-    analyzeByLanguage?: boolean;
+    analyzeByLanguage?: boolean
     /** @description Mutually exclusive with analyzeByLanguage. Default: true */
-    analyzeByProvider?: boolean;
+    analyzeByProvider?: boolean
     /** @description Default: false */
-    allowAutomaticPostAnalysis?: boolean;
-  };
+    allowAutomaticPostAnalysis?: boolean
+  }
   ProjectTemplateTermBaseDto: {
-    targetLocale?: string;
-    workflowStep?: definitions["WorkflowStepReference"];
-    readMode?: boolean;
-    writeMode?: boolean;
-    termBase?: definitions["TermBaseDto"];
-    qualityAssurance?: boolean;
-  };
+    targetLocale?: string
+    workflowStep?: definitions['WorkflowStepReference']
+    readMode?: boolean
+    writeMode?: boolean
+    termBase?: definitions['TermBaseDto']
+    qualityAssurance?: boolean
+  }
   ProjectTemplateTermBaseListDto: {
-    termBases?: definitions["ProjectTemplateTermBaseDto"][];
-  };
+    termBases?: definitions['ProjectTemplateTermBaseDto'][]
+  }
   SetProjectTemplateTermBaseDto: {
-    readTermBases?: definitions["IdReference"][];
-    writeTermBase?: definitions["IdReference"];
-    qualityAssuranceTermBases?: definitions["IdReference"][];
-    targetLang?: string;
-    workflowStep?: definitions["IdReference"];
-  };
+    readTermBases?: definitions['IdReference'][]
+    writeTermBase?: definitions['IdReference']
+    qualityAssuranceTermBases?: definitions['IdReference'][]
+    targetLang?: string
+    workflowStep?: definitions['IdReference']
+  }
   ProjectSecuritySettingsDtoV2: {
-    downloadEnabled?: boolean;
-    webEditorEnabledForLinguists?: boolean;
-    showUserDataToLinguists?: boolean;
-    emailNotifications?: boolean;
-    strictWorkflowFinish?: boolean;
-    useVendors?: boolean;
-    linguistsMayEditLockedSegments?: boolean;
-    usersMaySetAutoPropagation?: boolean;
-    allowLoadingExternalContentInEditors?: boolean;
-    allowLoadingIframes?: boolean;
-    linguistsMayEditSource?: boolean;
-    linguistsMayEditTagContent?: boolean;
-    linguistsMayDownloadLqaReport?: boolean;
-    usernamesDisplayedInLqaReport?: boolean;
-    userMaySetInstantQA?: boolean;
-    triggerWebhooks?: boolean;
-    vendors?: definitions["VendorSecuritySettingsDto"];
-    allowedDomains?: string[];
-  };
+    downloadEnabled?: boolean
+    webEditorEnabledForLinguists?: boolean
+    showUserDataToLinguists?: boolean
+    emailNotifications?: boolean
+    strictWorkflowFinish?: boolean
+    useVendors?: boolean
+    linguistsMayEditLockedSegments?: boolean
+    usersMaySetAutoPropagation?: boolean
+    allowLoadingExternalContentInEditors?: boolean
+    allowLoadingIframes?: boolean
+    linguistsMayEditSource?: boolean
+    linguistsMayEditTagContent?: boolean
+    linguistsMayDownloadLqaReport?: boolean
+    usernamesDisplayedInLqaReport?: boolean
+    userMaySetInstantQA?: boolean
+    triggerWebhooks?: boolean
+    vendors?: definitions['VendorSecuritySettingsDto']
+    allowedDomains?: string[]
+  }
   EditProjectSecuritySettingsDtoV2: {
     /** @description Default: `false` */
-    downloadEnabled?: boolean;
+    downloadEnabled?: boolean
     /** @description Default: `false` */
-    webEditorEnabledForLinguists?: boolean;
+    webEditorEnabledForLinguists?: boolean
     /** @description Default: `false` */
-    showUserDataToLinguists?: boolean;
+    showUserDataToLinguists?: boolean
     /** @description Default: `false` */
-    emailNotifications?: boolean;
+    emailNotifications?: boolean
     /** @description Default: `false` */
-    strictWorkflowFinish?: boolean;
+    strictWorkflowFinish?: boolean
     /** @description Default: `false` */
-    useVendors?: boolean;
+    useVendors?: boolean
     /** @description Default: `false` */
-    linguistsMayEditLockedSegments?: boolean;
+    linguistsMayEditLockedSegments?: boolean
     /** @description Default: `true` */
-    usersMaySetAutoPropagation?: boolean;
+    usersMaySetAutoPropagation?: boolean
     /** @description Default: `true` */
-    allowLoadingExternalContentInEditors?: boolean;
+    allowLoadingExternalContentInEditors?: boolean
     /** @description Default: `false` */
-    allowLoadingIframes?: boolean;
+    allowLoadingIframes?: boolean
     /** @description Default: `true` */
-    linguistsMayEditSource?: boolean;
+    linguistsMayEditSource?: boolean
     /** @description Default: `true` */
-    linguistsMayEditTagContent?: boolean;
+    linguistsMayEditTagContent?: boolean
     /** @description Default: `true` */
-    linguistsMayDownloadLqaReport?: boolean;
+    linguistsMayDownloadLqaReport?: boolean
     /** @description Default: `true` */
-    usernamesDisplayedInLqaReport?: boolean;
+    usernamesDisplayedInLqaReport?: boolean
     /** @description Default: `true` */
-    userMaySetInstantQA?: boolean;
+    userMaySetInstantQA?: boolean
     /** @description Default: `true` */
-    triggerWebhooks?: boolean;
+    triggerWebhooks?: boolean
     /** @description Default: `false` */
-    notifyJobOwnerStatusChanged?: boolean;
-    vendors?: definitions["VendorSecuritySettingsDto"];
-    allowedDomains?: string[];
-  };
+    notifyJobOwnerStatusChanged?: boolean
+    vendors?: definitions['VendorSecuritySettingsDto']
+    allowedDomains?: string[]
+  }
   ProjectTermBaseDto: {
-    targetLocale?: string;
-    workflowStep?: definitions["WorkflowStepReference"];
-    readMode?: boolean;
-    writeMode?: boolean;
-    termBase?: definitions["TermBaseDto"];
-    qualityAssurance?: boolean;
-  };
+    targetLocale?: string
+    workflowStep?: definitions['WorkflowStepReference']
+    readMode?: boolean
+    writeMode?: boolean
+    termBase?: definitions['TermBaseDto']
+    qualityAssurance?: boolean
+  }
   ProjectTermBaseListDto: {
-    termBases?: definitions["ProjectTermBaseDto"][];
-  };
+    termBases?: definitions['ProjectTermBaseDto'][]
+  }
   SetTermBaseDto: {
-    readTermBases?: definitions["IdReference"][];
-    writeTermBase?: definitions["IdReference"];
-    qualityAssuranceTermBases?: definitions["IdReference"][];
-    targetLang?: string;
-  };
+    readTermBases?: definitions['IdReference'][]
+    writeTermBase?: definitions['IdReference']
+    qualityAssuranceTermBases?: definitions['IdReference'][]
+    targetLang?: string
+  }
   PageDtoTermBaseDto: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["TermBaseDto"][];
-  };
+    numberOfElements?: number
+    content?: definitions['TermBaseDto'][]
+  }
   SearchTMRequestDto: {
-    segment: string;
+    segment: string
     /** Format: int32 */
-    workflowLevel?: number;
+    workflowLevel?: number
     /** Format: double */
-    scoreThreshold?: number;
-    previousSegment?: string;
-    nextSegment?: string;
-    contextKey?: string;
+    scoreThreshold?: number
+    previousSegment?: string
+    nextSegment?: string
+    contextKey?: string
     /**
      * Format: int32
      * @description Default: 5
      */
-    maxSegments?: number;
+    maxSegments?: number
     /**
      * Format: int32
      * @description Default: 5
      */
-    maxSubSegments?: number;
-    tagMetadata?: definitions["TagMetadataDto"][];
-    targetLangs: string[];
-  };
+    maxSubSegments?: number
+    tagMetadata?: definitions['TagMetadataDto'][]
+    targetLangs: string[]
+  }
   EmailQuotesResponseDto: {
-    recipients?: string[];
-  };
+    recipients?: string[]
+  }
   EmailQuotesRequestDto: {
-    quotes: definitions["UidReference"][];
-    subject: string;
-    body: string;
-    cc?: string;
-    bcc?: string;
-  };
+    quotes: definitions['UidReference'][]
+    subject: string
+    body: string
+    cc?: string
+    bcc?: string
+  }
   AuthSchema: {
-    type?: string;
-    name?: string;
-    description?: string;
-    specUrl?: string;
-    primary?: boolean;
-  };
+    type?: string
+    name?: string
+    description?: string
+    specUrl?: string
+    primary?: boolean
+  }
   ServiceProviderConfigDto: {
-    authenticationSchemes?: definitions["AuthSchema"][];
-    schemas?: string[];
-    patch?: definitions["Supported"];
-    bulk?: definitions["Supported"];
-    filter?: definitions["Supported"];
-    changePassword?: definitions["Supported"];
-    sort?: definitions["Supported"];
-    etag?: definitions["Supported"];
-    xmlDataFormat?: definitions["Supported"];
-  };
+    authenticationSchemes?: definitions['AuthSchema'][]
+    schemas?: string[]
+    patch?: definitions['Supported']
+    bulk?: definitions['Supported']
+    filter?: definitions['Supported']
+    changePassword?: definitions['Supported']
+    sort?: definitions['Supported']
+    etag?: definitions['Supported']
+    xmlDataFormat?: definitions['Supported']
+  }
   Supported: {
-    supported?: boolean;
-  };
+    supported?: boolean
+  }
   SchemaExtension: {
-    schema?: string;
-    required?: boolean;
-  };
+    schema?: string
+    required?: boolean
+  }
   ScimResourceTypeSchema: {
-    schemas?: string[];
-    id?: string;
-    name?: string;
-    endpoint?: string;
-    description?: string;
-    schema?: string;
-    schemaExtensions?: definitions["SchemaExtension"][];
-  };
+    schemas?: string[]
+    id?: string
+    name?: string
+    endpoint?: string
+    description?: string
+    schema?: string
+    schemaExtensions?: definitions['SchemaExtension'][]
+  }
   Attribute: {
-    name?: string;
+    name?: string
     /** @enum {string} */
     type?:
-      | "STRING"
-      | "BOOLEAN"
-      | "DECIMAL"
-      | "INTEGER"
-      | "DATE_TIME"
-      | "BINARY"
-      | "REFERENCE"
-      | "COMPLEX";
-    subAttributes?: definitions["Attribute"][];
-    multiValued?: boolean;
-    description?: string;
-    required?: boolean;
-    caseExact?: boolean;
+      | 'STRING'
+      | 'BOOLEAN'
+      | 'DECIMAL'
+      | 'INTEGER'
+      | 'DATE_TIME'
+      | 'BINARY'
+      | 'REFERENCE'
+      | 'COMPLEX'
+    subAttributes?: definitions['Attribute'][]
+    multiValued?: boolean
+    description?: string
+    required?: boolean
+    caseExact?: boolean
     /** @enum {string} */
-    mutability?: "READ_ONLY" | "READ_WRITE" | "IMMUTABLE" | "WRITE_ONLY";
+    mutability?: 'READ_ONLY' | 'READ_WRITE' | 'IMMUTABLE' | 'WRITE_ONLY'
     /** @enum {string} */
-    returned?: "ALWAYS" | "NEVER" | "DEFAULT" | "REQUEST";
+    returned?: 'ALWAYS' | 'NEVER' | 'DEFAULT' | 'REQUEST'
     /** @enum {string} */
-    uniqueness?: "NONE" | "SERVER" | "GLOBAL";
-  };
+    uniqueness?: 'NONE' | 'SERVER' | 'GLOBAL'
+  }
   ScimResourceSchema: {
-    id?: string;
-    name?: string;
-    description?: string;
-    attributes?: definitions["Attribute"][];
-  };
+    id?: string
+    name?: string
+    description?: string
+    attributes?: definitions['Attribute'][]
+  }
   Email: {
-    value?: string;
-    type?: string;
+    value?: string
+    type?: string
     /** @description Default: false */
-    primary?: boolean;
-  };
+    primary?: boolean
+  }
   Name: {
-    givenName: string;
-    familyName: string;
-  };
+    givenName: string
+    familyName: string
+  }
   ScimMeta: {
     /** Format: date-time */
-    created?: string;
-    location?: string;
-  };
+    created?: string
+    location?: string
+  }
   ScimUserCoreDto: {
-    id?: string;
-    userName: string;
-    name: definitions["Name"];
+    id?: string
+    userName: string
+    name: definitions['Name']
     /** @description Default: true */
-    active?: boolean;
-    emails: definitions["Email"][];
-    meta?: definitions["ScimMeta"];
-  };
+    active?: boolean
+    emails: definitions['Email'][]
+    meta?: definitions['ScimMeta']
+  }
   /** @description segmentation rule object */
   SegmentationRuleDto: {
-    id?: string;
-    uid?: string;
-    name: string;
-    locale?: string;
+    id?: string
+    uid?: string
+    name: string
+    locale?: string
     /** @description Default: false */
-    primary?: boolean;
-    filename: string;
+    primary?: boolean
+    filename: string
     /** Format: date-time */
-    dateCreated?: string;
+    dateCreated?: string
     /** @description created by user */
-    createdBy?: definitions["UserReference"];
-  };
+    createdBy?: definitions['UserReference']
+  }
   /** @description segmentation rule object for editing */
   EditSegmentationRuleDto: {
-    name: string;
+    name: string
     /** @description Default: false */
-    primary?: boolean;
-  };
+    primary?: boolean
+  }
   PageDtoSegmentationRuleReference: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["SegmentationRuleReference"][];
-  };
+    numberOfElements?: number
+    content?: definitions['SegmentationRuleReference'][]
+  }
   SegmentationRuleReference: {
-    id?: string;
-    uid?: string;
-    name: string;
-    locale?: string;
+    id?: string
+    uid?: string
+    name: string
+    locale?: string
     /** @description Default: false */
-    primary?: boolean;
-    filename: string;
+    primary?: boolean
+    filename: string
     /** Format: date-time */
-    dateCreated?: string;
-  };
+    dateCreated?: string
+  }
   CheckResponse: {
-    text?: string;
-    misspelledWords?: definitions["MisspelledWord"][];
-  };
+    text?: string
+    misspelledWords?: definitions['MisspelledWord'][]
+  }
   MisspelledWord: {
-    word?: string;
+    word?: string
     /** Format: int32 */
-    offset?: number;
-  };
+    offset?: number
+  }
   SpellCheckResponseDto: {
-    spellCheckResults?: definitions["CheckResponse"][];
-  };
+    spellCheckResults?: definitions['CheckResponse'][]
+  }
   SpellCheckRequestDto: {
-    lang: string;
-    texts: string[];
-    referenceTexts?: string[];
-    zeroLengthSeparator?: string;
-  };
+    lang: string
+    texts: string[]
+    referenceTexts?: string[]
+    zeroLengthSeparator?: string
+  }
   SuggestResponse: {
-    word?: string;
-    suggestions?: definitions["Suggestion"][];
-  };
+    word?: string
+    suggestions?: definitions['Suggestion'][]
+  }
   SuggestResponseDto: {
-    suggestResults?: definitions["SuggestResponse"][];
-  };
+    suggestResults?: definitions['SuggestResponse'][]
+  }
   Suggestion: {
-    text?: string;
-  };
+    text?: string
+  }
   SuggestRequestDto: {
-    lang: string;
-    words: string[];
-    referenceTexts?: string[];
-  };
+    lang: string
+    words: string[]
+    referenceTexts?: string[]
+  }
   DictionaryItemDto: {
-    lang: string;
-    word: string;
-  };
+    lang: string
+    word: string
+  }
   SubDomainDto: {
-    id?: string;
-    uid?: string;
-    name?: string;
-    createdBy?: definitions["UserReference"];
-  };
+    id?: string
+    uid?: string
+    name?: string
+    createdBy?: definitions['UserReference']
+  }
   PageDtoSubDomainDto: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["SubDomainDto"][];
-  };
+    numberOfElements?: number
+    content?: definitions['SubDomainDto'][]
+  }
   SubDomainEditDto: {
-    name?: string;
-  };
+    name?: string
+  }
   TermBaseEditDto: {
-    name: string;
-    langs: string[];
-    client?: definitions["IdReference"];
-    domain?: definitions["IdReference"];
-    subDomain?: definitions["IdReference"];
-    businessUnit?: definitions["IdReference"];
+    name: string
+    langs: string[]
+    client?: definitions['IdReference']
+    domain?: definitions['IdReference']
+    subDomain?: definitions['IdReference']
+    businessUnit?: definitions['IdReference']
     /** @description Owner of the TM must be Admin or PM */
-    owner?: definitions["IdReference"];
-    note?: string;
-  };
+    owner?: definitions['IdReference']
+    note?: string
+  }
   ImportTermBaseResponseDto: {
-    langs?: string[];
+    langs?: string[]
     /** Format: int64 */
-    createdTermsCount?: number;
+    createdTermsCount?: number
     /** Format: int64 */
-    updatedTermsCount?: number;
-  };
+    updatedTermsCount?: number
+  }
   ConceptListResponseDto: {
-    concepts?: definitions["ConceptWithMetadataDto"][];
+    concepts?: definitions['ConceptWithMetadataDto'][]
     /** Format: int64 */
-    totalCount?: number;
-  };
+    totalCount?: number
+  }
   ConceptWithMetadataDto: {
-    id?: string;
-    domain?: definitions["DomainReference"];
-    subdomains?: definitions["SubDomainReference"][];
-    url?: string;
-    definition?: string;
-    conceptNote?: string;
-  };
+    id?: string
+    domain?: definitions['DomainReference']
+    subdomains?: definitions['SubDomainReference'][]
+    url?: string
+    definition?: string
+    conceptNote?: string
+  }
   ConceptEditDto: {
-    domain?: definitions["UidReference"];
-    subdomains?: definitions["UidReference"][];
-    definition?: string;
-    url?: string;
-    conceptNote?: string;
-  };
+    domain?: definitions['UidReference']
+    subdomains?: definitions['UidReference'][]
+    definition?: string
+    url?: string
+    conceptNote?: string
+  }
   TermCreateDto: {
-    text: string;
-    lang: string;
+    text: string
+    lang: string
     /** @description Default: false */
-    caseSensitive?: boolean;
+    caseSensitive?: boolean
     /** @description Default: false */
-    exactMatch?: boolean;
+    exactMatch?: boolean
     /** @description Default: false */
-    forbidden?: boolean;
+    forbidden?: boolean
     /** @description Default: false */
-    preferred?: boolean;
+    preferred?: boolean
     /** @enum {string} */
-    status?: "New" | "Approved";
-    conceptId?: string;
-    usage?: string;
-    note?: string;
-    shortTranslation?: string;
+    status?: 'New' | 'Approved'
+    conceptId?: string
+    usage?: string
+    note?: string
+    shortTranslation?: string
     /** @enum {string} */
-    termType?:
-      | "FULL_FORM"
-      | "SHORT_FORM"
-      | "ACRONYM"
-      | "ABBREVIATION"
-      | "PHRASE"
-      | "VARIANT";
+    termType?: 'FULL_FORM' | 'SHORT_FORM' | 'ACRONYM' | 'ABBREVIATION' | 'PHRASE' | 'VARIANT'
     /** @enum {string} */
-    partOfSpeech?: "ADJECTIVE" | "NOUN" | "VERB" | "ADVERB";
+    partOfSpeech?: 'ADJECTIVE' | 'NOUN' | 'VERB' | 'ADVERB'
     /** @enum {string} */
-    gender?: "MASCULINE" | "FEMININE" | "NEUTRAL";
+    gender?: 'MASCULINE' | 'FEMININE' | 'NEUTRAL'
     /** @enum {string} */
-    number?: "SINGULAR" | "PLURAL" | "UNCOUNTABLE";
-  };
+    number?: 'SINGULAR' | 'PLURAL' | 'UNCOUNTABLE'
+  }
   TermEditDto: {
-    text: string;
-    lang?: string;
+    text: string
+    lang?: string
     /** @description Default: false */
-    caseSensitive?: boolean;
+    caseSensitive?: boolean
     /** @description Default: false */
-    exactMatch?: boolean;
+    exactMatch?: boolean
     /** @description Default: false */
-    forbidden?: boolean;
+    forbidden?: boolean
     /** @description Default: false */
-    preferred?: boolean;
+    preferred?: boolean
     /** @enum {string} */
-    status?: "New" | "Approved";
-    usage?: string;
-    note?: string;
-    shortTranslation?: string;
+    status?: 'New' | 'Approved'
+    usage?: string
+    note?: string
+    shortTranslation?: string
     /** @enum {string} */
-    termType?:
-      | "FULL_FORM"
-      | "SHORT_FORM"
-      | "ACRONYM"
-      | "ABBREVIATION"
-      | "PHRASE"
-      | "VARIANT";
+    termType?: 'FULL_FORM' | 'SHORT_FORM' | 'ACRONYM' | 'ABBREVIATION' | 'PHRASE' | 'VARIANT'
     /** @enum {string} */
-    partOfSpeech?: "ADJECTIVE" | "NOUN" | "VERB" | "ADVERB";
+    partOfSpeech?: 'ADJECTIVE' | 'NOUN' | 'VERB' | 'ADVERB'
     /** @enum {string} */
-    gender?: "MASCULINE" | "FEMININE" | "NEUTRAL";
+    gender?: 'MASCULINE' | 'FEMININE' | 'NEUTRAL'
     /** @enum {string} */
-    number?: "SINGULAR" | "PLURAL" | "UNCOUNTABLE";
-  };
+    number?: 'SINGULAR' | 'PLURAL' | 'UNCOUNTABLE'
+  }
   ConceptListReference: {
-    concepts: definitions["IdReference"][];
-  };
+    concepts: definitions['IdReference'][]
+  }
   ConceptDto: {
-    id?: string;
-    writable?: boolean;
-    terms?: definitions["TermDto"][][];
-  };
+    id?: string
+    writable?: boolean
+    terms?: definitions['TermDto'][][]
+  }
   BackgroundTasksTbDto: {
-    status?: string;
-    finishedDataText?: string;
-    asyncRequest?: definitions["AsyncRequestDto"];
-    lastTaskString?: string;
-    metadata?: definitions["MetadataResponse"];
-    lastTaskOk?: string;
-    lastTaskError?: string;
-    lastTaskErrorHtml?: string;
-  };
+    status?: string
+    finishedDataText?: string
+    asyncRequest?: definitions['AsyncRequestDto']
+    lastTaskString?: string
+    metadata?: definitions['MetadataResponse']
+    lastTaskOk?: string
+    lastTaskError?: string
+    lastTaskErrorHtml?: string
+  }
   MetadataResponse: {
     /** Format: int64 */
-    segmentsCount?: number;
+    segmentsCount?: number
     /** Format: int64 */
-    deduplicatedSegmentsCount?: number;
-    metadataByLanguage?: { [key: string]: definitions["LanguageMetadata1"] };
-  };
+    deduplicatedSegmentsCount?: number
+    metadataByLanguage?: {[key: string]: definitions['LanguageMetadata1']}
+  }
   BrowseResponseListDto: {
-    searchResults?: definitions["ConceptDto"][];
-  };
+    searchResults?: definitions['ConceptDto'][]
+  }
   BrowseRequestDto: {
-    queryLang?: string;
-    query?: string;
-    status?: string;
+    queryLang?: string
+    query?: string
+    status?: string
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    pageSize?: number;
-  };
+    pageSize?: number
+  }
   TermBaseSearchRequestDto: {
-    targetLangs: string[];
-    sourceLang: string;
-    query: string;
+    targetLangs: string[]
+    sourceLang: string
+    query: string
     /** @enum {string} */
-    status?: "New" | "Approved";
-  };
+    status?: 'New' | 'Approved'
+  }
   MetadataTbDto: {
     /** Format: int64 */
-    termsCount?: number;
-    metadataByLanguage?: { [key: string]: number };
-  };
+    termsCount?: number
+    metadataByLanguage?: {[key: string]: number}
+  }
   TransMemoryCreateDto: {
-    name: string;
-    sourceLang: string;
-    targetLangs: string[];
-    client?: definitions["IdReference"];
-    businessUnit?: definitions["IdReference"];
-    domain?: definitions["IdReference"];
-    subDomain?: definitions["IdReference"];
-    note?: string;
-  };
+    name: string
+    sourceLang: string
+    targetLangs: string[]
+    client?: definitions['IdReference']
+    businessUnit?: definitions['IdReference']
+    domain?: definitions['IdReference']
+    subDomain?: definitions['IdReference']
+    note?: string
+  }
   TransMemoryEditDto: {
-    name: string;
+    name: string
     /** @description New target languages to add. No languages can be removed */
-    targetLangs: string[];
-    client?: definitions["IdReference"];
-    businessUnit?: definitions["IdReference"];
-    domain?: definitions["IdReference"];
-    subDomain?: definitions["IdReference"];
+    targetLangs: string[]
+    client?: definitions['IdReference']
+    businessUnit?: definitions['IdReference']
+    domain?: definitions['IdReference']
+    subDomain?: definitions['IdReference']
     /** @description Owner of the TM must be Admin or PM */
-    owner?: definitions["IdReference"];
-    note?: string;
-  };
+    owner?: definitions['IdReference']
+    note?: string
+  }
   TargetLanguageDto: {
-    language: string;
-  };
+    language: string
+  }
   CleanedTransMemoriesDto: {
-    uids: string[];
+    uids: string[]
     /** @enum {string} */
-    outputFormat?: "TXT" | "TSV";
-    preserveRatio?: number;
-    targetLangs?: string[];
-  };
+    outputFormat?: 'TXT' | 'TSV'
+    preserveRatio?: number
+    targetLangs?: string[]
+  }
   SegmentDto: {
-    targetLang: string;
-    sourceSegment: string;
-    targetSegment: string;
-    previousSourceSegment?: string;
-    nextSourceSegment?: string;
-    sourceTagMetadata?: definitions["TagMetadataDto"][];
-    targetTagMetadata?: definitions["TagMetadataDto"][];
-  };
+    targetLang: string
+    sourceSegment: string
+    targetSegment: string
+    previousSourceSegment?: string
+    nextSourceSegment?: string
+    sourceTagMetadata?: definitions['TagMetadataDto'][]
+    targetTagMetadata?: definitions['TagMetadataDto'][]
+  }
   LanguageMetadata1: {
     /** Format: int64 */
-    segmentsCount?: number;
-  };
+    segmentsCount?: number
+  }
   TranslationDto: {
-    lang: string;
-    text: string;
-  };
+    lang: string
+    text: string
+  }
   BackgroundTasksTmDto: {
-    status?: string;
-    finishedDataText?: string;
-    asyncRequest?: definitions["AsyncRequestDto"];
-    lastTaskString?: string;
-    metadata?: definitions["MetadataResponse"];
-    lastTaskOk?: string;
-    lastTaskError?: string;
-    lastTaskErrorHtml?: string;
-  };
+    status?: string
+    finishedDataText?: string
+    asyncRequest?: definitions['AsyncRequestDto']
+    lastTaskString?: string
+    metadata?: definitions['MetadataResponse']
+    lastTaskOk?: string
+    lastTaskError?: string
+    lastTaskErrorHtml?: string
+  }
   WildCardSearchRequestDto: {
-    query?: string;
-    sourceLang: string;
-    targetLangs?: string[];
+    query?: string
+    sourceLang: string
+    targetLangs?: string[]
     /** Format: int32 */
-    count?: number;
+    count?: number
     /** Format: int32 */
-    offset?: number;
-    sourceLangs?: string[];
-  };
+    offset?: number
+    sourceLangs?: string[]
+  }
   AsyncExportTMByQueryDto: {
-    asyncRequest?: definitions["ObjectReference"];
-    transMemory?: definitions["ObjectReference"];
-    exportTargetLangs?: string[];
-    queries?: definitions["Query"][];
-  };
+    asyncRequest?: definitions['ObjectReference']
+    transMemory?: definitions['ObjectReference']
+    exportTargetLangs?: string[]
+    queries?: definitions['Query'][]
+  }
   AsyncExportTMByQueryResponseDto: {
-    asyncRequest?: definitions["AsyncRequestDto"];
-    asyncExport?: definitions["AsyncExportTMByQueryDto"];
-  };
+    asyncRequest?: definitions['AsyncRequestDto']
+    asyncExport?: definitions['AsyncExportTMByQueryDto']
+  }
   Query: {
-    query?: string;
-    lang?: string;
-  };
+    query?: string
+    lang?: string
+  }
   ExportByQueryDto: {
-    exportTargetLangs: string[];
-    queries: string[];
-    queryLangs: string[];
+    exportTargetLangs: string[]
+    queries: string[]
+    queryLangs: string[]
     /** Format: date-time */
-    createdAtMin?: string;
+    createdAtMin?: string
     /** Format: date-time */
-    createdAtMax?: string;
+    createdAtMax?: string
     /** Format: date-time */
-    modifiedAtMin?: string;
+    modifiedAtMin?: string
     /** Format: date-time */
-    modifiedAtMax?: string;
-    createdBy?: definitions["IdReference"];
-    modifiedBy?: definitions["IdReference"];
-    filename?: string;
-    project?: definitions["UidReference"];
-    callbackUrl?: string;
-  };
+    modifiedAtMax?: string
+    createdBy?: definitions['IdReference']
+    modifiedBy?: definitions['IdReference']
+    filename?: string
+    project?: definitions['UidReference']
+    callbackUrl?: string
+  }
   SearchRequestDto: {
-    query: string;
-    sourceLang: string;
-    targetLangs?: string[];
-    previousSegment?: string;
-    nextSegment?: string;
-    tagMetadata?: definitions["TagMetadataDto"][];
+    query: string
+    sourceLang: string
+    targetLangs?: string[]
+    previousSegment?: string
+    nextSegment?: string
+    tagMetadata?: definitions['TagMetadataDto'][]
     /** @description Remove leading and trailing whitespace from query. Default: true */
-    trimQuery?: boolean;
+    trimQuery?: boolean
     /** @description Return both wildcard and exact search results. Default: true */
-    phraseQuery?: boolean;
-  };
+    phraseQuery?: boolean
+  }
   TranslationRequestDto: {
-    sourceTexts: string[];
-  };
+    sourceTexts: string[]
+  }
   /** @description connection between language pair and workflow steps, contains price */
   TranslationPriceDto: {
-    workflowStep?: definitions["WorkflowStepDto"];
+    workflowStep?: definitions['WorkflowStepDto']
     /** Format: double */
-    price?: number;
-  };
+    price?: number
+  }
   /** @description Price list with set of prices for language pairs */
   TranslationPriceListDto: {
-    id?: string;
-    uid?: string;
+    id?: string
+    uid?: string
     /** Format: date-time */
-    dateCreated?: string;
-    name: string;
-    currencyCode?: string;
+    dateCreated?: string
+    name: string
+    currencyCode?: string
     /** @enum {string} */
-    billingUnit?: "Character" | "Word" | "Page" | "Hour";
-    priceSets?: definitions["TranslationPriceSetDto"][];
-  };
+    billingUnit?: 'Character' | 'Word' | 'Page' | 'Hour'
+    priceSets?: definitions['TranslationPriceSetDto'][]
+  }
   /** @description Language pair for translation price list, owns minimalPrice */
   TranslationPriceSetDto: {
-    sourceLang?: string;
-    targetLang?: string;
+    sourceLang?: string
+    targetLang?: string
     /** Format: double */
-    minimumPrice?: number;
-    prices?: definitions["TranslationPriceDto"][];
-  };
+    minimumPrice?: number
+    prices?: definitions['TranslationPriceDto'][]
+  }
   TranslationPriceListCreateDto: {
-    name: string;
-    currencyCode: string;
+    name: string
+    currencyCode: string
     /**
      * @description Default: Word
      * @enum {string}
      */
-    billingUnit?: "Word" | "Page" | "Character" | "Hour";
-  };
+    billingUnit?: 'Word' | 'Page' | 'Character' | 'Hour'
+  }
   PageDtoTranslationPriceListDto: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["TranslationPriceListDto"][];
-  };
+    numberOfElements?: number
+    content?: definitions['TranslationPriceListDto'][]
+  }
   TranslationPriceSetListDto: {
-    priceSets?: definitions["TranslationPriceSetDto"][];
-  };
+    priceSets?: definitions['TranslationPriceSetDto'][]
+  }
   TranslationPriceSetCreateDto: {
-    sourceLanguages: string[];
-    targetLanguages: string[];
-  };
+    sourceLanguages: string[]
+    targetLanguages: string[]
+  }
   TranslationPriceSetBulkDeleteDto: {
-    sourceLanguages?: string[];
-    targetLanguages?: string[];
-  };
+    sourceLanguages?: string[]
+    targetLanguages?: string[]
+  }
   PageDtoTranslationPriceSetDto: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["TranslationPriceSetDto"][];
-  };
+    numberOfElements?: number
+    content?: definitions['TranslationPriceSetDto'][]
+  }
   TranslationPriceSetBulkMinimumPricesDto: {
-    sourceLanguages?: string[];
-    targetLanguages?: string[];
+    sourceLanguages?: string[]
+    targetLanguages?: string[]
     /** Format: double */
-    minimumPrice?: number;
-  };
+    minimumPrice?: number
+  }
   TranslationPriceSetBulkPricesDto: {
-    sourceLanguages?: string[];
-    targetLanguages?: string[];
+    sourceLanguages?: string[]
+    targetLanguages?: string[]
     /** Format: double */
-    price?: number;
-    workflowSteps?: definitions["IdReference"][];
-  };
+    price?: number
+    workflowSteps?: definitions['IdReference'][]
+  }
   PageDtoProjectReference: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["ProjectReference"][];
-  };
+    numberOfElements?: number
+    content?: definitions['ProjectReference'][]
+  }
   UserPasswordEditDto: {
-    password: string;
-  };
+    password: string
+  }
   UserDto: {
-    id?: string;
-    uid?: string;
-    userName?: string;
-    firstName?: string;
-    lastName?: string;
-    email?: string;
+    id?: string
+    uid?: string
+    userName?: string
+    firstName?: string
+    lastName?: string
+    email?: string
     /** Format: date-time */
-    dateCreated?: string;
+    dateCreated?: string
     /** Format: date-time */
-    dateDeleted?: string;
-    createdBy?: definitions["UserReference"];
+    dateDeleted?: string
+    createdBy?: definitions['UserReference']
     /** @enum {string} */
     role?:
-      | "SYS_ADMIN"
-      | "SYS_ADMIN_READ"
-      | "ADMIN"
-      | "PROJECT_MANAGER"
-      | "LINGUIST"
-      | "GUEST"
-      | "SUBMITTER";
-    timezone?: string;
-    note?: string;
-    terminologist?: boolean;
-    sourceLangs?: string[];
-    targetLangs?: string[];
-    active?: boolean;
-    priceList?: definitions["PriceListReference"];
-    netRateScheme?: definitions["DiscountSchemeReference"];
-  };
+      | 'SYS_ADMIN'
+      | 'SYS_ADMIN_READ'
+      | 'ADMIN'
+      | 'PROJECT_MANAGER'
+      | 'LINGUIST'
+      | 'GUEST'
+      | 'SUBMITTER'
+    timezone?: string
+    note?: string
+    terminologist?: boolean
+    sourceLangs?: string[]
+    targetLangs?: string[]
+    active?: boolean
+    priceList?: definitions['PriceListReference']
+    netRateScheme?: definitions['DiscountSchemeReference']
+  }
   /** @description user login statistics */
   UserStatisticsDto: {
     /** Format: date-time */
-    date?: string;
-    ipAddress?: string;
-    ipCountry?: string;
-    userAgent?: string;
-  };
+    date?: string
+    ipAddress?: string
+    ipCountry?: string
+    userAgent?: string
+  }
   /** @description envelope for user statistics */
   UserStatisticsListDto: {
-    userStatistics: definitions["UserStatisticsDto"][];
-  };
+    userStatistics: definitions['UserStatisticsDto'][]
+  }
   PageDtoUserDto: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["UserDto"][];
-  };
+    numberOfElements?: number
+    content?: definitions['UserDto'][]
+  }
   AssignedJobDto: {
-    uid?: string;
-    innerId?: string;
-    filename?: string;
+    uid?: string
+    innerId?: string
+    filename?: string
     /** Format: date-time */
-    dateDue?: string;
+    dateDue?: string
     /** Format: date-time */
-    dateCreated?: string;
+    dateCreated?: string
     /** @enum {string} */
     status?:
-      | "NEW"
-      | "ACCEPTED"
-      | "DECLINED"
-      | "REJECTED"
-      | "DELIVERED"
-      | "EMAILED"
-      | "COMPLETED"
-      | "CANCELLED";
-    targetLang?: string;
-    sourceLang?: string;
-    project?: definitions["ProjectReference"];
-    workflowStep?: definitions["ProjectWorkflowStepReference"];
-    importStatus?: definitions["ImportStatusDto"];
-    imported?: boolean;
-  };
+      | 'NEW'
+      | 'ACCEPTED'
+      | 'DECLINED'
+      | 'REJECTED'
+      | 'DELIVERED'
+      | 'EMAILED'
+      | 'COMPLETED'
+      | 'CANCELLED'
+    targetLang?: string
+    sourceLang?: string
+    project?: definitions['ProjectReference']
+    workflowStep?: definitions['ProjectWorkflowStepReference']
+    importStatus?: definitions['ImportStatusDto']
+    imported?: boolean
+  }
   PageDtoAssignedJobDto: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["AssignedJobDto"][];
-  };
+    numberOfElements?: number
+    content?: definitions['AssignedJobDto'][]
+  }
   PageDtoWorkflowStepReference: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["WorkflowStepReference"][];
-  };
+    numberOfElements?: number
+    content?: definitions['WorkflowStepReference'][]
+  }
   PageDtoString: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: string[];
-  };
+    numberOfElements?: number
+    content?: string[]
+  }
   LastLoginDto: {
-    user?: definitions["UserReference"];
+    user?: definitions['UserReference']
     /** Format: date-time */
-    lastLoginDate?: string;
-  };
+    lastLoginDate?: string
+  }
   PageDtoLastLoginDto: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["LastLoginDto"][];
-  };
+    numberOfElements?: number
+    content?: definitions['LastLoginDto'][]
+  }
   VendorDto: {
-    id?: string;
-    uid?: string;
-    name?: string;
-    vendorToken?: string;
-    priceList?: definitions["PriceListReference"];
-    netRateScheme?: definitions["DiscountSchemeReference"];
-    sourceLocales?: string[];
-    targetLocales?: string[];
-    clients?: definitions["ClientReference"][];
-    domains?: definitions["DomainReference"][];
-    subDomains?: definitions["SubDomainReference"][];
-    workflowSteps?: definitions["WorkflowStepReference"][];
-  };
+    id?: string
+    uid?: string
+    name?: string
+    vendorToken?: string
+    priceList?: definitions['PriceListReference']
+    netRateScheme?: definitions['DiscountSchemeReference']
+    sourceLocales?: string[]
+    targetLocales?: string[]
+    clients?: definitions['ClientReference'][]
+    domains?: definitions['DomainReference'][]
+    subDomains?: definitions['SubDomainReference'][]
+    workflowSteps?: definitions['WorkflowStepReference'][]
+  }
   PageDtoVendorDto: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["VendorDto"][];
-  };
+    numberOfElements?: number
+    content?: definitions['VendorDto'][]
+  }
   CreateVendorDto: {
-    vendorToken: string;
-    netRateScheme?: definitions["UidReference"];
-    priceList?: definitions["UidReference"];
-    sourceLocales?: string[];
-    targetLocales?: string[];
-    clients?: definitions["UidReference"][];
-    domains?: definitions["UidReference"][];
-    subDomains?: definitions["UidReference"][];
-    workflowSteps?: definitions["UidReference"][];
-  };
+    vendorToken: string
+    netRateScheme?: definitions['UidReference']
+    priceList?: definitions['UidReference']
+    sourceLocales?: string[]
+    targetLocales?: string[]
+    clients?: definitions['UidReference'][]
+    domains?: definitions['UidReference'][]
+    subDomains?: definitions['UidReference'][]
+    workflowSteps?: definitions['UidReference'][]
+  }
   PageDtoWebhookCallDto: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["WebhookCallDto"][];
-  };
+    numberOfElements?: number
+    content?: definitions['WebhookCallDto'][]
+  }
   WebhookCallDto: {
-    uid?: string;
-    parentUid?: string;
-    eventUid?: string;
-    webhookSettings?: definitions["UidReference"];
+    uid?: string
+    parentUid?: string
+    eventUid?: string
+    webhookSettings?: definitions['UidReference']
     /** Format: date-time */
-    createdAt?: string;
-    url?: string;
-    forced?: boolean;
+    createdAt?: string
+    url?: string
+    forced?: boolean
     /** Format: date-time */
-    lastForcedAt?: string;
-    body?: string;
+    lastForcedAt?: string
+    body?: string
     /** @enum {string} */
     triggerEvent?:
-      | "JOB_STATUS_CHANGED"
-      | "JOB_CREATED"
-      | "JOB_DELETED"
-      | "JOB_UNSHARED"
-      | "JOB_ASSIGNED"
-      | "JOB_DUE_DATE_CHANGED"
-      | "JOB_UPDATED"
-      | "JOB_TARGET_UPDATED"
-      | "JOB_EXPORTED"
-      | "JOB_UNEXPORTED"
-      | "PROJECT_CREATED"
-      | "PROJECT_DELETED"
-      | "PROJECT_UNSHARED"
-      | "PROJECT_STATUS_CHANGED"
-      | "PROJECT_DUE_DATE_CHANGED"
-      | "SHARED_PROJECT_ASSIGNED"
-      | "PROJECT_METADATA_UPDATED"
-      | "PRE_TRANSLATION_FINISHED"
-      | "ANALYSIS_CREATED"
-      | "CONTINUOUS_JOB_UPDATED"
-      | "PROJECT_TEMPLATE_CREATED"
-      | "PROJECT_TEMPLATE_UPDATED"
-      | "PROJECT_TEMPLATE_DELETED"
-      | "RAW_MT_CONVERTER_IMPORT_FINISHED"
-      | "RAW_MT_PRE_TRANSLATION_FINISHED";
+      | 'JOB_STATUS_CHANGED'
+      | 'JOB_CREATED'
+      | 'JOB_DELETED'
+      | 'JOB_UNSHARED'
+      | 'JOB_ASSIGNED'
+      | 'JOB_DUE_DATE_CHANGED'
+      | 'JOB_UPDATED'
+      | 'JOB_TARGET_UPDATED'
+      | 'JOB_EXPORTED'
+      | 'JOB_UNEXPORTED'
+      | 'PROJECT_CREATED'
+      | 'PROJECT_DELETED'
+      | 'PROJECT_UNSHARED'
+      | 'PROJECT_STATUS_CHANGED'
+      | 'PROJECT_DUE_DATE_CHANGED'
+      | 'SHARED_PROJECT_ASSIGNED'
+      | 'PROJECT_METADATA_UPDATED'
+      | 'PRE_TRANSLATION_FINISHED'
+      | 'ANALYSIS_CREATED'
+      | 'CONTINUOUS_JOB_UPDATED'
+      | 'PROJECT_TEMPLATE_CREATED'
+      | 'PROJECT_TEMPLATE_UPDATED'
+      | 'PROJECT_TEMPLATE_DELETED'
+      | 'RAW_MT_CONVERTER_IMPORT_FINISHED'
+      | 'RAW_MT_PRE_TRANSLATION_FINISHED'
     /** Format: int64 */
-    retryAttempt?: number;
+    retryAttempt?: number
     /** Format: int64 */
-    statusCode?: number;
-    errorMessage?: string;
-  };
+    statusCode?: number
+    errorMessage?: string
+  }
   ReplayRequestDto: {
-    webhookCalls?: definitions["UidReference"][];
-  };
+    webhookCalls?: definitions['UidReference'][]
+  }
   PageDtoWorkflowStepDto: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["WorkflowStepDto"][];
-  };
+    numberOfElements?: number
+    content?: definitions['WorkflowStepDto'][]
+  }
   CreateWorkflowStepDto: {
     /** @description Name of the lqa workflow step */
-    name: string;
+    name: string
     /**
      * Format: int32
      * @description Order value
      */
-    order?: number;
+    order?: number
     /** @description Default: false */
-    lqaEnabled?: boolean;
+    lqaEnabled?: boolean
     /** @description Abbreviation */
-    abbr: string;
-  };
+    abbr: string
+  }
   EditWorkflowStepDto: {
     /** @description Name of the lqa workflow step */
-    name?: string;
+    name?: string
     /**
      * Format: int32
      * @description Order value
      */
-    order?: number;
+    order?: number
     /** @description Default: false */
-    lqaEnabled?: boolean;
+    lqaEnabled?: boolean
     /** @description Abbreviation */
-    abbr?: string;
-  };
+    abbr?: string
+  }
   AsyncAnalyseListResponseV2Dto: {
-    asyncRequests?: definitions["AsyncAnalyseResponseV2Dto"][];
-  };
+    asyncRequests?: definitions['AsyncAnalyseResponseV2Dto'][]
+  }
   AsyncAnalyseResponseV2Dto: {
-    asyncRequest?: definitions["AsyncRequestV2Dto"];
-    analyse?: definitions["ObjectReference"];
-  };
+    asyncRequest?: definitions['AsyncRequestV2Dto']
+    analyse?: definitions['ObjectReference']
+  }
   AsyncRequestV2Dto: {
-    id?: string;
-    createdBy?: definitions["UserReference"];
+    id?: string
+    createdBy?: definitions['UserReference']
     /** Format: date-time */
-    dateCreated?: string;
+    dateCreated?: string
     /** @enum {string} */
     action?:
-      | "PRE_ANALYSE"
-      | "POST_ANALYSE"
-      | "COMPARE_ANALYSE"
-      | "PARENT_ANALYSE"
-      | "PRE_TRANSLATE"
-      | "ASYNC_TRANSLATE"
-      | "IMPORT_JOB"
-      | "IMPORT_FILE"
-      | "ALIGN"
-      | "EXPORT_TMX_BY_QUERY"
-      | "EXPORT_TMX"
-      | "IMPORT_TMX"
-      | "IMPORT_TBX"
-      | "INSERT_INTO_TM"
-      | "DELETE_TM"
-      | "CLEAR_TM"
-      | "QA"
-      | "QA_V3"
-      | "UPDATE_CONTINUOUS_JOB"
-      | "UPDATE_SOURCE"
-      | "UPDATE_TARGET"
-      | "EXTRACT_CLEANED_TMS"
-      | "GLOSSARY_PUT"
-      | "GLOSSARY_DELETE"
-      | "CREATE_PROJECT"
-      | "EXPORT_COMPLETE_FILE"
-      | "IMPORT_ANNOTATIONS"
-      | "FILE_FLOW_CONVERTER_IMPORT"
-      | "FILE_FLOW_MT_PRETRANSLATE";
-    asyncResponse?: definitions["AsyncResponseV2Dto"];
-    parent?: definitions["AsyncRequestV2Dto"];
-    project?: definitions["ProjectReference"];
-  };
+      | 'PRE_ANALYSE'
+      | 'POST_ANALYSE'
+      | 'COMPARE_ANALYSE'
+      | 'PARENT_ANALYSE'
+      | 'PRE_TRANSLATE'
+      | 'ASYNC_TRANSLATE'
+      | 'IMPORT_JOB'
+      | 'IMPORT_FILE'
+      | 'ALIGN'
+      | 'EXPORT_TMX_BY_QUERY'
+      | 'EXPORT_TMX'
+      | 'IMPORT_TMX'
+      | 'IMPORT_TBX'
+      | 'INSERT_INTO_TM'
+      | 'DELETE_TM'
+      | 'CLEAR_TM'
+      | 'QA'
+      | 'QA_V3'
+      | 'UPDATE_CONTINUOUS_JOB'
+      | 'UPDATE_SOURCE'
+      | 'UPDATE_TARGET'
+      | 'EXTRACT_CLEANED_TMS'
+      | 'GLOSSARY_PUT'
+      | 'GLOSSARY_DELETE'
+      | 'CREATE_PROJECT'
+      | 'EXPORT_COMPLETE_FILE'
+      | 'IMPORT_ANNOTATIONS'
+      | 'FILE_FLOW_CONVERTER_IMPORT'
+      | 'FILE_FLOW_MT_PRETRANSLATE'
+    asyncResponse?: definitions['AsyncResponseV2Dto']
+    parent?: definitions['AsyncRequestV2Dto']
+    project?: definitions['ProjectReference']
+  }
   AsyncResponseV2Dto: {
     /** Format: date-time */
-    dateCreated?: string;
-    errorCode?: string;
-    errorDesc?: string;
-    errorDetails?: definitions["ErrorDetailDtoV2"][];
-    warnings?: definitions["ErrorDetailDtoV2"][];
-  };
+    dateCreated?: string
+    errorCode?: string
+    errorDesc?: string
+    errorDetails?: definitions['ErrorDetailDtoV2'][]
+    warnings?: definitions['ErrorDetailDtoV2'][]
+  }
   ErrorDetailDtoV2: {
     /** @description Code, e.g. NOT_FOUND. */
-    code?: string;
+    code?: string
     /** @description Related arguments, e.g. number => "hello world" */
-    args?: { [key: string]: { [key: string]: unknown } };
+    args?: {[key: string]: {[key: string]: unknown}}
     /** @description Optional human-readable message. */
-    message?: string;
-  };
+    message?: string
+  }
   CreateAnalyseAsyncV2Dto: {
-    jobs: definitions["UidReference"][];
+    jobs: definitions['UidReference'][]
     /**
      * @description default: PreAnalyse
      * @enum {string}
      */
-    type?: "PreAnalyse" | "PostAnalyse" | "Compare";
+    type?: 'PreAnalyse' | 'PostAnalyse' | 'Compare'
     /** @description Default: true */
-    includeFuzzyRepetitions?: boolean;
+    includeFuzzyRepetitions?: boolean
     /** @description Default: false */
-    separateFuzzyRepetitions?: boolean;
+    separateFuzzyRepetitions?: boolean
     /** @description Default: true */
-    includeConfirmedSegments?: boolean;
+    includeConfirmedSegments?: boolean
     /** @description Default: true */
-    includeNumbers?: boolean;
+    includeNumbers?: boolean
     /** @description Default: true */
-    includeLockedSegments?: boolean;
+    includeLockedSegments?: boolean
     /** @description Default: true */
-    countSourceUnits?: boolean;
+    countSourceUnits?: boolean
     /** @description Default: true. Works only for type=PreAnalyse. */
-    includeTransMemory?: boolean;
+    includeTransMemory?: boolean
     /** @description Default: false. Works only for type=PreAnalyse. */
-    includeNonTranslatables?: boolean;
+    includeNonTranslatables?: boolean
     /** @description Default: false. Works only for type=PreAnalyse. */
-    includeMachineTranslationMatches?: boolean;
+    includeMachineTranslationMatches?: boolean
     /** @description Default: false. Works only for type=PostAnalyse. */
-    transMemoryPostEditing?: boolean;
+    transMemoryPostEditing?: boolean
     /** @description Default: false. Works only for type=PostAnalyse. */
-    nonTranslatablePostEditing?: boolean;
+    nonTranslatablePostEditing?: boolean
     /** @description Default: false. Works only for type=PostAnalyse. */
-    machineTranslatePostEditing?: boolean;
-    name?: string;
-    netRateScheme?: definitions["IdReference"];
+    machineTranslatePostEditing?: boolean
+    name?: string
+    netRateScheme?: definitions['IdReference']
     /**
      * Format: int32
      * @description Required for type=Compare
      */
-    compareWorkflowLevel?: number;
+    compareWorkflowLevel?: number
     /**
      * @description Default: false. Use default project settings. Will be overwritten with setting sent
      *         in the API call.
      */
-    useProjectAnalysisSettings?: boolean;
-    callbackUrl?: string;
-    provider?: definitions["ProviderReference"];
-  };
+    useProjectAnalysisSettings?: boolean
+    callbackUrl?: string
+    provider?: definitions['ProviderReference']
+  }
   AnalyseLanguagePartV2Dto: {
-    id?: string;
-    sourceLang?: string;
-    targetLang?: string;
-    data?: definitions["DataDto"];
-    discountedData?: definitions["DataDto"];
-    jobs?: definitions["AnalyseJobReference"][];
-  };
+    id?: string
+    sourceLang?: string
+    targetLang?: string
+    data?: definitions['DataDto']
+    discountedData?: definitions['DataDto']
+    jobs?: definitions['AnalyseJobReference'][]
+  }
   AnalyseV2Dto: {
-    id?: string;
-    uid?: string;
+    id?: string
+    uid?: string
     /** @enum {string} */
-    type?:
-      | "PreAnalyse"
-      | "PostAnalyse"
-      | "PreAnalyseTarget"
-      | "Compare"
-      | "PreAnalyseProvider";
-    name?: string;
-    provider?: definitions["ProviderReference"];
-    createdBy?: definitions["UserReference"];
+    type?: 'PreAnalyse' | 'PostAnalyse' | 'PreAnalyseTarget' | 'Compare' | 'PreAnalyseProvider'
+    name?: string
+    provider?: definitions['ProviderReference']
+    createdBy?: definitions['UserReference']
     /** Format: date-time */
-    dateCreated?: string;
-    netRateScheme?: definitions["NetRateSchemeReference"];
-    analyseLanguageParts?: definitions["AnalyseLanguagePartV2Dto"][];
-  };
+    dateCreated?: string
+    netRateScheme?: definitions['NetRateSchemeReference']
+    analyseLanguageParts?: definitions['AnalyseLanguagePartV2Dto'][]
+  }
   DataDto: {
-    available?: boolean;
-    estimate?: boolean;
-    all?: definitions["CountsDto"];
-    repetitions?: definitions["CountsDto"];
-    transMemoryMatches?: definitions["MatchCounts101Dto"];
-    machineTranslationMatches?: definitions["MatchCountsDto"];
-    nonTranslatablesMatches?: definitions["MatchCountsNTDto"];
-    internalFuzzyMatches?: definitions["MatchCountsDto"];
-  };
+    available?: boolean
+    estimate?: boolean
+    all?: definitions['CountsDto']
+    repetitions?: definitions['CountsDto']
+    transMemoryMatches?: definitions['MatchCounts101Dto']
+    machineTranslationMatches?: definitions['MatchCountsDto']
+    nonTranslatablesMatches?: definitions['MatchCountsNTDto']
+    internalFuzzyMatches?: definitions['MatchCountsDto']
+  }
   MatchCountsNTDto: {
-    match100?: definitions["CountsDto"];
-    match95?: definitions["CountsDto"];
-    match85?: definitions["CountsDto"];
-    match75?: definitions["CountsDto"];
-    match50?: definitions["CountsDto"];
-    match0?: definitions["CountsDto"];
-  };
+    match100?: definitions['CountsDto']
+    match95?: definitions['CountsDto']
+    match85?: definitions['CountsDto']
+    match75?: definitions['CountsDto']
+    match50?: definitions['CountsDto']
+    match0?: definitions['CountsDto']
+  }
   EditAnalyseV2Dto: {
-    name?: string;
-    provider?: definitions["ProviderReference"];
-    netRateScheme?: definitions["UidReference"];
-  };
+    name?: string
+    provider?: definitions['ProviderReference']
+    netRateScheme?: definitions['UidReference']
+  }
   AnalysesV2Dto: {
-    analyses?: definitions["AnalyseV2Dto"][];
-  };
+    analyses?: definitions['AnalyseV2Dto'][]
+  }
   BulkEditAnalyseV2Dto: {
-    analyses: definitions["IdReference"][];
-    name?: string;
-    provider?: definitions["ProviderReference"];
-    netRateScheme?: definitions["UidReference"];
-  };
+    analyses: definitions['IdReference'][]
+    name?: string
+    provider?: definitions['ProviderReference']
+    netRateScheme?: definitions['UidReference']
+  }
   MultipartFile: {
-    contentType?: string;
-    originalFilename?: string;
-    name?: string;
-    empty?: boolean;
-    bytes?: string[];
+    contentType?: string
+    originalFilename?: string
+    name?: string
+    empty?: boolean
+    bytes?: string[]
     /** Format: int64 */
-    size?: number;
-    inputStream?: definitions["InputStream"];
-  };
+    size?: number
+    inputStream?: definitions['InputStream']
+  }
   UploadBilingualFileRequestDto: {
     /** @description One or more bilingual files and/or ZIP archives (max 50) */
-    file: definitions["MultipartFile"];
-  };
+    file: definitions['MultipartFile']
+  }
   AsyncFileOpResponseDto: {
-    id?: string;
-    createdBy?: definitions["UserReference"];
+    id?: string
+    createdBy?: definitions['UserReference']
     /** Format: date-time */
-    dateCreated?: string;
-    fileName?: string;
+    dateCreated?: string
+    fileName?: string
     /** @enum {string} */
     action?:
-      | "GUI_UPLOAD"
-      | "GUI_DOWNLOAD"
-      | "GUI_REIMPORT"
-      | "GUI_REIMPORT_TARGET"
-      | "CJ_UPLOAD"
-      | "CJ_DOWNLOAD"
-      | "APC_UPLOAD"
-      | "APC_DOWNLOAD"
-      | "API_UPLOAD"
-      | "API_DOWNLOAD"
-      | "SUBMITTER_PORTAL_DOWNLOAD";
-  };
+      | 'GUI_UPLOAD'
+      | 'GUI_DOWNLOAD'
+      | 'GUI_REIMPORT'
+      | 'GUI_REIMPORT_TARGET'
+      | 'CJ_UPLOAD'
+      | 'CJ_DOWNLOAD'
+      | 'APC_UPLOAD'
+      | 'APC_DOWNLOAD'
+      | 'API_UPLOAD'
+      | 'API_DOWNLOAD'
+      | 'SUBMITTER_PORTAL_DOWNLOAD'
+  }
   GetFileRequestParamsDto: {
-    sourceLang?: string;
-    targetLang?: string;
+    sourceLang?: string
+    targetLang?: string
     /** @example {"callbackUrl": "https://www.yourdomain.com/callback_endpoint"} */
-    callbackUrl: string;
-  };
+    callbackUrl: string
+  }
   Response: {
-    context?: { [key: string]: { [key: string]: unknown } };
-    cancelled?: boolean;
-    done?: boolean;
-  };
+    context?: {[key: string]: {[key: string]: unknown}}
+    cancelled?: boolean
+    done?: boolean
+  }
   WorkflowChangesDto: {
-    jobs: definitions["UidReference"][];
-  };
+    jobs: definitions['UidReference'][]
+  }
   CreateLqaConversationDto: {
-    lqaDescription?: string;
-    references: definitions["LQAReferences"];
-  };
+    lqaDescription?: string
+    references: definitions['LQAReferences']
+  }
   EditLqaConversationDto: {
-    lqaDescription?: string;
-    lqa: definitions["LQAReference"][];
+    lqaDescription?: string
+    lqa: definitions['LQAReference'][]
     /** @enum {string} */
-    status?: "resolved" | "unresolved";
-    correlation?: definitions["ReferenceCorrelation"];
-  };
+    status?: 'resolved' | 'unresolved'
+    correlation?: definitions['ReferenceCorrelation']
+  }
   AddLqaCommentResultDto: {
     /** @description ID of created comment */
-    id?: string;
+    id?: string
     /** @description LQA Conversation */
-    conversation?: definitions["LQAConversationDto"];
-  };
+    conversation?: definitions['LQAConversationDto']
+  }
   PageDtoUserReference: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["UserReference"][];
-  };
+    numberOfElements?: number
+    content?: definitions['UserReference'][]
+  }
   AddPlainCommentResultDto: {
     /** @description ID of created comment */
-    id?: string;
+    id?: string
     /** @description Conversation */
-    conversation?: definitions["PlainConversationDto"];
-  };
+    conversation?: definitions['PlainConversationDto']
+  }
   ProviderListDtoV2: {
-    providers?: definitions["Providers"];
-  };
+    providers?: definitions['Providers']
+  }
   /** @description Base projectDto */
   AbstractProjectDtoV2: {
-    uid?: string;
+    uid?: string
     /** Format: int32 */
-    internalId?: number;
-    id?: string;
-    name?: string;
+    internalId?: number
+    id?: string
+    name?: string
     /** Format: date-time */
-    dateCreated?: string;
-    domain?: definitions["DomainReference"];
-    subDomain?: definitions["SubDomainReference"];
-    owner?: definitions["UserReference"];
-    sourceLang?: string;
-    targetLangs?: string[];
-    references?: definitions["ReferenceFileReference"][];
-    mtSettingsPerLanguageList?: definitions["MTSettingsPerLanguageReference"][];
+    dateCreated?: string
+    domain?: definitions['DomainReference']
+    subDomain?: definitions['SubDomainReference']
+    owner?: definitions['UserReference']
+    sourceLang?: string
+    targetLangs?: string[]
+    references?: definitions['ReferenceFileReference'][]
+    mtSettingsPerLanguageList?: definitions['MTSettingsPerLanguageReference'][]
     /** @description Response differs based on user's role */
-    userRole?: string;
-  };
-  "Admin, Project Manager (v2)": definitions["AbstractProjectDtoV2"] & {
+    userRole?: string
+  }
+  'Admin, Project Manager (v2)': definitions['AbstractProjectDtoV2'] & {
     /** @description Default: false */
-    shared?: boolean;
-    progress?: definitions["ProgressDtoV2"];
-    client?: definitions["ClientReference"];
-    costCenter?: definitions["CostCenterReference"];
-    businessUnit?: definitions["BusinessUnitReference"];
+    shared?: boolean
+    progress?: definitions['ProgressDtoV2']
+    client?: definitions['ClientReference']
+    costCenter?: definitions['CostCenterReference']
+    businessUnit?: definitions['BusinessUnitReference']
     /** Format: date-time */
-    dateDue?: string;
+    dateDue?: string
     /** @enum {string} */
     status?:
-      | "NEW"
-      | "ASSIGNED"
-      | "COMPLETED"
-      | "ACCEPTED_BY_VENDOR"
-      | "DECLINED_BY_VENDOR"
-      | "COMPLETED_BY_VENDOR"
-      | "CANCELLED";
-    purchaseOrder?: string;
+      | 'NEW'
+      | 'ASSIGNED'
+      | 'COMPLETED'
+      | 'ACCEPTED_BY_VENDOR'
+      | 'DECLINED_BY_VENDOR'
+      | 'COMPLETED_BY_VENDOR'
+      | 'CANCELLED'
+    purchaseOrder?: string
     /** @description Default: false */
-    isPublishedOnJobBoard?: boolean;
-    note?: string;
-    createdBy?: definitions["UserReference"];
-    qualityAssuranceSettings?: definitions["ObjectReference"];
-    workflowSteps?: definitions["ProjectWorkflowStepDtoV2"][];
-    analyseSettings?: definitions["ObjectReference"];
-    accessSettings?: definitions["ObjectReference"];
-    financialSettings?: definitions["ObjectReference"];
-  };
-  "Linguist (v2)": definitions["AbstractProjectDtoV2"] & {
-    [key: string]: unknown;
-  };
+    isPublishedOnJobBoard?: boolean
+    note?: string
+    createdBy?: definitions['UserReference']
+    qualityAssuranceSettings?: definitions['ObjectReference']
+    workflowSteps?: definitions['ProjectWorkflowStepDtoV2'][]
+    analyseSettings?: definitions['ObjectReference']
+    accessSettings?: definitions['ObjectReference']
+    financialSettings?: definitions['ObjectReference']
+  }
+  'Linguist (v2)': definitions['AbstractProjectDtoV2'] & {
+    [key: string]: unknown
+  }
   ProgressDtoV2: {
     /** Format: int32 */
-    totalCount?: number;
+    totalCount?: number
     /** Format: int32 */
-    finishedCount?: number;
+    finishedCount?: number
     /** Format: int32 */
-    overdueCount?: number;
-  };
+    overdueCount?: number
+  }
   CreateProjectFromTemplateV2Dto: {
-    name: string;
-    sourceLang?: string;
-    targetLangs?: string[];
-    workflowSteps?: definitions["IdReference"][];
+    name: string
+    sourceLang?: string
+    targetLangs?: string[]
+    workflowSteps?: definitions['IdReference'][]
     /** Format: date-time */
-    dateDue?: string;
-    note?: string;
-    client?: definitions["IdReference"];
-    businessUnit?: definitions["IdReference"];
-    domain?: definitions["IdReference"];
-    subDomain?: definitions["IdReference"];
-    costCenter?: definitions["IdReference"];
-  };
+    dateDue?: string
+    note?: string
+    client?: definitions['IdReference']
+    businessUnit?: definitions['IdReference']
+    domain?: definitions['IdReference']
+    subDomain?: definitions['IdReference']
+    costCenter?: definitions['IdReference']
+  }
   AsyncRequestWrapperV2Dto: {
-    asyncRequest?: definitions["AsyncRequestV2Dto"];
-  };
+    asyncRequest?: definitions['AsyncRequestV2Dto']
+  }
   CreateProjectFromTemplateAsyncV2Dto: {
-    name: string;
-    sourceLang?: string;
-    targetLangs?: string[];
-    workflowSteps?: definitions["IdReference"][];
+    name: string
+    sourceLang?: string
+    targetLangs?: string[]
+    workflowSteps?: definitions['IdReference'][]
     /** Format: date-time */
-    dateDue?: string;
-    note?: string;
-    client?: definitions["IdReference"];
-    businessUnit?: definitions["IdReference"];
-    domain?: definitions["IdReference"];
-    subDomain?: definitions["IdReference"];
-    costCenter?: definitions["IdReference"];
-    callbackUrl?: string;
-  };
+    dateDue?: string
+    note?: string
+    client?: definitions['IdReference']
+    businessUnit?: definitions['IdReference']
+    domain?: definitions['IdReference']
+    subDomain?: definitions['IdReference']
+    costCenter?: definitions['IdReference']
+    callbackUrl?: string
+  }
   LqaProfilesForWsV2Dto: {
-    workflowStep?: definitions["IdReference"];
-    lqaProfile?: definitions["UidReference"];
-  };
+    workflowStep?: definitions['IdReference']
+    lqaProfile?: definitions['UidReference']
+  }
   ProjectWorkflowStepListDtoV2: {
-    projectWorkflowSteps?: definitions["ProjectWorkflowStepDtoV2"][];
-  };
+    projectWorkflowSteps?: definitions['ProjectWorkflowStepDtoV2'][]
+  }
   CustomFieldInstanceApiDto: {
-    customField?: definitions["UidReference"];
-    selectedOptions?: definitions["UidReference"][];
-    value?: string;
-  };
+    customField?: definitions['UidReference']
+    selectedOptions?: definitions['UidReference'][]
+    value?: string
+  }
   EditProjectV2Dto: {
-    name: string;
+    name: string
     /** @enum {string} */
     status?:
-      | "NEW"
-      | "ASSIGNED"
-      | "COMPLETED"
-      | "ACCEPTED_BY_VENDOR"
-      | "DECLINED_BY_VENDOR"
-      | "COMPLETED_BY_VENDOR"
-      | "CANCELLED";
-    client?: definitions["IdReference"];
-    businessUnit?: definitions["IdReference"];
-    domain?: definitions["IdReference"];
-    subDomain?: definitions["IdReference"];
+      | 'NEW'
+      | 'ASSIGNED'
+      | 'COMPLETED'
+      | 'ACCEPTED_BY_VENDOR'
+      | 'DECLINED_BY_VENDOR'
+      | 'COMPLETED_BY_VENDOR'
+      | 'CANCELLED'
+    client?: definitions['IdReference']
+    businessUnit?: definitions['IdReference']
+    domain?: definitions['IdReference']
+    subDomain?: definitions['IdReference']
     /** @description Owner must be Admin or PM */
-    owner?: definitions["IdReference"];
-    purchaseOrder?: string;
+    owner?: definitions['IdReference']
+    purchaseOrder?: string
     /** Format: date-time */
-    dateDue?: string;
-    note?: string;
+    dateDue?: string
+    note?: string
     /** @description Default: false */
-    fileHandover?: boolean;
+    fileHandover?: boolean
     /** @description Lqa profiles that will be added to workflow steps */
-    lqaProfiles?: definitions["LqaProfilesForWsV2Dto"][];
+    lqaProfiles?: definitions['LqaProfilesForWsV2Dto'][]
     /** @description Default: false */
-    archived?: boolean;
+    archived?: boolean
     /** @description Custom fields for project */
-    customFields?: definitions["CustomFieldInstanceApiDto"][];
-  };
+    customFields?: definitions['CustomFieldInstanceApiDto'][]
+  }
   EnabledCheckContextDtoV2: {
-    moraviaProfileId?: string;
-    customQaDisplayName?: string;
-    provider?: string;
-  };
+    moraviaProfileId?: string
+    customQaDisplayName?: string
+    provider?: string
+  }
   EnabledCheckDtoV2: {
-    checkerType?: string;
-    context?: definitions["EnabledCheckContextDtoV2"];
-  };
+    checkerType?: string
+    context?: definitions['EnabledCheckContextDtoV2']
+  }
   QualityAssuranceChecksDtoV2: {
-    forbiddenStrings?: string[];
+    forbiddenStrings?: string[]
     /**
      * @description enabledChecks
      * @example
@@ -7296,4503 +7244,4486 @@ export interface definitions {
      *       }
      *    ]
      */
-    enabledChecks?: definitions["EnabledCheckDtoV2"][];
-    excludeLockedSegments?: boolean;
-    userCanSetInstantQA?: boolean;
-    strictJobStatus?: boolean;
-    regexpRules?: definitions["RegexpCheckRuleDtoV2"][];
-  };
+    enabledChecks?: definitions['EnabledCheckDtoV2'][]
+    excludeLockedSegments?: boolean
+    userCanSetInstantQA?: boolean
+    strictJobStatus?: boolean
+    regexpRules?: definitions['RegexpCheckRuleDtoV2'][]
+  }
   WebEditorLinkDtoV2: {
-    url?: string;
-    warnings?: definitions["ErrorDetailDtoV2"][];
-  };
+    url?: string
+    warnings?: definitions['ErrorDetailDtoV2'][]
+  }
   CreateWebEditorLinkDtoV2: {
     /** @description Maximum supported number of jobs is 260 */
-    jobs: definitions["UidReference"][];
-  };
+    jobs: definitions['UidReference'][]
+  }
   PseudoTranslateActionDtoV2: {
-    replacement?: string;
-    prefix?: string;
-    suffix?: string;
+    replacement?: string
+    prefix?: string
+    suffix?: string
     /** Format: double */
-    length?: number;
+    length?: number
     /** Format: int32 */
-    keyHashPrefixLen?: number;
-    substitution?: definitions["SubstituteDtoV2"][];
-  };
+    keyHashPrefixLen?: number
+    substitution?: definitions['SubstituteDtoV2'][]
+  }
   PseudoTranslateWrapperDto: {
-    jobParts: definitions["JobPartReadyReferences"];
-    pseudoTranslate: definitions["PseudoTranslateActionDtoV2"];
-  };
+    jobParts: definitions['JobPartReadyReferences']
+    pseudoTranslate: definitions['PseudoTranslateActionDtoV2']
+  }
   SubstituteDtoV2: {
-    source: string;
-    target: string;
-  };
+    source: string
+    target: string
+  }
   /** @description Machine translation related settings */
   JobMachineTranslationSettingsDto: {
     /** @description Pre-translate from machine translation. Default: true */
-    useMachineTranslation?: boolean;
+    useMachineTranslation?: boolean
     /** @description Lock section: 100% machine translation matches. Default: false */
-    lock100PercentMatches?: boolean;
+    lock100PercentMatches?: boolean
     /** @description Set segment status to confirmed for: 100% translation machine matches. Default: false */
-    confirm100PercentMatches?: boolean;
+    confirm100PercentMatches?: boolean
     /**
      * @description Do not put machine translations to target and use alt-trans fields (alt-trans in mxlf).
      * Default: false
      */
-    useAltTransOnly?: boolean;
-  };
+    useAltTransOnly?: boolean
+  }
   /** @description Non-translatables related settings */
   JobNonTranslatableSettingsDto: {
     /** @description Pre-translate non-translatables. Default: true */
-    preTranslateNonTranslatables?: boolean;
+    preTranslateNonTranslatables?: boolean
     /** @description Set segment status to confirmed for: 100% non-translatable matches. Default: false */
-    confirm100PercentMatches?: boolean;
+    confirm100PercentMatches?: boolean
     /** @description Lock section: 100% non-translatable matches. Default: false */
-    lock100PercentMatches?: boolean;
-  };
+    lock100PercentMatches?: boolean
+  }
   /** @description Translation memory related settings */
   JobTranslationMemorySettingsDto: {
     /** @description Pre-translate from translation memory. Default: true */
-    useTranslationMemory?: boolean;
+    useTranslationMemory?: boolean
     /**
      * Format: double
      * @description Pre-translation threshold percent. Default: 0.7
      */
-    translationMemoryThreshold?: number;
+    translationMemoryThreshold?: number
     /** @description Set segment status to confirmed for: 100% translation memory matches. Default: false */
-    confirm100PercentMatches?: boolean;
+    confirm100PercentMatches?: boolean
     /** @description Set segment status to confirmed for: 101% translation memory matches. Default: false */
-    confirm101PercentMatches?: boolean;
+    confirm101PercentMatches?: boolean
     /** @description Lock section: 100% translation memory matches. Default: false */
-    lock100PercentMatches?: boolean;
+    lock100PercentMatches?: boolean
     /** @description Lock section: 101% translation memory matches. Default: false */
-    lock101PercentMatches?: boolean;
-  };
+    lock101PercentMatches?: boolean
+  }
   /** @description Pre-translate settings */
   PreTranslateJobSettingsDto: {
     /** @description Propagate repetitions. Default: false */
-    autoPropagateRepetitions?: boolean;
+    autoPropagateRepetitions?: boolean
     /** @description Set segment status to confirmed for: Repetitions. Default: false */
-    confirmRepetitions?: boolean;
+    confirmRepetitions?: boolean
     /** @description Pre-translate & set job to completed: Set job to completed once pre-translated. Default: false */
-    setJobStatusCompleted?: boolean;
+    setJobStatusCompleted?: boolean
     /**
      * @description Pre-translate & set job to completed when all segments confirmed:
      * Set job to completed once pre-translated and all segments are confirmed. Default: false
      */
-    setJobStatusCompletedWhenConfirmed?: boolean;
+    setJobStatusCompletedWhenConfirmed?: boolean
     /**
      * @description Pre-translate & set job to completed: Set project to completed once all jobs pre-translated.
      *         Default: false
      */
-    setProjectStatusCompleted?: boolean;
+    setProjectStatusCompleted?: boolean
     /** @description Overwrite existing translations in target segments. Default: false */
-    overwriteExistingTranslations?: boolean;
-    translationMemorySettings?: definitions["JobTranslationMemorySettingsDto"];
-    machineTranslationSettings?: definitions["JobMachineTranslationSettingsDto"];
-    nonTranslatableSettings?: definitions["JobNonTranslatableSettingsDto"];
-  };
+    overwriteExistingTranslations?: boolean
+    translationMemorySettings?: definitions['JobTranslationMemorySettingsDto']
+    machineTranslationSettings?: definitions['JobMachineTranslationSettingsDto']
+    nonTranslatableSettings?: definitions['JobNonTranslatableSettingsDto']
+  }
   PreTranslateJobsV2Dto: {
     /** @description Jobs to be pre-translated */
-    jobs: definitions["UidReference"][];
-    segmentFilters?: ("LOCKED" | "NOT_LOCKED")[];
+    jobs: definitions['UidReference'][]
+    segmentFilters?: ('LOCKED' | 'NOT_LOCKED')[]
     /**
      * @description If pre-translate settings from project should be used.
      * If true, preTranslateSettings values are ignored. Default: false
      */
-    useProjectPreTranslateSettings?: boolean;
-    callbackUrl?: string;
+    useProjectPreTranslateSettings?: boolean
+    callbackUrl?: string
     /** @description Pre-translate settings, used if useProjectPreTranslateSettings is false */
-    preTranslateSettings?: definitions["PreTranslateJobSettingsDto"];
-  };
+    preTranslateSettings?: definitions['PreTranslateJobSettingsDto']
+  }
   JobPartReadyDeleteTranslationDto: {
-    jobs?: definitions["UidReference"][];
-    deleteSettings?: definitions["TranslationSegmentsReferenceV2"];
+    jobs?: definitions['UidReference'][]
+    deleteSettings?: definitions['TranslationSegmentsReferenceV2']
     /**
      * @description Set true if you want to delete translations for all jobs from project from specific workflow step.
      *                Default: false
      */
-    forAllJobs?: boolean;
+    forAllJobs?: boolean
     /**
      * Format: int32
      * @description Specifies workflow level for all jobs
      */
-    workflowLevel?: number;
+    workflowLevel?: number
     /** @description Specifies filtering for all jobs */
-    filter?: definitions["JobPartReadyDeleteTranslationFilterDto"];
-    getParts?: definitions["ClosureListJobPart"];
-  };
+    filter?: definitions['JobPartReadyDeleteTranslationFilterDto']
+    getParts?: definitions['ClosureListJobPart']
+  }
   JobPartReadyDeleteTranslationFilterDto: {
-    filename?: string;
-    statuses?: string[];
-    targetLang?: string;
-    provider?: definitions["ProviderReference"];
-    owner?: definitions["UidReference"];
+    filename?: string
+    statuses?: string[]
+    targetLang?: string
+    provider?: definitions['ProviderReference']
+    owner?: definitions['UidReference']
     /** Format: date-time */
-    dateDue?: string;
+    dateDue?: string
     /** Format: int32 */
-    dueInHours?: number;
-    overdue?: boolean;
-  };
+    dueInHours?: number
+    overdue?: boolean
+  }
   TranslationSegmentsReferenceV2: {
     /** @description Remove confirmed (true), unconfirmed (false) or both segments (null). Default: null */
-    confirmed?: boolean;
+    confirmed?: boolean
     /** @description Remove locked (true), unlocked (false) or both segments (null). Default: false */
-    locked?: boolean;
-  };
+    locked?: boolean
+  }
   UpdateIgnoredJobPartSegment: {
-    jobPartUid: string;
-    segments: definitions["UpdateIgnoredSegment"][];
-  };
+    jobPartUid: string
+    segments: definitions['UpdateIgnoredSegment'][]
+  }
   ReferenceFilesDto: {
-    referenceFiles?: definitions["ReferenceFileReference"][];
-  };
+    referenceFiles?: definitions['ReferenceFileReference'][]
+  }
   CreateReferenceFilesRequest: {
     /** @description Additional data in JSON format (`Content-Type`: `application/json)` */
-    json?: definitions["CreateReferenceFileNoteDto"];
+    json?: definitions['CreateReferenceFileNoteDto']
     /** @description Files with appropriate `Content-Type` header */
-    file?: definitions["MultipartFile"][];
-  };
+    file?: definitions['MultipartFile'][]
+  }
   TransMemoryReferenceDtoV2: {
     /** Format: int32 */
-    internalId?: number;
-    uid: string;
-    name?: string;
-    sourceLang?: string;
-    targetLangs?: string[];
-  };
+    internalId?: number
+    uid: string
+    name?: string
+    sourceLang?: string
+    targetLangs?: string[]
+  }
   ProjectTemplateTransMemoryListV2Dto: {
-    transMemories?: definitions["ProjectTemplateTransMemoryV2Dto"][];
-  };
+    transMemories?: definitions['ProjectTemplateTransMemoryV2Dto'][]
+  }
   ProjectTemplateTransMemoryV2Dto: {
-    targetLocale?: string;
-    workflowStep?: definitions["WorkflowStepReferenceV2"];
-    readMode?: boolean;
-    writeMode?: boolean;
-    transMemory?: definitions["TransMemoryDtoV2"];
+    targetLocale?: string
+    workflowStep?: definitions['WorkflowStepReferenceV2']
+    readMode?: boolean
+    writeMode?: boolean
+    transMemory?: definitions['TransMemoryDtoV2']
     /** Format: double */
-    penalty?: number;
-    applyPenaltyTo101Only?: boolean;
+    penalty?: number
+    applyPenaltyTo101Only?: boolean
     /** Format: int32 */
-    order?: number;
-  };
+    order?: number
+  }
   TransMemoryDtoV2: {
-    id?: string;
-    uid?: string;
+    id?: string
+    uid?: string
     /** Format: int32 */
-    internalId?: number;
-    name?: string;
-    sourceLang?: string;
-    targetLangs?: string[];
-    client?: definitions["ClientReference"];
-    businessUnit?: definitions["BusinessUnitReference"];
-    domain?: definitions["DomainReference"];
-    subDomain?: definitions["SubDomainReference"];
-    note?: string;
+    internalId?: number
+    name?: string
+    sourceLang?: string
+    targetLangs?: string[]
+    client?: definitions['ClientReference']
+    businessUnit?: definitions['BusinessUnitReference']
+    domain?: definitions['DomainReference']
+    subDomain?: definitions['SubDomainReference']
+    note?: string
     /** Format: date-time */
-    dateCreated?: string;
-    createdBy?: definitions["UserReference"];
-    owner?: definitions["UserReference"];
-  };
+    dateCreated?: string
+    createdBy?: definitions['UserReference']
+    owner?: definitions['UserReference']
+  }
   SetContextPTTransMemoriesV2Dto: {
-    transMemories: definitions["SetProjectTemplateTransMemoryV2Dto"][];
+    transMemories: definitions['SetProjectTemplateTransMemoryV2Dto'][]
     /** @description Set translation memory only for the specific project target language */
-    targetLang?: string;
+    targetLang?: string
     /** @description Set translation memory only for the specific workflow step */
-    workflowStep?: definitions["UidReference"];
+    workflowStep?: definitions['UidReference']
     /** @description Default: false */
-    orderEnabled?: boolean;
-  };
+    orderEnabled?: boolean
+  }
   SetProjectTemplateTransMemoriesV2Dto: {
-    dataPerContext: definitions["SetContextPTTransMemoriesV2Dto"][];
-  };
+    dataPerContext: definitions['SetContextPTTransMemoriesV2Dto'][]
+  }
   SetProjectTemplateTransMemoryV2Dto: {
-    transMemory: definitions["UidReference"];
+    transMemory: definitions['UidReference']
     /** @description Default: false */
-    readMode?: boolean;
+    readMode?: boolean
     /**
      * @description Can be set only for Translation Memory with read == true.<br/>
      *         Max 2 write TMs allowed per project.<br/>
      *         Default: false
      */
-    writeMode?: boolean;
+    writeMode?: boolean
     /** Format: double */
-    penalty?: number;
+    penalty?: number
     /** @description Can be set only for penalty == 1<br/>Default: false */
-    applyPenaltyTo101Only?: boolean;
+    applyPenaltyTo101Only?: boolean
     /** Format: int32 */
-    order?: number;
-  };
+    order?: number
+  }
   AdditionalWorkflowStepV2Dto: {
-    id?: string;
-    name?: string;
-  };
+    id?: string
+    name?: string
+  }
   QuoteV2Dto: {
     /** Format: int64 */
-    id?: number;
-    uid?: string;
-    name?: string;
+    id?: number
+    uid?: string
+    name?: string
     /** @enum {string} */
-    status?: "APPROVED" | "DECLINED" | "DRAFT" | "FOR_APPROVAL" | "NEW";
-    currency?: string;
+    status?: 'APPROVED' | 'DECLINED' | 'DRAFT' | 'FOR_APPROVAL' | 'NEW'
+    currency?: string
     /** @enum {string} */
-    billingUnit?: "Character" | "Word" | "Page" | "Hour";
-    createdBy?: definitions["UserReference"];
+    billingUnit?: 'Character' | 'Word' | 'Page' | 'Hour'
+    createdBy?: definitions['UserReference']
     /** Format: date-time */
-    dateCreated?: string;
+    dateCreated?: string
     /** Format: double */
-    totalPrice?: number;
-    netRateScheme?: definitions["NetRateSchemeReference"];
-    priceList?: definitions["PriceListReference"];
-    workflowStepList?: definitions["WorkflowStepReference"][];
-    provider?: definitions["ProviderReference"];
-    customerEmail?: string;
+    totalPrice?: number
+    netRateScheme?: definitions['NetRateSchemeReference']
+    priceList?: definitions['PriceListReference']
+    workflowStepList?: definitions['WorkflowStepReference'][]
+    provider?: definitions['ProviderReference']
+    customerEmail?: string
     /** @enum {string} */
-    quoteType?: "BUYER" | "PROVIDER";
-    editable?: boolean;
-    outdated?: boolean;
-    additionalSteps?: definitions["AdditionalWorkflowStepV2Dto"][];
-  };
+    quoteType?: 'BUYER' | 'PROVIDER'
+    editable?: boolean
+    outdated?: boolean
+    additionalSteps?: definitions['AdditionalWorkflowStepV2Dto'][]
+  }
   QuoteCreateV2Dto: {
-    name: string;
-    project: definitions["UidReference"];
-    analyse: definitions["IdReference"];
-    priceList: definitions["IdReference"];
-    netRateScheme?: definitions["IdReference"];
-    provider?: definitions["ProviderReference"];
-    workflowSettings?: definitions["QuoteWorkflowSettingDto"][];
-    units?: definitions["QuoteUnitsDto"][];
-    additionalSteps?: string[];
-  };
+    name: string
+    project: definitions['UidReference']
+    analyse: definitions['IdReference']
+    priceList: definitions['IdReference']
+    netRateScheme?: definitions['IdReference']
+    provider?: definitions['ProviderReference']
+    workflowSettings?: definitions['QuoteWorkflowSettingDto'][]
+    units?: definitions['QuoteUnitsDto'][]
+    additionalSteps?: string[]
+  }
   QuoteUnitsDto: {
-    analyseLanguagePart: definitions["IdReference"];
+    analyseLanguagePart: definitions['IdReference']
     /** Format: double */
-    value?: number;
-  };
+    value?: number
+  }
   QuoteWorkflowSettingDto: {
-    workflowStep: definitions["IdReference"];
-    units?: definitions["QuoteUnitsDto"][];
-  };
+    workflowStep: definitions['IdReference']
+    units?: definitions['QuoteUnitsDto'][]
+  }
   AsyncExportTMDto: {
-    transMemory?: definitions["ObjectReference"];
-    exportTargetLangs?: string[];
-  };
+    transMemory?: definitions['ObjectReference']
+    exportTargetLangs?: string[]
+  }
   AsyncExportTMResponseDto: {
-    asyncRequest?: definitions["AsyncRequestV2Dto"];
-    asyncExport?: definitions["AsyncExportTMDto"];
-  };
+    asyncRequest?: definitions['AsyncRequestV2Dto']
+    asyncExport?: definitions['AsyncExportTMDto']
+  }
   ExportTMDto: {
-    exportTargetLangs?: string[];
-    callbackUrl?: string;
-  };
+    exportTargetLangs?: string[]
+    callbackUrl?: string
+  }
   PageDtoWebHookDtoV2: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["WebHookDtoV2"][];
-  };
+    numberOfElements?: number
+    content?: definitions['WebHookDtoV2'][]
+  }
   WebHookDtoV2: {
-    name?: string;
-    id?: string;
-    uid?: string;
-    url: string;
+    name?: string
+    id?: string
+    uid?: string
+    url: string
     events?: (
-      | "JOB_STATUS_CHANGED"
-      | "JOB_CREATED"
-      | "JOB_DELETED"
-      | "JOB_UNSHARED"
-      | "JOB_ASSIGNED"
-      | "JOB_DUE_DATE_CHANGED"
-      | "JOB_UPDATED"
-      | "JOB_TARGET_UPDATED"
-      | "JOB_EXPORTED"
-      | "JOB_UNEXPORTED"
-      | "PROJECT_CREATED"
-      | "PROJECT_DELETED"
-      | "PROJECT_UNSHARED"
-      | "PROJECT_STATUS_CHANGED"
-      | "PROJECT_DUE_DATE_CHANGED"
-      | "SHARED_PROJECT_ASSIGNED"
-      | "PROJECT_METADATA_UPDATED"
-      | "PRE_TRANSLATION_FINISHED"
-      | "ANALYSIS_CREATED"
-      | "CONTINUOUS_JOB_UPDATED"
-      | "PROJECT_TEMPLATE_CREATED"
-      | "PROJECT_TEMPLATE_UPDATED"
-      | "PROJECT_TEMPLATE_DELETED"
-      | "RAW_MT_CONVERTER_IMPORT_FINISHED"
-      | "RAW_MT_PRE_TRANSLATION_FINISHED"
-    )[];
-    secretToken?: string;
+      | 'JOB_STATUS_CHANGED'
+      | 'JOB_CREATED'
+      | 'JOB_DELETED'
+      | 'JOB_UNSHARED'
+      | 'JOB_ASSIGNED'
+      | 'JOB_DUE_DATE_CHANGED'
+      | 'JOB_UPDATED'
+      | 'JOB_TARGET_UPDATED'
+      | 'JOB_EXPORTED'
+      | 'JOB_UNEXPORTED'
+      | 'PROJECT_CREATED'
+      | 'PROJECT_DELETED'
+      | 'PROJECT_UNSHARED'
+      | 'PROJECT_STATUS_CHANGED'
+      | 'PROJECT_DUE_DATE_CHANGED'
+      | 'SHARED_PROJECT_ASSIGNED'
+      | 'PROJECT_METADATA_UPDATED'
+      | 'PRE_TRANSLATION_FINISHED'
+      | 'ANALYSIS_CREATED'
+      | 'CONTINUOUS_JOB_UPDATED'
+      | 'PROJECT_TEMPLATE_CREATED'
+      | 'PROJECT_TEMPLATE_UPDATED'
+      | 'PROJECT_TEMPLATE_DELETED'
+      | 'RAW_MT_CONVERTER_IMPORT_FINISHED'
+      | 'RAW_MT_PRE_TRANSLATION_FINISHED'
+    )[]
+    secretToken?: string
     /** @description Default: false */
-    hidden?: boolean;
+    hidden?: boolean
     /** @enum {string} */
-    status?: "ENABLED" | "DISABLED";
+    status?: 'ENABLED' | 'DISABLED'
     /** Format: int32 */
-    failedAttempts?: number;
+    failedAttempts?: number
     /** Format: date-time */
-    created?: string;
-    createdBy?: definitions["UserReference"];
+    created?: string
+    createdBy?: definitions['UserReference']
     /** Format: date-time */
-    lastModified?: string;
-    lastModifiedBy?: definitions["UserReference"];
-  };
+    lastModified?: string
+    lastModifiedBy?: definitions['UserReference']
+  }
   CreateWebHookDto: {
-    name?: string;
-    url: string;
+    name?: string
+    url: string
     events: (
-      | "JOB_STATUS_CHANGED"
-      | "JOB_CREATED"
-      | "JOB_DELETED"
-      | "JOB_UNSHARED"
-      | "JOB_ASSIGNED"
-      | "JOB_DUE_DATE_CHANGED"
-      | "JOB_UPDATED"
-      | "JOB_TARGET_UPDATED"
-      | "JOB_EXPORTED"
-      | "JOB_UNEXPORTED"
-      | "PROJECT_CREATED"
-      | "PROJECT_DELETED"
-      | "PROJECT_UNSHARED"
-      | "PROJECT_STATUS_CHANGED"
-      | "PROJECT_DUE_DATE_CHANGED"
-      | "SHARED_PROJECT_ASSIGNED"
-      | "PROJECT_METADATA_UPDATED"
-      | "PRE_TRANSLATION_FINISHED"
-      | "ANALYSIS_CREATED"
-      | "CONTINUOUS_JOB_UPDATED"
-      | "PROJECT_TEMPLATE_CREATED"
-      | "PROJECT_TEMPLATE_UPDATED"
-      | "PROJECT_TEMPLATE_DELETED"
-      | "RAW_MT_CONVERTER_IMPORT_FINISHED"
-      | "RAW_MT_PRE_TRANSLATION_FINISHED"
-    )[];
-    secretToken?: string;
+      | 'JOB_STATUS_CHANGED'
+      | 'JOB_CREATED'
+      | 'JOB_DELETED'
+      | 'JOB_UNSHARED'
+      | 'JOB_ASSIGNED'
+      | 'JOB_DUE_DATE_CHANGED'
+      | 'JOB_UPDATED'
+      | 'JOB_TARGET_UPDATED'
+      | 'JOB_EXPORTED'
+      | 'JOB_UNEXPORTED'
+      | 'PROJECT_CREATED'
+      | 'PROJECT_DELETED'
+      | 'PROJECT_UNSHARED'
+      | 'PROJECT_STATUS_CHANGED'
+      | 'PROJECT_DUE_DATE_CHANGED'
+      | 'SHARED_PROJECT_ASSIGNED'
+      | 'PROJECT_METADATA_UPDATED'
+      | 'PRE_TRANSLATION_FINISHED'
+      | 'ANALYSIS_CREATED'
+      | 'CONTINUOUS_JOB_UPDATED'
+      | 'PROJECT_TEMPLATE_CREATED'
+      | 'PROJECT_TEMPLATE_UPDATED'
+      | 'PROJECT_TEMPLATE_DELETED'
+      | 'RAW_MT_CONVERTER_IMPORT_FINISHED'
+      | 'RAW_MT_PRE_TRANSLATION_FINISHED'
+    )[]
+    secretToken?: string
     /** @description Default: false */
-    hidden?: boolean;
+    hidden?: boolean
     /**
      * @description Default: ENABLED
      * @enum {string}
      */
-    status?: "ENABLED" | "DISABLED";
-  };
+    status?: 'ENABLED' | 'DISABLED'
+  }
   WebhookPreviewDto: {
     /** @enum {string} */
     event?:
-      | "JOB_STATUS_CHANGED"
-      | "JOB_CREATED"
-      | "JOB_DELETED"
-      | "JOB_UNSHARED"
-      | "JOB_ASSIGNED"
-      | "JOB_DUE_DATE_CHANGED"
-      | "JOB_UPDATED"
-      | "JOB_TARGET_UPDATED"
-      | "JOB_EXPORTED"
-      | "JOB_UNEXPORTED"
-      | "PROJECT_CREATED"
-      | "PROJECT_DELETED"
-      | "PROJECT_UNSHARED"
-      | "PROJECT_STATUS_CHANGED"
-      | "PROJECT_DUE_DATE_CHANGED"
-      | "SHARED_PROJECT_ASSIGNED"
-      | "PROJECT_METADATA_UPDATED"
-      | "PRE_TRANSLATION_FINISHED"
-      | "ANALYSIS_CREATED"
-      | "CONTINUOUS_JOB_UPDATED"
-      | "PROJECT_TEMPLATE_CREATED"
-      | "PROJECT_TEMPLATE_UPDATED"
-      | "PROJECT_TEMPLATE_DELETED"
-      | "RAW_MT_CONVERTER_IMPORT_FINISHED"
-      | "RAW_MT_PRE_TRANSLATION_FINISHED";
-    preview?: string;
-  };
+      | 'JOB_STATUS_CHANGED'
+      | 'JOB_CREATED'
+      | 'JOB_DELETED'
+      | 'JOB_UNSHARED'
+      | 'JOB_ASSIGNED'
+      | 'JOB_DUE_DATE_CHANGED'
+      | 'JOB_UPDATED'
+      | 'JOB_TARGET_UPDATED'
+      | 'JOB_EXPORTED'
+      | 'JOB_UNEXPORTED'
+      | 'PROJECT_CREATED'
+      | 'PROJECT_DELETED'
+      | 'PROJECT_UNSHARED'
+      | 'PROJECT_STATUS_CHANGED'
+      | 'PROJECT_DUE_DATE_CHANGED'
+      | 'SHARED_PROJECT_ASSIGNED'
+      | 'PROJECT_METADATA_UPDATED'
+      | 'PRE_TRANSLATION_FINISHED'
+      | 'ANALYSIS_CREATED'
+      | 'CONTINUOUS_JOB_UPDATED'
+      | 'PROJECT_TEMPLATE_CREATED'
+      | 'PROJECT_TEMPLATE_UPDATED'
+      | 'PROJECT_TEMPLATE_DELETED'
+      | 'RAW_MT_CONVERTER_IMPORT_FINISHED'
+      | 'RAW_MT_PRE_TRANSLATION_FINISHED'
+    preview?: string
+  }
   WebhookPreviewsDto: {
-    previews?: definitions["WebhookPreviewDto"][];
-  };
+    previews?: definitions['WebhookPreviewDto'][]
+  }
   ConceptDtov2: {
-    id?: string;
-    definition?: string;
-    domain?: string;
-    subDomains?: string[];
-    url?: string;
-    note?: string;
-  };
+    id?: string
+    definition?: string
+    domain?: string
+    subDomains?: string[]
+    url?: string
+    note?: string
+  }
   SearchInTextResponse2Dto: {
-    termBase?: definitions["TermBaseReference"];
-    sourceTerm?: definitions["TermV2Dto"];
-    concept?: definitions["ConceptDtov2"];
-    translationTerms?: definitions["TermV2Dto"][];
-    subTerm?: boolean;
-    matches?: definitions["Match"][];
-  };
+    termBase?: definitions['TermBaseReference']
+    sourceTerm?: definitions['TermV2Dto']
+    concept?: definitions['ConceptDtov2']
+    translationTerms?: definitions['TermV2Dto'][]
+    subTerm?: boolean
+    matches?: definitions['Match'][]
+  }
   SearchInTextResponseList2Dto: {
-    searchResults?: definitions["SearchInTextResponse2Dto"][];
-  };
+    searchResults?: definitions['SearchInTextResponse2Dto'][]
+  }
   TermBaseReference: {
-    name?: string;
-    id?: string;
-    uid?: string;
-  };
+    name?: string
+    id?: string
+    uid?: string
+  }
   TermV2Dto: {
-    id?: string;
-    text: string;
-    lang?: string;
-    rtl?: boolean;
+    id?: string
+    text: string
+    lang?: string
+    rtl?: boolean
     /** Format: date-time */
-    modifiedAt?: string;
+    modifiedAt?: string
     /** Format: date-time */
-    createdAt?: string;
-    modifiedBy?: definitions["UserReference"];
-    createdBy?: definitions["UserReference"];
-    caseSensitive?: boolean;
-    exactMatch?: boolean;
-    forbidden?: boolean;
-    preferred?: boolean;
+    createdAt?: string
+    modifiedBy?: definitions['UserReference']
+    createdBy?: definitions['UserReference']
+    caseSensitive?: boolean
+    exactMatch?: boolean
+    forbidden?: boolean
+    preferred?: boolean
     /** @enum {string} */
-    status?: "New" | "Approved";
-    conceptId?: string;
-    usage?: string;
-    note?: string;
-    writable?: boolean;
-    shortTranslation?: string;
-    termType?: string;
-    partOfSpeech?: string;
-    gender?: string;
-    number?: string;
-  };
+    status?: 'New' | 'Approved'
+    conceptId?: string
+    usage?: string
+    note?: string
+    writable?: boolean
+    shortTranslation?: string
+    termType?: string
+    partOfSpeech?: string
+    gender?: string
+    number?: string
+  }
   SearchTbInTextByJobRequestDto: {
-    text: string;
+    text: string
     /** @description Default: false */
-    reverse?: boolean;
-    zeroLengthSeparator?: string;
-  };
+    reverse?: boolean
+    zeroLengthSeparator?: string
+  }
   SearchTbResponseDto: {
-    termBase?: definitions["TermBaseReference"];
-    concept?: definitions["ConceptDtov2"];
-    sourceTerm?: definitions["TermV2Dto"];
-    translationTerms?: definitions["TermV2Dto"][];
-  };
+    termBase?: definitions['TermBaseReference']
+    concept?: definitions['ConceptDtov2']
+    sourceTerm?: definitions['TermV2Dto']
+    translationTerms?: definitions['TermV2Dto'][]
+  }
   SearchTbResponseListDto: {
-    searchResults?: definitions["SearchTbResponseDto"][];
-  };
+    searchResults?: definitions['SearchTbResponseDto'][]
+  }
   SearchTbByJobRequestDto: {
-    query: string;
+    query: string
     /**
      * Format: int32
      * @description Default: 15
      */
-    count?: number;
+    count?: number
     /**
      * Format: int32
      * @description Default: 0
      */
-    offset?: number;
+    offset?: number
     /** @description Default: false */
-    reverse?: boolean;
-  };
+    reverse?: boolean
+  }
   AnalyseLanguagePartV3Dto: {
-    id?: string;
-    sourceLang?: string;
-    targetLang?: string;
-    data?: definitions["DataDto"];
-    discountedData?: definitions["DataDto"];
-    jobs?: definitions["AnalyseJobReference"][];
-    transMemories?: definitions["TransMemoryReferenceDtoV2"][];
-  };
+    id?: string
+    sourceLang?: string
+    targetLang?: string
+    data?: definitions['DataDto']
+    discountedData?: definitions['DataDto']
+    jobs?: definitions['AnalyseJobReference'][]
+    transMemories?: definitions['TransMemoryReferenceDtoV2'][]
+  }
   AnalyseV3Dto: {
-    id?: string;
-    uid?: string;
+    id?: string
+    uid?: string
     /** Format: int32 */
-    innerId?: number;
+    innerId?: number
     /** @enum {string} */
-    type?:
-      | "PreAnalyse"
-      | "PostAnalyse"
-      | "PreAnalyseTarget"
-      | "Compare"
-      | "PreAnalyseProvider";
-    name?: string;
-    provider?: definitions["ProviderReference"];
-    createdBy?: definitions["UserReference"];
+    type?: 'PreAnalyse' | 'PostAnalyse' | 'PreAnalyseTarget' | 'Compare' | 'PreAnalyseProvider'
+    name?: string
+    provider?: definitions['ProviderReference']
+    createdBy?: definitions['UserReference']
     /** Format: date-time */
-    dateCreated?: string;
-    netRateScheme?: definitions["NetRateSchemeReference"];
-    canChangeNetRateScheme?: boolean;
-    analyseLanguageParts?: definitions["AnalyseLanguagePartV3Dto"][];
-    settings?: definitions["AbstractAnalyseSettingsDto"];
-    outdated?: boolean;
-    importStatus?: definitions["ImportStatusDto"];
-    pureWarnings?: string[];
-    project?: definitions["ProjectReference"];
-  };
+    dateCreated?: string
+    netRateScheme?: definitions['NetRateSchemeReference']
+    canChangeNetRateScheme?: boolean
+    analyseLanguageParts?: definitions['AnalyseLanguagePartV3Dto'][]
+    settings?: definitions['AbstractAnalyseSettingsDto']
+    outdated?: boolean
+    importStatus?: definitions['ImportStatusDto']
+    pureWarnings?: string[]
+    project?: definitions['ProjectReference']
+  }
   LoginResponseV3Dto: {
-    user?: definitions["UserReference"];
-    token?: string;
+    user?: definitions['UserReference']
+    token?: string
     /** Format: date-time */
-    expires?: string;
+    expires?: string
     /** Format: date-time */
-    lastInvalidateAllSessionsPerformed?: string;
-  };
+    lastInvalidateAllSessionsPerformed?: string
+  }
   LoginV3Dto: {
     /** @description When not filled, default user of identity will be logged in */
-    userUid?: string;
-    userName: string;
-    password: string;
+    userUid?: string
+    userName: string
+    password: string
     /** @description Required only for 2-factor authentication */
-    code?: string;
-  };
+    code?: string
+  }
   LoginToSessionResponseV3Dto: {
-    user?: definitions["UserReference"];
-    cookie?: string;
-    csrfToken?: string;
-  };
+    user?: definitions['UserReference']
+    cookie?: string
+    csrfToken?: string
+  }
   LoginToSessionV3Dto: {
     /** @description When not filled, default user of identity will be logged in */
-    userUid?: string;
-    userName: string;
-    password: string;
-    rememberMe?: boolean;
+    userUid?: string
+    userName: string
+    password: string
+    rememberMe?: boolean
     /** Format: int32 */
-    twoFactorCode?: number;
-    captchaCode?: string;
-  };
+    twoFactorCode?: number
+    captchaCode?: string
+  }
   LoginOtherV3Dto: {
     /** @description When not filled, default user of identity will be logged in */
-    userUid?: string;
-    userName: string;
-  };
+    userUid?: string
+    userName: string
+  }
   ErrorDetailDtoV3: {
     /** @description Code, e.g. NOT_FOUND. */
-    code?: string;
+    code?: string
     /** @description Related arguments, e.g. number => "hello world" */
-    args?: { [key: string]: { [key: string]: unknown } };
+    args?: {[key: string]: {[key: string]: unknown}}
     /** @description Optional human-readable message. */
-    message?: string;
-  };
+    message?: string
+  }
   JobPartPatchResultDto: {
     /**
      * Format: int32
      * @description Number of successfully updated job parts
      */
-    updated?: number;
+    updated?: number
     /** @description Errors and their counts encountered during the update */
-    errors?: definitions["ErrorDetailDtoV3"][];
-  };
+    errors?: definitions['ErrorDetailDtoV3'][]
+  }
   JobPartPatchBatchDto: {
-    jobs: definitions["UidReference"][];
+    jobs: definitions['UidReference'][]
     /** @enum {string} */
     status?:
-      | "NEW"
-      | "ACCEPTED"
-      | "DECLINED"
-      | "REJECTED"
-      | "DELIVERED"
-      | "EMAILED"
-      | "COMPLETED"
-      | "CANCELLED";
+      | 'NEW'
+      | 'ACCEPTED'
+      | 'DECLINED'
+      | 'REJECTED'
+      | 'DELIVERED'
+      | 'EMAILED'
+      | 'COMPLETED'
+      | 'CANCELLED'
     /** Format: date-time */
-    dateDue?: string;
-    clearDateDue?: boolean;
-    providers?: definitions["ProviderReference"][];
-  };
+    dateDue?: string
+    clearDateDue?: boolean
+    providers?: definitions['ProviderReference'][]
+  }
   SearchResponseListTmDtoV3: {
-    searchResults?: definitions["SearchTMResponseDtoV3"][];
-  };
+    searchResults?: definitions['SearchTMResponseDtoV3'][]
+  }
   SearchTMClientDtoV3: {
     /** Format: int64 */
-    id?: number;
-    name?: string;
-  };
+    id?: number
+    name?: string
+  }
   SearchTMDomainDtoV3: {
     /** Format: int64 */
-    id?: number;
-    name?: string;
-  };
+    id?: number
+    name?: string
+  }
   SearchTMProjectDtoV3: {
     /** Format: int64 */
-    id?: number;
-    uid?: string;
-    name?: string;
-  };
+    id?: number
+    uid?: string
+    name?: string
+  }
   SearchTMResponseDtoV3: {
-    segmentId?: string;
-    source?: definitions["SearchTMSegmentDtoV3"];
-    translations?: definitions["SearchTMSegmentDtoV3"][];
-    transMemory?: definitions["SearchTMTransMemoryDtoV3"];
+    segmentId?: string
+    source?: definitions['SearchTMSegmentDtoV3']
+    translations?: definitions['SearchTMSegmentDtoV3'][]
+    transMemory?: definitions['SearchTMTransMemoryDtoV3']
     /** Format: double */
-    grossScore?: number;
+    grossScore?: number
     /** Format: double */
-    score?: number;
-    subSegment?: boolean;
-  };
+    score?: number
+    subSegment?: boolean
+  }
   SearchTMSegmentDtoV3: {
-    id?: string;
-    text?: string;
-    lang?: string;
-    rtl?: boolean;
+    id?: string
+    text?: string
+    lang?: string
+    rtl?: boolean
     /** Format: int64 */
-    modifiedAt?: number;
+    modifiedAt?: number
     /** Format: int64 */
-    createdAt?: number;
-    modifiedBy?: definitions["UserReference"];
-    createdBy?: definitions["UserReference"];
-    filename?: string;
-    project?: definitions["SearchTMProjectDtoV3"];
-    client?: definitions["SearchTMClientDtoV3"];
-    domain?: definitions["SearchTMDomainDtoV3"];
-    subDomain?: definitions["SearchTMSubDomainDtoV3"];
-    tagMetadata?: definitions["TagMetadata"][];
-    previousSegment?: string;
-    nextSegment?: string;
-    key?: string;
-    targetNote?: string;
-  };
+    createdAt?: number
+    modifiedBy?: definitions['UserReference']
+    createdBy?: definitions['UserReference']
+    filename?: string
+    project?: definitions['SearchTMProjectDtoV3']
+    client?: definitions['SearchTMClientDtoV3']
+    domain?: definitions['SearchTMDomainDtoV3']
+    subDomain?: definitions['SearchTMSubDomainDtoV3']
+    tagMetadata?: definitions['TagMetadata'][]
+    previousSegment?: string
+    nextSegment?: string
+    key?: string
+    targetNote?: string
+  }
   SearchTMSubDomainDtoV3: {
     /** Format: int64 */
-    id?: number;
-    name?: string;
-  };
+    id?: number
+    name?: string
+  }
   SearchTMTransMemoryDtoV3: {
-    uid?: string;
-    id?: string;
-    name?: string;
-    reverse?: boolean;
-  };
+    uid?: string
+    id?: string
+    name?: string
+    reverse?: boolean
+  }
   SearchTMByJobRequestDtoV3: {
-    query: string;
+    query: string
     /** @description Default: false */
-    reverse?: boolean;
+    reverse?: boolean
     /**
      * Format: double
      * @description Default: 0.0
      */
-    scoreThreshold?: number;
+    scoreThreshold?: number
     /**
      * Format: int32
      * @description Default: 15
      */
-    maxResults?: number;
-  };
+    maxResults?: number
+  }
   WildCardSearchByJobRequestDtoV3: {
-    query: string;
+    query: string
     /** @description Default: false */
-    reverse?: boolean;
+    reverse?: boolean
     /** Format: int32 */
-    count?: number;
+    count?: number
     /** Format: int32 */
-    offset?: number;
-  };
+    offset?: number
+  }
   MetadataOptionReference: {
-    uid?: string;
-    value?: string;
-  };
+    uid?: string
+    value?: string
+  }
   MetadataReference: {
-    uid?: string;
-    fieldName?: string;
-    value?: string;
-    options?: definitions["MetadataOptionReference"][];
-  };
+    uid?: string
+    fieldName?: string
+    value?: string
+    options?: definitions['MetadataOptionReference'][]
+  }
   ProgressReference: {
     /** Format: int32 */
-    totalCount?: number;
+    totalCount?: number
     /** Format: int32 */
-    finishedCount?: number;
+    finishedCount?: number
     /** Format: int32 */
-    overdueCount?: number;
+    overdueCount?: number
     /** Format: double */
-    finishedRatio?: number;
+    finishedRatio?: number
     /** Format: double */
-    overdueRatio?: number;
-  };
+    overdueRatio?: number
+  }
   VendorUserReference: {
-    uid?: string;
-    vendorUid?: string;
-    username?: string;
-    firstName?: string;
-    lastName?: string;
-    organization?: definitions["OrganizationReference"];
-  };
+    uid?: string
+    vendorUid?: string
+    username?: string
+    firstName?: string
+    lastName?: string
+    organization?: definitions['OrganizationReference']
+  }
   /** @description Pre-translate settings */
   PreTranslateSettingsV3Dto: {
     /** @description Pre-translate & set job to completed: Pre-translate on job creation. Default: false */
-    preTranslateOnJobCreation?: boolean;
+    preTranslateOnJobCreation?: boolean
     /** @description Pre-translate & set job to completed: Set job to completed once pre-translated. Default: false */
-    setJobStatusCompleted?: boolean;
+    setJobStatusCompleted?: boolean
     /**
      * @description Pre-translate & set job to completed when all segments confirmed:
      * Set job to completed once pre-translated and all segments are confirmed. Default: false
      */
-    setJobStatusCompletedWhenConfirmed?: boolean;
+    setJobStatusCompletedWhenConfirmed?: boolean
     /**
      * @description Pre-translate & set job to completed: Set project to completed once all jobs pre-translated.
      *         Default: false
      */
-    setProjectStatusCompleted?: boolean;
+    setProjectStatusCompleted?: boolean
     /** @description Overwrite existing translations in target segments. Default: false */
-    overwriteExistingTranslations?: boolean;
-    translationMemorySettings?: definitions["TranslationMemorySettingsDto"];
-    machineTranslationSettings?: definitions["MachineTranslationSettingsDto"];
-    nonTranslatableSettings?: definitions["NonTranslatableSettingsDto"];
-    repetitionsSettings?: definitions["RepetitionsSettingsDto"];
-  };
+    overwriteExistingTranslations?: boolean
+    translationMemorySettings?: definitions['TranslationMemorySettingsDto']
+    machineTranslationSettings?: definitions['MachineTranslationSettingsDto']
+    nonTranslatableSettings?: definitions['NonTranslatableSettingsDto']
+    repetitionsSettings?: definitions['RepetitionsSettingsDto']
+  }
   AnalyseLanguagePartReference: {
-    id?: string;
-    sourceLang?: string;
-    targetLang?: string;
-    jobs?: definitions["AnalyseJobReference"][];
-  };
+    id?: string
+    sourceLang?: string
+    targetLang?: string
+    jobs?: definitions['AnalyseJobReference'][]
+  }
   AnalyseReference: {
-    id?: string;
-    uid?: string;
-    innerId?: string;
+    id?: string
+    uid?: string
+    innerId?: string
     /** @enum {string} */
-    type?:
-      | "PreAnalyse"
-      | "PostAnalyse"
-      | "PreAnalyseTarget"
-      | "Compare"
-      | "PreAnalyseProvider";
-    name?: string;
-    provider?: definitions["ProviderReference"];
-    createdBy?: definitions["UserReference"];
+    type?: 'PreAnalyse' | 'PostAnalyse' | 'PreAnalyseTarget' | 'Compare' | 'PreAnalyseProvider'
+    name?: string
+    provider?: definitions['ProviderReference']
+    createdBy?: definitions['UserReference']
     /** Format: date-time */
-    dateCreated?: string;
-    netRateScheme?: definitions["NetRateSchemeReference"];
-    analyseLanguageParts?: definitions["AnalyseLanguagePartReference"][];
-    outdated?: boolean;
-    importStatus?: definitions["ImportStatusDto"];
-    pureWarnings?: string[];
-  };
+    dateCreated?: string
+    netRateScheme?: definitions['NetRateSchemeReference']
+    analyseLanguageParts?: definitions['AnalyseLanguagePartReference'][]
+    outdated?: boolean
+    importStatus?: definitions['ImportStatusDto']
+    pureWarnings?: string[]
+  }
   PageDtoAnalyseReference: {
     /** Format: int32 */
-    totalElements?: number;
+    totalElements?: number
     /** Format: int32 */
-    totalPages?: number;
+    totalPages?: number
     /** Format: int32 */
-    pageSize?: number;
+    pageSize?: number
     /** Format: int32 */
-    pageNumber?: number;
+    pageNumber?: number
     /** Format: int32 */
-    numberOfElements?: number;
-    content?: definitions["AnalyseReference"][];
-  };
+    numberOfElements?: number
+    content?: definitions['AnalyseReference'][]
+  }
   CreateProjectV3Dto: {
-    name: string;
-    sourceLang: string;
-    targetLangs: string[];
+    name: string
+    sourceLang: string
+    targetLangs: string[]
     /** @description Client referenced by id */
-    client?: definitions["IdReference"];
-    businessUnit?: definitions["IdReference"];
-    domain?: definitions["IdReference"];
-    subDomain?: definitions["IdReference"];
-    costCenter?: definitions["IdReference"];
-    purchaseOrder?: string;
-    workflowSteps?: definitions["IdReference"][];
+    client?: definitions['IdReference']
+    businessUnit?: definitions['IdReference']
+    domain?: definitions['IdReference']
+    subDomain?: definitions['IdReference']
+    costCenter?: definitions['IdReference']
+    purchaseOrder?: string
+    workflowSteps?: definitions['IdReference'][]
     /** Format: date-time */
-    dateDue?: string;
-    note?: string;
+    dateDue?: string
+    note?: string
     /** @description Lqa profiles that will be added to workflow steps */
-    lqaProfiles?: definitions["LqaProfilesForWsV2Dto"][];
+    lqaProfiles?: definitions['LqaProfilesForWsV2Dto'][]
     /** @description Custom fields for project */
-    customFields?: definitions["CustomFieldInstanceApiDto"][];
+    customFields?: definitions['CustomFieldInstanceApiDto'][]
     /** @description Default: false */
-    fileHandover?: boolean;
-  };
-  AbsoluteTranslationLengthWarningDto: definitions["segmentWarning"] & {
-    limit?: string;
-  };
-  CustomQAWarningDto: definitions["segmentWarning"] & {
-    message?: string;
-    subType?: string;
-    srcPosition?: definitions["Position"];
-    tgtPosition?: definitions["Position"];
-  };
-  EmptyPairTagsWarningDto: definitions["segmentWarning"] & {
-    [key: string]: unknown;
-  };
-  EmptyTagContentWarningDto: definitions["segmentWarning"] & {
-    [key: string]: unknown;
-  };
-  EmptyTranslationWarningDto: definitions["segmentWarning"] & {
-    [key: string]: unknown;
-  };
-  ExtraNumbersV3WarningDto: definitions["segmentWarning"] & {
-    number?: string;
-    positions?: definitions["Position"][];
-  };
-  ExtraNumbersWarningDto: definitions["segmentWarning"] & {
-    extraNumbers?: string[];
-  };
-  ForbiddenStringWarningDto: definitions["segmentWarning"] & {
-    forbiddenString?: string;
-    positions?: definitions["Position"][];
-  };
-  ForbiddenTermWarningDto: definitions["segmentWarning"] & {
-    term?: string;
-    positions?: definitions["Position"][];
-    sourceTerms?: definitions["Term"][];
-  };
-  FormattingWarningDto: definitions["segmentWarning"] & {
-    [key: string]: unknown;
-  };
-  FuzzyInconsistencyWarningDto: definitions["segmentWarning"] & {
-    segmentIds?: string[];
-  };
-  InconsistentTagContentWarningDto: definitions["segmentWarning"] & {
-    [key: string]: unknown;
-  };
-  InconsistentTranslationWarningDto: definitions["segmentWarning"] & {
-    segmentId?: string;
-  };
-  JoinTagsWarningDto: definitions["segmentWarning"] & {
+    fileHandover?: boolean
+  }
+  AbsoluteTranslationLengthWarningDto: definitions['segmentWarning'] & {
+    limit?: string
+  }
+  CustomQAWarningDto: definitions['segmentWarning'] & {
+    message?: string
+    subType?: string
+    srcPosition?: definitions['Position']
+    tgtPosition?: definitions['Position']
+  }
+  EmptyPairTagsWarningDto: definitions['segmentWarning'] & {
+    [key: string]: unknown
+  }
+  EmptyTagContentWarningDto: definitions['segmentWarning'] & {
+    [key: string]: unknown
+  }
+  EmptyTranslationWarningDto: definitions['segmentWarning'] & {
+    [key: string]: unknown
+  }
+  ExtraNumbersV3WarningDto: definitions['segmentWarning'] & {
+    number?: string
+    positions?: definitions['Position'][]
+  }
+  ExtraNumbersWarningDto: definitions['segmentWarning'] & {
+    extraNumbers?: string[]
+  }
+  ForbiddenStringWarningDto: definitions['segmentWarning'] & {
+    forbiddenString?: string
+    positions?: definitions['Position'][]
+  }
+  ForbiddenTermWarningDto: definitions['segmentWarning'] & {
+    term?: string
+    positions?: definitions['Position'][]
+    sourceTerms?: definitions['Term'][]
+  }
+  FormattingWarningDto: definitions['segmentWarning'] & {
+    [key: string]: unknown
+  }
+  FuzzyInconsistencyWarningDto: definitions['segmentWarning'] & {
+    segmentIds?: string[]
+  }
+  InconsistentTagContentWarningDto: definitions['segmentWarning'] & {
+    [key: string]: unknown
+  }
+  InconsistentTranslationWarningDto: definitions['segmentWarning'] & {
+    segmentId?: string
+  }
+  JoinTagsWarningDto: definitions['segmentWarning'] & {
     /** Format: int32 */
-    sourceTagsCount?: number;
+    sourceTagsCount?: number
     /** Format: int32 */
-    translationTagsCount?: number;
-  };
-  LeadingAndTrailingSpacesWarningDto: definitions["segmentWarning"] & {
-    srcPosition?: definitions["Position"];
-    srcWhitespaces?: string;
-    tgtPosition?: definitions["Position"];
-    tgtWhitespaces?: string;
-    suggestion?: definitions["Suggestion"];
-  };
-  MalformedWarningDto: definitions["segmentWarning"] & {
-    message?: string;
-  };
-  MissingNonTranslatableAnnotationWarningDto: definitions["segmentWarning"] & {
-    text?: string;
-    beginIndexes?: number[];
-  };
-  MissingNumbersV3WarningDto: definitions["segmentWarning"] & {
-    number?: string;
-    positions?: definitions["Position"][];
-  };
-  MissingNumbersWarningDto: definitions["segmentWarning"] & {
-    missingNumbers?: string[];
-  };
+    translationTagsCount?: number
+  }
+  LeadingAndTrailingSpacesWarningDto: definitions['segmentWarning'] & {
+    srcPosition?: definitions['Position']
+    srcWhitespaces?: string
+    tgtPosition?: definitions['Position']
+    tgtWhitespaces?: string
+    suggestion?: definitions['Suggestion']
+  }
+  MalformedWarningDto: definitions['segmentWarning'] & {
+    message?: string
+  }
+  MissingNonTranslatableAnnotationWarningDto: definitions['segmentWarning'] & {
+    text?: string
+    beginIndexes?: number[]
+  }
+  MissingNumbersV3WarningDto: definitions['segmentWarning'] & {
+    number?: string
+    positions?: definitions['Position'][]
+  }
+  MissingNumbersWarningDto: definitions['segmentWarning'] & {
+    missingNumbers?: string[]
+  }
   MisspelledWordDto: {
-    word?: string;
+    word?: string
     /** Format: int32 */
-    offset?: number;
-  };
-  MoraviaWarningDto: definitions["segmentWarning"] & {
-    message?: string;
-    subType?: string;
-  };
-  MultipleSpacesV3WarningDto: definitions["segmentWarning"] & {
-    spaces?: string;
-    positions?: definitions["Position"][];
-  };
-  MultipleSpacesWarningDto: definitions["segmentWarning"] & {
-    [key: string]: unknown;
-  };
-  NestedTagsWarningDto: definitions["segmentWarning"] & {
-    misplacedTargetTag?: string;
-  };
-  NewerAtLowerLevelWarningDto: definitions["segmentWarning"] & {
-    [key: string]: unknown;
-  };
-  NonConformingTermWarningDto: definitions["segmentWarning"] & {
-    term?: string;
-    positions?: definitions["Position"][];
-    suggestedTargetTerms?: definitions["Term"][];
-  };
-  NotConfirmedWarningDto: definitions["segmentWarning"] & {
-    [key: string]: unknown;
-  };
+    offset?: number
+  }
+  MoraviaWarningDto: definitions['segmentWarning'] & {
+    message?: string
+    subType?: string
+  }
+  MultipleSpacesV3WarningDto: definitions['segmentWarning'] & {
+    spaces?: string
+    positions?: definitions['Position'][]
+  }
+  MultipleSpacesWarningDto: definitions['segmentWarning'] & {
+    [key: string]: unknown
+  }
+  NestedTagsWarningDto: definitions['segmentWarning'] & {
+    misplacedTargetTag?: string
+  }
+  NewerAtLowerLevelWarningDto: definitions['segmentWarning'] & {
+    [key: string]: unknown
+  }
+  NonConformingTermWarningDto: definitions['segmentWarning'] & {
+    term?: string
+    positions?: definitions['Position'][]
+    suggestedTargetTerms?: definitions['Term'][]
+  }
+  NotConfirmedWarningDto: definitions['segmentWarning'] & {
+    [key: string]: unknown
+  }
   Position: {
     /** Format: int32 */
-    beginIndex?: number;
+    beginIndex?: number
     /** Format: int32 */
-    endIndex?: number;
-  };
+    endIndex?: number
+  }
   QualityAssuranceResponseDto: {
-    segmentWarnings?: definitions["SegmentWarningsDto"][];
-    finished?: boolean;
-  };
-  RelativeTranslationLengthWarningDto: definitions["segmentWarning"] & {
-    limit?: string;
-  };
-  RepeatedWordWarningDto: definitions["segmentWarning"] & {
-    word?: string;
-    positions?: definitions["Position"][];
-  };
-  RepeatedWordsWarningDto: definitions["segmentWarning"] & {
-    repeatedWords?: string[];
-  };
+    segmentWarnings?: definitions['SegmentWarningsDto'][]
+    finished?: boolean
+  }
+  RelativeTranslationLengthWarningDto: definitions['segmentWarning'] & {
+    limit?: string
+  }
+  RepeatedWordWarningDto: definitions['segmentWarning'] & {
+    word?: string
+    positions?: definitions['Position'][]
+  }
+  RepeatedWordsWarningDto: definitions['segmentWarning'] & {
+    repeatedWords?: string[]
+  }
   SegmentWarningsDto: {
-    segmentId?: string;
-    warnings?: definitions["segmentWarning"][];
-    ignoredChecks?: string[];
-  };
-  SourceTargetRegexpWarningDto: definitions["segmentWarning"] & {
-    description?: string;
-  };
-  SpellCheckWarningDto: definitions["segmentWarning"] & {
-    misspelledWords?: definitions["MisspelledWordDto"][];
-  };
-  TargetSourceIdenticalWarningDto: definitions["segmentWarning"] & {
-    [key: string]: unknown;
-  };
+    segmentId?: string
+    warnings?: definitions['segmentWarning'][]
+    ignoredChecks?: string[]
+  }
+  SourceTargetRegexpWarningDto: definitions['segmentWarning'] & {
+    description?: string
+  }
+  SpellCheckWarningDto: definitions['segmentWarning'] & {
+    misspelledWords?: definitions['MisspelledWordDto'][]
+  }
+  TargetSourceIdenticalWarningDto: definitions['segmentWarning'] & {
+    [key: string]: unknown
+  }
   Term: {
-    text?: string;
-    preferred?: boolean;
-  };
-  TerminologyWarningDto: definitions["segmentWarning"] & {
-    missingTerms?: string[];
-    forbiddenTerms?: string[];
-  };
-  TrailingPunctuationWarningDto: definitions["segmentWarning"] & {
-    srcPosition?: definitions["Position"];
-    srcEndPunctuation?: string;
-    tgtPosition?: definitions["Position"];
-    tgtEndPunctuation?: string;
-    suggestedTgtEndPunctuation?: string;
-  };
-  TrailingSpaceWarningDto: definitions["segmentWarning"] & {
-    [key: string]: unknown;
-  };
-  TranslationLengthWarningDto: definitions["segmentWarning"] & {
-    [key: string]: unknown;
-  };
-  UnmodifiedFuzzyTranslationMTNTWarningDto: definitions["segmentWarning"] & {
-    transOrigin?: string;
-  };
-  UnmodifiedFuzzyTranslationTMWarningDto: definitions["segmentWarning"] & {
-    transOrigin?: string;
-  };
-  UnmodifiedFuzzyTranslationWarningDto: definitions["segmentWarning"] & {
-    transOrigin?: string;
-  };
-  UnresolvedCommentWarningDto: definitions["segmentWarning"] & {
-    [key: string]: unknown;
-  };
-  UnresolvedConversationWarningDto: definitions["segmentWarning"] & {
-    [key: string]: unknown;
-  };
+    text?: string
+    preferred?: boolean
+  }
+  TerminologyWarningDto: definitions['segmentWarning'] & {
+    missingTerms?: string[]
+    forbiddenTerms?: string[]
+  }
+  TrailingPunctuationWarningDto: definitions['segmentWarning'] & {
+    srcPosition?: definitions['Position']
+    srcEndPunctuation?: string
+    tgtPosition?: definitions['Position']
+    tgtEndPunctuation?: string
+    suggestedTgtEndPunctuation?: string
+  }
+  TrailingSpaceWarningDto: definitions['segmentWarning'] & {
+    [key: string]: unknown
+  }
+  TranslationLengthWarningDto: definitions['segmentWarning'] & {
+    [key: string]: unknown
+  }
+  UnmodifiedFuzzyTranslationMTNTWarningDto: definitions['segmentWarning'] & {
+    transOrigin?: string
+  }
+  UnmodifiedFuzzyTranslationTMWarningDto: definitions['segmentWarning'] & {
+    transOrigin?: string
+  }
+  UnmodifiedFuzzyTranslationWarningDto: definitions['segmentWarning'] & {
+    transOrigin?: string
+  }
+  UnresolvedCommentWarningDto: definitions['segmentWarning'] & {
+    [key: string]: unknown
+  }
+  UnresolvedConversationWarningDto: definitions['segmentWarning'] & {
+    [key: string]: unknown
+  }
   segmentWarning: {
-    id?: string;
-    ignored?: boolean;
-    type?: string;
-    repetitionGroupId?: string;
-  };
+    id?: string
+    ignored?: boolean
+    type?: string
+    repetitionGroupId?: string
+  }
   QualityAssuranceRunDtoV3: {
-    initialSegment?: definitions["SegmentReference"];
+    initialSegment?: definitions['SegmentReference']
     /**
      * Format: int32
      * @description Maximum number of QA warnings in result, default: 100. For efficiency reasons QA
      * warnings are processed with minimum segments chunk size 10, therefore slightly more warnings are returned.
      */
-    maxQaWarningsCount?: number;
+    maxQaWarningsCount?: number
     warningTypes?: (
-      | "EmptyTranslation"
-      | "TrailingPunctuation"
-      | "Formatting"
-      | "JoinTags"
-      | "MissingNumbersV3"
-      | "MultipleSpacesV3"
-      | "NonConformingTerm"
-      | "NotConfirmed"
-      | "TranslationLength"
-      | "AbsoluteLength"
-      | "RelativeLength"
-      | "UnresolvedComment"
-      | "EmptyPairTags"
-      | "InconsistentTranslationTargetSource"
-      | "InconsistentTranslationSourceTarget"
-      | "ForbiddenString"
-      | "SpellCheck"
-      | "RepeatedWord"
-      | "InconsistentTagContent"
-      | "EmptyTagContent"
-      | "Malformed"
-      | "ForbiddenTerm"
-      | "NewerAtLowerLevel"
-      | "LeadingAndTrailingSpaces"
-      | "LeadingSpaces"
-      | "TrailingSpaces"
-      | "TargetSourceIdentical"
-      | "SourceOrTargetRegexp"
-      | "UnmodifiedFuzzyTranslation"
-      | "UnmodifiedFuzzyTranslationTM"
-      | "UnmodifiedFuzzyTranslationMTNT"
-      | "Moravia"
-      | "ExtraNumbersV3"
-      | "UnresolvedConversation"
-      | "NestedTags"
-      | "FuzzyInconsistencyTargetSource"
-      | "FuzzyInconsistencySourceTarget"
-      | "CustomQA"
-      | "MissingNonTranslatableAnnotation"
-    )[];
-  };
+      | 'EmptyTranslation'
+      | 'TrailingPunctuation'
+      | 'Formatting'
+      | 'JoinTags'
+      | 'MissingNumbersV3'
+      | 'MultipleSpacesV3'
+      | 'NonConformingTerm'
+      | 'NotConfirmed'
+      | 'TranslationLength'
+      | 'AbsoluteLength'
+      | 'RelativeLength'
+      | 'UnresolvedComment'
+      | 'EmptyPairTags'
+      | 'InconsistentTranslationTargetSource'
+      | 'InconsistentTranslationSourceTarget'
+      | 'ForbiddenString'
+      | 'SpellCheck'
+      | 'RepeatedWord'
+      | 'InconsistentTagContent'
+      | 'EmptyTagContent'
+      | 'Malformed'
+      | 'ForbiddenTerm'
+      | 'NewerAtLowerLevel'
+      | 'LeadingAndTrailingSpaces'
+      | 'LeadingSpaces'
+      | 'TrailingSpaces'
+      | 'TargetSourceIdentical'
+      | 'SourceOrTargetRegexp'
+      | 'UnmodifiedFuzzyTranslation'
+      | 'UnmodifiedFuzzyTranslationTM'
+      | 'UnmodifiedFuzzyTranslationMTNT'
+      | 'Moravia'
+      | 'ExtraNumbersV3'
+      | 'UnresolvedConversation'
+      | 'NestedTags'
+      | 'FuzzyInconsistencyTargetSource'
+      | 'FuzzyInconsistencySourceTarget'
+      | 'CustomQA'
+      | 'MissingNonTranslatableAnnotation'
+    )[]
+  }
   QualityAssuranceBatchRunDtoV3: {
-    jobs: definitions["UidReference"][];
-    settings?: definitions["QualityAssuranceRunDtoV3"];
+    jobs: definitions['UidReference'][]
+    settings?: definitions['QualityAssuranceRunDtoV3']
     /**
      * Format: int32
      * @description Maximum number of QA warnings in result, default: 100. For efficiency reasons QA
      * warnings are processed with minimum segments chunk size 10, therefore slightly more warnings are returned.
      */
-    maxQaWarningsCount?: number;
-  };
+    maxQaWarningsCount?: number
+  }
   JobPartSegmentsDtoV3: {
-    job: definitions["UidReference"];
-    segments: string[];
-  };
+    job: definitions['UidReference']
+    segments: string[]
+  }
   QualityAssuranceSegmentsRunDtoV3: {
-    jobsAndSegments: definitions["JobPartSegmentsDtoV3"][];
+    jobsAndSegments: definitions['JobPartSegmentsDtoV3'][]
     /** @description When empty only fast checks run */
     warningTypes?: (
-      | "EmptyTranslation"
-      | "TrailingPunctuation"
-      | "Formatting"
-      | "JoinTags"
-      | "MissingNumbersV3"
-      | "MultipleSpacesV3"
-      | "NonConformingTerm"
-      | "NotConfirmed"
-      | "TranslationLength"
-      | "AbsoluteLength"
-      | "RelativeLength"
-      | "UnresolvedComment"
-      | "EmptyPairTags"
-      | "InconsistentTranslationTargetSource"
-      | "InconsistentTranslationSourceTarget"
-      | "ForbiddenString"
-      | "SpellCheck"
-      | "RepeatedWord"
-      | "InconsistentTagContent"
-      | "EmptyTagContent"
-      | "Malformed"
-      | "ForbiddenTerm"
-      | "NewerAtLowerLevel"
-      | "LeadingAndTrailingSpaces"
-      | "LeadingSpaces"
-      | "TrailingSpaces"
-      | "TargetSourceIdentical"
-      | "SourceOrTargetRegexp"
-      | "UnmodifiedFuzzyTranslation"
-      | "UnmodifiedFuzzyTranslationTM"
-      | "UnmodifiedFuzzyTranslationMTNT"
-      | "Moravia"
-      | "ExtraNumbersV3"
-      | "UnresolvedConversation"
-      | "NestedTags"
-      | "FuzzyInconsistencyTargetSource"
-      | "FuzzyInconsistencySourceTarget"
-      | "CustomQA"
-      | "MissingNonTranslatableAnnotation"
-    )[];
+      | 'EmptyTranslation'
+      | 'TrailingPunctuation'
+      | 'Formatting'
+      | 'JoinTags'
+      | 'MissingNumbersV3'
+      | 'MultipleSpacesV3'
+      | 'NonConformingTerm'
+      | 'NotConfirmed'
+      | 'TranslationLength'
+      | 'AbsoluteLength'
+      | 'RelativeLength'
+      | 'UnresolvedComment'
+      | 'EmptyPairTags'
+      | 'InconsistentTranslationTargetSource'
+      | 'InconsistentTranslationSourceTarget'
+      | 'ForbiddenString'
+      | 'SpellCheck'
+      | 'RepeatedWord'
+      | 'InconsistentTagContent'
+      | 'EmptyTagContent'
+      | 'Malformed'
+      | 'ForbiddenTerm'
+      | 'NewerAtLowerLevel'
+      | 'LeadingAndTrailingSpaces'
+      | 'LeadingSpaces'
+      | 'TrailingSpaces'
+      | 'TargetSourceIdentical'
+      | 'SourceOrTargetRegexp'
+      | 'UnmodifiedFuzzyTranslation'
+      | 'UnmodifiedFuzzyTranslationTM'
+      | 'UnmodifiedFuzzyTranslationMTNT'
+      | 'Moravia'
+      | 'ExtraNumbersV3'
+      | 'UnresolvedConversation'
+      | 'NestedTags'
+      | 'FuzzyInconsistencyTargetSource'
+      | 'FuzzyInconsistencySourceTarget'
+      | 'CustomQA'
+      | 'MissingNonTranslatableAnnotation'
+    )[]
     /**
      * Format: int32
      * @description Maximum number of QA warnings in result, default: 100. For efficiency reasons QA
      * warnings are processed with minimum segments chunk size 10, therefore slightly more warnings are returned.
      */
-    maxQaWarningsCount?: number;
-  };
+    maxQaWarningsCount?: number
+  }
   JobExportResponseDto: {
-    jobs?: definitions["UidReference"][];
-  };
+    jobs?: definitions['UidReference'][]
+  }
   JobExportActionDto: {
-    jobs: definitions["UidReference"][];
-  };
+    jobs: definitions['UidReference'][]
+  }
   ProjectTemplateTransMemoryDtoV3: {
-    targetLocale?: string;
-    workflowStep?: definitions["WorkflowStepReferenceV3"];
-    readMode?: boolean;
-    writeMode?: boolean;
-    transMemory?: definitions["TransMemoryDtoV3"];
+    targetLocale?: string
+    workflowStep?: definitions['WorkflowStepReferenceV3']
+    readMode?: boolean
+    writeMode?: boolean
+    transMemory?: definitions['TransMemoryDtoV3']
     /** Format: double */
-    penalty?: number;
-    applyPenaltyTo101Only?: boolean;
+    penalty?: number
+    applyPenaltyTo101Only?: boolean
     /** Format: int32 */
-    order?: number;
-  };
+    order?: number
+  }
   ProjectTemplateTransMemoryListDtoV3: {
-    transMemories?: definitions["ProjectTemplateTransMemoryDtoV3"][];
-  };
+    transMemories?: definitions['ProjectTemplateTransMemoryDtoV3'][]
+  }
   TransMemoryDtoV3: {
-    id?: string;
-    uid?: string;
+    id?: string
+    uid?: string
     /** Format: int32 */
-    internalId?: number;
-    name?: string;
-    sourceLang?: string;
-    targetLangs?: string[];
-    client?: definitions["ClientReference"];
-    businessUnit?: definitions["BusinessUnitReference"];
-    domain?: definitions["DomainReference"];
-    subDomain?: definitions["SubDomainReference"];
-    note?: string;
+    internalId?: number
+    name?: string
+    sourceLang?: string
+    targetLangs?: string[]
+    client?: definitions['ClientReference']
+    businessUnit?: definitions['BusinessUnitReference']
+    domain?: definitions['DomainReference']
+    subDomain?: definitions['SubDomainReference']
+    note?: string
     /** Format: date-time */
-    dateCreated?: string;
-    createdBy?: definitions["UserReference"];
-  };
+    dateCreated?: string
+    createdBy?: definitions['UserReference']
+  }
   WorkflowStepReferenceV3: {
-    name?: string;
-    id?: string;
-    uid?: string;
+    name?: string
+    id?: string
+    uid?: string
     /** Format: int32 */
-    order?: number;
-    lqaEnabled?: boolean;
-  };
+    order?: number
+    lqaEnabled?: boolean
+  }
   ProjectTransMemoryDtoV3: {
-    transMemory?: definitions["TransMemoryDtoV3"];
+    transMemory?: definitions['TransMemoryDtoV3']
     /** Format: double */
-    penalty?: number;
-    applyPenaltyTo101Only?: boolean;
-    targetLocale?: string;
-    workflowStep?: definitions["WorkflowStepReferenceV3"];
-    readMode?: boolean;
-    writeMode?: boolean;
+    penalty?: number
+    applyPenaltyTo101Only?: boolean
+    targetLocale?: string
+    workflowStep?: definitions['WorkflowStepReferenceV3']
+    readMode?: boolean
+    writeMode?: boolean
     /** Format: int32 */
-    order?: number;
-  };
+    order?: number
+  }
   ProjectTransMemoryListDtoV3: {
-    transMemories?: definitions["ProjectTransMemoryDtoV3"][];
-  };
+    transMemories?: definitions['ProjectTransMemoryDtoV3'][]
+  }
   SetContextTransMemoriesDtoV3Dto: {
-    transMemories: definitions["SetProjectTransMemoryV3Dto"][];
+    transMemories: definitions['SetProjectTransMemoryV3Dto'][]
     /** @description Set translation memory only for the specific project target language */
-    targetLang?: string;
+    targetLang?: string
     /** @description Set translation memory only for the specific workflow step */
-    workflowStep?: definitions["UidReference"];
+    workflowStep?: definitions['UidReference']
     /** @description Default: false */
-    orderEnabled?: boolean;
-  };
+    orderEnabled?: boolean
+  }
   SetProjectTransMemoriesV3Dto: {
-    dataPerContext: definitions["SetContextTransMemoriesDtoV3Dto"][];
-  };
+    dataPerContext: definitions['SetContextTransMemoriesDtoV3Dto'][]
+  }
   SetProjectTransMemoryV3Dto: {
-    transMemory: definitions["UidReference"];
+    transMemory: definitions['UidReference']
     /** @description Default: false */
-    readMode?: boolean;
+    readMode?: boolean
     /**
      * @description Can be set only for Translation Memory with read == true.<br/>
      *         Max 2 write TMs allowed per project.<br/>
      *         Default: false
      */
-    writeMode?: boolean;
+    writeMode?: boolean
     /** Format: double */
-    penalty?: number;
+    penalty?: number
     /** @description Can be set only for penalty == 1<br/>Default: false */
-    applyPenaltyTo101Only?: boolean;
+    applyPenaltyTo101Only?: boolean
     /** Format: int32 */
-    order?: number;
-  };
-  ADMIN_RESPONSE: definitions["UserDetailsDtoV3"] & { [key: string]: unknown };
-  GUEST_RESPONSE: definitions["UserDetailsDtoV3"] & {
-    client: definitions["ClientReference"];
-    enableMT?: boolean;
-    projectViewOther?: boolean;
-    projectViewOtherLinguist?: boolean;
-    projectViewOtherEditor?: boolean;
-    transMemoryViewOther?: boolean;
-    transMemoryEditOther?: boolean;
-    transMemoryExportOther?: boolean;
-    transMemoryImportOther?: boolean;
-    termBaseViewOther?: boolean;
-    termBaseEditOther?: boolean;
-    termBaseExportOther?: boolean;
-    termBaseImportOther?: boolean;
-    termBaseApproveOther?: boolean;
-  };
-  LINGUIST_RESPONSE: definitions["UserDetailsDtoV3"] & {
-    editAllTermsInTB?: boolean;
-    editTranslationsInTM?: boolean;
-    enableMT?: boolean;
-    mayRejectJobs?: boolean;
-    sourceLocales?: string[];
-    targetLocales?: string[];
-    workflowSteps?: definitions["WorkflowStepReferenceV3"][];
-    clients?: definitions["ClientReference"][];
-    domains?: definitions["DomainReference"][];
-    subDomains?: definitions["SubDomainReference"][];
-    netRateScheme?: definitions["DiscountSchemeReference"];
-    translationPriceList?: definitions["PriceListReference"];
-  };
-  PROJECT_MANAGER_RESPONSE: definitions["UserDetailsDtoV3"] & {
-    sourceLocales?: string[];
-    targetLocales?: string[];
-    workflowSteps?: definitions["WorkflowStepReferenceV3"][];
-    clients?: definitions["ClientReference"][];
-    domains?: definitions["DomainReference"][];
-    subDomains?: definitions["SubDomainReference"][];
-    projectCreate?: boolean;
-    projectViewOther?: boolean;
-    projectEditOther?: boolean;
-    projectDeleteOther?: boolean;
-    projectClients?: definitions["ClientReference"][];
-    projectBusinessUnits?: definitions["BusinessUnitReference"][];
-    projectTemplateCreate?: boolean;
-    projectTemplateViewOther?: boolean;
-    projectTemplateEditOther?: boolean;
-    projectTemplateDeleteOther?: boolean;
-    projectTemplateClients?: definitions["ClientReference"][];
-    projectTemplateBusinessUnits?: definitions["BusinessUnitReference"][];
-    transMemoryCreate?: boolean;
-    transMemoryViewOther?: boolean;
-    transMemoryEditOther?: boolean;
-    transMemoryDeleteOther?: boolean;
-    transMemoryExportOther?: boolean;
-    transMemoryImportOther?: boolean;
-    transMemoryClients?: definitions["ClientReference"][];
-    transMemoryBusinessUnits?: definitions["BusinessUnitReference"][];
-    termBaseCreate?: boolean;
-    termBaseViewOther?: boolean;
-    termBaseEditOther?: boolean;
-    termBaseDeleteOther?: boolean;
-    termBaseExportOther?: boolean;
-    termBaseImportOther?: boolean;
-    termBaseApproveOther?: boolean;
-    termBaseClients?: definitions["ClientReference"][];
-    termBaseBusinessUnits?: definitions["BusinessUnitReference"][];
-    userCreate?: boolean;
-    userViewOther?: boolean;
-    userEditOther?: boolean;
-    userDeleteOther?: boolean;
-    clientDomainSubDomainCreate?: boolean;
-    clientDomainSubDomainViewOther?: boolean;
-    clientDomainSubDomainEditOther?: boolean;
-    clientDomainSubDomainDeleteOther?: boolean;
-    vendorCreate?: boolean;
-    vendorViewOther?: boolean;
-    vendorEditOther?: boolean;
-    vendorDeleteOther?: boolean;
-    dashboardSetting?: string;
-    setupServer?: boolean;
-  };
-  SUBMITTER_RESPONSE: definitions["UserDetailsDtoV3"] & {
-    automationWidgets: definitions["IdReference"][];
-    projectViewCreatedByOtherSubmitters?: boolean;
-  };
+    order?: number
+  }
+  ADMIN_RESPONSE: definitions['UserDetailsDtoV3'] & {[key: string]: unknown}
+  GUEST_RESPONSE: definitions['UserDetailsDtoV3'] & {
+    client: definitions['ClientReference']
+    enableMT?: boolean
+    projectViewOther?: boolean
+    projectViewOtherLinguist?: boolean
+    projectViewOtherEditor?: boolean
+    transMemoryViewOther?: boolean
+    transMemoryEditOther?: boolean
+    transMemoryExportOther?: boolean
+    transMemoryImportOther?: boolean
+    termBaseViewOther?: boolean
+    termBaseEditOther?: boolean
+    termBaseExportOther?: boolean
+    termBaseImportOther?: boolean
+    termBaseApproveOther?: boolean
+  }
+  LINGUIST_RESPONSE: definitions['UserDetailsDtoV3'] & {
+    editAllTermsInTB?: boolean
+    editTranslationsInTM?: boolean
+    enableMT?: boolean
+    mayRejectJobs?: boolean
+    sourceLocales?: string[]
+    targetLocales?: string[]
+    workflowSteps?: definitions['WorkflowStepReferenceV3'][]
+    clients?: definitions['ClientReference'][]
+    domains?: definitions['DomainReference'][]
+    subDomains?: definitions['SubDomainReference'][]
+    netRateScheme?: definitions['DiscountSchemeReference']
+    translationPriceList?: definitions['PriceListReference']
+  }
+  PROJECT_MANAGER_RESPONSE: definitions['UserDetailsDtoV3'] & {
+    sourceLocales?: string[]
+    targetLocales?: string[]
+    workflowSteps?: definitions['WorkflowStepReferenceV3'][]
+    clients?: definitions['ClientReference'][]
+    domains?: definitions['DomainReference'][]
+    subDomains?: definitions['SubDomainReference'][]
+    projectCreate?: boolean
+    projectViewOther?: boolean
+    projectEditOther?: boolean
+    projectDeleteOther?: boolean
+    projectClients?: definitions['ClientReference'][]
+    projectBusinessUnits?: definitions['BusinessUnitReference'][]
+    projectTemplateCreate?: boolean
+    projectTemplateViewOther?: boolean
+    projectTemplateEditOther?: boolean
+    projectTemplateDeleteOther?: boolean
+    projectTemplateClients?: definitions['ClientReference'][]
+    projectTemplateBusinessUnits?: definitions['BusinessUnitReference'][]
+    transMemoryCreate?: boolean
+    transMemoryViewOther?: boolean
+    transMemoryEditOther?: boolean
+    transMemoryDeleteOther?: boolean
+    transMemoryExportOther?: boolean
+    transMemoryImportOther?: boolean
+    transMemoryClients?: definitions['ClientReference'][]
+    transMemoryBusinessUnits?: definitions['BusinessUnitReference'][]
+    termBaseCreate?: boolean
+    termBaseViewOther?: boolean
+    termBaseEditOther?: boolean
+    termBaseDeleteOther?: boolean
+    termBaseExportOther?: boolean
+    termBaseImportOther?: boolean
+    termBaseApproveOther?: boolean
+    termBaseClients?: definitions['ClientReference'][]
+    termBaseBusinessUnits?: definitions['BusinessUnitReference'][]
+    userCreate?: boolean
+    userViewOther?: boolean
+    userEditOther?: boolean
+    userDeleteOther?: boolean
+    clientDomainSubDomainCreate?: boolean
+    clientDomainSubDomainViewOther?: boolean
+    clientDomainSubDomainEditOther?: boolean
+    clientDomainSubDomainDeleteOther?: boolean
+    vendorCreate?: boolean
+    vendorViewOther?: boolean
+    vendorEditOther?: boolean
+    vendorDeleteOther?: boolean
+    dashboardSetting?: string
+    setupServer?: boolean
+  }
+  SUBMITTER_RESPONSE: definitions['UserDetailsDtoV3'] & {
+    automationWidgets: definitions['IdReference'][]
+    projectViewCreatedByOtherSubmitters?: boolean
+  }
   /** @description User with all belonging objects */
   UserDetailsDtoV3: {
-    uid: string;
-    userName: string;
-    firstName: string;
-    lastName: string;
-    email: string;
+    uid: string
+    userName: string
+    firstName: string
+    lastName: string
+    email: string
     /** Format: date-time */
-    dateCreated?: string;
+    dateCreated?: string
     /** Format: date-time */
-    dateDeleted?: string;
-    createdBy?: definitions["UserReference"];
+    dateDeleted?: string
+    createdBy?: definitions['UserReference']
     /**
      * @description Enum: "ADMIN", "PROJECT_MANAGER", "LINGUIST", "GUEST", "SUBMITTER"
      * @enum {string}
      */
     role:
-      | "SYS_ADMIN"
-      | "SYS_ADMIN_READ"
-      | "ADMIN"
-      | "PROJECT_MANAGER"
-      | "LINGUIST"
-      | "GUEST"
-      | "SUBMITTER";
-    timezone: string;
-    note?: string;
-    receiveNewsletter?: boolean;
-    active?: boolean;
+      | 'SYS_ADMIN'
+      | 'SYS_ADMIN_READ'
+      | 'ADMIN'
+      | 'PROJECT_MANAGER'
+      | 'LINGUIST'
+      | 'GUEST'
+      | 'SUBMITTER'
+    timezone: string
+    note?: string
+    receiveNewsletter?: boolean
+    active?: boolean
     /** @description If user has email change pending (new email not verified) */
-    pendingEmailChange?: boolean;
-  };
-  ADMIN: definitions["AbstractUserCreateDto"] & { [key: string]: unknown };
+    pendingEmailChange?: boolean
+  }
+  ADMIN: definitions['AbstractUserCreateDto'] & {[key: string]: unknown}
   AbstractUserCreateDto: {
-    userName: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
+    userName: string
+    firstName: string
+    lastName: string
+    email: string
+    password: string
     /**
      * @description Enum: "ADMIN", "PROJECT_MANAGER", "LINGUIST", "GUEST", "SUBMITTER"
      * @enum {string}
      */
     role:
-      | "SYS_ADMIN"
-      | "SYS_ADMIN_READ"
-      | "ADMIN"
-      | "PROJECT_MANAGER"
-      | "LINGUIST"
-      | "GUEST"
-      | "SUBMITTER";
-    timezone: string;
+      | 'SYS_ADMIN'
+      | 'SYS_ADMIN_READ'
+      | 'ADMIN'
+      | 'PROJECT_MANAGER'
+      | 'LINGUIST'
+      | 'GUEST'
+      | 'SUBMITTER'
+    timezone: string
     /** @description Default: true */
-    receiveNewsletter?: boolean;
-    note?: string;
+    receiveNewsletter?: boolean
+    note?: string
     /** @description Default: true */
-    active?: boolean;
-  };
-  GUEST: definitions["AbstractUserCreateDto"] & {
-    client: definitions["UidReference"];
+    active?: boolean
+  }
+  GUEST: definitions['AbstractUserCreateDto'] & {
+    client: definitions['UidReference']
     /** @description Enable MT. Default: true */
-    enableMT?: boolean;
+    enableMT?: boolean
     /** @description View projects created by other users. Default: true */
-    projectViewOther?: boolean;
+    projectViewOther?: boolean
     /** @description Show provider names. Default: true */
-    projectViewOtherLinguist?: boolean;
+    projectViewOtherLinguist?: boolean
     /** @description Edit jobs in Memsource Editor. Default: true */
-    projectViewOtherEditor?: boolean;
+    projectViewOtherEditor?: boolean
     /** @description View TMs created by other users. Default: true */
-    transMemoryViewOther?: boolean;
+    transMemoryViewOther?: boolean
     /** @description Modify TMs created by other users. Default: true */
-    transMemoryEditOther?: boolean;
+    transMemoryEditOther?: boolean
     /** @description Export TMs created by other users. Default: true */
-    transMemoryExportOther?: boolean;
+    transMemoryExportOther?: boolean
     /** @description Import into TMs created by other users. Default: true */
-    transMemoryImportOther?: boolean;
+    transMemoryImportOther?: boolean
     /** @description View TBs created by other users. Default: true */
-    termBaseViewOther?: boolean;
+    termBaseViewOther?: boolean
     /** @description Modify TBs created by other users. Default: true */
-    termBaseEditOther?: boolean;
+    termBaseEditOther?: boolean
     /** @description Export TBs created by other users. Default: true */
-    termBaseExportOther?: boolean;
+    termBaseExportOther?: boolean
     /** @description Import into TBs created by other users. Default: true */
-    termBaseImportOther?: boolean;
+    termBaseImportOther?: boolean
     /** @description Approve terms in TBs created by other users. Default: true */
-    termBaseApproveOther?: boolean;
-  };
-  LINGUIST: definitions["AbstractUserCreateDto"] & {
+    termBaseApproveOther?: boolean
+  }
+  LINGUIST: definitions['AbstractUserCreateDto'] & {
     /** @description Edit all terms in TB. Default: false */
-    editAllTermsInTB?: boolean;
+    editAllTermsInTB?: boolean
     /** @description Edit translations in TM. Default: false */
-    editTranslationsInTM?: boolean;
+    editTranslationsInTM?: boolean
     /** @description Enable MT. Default: true */
-    enableMT?: boolean;
+    enableMT?: boolean
     /** @description Reject jobs. Default: false */
-    mayRejectJobs?: boolean;
-    sourceLocales?: string[];
-    targetLocales?: string[];
-    workflowSteps?: definitions["UidReference"][];
-    clients?: definitions["UidReference"][];
-    domains?: definitions["UidReference"][];
-    subDomains?: definitions["UidReference"][];
+    mayRejectJobs?: boolean
+    sourceLocales?: string[]
+    targetLocales?: string[]
+    workflowSteps?: definitions['UidReference'][]
+    clients?: definitions['UidReference'][]
+    domains?: definitions['UidReference'][]
+    subDomains?: definitions['UidReference'][]
     /** @description Net rate scheme */
-    netRateScheme?: definitions["UidReference"];
+    netRateScheme?: definitions['UidReference']
     /** @description Price list */
-    translationPriceList?: definitions["UidReference"];
-  };
-  PROJECT_MANAGER: definitions["AbstractUserCreateDto"] & {
-    sourceLocales?: string[];
-    targetLocales?: string[];
-    workflowSteps?: definitions["UidReference"][];
-    clients?: definitions["UidReference"][];
-    domains?: definitions["UidReference"][];
-    subDomains?: definitions["UidReference"][];
+    translationPriceList?: definitions['UidReference']
+  }
+  PROJECT_MANAGER: definitions['AbstractUserCreateDto'] & {
+    sourceLocales?: string[]
+    targetLocales?: string[]
+    workflowSteps?: definitions['UidReference'][]
+    clients?: definitions['UidReference'][]
+    domains?: definitions['UidReference'][]
+    subDomains?: definitions['UidReference'][]
     /** @description Enable project creation. Default: true */
-    projectCreate?: boolean;
+    projectCreate?: boolean
     /** @description View projects created by other users. Default: true */
-    projectViewOther?: boolean;
+    projectViewOther?: boolean
     /** @description Modify projects created by other users. Default: true */
-    projectEditOther?: boolean;
+    projectEditOther?: boolean
     /** @description Delete projects created by other users. Default: true */
-    projectDeleteOther?: boolean;
+    projectDeleteOther?: boolean
     /** @description Access projects of a selected clients only */
-    projectClients?: definitions["UidReference"][];
+    projectClients?: definitions['UidReference'][]
     /** @description Access projects of selected business units only */
-    projectBusinessUnits?: definitions["UidReference"][];
+    projectBusinessUnits?: definitions['UidReference'][]
     /** @description Enable project templates creation. Default: true */
-    projectTemplateCreate?: boolean;
+    projectTemplateCreate?: boolean
     /** @description View project templates created by other users. Default: true */
-    projectTemplateViewOther?: boolean;
+    projectTemplateViewOther?: boolean
     /** @description Modify project templates created by other users. Default: true */
-    projectTemplateEditOther?: boolean;
+    projectTemplateEditOther?: boolean
     /** @description Delete project templates created by other users. Default: true */
-    projectTemplateDeleteOther?: boolean;
+    projectTemplateDeleteOther?: boolean
     /** @description Access project templates of a selected clients only */
-    projectTemplateClients?: definitions["UidReference"][];
+    projectTemplateClients?: definitions['UidReference'][]
     /** @description Access project templates of selected business units only */
-    projectTemplateBusinessUnits?: definitions["UidReference"][];
+    projectTemplateBusinessUnits?: definitions['UidReference'][]
     /** @description Enable TMs creation. Default: true */
-    transMemoryCreate?: boolean;
+    transMemoryCreate?: boolean
     /** @description View TMs created by other users. Default: true */
-    transMemoryViewOther?: boolean;
+    transMemoryViewOther?: boolean
     /** @description Modify TMs created by other users. Default: true */
-    transMemoryEditOther?: boolean;
+    transMemoryEditOther?: boolean
     /** @description Delete TMs created by other users. Default: true */
-    transMemoryDeleteOther?: boolean;
+    transMemoryDeleteOther?: boolean
     /** @description Export TMs created by other users. Default: true */
-    transMemoryExportOther?: boolean;
+    transMemoryExportOther?: boolean
     /** @description Import into TMs created by other users. Default: true */
-    transMemoryImportOther?: boolean;
+    transMemoryImportOther?: boolean
     /** @description Access TMs of a selected clients only */
-    transMemoryClients?: definitions["UidReference"][];
+    transMemoryClients?: definitions['UidReference'][]
     /** @description Access TMs of selected business units only */
-    transMemoryBusinessUnits?: definitions["UidReference"][];
+    transMemoryBusinessUnits?: definitions['UidReference'][]
     /** @description Enable TBs creation. Default: true */
-    termBaseCreate?: boolean;
+    termBaseCreate?: boolean
     /** @description View TBs created by other users. Default: true */
-    termBaseViewOther?: boolean;
+    termBaseViewOther?: boolean
     /** @description Modify TBs created by other users. Default: true */
-    termBaseEditOther?: boolean;
+    termBaseEditOther?: boolean
     /** @description Delete TBs created by other users. Default: true */
-    termBaseDeleteOther?: boolean;
+    termBaseDeleteOther?: boolean
     /** @description Export TBs created by other users. Default: true */
-    termBaseExportOther?: boolean;
+    termBaseExportOther?: boolean
     /** @description Import into TBs created by other users. Default: true */
-    termBaseImportOther?: boolean;
+    termBaseImportOther?: boolean
     /** @description Approve terms in TBs created by other users. Default: true */
-    termBaseApproveOther?: boolean;
+    termBaseApproveOther?: boolean
     /** @description Access TBs of a selected clients only */
-    termBaseClients?: definitions["UidReference"][];
+    termBaseClients?: definitions['UidReference'][]
     /** @description Access TBs of selected business units only */
-    termBaseBusinessUnits?: definitions["UidReference"][];
+    termBaseBusinessUnits?: definitions['UidReference'][]
     /** @description Enable users creation. Default: true */
-    userCreate?: boolean;
+    userCreate?: boolean
     /** @description View users created by other users. Default: true */
-    userViewOther?: boolean;
+    userViewOther?: boolean
     /** @description Modify users created by other users. Default: true */
-    userEditOther?: boolean;
+    userEditOther?: boolean
     /** @description Delete users created by other users. Default: true */
-    userDeleteOther?: boolean;
+    userDeleteOther?: boolean
     /** @description Enable clients, domains, subdomains creation. Default: true */
-    clientDomainSubDomainCreate?: boolean;
+    clientDomainSubDomainCreate?: boolean
     /** @description View clients, domains, subdomains created by other users. Default: true */
-    clientDomainSubDomainViewOther?: boolean;
+    clientDomainSubDomainViewOther?: boolean
     /** @description Modify clients, domains, subdomains created by other users. Default: true */
-    clientDomainSubDomainEditOther?: boolean;
+    clientDomainSubDomainEditOther?: boolean
     /** @description Delete clients, domains, subdomains created by other users. Default: true */
-    clientDomainSubDomainDeleteOther?: boolean;
+    clientDomainSubDomainDeleteOther?: boolean
     /** @description Enable Vendors creation. Default: true */
-    vendorCreate?: boolean;
+    vendorCreate?: boolean
     /** @description View Vendors created by other users. Default: true */
-    vendorViewOther?: boolean;
+    vendorViewOther?: boolean
     /** @description Modify Vendors created by other users. Default: true */
-    vendorEditOther?: boolean;
+    vendorEditOther?: boolean
     /** @description Delete Vendors created by other users. Default: true */
-    vendorDeleteOther?: boolean;
+    vendorDeleteOther?: boolean
     /**
      * @description Home page dashboards. Default: OWN_DATA
      * @enum {string}
      */
-    dashboardSetting?: "ALL_DATA" | "OWN_DATA" | "NO_DASHBOARD";
+    dashboardSetting?: 'ALL_DATA' | 'OWN_DATA' | 'NO_DASHBOARD'
     /** @description Modify setup's server settings. Default: true */
-    setupServer?: boolean;
-  };
-  SUBMITTER: definitions["AbstractUserCreateDto"] & {
+    setupServer?: boolean
+  }
+  SUBMITTER: definitions['AbstractUserCreateDto'] & {
     /** @description If no automation widgets are assigned in request the default automation widgets will be assigned instead */
-    automationWidgets?: definitions["IdReference"][];
+    automationWidgets?: definitions['IdReference'][]
     /** @description View projects created by other Submitters. Default: false */
-    projectViewCreatedByOtherSubmitters?: boolean;
-  };
-  ADMIN_EDIT: definitions["AbstractUserEditDto"] & { [key: string]: unknown };
+    projectViewCreatedByOtherSubmitters?: boolean
+  }
+  ADMIN_EDIT: definitions['AbstractUserEditDto'] & {[key: string]: unknown}
   AbstractUserEditDto: {
-    userName: string;
-    firstName: string;
-    lastName: string;
-    email: string;
+    userName: string
+    firstName: string
+    lastName: string
+    email: string
     /**
      * @description Enum: "ADMIN", "PROJECT_MANAGER", "LINGUIST", "GUEST", "SUBMITTER"
      * @enum {string}
      */
     role:
-      | "SYS_ADMIN"
-      | "SYS_ADMIN_READ"
-      | "ADMIN"
-      | "PROJECT_MANAGER"
-      | "LINGUIST"
-      | "GUEST"
-      | "SUBMITTER";
-    timezone: string;
+      | 'SYS_ADMIN'
+      | 'SYS_ADMIN_READ'
+      | 'ADMIN'
+      | 'PROJECT_MANAGER'
+      | 'LINGUIST'
+      | 'GUEST'
+      | 'SUBMITTER'
+    timezone: string
     /** @description Default: true */
-    receiveNewsletter?: boolean;
-    note?: string;
+    receiveNewsletter?: boolean
+    note?: string
     /** @description Default: true */
-    active?: boolean;
-  };
-  GUEST_EDIT: definitions["AbstractUserEditDto"] & {
-    client: definitions["UidReference"];
+    active?: boolean
+  }
+  GUEST_EDIT: definitions['AbstractUserEditDto'] & {
+    client: definitions['UidReference']
     /** @description Enable MT. Default: true */
-    enableMT?: boolean;
+    enableMT?: boolean
     /** @description View projects created by other users. Default: true */
-    projectViewOther?: boolean;
+    projectViewOther?: boolean
     /** @description Show provider names. Default: true */
-    projectViewOtherLinguist?: boolean;
+    projectViewOtherLinguist?: boolean
     /** @description Edit jobs in Memsource Editor. Default: true */
-    projectViewOtherEditor?: boolean;
+    projectViewOtherEditor?: boolean
     /** @description View TMs created by other users. Default: true */
-    transMemoryViewOther?: boolean;
+    transMemoryViewOther?: boolean
     /** @description Modify TMs created by other users. Default: true */
-    transMemoryEditOther?: boolean;
+    transMemoryEditOther?: boolean
     /** @description Export TMs created by other users. Default: true */
-    transMemoryExportOther?: boolean;
+    transMemoryExportOther?: boolean
     /** @description Import into TMs created by other users. Default: true */
-    transMemoryImportOther?: boolean;
+    transMemoryImportOther?: boolean
     /** @description View TBs created by other users. Default: true */
-    termBaseViewOther?: boolean;
+    termBaseViewOther?: boolean
     /** @description Modify TBs created by other users. Default: true */
-    termBaseEditOther?: boolean;
+    termBaseEditOther?: boolean
     /** @description Export TBs created by other users. Default: true */
-    termBaseExportOther?: boolean;
+    termBaseExportOther?: boolean
     /** @description Import into TBs created by other users. Default: true */
-    termBaseImportOther?: boolean;
+    termBaseImportOther?: boolean
     /** @description Approve terms in TBs created by other users. Default: true */
-    termBaseApproveOther?: boolean;
-  };
-  LINGUIST_EDIT: definitions["AbstractUserEditDto"] & {
+    termBaseApproveOther?: boolean
+  }
+  LINGUIST_EDIT: definitions['AbstractUserEditDto'] & {
     /** @description Edit all terms in TB. Default: false */
-    editAllTermsInTB?: boolean;
+    editAllTermsInTB?: boolean
     /** @description Edit translations in TM. Default: false */
-    editTranslationsInTM?: boolean;
+    editTranslationsInTM?: boolean
     /** @description Enable MT. Default: true */
-    enableMT?: boolean;
+    enableMT?: boolean
     /** @description Reject jobs. Default: false */
-    mayRejectJobs?: boolean;
-    sourceLocales?: string[];
-    targetLocales?: string[];
-    workflowSteps?: definitions["UidReference"][];
-    clients?: definitions["UidReference"][];
-    domains?: definitions["UidReference"][];
-    subDomains?: definitions["UidReference"][];
+    mayRejectJobs?: boolean
+    sourceLocales?: string[]
+    targetLocales?: string[]
+    workflowSteps?: definitions['UidReference'][]
+    clients?: definitions['UidReference'][]
+    domains?: definitions['UidReference'][]
+    subDomains?: definitions['UidReference'][]
     /** @description Net rate scheme */
-    netRateScheme?: definitions["UidReference"];
+    netRateScheme?: definitions['UidReference']
     /** @description Price list */
-    translationPriceList?: definitions["UidReference"];
-  };
-  PROJECT_MANAGER_EDIT: definitions["AbstractUserEditDto"] & {
-    sourceLocales?: string[];
-    targetLocales?: string[];
-    workflowSteps?: definitions["UidReference"][];
-    clients?: definitions["UidReference"][];
-    domains?: definitions["UidReference"][];
-    subDomains?: definitions["UidReference"][];
+    translationPriceList?: definitions['UidReference']
+  }
+  PROJECT_MANAGER_EDIT: definitions['AbstractUserEditDto'] & {
+    sourceLocales?: string[]
+    targetLocales?: string[]
+    workflowSteps?: definitions['UidReference'][]
+    clients?: definitions['UidReference'][]
+    domains?: definitions['UidReference'][]
+    subDomains?: definitions['UidReference'][]
     /** @description Enable project creation. Default: true */
-    projectCreate?: boolean;
+    projectCreate?: boolean
     /** @description View projects created by other users. Default: true */
-    projectViewOther?: boolean;
+    projectViewOther?: boolean
     /** @description Modify projects created by other users. Default: true */
-    projectEditOther?: boolean;
+    projectEditOther?: boolean
     /** @description Delete projects created by other users. Default: true */
-    projectDeleteOther?: boolean;
+    projectDeleteOther?: boolean
     /** @description Access projects of a selected clients only */
-    projectClients?: definitions["UidReference"][];
+    projectClients?: definitions['UidReference'][]
     /** @description Access projects of selected business units only */
-    projectBusinessUnits?: definitions["UidReference"][];
+    projectBusinessUnits?: definitions['UidReference'][]
     /** @description Enable project templates creation. Default: true */
-    projectTemplateCreate?: boolean;
+    projectTemplateCreate?: boolean
     /** @description View project templates created by other users. Default: true */
-    projectTemplateViewOther?: boolean;
+    projectTemplateViewOther?: boolean
     /** @description Modify project templates created by other users. Default: true */
-    projectTemplateEditOther?: boolean;
+    projectTemplateEditOther?: boolean
     /** @description Delete project templates created by other users. Default: true */
-    projectTemplateDeleteOther?: boolean;
+    projectTemplateDeleteOther?: boolean
     /** @description Access project templates of a selected clients only */
-    projectTemplateClients?: definitions["UidReference"][];
+    projectTemplateClients?: definitions['UidReference'][]
     /** @description Access project templates of selected business units only */
-    projectTemplateBusinessUnits?: definitions["UidReference"][];
+    projectTemplateBusinessUnits?: definitions['UidReference'][]
     /** @description Enable TMs creation. Default: true */
-    transMemoryCreate?: boolean;
+    transMemoryCreate?: boolean
     /** @description View TMs created by other users. Default: true */
-    transMemoryViewOther?: boolean;
+    transMemoryViewOther?: boolean
     /** @description Modify TMs created by other users. Default: true */
-    transMemoryEditOther?: boolean;
+    transMemoryEditOther?: boolean
     /** @description Delete TMs created by other users. Default: true */
-    transMemoryDeleteOther?: boolean;
+    transMemoryDeleteOther?: boolean
     /** @description Export TMs created by other users. Default: true */
-    transMemoryExportOther?: boolean;
+    transMemoryExportOther?: boolean
     /** @description Import into TMs created by other users. Default: true */
-    transMemoryImportOther?: boolean;
+    transMemoryImportOther?: boolean
     /** @description Access TMs of a selected clients only */
-    transMemoryClients?: definitions["UidReference"][];
+    transMemoryClients?: definitions['UidReference'][]
     /** @description Access TMs of selected business units only */
-    transMemoryBusinessUnits?: definitions["UidReference"][];
+    transMemoryBusinessUnits?: definitions['UidReference'][]
     /** @description Enable TBs creation. Default: true */
-    termBaseCreate?: boolean;
+    termBaseCreate?: boolean
     /** @description View TBs created by other users. Default: true */
-    termBaseViewOther?: boolean;
+    termBaseViewOther?: boolean
     /** @description Modify TBs created by other users. Default: true */
-    termBaseEditOther?: boolean;
+    termBaseEditOther?: boolean
     /** @description Delete TBs created by other users. Default: true */
-    termBaseDeleteOther?: boolean;
+    termBaseDeleteOther?: boolean
     /** @description Export TBs created by other users. Default: true */
-    termBaseExportOther?: boolean;
+    termBaseExportOther?: boolean
     /** @description Import into TBs created by other users. Default: true */
-    termBaseImportOther?: boolean;
+    termBaseImportOther?: boolean
     /** @description Approve terms in TBs created by other users. Default: true */
-    termBaseApproveOther?: boolean;
+    termBaseApproveOther?: boolean
     /** @description Access TBs of a selected clients only */
-    termBaseClients?: definitions["UidReference"][];
+    termBaseClients?: definitions['UidReference'][]
     /** @description Access TBs of selected business units only */
-    termBaseBusinessUnits?: definitions["UidReference"][];
+    termBaseBusinessUnits?: definitions['UidReference'][]
     /** @description Enable users creation. Default: true */
-    userCreate?: boolean;
+    userCreate?: boolean
     /** @description View users created by other users. Default: true */
-    userViewOther?: boolean;
+    userViewOther?: boolean
     /** @description Modify users created by other users. Default: true */
-    userEditOther?: boolean;
+    userEditOther?: boolean
     /** @description Delete users created by other users. Default: true */
-    userDeleteOther?: boolean;
+    userDeleteOther?: boolean
     /** @description Enable clients, domains, subdomains creation. Default: true */
-    clientDomainSubDomainCreate?: boolean;
+    clientDomainSubDomainCreate?: boolean
     /** @description View clients, domains, subdomains created by other users. Default: true */
-    clientDomainSubDomainViewOther?: boolean;
+    clientDomainSubDomainViewOther?: boolean
     /** @description Modify clients, domains, subdomains created by other users. Default: true */
-    clientDomainSubDomainEditOther?: boolean;
+    clientDomainSubDomainEditOther?: boolean
     /** @description Delete clients, domains, subdomains created by other users. Default: true */
-    clientDomainSubDomainDeleteOther?: boolean;
+    clientDomainSubDomainDeleteOther?: boolean
     /** @description Enable Vendors creation. Default: true */
-    vendorCreate?: boolean;
+    vendorCreate?: boolean
     /** @description View Vendors created by other users. Default: true */
-    vendorViewOther?: boolean;
+    vendorViewOther?: boolean
     /** @description Modify Vendors created by other users. Default: true */
-    vendorEditOther?: boolean;
+    vendorEditOther?: boolean
     /** @description Delete Vendors created by other users. Default: true */
-    vendorDeleteOther?: boolean;
+    vendorDeleteOther?: boolean
     /**
      * @description Home page dashboards. Default: OWN_DATA
      * @enum {string}
      */
-    dashboardSetting?: "ALL_DATA" | "OWN_DATA" | "NO_DASHBOARD";
+    dashboardSetting?: 'ALL_DATA' | 'OWN_DATA' | 'NO_DASHBOARD'
     /** @description Modify setup's server settings. Default: true */
-    setupServer?: boolean;
-  };
-  SUBMITTER_EDIT: definitions["AbstractUserEditDto"] & {
-    automationWidgets: definitions["IdReference"][];
+    setupServer?: boolean
+  }
+  SUBMITTER_EDIT: definitions['AbstractUserEditDto'] & {
+    automationWidgets: definitions['IdReference'][]
     /** @description View projects created by other Submitters. Default: false */
-    projectViewCreatedByOtherSubmitters?: boolean;
-  };
+    projectViewCreatedByOtherSubmitters?: boolean
+  }
 }
 
 export interface operations {
   deleteAWFStep: {
     parameters: {
       path: {
-        id: string;
-      };
-    };
+        id: string
+      }
+    }
     responses: {
       /** Deleted */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   listAWFSteps: {
     parameters: {
       query: {
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
+        pageSize?: number
         /** Name of the additional workflow step to filter */
-        name?: string;
-      };
-    };
+        name?: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoAdditionalWorkflowStepDto"];
-      };
+        schema: definitions['PageDtoAdditionalWorkflowStepDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   createAWFStep: {
     parameters: {
       body: {
-        body?: definitions["AdditionalWorkflowStepRequestDto"];
-      };
-    };
+        body?: definitions['AdditionalWorkflowStepRequestDto']
+      }
+    }
     responses: {
       /** Created */
       201: {
-        schema: definitions["AdditionalWorkflowStepDto"];
-      };
+        schema: definitions['AdditionalWorkflowStepDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   bulkDeleteAnalyses: {
     parameters: {
       body: {
-        body?: definitions["BulkDeleteAnalyseDto"];
-      };
-    };
+        body?: definitions['BulkDeleteAnalyseDto']
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   delete: {
     parameters: {
       path: {
-        analyseUid: string;
-      };
+        analyseUid: string
+      }
       query: {
-        purge?: boolean;
-      };
-    };
+        purge?: boolean
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   createAnalysesForProviders: {
     parameters: {
       body: {
-        body?: definitions["CreateAnalyseListAsyncDto"];
-      };
-    };
+        body?: definitions['CreateAnalyseListAsyncDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["AsyncAnalyseListResponseDto"];
-      };
+        schema: definitions['AsyncAnalyseListResponseDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   createAnalysesForLangs: {
     parameters: {
       body: {
-        body?: definitions["CreateAnalyseListAsyncDto"];
-      };
-    };
+        body?: definitions['CreateAnalyseListAsyncDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["AsyncAnalyseListResponseDto"];
-      };
+        schema: definitions['AsyncAnalyseListResponseDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   recalculate: {
     parameters: {
       body: {
-        body?: definitions["AnalyseRecalculateRequestDto"];
-      };
-    };
+        body?: definitions['AnalyseRecalculateRequestDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["AnalyseRecalculateResponseDto"];
-      };
+        schema: definitions['AnalyseRecalculateResponseDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Returns analysis language pair */
   getAnalyseLanguagePart: {
     parameters: {
       path: {
-        analyseUid: string;
-        analyseLanguagePartId: number;
-      };
-    };
+        analyseUid: string
+        analyseLanguagePartId: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["AnalyseLanguagePartDto"];
-      };
+        schema: definitions['AnalyseLanguagePartDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Returns list of job's analyses */
   listJobParts: {
     parameters: {
       path: {
-        analyseUid: string;
-        analyseLanguagePartId: number;
-      };
+        analyseUid: string
+        analyseLanguagePartId: number
+      }
       query: {
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
-      };
-    };
+        pageSize?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoAnalyseJobDto"];
-      };
+        schema: definitions['PageDtoAnalyseJobDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Returns job's analyse */
   getJobPartAnalyse: {
     parameters: {
       path: {
-        analyseUid: string;
-        jobUid: string;
-      };
-    };
+        analyseUid: string
+        jobUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["AnalyseJobDto"];
-      };
+        schema: definitions['AnalyseJobDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   downloadAnalyse: {
     parameters: {
       path: {
-        analyseUid: string;
-      };
+        analyseUid: string
+      }
       query: {
-        format: "CSV" | "CSV_EXTENDED" | "LOG" | "JSON";
-      };
-    };
+        format: 'CSV' | 'CSV_EXTENDED' | 'LOG' | 'JSON'
+      }
+    }
     responses: {
       /** application/octet-stream */
-      200: unknown;
+      200: unknown
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getAsyncRequest: {
     parameters: {
       path: {
-        asyncRequestId: number;
-      };
-    };
+        asyncRequestId: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["AsyncRequestDto"];
-      };
+        schema: definitions['AsyncRequestDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   listPendingRequests: {
     parameters: {
       query: {
         /** Pending requests for organization instead of current user. Only for ADMIN. */
-        all?: boolean;
+        all?: boolean
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
-      };
-    };
+        pageSize?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoAsyncRequestDto"];
-      };
+        schema: definitions['PageDtoAsyncRequestDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getCurrentLimitStatus: {
-    parameters: {};
+    parameters: {}
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["AsyncRequestStatusDto"];
-      };
+        schema: definitions['AsyncRequestStatusDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   login: {
     parameters: {
       body: {
-        body?: definitions["LoginDto"];
-      };
-    };
+        body?: definitions['LoginDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["LoginResponseDto"];
-      };
+        schema: definitions['LoginResponseDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   logout: {
     parameters: {
       query: {
-        token?: string;
-      };
+        token?: string
+      }
       header: {
-        Authorization?: string;
-      };
-    };
+        Authorization?: string
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   loginToSession: {
     parameters: {
       body: {
-        body?: definitions["LoginToSessionDto"];
-      };
-    };
+        body?: definitions['LoginToSessionDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["LoginToSessionResponseDto"];
-      };
+        schema: definitions['LoginToSessionResponseDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Available only for admin */
   loginOther: {
     parameters: {
       body: {
-        body?: definitions["LoginOtherDto"];
-      };
-    };
+        body?: definitions['LoginOtherDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["LoginResponseDto"];
-      };
+        schema: definitions['LoginResponseDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   whoAmI: {
-    parameters: {};
+    parameters: {}
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["LoginUserDto"];
-      };
+        schema: definitions['LoginUserDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   loginByGoogle: {
     parameters: {
       body: {
-        body?: definitions["LoginWithGoogleDto"];
-      };
-    };
+        body?: definitions['LoginWithGoogleDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["LoginResponseDto"];
-      };
+        schema: definitions['LoginResponseDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   loginByAppleWithRefreshToken: {
     parameters: {
       body: {
-        body?: definitions["LoginWithAppleDto"];
-      };
-    };
+        body?: definitions['LoginWithAppleDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["LoginResponseDto"];
-      };
+        schema: definitions['LoginResponseDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   loginByAppleWithCode: {
     parameters: {
       body: {
-        body?: definitions["LoginWithAppleDto"];
-      };
+        body?: definitions['LoginWithAppleDto']
+      }
       query: {
         /** For sign in with code from native device */
-        native?: boolean;
-      };
-    };
+        native?: boolean
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["LoginResponseDto"];
-      };
+        schema: definitions['LoginResponseDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   refreshAppleToken: {
     parameters: {
       query: {
-        token?: string;
-      };
-    };
+        token?: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["AppleTokenResponseDto"];
-      };
+        schema: definitions['AppleTokenResponseDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Compares bilingual file to job state. Returns list of compared segments. */
   compareBilingualFile: {
     parameters: {
       body: {
-        body?: definitions["InputStream"];
-      };
+        body?: definitions['InputStream']
+      }
       query: {
-        workflowLevel?: number;
-      };
-    };
+        workflowLevel?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["ComparedSegmentsDto"];
-      };
+        schema: definitions['ComparedSegmentsDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Supports mxliff format */
   getPreviewFile: {
     parameters: {
       body: {
-        body?: definitions["InputStream"];
-      };
-    };
+        body?: definitions['InputStream']
+      }
+    }
     responses: {
       /** application/octet-stream */
-      200: unknown;
+      200: unknown
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   convertBilingualFile: {
     parameters: {
       body: {
-        body?: definitions["InputStream"];
-      };
+        body?: definitions['InputStream']
+      }
       query: {
-        from: "MXLF" | "DOCX";
-        to: "MXLF" | "DOCX";
-      };
-    };
+        from: 'MXLF' | 'DOCX'
+        to: 'MXLF' | 'DOCX'
+      }
+    }
     responses: {
       /** application/octet-stream */
-      200: unknown;
+      200: unknown
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getBusinessUnit: {
     parameters: {
       path: {
-        businessUnitUid: string;
-      };
-    };
+        businessUnitUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["BusinessUnitDto"];
-      };
+        schema: definitions['BusinessUnitDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   updateBusinessUnit: {
     parameters: {
       path: {
-        businessUnitUid: string;
-      };
+        businessUnitUid: string
+      }
       body: {
-        body?: definitions["BusinessUnitEditDto"];
-      };
-    };
+        body?: definitions['BusinessUnitEditDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["BusinessUnitDto"];
-      };
+        schema: definitions['BusinessUnitDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deleteBusinessUnit: {
     parameters: {
       path: {
-        businessUnitUid: string;
-      };
-    };
+        businessUnitUid: string
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   listBusinessUnits: {
     parameters: {
       query: {
         /** Unique name of the business unit */
-        name?: string;
+        name?: string
         /** Uid of user */
-        createdBy?: string;
-        sort?: "NAME" | "DATE_CREATED";
-        order?: "ASC" | "DESC";
+        createdBy?: string
+        sort?: 'NAME' | 'DATE_CREATED'
+        order?: 'ASC' | 'DESC'
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
-      };
-    };
+        pageSize?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoBusinessUnitDto"];
-      };
+        schema: definitions['PageDtoBusinessUnitDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   createBusinessUnit: {
     parameters: {
       body: {
-        body?: definitions["BusinessUnitEditDto"];
-      };
-    };
+        body?: definitions['BusinessUnitEditDto']
+      }
+    }
     responses: {
       /** Created */
       201: {
-        schema: definitions["BusinessUnitDto"];
-      };
+        schema: definitions['BusinessUnitDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getClient: {
     parameters: {
       path: {
-        clientUid: string;
-      };
-    };
+        clientUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["ClientDto"];
-      };
+        schema: definitions['ClientDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   updateClient: {
     parameters: {
       path: {
-        clientUid: string;
-      };
+        clientUid: string
+      }
       body: {
-        body: definitions["ClientEditDto"];
-      };
-    };
+        body: definitions['ClientEditDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["ClientDto"];
-      };
+        schema: definitions['ClientDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deleteClient: {
     parameters: {
       path: {
-        clientUid: string;
-      };
-    };
+        clientUid: string
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   listClients: {
     parameters: {
       query: {
         /** Unique name of the Client */
-        name?: string;
+        name?: string
         /** Uid of user */
-        createdBy?: string;
-        sort?: "NAME" | "DATE_CREATED";
-        order?: "ASC" | "DESC";
+        createdBy?: string
+        sort?: 'NAME' | 'DATE_CREATED'
+        order?: 'ASC' | 'DESC'
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
-      };
-    };
+        pageSize?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoClientDto"];
-      };
+        schema: definitions['PageDtoClientDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   createClient: {
     parameters: {
       body: {
-        body: definitions["ClientEditDto"];
-      };
-    };
+        body: definitions['ClientEditDto']
+      }
+    }
     responses: {
       /** Created */
       201: {
-        schema: definitions["ClientDto"];
-      };
+        schema: definitions['ClientDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getConnector: {
     parameters: {
       path: {
-        connectorId: string;
-      };
-    };
+        connectorId: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["ConnectorDto"];
-      };
+        schema: definitions['ConnectorDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Edit selected connector */
   editConnector: {
     parameters: {
       path: {
-        connectorId: string;
-      };
+        connectorId: string
+      }
       body: {
-        body?: definitions["AbstractConnectorDto"];
-      };
+        body?: definitions['AbstractConnectorDto']
+      }
       query: {
         /** For running connection test */
-        connectionTest?: boolean;
-      };
-    };
+        connectionTest?: boolean
+      }
+    }
     responses: {
       /** Edited */
       200: {
-        schema: definitions["ConnectorCreateResponseDto"];
-      };
+        schema: definitions['ConnectorCreateResponseDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getConnectorList: {
     parameters: {
       query: {
-        type?: string;
-      };
-    };
+        type?: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["ConnectorListDto"];
-      };
+        schema: definitions['ConnectorListDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** List files in a subfolder of the selected connector */
   getFolder: {
     parameters: {
       path: {
-        connectorId: string;
-        folder: string;
-      };
+        connectorId: string
+        folder: string
+      }
       query: {
-        projectUid?: string;
-        fileType?: string;
-        sort?: string;
-        direction?: string;
-      };
-    };
+        projectUid?: string
+        fileType?: string
+        sort?: string
+        direction?: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["FileListDto"];
-      };
+        schema: definitions['FileListDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Upload a file to a subfolder of the selected connector */
   uploadFile: {
     parameters: {
       path: {
-        connectorId: string;
-        folder: string;
-      };
+        connectorId: string
+        folder: string
+      }
       header: {
-        "Content-Type": "multipart/form-data";
-      };
+        'Content-Type': 'multipart/form-data'
+      }
       formData: {
         /** Translated file to upload */
-        file: unknown;
+        file: unknown
         /** Name or ID of the original file */
-        sourceFileName?: string;
+        sourceFileName?: string
         /** Optional subfolder to upload the file to */
-        subfolderName?: string;
+        subfolderName?: string
         /** Mime type of the file to upload */
-        mimeType?: string;
+        mimeType?: string
         /** Commit message for upload to Git, etc. */
-        commitMessage?: string;
-      };
-    };
+        commitMessage?: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["UploadResultDto"];
-      };
+        schema: definitions['UploadResultDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** List files in a root folder of the selected connector */
   getRootFolder: {
     parameters: {
       path: {
-        connectorId: string;
-      };
+        connectorId: string
+      }
       query: {
-        fileType?: string;
-        sort?: string;
-        direction?: string;
-      };
-    };
+        fileType?: string
+        sort?: string
+        direction?: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["FileListDto"];
-      };
+        schema: definitions['FileListDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Download a file from a subfolder of the selected connector */
   getFile: {
     parameters: {
       path: {
-        connectorId: string;
-        folder: string;
-        file: string;
-      };
-    };
+        connectorId: string
+        folder: string
+        file: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["InputStreamLength"];
-      };
+        schema: definitions['InputStreamLength']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   listAllConversations: {
     parameters: {
       path: {
-        jobUid: string;
-      };
+        jobUid: string
+      }
       query: {
-        includeDeleted?: boolean;
-        since?: string;
-      };
-    };
+        includeDeleted?: boolean
+        since?: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["ConversationListDto"];
-      };
+        schema: definitions['ConversationListDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   findConversations: {
     parameters: {
       body: {
-        body?: definitions["FindConversationsDto"];
-      };
-    };
+        body?: definitions['FindConversationsDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["ConversationListDto"];
-      };
+        schema: definitions['ConversationListDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getCostCenter: {
     parameters: {
       path: {
-        costCenterUid: string;
-      };
-    };
+        costCenterUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["CostCenterDto"];
-      };
+        schema: definitions['CostCenterDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   updateCostCenter: {
     parameters: {
       path: {
-        costCenterUid: string;
-      };
+        costCenterUid: string
+      }
       body: {
-        body?: definitions["CostCenterEditDto"];
-      };
-    };
+        body?: definitions['CostCenterEditDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["CostCenterDto"];
-      };
+        schema: definitions['CostCenterDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deleteCostCenter: {
     parameters: {
       path: {
-        costCenterUid: string;
-      };
-    };
+        costCenterUid: string
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   listCostCenters: {
     parameters: {
       query: {
-        name?: string;
+        name?: string
         /** Uid of user */
-        createdBy?: string;
-        sort?: "NAME" | "DATE_CREATED";
-        order?: "ASC" | "DESC";
+        createdBy?: string
+        sort?: 'NAME' | 'DATE_CREATED'
+        order?: 'ASC' | 'DESC'
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
-      };
-    };
+        pageSize?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoCostCenterDto"];
-      };
+        schema: definitions['PageDtoCostCenterDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   createCostCenter: {
     parameters: {
       body: {
-        body: definitions["CostCenterEditDto"];
-      };
-    };
+        body: definitions['CostCenterEditDto']
+      }
+    }
     responses: {
       /** Created */
       201: {
-        schema: definitions["CostCenterDto"];
-      };
+        schema: definitions['CostCenterDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getCustomField: {
     parameters: {
       path: {
-        fieldUid: string;
-      };
-    };
+        fieldUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["CustomFieldDto"];
-      };
+        schema: definitions['CustomFieldDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getCustomFieldList: {
     parameters: {
       query: {
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
+        pageSize?: number
         /** Filter by custom field name */
-        name?: string;
+        name?: string
         /** Filter by custom field allowed entities */
-        allowedEntities?: "PROJECT"[];
+        allowedEntities?: 'PROJECT'[]
         /** Filter by custom field types */
-        types?: (
-          | "MULTI_SELECT"
-          | "SINGLE_SELECT"
-          | "STRING"
-          | "NUMBER"
-          | "URL"
-          | "DATE"
-        )[];
+        types?: ('MULTI_SELECT' | 'SINGLE_SELECT' | 'STRING' | 'NUMBER' | 'URL' | 'DATE')[]
         /** Filter by custom field creators UIDs */
-        createdBy?: string[];
+        createdBy?: string[]
         /** Filter by custom field updaters UIDs */
-        modifiedBy?: string[];
+        modifiedBy?: string[]
         /** Filter by custom field UIDs */
-        uids?: string[];
+        uids?: string[]
         /** Filter by custom field required parameter */
-        required?: boolean;
+        required?: boolean
         /** Sort by this field */
-        sortField?: "NAME" | "CREATED" | "LAST_MODIFIED";
+        sortField?: 'NAME' | 'CREATED' | 'LAST_MODIFIED'
         /** Sort direction */
-        sortTrend?: "ASC" | "DESC";
-      };
-    };
+        sortTrend?: 'ASC' | 'DESC'
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoCustomFieldDto"];
-      };
+        schema: definitions['PageDtoCustomFieldDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   createCustomField: {
     parameters: {
       body: {
-        body?: definitions["CreateCustomFieldDto"];
-      };
-    };
+        body?: definitions['CreateCustomFieldDto']
+      }
+    }
     responses: {
       /** Created */
       201: {
-        schema: definitions["CustomFieldDto"];
-      };
+        schema: definitions['CustomFieldDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getCustomFieldOptionList: {
     parameters: {
       path: {
-        fieldUid: string;
-      };
+        fieldUid: string
+      }
       query: {
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
+        pageSize?: number
         /** Filter by option name */
-        name?: string;
+        name?: string
         /** Sort by this field */
-        sortField?: "NAME";
+        sortField?: 'NAME'
         /** Sort direction */
-        sortTrend?: "ASC" | "DESC";
-      };
-    };
+        sortTrend?: 'ASC' | 'DESC'
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoCustomFieldOptionDto"];
-      };
+        schema: definitions['PageDtoCustomFieldOptionDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getAllCustomFileType: {
     parameters: {
       query: {
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
-      };
-    };
+        pageSize?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoCustomFileTypeDto"];
-      };
+        schema: definitions['PageDtoCustomFileTypeDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   createCustomFileTypes: {
     parameters: {
       body: {
-        body?: definitions["CreateCustomFileTypeDto"];
-      };
-    };
+        body?: definitions['CreateCustomFileTypeDto']
+      }
+    }
     responses: {
       /** Created */
       201: {
-        schema: definitions["CustomFileTypeDto"];
-      };
+        schema: definitions['CustomFileTypeDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deleteBatchCustomFileType: {
     parameters: {
       body: {
-        body?: definitions["DeleteCustomFileTypeDto"];
-      };
-    };
+        body?: definitions['DeleteCustomFileTypeDto']
+      }
+    }
     responses: {
       /** Deleted */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getCustomFileType: {
     parameters: {
       path: {
-        customFileTypeUid: string;
-      };
-    };
+        customFileTypeUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["CustomFileTypeDto"];
-      };
+        schema: definitions['CustomFileTypeDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   updateCustomFileType: {
     parameters: {
       path: {
-        customFileTypeUid: string;
-      };
+        customFileTypeUid: string
+      }
       body: {
-        body?: definitions["UpdateCustomFileTypeDto"];
-      };
-    };
+        body?: definitions['UpdateCustomFileTypeDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["CustomFileTypeDto"];
-      };
+        schema: definitions['CustomFileTypeDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deleteCustomFileType: {
     parameters: {
       path: {
-        customFileTypeUid: string;
-      };
-    };
+        customFileTypeUid: string
+      }
+    }
     responses: {
       /** Deleted */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** If no matching custom file type is found it returns status 200 and empty body. */
   findCustomFileType: {
     parameters: {
       query: {
-        fileName?: string;
-      };
-    };
+        fileName?: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["CustomFileTypeDto"];
-      };
+        schema: definitions['CustomFileTypeDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getDiscountScheme: {
     parameters: {
       path: {
-        netRateSchemeUid: string;
-      };
-    };
+        netRateSchemeUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["NetRateScheme"];
-      };
+        schema: definitions['NetRateScheme']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   updateDiscountScheme: {
     parameters: {
       body: {
-        body?: definitions["NetRateSchemeEdit"];
-      };
+        body?: definitions['NetRateSchemeEdit']
+      }
       path: {
-        netRateSchemeUid: string;
-      };
-    };
+        netRateSchemeUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["NetRateScheme"];
-      };
+        schema: definitions['NetRateScheme']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getDiscountSchemes: {
     parameters: {
       query: {
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
-      };
-    };
+        pageSize?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoNetRateSchemeReference"];
-      };
+        schema: definitions['PageDtoNetRateSchemeReference']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   createDiscountScheme: {
     parameters: {
       body: {
-        body?: definitions["DiscountSchemeCreateDto"];
-      };
-    };
+        body?: definitions['DiscountSchemeCreateDto']
+      }
+    }
     responses: {
       /** Created */
       201: {
-        schema: definitions["NetRateScheme"];
-      };
+        schema: definitions['NetRateScheme']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getDiscountSchemeWorkflowStep: {
     parameters: {
       path: {
-        netRateSchemeUid: string;
-        netRateSchemeWorkflowStepId: number;
-      };
-    };
+        netRateSchemeUid: string
+        netRateSchemeWorkflowStepId: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["NetRateSchemeWorkflowStep"];
-      };
+        schema: definitions['NetRateSchemeWorkflowStep']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   editDiscountSchemeWorkflowStep: {
     parameters: {
       path: {
-        netRateSchemeUid: string;
-        netRateSchemeWorkflowStepId: number;
-      };
+        netRateSchemeUid: string
+        netRateSchemeWorkflowStepId: number
+      }
       body: {
-        body?: definitions["NetRateSchemeWorkflowStepEdit"];
-      };
-    };
+        body?: definitions['NetRateSchemeWorkflowStepEdit']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["NetRateSchemeWorkflowStep"];
-      };
+        schema: definitions['NetRateSchemeWorkflowStep']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getDiscountSchemeWorkflowSteps: {
     parameters: {
       path: {
-        netRateSchemeUid: string;
-      };
+        netRateSchemeUid: string
+      }
       query: {
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
-      };
-    };
+        pageSize?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoNetRateSchemeWorkflowStepReference"];
-      };
+        schema: definitions['PageDtoNetRateSchemeWorkflowStepReference']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getDomain: {
     parameters: {
       path: {
-        domainUid: string;
-      };
-    };
+        domainUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["DomainDto"];
-      };
+        schema: definitions['DomainDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   updateDomain: {
     parameters: {
       path: {
-        domainUid: string;
-      };
+        domainUid: string
+      }
       body: {
-        body?: definitions["DomainEditDto"];
-      };
-    };
+        body?: definitions['DomainEditDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["DomainDto"];
-      };
+        schema: definitions['DomainDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deleteDomain: {
     parameters: {
       path: {
-        domainUid: string;
-      };
-    };
+        domainUid: string
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   listDomains: {
     parameters: {
       query: {
-        name?: string;
+        name?: string
         /** Uid of user */
-        createdBy?: string;
-        sort?: "NAME" | "DATE_CREATED";
-        order?: "ASC" | "DESC";
+        createdBy?: string
+        sort?: 'NAME' | 'DATE_CREATED'
+        order?: 'ASC' | 'DESC'
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
-      };
-    };
+        pageSize?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoDomainDto"];
-      };
+        schema: definitions['PageDtoDomainDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   createDomain: {
     parameters: {
       body: {
-        body?: definitions["DomainEditDto"];
-      };
-    };
+        body?: definitions['DomainEditDto']
+      }
+    }
     responses: {
       /** Created */
       201: {
-        schema: definitions["DomainDto"];
-      };
+        schema: definitions['DomainDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getOrgEmailTemplate: {
     parameters: {
       path: {
-        templateUid: string;
-      };
-    };
+        templateUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["OrganizationEmailTemplateDto"];
-      };
+        schema: definitions['OrganizationEmailTemplateDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   listOrgEmailTemplates: {
     parameters: {
       query: {
-        type?: string;
+        type?: string
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
-      };
-    };
+        pageSize?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoOrganizationEmailTemplateDto"];
-      };
+        schema: definitions['PageDtoOrganizationEmailTemplateDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /**
    * For downloading multiple files as ZIP file provide multiple IDs in query parameters.
    * * For example `?jobUid={id1}&jobUid={id2}`
@@ -11801,40 +11732,40 @@ export interface operations {
   getHandoverFiles: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       query: {
         /** JobPart Id of requested handover file */
-        jobUid?: string[];
-      };
-    };
+        jobUid?: string[]
+      }
+    }
     responses: {
       /** File / Archive with file handovers */
-      200: unknown;
+      200: unknown
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /**
    * For following jobs the handover file is not supported:
    * * Continuous jobs
@@ -11845,464 +11776,464 @@ export interface operations {
   uploadHandoverFile: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       header: {
-        Memsource: string;
+        Memsource: string
         /** must match pattern `((inline|attachment); )?(filename\*=UTF-8''(.+)|filename="?(.+)"?)` */
-        "Content-Disposition": string;
-        "Content-Length"?: number;
-      };
+        'Content-Disposition': string
+        'Content-Length'?: number
+      }
       body: {
-        body?: definitions["InputStream"];
-      };
-    };
+        body?: definitions['InputStream']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["FileHandoverDto"];
-      };
+        schema: definitions['FileHandoverDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deleteHandoverFile: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["JobPartReferences"];
-      };
-    };
+        body?: definitions['JobPartReferences']
+      }
+    }
     responses: {
       /** Deleted */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getFiles: {
     parameters: {
       query: {
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
-        name?: string;
-        types?: string[];
-        createdBy?: number;
+        pageSize?: number
+        name?: string
+        types?: string[]
+        createdBy?: number
         /** Size in bytes */
-        biggerThan?: number;
-      };
-    };
+        biggerThan?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoUploadedFileDto"];
-      };
+        schema: definitions['PageDtoUploadedFileDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Accepts multipart/form-data, application/octet-stream or application/json. */
   createUrlFile: {
     parameters: {
       body: {
         /** file */
-        body: definitions["RemoteUploadedFileDto"];
-      };
+        body: definitions['RemoteUploadedFileDto']
+      }
       header: {
         /** must match pattern `((inline|attachment); )?filename\*=UTF-8''(.+)` */
-        "Content-Disposition": string;
-      };
-    };
+        'Content-Disposition': string
+      }
+    }
     responses: {
       /** Created */
       201: {
-        schema: definitions["UploadedFileDto"];
-      };
+        schema: definitions['UploadedFileDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Get uploaded file as <b>octet-stream</b> or as <b>json</b> based on 'Accept' header */
   getFileJson: {
     parameters: {
       path: {
-        fileUid: string;
-      };
-    };
+        fileUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["UploadedFileDto"];
-      };
+        schema: definitions['UploadedFileDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deletesFile: {
     parameters: {
       path: {
-        fileUid: string;
-      };
-    };
+        fileUid: string
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getGlossary: {
     parameters: {
       path: {
-        glossaryUid: string;
-      };
-    };
+        glossaryUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["GlossaryDto"];
-      };
+        schema: definitions['GlossaryDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Languages can only be added, their removal is not supported */
   updateGlossary: {
     parameters: {
       path: {
-        glossaryUid: string;
-      };
+        glossaryUid: string
+      }
       body: {
-        body?: definitions["GlossaryEditDto"];
-      };
-    };
+        body?: definitions['GlossaryEditDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["GlossaryDto"];
-      };
+        schema: definitions['GlossaryDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deleteGlossary: {
     parameters: {
       path: {
-        glossaryUid: string;
-      };
+        glossaryUid: string
+      }
       query: {
         /**
          * purge=false - the Glossary can later be restored,
          *                     'purge=true - the Glossary is completely deleted and cannot be restored
          */
-        purge?: boolean;
-      };
-    };
+        purge?: boolean
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   listGlossaries: {
     parameters: {
       query: {
-        name?: string;
+        name?: string
         /** Language of the glossary */
-        lang?: string[];
+        lang?: string[]
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
-      };
-    };
+        pageSize?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoGlossaryDto"];
-      };
+        schema: definitions['PageDtoGlossaryDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   createGlossary: {
     parameters: {
       body: {
-        body?: definitions["GlossaryEditDto"];
-      };
-    };
+        body?: definitions['GlossaryEditDto']
+      }
+    }
     responses: {
       /** Created */
       200: {
-        schema: definitions["GlossaryDto"];
-      };
+        schema: definitions['GlossaryDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   activateGlossary: {
     parameters: {
       path: {
-        glossaryUid: string;
-      };
+        glossaryUid: string
+      }
       body: {
-        body?: definitions["GlossaryActivationDto"];
-      };
-    };
+        body?: definitions['GlossaryActivationDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["GlossaryDto"];
-      };
+        schema: definitions['GlossaryDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /**
    * Returns at most <i>maxSegments</i>
    *             records with <i>score >= scoreThreshold</i> and at most <i>maxSubsegments</i> records which are subsegment,
@@ -12311,221 +12242,221 @@ export interface operations {
   searchSegmentByJob: {
     parameters: {
       path: {
-        projectUid: string;
-        jobUid: string;
-      };
+        projectUid: string
+        jobUid: string
+      }
       body: {
-        body?: definitions["SearchTMByJobRequestDto"];
-      };
-    };
+        body?: definitions['SearchTMByJobRequestDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["SearchResponseListTmDto"];
-      };
+        schema: definitions['SearchResponseListTmDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deleteLQAComment: {
     parameters: {
       path: {
-        jobUid: string;
-        conversationId: string;
-        commentId: string;
-      };
-    };
+        jobUid: string
+        conversationId: string
+        commentId: string
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getLQAConversation: {
     parameters: {
       path: {
-        jobUid: string;
-        conversationId: string;
-      };
-    };
+        jobUid: string
+        conversationId: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["LQAConversationDto"];
-      };
+        schema: definitions['LQAConversationDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deleteLQAConversation: {
     parameters: {
       path: {
-        jobUid: string;
-        conversationId: string;
-      };
-    };
+        jobUid: string
+        conversationId: string
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   listLQAConversations: {
     parameters: {
       path: {
-        jobUid: string;
-      };
+        jobUid: string
+      }
       query: {
-        includeDeleted?: boolean;
-        since?: string;
-      };
-    };
+        includeDeleted?: boolean
+        since?: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["LQAConversationsListDto"];
-      };
+        schema: definitions['LQAConversationsListDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   listOfLanguages: {
     parameters: {
       query: {
-        active?: boolean;
-      };
-    };
+        active?: boolean
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["LanguageListDto"];
-      };
+        schema: definitions['LanguageListDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /**
    * Returns a single xlsx report or ZIP archive with multiple reports.
    * If any given jobPart is not from LQA workflow step, reports from successive workflow steps may be returned
@@ -12535,789 +12466,789 @@ export interface operations {
     parameters: {
       query: {
         /** Comma separated list of JobPart UIDs, between 1 and 100 UIDs */
-        jobParts: string;
-      };
-    };
+        jobParts: string
+      }
+    }
     responses: {
       /** application/octet-stream */
-      200: unknown;
+      200: unknown
       /** Invalid request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** No reports found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getLqaProfiles: {
     parameters: {
       query: {
         /** Name of LQA profiles, it is used for filter the list by name */
-        name?: string;
+        name?: string
         /** It is used for filter the list by who created the profile */
-        createdBy?: string;
+        createdBy?: string
         /** It is used for filter the list by date created */
-        dateCreated?: string;
+        dateCreated?: string
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 20 */
-        pageSize?: number;
-        sort?: ("NAME" | "CREATED_BY" | "DATE_CREATED")[];
-        order?: ("ASC" | "DESC")[];
-      };
-    };
+        pageSize?: number
+        sort?: ('NAME' | 'CREATED_BY' | 'DATE_CREATED')[]
+        order?: ('ASC' | 'DESC')[]
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoLqaProfileReferenceDto"];
-      };
+        schema: definitions['PageDtoLqaProfileReferenceDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   createLqaProfile: {
     parameters: {
       body: {
-        body?: definitions["CreateLqaProfileDto"];
-      };
-    };
+        body?: definitions['CreateLqaProfileDto']
+      }
+    }
     responses: {
       /** Created */
       201: {
-        schema: definitions["LqaProfileDetailDto"];
-      };
+        schema: definitions['LqaProfileDetailDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getLqaProfile: {
     parameters: {
       path: {
-        profileUid: string;
-      };
-    };
+        profileUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["LqaProfileDetailDto"];
-      };
+        schema: definitions['LqaProfileDetailDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   updateLqaProfile: {
     parameters: {
       path: {
-        profileUid: string;
-      };
+        profileUid: string
+      }
       body: {
-        body?: definitions["UpdateLqaProfileDto"];
-      };
-    };
+        body?: definitions['UpdateLqaProfileDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["LqaProfileDetailDto"];
-      };
+        schema: definitions['LqaProfileDetailDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deleteLqaProfile: {
     parameters: {
       path: {
-        profileUid: string;
-      };
-    };
+        profileUid: string
+      }
+    }
     responses: {
       /** Deleted */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getLqaProfileDefaultValues: {
-    parameters: {};
+    parameters: {}
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["LqaProfileDetailDto"];
-      };
+        schema: definitions['LqaProfileDetailDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   makeDefault: {
     parameters: {
       path: {
-        profileUid: string;
-      };
-    };
+        profileUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["LqaProfileReferenceDto"];
-      };
+        schema: definitions['LqaProfileReferenceDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   duplicateProfile: {
     parameters: {
       path: {
-        profileUid: string;
-      };
-    };
+        profileUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["LqaProfileReferenceDto"];
-      };
+        schema: definitions['LqaProfileReferenceDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getLqaProfileAuthors: {
-    parameters: {};
+    parameters: {}
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["UserReference"][];
-      };
+        schema: definitions['UserReference'][]
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getStatus: {
     parameters: {
       path: {
-        mtsUid: string;
-      };
-    };
+        mtsUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["MachineTranslateStatusDto"];
-      };
+        schema: definitions['MachineTranslateStatusDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getList: {
     parameters: {
       query: {
-        name?: string;
+        name?: string
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
+        pageSize?: number
         /** Sorting field */
-        sort?: "NAME";
-        order?: string;
-      };
-    };
+        sort?: 'NAME'
+        order?: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoMachineTranslateSettingsPbmDto"];
-      };
+        schema: definitions['PageDtoMachineTranslateSettingsPbmDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getMTSettings: {
     parameters: {
       path: {
-        mtsUid: string;
-      };
-    };
+        mtsUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["MachineTranslateSettingsPbmDto"];
-      };
+        schema: definitions['MachineTranslateSettingsPbmDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getThirdPartyEnginesList: {
     parameters: {
       query: {
-        name?: string;
+        name?: string
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
+        pageSize?: number
         /** Sorting field */
-        sort?: "NAME";
-        order?: string;
-      };
-    };
+        sort?: 'NAME'
+        order?: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoMachineTranslateSettingsPbmDto"];
-      };
+        schema: definitions['PageDtoMachineTranslateSettingsPbmDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getMTTypes: {
-    parameters: {};
+    parameters: {}
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["TypesDto"];
-      };
+        schema: definitions['TypesDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   machineTranslation: {
     parameters: {
       path: {
-        mtSettingsUid: string;
-      };
+        mtSettingsUid: string
+      }
       body: {
-        body?: definitions["TranslationRequestExtendedDto"];
-      };
-    };
+        body?: definitions['TranslationRequestExtendedDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["MachineTranslateResponse"];
-      };
+        schema: definitions['MachineTranslateResponse']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getMappingForTask: {
     parameters: {
       path: {
-        id: string;
-      };
+        id: string
+      }
       query: {
-        workflowLevel?: number;
-      };
-    };
+        workflowLevel?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["TaskMappingDto"];
-      };
+        schema: definitions['TaskMappingDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getImportSettings: {
-    parameters: {};
+    parameters: {}
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["ImportSettingsDto"];
-      };
+        schema: definitions['ImportSettingsDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getImportSettings_1: {
     parameters: {
       path: {
-        uid: string;
-      };
-    };
+        uid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["ImportSettingsDto"];
-      };
+        schema: definitions['ImportSettingsDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deleteImportSettings: {
     parameters: {
       path: {
-        uid: string;
-      };
-    };
+        uid: string
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   listImportSettings: {
     parameters: {
       query: {
-        name?: string;
+        name?: string
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
-      };
-    };
+        pageSize?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoImportSettingsReference"];
-      };
+        schema: definitions['PageDtoImportSettingsReference']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   editImportSettings: {
     parameters: {
       body: {
-        body?: definitions["ImportSettingsEditDto"];
-      };
-    };
+        body?: definitions['ImportSettingsEditDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["ImportSettingsDto"];
-      };
+        schema: definitions['ImportSettingsDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /**
    * Pre-defined import settings is handy for [Create Job](#operation/createJob).
    *                   See [supported file types](https://wiki.memsource.com/wiki/API_File_Type_List)
@@ -13325,596 +13256,596 @@ export interface operations {
   createImportSettings: {
     parameters: {
       body: {
-        body?: definitions["ImportSettingsCreateDto"];
-      };
-    };
+        body?: definitions['ImportSettingsCreateDto']
+      }
+    }
     responses: {
       /** Created */
       201: {
-        schema: definitions["ImportSettingsDto"];
-      };
+        schema: definitions['ImportSettingsDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getPlainConversation: {
     parameters: {
       path: {
-        jobUid: string;
-        conversationId: string;
-      };
-    };
+        jobUid: string
+        conversationId: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PlainConversationDto"];
-      };
+        schema: definitions['PlainConversationDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   updatePlainConversation: {
     parameters: {
       path: {
-        jobUid: string;
-        conversationId: string;
-      };
+        jobUid: string
+        conversationId: string
+      }
       body: {
-        body?: definitions["EditPlainConversationDto"];
-      };
-    };
+        body?: definitions['EditPlainConversationDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PlainConversationDto"];
-      };
+        schema: definitions['PlainConversationDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deletePlainConversation: {
     parameters: {
       path: {
-        jobUid: string;
-        conversationId: string;
-      };
-    };
+        jobUid: string
+        conversationId: string
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   listPlainConversations: {
     parameters: {
       path: {
-        jobUid: string;
-      };
+        jobUid: string
+      }
       query: {
-        includeDeleted?: boolean;
-        since?: string;
-      };
-    };
+        includeDeleted?: boolean
+        since?: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PlainConversationsListDto"];
-      };
+        schema: definitions['PlainConversationsListDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deletePlainComment: {
     parameters: {
       path: {
-        jobUid: string;
-        conversationId: string;
-        commentId: string;
-      };
-    };
+        jobUid: string
+        conversationId: string
+        commentId: string
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getProject: {
     parameters: {
       path: {
-        projectUid: string;
-      };
-    };
+        projectUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["AbstractProjectDto"];
-      };
+        schema: definitions['AbstractProjectDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deleteProject: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       query: {
-        purge?: boolean;
-      };
-    };
+        purge?: boolean
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   patchProject: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["PatchProjectDto"];
-      };
-    };
+        body?: definitions['PatchProjectDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["AbstractProjectDto"];
-      };
+        schema: definitions['AbstractProjectDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   assignableTemplates: {
     parameters: {
       path: {
-        projectUid: string;
-      };
-    };
+        projectUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["AssignableTemplatesDto"];
-      };
+        schema: definitions['AssignableTemplatesDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   assignLinguistsFromTemplate: {
     parameters: {
       path: {
-        templateUid: string;
-        projectUid: string;
-      };
-    };
+        templateUid: string
+        projectUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["JobPartsDto"];
-      };
+        schema: definitions['JobPartsDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   assignLinguistsFromTemplateToJobParts: {
     parameters: {
       path: {
-        templateUid: string;
-        projectUid: string;
-      };
+        templateUid: string
+        projectUid: string
+      }
       body: {
-        body?: definitions["JobPartReferences"];
-      };
-    };
+        body?: definitions['JobPartReferences']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["JobPartsDto"];
-      };
+        schema: definitions['JobPartsDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   listProjects: {
     parameters: {
       query: {
-        name?: string;
-        clientId?: number;
-        clientName?: string;
-        businessUnitId?: number;
-        businessUnitName?: string;
+        name?: string
+        clientId?: number
+        clientName?: string
+        businessUnitId?: number
+        businessUnitName?: string
         statuses?: (
-          | "NEW"
-          | "ASSIGNED"
-          | "COMPLETED"
-          | "ACCEPTED_BY_VENDOR"
-          | "DECLINED_BY_VENDOR"
-          | "COMPLETED_BY_VENDOR"
-          | "CANCELLED"
-        )[];
-        targetLangs?: string[];
-        domainId?: number;
-        domainName?: string;
-        subDomainId?: number;
-        subDomainName?: string;
-        costCenterId?: number;
-        costCenterName?: string;
+          | 'NEW'
+          | 'ASSIGNED'
+          | 'COMPLETED'
+          | 'ACCEPTED_BY_VENDOR'
+          | 'DECLINED_BY_VENDOR'
+          | 'COMPLETED_BY_VENDOR'
+          | 'CANCELLED'
+        )[]
+        targetLangs?: string[]
+        domainId?: number
+        domainName?: string
+        subDomainId?: number
+        subDomainName?: string
+        costCenterId?: number
+        costCenterName?: string
         /** -1 for projects that are overdue */
-        dueInHours?: number;
-        createdInLastHours?: number;
-        sourceLangs?: string[];
-        ownerId?: number;
+        dueInHours?: number
+        createdInLastHours?: number
+        sourceLangs?: string[]
+        ownerId?: number
         /** Allowed for linguists only */
         jobStatuses?: (
-          | "NEW"
-          | "ACCEPTED"
-          | "DECLINED"
-          | "DELIVERED"
-          | "EMAILED"
-          | "COMPLETED"
-          | "CANCELLED"
-        )[];
+          | 'NEW'
+          | 'ACCEPTED'
+          | 'DECLINED'
+          | 'DELIVERED'
+          | 'EMAILED'
+          | 'COMPLETED'
+          | 'CANCELLED'
+        )[]
         /** Allowed for linguists only */
-        jobStatusGroup?: "NEW" | "ACCEPTED" | "COMPLETED";
-        buyerId?: number;
+        jobStatusGroup?: 'NEW' | 'ACCEPTED' | 'COMPLETED'
+        buyerId?: number
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
+        pageSize?: number
         /** Name or internal ID of project */
-        nameOrInternalId?: string;
+        nameOrInternalId?: string
         /** List also archived projects */
-        includeArchived?: boolean;
+        includeArchived?: boolean
         /** List only archived projects, regardless of `includeArchived` */
-        archivedOnly?: boolean;
-      };
-    };
+        archivedOnly?: boolean
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoAbstractProjectDto"];
-      };
+        schema: definitions['PageDtoAbstractProjectDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   addWorkflowSteps: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["AddWorkflowStepsDto"];
-      };
-    };
+        body?: definitions['AddWorkflowStepsDto']
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Add target languages to project */
   addTargetLanguageToProject: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["AddTargetLangDto"];
-      };
-    };
+        body?: definitions['AddTargetLangDto']
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /**
    * To unassign Vendor from Project, use empty body:
    * ```
@@ -13924,337 +13855,337 @@ export interface operations {
   assignVendorToProject: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["AssignVendorDto"];
-      };
-    };
+        body?: definitions['AssignVendorDto']
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   cloneProject: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["CloneProjectDto"];
-      };
-    };
+        body?: definitions['CloneProjectDto']
+      }
+    }
     responses: {
       /** Created */
       201: {
-        schema: definitions["AbstractProjectDto"];
-      };
+        schema: definitions['AbstractProjectDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getProjectAssignments: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       query: {
-        providerName?: string;
+        providerName?: string
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
-      };
-    };
+        pageSize?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoProviderReference"];
-      };
+        schema: definitions['PageDtoProviderReference']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   setProjectStatus: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["SetProjectStatusDto"];
-      };
-    };
+        body?: definitions['SetProjectStatusDto']
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getFinancialSettings: {
     parameters: {
       path: {
-        projectUid: string;
-      };
-    };
+        projectUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["FinancialSettingsDto"];
-      };
+        schema: definitions['FinancialSettingsDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   setFinancialSettings: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["SetFinancialSettingsDto"];
-      };
-    };
+        body?: definitions['SetFinancialSettingsDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["FinancialSettingsDto"];
-      };
+        schema: definitions['FinancialSettingsDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Returns enabled quality assurance settings. */
   enabledQualityChecks: {
     parameters: {
       path: {
-        projectUid: string;
-      };
-    };
+        projectUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["EnabledQualityChecksDto"];
-      };
+        schema: definitions['EnabledQualityChecksDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getProjectSettings: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       query: {
-        workflowLevel?: number;
-      };
-    };
+        workflowLevel?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["LqaSettingsDto"];
-      };
+        schema: definitions['LqaSettingsDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getMtSettingsForProject: {
     parameters: {
       path: {
-        projectUid: string;
-      };
-    };
+        projectUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["MTSettingsPerLanguageListDto"];
-      };
+        schema: definitions['MTSettingsPerLanguageListDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /**
    * This will erase all mtSettings per language for project.
    *         To remove all machine translate settings from project call without a machineTranslateSettings parameter.
@@ -14262,1272 +14193,1272 @@ export interface operations {
   setMtSettingsForProject: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["EditProjectMTSettingsDto"];
-      };
-    };
+        body?: definitions['EditProjectMTSettingsDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["MTSettingsPerLanguageListDto"];
-      };
+        schema: definitions['MTSettingsPerLanguageListDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getQuotesForProject: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       query: {
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
-      };
-    };
+        pageSize?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoQuoteDto"];
-      };
+        schema: definitions['PageDtoQuoteDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** This will erase mtSettings for project */
   setMtSettingsPerLanguageForProject: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["EditProjectMTSettPerLangListDto"];
-      };
-    };
+        body?: definitions['EditProjectMTSettPerLangListDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["MTSettingsPerLanguageListDto"];
-      };
+        schema: definitions['MTSettingsPerLanguageListDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getAnalyseSettingsForProject: {
     parameters: {
       path: {
-        projectUid: string;
-      };
-    };
+        projectUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["AnalyseSettingsDto"];
-      };
+        schema: definitions['AnalyseSettingsDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getImportSettings_2: {
     parameters: {
       path: {
-        projectUid: string;
-      };
-    };
+        projectUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["FileImportSettingsDto"];
-      };
+        schema: definitions['FileImportSettingsDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   editImportSettings_1: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["FileImportSettingsCreateDto"];
-      };
-    };
+        body?: definitions['FileImportSettingsCreateDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["FileImportSettingsDto"];
-      };
+        schema: definitions['FileImportSettingsDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getFileNamingSettings: {
     parameters: {
       path: {
-        projectUid: string;
-      };
-    };
+        projectUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["FileNamingSettingsDto"];
-      };
+        schema: definitions['FileNamingSettingsDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   updateFileNamingSettings: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["FileNamingSettingsDto"];
-      };
-    };
+        body?: definitions['FileNamingSettingsDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["FileNamingSettingsDto"];
-      };
+        schema: definitions['FileNamingSettingsDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getCustomFieldsPage: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       query: {
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 20 */
-        pageSize?: number;
+        pageSize?: number
         /** Filter by webhook creators UIDs */
-        createdBy?: string[];
+        createdBy?: string[]
         /** Filter by webhook updaters UIDs */
-        modifiedBy?: string[];
+        modifiedBy?: string[]
         /** Sort by this field */
-        sortField?: "CREATED" | "LAST_MODIFIED";
+        sortField?: 'CREATED' | 'LAST_MODIFIED'
         /** Sort direction */
-        sortTrend?: "ASC" | "DESC";
-      };
-    };
+        sortTrend?: 'ASC' | 'DESC'
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoCustomFieldInstanceDto"];
-      };
+        schema: definitions['PageDtoCustomFieldInstanceDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   editCustomFields: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["UpdateCustomFieldInstancesDto"];
-      };
-    };
+        body?: definitions['UpdateCustomFieldInstancesDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["CustomFieldInstancesDto"];
-      };
+        schema: definitions['CustomFieldInstancesDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   createCustomFields: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["CreateCustomFieldInstancesDto"];
-      };
-    };
+        body?: definitions['CreateCustomFieldInstancesDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["CustomFieldInstancesDto"];
-      };
+        schema: definitions['CustomFieldInstancesDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getCustomField_1: {
     parameters: {
       path: {
-        projectUid: string;
-        fieldInstanceUid: string;
-      };
-    };
+        projectUid: string
+        fieldInstanceUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["CustomFieldInstanceDto"];
-      };
+        schema: definitions['CustomFieldInstanceDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   editCustomField: {
     parameters: {
       path: {
-        projectUid: string;
-        fieldInstanceUid: string;
-      };
+        projectUid: string
+        fieldInstanceUid: string
+      }
       body: {
-        body?: definitions["UpdateCustomFieldInstanceDto"];
-      };
-    };
+        body?: definitions['UpdateCustomFieldInstanceDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["CustomFieldInstanceDto"];
-      };
+        schema: definitions['CustomFieldInstanceDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deleteCustomField_1: {
     parameters: {
       path: {
-        projectUid: string;
-        fieldInstanceUid: string;
-      };
-    };
+        projectUid: string
+        fieldInstanceUid: string
+      }
+    }
     responses: {
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   setStatus: {
     parameters: {
       path: {
-        projectUid: string;
-        jobUid: string;
-      };
+        projectUid: string
+        jobUid: string
+      }
       body: {
-        body?: definitions["JobStatusChangeActionDto"];
-      };
-    };
+        body?: definitions['JobStatusChangeActionDto']
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getPart: {
     parameters: {
       path: {
-        projectUid: string;
-        jobUid: string;
-      };
-    };
+        projectUid: string
+        jobUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["JobPartExtendedDto"];
-      };
+        schema: definitions['JobPartExtendedDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   editPart: {
     parameters: {
       path: {
-        projectUid: string;
-        jobUid: string;
-      };
+        projectUid: string
+        jobUid: string
+      }
       body: {
-        body?: definitions["JobPartUpdateSingleDto"];
-      };
-    };
+        body?: definitions['JobPartUpdateSingleDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["JobPartExtendedDto"];
-      };
+        schema: definitions['JobPartExtendedDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   patchPart: {
     parameters: {
       path: {
-        projectUid: string;
-        jobUid: string;
-      };
+        projectUid: string
+        jobUid: string
+      }
       body: {
-        body?: definitions["JobPartPatchSingleDto"];
-      };
-    };
+        body?: definitions['JobPartPatchSingleDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["JobPartExtendedDto"];
-      };
+        schema: definitions['JobPartExtendedDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   pseudoTranslateJobPart: {
     parameters: {
       path: {
-        projectUid: string;
-        jobUid: string;
-      };
+        projectUid: string
+        jobUid: string
+      }
       body: {
-        body?: definitions["PseudoTranslateActionDto"];
-      };
-    };
+        body?: definitions['PseudoTranslateActionDto']
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deleteAllTranslations: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["JobPartReadyReferences"];
-      };
-    };
+        body?: definitions['JobPartReadyReferences']
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   addIgnoredWarnings: {
     parameters: {
       path: {
-        projectUid: string;
-        jobUid: string;
-      };
+        projectUid: string
+        jobUid: string
+      }
       body: {
-        body?: definitions["UpdateIgnoredWarningsDto"];
-      };
-    };
+        body?: definitions['UpdateIgnoredWarningsDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["UpdateIgnoredWarningsDto"];
-      };
+        schema: definitions['UpdateIgnoredWarningsDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deleteIgnoredWarnings: {
     parameters: {
       path: {
-        projectUid: string;
-        jobUid: string;
-      };
+        projectUid: string
+        jobUid: string
+      }
       body: {
-        body?: definitions["UpdateIgnoredWarningsDto"];
-      };
-    };
+        body?: definitions['UpdateIgnoredWarningsDto']
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getImportSettings_3: {
     parameters: {
       path: {
-        projectUid: string;
-        jobUid: string;
-      };
-    };
+        projectUid: string
+        jobUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["FileImportSettingsDto"];
-      };
+        schema: definitions['FileImportSettingsDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   editJobImportSettings: {
     parameters: {
       path: {
-        projectUid: string;
-        jobUid: string;
-      };
+        projectUid: string
+        jobUid: string
+      }
       body: {
-        body?: definitions["FileImportSettingsCreateDto"];
-      };
-    };
+        body?: definitions['FileImportSettingsCreateDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["FileImportSettingsDto"];
-      };
+        schema: definitions['FileImportSettingsDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   statusChanges: {
     parameters: {
       path: {
-        projectUid: string;
-        jobUid: string;
-      };
-    };
+        projectUid: string
+        jobUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["JobPartStatusChangesDto"];
-      };
+        schema: definitions['JobPartStatusChangesDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   copySourceToTarget: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["JobPartReadyReferences"];
-      };
-    };
+        body?: definitions['JobPartReadyReferences']
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   copySourceToTargetJobPart: {
     parameters: {
       path: {
-        projectUid: string;
-        jobUid: string;
-      };
-    };
+        projectUid: string
+        jobUid: string
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getTranslationResources: {
     parameters: {
       path: {
-        projectUid: string;
-        jobUid: string;
-      };
-    };
+        projectUid: string
+        jobUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["TranslationResourcesDto"];
-      };
+        schema: definitions['TranslationResourcesDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   listSegments: {
     parameters: {
       path: {
-        projectUid: string;
-        jobUid: string;
-      };
+        projectUid: string
+        jobUid: string
+      }
       query: {
-        beginIndex?: number;
-        endIndex?: number;
-      };
-    };
+        beginIndex?: number
+        endIndex?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["SegmentListDto"];
-      };
+        schema: definitions['SegmentListDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getOriginalFile: {
     parameters: {
       path: {
-        projectUid: string;
-        jobUid: string;
-      };
-    };
+        projectUid: string
+        jobUid: string
+      }
+    }
     responses: {
       /** application/octet-stream */
-      200: unknown;
+      200: unknown
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   filePreviewJob: {
     parameters: {
       path: {
-        projectUid: string;
-        jobUid: string;
-      };
-    };
+        projectUid: string
+        jobUid: string
+      }
+    }
     responses: {
       /** application/octet-stream */
-      200: unknown;
+      200: unknown
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Takes bilingual file (.mxliff only) as argument. If not passed, data will be taken from database */
   filePreview: {
     parameters: {
       path: {
-        projectUid: string;
-        jobUid: string;
-      };
+        projectUid: string
+        jobUid: string
+      }
       body: {
-        body?: definitions["InputStream"];
-      };
-    };
+        body?: definitions['InputStream']
+      }
+    }
     responses: {
       /** application/octet-stream */
-      200: unknown;
+      200: unknown
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** This call will return target file's warnings. This means even for other jobs that were created via 'split jobs' etc. */
   getCompletedFileWarnings: {
     parameters: {
       path: {
-        projectUid: string;
-        jobUid: string;
-      };
-    };
+        projectUid: string
+        jobUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["TargetFileWarningsDto"];
-      };
+        schema: definitions['TargetFileWarningsDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   previewUrls: {
     parameters: {
       path: {
-        projectUid: string;
-        jobUid: string;
-      };
+        projectUid: string
+        jobUid: string
+      }
       query: {
-        workflowLevel?: number;
-      };
-    };
+        workflowLevel?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PreviewUrlsDto"];
-      };
+        schema: definitions['PreviewUrlsDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /**
    * Job file can be provided directly in the message body or downloaded from connector.
    *
@@ -15642,46 +15573,46 @@ export interface operations {
   createJob: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       header: {
-        Memsource?: string;
+        Memsource?: string
         /** must match pattern `((inline|attachment); )?(filename\*=UTF-8''(.+)|filename="?(.+)"?)` */
-        "Content-Disposition"?: string;
-      };
+        'Content-Disposition'?: string
+      }
       body: {
-        body?: definitions["InputStream"];
-      };
-    };
+        body?: definitions['InputStream']
+      }
+    }
     responses: {
       /** Created */
       201: {
-        schema: definitions["JobListDto"];
-      };
+        schema: definitions['JobListDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /**
    * Creates the job in project specified by path param projectUid. Source file is defined by downloadTaskId parameter. That is value of finished download async task
    * [Connector - Download file (async)](#operation/getFile_1).
@@ -15779,45 +15710,45 @@ export interface operations {
   createJobFromAsyncDownloadTask: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       query: {
-        downloadTaskId?: string;
-        continuous?: boolean;
-      };
+        downloadTaskId?: string
+        continuous?: boolean
+      }
       body: {
-        body?: definitions["JobCreateRequestDto"];
-      };
-    };
+        body?: definitions['JobCreateRequestDto']
+      }
+    }
     responses: {
       /** Created */
       201: {
-        schema: definitions["JobListDto"];
-      };
+        schema: definitions['JobListDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /**
    * API updated source file for specified job
    *
@@ -15870,46 +15801,46 @@ export interface operations {
   updateSource: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       header: {
-        Memsource?: string;
+        Memsource?: string
         /** must match pattern `((inline|attachment); )?(filename\*=UTF-8''(.+)|filename="?(.+)"?)` */
-        "Content-Disposition"?: string;
-      };
+        'Content-Disposition'?: string
+      }
       body: {
-        body?: definitions["InputStream"];
-      };
-    };
+        body?: definitions['InputStream']
+      }
+    }
     responses: {
       /** Updated */
       200: {
-        schema: definitions["JobUpdateSourceResponseDto"];
-      };
+        schema: definitions['JobUpdateSourceResponseDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /**
    * API update target file for specified job
    *
@@ -15959,430 +15890,430 @@ export interface operations {
   updateTarget: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       header: {
-        Memsource?: string;
+        Memsource?: string
         /** must match pattern `((inline|attachment); )?(filename\*=UTF-8''(.+)|filename="?(.+)"?)` */
-        "Content-Disposition"?: string;
-      };
+        'Content-Disposition'?: string
+      }
       body: {
-        body?: definitions["InputStream"];
-      };
-    };
+        body?: definitions['InputStream']
+      }
+    }
     responses: {
       /** Updated */
       202: {
-        schema: definitions["JobUpdateSourceResponseDto"];
-      };
+        schema: definitions['JobUpdateSourceResponseDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Returns only jobs which were updated by the batch operation. */
   editParts: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["JobPartUpdateBatchDto"];
-      };
-    };
+        body?: definitions['JobPartUpdateBatchDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["JobPartsDto"];
-      };
+        schema: definitions['JobPartsDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deleteParts: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["JobPartDeleteReferences"];
-      };
+        body?: definitions['JobPartDeleteReferences']
+      }
       query: {
-        purge?: boolean;
-      };
-    };
+        purge?: boolean
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   humanTranslate: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["HumanTranslateJobsDto"];
-      };
-    };
+        body?: definitions['HumanTranslateJobsDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["AsyncRequestWrapperDto"];
-      };
+        schema: definitions['AsyncRequestWrapperDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   notifyAssigned: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["NotifyJobPartsRequestDto"];
-      };
-    };
+        body?: definitions['NotifyJobPartsRequestDto']
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   comparePart: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["JobPartReadyReferences"];
-      };
+        body?: definitions['JobPartReadyReferences']
+      }
       query: {
-        atWorkflowLevel?: number;
-        withWorkflowLevel?: number;
-      };
-    };
+        atWorkflowLevel?: number
+        withWorkflowLevel?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["ComparedSegmentsDto"];
-      };
+        schema: definitions['ComparedSegmentsDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getBilingualFile: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["GetBilingualFileDto"];
-      };
+        body?: definitions['GetBilingualFileDto']
+      }
       query: {
-        format?: "MXLF" | "DOCX" | "XLIFF" | "TMX";
-        preview?: boolean;
-      };
-    };
+        format?: 'MXLF' | 'DOCX' | 'XLIFF' | 'TMX'
+        preview?: boolean
+      }
+    }
     responses: {
       /** application/octet-stream, application/mxliff, application/xliff+xml */
-      200: unknown;
+      200: unknown
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   updateIgnoredChecks: {
     parameters: {
       path: {
-        projectUid: string;
-        jobUid: string;
-      };
+        projectUid: string
+        jobUid: string
+      }
       body: {
-        body?: definitions["UpdateIgnoredChecksDto"];
-      };
-    };
+        body?: definitions['UpdateIgnoredChecksDto']
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getPartsWorkflowStep: {
     parameters: {
       path: {
-        projectUid: string;
-        jobUid: string;
-      };
-    };
+        projectUid: string
+        jobUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["ProjectWorkflowStepDto"];
-      };
+        schema: definitions['ProjectWorkflowStepDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   searchPartsInProject: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["SearchJobsRequestDto"];
-      };
-    };
+        body?: definitions['SearchJobsRequestDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["SearchJobsDto"];
-      };
+        schema: definitions['SearchJobsDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Provides segments count (progress data) */
   getSegmentsCount: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["JobPartReadyReferences"];
-      };
-    };
+        body?: definitions['JobPartReadyReferences']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["SegmentsCountsResponseListDto"];
-      };
+        schema: definitions['SegmentsCountsResponseListDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /**
    * Splits job by one of the following methods:
    * * **After specific segments** - fill in `segmentOrdinals`
@@ -16396,234 +16327,234 @@ export interface operations {
   split: {
     parameters: {
       path: {
-        projectUid: string;
-        jobUid: string;
-      };
+        projectUid: string
+        jobUid: string
+      }
       body: {
-        body?: definitions["SplitJobActionDto"];
-      };
-    };
+        body?: definitions['SplitJobActionDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["JobPartsDto"];
-      };
+        schema: definitions['JobPartsDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Create new term in the write term base assigned to the job */
   createTermByJob: {
     parameters: {
       path: {
-        jobUid: string;
-        projectUid: string;
-      };
+        jobUid: string
+        projectUid: string
+      }
       body: {
-        body?: definitions["CreateTermsDto"];
-      };
-    };
+        body?: definitions['CreateTermsDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["TermPairDto"];
-      };
+        schema: definitions['TermPairDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   listReferenceFiles: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       query: {
-        filename?: string;
+        filename?: string
         /** date time in ISO 8601 UTC format */
-        dateCreatedSince?: string;
+        dateCreatedSince?: string
         /** UID of user */
-        createdBy?: string;
-        pageNumber?: number;
-        pageSize?: number;
-        sort?: "FILENAME" | "DATE_CREATED" | "CREATED_BY";
-        order?: "ASC" | "DESC";
-      };
-    };
+        createdBy?: string
+        pageNumber?: number
+        pageSize?: number
+        sort?: 'FILENAME' | 'DATE_CREATED' | 'CREATED_BY'
+        order?: 'ASC' | 'DESC'
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["ReferenceFilePageDto"];
-      };
+        schema: definitions['ReferenceFilePageDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   batchDeleteReferenceFiles: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["ProjectReferenceFilesRequestDto"];
-      };
-    };
+        body?: definitions['ProjectReferenceFilesRequestDto']
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   downloadReference: {
     parameters: {
       path: {
-        projectUid: string;
-        referenceFileId: string;
-      };
-    };
+        projectUid: string
+        referenceFileId: string
+      }
+    }
     responses: {
       /** application/octet-stream */
-      200: unknown;
+      200: unknown
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   batchDownloadReferenceFiles: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["ProjectReferenceFilesRequestDto"];
-      };
-    };
+        body?: definitions['ProjectReferenceFilesRequestDto']
+      }
+    }
     responses: {
       /** application/octet-stream */
-      200: unknown;
+      200: unknown
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /**
    * The result is not paged and returns up to 50 users.
    *                 If the requested user is not included, the search can be narrowed down with the `userName` parameter.
@@ -16631,1078 +16562,1078 @@ export interface operations {
   listReferenceFileCreators: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       query: {
-        userName?: string;
-      };
-    };
+        userName?: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["UserReferencesDto"];
-      };
+        schema: definitions['UserReferencesDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   relevantTransMemories: {
     parameters: {
       path: {
-        projectTemplateUid: string;
-      };
+        projectTemplateUid: string
+      }
       query: {
-        name?: string;
-        domainName?: string;
-        clientName?: string;
-        subDomainName?: string;
-        targetLangs?: string[];
-        strictLangMatching?: boolean;
+        name?: string
+        domainName?: string
+        clientName?: string
+        subDomainName?: string
+        targetLangs?: string[]
+        strictLangMatching?: boolean
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
-      };
-    };
+        pageSize?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoTransMemoryDto"];
-      };
+        schema: definitions['PageDtoTransMemoryDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getProjectTemplateQASettings: {
     parameters: {
       path: {
-        projectTemplateUid: string;
-      };
-    };
+        projectTemplateUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["QASettingsDtoV2"];
-      };
+        schema: definitions['QASettingsDtoV2']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   setProjectTemplateQASettings: {
     parameters: {
       path: {
-        projectTemplateUid: string;
-      };
+        projectTemplateUid: string
+      }
       body: {
-        body?: definitions["EditQASettingsDtoV2"];
-      };
-    };
+        body?: definitions['EditQASettingsDtoV2']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["QASettingsDtoV2"];
-      };
+        schema: definitions['QASettingsDtoV2']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getProjectTemplates: {
     parameters: {
       query: {
-        name?: string;
-        clientId?: number;
-        clientName?: string;
-        ownerUid?: string;
-        domainName?: string;
-        subDomainName?: string;
-        costCenterId?: number;
-        costCenterName?: string;
-        businessUnitName?: string;
-        sort?: string;
-        direction?: string;
+        name?: string
+        clientId?: number
+        clientName?: string
+        ownerUid?: string
+        domainName?: string
+        subDomainName?: string
+        costCenterId?: number
+        costCenterName?: string
+        businessUnitName?: string
+        sort?: string
+        direction?: string
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
-      };
-    };
+        pageSize?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoProjectTemplateReference"];
-      };
+        schema: definitions['PageDtoProjectTemplateReference']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   createProjectTemplate: {
     parameters: {
       body: {
-        body: definitions["ProjectTemplateCreateActionDto"];
-      };
-    };
+        body: definitions['ProjectTemplateCreateActionDto']
+      }
+    }
     responses: {
       /** Created */
       201: {
-        schema: definitions["ProjectTemplate"];
-      };
+        schema: definitions['ProjectTemplate']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Note: importSettings in response is deprecated and will be always null */
   getProjectTemplate: {
     parameters: {
       path: {
-        projectTemplateUid: string;
-      };
-    };
+        projectTemplateUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["ProjectTemplate"];
-      };
+        schema: definitions['ProjectTemplate']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   editProjectTemplate: {
     parameters: {
       path: {
-        projectTemplateUid: string;
-      };
+        projectTemplateUid: string
+      }
       body: {
-        body: definitions["ProjectTemplateEditDto"];
-      };
-    };
+        body: definitions['ProjectTemplateEditDto']
+      }
+    }
     responses: {
       /** Edited */
       200: {
-        schema: definitions["ProjectTemplate"];
-      };
+        schema: definitions['ProjectTemplate']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deleteProjectTemplate: {
     parameters: {
       path: {
-        projectTemplateUid: string;
-      };
-    };
+        projectTemplateUid: string
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getAnalyseSettingsForProjectTemplate: {
     parameters: {
       path: {
-        projectTemplateUid: string;
-      };
-    };
+        projectTemplateUid: string
+      }
+    }
     responses: {
       /** OK */
       200: {
-        schema: definitions["AbstractAnalyseSettingsDto"];
-      };
+        schema: definitions['AbstractAnalyseSettingsDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   updateAnalyseSettingsForProjectTemplate: {
     parameters: {
       path: {
-        projectTemplateUid: string;
-      };
+        projectTemplateUid: string
+      }
       body: {
-        body?: definitions["EditAnalyseSettingsDto"];
-      };
-    };
+        body?: definitions['EditAnalyseSettingsDto']
+      }
+    }
     responses: {
       /** OK */
       200: {
-        schema: definitions["AbstractAnalyseSettingsDto"];
-      };
+        schema: definitions['AbstractAnalyseSettingsDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getImportSettingsForProjectTemplate: {
     parameters: {
       path: {
-        projectTemplateUid: string;
-      };
-    };
+        projectTemplateUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["FileImportSettingsDto"];
-      };
+        schema: definitions['FileImportSettingsDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   editProjectTemplateImportSettings: {
     parameters: {
       path: {
-        projectTemplateUid: string;
-      };
+        projectTemplateUid: string
+      }
       body: {
-        body?: definitions["FileImportSettingsCreateDto"];
-      };
-    };
+        body?: definitions['FileImportSettingsCreateDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["FileImportSettingsDto"];
-      };
+        schema: definitions['FileImportSettingsDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getMachineTranslateSettingsForProjectTemplate: {
     parameters: {
       path: {
-        projectTemplateUid: string;
-      };
-    };
+        projectTemplateUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["MTSettingsPerLanguageListDto"];
-      };
+        schema: definitions['MTSettingsPerLanguageListDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getProjectTemplateTermBases: {
     parameters: {
       path: {
-        projectTemplateUid: string;
-      };
-    };
+        projectTemplateUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["ProjectTemplateTermBaseListDto"];
-      };
+        schema: definitions['ProjectTemplateTermBaseListDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   setProjectTemplateTermBases: {
     parameters: {
       path: {
-        projectTemplateUid: string;
-      };
+        projectTemplateUid: string
+      }
       body: {
-        body?: definitions["SetProjectTemplateTermBaseDto"];
-      };
-    };
+        body?: definitions['SetProjectTemplateTermBaseDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["ProjectTemplateTermBaseListDto"];
-      };
+        schema: definitions['ProjectTemplateTermBaseListDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getProjectTemplateAccessSettings: {
     parameters: {
       path: {
-        projectTemplateUid: string;
-      };
-    };
+        projectTemplateUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["ProjectSecuritySettingsDtoV2"];
-      };
+        schema: definitions['ProjectSecuritySettingsDtoV2']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   editProjectTemplateAccessSettings: {
     parameters: {
       path: {
-        projectTemplateUid: string;
-      };
+        projectTemplateUid: string
+      }
       body: {
-        body?: definitions["EditProjectSecuritySettingsDtoV2"];
-      };
-    };
+        body?: definitions['EditProjectSecuritySettingsDtoV2']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["ProjectSecuritySettingsDtoV2"];
-      };
+        schema: definitions['ProjectSecuritySettingsDtoV2']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getCustomFieldsPage_1: {
     parameters: {
       path: {
-        projectTemplateUid: string;
-      };
+        projectTemplateUid: string
+      }
       query: {
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 20 */
-        pageSize?: number;
+        pageSize?: number
         /** Filter by webhook creators UIDs */
-        createdBy?: string[];
+        createdBy?: string[]
         /** Filter by webhook updaters UIDs */
-        modifiedBy?: string[];
+        modifiedBy?: string[]
         /** Sort by this field */
-        sortField?: "CREATED" | "LAST_MODIFIED";
+        sortField?: 'CREATED' | 'LAST_MODIFIED'
         /** Sort direction */
-        sortTrend?: "ASC" | "DESC";
-      };
-    };
+        sortTrend?: 'ASC' | 'DESC'
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoCustomFieldInstanceDto"];
-      };
+        schema: definitions['PageDtoCustomFieldInstanceDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   editCustomFields_1: {
     parameters: {
       path: {
-        projectTemplateUid: string;
-      };
+        projectTemplateUid: string
+      }
       body: {
-        body?: definitions["UpdateCustomFieldInstancesDto"];
-      };
-    };
+        body?: definitions['UpdateCustomFieldInstancesDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["CustomFieldInstancesDto"];
-      };
+        schema: definitions['CustomFieldInstancesDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   createCustomFields_1: {
     parameters: {
       path: {
-        projectTemplateUid: string;
-      };
+        projectTemplateUid: string
+      }
       body: {
-        body?: definitions["CreateCustomFieldInstancesDto"];
-      };
-    };
+        body?: definitions['CreateCustomFieldInstancesDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["CustomFieldInstancesDto"];
-      };
+        schema: definitions['CustomFieldInstancesDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getCustomField_2: {
     parameters: {
       path: {
-        projectTemplateUid: string;
-        fieldInstanceUid: string;
-      };
-    };
+        projectTemplateUid: string
+        fieldInstanceUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["CustomFieldInstanceDto"];
-      };
+        schema: definitions['CustomFieldInstanceDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   editCustomField_1: {
     parameters: {
       path: {
-        projectTemplateUid: string;
-        fieldInstanceUid: string;
-      };
+        projectTemplateUid: string
+        fieldInstanceUid: string
+      }
       body: {
-        body?: definitions["UpdateCustomFieldInstanceDto"];
-      };
-    };
+        body?: definitions['UpdateCustomFieldInstanceDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["CustomFieldInstanceDto"];
-      };
+        schema: definitions['CustomFieldInstanceDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deleteCustomField_2: {
     parameters: {
       path: {
-        projectTemplateUid: string;
-        fieldInstanceUid: string;
-      };
-    };
+        projectTemplateUid: string
+        fieldInstanceUid: string
+      }
+    }
     responses: {
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getProjectTermBases: {
     parameters: {
       path: {
-        projectUid: string;
-      };
-    };
+        projectUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["ProjectTermBaseListDto"];
-      };
+        schema: definitions['ProjectTermBaseListDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   setProjectTermBases: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["SetTermBaseDto"];
-      };
-    };
+        body?: definitions['SetTermBaseDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["ProjectTermBaseListDto"];
-      };
+        schema: definitions['ProjectTermBaseListDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   relevantTermBases: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       query: {
-        name?: string;
-        domainName?: string;
-        clientName?: string;
-        subDomainName?: string;
-        targetLangs?: string[];
-        strictLangMatching?: boolean;
+        name?: string
+        domainName?: string
+        clientName?: string
+        subDomainName?: string
+        targetLangs?: string[]
+        strictLangMatching?: boolean
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
-      };
-    };
+        pageSize?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoTermBaseDto"];
-      };
+        schema: definitions['PageDtoTermBaseDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   relevantTransMemories_1: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       query: {
-        name?: string;
-        domainName?: string;
-        clientName?: string;
-        subDomainName?: string;
-        targetLangs?: string[];
-        strictLangMatching?: boolean;
+        name?: string
+        domainName?: string
+        clientName?: string
+        subDomainName?: string
+        targetLangs?: string[]
+        strictLangMatching?: boolean
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
-      };
-    };
+        pageSize?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoTransMemoryDto"];
-      };
+        schema: definitions['PageDtoTransMemoryDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /**
    * Returns at most <i>maxSegments</i>
    *             records with <i>score >= scoreThreshold</i> and at most <i>maxSubsegments</i> records which are subsegment,
@@ -17711,428 +17642,428 @@ export interface operations {
   searchSegment_1: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["SearchTMRequestDto"];
-      };
-    };
+        body?: definitions['SearchTMRequestDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["SearchResponseListTmDto"];
-      };
+        schema: definitions['SearchResponseListTmDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   get_2: {
     parameters: {
       path: {
-        quoteUid: string;
-      };
-    };
+        quoteUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["QuoteDto"];
-      };
+        schema: definitions['QuoteDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deleteQuote: {
     parameters: {
       path: {
-        quoteUid: string;
-      };
-    };
+        quoteUid: string
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   emailQuotes: {
     parameters: {
       body: {
-        body?: definitions["EmailQuotesRequestDto"];
-      };
-    };
+        body?: definitions['EmailQuotesRequestDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["EmailQuotesResponseDto"];
-      };
+        schema: definitions['EmailQuotesResponseDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getServiceProviderConfigDto: {
-    parameters: {};
+    parameters: {}
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["ServiceProviderConfigDto"];
-      };
+        schema: definitions['ServiceProviderConfigDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getResourceTypes: {
-    parameters: {};
+    parameters: {}
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["ScimResourceTypeSchema"][];
-      };
+        schema: definitions['ScimResourceTypeSchema'][]
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getSchemas: {
-    parameters: {};
+    parameters: {}
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["ScimResourceSchema"][];
-      };
+        schema: definitions['ScimResourceSchema'][]
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getSchemaByUrn: {
     parameters: {
       path: {
-        schemaUrn: string;
-      };
-    };
+        schemaUrn: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["ScimResourceSchema"];
-      };
+        schema: definitions['ScimResourceSchema']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getScimUser: {
     parameters: {
       header: {
-        Authorization?: string;
-      };
+        Authorization?: string
+      }
       path: {
-        userId: number;
-      };
-    };
+        userId: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["ScimUserCoreDto"];
-      };
+        schema: definitions['ScimUserCoreDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   editUser: {
     parameters: {
       body: {
-        body?: definitions["ScimUserCoreDto"];
-      };
+        body?: definitions['ScimUserCoreDto']
+      }
       header: {
-        Authorization?: string;
-      };
+        Authorization?: string
+      }
       path: {
-        userId: number;
-      };
-    };
+        userId: number
+      }
+    }
     responses: {
       /** Updated */
       200: {
-        schema: definitions["ScimUserCoreDto"];
-      };
+        schema: definitions['ScimUserCoreDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deleteUser: {
     parameters: {
       header: {
-        Authorization?: string;
-      };
+        Authorization?: string
+      }
       path: {
-        userId: number;
-      };
-    };
+        userId: number
+      }
+    }
     responses: {
       /** No Content */
-      200: unknown;
+      200: unknown
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   patchUser: {
     parameters: {
       body: {
-        body?: { [key: string]: { [key: string]: unknown } };
-      };
+        body?: {[key: string]: {[key: string]: unknown}}
+      }
       header: {
-        Authorization?: string;
-      };
+        Authorization?: string
+      }
       path: {
-        userId: number;
-      };
-    };
+        userId: number
+      }
+    }
     responses: {
       /** Patched */
       200: {
-        schema: definitions["ScimUserCoreDto"];
-      };
+        schema: definitions['ScimUserCoreDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /**
    * This operation supports <a href="http://ldapwiki.com/wiki/SCIM%20Filtering" target="_blank">SCIM Filter</a>,
    * <a href="http://ldapwiki.com/wiki/SCIM%20Search%20Request" target="_blank">SCIM attributes</a> and
@@ -18150,48 +18081,48 @@ export interface operations {
   searchUsers: {
     parameters: {
       header: {
-        Authorization?: string;
-      };
+        Authorization?: string
+      }
       query: {
         /** See method description */
-        filter?: string;
+        filter?: string
         /** See method description */
-        attributes?: string;
+        attributes?: string
         /** See method description */
-        sortBy?: string;
+        sortBy?: string
         /** See method description */
-        sortOrder?: "ascending" | "descending";
+        sortOrder?: 'ascending' | 'descending'
         /** The 1-based index of the first search result. Default 1 */
-        startIndex?: number;
+        startIndex?: number
         /** Non-negative Integer. Specifies the desired maximum number of search results per page; e.g., 10. */
-        count?: number;
-      };
-    };
+        count?: number
+      }
+    }
     responses: {
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /**
    * Supported schema: `"urn:ietf:params:scim:schemas:core:2.0:User"`
    *
@@ -18220,747 +18151,747 @@ export interface operations {
   createUserSCIM: {
     parameters: {
       body: {
-        body?: definitions["ScimUserCoreDto"];
-      };
+        body?: definitions['ScimUserCoreDto']
+      }
       header: {
-        Authorization?: string;
-      };
-    };
+        Authorization?: string
+      }
+    }
     responses: {
       /** Created */
       201: {
-        schema: definitions["ScimUserCoreDto"];
-      };
+        schema: definitions['ScimUserCoreDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getSegmentationRule: {
     parameters: {
       path: {
-        segRuleId: number;
-      };
-    };
+        segRuleId: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["SegmentationRuleDto"];
-      };
+        schema: definitions['SegmentationRuleDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   updatesSegmentationRule: {
     parameters: {
       body: {
-        body?: definitions["EditSegmentationRuleDto"];
-      };
+        body?: definitions['EditSegmentationRuleDto']
+      }
       path: {
-        segRuleId: number;
-      };
-    };
+        segRuleId: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["SegmentationRuleDto"];
-      };
+        schema: definitions['SegmentationRuleDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deletesSegmentationRule: {
     parameters: {
       path: {
-        segRuleId: number;
-      };
-    };
+        segRuleId: number
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getListOfSegmentationRules: {
     parameters: {
       query: {
-        locales?: string[];
+        locales?: string[]
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
-      };
-    };
+        pageSize?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoSegmentationRuleReference"];
-      };
+        schema: definitions['PageDtoSegmentationRuleReference']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Creates new Segmentation Rule with file and segRule JSON Object as header parameter. The same object is used for GET action. */
   createSegmentationRule: {
     parameters: {
       body: {
         /** streamed file */
-        body: definitions["InputStream"];
-      };
+        body: definitions['InputStream']
+      }
       header: {
-        segRule: string;
-      };
-    };
+        segRule: string
+      }
+    }
     responses: {
       /** Created */
       201: {
-        schema: definitions["SegmentationRuleDto"];
-      };
+        schema: definitions['SegmentationRuleDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Spell check using the settings from the project of the job */
   checkByJob: {
     parameters: {
       path: {
-        jobUid: string;
-      };
+        jobUid: string
+      }
       body: {
-        body?: definitions["SpellCheckRequestDto"];
-      };
-    };
+        body?: definitions['SpellCheckRequestDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["SpellCheckResponseDto"];
-      };
+        schema: definitions['SpellCheckResponseDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Spell check suggest using the users's spell check dictionary */
   suggest: {
     parameters: {
       body: {
-        body?: definitions["SuggestRequestDto"];
-      };
-    };
+        body?: definitions['SuggestRequestDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["SuggestResponseDto"];
-      };
+        schema: definitions['SuggestResponseDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   addWord: {
     parameters: {
       body: {
-        body?: definitions["DictionaryItemDto"];
-      };
-    };
+        body?: definitions['DictionaryItemDto']
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Spell check using the settings of the user's organization */
   check: {
     parameters: {
       body: {
-        body?: definitions["SpellCheckRequestDto"];
-      };
-    };
+        body?: definitions['SpellCheckRequestDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["SpellCheckResponseDto"];
-      };
+        schema: definitions['SpellCheckResponseDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getSubDomain: {
     parameters: {
       path: {
-        subDomainUid: string;
-      };
-    };
+        subDomainUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["SubDomainDto"];
-      };
+        schema: definitions['SubDomainDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   updateSubDomain: {
     parameters: {
       path: {
-        subDomainUid: string;
-      };
+        subDomainUid: string
+      }
       body: {
-        body?: definitions["SubDomainEditDto"];
-      };
-    };
+        body?: definitions['SubDomainEditDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["SubDomainDto"];
-      };
+        schema: definitions['SubDomainDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deleteSubDomain: {
     parameters: {
       path: {
-        subDomainUid: string;
-      };
-    };
+        subDomainUid: string
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   listSubDomains: {
     parameters: {
       query: {
-        name?: string;
+        name?: string
         /** Uid of user */
-        createdBy?: string;
-        sort?: "NAME" | "DATE_CREATED";
-        order?: "ASC" | "DESC";
+        createdBy?: string
+        sort?: 'NAME' | 'DATE_CREATED'
+        order?: 'ASC' | 'DESC'
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
-      };
-    };
+        pageSize?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoSubDomainDto"];
-      };
+        schema: definitions['PageDtoSubDomainDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   createSubDomain: {
     parameters: {
       body: {
-        body?: definitions["SubDomainEditDto"];
-      };
-    };
+        body?: definitions['SubDomainEditDto']
+      }
+    }
     responses: {
       /** Created */
       201: {
-        schema: definitions["SubDomainDto"];
-      };
+        schema: definitions['SubDomainDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getTermBase: {
     parameters: {
       path: {
-        termBaseUid: string;
-      };
-    };
+        termBaseUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["TermBaseDto"];
-      };
+        schema: definitions['TermBaseDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** It is possible to add new languages only */
   updateTermBase: {
     parameters: {
       path: {
-        termBaseUid: string;
-      };
+        termBaseUid: string
+      }
       body: {
-        body?: definitions["TermBaseEditDto"];
-      };
-    };
+        body?: definitions['TermBaseEditDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["TermBaseDto"];
-      };
+        schema: definitions['TermBaseDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deleteTermBase: {
     parameters: {
       path: {
-        termBaseUid: string;
-      };
+        termBaseUid: string
+      }
       query: {
         /**
          * purge=false - the Termbase is can later be restored,
          *                     "purge=true - the Termbase is completely deleted and cannot be restored
          */
-        purge?: boolean;
-      };
-    };
+        purge?: boolean
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   listTermBases: {
     parameters: {
       query: {
-        name?: string;
+        name?: string
         /** Language of the term base */
-        lang?: string[];
-        clientId?: string;
-        domainId?: string;
-        subDomainId?: string;
+        lang?: string[]
+        clientId?: string
+        domainId?: string
+        subDomainId?: string
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
-      };
-    };
+        pageSize?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoTermBaseDto"];
-      };
+        schema: definitions['PageDtoTermBaseDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   createTermBase: {
     parameters: {
       body: {
-        body?: definitions["TermBaseEditDto"];
-      };
-    };
+        body?: definitions['TermBaseEditDto']
+      }
+    }
     responses: {
       /** Created */
       200: {
-        schema: definitions["TermBaseDto"];
-      };
+        schema: definitions['TermBaseDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /**
    * Terms can be imported from XLS/XLSX and TBX file formats into a term base.
    * See <a target="_blank" href="https://support.phrase.com/hc/en-us/articles/5709733372188">Phrase Help Center</a>
@@ -18968,1975 +18899,1975 @@ export interface operations {
   importTermBase: {
     parameters: {
       body: {
-        body?: definitions["InputStream"];
-      };
+        body?: definitions['InputStream']
+      }
       header: {
         /** must match pattern `((inline|attachment); )?filename\*=UTF-8''(.+)` */
-        "Content-Disposition": string;
-      };
+        'Content-Disposition': string
+      }
       path: {
-        termBaseUid: string;
-      };
+        termBaseUid: string
+      }
       query: {
-        charset?: string;
-        strictLangMatching?: boolean;
-        updateTerms?: boolean;
-      };
-    };
+        charset?: string
+        strictLangMatching?: boolean
+        updateTerms?: boolean
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["ImportTermBaseResponseDto"];
-      };
+        schema: definitions['ImportTermBaseResponseDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   listConcepts: {
     parameters: {
       path: {
-        termBaseUid: string;
-      };
+        termBaseUid: string
+      }
       query: {
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
-      };
-    };
+        pageSize?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["ConceptListResponseDto"];
-      };
+        schema: definitions['ConceptListResponseDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   createConcept: {
     parameters: {
       path: {
-        termBaseUid: string;
-      };
+        termBaseUid: string
+      }
       body: {
-        body?: definitions["ConceptEditDto"];
-      };
-    };
+        body?: definitions['ConceptEditDto']
+      }
+    }
     responses: {
       /** Created */
       201: {
-        schema: definitions["ConceptWithMetadataDto"];
-      };
+        schema: definitions['ConceptWithMetadataDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deleteConcepts: {
     parameters: {
       body: {
-        body?: definitions["ConceptListReference"];
-      };
+        body?: definitions['ConceptListReference']
+      }
       path: {
-        termBaseUid: string;
-      };
-    };
+        termBaseUid: string
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getConcept: {
     parameters: {
       path: {
-        termBaseUid: string;
-        conceptUid: string;
-      };
-    };
+        termBaseUid: string
+        conceptUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["ConceptWithMetadataDto"];
-      };
+        schema: definitions['ConceptWithMetadataDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   updateConcept: {
     parameters: {
       path: {
-        termBaseUid: string;
-        conceptUid: string;
-      };
+        termBaseUid: string
+        conceptUid: string
+      }
       body: {
-        body?: definitions["ConceptEditDto"];
-      };
-    };
+        body?: definitions['ConceptEditDto']
+      }
+    }
     responses: {
       /** Ok */
       200: {
-        schema: definitions["ConceptWithMetadataDto"];
-      };
+        schema: definitions['ConceptWithMetadataDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Set conceptId to assign the term to an existing concept, otherwise a new concept will be created. */
   createTerm: {
     parameters: {
       path: {
-        termBaseUid: string;
-      };
+        termBaseUid: string
+      }
       body: {
-        body?: definitions["TermCreateDto"];
-      };
-    };
+        body?: definitions['TermCreateDto']
+      }
+    }
     responses: {
       /** Created */
       201: {
-        schema: definitions["TermDto"];
-      };
+        schema: definitions['TermDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Deletes all terms */
   clearTermBase: {
     parameters: {
       path: {
-        termBaseUid: string;
-      };
-    };
+        termBaseUid: string
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getTerm: {
     parameters: {
       path: {
-        termBaseUid: string;
-        termId: string;
-      };
-    };
+        termBaseUid: string
+        termId: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["TermDto"];
-      };
+        schema: definitions['TermDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   updateTerm: {
     parameters: {
       path: {
-        termBaseUid: string;
-        termId: string;
-      };
+        termBaseUid: string
+        termId: string
+      }
       body: {
-        body?: definitions["TermEditDto"];
-      };
-    };
+        body?: definitions['TermEditDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["TermDto"];
-      };
+        schema: definitions['TermDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deleteTerm: {
     parameters: {
       path: {
-        termBaseUid: string;
-        termId: string;
-      };
-    };
+        termBaseUid: string
+        termId: string
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deleteConcept: {
     parameters: {
       path: {
-        termBaseUid: string;
-        conceptId: string;
-      };
-    };
+        termBaseUid: string
+        conceptId: string
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   listTermsOfConcept: {
     parameters: {
       path: {
-        termBaseUid: string;
-        conceptId: string;
-      };
-    };
+        termBaseUid: string
+        conceptId: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["ConceptDto"];
-      };
+        schema: definitions['ConceptDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getLastBackgroundTask: {
     parameters: {
       path: {
-        termBaseUid: string;
-      };
-    };
+        termBaseUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["BackgroundTasksTbDto"];
-      };
+        schema: definitions['BackgroundTasksTbDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   browseTerms: {
     parameters: {
       path: {
-        termBaseUid: string;
-      };
+        termBaseUid: string
+      }
       body: {
-        body?: definitions["BrowseRequestDto"];
-      };
-    };
+        body?: definitions['BrowseRequestDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["BrowseResponseListDto"];
-      };
+        schema: definitions['BrowseResponseListDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   searchTerms: {
     parameters: {
       path: {
-        termBaseUid: string;
-      };
+        termBaseUid: string
+      }
       body: {
-        body?: definitions["TermBaseSearchRequestDto"];
-      };
-    };
+        body?: definitions['TermBaseSearchRequestDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["SearchResponseListTbDto"];
-      };
+        schema: definitions['SearchResponseListTbDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   exportTermBase: {
     parameters: {
       path: {
-        termBaseUid: string;
-      };
+        termBaseUid: string
+      }
       query: {
-        format?: "Tbx" | "Xlsx";
-        charset?: string;
-        termStatus?: "NEW" | "APPROVED";
-      };
-    };
+        format?: 'Tbx' | 'Xlsx'
+        charset?: string
+        termStatus?: 'NEW' | 'APPROVED'
+      }
+    }
     responses: {
       /** application/octet-stream */
-      200: unknown;
+      200: unknown
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getTermBaseMetadata: {
     parameters: {
       path: {
-        termBaseUid: string;
-      };
-    };
+        termBaseUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["MetadataTbDto"];
-      };
+        schema: definitions['MetadataTbDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   listTransMemories: {
     parameters: {
       query: {
-        name?: string;
-        sourceLang?: string;
-        targetLang?: string;
-        clientId?: string;
-        domainId?: string;
-        subDomainId?: string;
-        businessUnitId?: string;
+        name?: string
+        sourceLang?: string
+        targetLang?: string
+        clientId?: string
+        domainId?: string
+        subDomainId?: string
+        businessUnitId?: string
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
-      };
-    };
+        pageSize?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoTransMemoryDto"];
-      };
+        schema: definitions['PageDtoTransMemoryDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   createTransMemory: {
     parameters: {
       body: {
-        body?: definitions["TransMemoryCreateDto"];
-      };
-    };
+        body?: definitions['TransMemoryCreateDto']
+      }
+    }
     responses: {
       /** Created */
       201: {
-        schema: definitions["TransMemoryDto"];
-      };
+        schema: definitions['TransMemoryDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getTransMemory: {
     parameters: {
       path: {
-        transMemoryUid: string;
-      };
-    };
+        transMemoryUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["TransMemoryDto"];
-      };
+        schema: definitions['TransMemoryDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   editTransMemory: {
     parameters: {
       path: {
-        transMemoryUid: string;
-      };
+        transMemoryUid: string
+      }
       body: {
-        body?: definitions["TransMemoryEditDto"];
-      };
-    };
+        body?: definitions['TransMemoryEditDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["TransMemoryDto"];
-      };
+        schema: definitions['TransMemoryDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deleteTransMemory: {
     parameters: {
       path: {
-        transMemoryUid: string;
-      };
+        transMemoryUid: string
+      }
       query: {
-        purge?: boolean;
-      };
-    };
+        purge?: boolean
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   addTargetLangToTransMemory: {
     parameters: {
       path: {
-        transMemoryUid: string;
-      };
+        transMemoryUid: string
+      }
       body: {
-        body?: definitions["TargetLanguageDto"];
-      };
-    };
+        body?: definitions['TargetLanguageDto']
+      }
+    }
     responses: {
       /** Created */
       201: {
-        schema: definitions["TransMemoryDto"];
-      };
+        schema: definitions['TransMemoryDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Returns a ZIP file containing the cleaned translation memories in the specified outputFormat. */
   exportCleanedTMs: {
     parameters: {
       body: {
-        body?: definitions["CleanedTransMemoriesDto"];
-      };
-    };
+        body?: definitions['CleanedTransMemoriesDto']
+      }
+    }
     responses: {
       /** successful operation */
       202: {
-        schema: definitions["AsyncRequestWrapperDto"];
-      };
+        schema: definitions['AsyncRequestWrapperDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   downloadCleanedTM: {
     parameters: {
       path: {
         /** Request ID */
-        asyncRequestId: string;
-      };
-    };
+        asyncRequestId: string
+      }
+    }
     responses: {
       /** application/octet-stream */
-      200: unknown;
+      200: unknown
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   insertToTransMemory: {
     parameters: {
       path: {
-        transMemoryUid: string;
-      };
+        transMemoryUid: string
+      }
       body: {
-        body?: definitions["SegmentDto"];
-      };
-    };
+        body?: definitions['SegmentDto']
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   clearTransMemory: {
     parameters: {
       path: {
-        transMemoryUid: string;
-      };
-    };
+        transMemoryUid: string
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getRelatedProjects: {
     parameters: {
       path: {
-        transMemoryUid: string;
-      };
+        transMemoryUid: string
+      }
       query: {
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
-      };
-    };
+        pageSize?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoAbstractProjectDto"];
-      };
+        schema: definitions['PageDtoAbstractProjectDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getMetadata: {
     parameters: {
       path: {
-        transMemoryUid: string;
-      };
+        transMemoryUid: string
+      }
       query: {
-        byLanguage?: boolean;
-      };
-    };
+        byLanguage?: boolean
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["MetadataResponse"];
-      };
+        schema: definitions['MetadataResponse']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   updateTranslation: {
     parameters: {
       path: {
-        transMemoryUid: string;
-        segmentId: string;
-      };
+        transMemoryUid: string
+        segmentId: string
+      }
       body: {
-        body?: definitions["TranslationDto"];
-      };
-    };
+        body?: definitions['TranslationDto']
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Not recommended for bulk removal of segments */
   deleteSourceAndTranslations: {
     parameters: {
       path: {
-        transMemoryUid: string;
-        segmentId: string;
-      };
-    };
+        transMemoryUid: string
+        segmentId: string
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Not recommended for bulk removal of segments */
   deleteTranslation: {
     parameters: {
       path: {
-        transMemoryUid: string;
-        segmentId: string;
-        lang: string;
-      };
-    };
+        transMemoryUid: string
+        segmentId: string
+        lang: string
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getBackgroundTasks_1: {
     parameters: {
       path: {
-        transMemoryUid: string;
-      };
-    };
+        transMemoryUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["BackgroundTasksTmDto"];
-      };
+        schema: definitions['BackgroundTasksTmDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   wildcardSearch: {
     parameters: {
       path: {
-        transMemoryUid: string;
-      };
+        transMemoryUid: string
+      }
       body: {
-        body?: definitions["WildCardSearchRequestDto"];
-      };
-    };
+        body?: definitions['WildCardSearchRequestDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["SearchResponseListTmDto"];
-      };
+        schema: definitions['SearchResponseListTmDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   downloadSearchResult: {
     parameters: {
       path: {
         /** Request ID */
-        asyncRequestId: string;
-      };
+        asyncRequestId: string
+      }
       query: {
-        format?: "TMX" | "XLSX";
+        format?: 'TMX' | 'XLSX'
         /** Fields to include in exported XLSX */
         fields?: (
-          | "ID"
-          | "TEXT"
-          | "PREVIOUS_SEGMENT"
-          | "NEXT_SEGMENT"
-          | "CONTEXT_KEY"
-          | "CREATED_BY"
-          | "CREATED_AT"
-          | "MODIFIED_BY"
-          | "MODIFIED_AT"
-          | "CLIENT"
-          | "PROJECT"
-          | "DOMAIN"
-          | "SUBDOMAIN"
-          | "NOTE"
-          | "REVIEWED"
-          | "ALIGNED"
-          | "FILENAME"
-          | "METADATA"
-        )[];
-      };
-    };
+          | 'ID'
+          | 'TEXT'
+          | 'PREVIOUS_SEGMENT'
+          | 'NEXT_SEGMENT'
+          | 'CONTEXT_KEY'
+          | 'CREATED_BY'
+          | 'CREATED_AT'
+          | 'MODIFIED_BY'
+          | 'MODIFIED_AT'
+          | 'CLIENT'
+          | 'PROJECT'
+          | 'DOMAIN'
+          | 'SUBDOMAIN'
+          | 'NOTE'
+          | 'REVIEWED'
+          | 'ALIGNED'
+          | 'FILENAME'
+          | 'METADATA'
+        )[]
+      }
+    }
     responses: {
       /** application/octet-stream */
-      200: unknown;
+      200: unknown
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Use [this API](#operation/downloadSearchResult) to download result */
   exportByQueryAsync: {
     parameters: {
       path: {
-        transMemoryUid: string;
-      };
+        transMemoryUid: string
+      }
       body: {
-        body?: definitions["ExportByQueryDto"];
-      };
-    };
+        body?: definitions['ExportByQueryDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["AsyncExportTMByQueryResponseDto"];
-      };
+        schema: definitions['AsyncExportTMByQueryResponseDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   search: {
     parameters: {
       path: {
-        transMemoryUid: string;
-      };
+        transMemoryUid: string
+      }
       body: {
-        body?: definitions["SearchRequestDto"];
-      };
-    };
+        body?: definitions['SearchRequestDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["SearchResponseListTmDto"];
-      };
+        schema: definitions['SearchResponseListTmDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Configured machine translate settings is used */
   machineTranslationJob: {
     parameters: {
       path: {
-        projectUid: string;
-        jobUid: string;
-      };
+        projectUid: string
+        jobUid: string
+      }
       body: {
-        body?: definitions["TranslationRequestDto"];
-      };
-    };
+        body?: definitions['TranslationRequestDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["MachineTranslateResponse"];
-      };
+        schema: definitions['MachineTranslateResponse']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getPriceList: {
     parameters: {
       path: {
-        priceListUid: string;
-      };
-    };
+        priceListUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["TranslationPriceListDto"];
-      };
+        schema: definitions['TranslationPriceListDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   updatePriceList: {
     parameters: {
       body: {
-        body?: definitions["TranslationPriceListCreateDto"];
-      };
+        body?: definitions['TranslationPriceListCreateDto']
+      }
       path: {
-        priceListUid: string;
-      };
-    };
+        priceListUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["TranslationPriceListDto"];
-      };
+        schema: definitions['TranslationPriceListDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deletePriceList: {
     parameters: {
       path: {
-        priceListUid: string;
-      };
-    };
+        priceListUid: string
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getListOfPriceList: {
     parameters: {
       query: {
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
-      };
-    };
+        pageSize?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoTranslationPriceListDto"];
-      };
+        schema: definitions['PageDtoTranslationPriceListDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   createPriceList: {
     parameters: {
       body: {
-        body?: definitions["TranslationPriceListCreateDto"];
-      };
-    };
+        body?: definitions['TranslationPriceListCreateDto']
+      }
+    }
     responses: {
       /** Created */
       201: {
-        schema: definitions["TranslationPriceListDto"];
-      };
+        schema: definitions['TranslationPriceListDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getPricesWithWorkflowSteps: {
     parameters: {
       path: {
-        priceListUid: string;
-      };
+        priceListUid: string
+      }
       query: {
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
-        sourceLanguages?: string[];
-        targetLanguages?: string[];
-      };
-    };
+        pageSize?: number
+        sourceLanguages?: string[]
+        targetLanguages?: string[]
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoTranslationPriceSetDto"];
-      };
+        schema: definitions['PageDtoTranslationPriceSetDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   createLanguagePair: {
     parameters: {
       body: {
-        body?: definitions["TranslationPriceSetCreateDto"];
-      };
+        body?: definitions['TranslationPriceSetCreateDto']
+      }
       path: {
-        priceListUid: string;
-      };
-    };
+        priceListUid: string
+      }
+    }
     responses: {
       /** Created */
       201: {
-        schema: definitions["TranslationPriceSetListDto"];
-      };
+        schema: definitions['TranslationPriceSetListDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deleteLanguagePairs: {
     parameters: {
       path: {
-        priceListUid: string;
-      };
+        priceListUid: string
+      }
       body: {
-        body?: definitions["TranslationPriceSetBulkDeleteDto"];
-      };
-    };
+        body?: definitions['TranslationPriceSetBulkDeleteDto']
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deleteLanguagePair: {
     parameters: {
       path: {
-        priceListUid: string;
-        sourceLanguage: string;
-        targetLanguage: string;
-      };
-    };
+        priceListUid: string
+        sourceLanguage: string
+        targetLanguage: string
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   setMinimumPriceForSet: {
     parameters: {
       body: {
-        body?: definitions["TranslationPriceSetBulkMinimumPricesDto"];
-      };
+        body?: definitions['TranslationPriceSetBulkMinimumPricesDto']
+      }
       path: {
-        priceListUid: string;
-      };
-    };
+        priceListUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["TranslationPriceListDto"];
-      };
+        schema: definitions['TranslationPriceListDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** If object contains only price, all languages and workflow steps will be updated */
   setPrices: {
     parameters: {
       body: {
-        body?: definitions["TranslationPriceSetBulkPricesDto"];
-      };
+        body?: definitions['TranslationPriceSetBulkPricesDto']
+      }
       path: {
-        priceListUid: string;
-      };
-    };
+        priceListUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["TranslationPriceListDto"];
-      };
+        schema: definitions['TranslationPriceListDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deleteUser_1: {
     parameters: {
       path: {
-        userUid: string;
-      };
-    };
+        userUid: string
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** List projects in which the user is assigned to at least one job matching the criteria */
   listAssignedProjects: {
     parameters: {
       path: {
-        userUid: string;
-      };
+        userUid: string
+      }
       query: {
         /** Status of the assigned jobs */
         status?: (
-          | "NEW"
-          | "ACCEPTED"
-          | "DECLINED"
-          | "DELIVERED"
-          | "EMAILED"
-          | "COMPLETED"
-          | "CANCELLED"
-        )[];
+          | 'NEW'
+          | 'ACCEPTED'
+          | 'DECLINED'
+          | 'DELIVERED'
+          | 'EMAILED'
+          | 'COMPLETED'
+          | 'CANCELLED'
+        )[]
         /** Target language of the assigned jobs */
-        targetLang?: string[];
-        workflowStepId?: number;
+        targetLang?: string[]
+        workflowStepId?: number
         /** Number of hours in which the assigned jobs are due. Use `-1` for jobs that are overdue. */
-        dueInHours?: number;
-        filename?: string;
-        projectName?: string;
-        pageNumber?: number;
-        pageSize?: number;
-      };
-    };
+        dueInHours?: number
+        filename?: string
+        projectName?: string
+        pageNumber?: number
+        pageSize?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoProjectReference"];
-      };
+        schema: definitions['PageDtoProjectReference']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /**
    * * Password length must be between 8 and 255
    * * Password must not be same as the username
@@ -20944,842 +20875,830 @@ export interface operations {
   updatePassword: {
     parameters: {
       body: {
-        body?: definitions["UserPasswordEditDto"];
-      };
+        body?: definitions['UserPasswordEditDto']
+      }
       path: {
-        userUid: string;
-      };
-    };
+        userUid: string
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   sendLoginInfo: {
     parameters: {
       path: {
-        userUid: string;
-      };
-    };
+        userUid: string
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   cancelDeletion: {
     parameters: {
       path: {
-        userUid: string;
-      };
-    };
+        userUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["UserDto"];
-      };
+        schema: definitions['UserDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   loginActivity: {
     parameters: {
       path: {
-        userUid: string;
-      };
-    };
+        userUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["UserStatisticsListDto"];
-      };
+        schema: definitions['UserStatisticsListDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getListOfUsersFiltered: {
     parameters: {
       query: {
         /** Filter for first name, that starts with value */
-        firstName?: string;
+        firstName?: string
         /** Filter for last name, that starts with value */
-        lastName?: string;
+        lastName?: string
         /** Filter for last name or first name, that starts with value */
-        name?: string;
-        userName?: string;
-        email?: string;
+        name?: string
+        userName?: string
+        email?: string
         /** Filter for last name, first name or email starting with the value */
-        nameOrEmail?: string;
-        role?: (
-          | "ADMIN"
-          | "PROJECT_MANAGER"
-          | "LINGUIST"
-          | "GUEST"
-          | "SUBMITTER"
-        )[];
-        includeDeleted?: boolean;
+        nameOrEmail?: string
+        role?: ('ADMIN' | 'PROJECT_MANAGER' | 'LINGUIST' | 'GUEST' | 'SUBMITTER')[]
+        includeDeleted?: boolean
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
-        sort?: ("ID" | "LAST_NAME" | "FIRST_NAME")[];
-        order?: ("ASC" | "DESC")[];
-      };
-    };
+        pageSize?: number
+        sort?: ('ID' | 'LAST_NAME' | 'FIRST_NAME')[]
+        order?: ('ASC' | 'DESC')[]
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoUserDto"];
-      };
+        schema: definitions['PageDtoUserDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   listJobs: {
     parameters: {
       path: {
-        userUid: string;
-      };
+        userUid: string
+      }
       query: {
         status?: (
-          | "NEW"
-          | "ACCEPTED"
-          | "DECLINED"
-          | "DELIVERED"
-          | "EMAILED"
-          | "COMPLETED"
-          | "CANCELLED"
-        )[];
-        projectUid?: string;
-        targetLang?: string[];
-        workflowStepId?: number;
+          | 'NEW'
+          | 'ACCEPTED'
+          | 'DECLINED'
+          | 'DELIVERED'
+          | 'EMAILED'
+          | 'COMPLETED'
+          | 'CANCELLED'
+        )[]
+        projectUid?: string
+        targetLang?: string[]
+        workflowStepId?: number
         /** -1 for jobs that are overdue */
-        dueInHours?: number;
-        filename?: string;
-        pageNumber?: number;
-        pageSize?: number;
-      };
-    };
+        dueInHours?: number
+        filename?: string
+        pageNumber?: number
+        pageSize?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoAssignedJobDto"];
-      };
+        schema: definitions['PageDtoAssignedJobDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   listWorkflowSteps: {
     parameters: {
       path: {
-        userUid: string;
-      };
+        userUid: string
+      }
       query: {
         status?: (
-          | "NEW"
-          | "ACCEPTED"
-          | "DECLINED"
-          | "DELIVERED"
-          | "EMAILED"
-          | "COMPLETED"
-          | "CANCELLED"
-        )[];
-        projectUid?: string;
-        targetLang?: string[];
+          | 'NEW'
+          | 'ACCEPTED'
+          | 'DECLINED'
+          | 'DELIVERED'
+          | 'EMAILED'
+          | 'COMPLETED'
+          | 'CANCELLED'
+        )[]
+        projectUid?: string
+        targetLang?: string[]
         /** -1 for jobs that are overdue */
-        dueInHours?: number;
-        filename?: string;
-        pageNumber?: number;
-        pageSize?: number;
-      };
-    };
+        dueInHours?: number
+        filename?: string
+        pageNumber?: number
+        pageSize?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoWorkflowStepReference"];
-      };
+        schema: definitions['PageDtoWorkflowStepReference']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   listTargetLangs: {
     parameters: {
       path: {
-        userUid: string;
-      };
+        userUid: string
+      }
       query: {
         status?: (
-          | "NEW"
-          | "ACCEPTED"
-          | "DECLINED"
-          | "DELIVERED"
-          | "EMAILED"
-          | "COMPLETED"
-          | "CANCELLED"
-        )[];
-        projectUid?: string;
-        workflowStepId?: number;
+          | 'NEW'
+          | 'ACCEPTED'
+          | 'DECLINED'
+          | 'DELIVERED'
+          | 'EMAILED'
+          | 'COMPLETED'
+          | 'CANCELLED'
+        )[]
+        projectUid?: string
+        workflowStepId?: number
         /** -1 for jobs that are overdue */
-        dueInHours?: number;
-        filename?: string;
-        pageNumber?: number;
-        pageSize?: number;
-      };
-    };
+        dueInHours?: number
+        filename?: string
+        pageNumber?: number
+        pageSize?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoString"];
-      };
+        schema: definitions['PageDtoString']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
-  "user-lastLogins": {
+      501: unknown
+    }
+  }
+  'user-lastLogins': {
     parameters: {
       query: {
-        userName?: string;
-        role?: (
-          | "ADMIN"
-          | "PROJECT_MANAGER"
-          | "LINGUIST"
-          | "GUEST"
-          | "SUBMITTER"
-        )[];
-        sort?: ("ID" | "LAST_LOGIN_DATE")[];
-        order?: ("ASC" | "DESC")[];
+        userName?: string
+        role?: ('ADMIN' | 'PROJECT_MANAGER' | 'LINGUIST' | 'GUEST' | 'SUBMITTER')[]
+        sort?: ('ID' | 'LAST_LOGIN_DATE')[]
+        order?: ('ASC' | 'DESC')[]
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 100, default 100 */
-        pageSize?: number;
-      };
-    };
+        pageSize?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoLastLoginDto"];
-      };
+        schema: definitions['PageDtoLastLoginDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getVendor: {
     parameters: {
       path: {
-        vendorUid: string;
-      };
-    };
+        vendorUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["VendorDto"];
-      };
+        schema: definitions['VendorDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   listVendors: {
     parameters: {
       query: {
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
+        pageSize?: number
         /** Name or the vendor, for filtering */
-        name?: string;
-      };
-    };
+        name?: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoVendorDto"];
-      };
+        schema: definitions['PageDtoVendorDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   createVendor: {
     parameters: {
       body: {
-        body?: definitions["CreateVendorDto"];
-      };
-    };
+        body?: definitions['CreateVendorDto']
+      }
+    }
     responses: {
       /** Created */
       201: {
-        schema: definitions["VendorDto"];
-      };
+        schema: definitions['VendorDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getWebhookCallsList: {
     parameters: {
       query: {
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
+        pageSize?: number
         /** List of Webhook events to filter by */
         events?: (
-          | "JOB_STATUS_CHANGED"
-          | "JOB_CREATED"
-          | "JOB_DELETED"
-          | "JOB_UNSHARED"
-          | "JOB_ASSIGNED"
-          | "JOB_DUE_DATE_CHANGED"
-          | "JOB_UPDATED"
-          | "JOB_TARGET_UPDATED"
-          | "JOB_EXPORTED"
-          | "JOB_UNEXPORTED"
-          | "PROJECT_CREATED"
-          | "PROJECT_DELETED"
-          | "PROJECT_UNSHARED"
-          | "PROJECT_STATUS_CHANGED"
-          | "PROJECT_DUE_DATE_CHANGED"
-          | "SHARED_PROJECT_ASSIGNED"
-          | "PROJECT_METADATA_UPDATED"
-          | "PRE_TRANSLATION_FINISHED"
-          | "ANALYSIS_CREATED"
-          | "CONTINUOUS_JOB_UPDATED"
-          | "PROJECT_TEMPLATE_CREATED"
-          | "PROJECT_TEMPLATE_UPDATED"
-          | "PROJECT_TEMPLATE_DELETED"
-          | "RAW_MT_CONVERTER_IMPORT_FINISHED"
-          | "RAW_MT_PRE_TRANSLATION_FINISHED"
-        )[];
+          | 'JOB_STATUS_CHANGED'
+          | 'JOB_CREATED'
+          | 'JOB_DELETED'
+          | 'JOB_UNSHARED'
+          | 'JOB_ASSIGNED'
+          | 'JOB_DUE_DATE_CHANGED'
+          | 'JOB_UPDATED'
+          | 'JOB_TARGET_UPDATED'
+          | 'JOB_EXPORTED'
+          | 'JOB_UNEXPORTED'
+          | 'PROJECT_CREATED'
+          | 'PROJECT_DELETED'
+          | 'PROJECT_UNSHARED'
+          | 'PROJECT_STATUS_CHANGED'
+          | 'PROJECT_DUE_DATE_CHANGED'
+          | 'SHARED_PROJECT_ASSIGNED'
+          | 'PROJECT_METADATA_UPDATED'
+          | 'PRE_TRANSLATION_FINISHED'
+          | 'ANALYSIS_CREATED'
+          | 'CONTINUOUS_JOB_UPDATED'
+          | 'PROJECT_TEMPLATE_CREATED'
+          | 'PROJECT_TEMPLATE_UPDATED'
+          | 'PROJECT_TEMPLATE_DELETED'
+          | 'RAW_MT_CONVERTER_IMPORT_FINISHED'
+          | 'RAW_MT_PRE_TRANSLATION_FINISHED'
+        )[]
         /** Status of Webhook calls to filter by */
-        status?: "SUCCESS" | "FAIL";
+        status?: 'SUCCESS' | 'FAIL'
         /** UID of Webhook to filter by */
-        webhookUid?: string;
+        webhookUid?: string
         /** UID of parent webhook call to filter by */
-        parentUid?: string;
-      };
-    };
+        parentUid?: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoWebhookCallDto"];
-      };
+        schema: definitions['PageDtoWebhookCallDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Replays given list of Webhook Calls in specified order in the request */
   replayWebhookCalls: {
     parameters: {
       body: {
-        body?: definitions["ReplayRequestDto"];
-      };
-    };
+        body?: definitions['ReplayRequestDto']
+      }
+    }
     responses: {
       /** Accepted */
-      202: unknown;
+      202: unknown
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Replays specified number of last Webhook calls from oldest to the newest one */
   replayLast: {
     parameters: {
       query: {
         /** Number of calls to be replayed */
-        numberOfCalls?: number;
+        numberOfCalls?: number
         /** List of Webhook events to filter by */
         events?: (
-          | "JOB_STATUS_CHANGED"
-          | "JOB_CREATED"
-          | "JOB_DELETED"
-          | "JOB_UNSHARED"
-          | "JOB_ASSIGNED"
-          | "JOB_DUE_DATE_CHANGED"
-          | "JOB_UPDATED"
-          | "JOB_TARGET_UPDATED"
-          | "JOB_EXPORTED"
-          | "JOB_UNEXPORTED"
-          | "PROJECT_CREATED"
-          | "PROJECT_DELETED"
-          | "PROJECT_UNSHARED"
-          | "PROJECT_STATUS_CHANGED"
-          | "PROJECT_DUE_DATE_CHANGED"
-          | "SHARED_PROJECT_ASSIGNED"
-          | "PROJECT_METADATA_UPDATED"
-          | "PRE_TRANSLATION_FINISHED"
-          | "ANALYSIS_CREATED"
-          | "CONTINUOUS_JOB_UPDATED"
-          | "PROJECT_TEMPLATE_CREATED"
-          | "PROJECT_TEMPLATE_UPDATED"
-          | "PROJECT_TEMPLATE_DELETED"
-          | "RAW_MT_CONVERTER_IMPORT_FINISHED"
-          | "RAW_MT_PRE_TRANSLATION_FINISHED"
-        )[];
+          | 'JOB_STATUS_CHANGED'
+          | 'JOB_CREATED'
+          | 'JOB_DELETED'
+          | 'JOB_UNSHARED'
+          | 'JOB_ASSIGNED'
+          | 'JOB_DUE_DATE_CHANGED'
+          | 'JOB_UPDATED'
+          | 'JOB_TARGET_UPDATED'
+          | 'JOB_EXPORTED'
+          | 'JOB_UNEXPORTED'
+          | 'PROJECT_CREATED'
+          | 'PROJECT_DELETED'
+          | 'PROJECT_UNSHARED'
+          | 'PROJECT_STATUS_CHANGED'
+          | 'PROJECT_DUE_DATE_CHANGED'
+          | 'SHARED_PROJECT_ASSIGNED'
+          | 'PROJECT_METADATA_UPDATED'
+          | 'PRE_TRANSLATION_FINISHED'
+          | 'ANALYSIS_CREATED'
+          | 'CONTINUOUS_JOB_UPDATED'
+          | 'PROJECT_TEMPLATE_CREATED'
+          | 'PROJECT_TEMPLATE_UPDATED'
+          | 'PROJECT_TEMPLATE_DELETED'
+          | 'RAW_MT_CONVERTER_IMPORT_FINISHED'
+          | 'RAW_MT_PRE_TRANSLATION_FINISHED'
+        )[]
         /** Status of Webhook calls to filter by */
-        status?: "SUCCESS" | "FAIL";
-      };
-    };
+        status?: 'SUCCESS' | 'FAIL'
+      }
+    }
     responses: {
       /** Accepted */
-      202: unknown;
+      202: unknown
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   listWFSteps: {
     parameters: {
       query: {
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
-        sort?: "ID" | "NAME" | "ORDER" | "ABBR";
-        order?: "ASC" | "DESC";
+        pageSize?: number
+        sort?: 'ID' | 'NAME' | 'ORDER' | 'ABBR'
+        order?: 'ASC' | 'DESC'
         /** Name of the workflow step */
-        name?: string;
+        name?: string
         /** Abbreviation of workflow step */
-        abbr?: string;
-      };
-    };
+        abbr?: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoWorkflowStepDto"];
-      };
+        schema: definitions['PageDtoWorkflowStepDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   createWFStep: {
     parameters: {
       body: {
-        body?: definitions["CreateWorkflowStepDto"];
-      };
-    };
+        body?: definitions['CreateWorkflowStepDto']
+      }
+    }
     responses: {
       /** Created */
       201: {
-        schema: definitions["WorkflowStepDto"];
-      };
+        schema: definitions['WorkflowStepDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   editWFStep: {
     parameters: {
       path: {
-        workflowStepUid: string;
-      };
+        workflowStepUid: string
+      }
       body: {
-        body?: definitions["EditWorkflowStepDto"];
-      };
-    };
+        body?: definitions['EditWorkflowStepDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["WorkflowStepDto"];
-      };
+        schema: definitions['WorkflowStepDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Returns created analyses - batching analyses by number of segments (api.segment.count.approximation, default 100000), in case request contains more segments than maximum (api.segment.max.count, default 300000), returns 400 bad request. */
   createAnalyseAsync_1: {
     parameters: {
       body: {
-        body?: definitions["CreateAnalyseAsyncV2Dto"];
-      };
-    };
+        body?: definitions['CreateAnalyseAsyncV2Dto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["AsyncAnalyseListResponseV2Dto"];
-      };
+        schema: definitions['AsyncAnalyseListResponseV2Dto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /**
    * If no netRateScheme is provided in
    * request, then netRateScheme associated with provider will be used if it exists, otherwise it will remain the same
@@ -21788,210 +21707,210 @@ export interface operations {
   editAnalysis: {
     parameters: {
       path: {
-        analyseUid: string;
-      };
+        analyseUid: string
+      }
       body: {
-        body?: definitions["EditAnalyseV2Dto"];
-      };
-    };
+        body?: definitions['EditAnalyseV2Dto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["AnalyseV2Dto"];
-      };
+        schema: definitions['AnalyseV2Dto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /**
    * If no netRateScheme is provided in request, then netRateScheme associated with provider will
    * be used if it exists, otherwise it will remain the same as it was.
    */
-  "analyses-batchEdit-v2": {
+  'analyses-batchEdit-v2': {
     parameters: {
       body: {
-        body?: definitions["BulkEditAnalyseV2Dto"];
-      };
-    };
+        body?: definitions['BulkEditAnalyseV2Dto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["AnalysesV2Dto"];
-      };
+        schema: definitions['AnalysesV2Dto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Returns updated job parts and projects */
   uploadBilingualFileV2: {
     parameters: {
       query: {
-        saveToTransMemory?: "All" | "Confirmed" | "None";
-        setCompleted?: boolean;
-      };
+        saveToTransMemory?: 'All' | 'Confirmed' | 'None'
+        setCompleted?: boolean
+      }
       body: {
         /** Multipart request with files */
-        multipart: definitions["UploadBilingualFileRequestDto"];
-      };
-    };
+        multipart: definitions['UploadBilingualFileRequestDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["ProjectJobPartsDto"];
-      };
+        schema: definitions['ProjectJobPartsDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Download the file by referencing successfully finished async download request [Connector - Download file (async)](#operation/getFile_1). */
   getPreparedFile: {
     parameters: {
       path: {
-        connectorId: string;
-        folder: string;
-        file: string;
-        taskId: string;
-      };
-    };
+        connectorId: string
+        folder: string
+        file: string
+        taskId: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["InputStreamLength"];
-      };
+        schema: definitions['InputStreamLength']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Upload a file to a subfolder of the selected connector */
   uploadFile_1: {
     parameters: {
       path: {
-        connectorId: string;
-        folder: string;
-        fileName: string;
-      };
+        connectorId: string
+        folder: string
+        fileName: string
+      }
       query: {
         /** Mime type of the file to upload */
-        mimeType?: string;
-      };
+        mimeType?: string
+      }
       header: {
-        Memsource: string;
-        "Content-Type": "multipart/form-data";
-      };
+        Memsource: string
+        'Content-Type': 'multipart/form-data'
+      }
       formData: {
         /** Translated file to upload */
-        file: unknown;
-      };
-    };
+        file: unknown
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["AsyncFileOpResponseDto"];
-      };
+        schema: definitions['AsyncFileOpResponseDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /**
    * Create an asynchronous request to download a file from a (sub)folder of the selected connector.
    * After a callback with successful response is received, prepared file can be downloaded by [Download prepared file](#operation/getPreparedFile)
@@ -22000,701 +21919,701 @@ export interface operations {
   getFile_1: {
     parameters: {
       path: {
-        connectorId: string;
-        folder: string;
-        file: string;
-      };
+        connectorId: string
+        folder: string
+        file: string
+      }
       body: {
-        body?: definitions["GetFileRequestParamsDto"];
-      };
-    };
+        body?: definitions['GetFileRequestParamsDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["AsyncFileOpResponseDto"];
-      };
+        schema: definitions['AsyncFileOpResponseDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   downloadWorkflowChanges: {
     parameters: {
       body: {
-        body?: definitions["WorkflowChangesDto"];
-      };
-    };
+        body?: definitions['WorkflowChangesDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["Response"];
-      };
+        schema: definitions['Response']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   createLqaConversation_1: {
     parameters: {
       path: {
-        jobUid: string;
-      };
+        jobUid: string
+      }
       body: {
-        body?: definitions["CreateLqaConversationDto"];
-      };
-    };
+        body?: definitions['CreateLqaConversationDto']
+      }
+    }
     responses: {
       /** Created */
       201: {
-        schema: definitions["LQAConversationDto"];
-      };
+        schema: definitions['LQAConversationDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   updateLqaConversation_1: {
     parameters: {
       path: {
-        jobUid: string;
-        conversationId: string;
-      };
+        jobUid: string
+        conversationId: string
+      }
       body: {
-        body?: definitions["EditLqaConversationDto"];
-      };
-    };
+        body?: definitions['EditLqaConversationDto']
+      }
+    }
     responses: {
       /** Updated */
       202: {
-        schema: definitions["LQAConversationDto"];
-      };
+        schema: definitions['LQAConversationDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   addLQAComment_1: {
     parameters: {
       path: {
-        jobUid: string;
-        conversationId: string;
-      };
+        jobUid: string
+        conversationId: string
+      }
       body: {
-        body?: definitions["AddCommentDto"];
-      };
-    };
+        body?: definitions['AddCommentDto']
+      }
+    }
     responses: {
       /** Created */
       201: {
-        schema: definitions["AddLqaCommentResultDto"];
-      };
+        schema: definitions['AddLqaCommentResultDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   updateLQAComment_1: {
     parameters: {
       path: {
-        jobUid: string;
-        conversationId: string;
-        commentId: string;
-      };
+        jobUid: string
+        conversationId: string
+        commentId: string
+      }
       body: {
-        body?: definitions["AddCommentDto"];
-      };
-    };
+        body?: definitions['AddCommentDto']
+      }
+    }
     responses: {
       /** Updated */
       202: {
-        schema: definitions["LQAConversationDto"];
-      };
+        schema: definitions['LQAConversationDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getLqaProfileAuthorsV2: {
     parameters: {
       query: {
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 20 */
-        pageSize?: number;
-      };
-    };
+        pageSize?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoUserReference"];
-      };
+        schema: definitions['PageDtoUserReference']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   listProviders_3: {
     parameters: {
       path: {
-        projectUid: string;
-      };
-    };
+        projectUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["ProviderListDtoV2"];
-      };
+        schema: definitions['ProviderListDtoV2']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   setProjectQASettingsV2: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["EditQASettingsDtoV2"];
-      };
-    };
+        body?: definitions['EditQASettingsDtoV2']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["QASettingsDtoV2"];
-      };
+        schema: definitions['QASettingsDtoV2']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   createProjectFromTemplateV2: {
     parameters: {
       path: {
-        templateUid: string;
-      };
+        templateUid: string
+      }
       body: {
-        body?: definitions["CreateProjectFromTemplateV2Dto"];
-      };
-    };
+        body?: definitions['CreateProjectFromTemplateV2Dto']
+      }
+    }
     responses: {
       /** Created */
       201: {
-        schema: definitions["AbstractProjectDtoV2"];
-      };
+        schema: definitions['AbstractProjectDtoV2']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   createProjectFromTemplateV2Async: {
     parameters: {
       path: {
-        templateUid: string;
-      };
+        templateUid: string
+      }
       body: {
-        body?: definitions["CreateProjectFromTemplateAsyncV2Dto"];
-      };
-    };
+        body?: definitions['CreateProjectFromTemplateAsyncV2Dto']
+      }
+    }
     responses: {
       /** Accepted */
       202: {
-        schema: definitions["AsyncRequestWrapperV2Dto"];
-      };
+        schema: definitions['AsyncRequestWrapperV2Dto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getProjectAccessSettingsV2: {
     parameters: {
       path: {
-        projectUid: string;
-      };
-    };
+        projectUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["ProjectSecuritySettingsDtoV2"];
-      };
+        schema: definitions['ProjectSecuritySettingsDtoV2']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   editProjectAccessSettingsV2: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["EditProjectSecuritySettingsDtoV2"];
-      };
-    };
+        body?: definitions['EditProjectSecuritySettingsDtoV2']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["ProjectSecuritySettingsDtoV2"];
-      };
+        schema: definitions['ProjectSecuritySettingsDtoV2']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getProjectWorkflowStepsV2: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       query: {
         /** Return only steps containing jobs assigned to the calling linguist. */
-        withAssignedJobs?: boolean;
-      };
-    };
+        withAssignedJobs?: boolean
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["ProjectWorkflowStepListDtoV2"];
-      };
+        schema: definitions['ProjectWorkflowStepListDtoV2']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   editProjectV2: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["EditProjectV2Dto"];
-      };
-    };
+        body?: definitions['EditProjectV2Dto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["AbstractProjectDtoV2"];
-      };
+        schema: definitions['AbstractProjectDtoV2']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   listPartsV2: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       query: {
-        pageNumber?: number;
-        pageSize?: number;
-        count?: boolean;
-        workflowLevel?: number;
+        pageNumber?: number
+        pageSize?: number
+        count?: boolean
+        workflowLevel?: number
         status?: (
-          | "NEW"
-          | "ACCEPTED"
-          | "DECLINED"
-          | "REJECTED"
-          | "DELIVERED"
-          | "EMAILED"
-          | "COMPLETED"
-          | "CANCELLED"
-        )[];
-        assignedUser?: number;
-        dueInHours?: number;
-        filename?: string;
-        targetLang?: string;
-        assignedVendor?: number;
-        notReady?: boolean;
-      };
-    };
+          | 'NEW'
+          | 'ACCEPTED'
+          | 'DECLINED'
+          | 'REJECTED'
+          | 'DELIVERED'
+          | 'EMAILED'
+          | 'COMPLETED'
+          | 'CANCELLED'
+        )[]
+        assignedUser?: number
+        dueInHours?: number
+        filename?: string
+        targetLang?: string
+        assignedVendor?: number
+        notReady?: boolean
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoJobPartReferenceV2"];
-      };
+        schema: definitions['PageDtoJobPartReferenceV2']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Returns enabled quality assurance checks and settings. */
   enabledQualityChecksForJob: {
     parameters: {
       path: {
-        projectUid: string;
-      };
-    };
+        projectUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["QualityAssuranceChecksDtoV2"];
-      };
+        schema: definitions['QualityAssuranceChecksDtoV2']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Returns enabled quality assurance checks and settings for job. */
   enabledQualityChecksForJob_1: {
     parameters: {
       path: {
-        projectUid: string;
-        jobUid: string;
-      };
-    };
+        projectUid: string
+        jobUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["QualityAssuranceChecksDtoV2"];
-      };
+        schema: definitions['QualityAssuranceChecksDtoV2']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /**
    * Possible warning codes are:
    *   - `NOT_ACCEPTED_BY_LINGUIST` - Job is not accepted by linguist
@@ -22774,187 +22693,187 @@ export interface operations {
   webEditorLinkV2: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["CreateWebEditorLinkDtoV2"];
-      };
-    };
+        body?: definitions['CreateWebEditorLinkDtoV2']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["WebEditorLinkDtoV2"];
-      };
+        schema: definitions['WebEditorLinkDtoV2']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   pseudoTranslate_1: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["PseudoTranslateWrapperDto"];
-      };
-    };
+        body?: definitions['PseudoTranslateWrapperDto']
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   preTranslate_1: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["PreTranslateJobsV2Dto"];
-      };
-    };
+        body?: definitions['PreTranslateJobsV2Dto']
+      }
+    }
     responses: {
       /** Accepted */
       202: {
-        schema: definitions["AsyncRequestWrapperV2Dto"];
-      };
+        schema: definitions['AsyncRequestWrapperV2Dto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deleteAllTranslations_1: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["JobPartReadyDeleteTranslationDto"];
-      };
-    };
+        body?: definitions['JobPartReadyDeleteTranslationDto']
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   listProviders_4: {
     parameters: {
       path: {
-        projectUid: string;
-        jobUid: string;
-      };
-    };
+        projectUid: string
+        jobUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["ProviderListDtoV2"];
-      };
+        schema: definitions['ProviderListDtoV2']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /**
    * This call will create async request for downloading target file with translation that can be downloaded when
    *     finished. This means even for other jobs that were created via 'split jobs' etc.
@@ -22962,39 +22881,39 @@ export interface operations {
   completedFile_1: {
     parameters: {
       path: {
-        projectUid: string;
-        jobUid: string;
-      };
-    };
+        projectUid: string
+        jobUid: string
+      }
+    }
     responses: {
       /** Accepted */
       202: {
-        schema: definitions["AsyncRequestWrapperV2Dto"];
-      };
+        schema: definitions['AsyncRequestWrapperV2Dto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /**
    * This call will return target file with translation. This means even for other jobs that were created via
    *     'split jobs' etc.
@@ -23002,115 +22921,115 @@ export interface operations {
   downloadCompletedFile: {
     parameters: {
       path: {
-        projectUid: string;
-        jobUid: string;
-        asyncRequestId: string;
-      };
+        projectUid: string
+        jobUid: string
+        asyncRequestId: string
+      }
       query: {
-        format?: "ORIGINAL" | "PDF";
-      };
-    };
+        format?: 'ORIGINAL' | 'PDF'
+      }
+    }
     responses: {
       /** application/octet-stream */
-      200: unknown;
+      200: unknown
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   addIgnoredWarnings_1: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["UpdateIgnoredWarningsDto"];
-      };
-    };
+        body?: definitions['UpdateIgnoredWarningsDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["UpdateIgnoredWarningsDto"];
-      };
+        schema: definitions['UpdateIgnoredWarningsDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deleteIgnoredWarnings_1: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["UpdateIgnoredWarningsDto"];
-      };
-    };
+        body?: definitions['UpdateIgnoredWarningsDto']
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /**
    * The `json` request part allows sending additional data as JSON,
    * such as a text note that will be used for all the given reference files.
@@ -23127,42 +23046,42 @@ export interface operations {
   createReferenceFiles: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
         /** Multipart request with files and JSON */
-        multipart: definitions["CreateReferenceFilesRequest"];
-      };
-    };
+        multipart: definitions['CreateReferenceFilesRequest']
+      }
+    }
     responses: {
       /** Created */
       201: {
-        schema: definitions["ReferenceFilesDto"];
-      };
+        schema: definitions['ReferenceFilesDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /**
    * If user wants to edit “All target languages” or "All workflow steps”,
    *                        but there are already varied TM settings for individual languages or steps,
@@ -23171,77 +23090,77 @@ export interface operations {
   setProjectTemplateTransMemoriesV2: {
     parameters: {
       path: {
-        projectTemplateUid: string;
-      };
+        projectTemplateUid: string
+      }
       body: {
-        body?: definitions["SetProjectTemplateTransMemoriesV2Dto"];
-      };
-    };
+        body?: definitions['SetProjectTemplateTransMemoriesV2Dto']
+      }
+    }
     responses: {
       /** OK */
       200: {
-        schema: definitions["ProjectTemplateTransMemoryListV2Dto"];
-      };
+        schema: definitions['ProjectTemplateTransMemoryListV2Dto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Either WorkflowSettings or Units must be sent for billingUnit "Hour". */
   createQuoteV2: {
     parameters: {
       body: {
-        body?: definitions["QuoteCreateV2Dto"];
-      };
-    };
+        body?: definitions['QuoteCreateV2Dto']
+      }
+    }
     responses: {
       /** successful operation */
       201: {
-        schema: definitions["QuoteV2Dto"];
-      };
+        schema: definitions['QuoteV2Dto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /**
    * Terms can be imported from XLS/XLSX and TBX file formats into a term base.
    * See <a target="_blank" href="https://support.phrase.com/hc/en-us/articles/5709733372188">Phrase Help Center</a>
@@ -23249,1472 +23168,1472 @@ export interface operations {
   importTermBaseV2: {
     parameters: {
       body: {
-        body?: definitions["InputStream"];
-      };
+        body?: definitions['InputStream']
+      }
       header: {
         /** must match pattern `((inline|attachment); )?filename\*=UTF-8''(.+)` */
-        "Content-Disposition": string;
-      };
+        'Content-Disposition': string
+      }
       path: {
-        termBaseUid: string;
-      };
+        termBaseUid: string
+      }
       query: {
-        charset?: string;
-        strictLangMatching?: boolean;
-        updateTerms?: boolean;
-      };
-    };
+        charset?: string
+        strictLangMatching?: boolean
+        updateTerms?: boolean
+      }
+    }
     responses: {
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Use [this API](#operation/downloadSearchResult) to download result */
   exportV2: {
     parameters: {
       path: {
-        transMemoryUid: string;
-      };
+        transMemoryUid: string
+      }
       body: {
-        body?: definitions["ExportTMDto"];
-      };
-    };
+        body?: definitions['ExportTMDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["AsyncExportTMResponseDto"];
-      };
+        schema: definitions['AsyncExportTMResponseDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** This call is **asynchronous**, use [this API](#operation/getAsyncRequest) to check the result */
   clearTransMemoryV2: {
     parameters: {
       path: {
-        transMemoryUid: string;
-      };
-    };
+        transMemoryUid: string
+      }
+    }
     responses: {
       /** Accepted */
-      202: unknown;
+      202: unknown
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   importTransMemoryV2: {
     parameters: {
       header: {
-        "Content-Length"?: number;
+        'Content-Length'?: number
         /** must match pattern `((inline|attachment); )?filename\*=UTF-8''(.+)` */
-        "Content-Disposition": string;
-      };
+        'Content-Disposition': string
+      }
       path: {
-        transMemoryUid: string;
-      };
+        transMemoryUid: string
+      }
       body: {
-        body?: definitions["InputStream"];
-      };
+        body?: definitions['InputStream']
+      }
       query: {
-        strictLangMatching?: boolean;
-        stripNativeCodes?: boolean;
-      };
-    };
+        strictLangMatching?: boolean
+        stripNativeCodes?: boolean
+      }
+    }
     responses: {
       /** successful operation */
       202: {
-        schema: definitions["AsyncRequestWrapperV2Dto"];
-      };
+        schema: definitions['AsyncRequestWrapperV2Dto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getWebHookList_1: {
     parameters: {
       query: {
         /** Page number, starting with 0, default 0 */
-        pageNumber?: number;
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
+        pageSize?: number
         /** Filter by webhook name */
-        name?: string;
+        name?: string
         /** Filter by enabled/disabled status */
-        status?: "ENABLED" | "DISABLED";
+        status?: 'ENABLED' | 'DISABLED'
         /** Filter by webhook URL */
-        url?: string;
+        url?: string
         /** Filter by webhook events, any match is included */
         events?: (
-          | "JOB_STATUS_CHANGED"
-          | "JOB_CREATED"
-          | "JOB_DELETED"
-          | "JOB_UNSHARED"
-          | "JOB_ASSIGNED"
-          | "JOB_DUE_DATE_CHANGED"
-          | "JOB_UPDATED"
-          | "JOB_TARGET_UPDATED"
-          | "JOB_EXPORTED"
-          | "JOB_UNEXPORTED"
-          | "PROJECT_CREATED"
-          | "PROJECT_DELETED"
-          | "PROJECT_UNSHARED"
-          | "PROJECT_STATUS_CHANGED"
-          | "PROJECT_DUE_DATE_CHANGED"
-          | "SHARED_PROJECT_ASSIGNED"
-          | "PROJECT_METADATA_UPDATED"
-          | "PRE_TRANSLATION_FINISHED"
-          | "ANALYSIS_CREATED"
-          | "CONTINUOUS_JOB_UPDATED"
-          | "PROJECT_TEMPLATE_CREATED"
-          | "PROJECT_TEMPLATE_UPDATED"
-          | "PROJECT_TEMPLATE_DELETED"
-          | "RAW_MT_CONVERTER_IMPORT_FINISHED"
-          | "RAW_MT_PRE_TRANSLATION_FINISHED"
-        )[];
+          | 'JOB_STATUS_CHANGED'
+          | 'JOB_CREATED'
+          | 'JOB_DELETED'
+          | 'JOB_UNSHARED'
+          | 'JOB_ASSIGNED'
+          | 'JOB_DUE_DATE_CHANGED'
+          | 'JOB_UPDATED'
+          | 'JOB_TARGET_UPDATED'
+          | 'JOB_EXPORTED'
+          | 'JOB_UNEXPORTED'
+          | 'PROJECT_CREATED'
+          | 'PROJECT_DELETED'
+          | 'PROJECT_UNSHARED'
+          | 'PROJECT_STATUS_CHANGED'
+          | 'PROJECT_DUE_DATE_CHANGED'
+          | 'SHARED_PROJECT_ASSIGNED'
+          | 'PROJECT_METADATA_UPDATED'
+          | 'PRE_TRANSLATION_FINISHED'
+          | 'ANALYSIS_CREATED'
+          | 'CONTINUOUS_JOB_UPDATED'
+          | 'PROJECT_TEMPLATE_CREATED'
+          | 'PROJECT_TEMPLATE_UPDATED'
+          | 'PROJECT_TEMPLATE_DELETED'
+          | 'RAW_MT_CONVERTER_IMPORT_FINISHED'
+          | 'RAW_MT_PRE_TRANSLATION_FINISHED'
+        )[]
         /** Filter by webhook creators UIDs */
-        createdBy?: string[];
+        createdBy?: string[]
         /** Filter by webhook updaters UIDs */
-        modifiedBy?: string[];
+        modifiedBy?: string[]
         /** Sort by this field */
-        sortField?: "NAME" | "STATUS" | "CREATED" | "LAST_MODIFIED";
+        sortField?: 'NAME' | 'STATUS' | 'CREATED' | 'LAST_MODIFIED'
         /** Sort direction */
-        sortTrend?: "ASC" | "DESC";
-      };
-    };
+        sortTrend?: 'ASC' | 'DESC'
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoWebHookDtoV2"];
-      };
+        schema: definitions['PageDtoWebHookDtoV2']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   createWebHook_1: {
     parameters: {
       body: {
-        body?: definitions["CreateWebHookDto"];
-      };
-    };
+        body?: definitions['CreateWebHookDto']
+      }
+    }
     responses: {
       /** Created */
       201: {
-        schema: definitions["WebHookDtoV2"];
-      };
+        schema: definitions['WebHookDtoV2']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getWebHook_1: {
     parameters: {
       path: {
-        webHookUid: string;
-      };
-    };
+        webHookUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["WebHookDtoV2"];
-      };
+        schema: definitions['WebHookDtoV2']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   updateWebHook_1: {
     parameters: {
       path: {
-        webHookUid: string;
-      };
+        webHookUid: string
+      }
       body: {
-        body?: definitions["CreateWebHookDto"];
-      };
-    };
+        body?: definitions['CreateWebHookDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["WebHookDtoV2"];
-      };
+        schema: definitions['WebHookDtoV2']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   deleteWebHook_1: {
     parameters: {
       path: {
-        webHookUid: string;
-      };
-    };
+        webHookUid: string
+      }
+    }
     responses: {
       /** No Content */
-      204: never;
+      204: never
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getWebhookPreviews: {
     parameters: {
       query: {
         /** Filter by webhook events */
         events?: (
-          | "JOB_STATUS_CHANGED"
-          | "JOB_CREATED"
-          | "JOB_DELETED"
-          | "JOB_UNSHARED"
-          | "JOB_ASSIGNED"
-          | "JOB_DUE_DATE_CHANGED"
-          | "JOB_UPDATED"
-          | "JOB_TARGET_UPDATED"
-          | "JOB_EXPORTED"
-          | "JOB_UNEXPORTED"
-          | "PROJECT_CREATED"
-          | "PROJECT_DELETED"
-          | "PROJECT_UNSHARED"
-          | "PROJECT_STATUS_CHANGED"
-          | "PROJECT_DUE_DATE_CHANGED"
-          | "SHARED_PROJECT_ASSIGNED"
-          | "PROJECT_METADATA_UPDATED"
-          | "PRE_TRANSLATION_FINISHED"
-          | "ANALYSIS_CREATED"
-          | "CONTINUOUS_JOB_UPDATED"
-          | "PROJECT_TEMPLATE_CREATED"
-          | "PROJECT_TEMPLATE_UPDATED"
-          | "PROJECT_TEMPLATE_DELETED"
-          | "RAW_MT_CONVERTER_IMPORT_FINISHED"
-          | "RAW_MT_PRE_TRANSLATION_FINISHED"
-        )[];
-      };
-    };
+          | 'JOB_STATUS_CHANGED'
+          | 'JOB_CREATED'
+          | 'JOB_DELETED'
+          | 'JOB_UNSHARED'
+          | 'JOB_ASSIGNED'
+          | 'JOB_DUE_DATE_CHANGED'
+          | 'JOB_UPDATED'
+          | 'JOB_TARGET_UPDATED'
+          | 'JOB_EXPORTED'
+          | 'JOB_UNEXPORTED'
+          | 'PROJECT_CREATED'
+          | 'PROJECT_DELETED'
+          | 'PROJECT_UNSHARED'
+          | 'PROJECT_STATUS_CHANGED'
+          | 'PROJECT_DUE_DATE_CHANGED'
+          | 'SHARED_PROJECT_ASSIGNED'
+          | 'PROJECT_METADATA_UPDATED'
+          | 'PRE_TRANSLATION_FINISHED'
+          | 'ANALYSIS_CREATED'
+          | 'CONTINUOUS_JOB_UPDATED'
+          | 'PROJECT_TEMPLATE_CREATED'
+          | 'PROJECT_TEMPLATE_UPDATED'
+          | 'PROJECT_TEMPLATE_DELETED'
+          | 'RAW_MT_CONVERTER_IMPORT_FINISHED'
+          | 'RAW_MT_PRE_TRANSLATION_FINISHED'
+        )[]
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["WebhookPreviewsDto"];
-      };
+        schema: definitions['WebhookPreviewsDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   sendTestWebhook: {
     parameters: {
       path: {
         /** UID of the webhook */
-        webhookUid: string;
-      };
+        webhookUid: string
+      }
       query: {
         /** Event of test webhook */
         event:
-          | "JOB_STATUS_CHANGED"
-          | "JOB_CREATED"
-          | "JOB_DELETED"
-          | "JOB_UNSHARED"
-          | "JOB_ASSIGNED"
-          | "JOB_DUE_DATE_CHANGED"
-          | "JOB_UPDATED"
-          | "JOB_TARGET_UPDATED"
-          | "JOB_EXPORTED"
-          | "JOB_UNEXPORTED"
-          | "PROJECT_CREATED"
-          | "PROJECT_DELETED"
-          | "PROJECT_UNSHARED"
-          | "PROJECT_STATUS_CHANGED"
-          | "PROJECT_DUE_DATE_CHANGED"
-          | "SHARED_PROJECT_ASSIGNED"
-          | "PROJECT_METADATA_UPDATED"
-          | "PRE_TRANSLATION_FINISHED"
-          | "ANALYSIS_CREATED"
-          | "CONTINUOUS_JOB_UPDATED"
-          | "PROJECT_TEMPLATE_CREATED"
-          | "PROJECT_TEMPLATE_UPDATED"
-          | "PROJECT_TEMPLATE_DELETED"
-          | "RAW_MT_CONVERTER_IMPORT_FINISHED"
-          | "RAW_MT_PRE_TRANSLATION_FINISHED";
-      };
-    };
+          | 'JOB_STATUS_CHANGED'
+          | 'JOB_CREATED'
+          | 'JOB_DELETED'
+          | 'JOB_UNSHARED'
+          | 'JOB_ASSIGNED'
+          | 'JOB_DUE_DATE_CHANGED'
+          | 'JOB_UPDATED'
+          | 'JOB_TARGET_UPDATED'
+          | 'JOB_EXPORTED'
+          | 'JOB_UNEXPORTED'
+          | 'PROJECT_CREATED'
+          | 'PROJECT_DELETED'
+          | 'PROJECT_UNSHARED'
+          | 'PROJECT_STATUS_CHANGED'
+          | 'PROJECT_DUE_DATE_CHANGED'
+          | 'SHARED_PROJECT_ASSIGNED'
+          | 'PROJECT_METADATA_UPDATED'
+          | 'PRE_TRANSLATION_FINISHED'
+          | 'ANALYSIS_CREATED'
+          | 'CONTINUOUS_JOB_UPDATED'
+          | 'PROJECT_TEMPLATE_CREATED'
+          | 'PROJECT_TEMPLATE_UPDATED'
+          | 'PROJECT_TEMPLATE_DELETED'
+          | 'RAW_MT_CONVERTER_IMPORT_FINISHED'
+          | 'RAW_MT_PRE_TRANSLATION_FINISHED'
+      }
+    }
     responses: {
       /** Test webhook sent */
-      201: unknown;
+      201: unknown
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Search in text in all read term bases assigned to the job */
   searchTermsInTextByJobV2: {
     parameters: {
       path: {
-        jobUid: string;
-        projectUid: string;
-      };
+        jobUid: string
+        projectUid: string
+      }
       body: {
-        body?: definitions["SearchTbInTextByJobRequestDto"];
-      };
-    };
+        body?: definitions['SearchTbInTextByJobRequestDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["SearchInTextResponseList2Dto"];
-      };
+        schema: definitions['SearchInTextResponseList2Dto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Search all read term bases assigned to the job */
   searchTermsByJob_1: {
     parameters: {
       path: {
-        jobUid: string;
-        projectUid: string;
-      };
+        jobUid: string
+        projectUid: string
+      }
       body: {
-        body?: definitions["SearchTbByJobRequestDto"];
-      };
-    };
+        body?: definitions['SearchTbByJobRequestDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["SearchTbResponseListDto"];
-      };
+        schema: definitions['SearchTbResponseListDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getAnalyseV3: {
     parameters: {
       path: {
-        analyseUid: string;
-      };
-    };
+        analyseUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["AnalyseV3Dto"];
-      };
+        schema: definitions['AnalyseV3Dto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   login_1: {
     parameters: {
       body: {
-        body?: definitions["LoginV3Dto"];
-      };
-    };
+        body?: definitions['LoginV3Dto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["LoginResponseV3Dto"];
-      };
+        schema: definitions['LoginResponseV3Dto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   loginToSession_2: {
     parameters: {
       body: {
-        body?: definitions["LoginToSessionV3Dto"];
-      };
-    };
+        body?: definitions['LoginToSessionV3Dto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["LoginToSessionResponseV3Dto"];
-      };
+        schema: definitions['LoginToSessionResponseV3Dto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Available only for admin */
   loginOther_1: {
     parameters: {
       body: {
-        body?: definitions["LoginOtherV3Dto"];
-      };
-    };
+        body?: definitions['LoginOtherV3Dto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["LoginResponseV3Dto"];
-      };
+        schema: definitions['LoginResponseV3Dto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Allows partial update, not breaking whole batch if single job fails and returns list of errors */
   patchUpdateJobParts: {
     parameters: {
       body: {
-        body?: definitions["JobPartPatchBatchDto"];
-      };
-    };
+        body?: definitions['JobPartPatchBatchDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["JobPartPatchResultDto"];
-      };
+        schema: definitions['JobPartPatchResultDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   searchByJob3: {
     parameters: {
       path: {
-        projectUid: string;
-        jobUid: string;
-      };
+        projectUid: string
+        jobUid: string
+      }
       body: {
-        body?: definitions["SearchTMByJobRequestDtoV3"];
-      };
-    };
+        body?: definitions['SearchTMByJobRequestDtoV3']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["SearchResponseListTmDtoV3"];
-      };
+        schema: definitions['SearchResponseListTmDtoV3']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   wildCardSearchByJob3: {
     parameters: {
       path: {
-        projectUid: string;
-        jobUid: string;
-      };
+        projectUid: string
+        jobUid: string
+      }
       body: {
-        body?: definitions["WildCardSearchByJobRequestDtoV3"];
-      };
-    };
+        body?: definitions['WildCardSearchByJobRequestDtoV3']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["SearchResponseListTmDtoV3"];
-      };
+        schema: definitions['SearchResponseListTmDtoV3']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   addPlainComment_2: {
     parameters: {
       path: {
-        jobUid: string;
-        conversationId: string;
-      };
+        jobUid: string
+        conversationId: string
+      }
       body: {
-        body?: definitions["AddCommentDto"];
-      };
-    };
+        body?: definitions['AddCommentDto']
+      }
+    }
     responses: {
       /** Created */
       201: {
-        schema: definitions["AddPlainCommentResultDto"];
-      };
+        schema: definitions['AddPlainCommentResultDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   createSegmentTargetConversation_1: {
     parameters: {
       path: {
-        jobUid: string;
-      };
+        jobUid: string
+      }
       body: {
-        body?: definitions["CreatePlainConversationDto"];
-      };
-    };
+        body?: definitions['CreatePlainConversationDto']
+      }
+    }
     responses: {
       /** Created */
       201: {
-        schema: definitions["PlainConversationDto"];
-      };
+        schema: definitions['PlainConversationDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   updatePlainComment_1: {
     parameters: {
       path: {
-        jobUid: string;
-        conversationId: string;
-        commentId: string;
-      };
+        jobUid: string
+        conversationId: string
+        commentId: string
+      }
       body: {
-        body?: definitions["AddCommentDto"];
-      };
-    };
+        body?: definitions['AddCommentDto']
+      }
+    }
     responses: {
       /** Updated */
       202: {
-        schema: definitions["PlainConversationDto"];
-      };
+        schema: definitions['PlainConversationDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getPreTranslateSettingsForProject_2: {
     parameters: {
       path: {
-        projectUid: string;
-      };
-    };
+        projectUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PreTranslateSettingsV3Dto"];
-      };
+        schema: definitions['PreTranslateSettingsV3Dto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   editProjectPreTranslateSettings_2: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["PreTranslateSettingsV3Dto"];
-      };
-    };
+        body?: definitions['PreTranslateSettingsV3Dto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PreTranslateSettingsV3Dto"];
-      };
+        schema: definitions['PreTranslateSettingsV3Dto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   listByProjectV3: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       query: {
         /** Name to search by */
-        name?: string;
+        name?: string
         /** Uid to search by */
-        uid?: string;
-        pageNumber?: number;
+        uid?: string
+        pageNumber?: number
         /** Page size, accepts values between 1 and 50, default 50 */
-        pageSize?: number;
+        pageSize?: number
         /** Sorting field */
-        sort?: "DATE_CREATED";
+        sort?: 'DATE_CREATED'
         /** Sorting order */
-        order?: "asc" | "desc";
-        onlyOwnerOrg?: boolean;
-      };
-    };
+        order?: 'asc' | 'desc'
+        onlyOwnerOrg?: boolean
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoAnalyseReference"];
-      };
+        schema: definitions['PageDtoAnalyseReference']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   createProjectV3: {
     parameters: {
       body: {
-        body?: definitions["CreateProjectV3Dto"];
-      };
-    };
+        body?: definitions['CreateProjectV3Dto']
+      }
+    }
     responses: {
       /** Created */
       201: {
-        schema: definitions["AbstractProjectDtoV2"];
-      };
+        schema: definitions['AbstractProjectDtoV2']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Call "Get QA settings" endpoint to get the list of enabled QA checks */
   runQaForJobPartV3: {
     parameters: {
       path: {
-        projectUid: string;
-        jobUid: string;
-      };
+        projectUid: string
+        jobUid: string
+      }
       body: {
-        body?: definitions["QualityAssuranceRunDtoV3"];
-      };
-    };
+        body?: definitions['QualityAssuranceRunDtoV3']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["QualityAssuranceResponseDto"];
-      };
+        schema: definitions['QualityAssuranceResponseDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** Call "Get QA settings" endpoint to get the list of enabled QA checks */
   runQaForJobPartsV3: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["QualityAssuranceBatchRunDtoV3"];
-      };
-    };
+        body?: definitions['QualityAssuranceBatchRunDtoV3']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["QualityAssuranceResponseDto"];
-      };
+        schema: definitions['QualityAssuranceResponseDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /** By default runs only fast running checks. Source and target language of jobs have to match. */
   runQaForSegmentsV3: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["QualityAssuranceSegmentsRunDtoV3"];
-      };
-    };
+        body?: definitions['QualityAssuranceSegmentsRunDtoV3']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["QualityAssuranceResponseDto"];
-      };
+        schema: definitions['QualityAssuranceResponseDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   listPartAnalyseV3: {
     parameters: {
       path: {
-        projectUid: string;
-        jobUid: string;
-      };
+        projectUid: string
+        jobUid: string
+      }
       query: {
-        pageNumber?: number;
-        pageSize?: number;
-      };
-    };
+        pageNumber?: number
+        pageSize?: number
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PageDtoAnalyseReference"];
-      };
+        schema: definitions['PageDtoAnalyseReference']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   exportToOnlineRepository: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["JobExportActionDto"];
-      };
-    };
+        body?: definitions['JobExportActionDto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["JobExportResponseDto"];
-      };
+        schema: definitions['JobExportResponseDto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getPreTranslateSettingsForProjectTemplate_2: {
     parameters: {
       path: {
-        projectTemplateUid: string;
-      };
-    };
+        projectTemplateUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PreTranslateSettingsV3Dto"];
-      };
+        schema: definitions['PreTranslateSettingsV3Dto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   updatePreTranslateSettingsForProjectTemplate_2: {
     parameters: {
       path: {
-        projectTemplateUid: string;
-      };
+        projectTemplateUid: string
+      }
       body: {
-        body?: definitions["PreTranslateSettingsV3Dto"];
-      };
-    };
+        body?: definitions['PreTranslateSettingsV3Dto']
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["PreTranslateSettingsV3Dto"];
-      };
+        schema: definitions['PreTranslateSettingsV3Dto']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getProjectTemplateTransMemories_2: {
     parameters: {
       query: {
         /** Filter project translation memories by target language */
-        targetLang?: string;
+        targetLang?: string
         /** Filter project translation memories by workflow step */
-        wfStepUid?: string;
-      };
+        wfStepUid?: string
+      }
       path: {
-        projectTemplateUid: string;
-      };
-    };
+        projectTemplateUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["ProjectTemplateTransMemoryListDtoV3"];
-      };
+        schema: definitions['ProjectTemplateTransMemoryListDtoV3']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getProjectTransMemories_1: {
     parameters: {
       query: {
         /** Filter project translation memories by target language */
-        targetLang?: string;
+        targetLang?: string
         /** Filter project translation memories by workflow step */
-        wfStepUid?: string;
-      };
+        wfStepUid?: string
+      }
       path: {
-        projectUid: string;
-      };
-    };
+        projectUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["ProjectTransMemoryListDtoV3"];
-      };
+        schema: definitions['ProjectTransMemoryListDtoV3']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   /**
    * If user wants to edit “All target languages” or "All workflow steps”,
    *                        but there are already varied TM settings for individual languages or steps,
@@ -24723,187 +24642,187 @@ export interface operations {
   setProjectTransMemoriesV3: {
     parameters: {
       path: {
-        projectUid: string;
-      };
+        projectUid: string
+      }
       body: {
-        body?: definitions["SetProjectTransMemoriesV3Dto"];
-      };
-    };
+        body?: definitions['SetProjectTransMemoriesV3Dto']
+      }
+    }
     responses: {
       /** OK */
       200: {
-        schema: definitions["ProjectTransMemoryListDtoV3"];
-      };
+        schema: definitions['ProjectTransMemoryListDtoV3']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   createUserV3: {
     parameters: {
       body: {
-        body?: definitions["AbstractUserCreateDto"];
-      };
+        body?: definitions['AbstractUserCreateDto']
+      }
       query: {
-        sendInvitation?: boolean;
-      };
-    };
+        sendInvitation?: boolean
+      }
+    }
     responses: {
       /** Created */
       201: {
-        schema: definitions["UserDetailsDtoV3"];
-      };
+        schema: definitions['UserDetailsDtoV3']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   getUserV3: {
     parameters: {
       path: {
-        userUid: string;
-      };
-    };
+        userUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["UserDetailsDtoV3"];
-      };
+        schema: definitions['UserDetailsDtoV3']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   updateUserV3: {
     parameters: {
       body: {
-        body?: definitions["AbstractUserEditDto"];
-      };
+        body?: definitions['AbstractUserEditDto']
+      }
       path: {
-        userUid: string;
-      };
-    };
+        userUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["UserDetailsDtoV3"];
-      };
+        schema: definitions['UserDetailsDtoV3']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
   disableTwoFactorAuthV3: {
     parameters: {
       path: {
-        userUid: string;
-      };
-    };
+        userUid: string
+      }
+    }
     responses: {
       /** successful operation */
       200: {
-        schema: definitions["UserDetailsDtoV3"];
-      };
+        schema: definitions['UserDetailsDtoV3']
+      }
       /** Bad request */
-      400: unknown;
+      400: unknown
       /** Not authorized */
-      401: unknown;
+      401: unknown
       /** Forbidden */
-      403: unknown;
+      403: unknown
       /** Resource not found */
-      404: unknown;
+      404: unknown
       /** Method not allowed */
-      405: unknown;
+      405: unknown
       /** Timeout */
-      408: unknown;
+      408: unknown
       /** Gone */
-      410: unknown;
+      410: unknown
       /** Unsupported media type */
-      415: unknown;
+      415: unknown
       /** Too many requests */
-      429: unknown;
+      429: unknown
       /** Internal server error */
-      500: unknown;
+      500: unknown
       /** Not implemented */
-      501: unknown;
-    };
-  };
+      501: unknown
+    }
+  }
 }
 
 export interface external {}

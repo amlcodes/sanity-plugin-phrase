@@ -76,6 +76,8 @@ export async function getStaleTranslations({
       getSourceChanges(sourceDocPair.published, collatedHistory.published),
   }
   console.log({ changesByVersion })
+
+  return changesByVersion
 }
 
 function getSourceChanges(
@@ -84,7 +86,7 @@ function getSourceChanges(
 ) {
   const diffPatches = diffPatch(historicVersion, currentVersion)
   const pathsChanged = diffPatches.flatMap(({ patch }) => {
-    let paths: string[] = []
+    const paths: string[] = []
     if ('set' in patch) {
       paths.push(...Object.keys(patch.set))
     }

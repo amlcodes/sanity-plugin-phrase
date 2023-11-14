@@ -1,0 +1,19 @@
+*.js
+.eslintrc.js
+commitlint.config.js
+dist
+lint-staged.config.js
+package.config.ts
+demo
+example-data
+dev
+patches
+node_modules
+tests
+src/types/phraseOpenAPI.d.ts
+
+# Temporary
+createTest.ts
+webhookTest.ts
+playground.ts
+testing-effect

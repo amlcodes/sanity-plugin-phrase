@@ -1,4 +1,4 @@
-import { SanityDocument } from '@sanity/types'
+import { SanityDocument } from 'sanity'
 import { i18nAdapter } from './adapters'
 import { mergeDocs } from './mergeDocs'
 import {
@@ -32,18 +32,21 @@ export function createPTDs({
   freshDocuments: SanityTranslationDocPair[]
 }) {
   /** Join jobs by target language (`PhraseLangCode`) */
-  const jobCollections = jobs.reduce((acc, job) => {
-    if (!job.targetLang) return acc
+  const jobCollections = jobs.reduce(
+    (acc, job) => {
+      if (!job.targetLang) return acc
 
-    return {
-      ...acc,
-      [job.targetLang]: [...(acc[job.targetLang] || []), job],
-    }
-  }, {} as Record<PhraseLangCode, Phrase['JobPart'][]>)
+      return {
+        ...acc,
+        [job.targetLang]: [...(acc[job.targetLang] || []), job],
+      }
+    },
+    {} as Record<PhraseLangCode, Phrase['JobPart'][]>,
+  )
 
   /** And create _one_ PTD for each target language */
   const PTDs = Object.entries(jobCollections).map(
-    ([targetPhraseLang, jobs]) => {
+    ([targetPhraseLang, jobCollection]) => {
       const targetLangDocPair = freshDocuments.find(
         (d) => d.lang.phrase === targetPhraseLang,
       )
@@ -92,7 +95,7 @@ export function createPTDs({
                 : undefined,
             },
             paths,
-            jobs: jobs.map((j) => ({
+            jobs: jobCollection.map((j) => ({
               _type: 'phrase.job',
               _key: makeKeyFriendly(j.uid || 'invalid-job'),
               uid: j.uid,
@@ -106,9 +109,9 @@ export function createPTDs({
             projectUid: project.uid || 'invalid-project',
             targetLang: langAdapter.phraseToCrossSystem(targetPhraseLang),
             sourceLang: sourceDoc.lang,
-            filename: jobs[0].filename,
-            sourceFileUid: jobs[0].sourceFileUid,
-            dateCreated: jobs[0].dateCreated,
+            filename: jobCollection[0].filename,
+            sourceFileUid: jobCollection[0].sourceFileUid,
+            dateCreated: jobCollection[0].dateCreated,
           },
         },
         targetPhraseLang,

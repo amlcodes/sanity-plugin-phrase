@@ -2,7 +2,7 @@ import {
   documentInternationalization,
   DocumentInternationalizationMenu,
 } from '@sanity/document-internationalization'
-import { SanityDocument } from '@sanity/types'
+import { SanityDocument } from 'sanity'
 import { visionTool } from '@sanity/vision'
 import { defineConfig } from 'sanity'
 import { deskTool } from 'sanity/desk'

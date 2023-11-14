@@ -13,6 +13,7 @@ export default async function phraseDocumentToSanityDocument(
   const references = dedupeArray(
     parseAllReferences(phrase.contentByPath, []).map((ref) => ref._ref),
   )
+  console.log(references)
   // @TODO: fetch references via i18nAdapter.getTranslatedReferences
   // (only if we don't have the referenceMap cache in phraseMeta or we want to force re-fetching)
 

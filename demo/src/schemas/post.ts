@@ -1,4 +1,4 @@
-import { SlugValidationContext } from '@sanity/types'
+import { SlugValidationContext } from 'sanity'
 import { defineArrayMember, defineField, defineType } from 'sanity'
 
 import { apiVersion } from '~/lib/sanity.api'

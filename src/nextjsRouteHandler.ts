@@ -1,10 +1,10 @@
 'use client'
 import { SanityClient } from 'sanity'
-import handlePhraseWebhook, { PhraseWebhook } from './handlePhraseWebhook'
 import createAuthedPhraseClient from './createAuthedPhraseClient'
-import refreshPtdById from './refreshPtdById'
-import { EndpointActionTypes } from './types'
 import createTranslations from './createTranslations'
+import handlePhraseWebhook, { PhraseWebhook } from './handlePhraseWebhook'
+import refreshPtdById from './refreshPtdById'
+import { CreateTranslationsInput, EndpointActionTypes } from './types'
 
 export default function nextjsRouteHandler(clientWithWriteToken: SanityClient) {
   if (!clientWithWriteToken.config().token) {
@@ -15,7 +15,9 @@ export default function nextjsRouteHandler(clientWithWriteToken: SanityClient) {
     const body = await request.json().catch(() => {})
 
     if (typeof body !== 'object' || !body) {
-      return new Response({ error: 'Invalid request' }, { status: 400 })
+      return new Response(JSON.stringify({ error: 'Invalid request' }), {
+        status: 400,
+      })
     }
 
     if ('event' in body && 'jobParts' in body) {
@@ -32,19 +34,23 @@ export default function nextjsRouteHandler(clientWithWriteToken: SanityClient) {
       !('action' in body) ||
       Object.values(EndpointActionTypes).includes(body.action as any)
     ) {
-      return new Response({ error: 'Invalid request' }, { status: 400 })
+      return new Response(JSON.stringify({ error: 'Invalid request' }), {
+        status: 400,
+      })
     }
 
     if (body.action === EndpointActionTypes.REFRESH_PTD) {
       const ptdId = 'ptdId' in body && body.ptdId
 
       if (typeof ptdId !== 'string') {
-        return new Response({ error: 'Invalid request' }, { status: 400 })
+        return new Response(JSON.stringify({ error: 'Invalid request' }), {
+          status: 400,
+        })
       }
 
       const phraseClient = await createAuthedPhraseClient(clientWithWriteToken)
       await refreshPtdById(clientWithWriteToken, phraseClient, ptdId)
-      new Response({ success: true }, { status: 200 })
+      return new Response(JSON.stringify({ success: true }), { status: 200 })
     }
 
     if (body.action === EndpointActionTypes.CREATE_TRANSLATIONS) {
@@ -53,34 +59,44 @@ export default function nextjsRouteHandler(clientWithWriteToken: SanityClient) {
         !Array.isArray(body.translations) ||
         body.translations.length === 0
       ) {
-        return new Response({ error: 'Invalid request' }, { status: 400 })
+        return new Response(JSON.stringify({ error: 'Invalid request' }), {
+          status: 400,
+        })
       }
 
       console.log(
         'Translating...',
-        body.translations.map((t) => t.sourceDoc),
+        body.translations.map((t: any) => t.sourceDoc),
       )
       try {
-        const phraseClient = await createAuthedPhraseClient(
-          clientWithWriteToken,
-        )
+        const phraseClient =
+          await createAuthedPhraseClient(clientWithWriteToken)
 
         // @TODO handle errors
         await Promise.all(
-          body.translations.map((t) =>
+          (
+            body.translations as Omit<
+              CreateTranslationsInput,
+              'phraseClient' | 'sanityClient'
+            >[]
+          ).map((t) =>
             createTranslations({
+              ...t,
               phraseClient,
               sanityClient: clientWithWriteToken,
-              ...t,
             }),
           ),
         )
-        new Response({ success: true }, { status: 200 })
+        return new Response(JSON.stringify({ success: true }), { status: 200 })
       } catch (error) {
-        return new Response({ error: 'Something went wrong' }, { status: 500 })
+        return new Response(JSON.stringify({ error: 'Something went wrong' }), {
+          status: 500,
+        })
       }
     }
 
-    return new Response({ error: 'Invalid request' }, { status: 400 })
+    return new Response(JSON.stringify({ error: 'Invalid request' }), {
+      status: 400,
+    })
   }
 }

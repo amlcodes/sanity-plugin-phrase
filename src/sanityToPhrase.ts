@@ -1,4 +1,4 @@
-import { PortableTextTextBlock } from '@sanity/types'
+import { PortableTextTextBlock } from 'sanity'
 import { SerializedPtBlock, SerializedPtHtmlTag } from './types'
 import { encodeHTML } from 'entities'
 
@@ -48,12 +48,12 @@ function serializeBlock(block: PortableTextTextBlock): SerializedPtBlock {
    *
    * @docs https://github.com/portabletext/portabletext#custom-blocks
    */
-  const inlineBlocksData = children.reduce((metaAcc, block) => {
-    if (block._type === 'span') return metaAcc
+  const inlineBlocksData = children.reduce((metaAcc, child) => {
+    if (child._type === 'span') return metaAcc
 
     return {
       ...metaAcc,
-      [block._key]: block,
+      [child._key]: child,
     }
   }, {})
 

@@ -1,4 +1,4 @@
-import { Reference } from '@sanity/types'
+import { Reference } from 'sanity'
 
 const UNDESIRED_KEYS = ['phraseMeta']
 

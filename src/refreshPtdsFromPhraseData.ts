@@ -60,26 +60,35 @@ export default async function refreshPtdsFromPhraseData(
   }
 
   // For each PTD, find the last job in the workflow - that's the freshest preview possible
-  const jobsToRefreshData = PTDs.reduce((acc, doc) => {
-    if (
-      doc.phraseMeta?._type !== 'phrase.ptd.meta' ||
-      !doc.phraseMeta.jobs?.length
-    )
-      return acc
+  const jobsToRefreshData = PTDs.reduce(
+    (acc, doc) => {
+      if (
+        doc.phraseMeta?._type !== 'phrase.ptd.meta' ||
+        !doc.phraseMeta.jobs?.length
+      )
+        return acc
 
-    const lastJobInWorkflow = sortJobsByWorkflowLevel(doc.phraseMeta.jobs)[0]
-    if (!lastJobInWorkflow.uid) return acc
+      const lastJobInWorkflow = sortJobsByWorkflowLevel(doc.phraseMeta.jobs)[0]
+      if (!lastJobInWorkflow.uid) return acc
 
-    return {
-      ...acc,
-      [lastJobInWorkflow.uid]: {
-        ...(acc[lastJobInWorkflow.uid] || {}),
-        projectUid: doc.phraseMeta.projectUid,
-        targetLang: doc.phraseMeta.targetLang,
-        ptdIds: [...(acc[lastJobInWorkflow.uid]?.ptdIds || []), doc._id],
-      },
-    }
-  }, {} as { [jobUid: string]: { projectUid: string; targetLang: CrossSystemLangCode; ptdIds: string[] } })
+      return {
+        ...acc,
+        [lastJobInWorkflow.uid]: {
+          ...(acc[lastJobInWorkflow.uid] || {}),
+          projectUid: doc.phraseMeta.projectUid,
+          targetLang: doc.phraseMeta.targetLang,
+          ptdIds: [...(acc[lastJobInWorkflow.uid]?.ptdIds || []), doc._id],
+        },
+      }
+    },
+    {} as {
+      [jobUid: string]: {
+        projectUid: string
+        targetLang: CrossSystemLangCode
+        ptdIds: string[]
+      }
+    },
+  )
 
   const refreshedJobData = await Promise.all(
     Object.entries(jobsToRefreshData).map(
@@ -160,7 +169,8 @@ export default async function refreshPtdsFromPhraseData(
     }
   })
 
-  const res = await transaction.commit()
+  await transaction.commit()
+  // const res = await transaction.commit()
 
   // fs.writeFileSync(
   //   'example-data/gitignored/fetchedPTDs.json',

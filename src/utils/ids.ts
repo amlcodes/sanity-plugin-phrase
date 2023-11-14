@@ -1,4 +1,4 @@
-import { Path } from '@sanity/types'
+import { Path } from 'sanity'
 import { CrossSystemLangCode, TranslationRequest } from '../types'
 import { pathToString } from './paths'
 
@@ -32,12 +32,9 @@ export function getPtdId({
   targetLang: CrossSystemLangCode
 }) {
   // @TODO: is it safe not to include the source document's ID? Is _rev unique system-wide?
-  return `${
-    undraftId(sourceDoc._id) !== sourceDoc._id ? 'drafts.' : ''
-  }phrase-translation--${targetLang.phrase}--${getTranslationKey(
-    paths,
-    sourceDoc._rev,
-  )}`
+  return `${isDraft(sourceDoc._id) ? 'drafts.' : ''}phrase-translation--${
+    targetLang.phrase
+  }--${getTranslationKey(paths, sourceDoc._rev)}`
 }
 
 export function isPtdId(id: string) {

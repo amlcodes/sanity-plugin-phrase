@@ -1,4 +1,4 @@
-import { PortableTextBlock } from '@sanity/types'
+import { PortableTextBlock } from 'sanity'
 import { parse } from 'parse5'
 import { Element, TextNode } from 'parse5/dist/tree-adapters/default'
 import { SerializedPtBlock, SerializedPtHtmlTag } from './types'

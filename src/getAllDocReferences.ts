@@ -1,4 +1,4 @@
-import { Reference, SanityDocument } from '@sanity/types'
+import { Reference, SanityDocument } from 'sanity'
 import pMap from 'p-map'
 import { SanityClient, collate } from 'sanity'
 import { parseAllReferences } from './parseAllReferences'
@@ -14,7 +14,7 @@ export default async function getAllDocReferences(
   parentDocument: SanityDocumentWithPhraseMetadata,
   maxDepth: number = 3,
 ) {
-  let state = {
+  const state = {
     referenced: {
       [parentDocument._id]: {
         doc: parentDocument,
@@ -82,16 +82,19 @@ export default async function getAllDocReferences(
       return
     }
 
-    const toFetch = docReferences.reduce((refs, ref) => {
-      if (state.referenced[ref._ref]) {
-        return refs
-      }
+    const toFetch = docReferences.reduce(
+      (refs, ref) => {
+        if (state.referenced[ref._ref]) {
+          return refs
+        }
 
-      return {
-        ...refs,
-        [ref._ref]: [...(refs[ref._ref] || []), ref],
-      }
-    }, {} as Record<string, Reference[]>)
+        return {
+          ...refs,
+          [ref._ref]: [...(refs[ref._ref] || []), ref],
+        }
+      },
+      {} as Record<string, Reference[]>,
+    )
 
     console.log('QUERYING FROM SANITY', doc._id)
     const referencedDocuments = await sanityClient.fetch<SanityDocument[]>(
@@ -104,21 +107,21 @@ export default async function getAllDocReferences(
 
     await pMap(
       referencedDocuments,
-      async (doc: SanityDocument) => {
+      async (d: SanityDocument) => {
         try {
           // If we have a draft of the current published document, let that drive the references.
           // @TODO: is this valid? It leads to some missing published documents in the final data as compared to not having this check.
           // Come back to this once I'm ready to work with the references
           if (
-            !isDraft(doc._id) &&
-            referencedDocuments.find((a) => a._id === draftId(doc._id))
+            !isDraft(d._id) &&
+            referencedDocuments.find((a) => a._id === draftId(d._id))
           ) {
             return
           }
 
-          return await fetchDocReferences(doc, currentDepth + 1)
+          await fetchDocReferences(d, currentDepth + 1)
         } catch (error) {
-          persistError(doc, error)
+          persistError(d, error)
         }
       },
       {
