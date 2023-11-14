@@ -1,7 +1,8 @@
 import { SlugValidationContext } from '@sanity/types'
-import { defineField, defineType } from 'sanity'
+import { defineArrayMember, defineField, defineType } from 'sanity'
 
 import { apiVersion } from '~/lib/sanity.api'
+import { NOT_PTD } from '~/lib/sanity.queries'
 import PhraseDocDashboard from '~/plugin-dist/PhraseDocDashboard/PhraseDocDashboard'
 import { draftId, getReadableLanguageName, undraftId } from '~/utils'
 
@@ -53,7 +54,20 @@ export default defineType({
       name: 'relatedPosts',
       title: 'Related posts',
       type: 'array',
-      of: [{ type: 'reference', to: { type: 'post' } }],
+      of: [
+        defineArrayMember({
+          type: 'reference',
+          to: { type: 'post' },
+          options: {
+            filter: ({ document }) => {
+              return {
+                filter: `language == $language && ${NOT_PTD}`,
+                params: { language: document.language },
+              }
+            },
+          },
+        }),
+      ],
     }),
     defineField({
       name: 'body',

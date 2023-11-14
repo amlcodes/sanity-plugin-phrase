@@ -17,6 +17,7 @@ import { ReferencePreview } from '../ReferencePreview/ReferencePreview'
 import getAllDocReferences from '../getAllDocReferences'
 import {
   CreateTranslationsInput,
+  EndpointActionTypes,
   SanityDocumentWithPhraseMetadata,
   SanityLangCode,
 } from '../types'
@@ -26,6 +27,7 @@ import {
   getReadableLanguageName,
 } from '../utils'
 import { PhraseMonogram } from './PhraseLogo'
+import { i18nAdapter } from '../adapters'
 
 // @TODO: make configurable & remove source from it
 const TARGET_LANGUAGES = ['es', 'pt']
@@ -116,25 +118,60 @@ export default function TranslationForm({
 
     setState('submitting')
 
-    // @TODO: handle references
-    // const refs = references?.chosenDocs
     const input: Omit<
       CreateTranslationsInput,
       'phraseClient' | 'sanityClient'
-    > = {
-      sourceDoc: {
-        _id: sourceDocId,
-        _rev: document._rev,
-        _type: document._type,
-        lang: sourceLang,
+    >[] = [
+      {
+        sourceDoc: {
+          _id: sourceDocId,
+          _rev: document._rev,
+          _type: document._type,
+          lang: sourceLang,
+        },
+        targetLangs: formValue.targetLangs,
+        templateUid: formValue.templateUid,
+        dateDue: formValue.dateDue,
+        paths,
       },
-      targetLangs: formValue.targetLangs,
-      templateUid: formValue.templateUid,
-      dateDue: formValue.dateDue,
-      paths,
-    }
+      ...Object.entries(references?.chosenDocs || {}).flatMap(
+        ([refId, langs]) => {
+          const acceptedLangs = langs.filter((l) =>
+            formValue.targetLangs.includes(l),
+          )
+          const doc = references?.refs.find((r) => r.id === refId)
+          // If we have a draft, translate that instead
+          // @TODO: is this a good UX decision?
+          // Will editors know when a piece of content is incomplete in order to finish it before sending for translation?
+          const freshDoc = doc?.draft || doc?.published
+
+          if (!freshDoc) return []
+
+          const sourceLangNested = i18nAdapter.getDocumentLang(freshDoc)
+          if (!sourceLangNested) return []
+
+          const sourceDoc: CreateTranslationsInput['sourceDoc'] = {
+            _id: freshDoc._id,
+            _rev: freshDoc?._rev,
+            _type: doc.type,
+            lang: sourceLangNested,
+          }
+
+          return {
+            sourceDoc,
+            targetLangs: acceptedLangs,
+            templateUid: formValue.templateUid,
+            dateDue: formValue.dateDue,
+            paths,
+          }
+        },
+      ),
+    ]
     const res = await fetch(API_ENDPOINT, {
-      body: JSON.stringify(input),
+      body: JSON.stringify({
+        action: EndpointActionTypes.CREATE_TRANSLATIONS,
+        translations: input,
+      }),
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -192,7 +229,7 @@ export default function TranslationForm({
       <FormField title="Target languages">
         <Stack space={2} paddingLeft={1}>
           {TARGET_LANGUAGES.map((lang) => (
-            <Flex align="center" as="label">
+            <Flex align="center" as="label" key={lang}>
               <Checkbox
                 name="targetLanguages"
                 id={lang}

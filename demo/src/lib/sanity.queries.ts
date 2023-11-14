@@ -4,7 +4,7 @@ import { type SanityClient } from 'next-sanity'
 
 import { SupportedLanguage } from '~/utils'
 
-const NOT_PTD = `phraseMeta._type != "phrase.ptd.meta"`
+export const NOT_PTD = `phraseMeta._type != "phrase.ptd.meta"`
 
 export const postsQuery = /* groq */ `*[
   _type == "post" &&
