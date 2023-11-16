@@ -158,9 +158,12 @@ export type SanityTranslationDocPair = {
 }
 
 export type ContentInPhrase = {
-  _sanityRev: string
+  /** For document-level translations, the full Sanity document is already in `cotnentByPath.__root` */
+  _sanityDocument: SanityDocumentWithPhraseMetadata | 'contentByPath'
+
   /** HTML content to show in Phrase's "Context note" in-editor panel */
   _sanityContext?: string
+
   /**
    * The formatted content sent to Phrase by field path.
    * Keys are the result of `@sanity/util/paths`'s `toString(path)` and need to be decoded back to `Path` before usage.

@@ -50,7 +50,23 @@ export const createPhraseClient = (
         const json = JSON.parse(await res.text()) as ContentInPhrase
         return json
       },
-      create: async (
+      getOriginal: async (
+        props: operations['getOriginalFile']['parameters']['path'],
+      ) => {
+        const res = await fetch(
+          `${baseUrl}/api2/v1/projects/${props.projectUid}/jobs/${props.jobUid}/original`,
+          {
+            headers: {
+              Authorization: `ApiToken ${token}`,
+            },
+          },
+        )
+        if (!res.ok) throw new Error('Failed to get preview')
+
+        const json = JSON.parse(await res.text()) as ContentInPhrase
+        return json
+      },
+      create: (
         props: Parameters<typeof createJobFetcher>[0] & {
           targetLangs: string[]
           filename: string
