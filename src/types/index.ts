@@ -189,15 +189,18 @@ export type ContentInPhrase = {
   contentByPath: Record<ReturnType<typeof pathToString>, unknown>
 }
 
+export type PhraseCredentialsInput = {
+  userName: string
+  password: string
+  region: PhraseDatacenterRegion
+}
+
 export interface PhraseCredentialsDocument extends SanityDocument {
   _id: typeof CREDENTIALS_DOC_ID
   _type: typeof CREDENTIALS_DOC_ID
-  userName?: string
-  password?: string
   token?: string
   /** ISO date */
   expires?: string
-  region: PhraseDatacenterRegion
 }
 
 export type DocPairFromAdapter = Omit<SanityTranslationDocPair, 'lang'> & {
@@ -238,8 +241,9 @@ export type I18nAdapter = {
 
 export type CreateTranslationsInput = Omit<
   TranslationRequest,
-  'paths' | 'targetLangs' | 'sourceDoc'
+  'paths' | 'targetLangs' | 'sourceDoc' | 'phraseClient'
 > & {
+  credentials: PhraseCredentialsInput
   paths?: (Path | string)[]
   targetLangs: SanityLangCode[]
   sourceDoc: Omit<TranslationRequest['sourceDoc'], 'lang'> & {

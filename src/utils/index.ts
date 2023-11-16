@@ -114,7 +114,8 @@ export function getReadableLanguageName(lang: string) {
   }
 }
 
-const ONE_DAY = 1000 * 60 * 60 * 24
+export const ONE_HOUR = 1000 * 60 * 60
+export const ONE_DAY = ONE_HOUR * 24
 
 export function getDateDaysFromNow(dayCount: number) {
   return new Date(new Date().valueOf() + ONE_DAY * dayCount)
