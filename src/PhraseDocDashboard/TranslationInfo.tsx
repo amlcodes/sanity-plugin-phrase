@@ -36,7 +36,9 @@ export function TranslationInfo({
     sourceDoc,
   })
   const openInSidePane = useOpenInSidePane(paneParentDocId)
-  const label = getReadableLanguageName(targetLang.sanity)
+  // @TODO
+  const label = getReadableLanguageName(targetLang.sanity || targetLang)
+  console.log({ label, targetLang })
   const meta =
     typeof ptdMetadata === 'object' && !!ptdMetadata && ptdMetadata?.jobs
       ? ptdMetadataExtractor(ptdMetadata)

@@ -19,6 +19,8 @@
     "no-warning-comments": "warn",
     "no-shadow": "off",
     "@typescript-eslint/no-shadow": "error",
-    "prettier/prettier": "warn"
+    "prettier/prettier": "warn",
+    "@typescript-eslint/no-useless-constructor": "off",
+    "no-useless-constructor": "off"
   }
 }

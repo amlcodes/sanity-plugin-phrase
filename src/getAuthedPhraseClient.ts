@@ -8,10 +8,7 @@ import {
 import { PhraseClient, createPhraseClient } from './createPhraseClient'
 import { PhraseCredentialsDocument, PhraseCredentialsInput } from './types'
 import { CREDENTIALS_DOC_ID, ONE_HOUR } from './utils'
-
-class UnknownPhraseClientError {
-  readonly _tag = 'UnknownPhraseClientError'
-}
+import { UnknownPhraseClientError } from './EffectfulPhraseClient'
 
 class InvalidPhraseCredentialsError {
   readonly _tag = 'InvalidPhraseCredentialsError'
@@ -31,7 +28,7 @@ const getFreshToken = (credentials: PhraseCredentialsInput) => {
           password: credentials.password,
           userName: credentials.userName,
         }),
-      catch: () => new UnknownPhraseClientError(),
+      catch: (error) => new UnknownPhraseClientError(error),
     }),
     Effect.flatMap((res) => {
       if (!res.ok || !res.data.token) {
@@ -82,6 +79,11 @@ export default function getAuthedPhraseClient(
           new SanityFetchError('*[_id == $id][0]', { id: CREDENTIALS_DOC_ID }),
       }),
     ),
+    Effect.tap(() =>
+      Effect.logInfo(
+        '[getAuthedPhraseClient] Fetched Phrase credentials document',
+      ),
+    ),
     Effect.flatMap((phraseCredentials) => {
       if (tokenStillValid(phraseCredentials)) {
         return Effect.succeed(phraseCredentials.token as string)
@@ -89,11 +91,18 @@ export default function getAuthedPhraseClient(
 
       return pipe(
         getFreshToken(credentials),
+        Effect.tap(() =>
+          Effect.logInfo('[getAuthedPhraseClient] Got fresh token from Phrase'),
+        ),
         Effect.tap((loginPayload) => savePhraseToken(loginPayload)),
+        Effect.tap(() =>
+          Effect.logInfo('[getAuthedPhraseClient] Saved fresh token to Sanity'),
+        ),
         Effect.flatMap((loginPayload) => Effect.succeed(loginPayload.token)),
       )
     }),
     Effect.map((token) => createPhraseClient(credentials.region, token)),
+    Effect.withLogSpan('getAuthedPhraseClient'),
   )
 }
 

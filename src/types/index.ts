@@ -52,9 +52,9 @@ export type Phrase = {
       lastWorkflowLevel?: number | null
     }
   }
-  CreatedProject: Awaited<
-    ReturnType<PhraseClient['projects']['create']>
-  >['data']
+  CreatedProject: Omit<definitions['AbstractProjectDtoV2'], 'uid'> & {
+    uid: string
+  }
 }
 
 export type SerializedPtBlock = {

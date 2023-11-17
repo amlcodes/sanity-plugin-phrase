@@ -1,7 +1,11 @@
 import { SanityTranslationDocPair, TranslationRequest } from './types'
 import { translationsIntersect } from './utils'
 
-export default function ensureDocNotLocked({
+export class DocumentsLockedError {
+  readonly _tag = 'DocumentsLockedError'
+}
+
+export default function isDocLocked({
   paths,
   freshDocuments,
 }: Pick<TranslationRequest, 'paths'> & {
@@ -34,7 +38,5 @@ export default function ensureDocNotLocked({
     )
   })
 
-  if (someDocLocked) {
-    throw new Error('Translation already pending for this path')
-  }
+  return someDocLocked
 }
