@@ -37,22 +37,10 @@ export default function persistJobsAndCreatePTDs(context: ContextWithJobs) {
   )
 }
 
-function getTransaction({
-  request,
-  project,
-  jobs,
-  freshDocuments,
-  freshDocumentsById,
-}: ContextWithJobs) {
+function getTransaction(context: ContextWithJobs) {
+  const { request, project, freshDocumentsById } = context
   const { paths, sourceDoc } = request
-  const freshSourceDoc = freshDocumentsById[sourceDoc._id]
-  const PTDs = createPTDs({
-    ...request,
-    project,
-    jobs,
-    freshSourceDoc,
-    freshDocuments,
-  })
+  const PTDs = createPTDs(context)
 
   const transaction = request.sanityClient.transaction()
 

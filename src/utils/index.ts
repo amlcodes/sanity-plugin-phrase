@@ -1,3 +1,9 @@
+import {
+  SanityDocument,
+  SchemaTypeDefinition,
+  createSchema,
+  prepareForPreview,
+} from 'sanity'
 import { FILENAME_PREFIX } from './constants'
 import {
   CrossSystemLangCode,
@@ -13,15 +19,41 @@ export * from './paths'
 export * from './constants'
 export * from './phrase'
 
-// @TODO create friendlier names - requires schema
-export function getTranslationName({ sourceDoc, paths }: TranslationRequest) {
-  const name = `${FILENAME_PREFIX} ${sourceDoc._type} ${getTranslationKey(
+export const NOT_PTD = `phraseMeta._type != "phrase.ptd.meta"`
+
+export function getSchema(schemaTypes: SchemaTypeDefinition[]) {
+  return createSchema({
+    name: 'phrase',
+    types: schemaTypes,
+  })
+}
+
+export function getTranslationName(
+  {
+    sourceDoc,
     paths,
-    sourceDoc._rev,
-  )} ${sourceDoc._id}`
+    schemaTypes,
+    targetLangs,
+  }: Pick<
+    TranslationRequest,
+    'sourceDoc' | 'paths' | 'schemaTypes' | 'targetLangs'
+  >,
+  freshSourceDoc: SanityDocument,
+) {
+  const schemaType = getSchema(schemaTypes).get(sourceDoc._type)
+  const previewTitle =
+    (schemaType && prepareForPreview(freshSourceDoc, schemaType)?.title) || null
+
+  const type = schemaType?.title || sourceDoc._type
+  const title = previewTitle || `id#${sourceDoc._id.slice(0, 5)}...`
+  const name = `${FILENAME_PREFIX} ${type}: ${title} (${getReadableLanguageName(
+    sourceDoc.lang.sanity,
+  )} to ${targetLangs
+    .map((l) => getReadableLanguageName(l.sanity))
+    .join(', ')}) :: ${getTranslationKey(paths, sourceDoc._rev)})`
   return {
-    name,
-    filename: `${name}.json`,
+    translationName: name,
+    translationFilename: `${name}.json`,
   }
 }
 
@@ -123,4 +155,20 @@ export function getDateDaysFromNow(dayCount: number) {
 
 export function getIsoDay(date: Date) {
   return date.toISOString().split('T')[0]
+}
+
+export function formatDay(date: Date, lang?: string) {
+  try {
+    return date.toLocaleDateString(lang, {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    })
+  } catch (error) {
+    return date.toLocaleDateString('en', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    })
+  }
 }

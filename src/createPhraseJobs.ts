@@ -1,13 +1,13 @@
 import { Effect, pipe } from 'effect'
 import getDataToTranslate from './getDataToTranslate'
 import { ContextWithProject } from './types'
-import { getTranslationName, langAdapter } from './utils'
+import { langAdapter } from './utils'
 
 class FailedCreatingPhraseJobsError {
   readonly _tag = 'FailedCreatingPhraseJobs'
   readonly context: ContextWithProject
 
-  // @TODO fine grained errors
+  // @TODO fine grained errors?
   constructor(error: unknown, context: ContextWithProject) {
     this.context = context
   }
@@ -15,14 +15,13 @@ class FailedCreatingPhraseJobsError {
 
 export default function createPhraseJobs(context: ContextWithProject) {
   const { request, project, freshDocumentsById } = context
-  const { filename } = getTranslationName(request)
 
   return pipe(
     Effect.tryPromise({
       try: () =>
         request.phraseClient.jobs.create({
           projectUid: project.uid,
-          filename,
+          filename: context.translationFilename,
           targetLangs: langAdapter.crossSystemToPhrase(request.targetLangs),
           dataToTranslate: getDataToTranslate({
             ...request,

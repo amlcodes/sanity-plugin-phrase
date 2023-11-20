@@ -1,150 +1,172 @@
-import { fromString } from '@sanity/util/paths'
-import { createPTDs } from './createPTDs'
-import ensureDocNotLocked from './ensureDocNotLocked'
-import getDataToTranslate from './getDataToTranslate'
+import { Effect, pipe } from 'effect'
+import { EffectfulPhraseClient } from './EffectfulPhraseClient'
+import createPhraseJobs from './createPhraseJobs'
+import createPhraseProject from './createPhraseProject'
+import {
+  formatRequest,
+  retrySchedule,
+  runEffectWithClients,
+} from './createTranslationHelpers'
 import getOrCreateTranslatedDocuments from './getOrCreateTranslatedDocuments'
-import lockDocument from './lockDocument'
-import { SanityDocumentWithPhraseMetadata, TranslationRequest } from './types'
-import { getTranslationKey, getTranslationName, langAdapter } from './utils'
+import isDocLocked, { DocumentsLockedError } from './isDocLocked'
+import isRevTheSame from './isRevTheSame'
+import lockDocuments from './lockDocuments'
+import persistJobsAndCreatePTDs from './persistJobsAndCreatePTDs'
+import salvageCreatedJobs from './salvageCreatedJobs'
 import { CreateTranslationsInput } from './types'
+import undoLock from './undoLock'
+import undoPhraseProjectCreation from './undoPhraseProjectCreation'
 
-function formatRequest(request: CreateTranslationsInput): TranslationRequest {
-  const { paths: inputPaths, targetLangs: inputTargetLangs } = request
+export default function createTranslations(
+  inputRequest: CreateTranslationsInput,
+) {
+  const successfulPath = Effect.all([EffectfulPhraseClient]).pipe(
+    Effect.flatMap(([phraseClient]) => {
+      const request = formatRequest(inputRequest, phraseClient)
 
-  const paths = (
-    Array.isArray(inputPaths) && inputPaths.length > 0 ? inputPaths : [[]]
-  ).map((p) =>
-    typeof p === 'string' ? fromString(p) : p || [],
-  ) as TranslationRequest['paths']
-  const targetLangs = langAdapter.sanityToCrossSystem(
-    // Don't allow translating to the same language as the source
-    inputTargetLangs.filter(
-      (lang) => !!lang && request.sourceDoc.lang !== lang,
+      return pipe(
+        // #1 get fresh content & ensure translated documents are there
+        getOrCreateTranslatedDocuments(request),
+
+        // #2 ensure revs match - prohibit translations for content that has changed
+        Effect.flatMap((context) => {
+          const revsMatch = isRevTheSame(context)
+          return revsMatch === true
+            ? Effect.succeed(context)
+            : Effect.fail(revsMatch)
+        }),
+
+        // #3 ensure there aren't any conflicting translations
+        Effect.flatMap((context) => {
+          const isLocked = isDocLocked(context)
+          return isLocked
+            ? Effect.fail(new DocumentsLockedError())
+            : Effect.succeed(context)
+        }),
+
+        // #4 lock documents to prevent concurrent translations
+        Effect.tap((context) =>
+          Effect.retry(lockDocuments(context), retrySchedule),
+        ),
+
+        // #5 create Phrase project
+        Effect.flatMap((context) =>
+          pipe(
+            Effect.retry(createPhraseProject(context), retrySchedule),
+            Effect.map((project) => ({
+              ...context,
+              project,
+            })),
+          ),
+        ),
+
+        // #6 create jobs with the source content to be translated
+        Effect.flatMap((context) =>
+          pipe(
+            Effect.retry(createPhraseJobs(context), retrySchedule),
+            Effect.map((jobs) => ({
+              ...context,
+              jobs,
+            })),
+          ),
+        ),
+
+        // #7 persist jobs and create PTD documents in Sanity
+        Effect.flatMap((context) =>
+          pipe(
+            Effect.retry(persistJobsAndCreatePTDs(context), retrySchedule),
+            Effect.map((PTDs) => ({
+              ...context,
+              PTDs,
+            })),
+          ),
+        ),
+
+        // #8 translation successfully created!
+        Effect.map(
+          () =>
+            ({
+              body: { message: 'Translations created' },
+              status: 200,
+            }) as const,
+        ),
+      )
+    }),
+  )
+
+  const withErrorRecovery = successfulPath.pipe(
+    Effect.catchTags({
+      AdapterFailedQueryingError: (error) =>
+        Effect.succeed({ body: { error: error._tag }, status: 500 } as const),
+      RevMismatchError: (error) =>
+        Effect.succeed({ body: { error: error._tag }, status: 400 } as const),
+      DocumentsLockedError: (error) =>
+        Effect.succeed({ body: { error: error._tag }, status: 400 } as const),
+      FailedLockingError: (error) =>
+        Effect.succeed({ body: { error: error._tag }, status: 500 } as const),
+    }),
+    Effect.catchTag('FailedCreatingPhraseProject', (error) =>
+      pipe(
+        Effect.retry(undoLock(error.context), retrySchedule),
+        Effect.map(
+          () => ({ body: { error: error._tag }, status: 500 }) as const,
+        ),
+        Effect.catchTag('FailedUnlockingError', (e) =>
+          Effect.succeed({
+            body: { error: `FailedCreatingPhraseProject/${e._tag}` },
+            status: 500,
+          } as const),
+        ),
+      ),
+    ),
+    Effect.catchTag('FailedCreatingPhraseJobs', (error) =>
+      pipe(
+        Effect.all(
+          [
+            Effect.retry(
+              undoPhraseProjectCreation(error.context),
+              retrySchedule,
+            ),
+            Effect.retry(undoLock(error.context), retrySchedule),
+          ],
+          {
+            concurrency: 'unbounded',
+          },
+        ),
+        Effect.map(
+          () => ({ body: { error: error._tag }, status: 500 }) as const,
+        ),
+        Effect.catchTag('FailedUnlockingError', (e) =>
+          Effect.succeed({
+            body: { error: `${error}/${e._tag}` },
+            status: 500,
+          } as const),
+        ),
+        Effect.catchTag('FailedDeletingProjectError', (e) =>
+          Effect.succeed({
+            status: 500,
+            body: { error: `${error}/${e._tag}` },
+          } as const),
+        ),
+      ),
+    ),
+    Effect.catchTag('PersistJobsAndCreatePTDs', (error) =>
+      pipe(
+        Effect.retry(salvageCreatedJobs(error.context), retrySchedule),
+        Effect.map(
+          () => ({ status: 500, body: { error: error._tag } }) as const,
+        ),
+        Effect.catchTag('FailedSalvagingJobsError', (e) =>
+          Effect.succeed({
+            status: 500,
+            body: { error: `${error._tag}/${e._tag}` },
+          } as const),
+        ),
+      ),
     ),
   )
 
-  return {
-    ...request,
-    paths,
-    targetLangs,
-    sourceDoc: {
-      ...request.sourceDoc,
-      lang: langAdapter.sanityToCrossSystem(request.sourceDoc.lang),
-    },
-  }
-}
-
-export default async function createTranslations(
-  inputRequest: CreateTranslationsInput,
-) {
-  const request = formatRequest(inputRequest)
-  const { sourceDoc, targetLangs, paths } = request
-
-  const { freshDocuments, freshDocumentsById } =
-    await getOrCreateTranslatedDocuments(request)
-
-  // Before going ahead with Phrase, make sure there's no pending translation
-  ensureDocNotLocked({
-    ...request,
-    freshDocuments,
-  })
-
-  // @TODO: ensure revs match - ask user to retry if the document changed during the process
-
-  const { name: translationName, filename } = getTranslationName(request)
-
-  // And lock it to prevent race conditions
-  await lockDocument({
-    ...request,
-    freshDocuments,
-  })
-
-  const project = await request.phraseClient.projects.create({
-    name: translationName,
-    templateUid: request.templateUid,
-    targetLangs: langAdapter.crossSystemToPhrase(targetLangs),
-    sourceLang: sourceDoc.lang.phrase,
-    dateDue: request.dateDue,
-  })
-  if (!project.ok || !project.data.uid) {
-    // @TODO unlock on error in Phrase
-    throw new Error('Failed creating project')
-  }
-  const projectUid = project.data.uid
-
-  // %%%%% DEBUG %%%%%
-  console.log({ project, projectUid })
-  // fs.writeFileSync(
-  //   'example-data/created-project.json',
-  //   JSON.stringify(project, null, 2),
-  // )
-  // %%%%% DEBUG %%%%%
-
-  const jobsRes = await request.phraseClient.jobs.create({
-    projectUid,
-    filename,
-    targetLangs: langAdapter.crossSystemToPhrase(targetLangs),
-    // @TODO: handle non-object dataToTranslate
-    dataToTranslate: getDataToTranslate({
-      ...request,
-      freshDocumentsById,
-    }),
-  })
-
-  if (!jobsRes.ok || !jobsRes.data?.jobs) {
-    // @TODO unlock on error in Phrase
-    throw new Error('Failed creating jobs')
-  }
-
-  // %%%%% DEBUG %%%%%
-  // fs.writeFileSync(
-  //   'example-data/created-jobs.json',
-  //   JSON.stringify(jobsRes, null, 2),
-  // )
-  // %%%%% DEBUG %%%%%
-
-  const freshSourceDoc = freshDocumentsById[sourceDoc._id]
-  const PTDs = createPTDs({
-    ...request,
-    project: project.data,
-    paths,
-    jobs: jobsRes.data.jobs,
-    freshSourceDoc,
-    freshDocuments,
-  })
-
-  // %%%%% DEBUG %%%%%
-  // fs.writeFileSync('example-data/PTDs.json', JSON.stringify(PTDs, null, 2))
-  // %%%%% DEBUG %%%%%
-
-  const transaction = request.sanityClient.transaction()
-  // Create PTDs in Sanity
-  PTDs.forEach((doc) => transaction.createOrReplace(doc))
-
-  Object.keys(freshDocumentsById).forEach((id) => {
-    // And mark this translation as CREATED for each of the source & target documents
-    transaction.patch(id, (patch) => {
-      patch.setIfMissing({
-        phraseMeta: {
-          _type: 'phrase.main.meta',
-          translations: [],
-        },
-      } as Pick<SanityDocumentWithPhraseMetadata, 'phraseMeta'>)
-
-      const translationKey = getTranslationKey(paths, sourceDoc._rev)
-      const basePath = `phraseMeta.translations[_key == "${translationKey}"]`
-      return patch.set({
-        [`${basePath}.status`]: 'CREATED',
-        [`${basePath}.projectUid`]: projectUid,
-        [`${basePath}.targetLangs`]: targetLangs,
-      })
-    })
-  })
-
-  // fs.writeFileSync(
-  //   'example-data/gitignored/transaction.json',
-  //   JSON.stringify(transaction.toJSON(), null, 2),
-  // )
-  const res = await transaction.commit()
-  console.log('\n\n\nFinal transaction res', res)
+  return Effect.runPromise(
+    runEffectWithClients(inputRequest, withErrorRecovery),
+  )
 }

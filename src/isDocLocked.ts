@@ -1,4 +1,4 @@
-import { SanityTranslationDocPair, TranslationRequest } from './types'
+import { ContextWithFreshDocuments } from './types'
 import { translationsIntersect } from './utils'
 
 export class DocumentsLockedError {
@@ -6,11 +6,9 @@ export class DocumentsLockedError {
 }
 
 export default function isDocLocked({
-  paths,
+  request: { paths },
   freshDocuments,
-}: Pick<TranslationRequest, 'paths'> & {
-  freshDocuments: SanityTranslationDocPair[]
-}) {
+}: ContextWithFreshDocuments) {
   const someDocLocked = freshDocuments.some((d) => {
     const allMeta = [
       ...((d.draft?.phraseMeta?._type === 'phrase.main.meta' &&

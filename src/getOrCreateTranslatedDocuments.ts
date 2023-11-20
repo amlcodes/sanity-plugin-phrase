@@ -1,11 +1,12 @@
 import { Effect, pipe } from 'effect'
 import { i18nAdapter } from './adapters'
 import {
+  ContextWithFreshDocuments,
   SanityDocumentWithPhraseMetadata,
   SanityTranslationDocPair,
   TranslationRequest,
 } from './types'
-import { langAdapter } from './utils'
+import { getTranslationName, langAdapter } from './utils'
 
 class AdapterFailedQueryingError {
   readonly _tag = 'AdapterFailedQueryingError'
@@ -36,8 +37,11 @@ export default function getOrCreateTranslatedDocuments(
       const hasMissingLang = request.targetLangs.some(
         (lang) => !docs.some((d) => d?.lang === lang.sanity),
       )
+      const sourceDocMissing = !docs.some(
+        (d) => (d.draft || d.published)?._id === request.sourceDoc._id,
+      )
 
-      if (hasBrokenDoc || hasMissingLang) {
+      if (hasBrokenDoc || hasMissingLang || sourceDocMissing) {
         return Effect.fail(new AdapterFailedQueryingError())
       }
 
@@ -62,7 +66,14 @@ export default function getOrCreateTranslatedDocuments(
         {} as Record<string, SanityDocumentWithPhraseMetadata>,
       )
 
-      return { freshDocumentsById, freshDocuments }
+      const freshSourceDoc = freshDocumentsById[request.sourceDoc._id]
+      return {
+        freshDocumentsById,
+        freshDocuments,
+        request,
+        freshSourceDoc,
+        ...getTranslationName(request, freshSourceDoc),
+      } as ContextWithFreshDocuments
     }),
     Effect.withSpan('getOrCreateTranslatedDocuments'),
   )

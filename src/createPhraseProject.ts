@@ -1,6 +1,6 @@
 import { Effect, pipe } from 'effect'
 import { ContextWithFreshDocuments, Phrase } from './types'
-import { getTranslationName, langAdapter } from './utils'
+import { langAdapter } from './utils'
 
 class FailedCreatingPhraseProjectError {
   readonly context: ContextWithFreshDocuments
@@ -16,13 +16,12 @@ export default function createPhraseProject(
   context: ContextWithFreshDocuments,
 ) {
   const { request } = context
-  const { name: translationName } = getTranslationName(request)
 
   return pipe(
     Effect.tryPromise({
       try: () =>
         request.phraseClient.projects.create({
-          name: translationName,
+          name: context.translationName,
           templateUid: request.templateUid,
           targetLangs: langAdapter.crossSystemToPhrase(request.targetLangs),
           sourceLang: request.sourceDoc.lang.phrase,

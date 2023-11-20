@@ -1,5 +1,4 @@
-import { SanityTranslationDocPair, TranslationRequest } from './types'
-import { isDraft } from './utils'
+import { ContextWithFreshDocuments } from './types'
 
 export class RevMismatchError {
   readonly _tag = 'RevMismatchError'
@@ -10,23 +9,11 @@ export class RevMismatchError {
 }
 
 export default function isRevTheSame({
-  sourceDoc,
-  freshDocuments,
-}: Pick<TranslationRequest, 'sourceDoc'> & {
-  freshDocuments: SanityTranslationDocPair[]
-}) {
-  const sourceDocPair = freshDocuments.find(
-    (d) => d.lang.sanity === sourceDoc.lang.sanity,
-  ) as SanityTranslationDocPair
-
-  const requestRev = sourceDoc._rev
-  const freshDoc = isDraft(sourceDoc._id)
-    ? sourceDocPair?.draft
-    : sourceDocPair?.published
-  const freshRev = freshDoc?._rev
-
-  if (requestRev !== freshRev) {
-    return new RevMismatchError(requestRev, freshRev)
+  request: { sourceDoc },
+  freshSourceDoc,
+}: ContextWithFreshDocuments) {
+  if (sourceDoc._rev !== freshSourceDoc._rev) {
+    return new RevMismatchError(sourceDoc._rev, freshSourceDoc._rev)
   }
 
   return true

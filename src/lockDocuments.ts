@@ -6,7 +6,7 @@ import {
   MainDocTranslationMetadata,
   SanityDocumentWithPhraseMetadata,
 } from './types'
-import { getTranslationKey, getTranslationName } from './utils'
+import { getTranslationKey } from './utils'
 
 class FailedLockingError {
   readonly _tag = 'FailedLockingError'
@@ -52,12 +52,9 @@ export default function lockDocuments(context: ContextWithFreshDocuments) {
   )
 }
 
-function getLockTransaction({
-  request,
-  freshDocuments,
-}: ContextWithFreshDocuments) {
+function getLockTransaction(context: ContextWithFreshDocuments) {
+  const { request, freshDocuments } = context
   const { paths, sourceDoc } = request
-  const { name: translationName, filename } = getTranslationName(request)
   const translationKey = getTranslationKey(paths, sourceDoc._rev)
 
   const docs = freshDocuments.flatMap(
@@ -84,8 +81,8 @@ function getLockTransaction({
         _key: translationKey,
         _createdAt: new Date().toISOString(),
         sourceDocRev: request.sourceDoc._rev,
-        projectName: translationName,
-        filename,
+        projectName: context.translationName,
+        filename: context.translationFilename,
         paths,
         status: 'CREATING',
       }

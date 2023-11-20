@@ -6,9 +6,10 @@ import {
   PortableTextTextBlock,
   Reference,
   SanityDocument,
+  SchemaTypeDefinition,
 } from 'sanity'
 import { PhraseClient, PhraseDatacenterRegion } from '../createPhraseClient'
-import { pathToString } from '../utils'
+import { getTranslationName, pathToString } from '../utils'
 import { CREDENTIALS_DOC_ID } from '../utils/constants'
 import { definitions } from './phraseOpenAPI'
 
@@ -39,7 +40,7 @@ export interface TranslationRequest {
   targetLangs: CrossSystemLangCode[]
   templateUid: string
   dateDue?: string
-  // @TODO: schema
+  schemaTypes: SchemaTypeDefinition[]
 }
 
 export type Phrase = {
@@ -278,8 +279,10 @@ export enum EndpointActionTypes {
   CREATE_TRANSLATIONS = 'CREATE_TRANSLATIONS',
 }
 
-export interface ContextWithFreshDocuments {
+export interface ContextWithFreshDocuments
+  extends ReturnType<typeof getTranslationName> {
   request: TranslationRequest
+  freshSourceDoc: SanityDocumentWithPhraseMetadata
   freshDocuments: SanityTranslationDocPair[]
   freshDocumentsById: Record<string, SanityDocumentWithPhraseMetadata>
 }

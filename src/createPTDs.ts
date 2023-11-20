@@ -1,12 +1,6 @@
-import { SanityDocument } from 'sanity'
 import { i18nAdapter } from './adapters'
 import { mergeDocs } from './mergeDocs'
-import {
-  Phrase,
-  PhraseLangCode,
-  SanityTranslationDocPair,
-  TranslationRequest,
-} from './types'
+import { ContextWithJobs, Phrase, PhraseLangCode } from './types'
 import {
   getPtdId,
   isDraft,
@@ -19,18 +13,12 @@ import {
  * PTD: Parallel Translation Document
  */
 export function createPTDs({
+  request: { paths, sourceDoc },
   project,
   jobs,
   freshSourceDoc,
-  paths,
-  sourceDoc,
   freshDocuments,
-}: TranslationRequest & {
-  project: Phrase['CreatedProject']
-  jobs: Phrase['JobPart'][]
-  freshSourceDoc: SanityDocument
-  freshDocuments: SanityTranslationDocPair[]
-}) {
+}: ContextWithJobs) {
   /** Join jobs by target language (`PhraseLangCode`) */
   const jobCollections = jobs.reduce(
     (acc, job) => {
