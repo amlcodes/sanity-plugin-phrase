@@ -22,7 +22,10 @@ export default function PhraseDocDashboard(props: StringFieldProps) {
 
   return (
     <Card>
-      {!document.phraseMeta && (
+      {(!document.phraseMeta ||
+        (document.phraseMeta._type === 'phrase.main.meta' &&
+          (!document.phraseMeta.translations ||
+            document.phraseMeta.translations.length <= 0))) && (
         <UntranslatedDocDashboard
           document={document}
           openDialog={() => setPathsToTranslate([[]])}

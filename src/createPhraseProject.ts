@@ -1,14 +1,21 @@
 import { Effect, pipe } from 'effect'
-import { Phrase, TranslationRequest } from './types'
+import { ContextWithFreshDocuments, Phrase } from './types'
 import { getTranslationName, langAdapter } from './utils'
 
 class FailedCreatingPhraseProjectError {
+  readonly context: ContextWithFreshDocuments
   readonly _tag = 'FailedCreatingPhraseProject'
+
   // @TODO fine-grained errors
-  constructor(res: unknown) {}
+  constructor(res: unknown, context: ContextWithFreshDocuments) {
+    this.context = context
+  }
 }
 
-export default function createPhraseProject(request: TranslationRequest) {
+export default function createPhraseProject(
+  context: ContextWithFreshDocuments,
+) {
+  const { request } = context
   const { name: translationName } = getTranslationName(request)
 
   return pipe(
@@ -21,11 +28,11 @@ export default function createPhraseProject(request: TranslationRequest) {
           sourceLang: request.sourceDoc.lang.phrase,
           dateDue: request.dateDue,
         }),
-      catch: (error) => new FailedCreatingPhraseProjectError(error),
+      catch: (error) => new FailedCreatingPhraseProjectError(error, context),
     }),
     Effect.flatMap((res) => {
       if (!res.ok || !res.data.uid) {
-        return Effect.fail(new FailedCreatingPhraseProjectError(res))
+        return Effect.fail(new FailedCreatingPhraseProjectError(res, context))
       }
 
       return Effect.succeed(res.data as Phrase['CreatedProject'])

@@ -32,6 +32,10 @@ export const createPhraseClient = (
         .path('/api2/v2/projects/applyTemplate/{templateUid}')
         .method('post')
         .create(),
+      delete: fetcher
+        .path('/api2/v1/projects/{projectUid}')
+        .method('delete')
+        .create({ purge: true }),
     },
     jobs: {
       getPreview: async (

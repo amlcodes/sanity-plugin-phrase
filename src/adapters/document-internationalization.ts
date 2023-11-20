@@ -123,6 +123,8 @@ export const documentInternationalizationAdapter: I18nAdapter = {
         : undefined
     const allInitialDocuments = metaDocument
       ? metaDocument.translations
+          // As translations in meta document are weak references, they might be null
+          .filter((t) => !!(t.draft || t.published)?._id)
       : [fetched as DocPairFromAdapter]
 
     const freshSourcePair = allInitialDocuments.find(
@@ -138,7 +140,12 @@ export const documentInternationalizationAdapter: I18nAdapter = {
     }
 
     const langsMissingTranslation = props.targetLangs.flatMap((lang) => {
-      if (allInitialDocuments.some((doc) => doc.lang === lang.sanity)) {
+      if (
+        allInitialDocuments.some(
+          (doc) =>
+            doc.lang === lang.sanity && !!(doc.draft || doc.published)?._id,
+        )
+      ) {
         return []
       }
 

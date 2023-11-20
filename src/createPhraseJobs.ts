@@ -1,27 +1,20 @@
 import { Effect, pipe } from 'effect'
-import {
-  Phrase,
-  SanityDocumentWithPhraseMetadata,
-  TranslationRequest,
-} from './types'
-import { getTranslationName, langAdapter } from './utils'
 import getDataToTranslate from './getDataToTranslate'
+import { ContextWithProject } from './types'
+import { getTranslationName, langAdapter } from './utils'
 
-class FailedCreatingPhraseJobError {
-  readonly _tag = 'FailedCreatingPhraseJob'
+class FailedCreatingPhraseJobsError {
+  readonly _tag = 'FailedCreatingPhraseJobs'
+  readonly context: ContextWithProject
+
   // @TODO fine grained errors
-  constructor(error: unknown) {}
+  constructor(error: unknown, context: ContextWithProject) {
+    this.context = context
+  }
 }
 
-export default function createPhraseJobs({
-  request,
-  project,
-  freshDocumentsById,
-}: {
-  request: TranslationRequest
-  project: Phrase['CreatedProject']
-  freshDocumentsById: Record<string, SanityDocumentWithPhraseMetadata>
-}) {
+export default function createPhraseJobs(context: ContextWithProject) {
+  const { request, project, freshDocumentsById } = context
   const { filename } = getTranslationName(request)
 
   return pipe(
@@ -36,11 +29,11 @@ export default function createPhraseJobs({
             freshDocumentsById: freshDocumentsById,
           }),
         }),
-      catch: (error) => new FailedCreatingPhraseJobError(error),
+      catch: (error) => new FailedCreatingPhraseJobsError(error, context),
     }),
     Effect.flatMap((res) => {
       if (!res.ok || !res.data.jobs) {
-        return Effect.fail(new FailedCreatingPhraseJobError(res))
+        return Effect.fail(new FailedCreatingPhraseJobsError(res, context))
       }
 
       return Effect.succeed(res.data.jobs)

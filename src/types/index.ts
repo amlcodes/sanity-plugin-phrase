@@ -257,3 +257,17 @@ export enum EndpointActionTypes {
   // eslint-disable-next-line no-unused-vars
   CREATE_TRANSLATIONS = 'CREATE_TRANSLATIONS',
 }
+
+export interface ContextWithFreshDocuments {
+  request: TranslationRequest
+  freshDocuments: SanityTranslationDocPair[]
+  freshDocumentsById: Record<string, SanityDocumentWithPhraseMetadata>
+}
+
+export interface ContextWithProject extends ContextWithFreshDocuments {
+  project: Phrase['CreatedProject']
+}
+
+export interface ContextWithJobs extends ContextWithProject {
+  jobs: Phrase['JobPart'][]
+}

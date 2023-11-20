@@ -1,29 +1,20 @@
 import { Effect, pipe } from 'effect'
 import { createPTDs } from './createPTDs'
-import {
-  Phrase,
-  SanityDocumentWithPhraseMetadata,
-  SanityTranslationDocPair,
-  TranslationRequest,
-} from './types'
+import { ContextWithJobs, SanityDocumentWithPhraseMetadata } from './types'
 import { getTranslationKey } from './utils'
 
 class PersistJobsAndCreatePTDsError {
+  readonly context: ContextWithJobs
   readonly _tag = 'PersistJobsAndCreatePTDs'
+
   // @TODO: further divide this error. If the transaction is broken (rev changed, etc), we can't recover, need to fail. If Sanity is down, we can keep retrying.
-  constructor(error: unknown) {}
+  constructor(error: unknown, context: ContextWithJobs) {
+    this.context = context
+  }
 }
 
-type Props = {
-  request: TranslationRequest
-  project: Phrase['CreatedProject']
-  jobs: Phrase['JobPart'][]
-  freshDocuments: SanityTranslationDocPair[]
-  freshDocumentsById: Record<string, SanityDocumentWithPhraseMetadata>
-}
-
-export default function persistJobsAndCreatePTDs(props: Props) {
-  const { transaction, PTDs } = getTransaction(props)
+export default function persistJobsAndCreatePTDs(context: ContextWithJobs) {
+  const { transaction, PTDs } = getTransaction(context)
 
   return pipe(
     Effect.tryPromise({
@@ -32,7 +23,7 @@ export default function persistJobsAndCreatePTDs(props: Props) {
           returnDocuments: false,
           autoGenerateArrayKeys: true,
         }),
-      catch: (error) => new PersistJobsAndCreatePTDsError(error),
+      catch: (error) => new PersistJobsAndCreatePTDsError(error, context),
     }),
     Effect.map(() => PTDs),
     Effect.tap(() =>
@@ -50,7 +41,7 @@ function getTransaction({
   jobs,
   freshDocuments,
   freshDocumentsById,
-}: Props) {
+}: ContextWithJobs) {
   const { paths, sourceDoc } = request
   const freshSourceDoc = freshDocumentsById[sourceDoc._id]
   const PTDs = createPTDs({

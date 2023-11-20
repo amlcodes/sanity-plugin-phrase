@@ -1,19 +1,21 @@
 import { Effect, pipe } from 'effect'
 import { EffectfulPhraseClient } from './EffectfulPhraseClient'
+import createPhraseJobs from './createPhraseJobs'
+import createPhraseProject from './createPhraseProject'
+import {
+  createResponse,
+  formatRequest,
+  retrySchedule,
+  runEffectWithClients,
+} from './createTranslationHelpers'
 import getOrCreateTranslatedDocuments from './getOrCreateTranslatedDocuments'
-import { CreateTranslationsInput } from './types'
 import isDocLocked, { DocumentsLockedError } from './isDocLocked'
 import isRevTheSame from './isRevTheSame'
 import lockDocuments from './lockDocuments'
-import createPhraseProject from './createPhraseProject'
-import createPhraseJobs from './createPhraseJobs'
 import persistJobsAndCreatePTDs from './persistJobsAndCreatePTDs'
-import {
-  retrySchedule,
-  createResponse,
-  runEffectWithClients,
-} from './createTranslationHelpers'
-import { formatRequest } from './createTranslationHelpers'
+import { CreateTranslationsInput } from './types'
+import undoLock from './undoLock'
+import undoPhraseProjectCreation from './undoPhraseProjectCreation'
 
 export default function createTranslations(
   inputRequest: CreateTranslationsInput,
@@ -44,7 +46,7 @@ export default function createTranslations(
         ),
         Effect.flatMap((data) => {
           return pipe(
-            Effect.retry(createPhraseProject(data.request), retrySchedule),
+            Effect.retry(createPhraseProject(data), retrySchedule),
             Effect.map((project) => ({
               ...data,
               project,
@@ -87,8 +89,53 @@ export default function createTranslations(
       FailedLockingError: (error) =>
         Effect.succeed(createResponse({ error: error._tag }, 500)),
     }),
-    // Effect.catchTag('FailedCreatingPhraseProject', error => // undoLockDocuments),
-    // Effect.catchTag('FailedCreatingPhraseJob', error => // undoProjectCreation),
+    Effect.catchTag('FailedCreatingPhraseProject', (error) =>
+      pipe(
+        Effect.retry(undoLock(error.context), retrySchedule),
+        Effect.map(() => createResponse({ error: error._tag }, 500)),
+        Effect.catchTag('FailedUnlockingError', (e) =>
+          Effect.succeed(
+            createResponse(
+              { error: `FailedCreatingPhraseProject/${e._tag}` },
+              500,
+            ),
+          ),
+        ),
+      ),
+    ),
+    Effect.catchTag('FailedCreatingPhraseJobs', (error) =>
+      pipe(
+        Effect.all(
+          [
+            Effect.retry(
+              undoPhraseProjectCreation(error.context),
+              retrySchedule,
+            ),
+            Effect.retry(undoLock(error.context), retrySchedule),
+          ],
+          {
+            concurrency: 'unbounded',
+          },
+        ),
+        Effect.map(() => createResponse({ error: error._tag }, 500)),
+        Effect.catchTag('FailedUnlockingError', (e) =>
+          Effect.succeed(
+            createResponse(
+              { error: `FailedCreatingPhraseJobs/${e._tag}` },
+              500,
+            ),
+          ),
+        ),
+        Effect.catchTag('FailedDeletingProjectError', (e) =>
+          Effect.succeed(
+            createResponse(
+              { error: `FailedCreatingPhraseJobs/${e._tag}` },
+              500,
+            ),
+          ),
+        ),
+      ),
+    ),
     // Effect.catchTag('PersistJobsAndCreatePTDs', error => // salvageCreatedJobs),
   )
 
