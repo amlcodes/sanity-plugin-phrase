@@ -1,9 +1,10 @@
 import { Effect, pipe } from 'effect'
+import getMutationErrors from './getMutationErrors'
+import { RevMismatchError } from './isRevTheSame'
 import {
+  ContextWithFreshDocuments,
   MainDocTranslationMetadata,
   SanityDocumentWithPhraseMetadata,
-  SanityTranslationDocPair,
-  TranslationRequest,
 } from './types'
 import { getTranslationKey, getTranslationName } from './utils'
 
@@ -12,12 +13,8 @@ class FailedLockingError {
   constructor(error: unknown) {}
 }
 
-export default function lockDocuments(
-  request: TranslationRequest & {
-    freshDocuments: SanityTranslationDocPair[]
-  },
-) {
-  const transaction = getLockTransaction(request)
+export default function lockDocuments(context: ContextWithFreshDocuments) {
+  const transaction = getLockTransaction(context)
 
   return pipe(
     Effect.tryPromise({
@@ -26,8 +23,27 @@ export default function lockDocuments(
           returnDocuments: false,
           autoGenerateArrayKeys: true,
         }),
-      // @TODO: further divide this error. If the transaction is broken (rev changed, etc), we can't recover, need to fail. If Sanity is down, we can keep retrying.
-      catch: (error) => new FailedLockingError(error),
+      catch: (error) => {
+        const mutationError = getMutationErrors(error)
+        const mistmatchedRevError =
+          mutationError &&
+          mutationError.items?.find?.(
+            (i) =>
+              i &&
+              'error' in i &&
+              i.error?.type === 'documentRevisionIDDoesNotMatchError',
+          )
+        if (mistmatchedRevError) {
+          return new RevMismatchError(
+            // @ts-expect-error @sanity/client doesn't expose the full mutation error interface
+            mistmatchedRevError.error.expectedRevisionID,
+            // @ts-expect-error @sanity/client doesn't expose the full mutation error interface
+            mistmatchedRevError.error.currentRevisionID,
+          )
+        }
+
+        return new FailedLockingError(error)
+      },
     }),
     Effect.tap(() =>
       Effect.logInfo('[lockDocuments] Successfully locked documents'),
@@ -36,10 +52,11 @@ export default function lockDocuments(
   )
 }
 
-function getLockTransaction(
-  request: TranslationRequest & { freshDocuments: SanityTranslationDocPair[] },
-) {
-  const { paths, freshDocuments, sourceDoc } = request
+function getLockTransaction({
+  request,
+  freshDocuments,
+}: ContextWithFreshDocuments) {
+  const { paths, sourceDoc } = request
   const { name: translationName, filename } = getTranslationName(request)
   const translationKey = getTranslationKey(paths, sourceDoc._rev)
 
