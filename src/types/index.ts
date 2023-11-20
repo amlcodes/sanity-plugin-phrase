@@ -77,7 +77,7 @@ export enum SerializedPtHtmlTag {
   BLOCK = 'c-b',
 }
 
-export type MainDocTranslationMetadata = {
+type BaseMainDocMetadata = {
   _type: 'phrase.mainDoc.translation'
   /** @see getTranslationKey */
   _key: string
@@ -86,16 +86,36 @@ export type MainDocTranslationMetadata = {
   projectName: string
   filename: string
   paths: TranslationRequest['paths']
-} & (
-  | {
-      status: 'CREATING'
-    }
-  | {
-      status: 'CREATED' | 'COMPLETED'
-      targetLangs: CrossSystemLangCode[]
-      projectUid: string
-    }
-)
+}
+
+type CreatingMainDocMetadata = BaseMainDocMetadata & {
+  status: 'CREATING'
+}
+
+type CompletedMainDocMetadata = BaseMainDocMetadata & {
+  status: 'COMPLETED'
+  targetLangs: CrossSystemLangCode[]
+  projectUid: string
+}
+
+export type CreatedMainDocMetadata = Omit<
+  CompletedMainDocMetadata,
+  'status'
+> & {
+  status: 'CREATED'
+}
+
+export type FailedPersistingMainDocMetadata = BaseMainDocMetadata & {
+  status: 'FAILED_PERSISTING'
+  project: Phrase['CreatedProject']
+  jobs: Phrase['JobPart'][]
+}
+
+export type MainDocTranslationMetadata =
+  | CreatingMainDocMetadata
+  | CompletedMainDocMetadata
+  | CreatedMainDocMetadata
+  | FailedPersistingMainDocMetadata
 
 /** For main documents (source and translated) only */
 export type MainDocPhraseMetadata = {

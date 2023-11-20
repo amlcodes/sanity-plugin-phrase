@@ -6,6 +6,11 @@ class FailedDeletingProjectError {
   constructor(error: unknown) {}
 }
 
+/**
+ * Ran after an error creating jobs in Phrase.
+ *
+ * We need to delete the created project so the user can try again without polluting their Phrase dashboard.
+ */
 export default function undoPhraseProjectCreation(context: ContextWithProject) {
   return pipe(
     Effect.tryPromise({

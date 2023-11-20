@@ -1,7 +1,11 @@
 import { Effect, pipe } from 'effect'
 import { createPTDs } from './createPTDs'
-import { ContextWithJobs, SanityDocumentWithPhraseMetadata } from './types'
-import { getTranslationKey } from './utils'
+import {
+  ContextWithJobs,
+  CreatedMainDocMetadata,
+  SanityDocumentWithPhraseMetadata,
+} from './types'
+import { getTranslationKey, langAdapter } from './utils'
 
 class PersistJobsAndCreatePTDsError {
   readonly context: ContextWithJobs
@@ -27,9 +31,7 @@ export default function persistJobsAndCreatePTDs(context: ContextWithJobs) {
     }),
     Effect.map(() => PTDs),
     Effect.tap(() =>
-      Effect.logInfo(
-        '[persistJobsAndCreatePTDs] Successfully created Phrase jobs',
-      ),
+      Effect.logInfo('[persistJobsAndCreatePTDs] Successfully created PTDs'),
     ),
     Effect.withLogSpan('persistJobsAndCreatePTDs'),
   )
@@ -68,11 +70,22 @@ function getTransaction({
 
       const translationKey = getTranslationKey(paths, sourceDoc._rev)
       const basePath = `phraseMeta.translations[_key == "${translationKey}"]`
-      return patch.set({
-        [`${basePath}.status`]: 'CREATED',
-        [`${basePath}.projectUid`]: project.uid,
-        [`${basePath}.targetLangs`]: project.targetLangs,
-      })
+      const updatedData: Pick<
+        CreatedMainDocMetadata,
+        'status' | 'projectUid' | 'targetLangs'
+      > = {
+        [`${basePath}.status` as 'status']: 'CREATED',
+        [`${basePath}.projectUid` as 'projectUid']: project.uid,
+        [`${basePath}.targetLangs` as 'targetLangs']:
+          langAdapter.phraseToCrossSystem(project.targetLangs || []),
+      }
+
+      return (
+        patch
+          .set(updatedData)
+          // in case this is a retry, remove the properties from FailedPersistingMainDocMetadata
+          .unset([`${basePath}.jobs`, `${basePath}.project`])
+      )
     })
   })
 

@@ -10,6 +10,12 @@ class FailedUnlockingError {
   constructor(error: unknown) {}
 }
 
+/**
+ * Ran after we've locked a document but couldn't finish creating the translation,
+ * either because we couldn't create the Phrase project or jobs.
+ *
+ * Unlocking will allow users to re-issue the translation request in the Sanity plugin.
+ */
 export default function undoLock(context: ContextWithFreshDocuments) {
   const transaction = getUnlockTransaction(context)
 
