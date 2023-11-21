@@ -10,7 +10,11 @@ import { getTranslationKey } from './utils'
 
 class FailedLockingError {
   readonly _tag = 'FailedLockingError'
-  constructor(error: unknown) {}
+  readonly error: unknown
+
+  constructor(error: unknown) {
+    this.error = error
+  }
 }
 
 export default function lockDocuments(context: ContextWithFreshDocuments) {

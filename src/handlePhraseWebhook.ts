@@ -1,7 +1,7 @@
 import { SanityClient } from 'sanity'
-import createAuthedPhraseClient from './createAuthedPhraseClient'
-import refreshPtdsFromPhraseData from './refreshPtdsFromPhraseData'
-import { Phrase } from './types'
+import refreshPTDsInPhraseWebhook from './refreshPTDsInPhraseWebhook'
+import { Phrase, PhraseCredentialsInput } from './types'
+import { sleep } from './utils'
 
 type JobTargetUpdatedWebhook = {
   event: 'JOB_TARGET_UPDATED'
@@ -45,11 +45,15 @@ export type PhraseWebhook =
   | JobCreatedWebhook
   | JobStatusChangedWebhook
 
-export default async function handlePhraseWebhook(
-  sanityClient: SanityClient,
-  payload: PhraseWebhook,
-) {
-  const phraseClient = await createAuthedPhraseClient(sanityClient)
+export default async function handlePhraseWebhook({
+  sanityClient,
+  payload,
+  credentials,
+}: {
+  sanityClient: SanityClient
+  credentials: PhraseCredentialsInput
+  payload: PhraseWebhook
+}) {
   if (
     !payload.event ||
     !(
@@ -75,15 +79,9 @@ export default async function handlePhraseWebhook(
     await sleep(5000)
   }
 
-  await refreshPtdsFromPhraseData({
+  return refreshPTDsInPhraseWebhook({
+    credentials,
     sanityClient,
-    phraseClient,
     jobsInWebhook: payload.jobParts || [],
   })
-
-  return true
-}
-
-async function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms))
 }

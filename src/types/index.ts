@@ -106,6 +106,10 @@ export type CreatedMainDocMetadata = Omit<
   status: 'CREATED'
 }
 
+type DeletedMainDocMetadata = Omit<CompletedMainDocMetadata, 'status'> & {
+  status: 'DELETED_IN_PHRASE'
+}
+
 export type FailedPersistingMainDocMetadata = BaseMainDocMetadata & {
   status: 'FAILED_PERSISTING'
   project: Phrase['CreatedProject']
@@ -117,6 +121,7 @@ export type MainDocTranslationMetadata =
   | CompletedMainDocMetadata
   | CreatedMainDocMetadata
   | FailedPersistingMainDocMetadata
+  | DeletedMainDocMetadata
 
 /** For main documents (source and translated) only */
 export type MainDocPhraseMetadata = {
@@ -170,6 +175,10 @@ export type PtdPhraseMetadata = {
 export type SanityDocumentWithPhraseMetadata = SanityDocument & {
   // @TODO rename to phraseMetadata
   phraseMeta?: MainDocPhraseMetadata | PtdPhraseMetadata
+}
+
+export type SanityPTD = SanityDocument & {
+  phraseMeta: PtdPhraseMetadata
 }
 
 export type SanityTranslationDocPair = {

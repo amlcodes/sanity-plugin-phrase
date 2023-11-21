@@ -8,9 +8,18 @@ import {
 } from './types'
 import { getTranslationName, langAdapter } from './utils'
 
+type StoredError = {
+  adapter?: unknown
+  known?: 'hasBrokenDoc' | 'hasMissingLang' | 'sourceDocMissing'
+}
+
 class AdapterFailedQueryingError {
   readonly _tag = 'AdapterFailedQueryingError'
-  // @TODO fine grained errors
+  readonly error: StoredError
+
+  constructor(error: StoredError) {
+    this.error = error
+  }
 }
 
 export default function getOrCreateTranslatedDocuments(
@@ -19,7 +28,7 @@ export default function getOrCreateTranslatedDocuments(
   return pipe(
     Effect.tryPromise({
       try: () => i18nAdapter.getOrCreateTranslatedDocuments(request),
-      catch: () => new AdapterFailedQueryingError(),
+      catch: (error) => new AdapterFailedQueryingError({ adapter: error }),
     }),
     Effect.tap(() =>
       Effect.logInfo(
@@ -41,8 +50,13 @@ export default function getOrCreateTranslatedDocuments(
         (d) => (d.draft || d.published)?._id === request.sourceDoc._id,
       )
 
-      if (hasBrokenDoc || hasMissingLang || sourceDocMissing) {
-        return Effect.fail(new AdapterFailedQueryingError())
+      let knownError: StoredError['known']
+      if (hasBrokenDoc) knownError = 'hasBrokenDoc'
+      if (hasMissingLang) knownError = 'hasMissingLang'
+      if (sourceDocMissing) knownError = 'sourceDocMissing'
+
+      if (knownError) {
+        return Effect.fail(knownError)
       }
 
       return Effect.succeed(freshDocumentsSource)

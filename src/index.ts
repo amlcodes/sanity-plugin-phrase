@@ -1,16 +1,14 @@
 import { draftId, undraftId, isPtdId, NOT_PTD } from './utils'
-import createAuthedPhraseClient from './createAuthedPhraseClient'
 import handlePhraseWebhook from './handlePhraseWebhook'
 import nextjsRouteHandler from './nextjsRouteHandler'
-import refreshPtdById from './refreshPtdById'
+import refreshPTDById from './refreshPTDById'
 
 export {
-  createAuthedPhraseClient,
   draftId,
   handlePhraseWebhook,
   isPtdId,
   nextjsRouteHandler,
-  refreshPtdById,
+  refreshPTDById,
   undraftId,
   NOT_PTD,
 }

@@ -17,6 +17,10 @@ import { i18nAdapter } from '../adapters'
 export * from './ids'
 export * from './paths'
 export * from './constants'
+export function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}
+
 export * from './phrase'
 
 export const NOT_PTD = `phraseMeta._type != "phrase.ptd.meta"`

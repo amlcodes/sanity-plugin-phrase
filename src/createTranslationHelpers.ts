@@ -38,14 +38,14 @@ export function runEffectWithClients<E = unknown, A = unknown>(
 }
 
 export const retrySchedule = pipe(
-  // Exponential backoff with 50ms initial delay and 2x growth factor
-  Schedule.exponential(Duration.millis(50), 2),
+  // Exponential backoff with 100ms initial delay and 4x growth factor
+  Schedule.exponential(Duration.millis(100), 4),
   // At most 1 second between retries
-  Schedule.either(Schedule.spaced(Duration.seconds(1))),
+  Schedule.either(Schedule.spaced(Duration.seconds(1.5))),
   // Include the time elapsed so far
   Schedule.compose(Schedule.elapsed),
   // And use it to stop retrying after a total of 15 seconds have elapsed
-  Schedule.whileOutput(Duration.lessThanOrEqualTo(Duration.seconds(15))),
+  Schedule.whileOutput(Duration.lessThanOrEqualTo(Duration.seconds(10))),
 )
 
 export function createResponse(data: unknown, status: number) {

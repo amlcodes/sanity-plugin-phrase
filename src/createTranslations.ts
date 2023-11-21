@@ -2,11 +2,7 @@ import { Effect, pipe } from 'effect'
 import { EffectfulPhraseClient } from './EffectfulPhraseClient'
 import createPhraseJobs from './createPhraseJobs'
 import createPhraseProject from './createPhraseProject'
-import {
-  formatRequest,
-  retrySchedule,
-  runEffectWithClients,
-} from './createTranslationHelpers'
+import { formatRequest, retrySchedule } from './createTranslationHelpers'
 import getOrCreateTranslatedDocuments from './getOrCreateTranslatedDocuments'
 import isDocLocked, { DocumentsLockedError } from './isDocLocked'
 import isRevTheSame from './isRevTheSame'
@@ -166,7 +162,5 @@ export default function createTranslations(
     ),
   )
 
-  return Effect.runPromise(
-    runEffectWithClients(inputRequest, withErrorRecovery),
-  )
+  return withErrorRecovery
 }

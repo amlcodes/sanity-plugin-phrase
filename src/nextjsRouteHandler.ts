@@ -1,14 +1,55 @@
 'use client'
-import { SanityClient } from 'sanity'
-import createAuthedPhraseClient from './createAuthedPhraseClient'
-import createTranslations from './createTranslations'
+import { SanityClient, SchemaTypeDefinition } from 'sanity'
+import createMultipleTranslations from './createMultipleTranslations'
+import { createResponse } from './createTranslationHelpers'
 import handlePhraseWebhook, { PhraseWebhook } from './handlePhraseWebhook'
-import refreshPtdById from './refreshPtdById'
-import { CreateTranslationsInput, EndpointActionTypes } from './types'
+import refreshPTDById from './refreshPTDById'
+import { EndpointActionTypes, PhraseCredentialsInput } from './types'
 
-export default function nextjsRouteHandler(clientWithWriteToken: SanityClient) {
-  if (!clientWithWriteToken.config().token) {
-    throw new Error("[Phrase's nextRouteHandler] Missing token")
+export default function nextjsRouteHandler({
+  sanityClient,
+  phraseCredentials: credentials,
+  schemaTypes,
+}: {
+  /** Sanity client with write token (can modify data) */
+  sanityClient: SanityClient
+  /** Necessary to issue access tokens from Phrase */
+  phraseCredentials: PhraseCredentialsInput
+  /** Your studio schema types to provide */
+  schemaTypes: SchemaTypeDefinition[]
+}) {
+  if (!sanityClient.config().token) {
+    throw new Error(
+      '[sanity-plugin-phrase / nextRouteHandler] Missing write token in Sanity client',
+    )
+  }
+
+  if (!credentials) {
+    throw new Error(
+      '[sanity-plugin-phrase / nextRouteHandler] Missing `phraseCredentials`',
+    )
+  }
+
+  if (!credentials.userName || typeof credentials.userName !== 'string') {
+    throw new Error(
+      '[sanity-plugin-phrase / nextRouteHandler] Missing `phraseCredentials.userName`',
+    )
+  }
+
+  if (!credentials.password || typeof credentials.password !== 'string') {
+    throw new Error(
+      '[sanity-plugin-phrase / nextRouteHandler] Missing `phraseCredentials.password`',
+    )
+  }
+
+  if (
+    !credentials.region ||
+    typeof credentials.region !== 'string' ||
+    !['eur', 'us'].includes(credentials.region)
+  ) {
+    throw new Error(
+      '[sanity-plugin-phrase / nextRouteHandler] Missing or invalid `phraseCredentials.region`',
+    )
   }
 
   return async function phraseRouteHandler(request: Request) {
@@ -21,10 +62,11 @@ export default function nextjsRouteHandler(clientWithWriteToken: SanityClient) {
     }
 
     if ('event' in body && 'jobParts' in body) {
-      const updated = await handlePhraseWebhook(
-        clientWithWriteToken,
-        body as PhraseWebhook,
-      )
+      const updated = await handlePhraseWebhook({
+        credentials,
+        sanityClient,
+        payload: body as PhraseWebhook,
+      })
 
       return updated ? new Response('OK') : new Response('Failed updating')
     }
@@ -48,9 +90,12 @@ export default function nextjsRouteHandler(clientWithWriteToken: SanityClient) {
         })
       }
 
-      const phraseClient = await createAuthedPhraseClient(clientWithWriteToken)
-      await refreshPtdById(clientWithWriteToken, phraseClient, ptdId)
-      return new Response(JSON.stringify({ success: true }), { status: 200 })
+      const res = await refreshPTDById({
+        sanityClient: sanityClient,
+        credentials: credentials,
+        ptdId,
+      })
+      return createResponse(res.body, res.status)
     }
 
     if (body.action === EndpointActionTypes.CREATE_TRANSLATIONS) {
@@ -64,35 +109,13 @@ export default function nextjsRouteHandler(clientWithWriteToken: SanityClient) {
         })
       }
 
-      console.log(
-        'Translating...',
-        body.translations.map((t: any) => t.sourceDoc),
-      )
-      try {
-        const phraseClient =
-          await createAuthedPhraseClient(clientWithWriteToken)
-
-        // @TODO handle errors
-        await Promise.all(
-          (
-            body.translations as Omit<
-              CreateTranslationsInput,
-              'phraseClient' | 'sanityClient'
-            >[]
-          ).map((t) =>
-            createTranslations({
-              ...t,
-              phraseClient,
-              sanityClient: clientWithWriteToken,
-            }),
-          ),
-        )
-        return new Response(JSON.stringify({ success: true }), { status: 200 })
-      } catch (error) {
-        return new Response(JSON.stringify({ error: 'Something went wrong' }), {
-          status: 500,
-        })
-      }
+      const res = await createMultipleTranslations({
+        translations: body.translations,
+        credentials: credentials,
+        sanityClient: sanityClient,
+        schemaTypes,
+      })
+      return createResponse(res.body, res.status)
     }
 
     return new Response(JSON.stringify({ error: 'Invalid request' }), {
