@@ -11,11 +11,11 @@ export default function isDocLocked({
 }: ContextWithFreshDocuments) {
   const someDocLocked = freshDocuments.some((d) => {
     const allMeta = [
-      ...((d.draft?.phraseMeta?._type === 'phrase.main.meta' &&
-        d.draft.phraseMeta.translations) ||
+      ...((d.draft?.phraseMetadata?._type === 'phrase.main.meta' &&
+        d.draft.phraseMetadata.translations) ||
         []),
-      ...((d.published?.phraseMeta?._type === 'phrase.main.meta' &&
-        d.published.phraseMeta.translations) ||
+      ...((d.published?.phraseMetadata?._type === 'phrase.main.meta' &&
+        d.published.phraseMetadata.translations) ||
         []),
     ]
     const ongoingPaths = allMeta.flatMap((m) => {

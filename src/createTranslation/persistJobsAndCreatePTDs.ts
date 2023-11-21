@@ -5,7 +5,7 @@ import {
   CreatedMainDocMetadata,
   SanityDocumentWithPhraseMetadata,
 } from '~/types'
-import { getTranslationKey, langAdapter } from '~/utils'
+import { getTranslationKey, langAdapter, tPathInMainDoc } from '~/utils'
 
 class PersistJobsAndCreatePTDsError {
   readonly context: ContextWithJobs
@@ -50,14 +50,14 @@ function getTransaction(context: ContextWithJobs) {
     // And mark this translation as CREATED for each of the source & target documents
     transaction.patch(id, (patch) => {
       patch.setIfMissing({
-        phraseMeta: {
+        phraseMetadata: {
           _type: 'phrase.main.meta',
           translations: [],
         },
-      } as Pick<SanityDocumentWithPhraseMetadata, 'phraseMeta'>)
+      } as Pick<SanityDocumentWithPhraseMetadata, 'phraseMetadata'>)
 
       const translationKey = getTranslationKey(paths, sourceDoc._rev)
-      const basePath = `phraseMeta.translations[_key == "${translationKey}"]`
+      const basePath = tPathInMainDoc(translationKey)
       const updatedData: Pick<
         CreatedMainDocMetadata,
         'status' | 'projectUid' | 'targetLangs'

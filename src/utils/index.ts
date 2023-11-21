@@ -7,6 +7,7 @@ import {
 import { FILENAME_PREFIX } from './constants'
 import {
   CrossSystemLangCode,
+  METADATA_KEY,
   Phrase,
   PhraseLangCode,
   SanityLangCode,
@@ -23,7 +24,11 @@ export function sleep(ms: number) {
 
 export * from './phrase'
 
-export const NOT_PTD = `phraseMeta._type != "phrase.ptd.meta"`
+export const NOT_PTD = `${METADATA_KEY}._type != "phrase.ptd.meta"`
+
+export function tPathInMainDoc(translationKey: string) {
+  return `${METADATA_KEY}.translations[_key == "${translationKey}"]`
+}
 
 export function getSchema(schemaTypes: SchemaTypeDefinition[]) {
   return createSchema({

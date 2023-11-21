@@ -23,23 +23,27 @@ export function ptdMetadataExtractor(metadata: PtdPhraseMetadata) {
     activeJobUid: furthestOngoingJob?.uid,
   }
 }
+
 export function getProjectURL(
   projectUid: string,
   region: PhraseDatacenterRegion,
 ) {
   return `${getPhraseBaseUrl(region)}/project2/show/${projectUid}`
 }
+
 export function getJobEditorURL(
   jobUid: string,
   region: PhraseDatacenterRegion,
 ) {
   return `${getPhraseBaseUrl(region)}/job/${jobUid}/translate/`
 }
+
 export function getPathsLabel(paths: Path[]) {
   return paths
     .map((p) => (p.length ? `[${p.join(', ')}]` : "Entire document's content"))
     .join(', ')
 }
+
 export const usePtdState = createHookFromObservableFactory<
   PtdPhraseMetadata,
   {
@@ -49,7 +53,7 @@ export const usePtdState = createHookFromObservableFactory<
   }
 >((props) => {
   return props.documentStore.listenQuery(
-    /* groq */ `*[_id == $id][0].phraseMeta`,
+    /* groq */ `*[_id == $id][0].phraseMetadata`,
     { id: props.ptdId },
     {
       apiVersion: '2023-05-22',

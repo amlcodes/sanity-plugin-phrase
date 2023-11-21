@@ -22,26 +22,26 @@ export default function PhraseDocDashboard(props: StringFieldProps) {
 
   return (
     <Card>
-      {(!document.phraseMeta ||
-        (document.phraseMeta._type === 'phrase.main.meta' &&
-          (!document.phraseMeta.translations ||
-            document.phraseMeta.translations.length <= 0))) && (
+      {(!document.phraseMetadata ||
+        (document.phraseMetadata._type === 'phrase.main.meta' &&
+          (!document.phraseMetadata.translations ||
+            document.phraseMetadata.translations.length <= 0))) && (
         <UntranslatedDocDashboard
           document={document}
           openDialog={() => setPathsToTranslate([[]])}
         />
       )}
 
-      {document.phraseMeta &&
-        document.phraseMeta._type === 'phrase.ptd.meta' && (
+      {document.phraseMetadata &&
+        document.phraseMetadata._type === 'phrase.ptd.meta' && (
           <PtdDocDashboard
             document={document}
-            ptdMetadata={document.phraseMeta}
+            ptdMetadata={document.phraseMetadata}
           />
         )}
 
-      {document.phraseMeta &&
-        document.phraseMeta._type === 'phrase.main.meta' &&
+      {document.phraseMetadata &&
+        document.phraseMetadata._type === 'phrase.main.meta' &&
         (() => {
           const sourceDoc: TranslationRequest['sourceDoc'] = {
             _id: undraftId(document._id),
@@ -49,9 +49,10 @@ export default function PhraseDocDashboard(props: StringFieldProps) {
             _type: document._type,
             lang: langAdapter.sanityToCrossSystem(sourceLang),
           }
-          const ongoingTranslations = document.phraseMeta.translations?.filter(
-            (translations) => translations.status !== 'COMPLETED',
-          )
+          const ongoingTranslations =
+            document.phraseMetadata.translations?.filter(
+              (translations) => translations.status !== 'COMPLETED',
+            )
           if (ongoingTranslations?.length) {
             return (
               <OngoingTranslationsDocDashboard

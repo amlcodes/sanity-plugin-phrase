@@ -15,7 +15,7 @@ export default async function phraseDocumentToSanityDocument(
   )
   console.log(references)
   // @TODO: fetch references via i18nAdapter.getTranslatedReferences
-  // (only if we don't have the referenceMap cache in phraseMeta or we want to force re-fetching)
+  // (only if we don't have the referenceMap cache in phraseMetadata or we want to force re-fetching)
 
   Object.entries(phrase.contentByPath).forEach(([pathKey, content]) => {
     const path = stringToPath(pathKey)

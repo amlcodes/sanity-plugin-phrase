@@ -5,7 +5,7 @@ import {
   MainDocTranslationMetadata,
   SanityDocumentWithPhraseMetadata,
 } from '~/types'
-import { getTranslationKey } from '~/utils'
+import { getTranslationKey, tPathInMainDoc } from '~/utils'
 import { RevMismatchError } from './isRevTheSame'
 
 class FailedLockingError {
@@ -73,11 +73,11 @@ function getLockTransaction(context: ContextWithFreshDocuments) {
     transaction.patch(doc._id, (patch) => {
       patch
         .setIfMissing({
-          phraseMeta: {
+          phraseMetadata: {
             _type: 'phrase.main.meta',
             translations: [],
           },
-        } as Pick<SanityDocumentWithPhraseMetadata, 'phraseMeta'>)
+        } as Pick<SanityDocumentWithPhraseMetadata, 'phraseMetadata'>)
         .ifRevisionId(doc._rev)
 
       const translationMetadata: MainDocTranslationMetadata = {
@@ -91,20 +91,18 @@ function getLockTransaction(context: ContextWithFreshDocuments) {
         status: 'CREATING',
       }
       if (
-        doc.phraseMeta?._type === 'phrase.main.meta' &&
-        doc.phraseMeta.translations?.some((t) => t._key === translationKey)
+        doc.phraseMetadata?._type === 'phrase.main.meta' &&
+        doc.phraseMetadata.translations?.some((t) => t._key === translationKey)
       ) {
         return patch
-          .insert(
-            'replace',
-            `phraseMeta.translations[_key == "${translationKey}"]`,
-            [translationMetadata],
-          )
+          .insert('replace', tPathInMainDoc(translationKey), [
+            translationMetadata,
+          ])
           .ifRevisionId(doc._rev)
       }
 
       return patch
-        .append('phraseMeta.translations', [translationMetadata])
+        .append('phraseMetadata.translations', [translationMetadata])
         .ifRevisionId(doc._rev)
     })
   }

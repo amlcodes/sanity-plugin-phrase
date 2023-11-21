@@ -24,22 +24,24 @@ export default function refreshPTDs(inputRequest: {
 }) {
   const PTDs = inputRequest.docs.filter(
     (doc) =>
-      doc.phraseMeta?._type === 'phrase.ptd.meta' &&
-      doc.phraseMeta.jobs?.length,
+      doc.phraseMetadata?._type === 'phrase.ptd.meta' &&
+      doc.phraseMetadata.jobs?.length,
   ) as SanityPTD[]
 
   // For each PTD, find the last job in the workflow - that's the freshest preview possible
   const jobsToRefreshData = PTDs.reduce(
     (acc, doc) => {
-      const lastJobInWorkflow = sortJobsByWorkflowLevel(doc.phraseMeta.jobs)[0]
+      const lastJobInWorkflow = sortJobsByWorkflowLevel(
+        doc.phraseMetadata.jobs,
+      )[0]
       if (!lastJobInWorkflow.uid) return acc
 
       return {
         ...acc,
         [lastJobInWorkflow.uid]: {
           ...(acc[lastJobInWorkflow.uid] || {}),
-          projectUid: doc.phraseMeta.projectUid,
-          targetLang: doc.phraseMeta.targetLang,
+          projectUid: doc.phraseMetadata.projectUid,
+          targetLang: doc.phraseMetadata.targetLang,
           ptdIds: [...(acc[lastJobInWorkflow.uid]?.ptdIds || []), doc._id],
         },
       }
@@ -165,18 +167,18 @@ function diffPTD(
       const finalDoc = i18nAdapter.injectDocumentLang(
         {
           ...updatedContent,
-          phraseMeta:
-            doc.phraseMeta?._type === 'phrase.ptd.meta'
+          phraseMetadata:
+            doc.phraseMetadata?._type === 'phrase.ptd.meta'
               ? {
-                  ...doc.phraseMeta,
-                  jobs: doc.phraseMeta.jobs.map((job) =>
+                  ...doc.phraseMetadata,
+                  jobs: doc.phraseMetadata.jobs.map((job) =>
                     updateJobInPtd(job, [] /* @Todo */),
                   ),
                 }
               : undefined,
         },
-        (doc.phraseMeta?._type === 'phrase.ptd.meta'
-          ? doc.phraseMeta?.targetLang.sanity
+        (doc.phraseMetadata?._type === 'phrase.ptd.meta'
+          ? doc.phraseMetadata?.targetLang.sanity
           : i18nAdapter.getDocumentLang(doc)) ||
           // @TODO: how to deal with missing targetLang? Can this ever happen?
           '',

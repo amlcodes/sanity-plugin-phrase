@@ -16,6 +16,8 @@ import { getTranslationName, pathToString } from './utils'
 import { CREDENTIALS_DOC_ID } from './utils/constants'
 import { definitions } from './clients/phraseOpenAPI'
 
+export const METADATA_KEY = 'phraseMetadata'
+
 export type PhraseLangCode = string
 export type SanityLangCode = string
 
@@ -176,13 +178,11 @@ export type PtdPhraseMetadata = {
 }
 
 export type SanityDocumentWithPhraseMetadata = SanityDocument & {
-  // @TODO rename to phraseMetadata
-  phraseMeta?: MainDocPhraseMetadata | PtdPhraseMetadata
+  phraseMetadata?: MainDocPhraseMetadata | PtdPhraseMetadata
 }
 
 export type SanityPTD = SanityDocument & {
-  // @TODO rename to phraseMetadata
-  phraseMeta: PtdPhraseMetadata
+  phraseMetadata: PtdPhraseMetadata
 }
 
 export type SanityTranslationDocPair = {

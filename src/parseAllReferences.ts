@@ -1,6 +1,6 @@
 import { Reference } from 'sanity'
 
-const UNDESIRED_KEYS = ['phraseMeta']
+const UNDESIRED_KEYS = ['phraseMetadata']
 
 /**
  * Can contain duplicates.

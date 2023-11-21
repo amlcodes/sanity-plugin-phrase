@@ -3,7 +3,7 @@ import {
   ContextWithFreshDocuments,
   SanityDocumentWithPhraseMetadata,
 } from '~/types'
-import { getTranslationKey } from '~/utils'
+import { getTranslationKey, tPathInMainDoc } from '~/utils'
 
 class FailedUnlockingError {
   readonly _tag = 'FailedUnlockingError'
@@ -52,9 +52,7 @@ function getUnlockTransaction({
   const transaction = request.sanityClient.transaction()
   for (const doc of docs) {
     transaction.patch(doc._id, (patch) => {
-      return patch.unset([
-        `phraseMeta.translations[_key == "${translationKey}"]`,
-      ])
+      return patch.unset([tPathInMainDoc(translationKey)])
     })
   }
 

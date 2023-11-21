@@ -29,9 +29,9 @@ export async function getStaleTranslations({
 
   // If no Phrase translations, all is stale
   if (
-    sourceDocToConsider.phraseMeta?._type !== 'phrase.main.meta' ||
-    !Array.isArray(sourceDocToConsider.phraseMeta.translations) ||
-    sourceDocToConsider.phraseMeta.translations.length <= 0
+    sourceDocToConsider.phraseMetadata?._type !== 'phrase.main.meta' ||
+    !Array.isArray(sourceDocToConsider.phraseMetadata.translations) ||
+    sourceDocToConsider.phraseMetadata.translations.length <= 0
   ) {
     return {
       stale: 'entire-document',
@@ -46,7 +46,7 @@ export async function getStaleTranslations({
   // }
 
   const ongoingTranslations =
-    sourceDocToConsider.phraseMeta.translations.filter(
+    sourceDocToConsider.phraseMetadata.translations.filter(
       (t) => t.status !== 'COMPLETED',
     )
   const newestToOldest = ongoingTranslations.sort(

@@ -60,7 +60,7 @@ export function createPTDs({
           }),
           // @ts-expect-error
           _rev: undefined,
-          phraseMeta: {
+          phraseMetadata: {
             _type: 'phrase.ptd.meta',
             sourceDoc: {
               _type: 'reference',
