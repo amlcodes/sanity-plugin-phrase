@@ -181,6 +181,7 @@ export type SanityDocumentWithPhraseMetadata = SanityDocument & {
 }
 
 export type SanityPTD = SanityDocument & {
+  // @TODO rename to phraseMetadata
   phraseMeta: PtdPhraseMetadata
 }
 

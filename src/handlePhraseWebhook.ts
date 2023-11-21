@@ -2,6 +2,7 @@ import { SanityClient } from 'sanity'
 import refreshPTDsInPhraseWebhook from './refreshTranslation/refreshPTDsInPhraseWebhook'
 import { Phrase, PhraseCredentialsInput } from '~/types'
 import { sleep } from './utils'
+import markPTDsAsDeletedByWebhook from './markPTDsAsDeletedByWebhook'
 
 type JobTargetUpdatedWebhook = {
   event: 'JOB_TARGET_UPDATED'
@@ -10,7 +11,7 @@ type JobTargetUpdatedWebhook = {
   jobParts: Phrase['JobInWebhook'][]
 }
 
-type JobDeletedWebhook = {
+export type JobDeletedWebhook = {
   event: 'JOB_DELETED'
   timestamp: number
   eventUid: string
@@ -70,8 +71,10 @@ export default async function handlePhraseWebhook({
   }
 
   if (payload.event === 'JOB_DELETED') {
-    // @TODO: deal with deletions - probably marking status as DELETED_IN_PHRASE
-    return true
+    return markPTDsAsDeletedByWebhook({
+      sanityClient,
+      payload,
+    })
   }
 
   if (payload.event === 'JOB_CREATED') {
