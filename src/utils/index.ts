@@ -11,7 +11,7 @@ import {
   PhraseLangCode,
   SanityLangCode,
   TranslationRequest,
-} from '../types'
+} from '~/types'
 import { getTranslationKey } from './ids'
 import { i18nAdapter } from '../adapters'
 export * from './ids'

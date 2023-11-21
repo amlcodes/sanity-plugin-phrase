@@ -1,7 +1,7 @@
 import { draftId, undraftId, isPtdId, NOT_PTD } from './utils'
 import handlePhraseWebhook from './handlePhraseWebhook'
 import nextjsRouteHandler from './nextjsRouteHandler'
-import refreshPTDById from './refreshPTDById'
+import refreshPTDById from './refreshTranslation/refreshPTDById'
 
 export {
   draftId,

@@ -1,5 +1,5 @@
 import { Path } from 'sanity'
-import { CrossSystemLangCode, TranslationRequest } from '../types'
+import { CrossSystemLangCode, TranslationRequest } from '~/types'
 import { pathToString } from './paths'
 
 export function makeKeyFriendly(str: string) {

@@ -1,7 +1,7 @@
 import { modifyDocInPath } from './mergeDocs'
 import { parseAllReferences } from './parseAllReferences'
 import phraseToSanity from './phraseToSanity'
-import { ContentInPhrase, SanityDocumentWithPhraseMetadata } from './types'
+import { ContentInPhrase, SanityDocumentWithPhraseMetadata } from '~/types'
 import { dedupeArray, stringToPath } from './utils'
 
 export default async function phraseDocumentToSanityDocument(

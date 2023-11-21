@@ -5,7 +5,7 @@ import {
   SanityDocumentWithPhraseMetadata,
   SanityTranslationDocPair,
   TranslationRequest,
-} from './types'
+} from '~/types'
 import { getTranslationName, langAdapter } from './utils'
 
 type StoredError = {

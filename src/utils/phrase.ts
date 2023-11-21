@@ -1,6 +1,9 @@
-import { Path, createHookFromObservableFactory, DocumentStore } from 'sanity'
-import { PhraseDatacenterRegion, getPhraseBaseUrl } from '../createPhraseClient'
-import { PtdPhraseMetadata } from '../types'
+import { DocumentStore, Path, createHookFromObservableFactory } from 'sanity'
+import {
+  PhraseDatacenterRegion,
+  getPhraseBaseUrl,
+} from '../clients/createPhraseClient'
+import { PtdPhraseMetadata } from '~/types'
 
 export function ptdMetadataExtractor(metadata: PtdPhraseMetadata) {
   const { jobs } = metadata

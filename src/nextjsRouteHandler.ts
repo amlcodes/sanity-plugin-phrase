@@ -1,10 +1,10 @@
 'use client'
 import { SanityClient, SchemaTypeDefinition } from 'sanity'
-import createMultipleTranslations from './createMultipleTranslations'
-import { createResponse } from './createTranslationHelpers'
+import createMultipleTranslations from './createTranslation/createMultipleTranslations'
 import handlePhraseWebhook, { PhraseWebhook } from './handlePhraseWebhook'
-import refreshPTDById from './refreshPTDById'
-import { EndpointActionTypes, PhraseCredentialsInput } from './types'
+import { createResponse } from './backendHelpers'
+import refreshPTDById from './refreshTranslation/refreshPTDById'
+import { EndpointActionTypes, PhraseCredentialsInput } from '~/types'
 
 export default function nextjsRouteHandler({
   sanityClient,

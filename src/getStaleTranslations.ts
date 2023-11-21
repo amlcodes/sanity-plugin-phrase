@@ -4,7 +4,7 @@ import {
   SanityDocumentWithPhraseMetadata,
   SanityTranslationDocPair,
   TranslationRequest,
-} from './types'
+} from '~/types'
 import { dedupeArray, undraftId } from './utils'
 import { diffPatch } from 'sanity-diff-patch'
 import { fromString } from '@sanity/util/paths'

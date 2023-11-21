@@ -1,7 +1,7 @@
 import { PortableTextBlock } from 'sanity'
 import { parse } from 'parse5'
 import { Element, TextNode } from 'parse5/dist/tree-adapters/default'
-import { SerializedPtBlock, SerializedPtHtmlTag } from './types'
+import { SerializedPtBlock, SerializedPtHtmlTag } from '~/types'
 import { decodeHTML } from 'entities'
 
 function decodeStringFromPhrase(str: string) {

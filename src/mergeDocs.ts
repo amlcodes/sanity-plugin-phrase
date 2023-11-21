@@ -1,6 +1,6 @@
 import { Mutation, arrayToJSONMatchPath } from '@sanity/mutator'
-import { PatchOperations, Path, SanityDocument } from 'sanity'
 import { get } from '@sanity/util/paths'
+import { PatchOperations, Path, SanityDocument } from 'sanity'
 import phraseToSanity from './phraseToSanity'
 
 // @TODO: do we include language & i18n adapter specific things here?

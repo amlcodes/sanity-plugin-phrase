@@ -1,7 +1,7 @@
 import { KeyedObject, Reference } from 'sanity'
 import { uuid } from '@sanity/uuid'
-import { DocPairFromAdapter, I18nAdapter, ReferenceMap } from '../types'
-import { draftId, isDraft, undraftId } from '../utils'
+import { DocPairFromAdapter, I18nAdapter, ReferenceMap } from '~/types'
+import { draftId, isDraft, undraftId } from '~/utils'
 
 // @TODO make configurable
 const languageField = 'language'

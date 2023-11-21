@@ -1,5 +1,5 @@
 import { SanityClient } from 'sanity'
-import { SanityDocumentWithPhraseMetadata } from './types'
+import { SanityDocumentWithPhraseMetadata } from '~/types'
 
 /**
  * Different history between published and draft.

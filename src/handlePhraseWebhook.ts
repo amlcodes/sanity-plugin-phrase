@@ -1,6 +1,6 @@
 import { SanityClient } from 'sanity'
-import refreshPTDsInPhraseWebhook from './refreshPTDsInPhraseWebhook'
-import { Phrase, PhraseCredentialsInput } from './types'
+import refreshPTDsInPhraseWebhook from './refreshTranslation/refreshPTDsInPhraseWebhook'
+import { Phrase, PhraseCredentialsInput } from '~/types'
 import { sleep } from './utils'
 
 type JobTargetUpdatedWebhook = {
