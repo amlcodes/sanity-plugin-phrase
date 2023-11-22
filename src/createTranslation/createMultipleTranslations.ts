@@ -4,7 +4,7 @@ import createTranslations from '../createTranslation/createTranslations'
 import { runEffectWithClients } from '../createTranslation/createTranslationHelpers'
 
 export default function createMultipleTranslations(
-  inputRequest: {
+  input: {
     translations: Omit<
       CreateTranslationsInput,
       'sanityClient' | 'credentials' | 'schemaTypes'
@@ -14,7 +14,7 @@ export default function createMultipleTranslations(
     'sanityClient' | 'credentials' | 'schemaTypes'
   >,
 ) {
-  const { translations } = inputRequest
+  const { translations } = input
   if (!Array.isArray(translations)) {
     return { status: 400, body: { error: 'Invalid translations set' } } as const
   }
@@ -32,9 +32,9 @@ export default function createMultipleTranslations(
       (t) =>
         createTranslations({
           ...t,
-          sanityClient: inputRequest.sanityClient,
-          credentials: inputRequest.credentials,
-          schemaTypes: inputRequest.schemaTypes,
+          sanityClient: input.sanityClient,
+          credentials: input.credentials,
+          schemaTypes: input.schemaTypes,
         }).pipe(Effect.map((res) => ({ res, t }))),
       { concurrency: 2 },
     ),
@@ -67,5 +67,5 @@ export default function createMultipleTranslations(
     }),
   )
 
-  return Effect.runPromise(runEffectWithClients(inputRequest, program))
+  return Effect.runPromise(runEffectWithClients(input, program))
 }

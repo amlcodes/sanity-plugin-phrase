@@ -2,7 +2,7 @@ import { Effect, pipe } from 'effect'
 import { retrySchedule } from '~/backendHelpers'
 import { CreateTranslationsInput } from '~/types'
 import { EffectfulPhraseClient } from '../clients/EffectfulPhraseClient'
-import getOrCreateTranslatedDocuments from '../getOrCreateTranslatedDocuments'
+import getOrCreateTranslatedDocuments from './getOrCreateTranslatedDocuments'
 import createPhraseJobs from './createPhraseJobs'
 import createPhraseProject from './createPhraseProject'
 import { formatRequest } from './createTranslationHelpers'
@@ -14,12 +14,10 @@ import salvageCreatedJobs from './salvageCreatedJobs'
 import undoLock from './undoLock'
 import undoPhraseProjectCreation from './undoPhraseProjectCreation'
 
-export default function createTranslations(
-  inputRequest: CreateTranslationsInput,
-) {
+export default function createTranslations(input: CreateTranslationsInput) {
   const successfulPath = Effect.all([EffectfulPhraseClient]).pipe(
     Effect.flatMap(([phraseClient]) => {
-      const request = formatRequest(inputRequest, phraseClient)
+      const request = formatRequest(input, phraseClient)
 
       return pipe(
         // #1 get fresh content & ensure translated documents are there

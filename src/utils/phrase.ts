@@ -1,9 +1,12 @@
 import { DocumentStore, Path, createHookFromObservableFactory } from 'sanity'
 import {
+  CompletedMainDocMetadata,
   METADATA_KEY,
+  MainDocTranslationMetadata,
   PhraseJobInfo,
   PtdPhraseMetadata,
   SanityDocumentWithPhraseMetadata,
+  SanityMainDoc,
   SanityPTD,
 } from '~/types'
 import {
@@ -95,7 +98,7 @@ function sortJobsByWorkflowLevel(jobs: PhraseJobInfo[]) {
   })
 }
 
-export function docIsPTD(
+export function isPTDDoc(
   doc: SanityDocumentWithPhraseMetadata,
 ): doc is SanityPTD {
   return (
@@ -103,4 +106,25 @@ export function docIsPTD(
     doc.phraseMetadata.jobs &&
     doc.phraseMetadata.jobs.length > 0
   )
+}
+
+/** Only returns if has at least one translation */
+export function isMainDoc(
+  doc: SanityDocumentWithPhraseMetadata,
+): doc is SanityMainDoc {
+  return (
+    doc.phraseMetadata?._type === 'phrase.main.meta' &&
+    Array.isArray(doc.phraseMetadata.translations) &&
+    doc.phraseMetadata.translations.length > 0
+  )
+}
+
+export function translationsUnfinished(doc: SanityMainDoc) {
+  return doc.phraseMetadata.translations.some((t) => !isTranslationFinished(t))
+}
+
+export function isTranslationFinished(
+  translation: MainDocTranslationMetadata,
+): translation is CompletedMainDocMetadata {
+  return translation.status === 'COMPLETED'
 }

@@ -4,19 +4,19 @@ import {
   PhraseCredentialsInput,
   SanityDocumentWithPhraseMetadata,
 } from '~/types'
-import { docIsPTD, draftId, undraftId } from '~/utils'
+import { isPTDDoc, draftId, undraftId } from '~/utils'
 
-export default async function refreshPTDById(inputRequest: {
+export default async function refreshPTDById(input: {
   sanityClient: SanityClient
   credentials: PhraseCredentialsInput
   ptdId: string
 }) {
-  const PTDs = await inputRequest.sanityClient.fetch<
+  const PTDs = await input.sanityClient.fetch<
     SanityDocumentWithPhraseMetadata[]
   >(`*[_id == $publishedId || _id == $draftId]`, {
-    publishedId: undraftId(inputRequest.ptdId),
-    draftId: draftId(inputRequest.ptdId),
+    publishedId: undraftId(input.ptdId),
+    draftId: draftId(input.ptdId),
   })
 
-  return refreshPTDs({ ...inputRequest, PTDs: PTDs.filter(docIsPTD) })
+  return refreshPTDs({ ...input, PTDs: PTDs.filter(isPTDDoc) })
 }

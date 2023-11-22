@@ -1,12 +1,12 @@
 import { Effect, pipe } from 'effect'
-import { i18nAdapter } from './adapters'
+import { i18nAdapter } from '~/adapters'
 import {
   ContextWithFreshDocuments,
   SanityDocumentWithPhraseMetadata,
   SanityTranslationDocPair,
   TranslationRequest,
 } from '~/types'
-import { getTranslationName, langAdapter } from './utils'
+import { getTranslationName, langAdapter } from '~/utils'
 
 type StoredError = {
   adapter?: unknown

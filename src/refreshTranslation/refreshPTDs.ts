@@ -17,12 +17,12 @@ import { PhraseClient } from '../clients/createPhraseClient'
 import { runEffectWithClients } from '../createTranslation/createTranslationHelpers'
 import phraseDocumentToSanityDocument from '../phraseDocumentToSanityDocument'
 
-export default function refreshPTDs(inputRequest: {
+export default function refreshPTDs(input: {
   sanityClient: SanityClient
   credentials: PhraseCredentialsInput
   PTDs: SanityPTD[]
 }) {
-  const { PTDs, sanityClient } = inputRequest
+  const { PTDs, sanityClient } = input
 
   // For each PTD, find the last job in the workflow - that's the freshest preview possible
   const jobsToRefreshData = PTDs.reduce(
@@ -123,9 +123,7 @@ export default function refreshPTDs(inputRequest: {
     ),
   )
 
-  return Effect.runPromise(
-    runEffectWithClients(inputRequest, withErrorRecovery),
-  )
+  return Effect.runPromise(runEffectWithClients(input, withErrorRecovery))
 }
 
 function diffPTD(
