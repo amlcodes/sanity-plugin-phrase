@@ -7,6 +7,7 @@ import {
   Reference,
   SanityDocument,
   SchemaTypeDefinition,
+  WeakReference,
 } from 'sanity'
 import {
   PhraseClient,
@@ -42,6 +43,8 @@ export interface TranslationRequest {
     lang: CrossSystemLangCode
   }
   paths: [Path, ...Path[]]
+  /** @see getTranslationKey */
+  translationKey: string
   targetLangs: CrossSystemLangCode[]
   templateUid: string
   dateDue?: string
@@ -85,8 +88,7 @@ export enum SerializedPtHtmlTag {
 
 type BaseMainDocMetadata = {
   _type: 'phrase.mainDoc.translation'
-  /** @see getTranslationKey */
-  _key: string
+  _key: TranslationRequest['translationKey']
   _createdAt: string
   sourceDocRev: string
   projectName: string
@@ -100,7 +102,7 @@ type CreatingMainDocMetadata = BaseMainDocMetadata & {
 
 type CompletedMainDocMetadata = BaseMainDocMetadata & {
   status: 'COMPLETED'
-  targetLangs: CrossSystemLangCode[]
+  targetLangs: (CrossSystemLangCode & { ptd: WeakReference })[]
   projectUid: string
 }
 
@@ -109,10 +111,6 @@ export type CreatedMainDocMetadata = Omit<
   'status'
 > & {
   status: 'CREATED'
-}
-
-type DeletedMainDocMetadata = Omit<CompletedMainDocMetadata, 'status'> & {
-  status: 'DELETED_IN_PHRASE'
 }
 
 export type FailedPersistingMainDocMetadata = BaseMainDocMetadata & {
@@ -126,7 +124,6 @@ export type MainDocTranslationMetadata =
   | CompletedMainDocMetadata
   | CreatedMainDocMetadata
   | FailedPersistingMainDocMetadata
-  | DeletedMainDocMetadata
 
 /** For main documents (source and translated) only */
 export type MainDocPhraseMetadata = {
@@ -164,13 +161,14 @@ export type PtdPhraseMetadata = {
   _type: 'phrase.ptd.meta'
   sourceDoc: Reference
   targetDoc: Reference
+  translationKey: TranslationRequest['translationKey']
+  paths: TranslationRequest['paths']
   sourceFileUid?: string
   dateCreated?: string
   targetLang: CrossSystemLangCode
   sourceLang: CrossSystemLangCode
   filename?: string
   jobs: PhraseJobInfo[]
-  paths: TranslationRequest['paths']
   projectUid: string
 
   /** Cache of resolved documents referenced by the current PTD */
@@ -264,10 +262,10 @@ export type I18nAdapter = {
     toPhrase: (sanityLang: SanityLangCode) => PhraseLangCode
   }
 
-  injectDocumentLang: (
-    document: SanityDocumentWithPhraseMetadata,
+  injectDocumentLang: <Document extends SanityDocumentWithPhraseMetadata>(
+    document: Document,
     lang: SanityLangCode,
-  ) => SanityDocumentWithPhraseMetadata
+  ) => Document
   getDocumentLang: (
     document: SanityDocumentWithPhraseMetadata,
   ) => SanityLangCode | null
@@ -275,7 +273,7 @@ export type I18nAdapter = {
 
 export type CreateTranslationsInput = Omit<
   TranslationRequest,
-  'paths' | 'targetLangs' | 'sourceDoc' | 'phraseClient'
+  'paths' | 'targetLangs' | 'sourceDoc' | 'phraseClient' | 'translationKey'
 > & {
   credentials: PhraseCredentialsInput
   paths?: (Path | string)[]

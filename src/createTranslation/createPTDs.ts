@@ -1,6 +1,6 @@
 import { i18nAdapter } from '../adapters'
 import { mergeDocs } from '../mergeDocs'
-import { ContextWithJobs, Phrase, PhraseLangCode } from '~/types'
+import { ContextWithJobs, Phrase, PhraseLangCode, SanityPTD } from '~/types'
 import {
   getPtdId,
   isDraft,
@@ -13,7 +13,7 @@ import {
  * PTD: Parallel Translation Document
  */
 export function createPTDs({
-  request: { paths, sourceDoc },
+  request: { paths, sourceDoc, translationKey },
   project,
   jobs,
   freshSourceDoc,
@@ -50,7 +50,7 @@ export function createPTDs({
         paths,
       })
 
-      return i18nAdapter.injectDocumentLang(
+      return i18nAdapter.injectDocumentLang<SanityPTD>(
         {
           ...baseDoc,
           _id: getPtdId({
@@ -62,6 +62,7 @@ export function createPTDs({
           _rev: undefined,
           phraseMetadata: {
             _type: 'phrase.ptd.meta',
+            translationKey,
             sourceDoc: {
               _type: 'reference',
               _ref: undraftId(sourceDoc._id),

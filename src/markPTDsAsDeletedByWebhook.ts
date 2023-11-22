@@ -1,6 +1,7 @@
 import { SanityClient } from 'sanity'
 import getPTDsFromPhraseWebhook from './getPTDsFromPhraseWebhook'
 import { JobDeletedWebhook } from './handlePhraseWebhook'
+import { METADATA_KEY } from './types'
 
 export default async function markPTDsAsDeletedByWebhook({
   sanityClient,
@@ -18,8 +19,33 @@ export default async function markPTDsAsDeletedByWebhook({
     return PTDs
   }
 
-  return '@TODO'
+  const transaction = sanityClient.transaction()
+  const cancelledJobUids = payload.jobParts.flatMap((job) => job.uid || [])
 
-  // @TODO: finish dealing with job deletion
-  // Probably mark job as deleted, perhaps mark source/target docs as translation deleted if no more job is active?
+  PTDs.forEach((PTD) => {
+    const cancelledJobsInPTD = cancelledJobUids.filter((uid) =>
+      PTD.phraseMetadata.jobs.find((j) => j.uid === uid),
+    )
+    transaction.patch(PTD._id, (patch) => {
+      cancelledJobsInPTD.forEach((uid) => {
+        patch.set({
+          [`${METADATA_KEY}.jobs[uid=="${uid}"].status`]: 'CANCELLED',
+        })
+      })
+      return patch
+    })
+  })
+
+  try {
+    await transaction.commit()
+    return {
+      body: { message: 'Successfully marked PTDs as deleted' },
+      status: 200,
+    }
+  } catch (error) {
+    return {
+      body: { error: 'Failed to mark PTDs as deleted' },
+      status: 500,
+    }
+  }
 }

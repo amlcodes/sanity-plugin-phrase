@@ -7,7 +7,7 @@ import getAuthedPhraseClient from '../clients/getAuthedPhraseClient'
 import { CreateTranslationsInput, TranslationRequest } from '~/types'
 
 import { fromString } from '@sanity/util/paths'
-import { langAdapter } from '~/utils'
+import { getTranslationKey, langAdapter } from '~/utils'
 
 export function runEffectWithClients<E = unknown, A = unknown>(
   input: Pick<CreateTranslationsInput, 'credentials' | 'sanityClient'>,
@@ -55,14 +55,16 @@ export function formatRequest(
     ),
   )
 
+  const sourceDoc: TranslationRequest['sourceDoc'] = {
+    ...request.sourceDoc,
+    lang: langAdapter.sanityToCrossSystem(request.sourceDoc.lang),
+  }
   return {
     ...request,
     paths,
     targetLangs,
-    sourceDoc: {
-      ...request.sourceDoc,
-      lang: langAdapter.sanityToCrossSystem(request.sourceDoc.lang),
-    },
+    sourceDoc,
     phraseClient,
+    translationKey: getTranslationKey(paths, sourceDoc._rev),
   }
 }

@@ -4,7 +4,6 @@ import {
   createSchema,
   prepareForPreview,
 } from 'sanity'
-import { FILENAME_PREFIX } from './constants'
 import {
   CrossSystemLangCode,
   METADATA_KEY,
@@ -13,16 +12,17 @@ import {
   SanityLangCode,
   TranslationRequest,
 } from '~/types'
-import { getTranslationKey } from './ids'
 import { i18nAdapter } from '../adapters'
+import { FILENAME_PREFIX } from './constants'
+import { getTranslationKey } from './ids'
+export * from './constants'
 export * from './ids'
 export * from './paths'
-export * from './constants'
+export * from './phrase'
+
 export function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms))
 }
-
-export * from './phrase'
 
 export const NOT_PTD = `${METADATA_KEY}._type != "phrase.ptd.meta"`
 

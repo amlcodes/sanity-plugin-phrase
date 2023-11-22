@@ -14,5 +14,5 @@ export default async function refreshPTDsInPhraseWebhook(inputRequest: {
     return PTDs
   }
 
-  return refreshPTDs({ ...inputRequest, docs: PTDs })
+  return refreshPTDs({ ...inputRequest, PTDs: PTDs })
 }

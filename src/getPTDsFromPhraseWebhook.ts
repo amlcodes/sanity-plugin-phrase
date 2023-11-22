@@ -1,6 +1,7 @@
 import { SanityClient } from 'sanity'
 import { Phrase, SanityDocumentWithPhraseMetadata } from './types'
 import { dedupeArray, jobComesFromSanity } from './utils'
+import { docIsPTD } from './utils/phrase'
 
 export default async function getPTDsFromPhraseWebhook({
   sanityClient,
@@ -49,5 +50,5 @@ export default async function getPTDsFromPhraseWebhook({
     } as const
   }
 
-  return PTDs
+  return PTDs.filter(docIsPTD)
 }

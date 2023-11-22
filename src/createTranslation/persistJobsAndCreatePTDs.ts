@@ -1,11 +1,11 @@
 import { Effect, pipe } from 'effect'
-import { createPTDs } from './createPTDs'
 import {
   ContextWithJobs,
   CreatedMainDocMetadata,
   SanityDocumentWithPhraseMetadata,
 } from '~/types'
-import { getTranslationKey, langAdapter, tPathInMainDoc } from '~/utils'
+import { getPtdId, langAdapter, tPathInMainDoc } from '~/utils'
+import { createPTDs } from './createPTDs'
 
 class PersistJobsAndCreatePTDsError {
   readonly context: ContextWithJobs
@@ -39,7 +39,6 @@ export default function persistJobsAndCreatePTDs(context: ContextWithJobs) {
 
 function getTransaction(context: ContextWithJobs) {
   const { request, project, freshDocumentsById } = context
-  const { paths, sourceDoc } = request
   const PTDs = createPTDs(context)
 
   const transaction = request.sanityClient.transaction()
@@ -56,16 +55,29 @@ function getTransaction(context: ContextWithJobs) {
         },
       } as Pick<SanityDocumentWithPhraseMetadata, 'phraseMetadata'>)
 
-      const translationKey = getTranslationKey(paths, sourceDoc._rev)
-      const basePath = tPathInMainDoc(translationKey)
+      const basePath = tPathInMainDoc(request.translationKey)
+      const targetLangs: CreatedMainDocMetadata['targetLangs'] = langAdapter
+        .phraseToCrossSystem(project.targetLangs || [])
+        .map((lang) => ({
+          ...lang,
+          ptd: {
+            _ref: getPtdId({
+              targetLang: lang,
+              paths: request.paths,
+              sourceDoc: request.sourceDoc,
+            }),
+            _type: 'reference',
+            _weak: true,
+          },
+        }))
+
       const updatedData: Pick<
         CreatedMainDocMetadata,
         'status' | 'projectUid' | 'targetLangs'
       > = {
         [`${basePath}.status` as 'status']: 'CREATED',
         [`${basePath}.projectUid` as 'projectUid']: project.uid,
-        [`${basePath}.targetLangs` as 'targetLangs']:
-          langAdapter.phraseToCrossSystem(project.targetLangs || []),
+        [`${basePath}.targetLangs` as 'targetLangs']: targetLangs,
       }
 
       return (

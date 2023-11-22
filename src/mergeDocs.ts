@@ -2,9 +2,10 @@ import { Mutation, arrayToJSONMatchPath } from '@sanity/mutator'
 import { get } from '@sanity/util/paths'
 import { PatchOperations, Path, SanityDocument } from 'sanity'
 import phraseToSanity from './phraseToSanity'
+import { METADATA_KEY } from './types'
 
 // @TODO: do we include language & i18n adapter specific things here?
-const STATIC_KEYS = ['_id', '_rev', '_type', 'phraseMetadata']
+const STATIC_KEYS = ['_id', '_rev', '_type', METADATA_KEY]
 
 // @TODO: try using sanity-diff-patch instead. It has a basePath property we could perhaps leverage
 export function mergeDocs({

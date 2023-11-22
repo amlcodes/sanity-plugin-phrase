@@ -5,7 +5,7 @@ import {
   MainDocTranslationMetadata,
   SanityDocumentWithPhraseMetadata,
 } from '~/types'
-import { getTranslationKey, tPathInMainDoc } from '~/utils'
+import { tPathInMainDoc } from '~/utils'
 import { RevMismatchError } from './isRevTheSame'
 
 class FailedLockingError {
@@ -58,8 +58,7 @@ export default function lockDocuments(context: ContextWithFreshDocuments) {
 
 function getLockTransaction(context: ContextWithFreshDocuments) {
   const { request, freshDocuments } = context
-  const { paths, sourceDoc } = request
-  const translationKey = getTranslationKey(paths, sourceDoc._rev)
+  const { paths } = request
 
   const docs = freshDocuments.flatMap(
     (d) =>
@@ -82,7 +81,7 @@ function getLockTransaction(context: ContextWithFreshDocuments) {
 
       const translationMetadata: MainDocTranslationMetadata = {
         _type: 'phrase.mainDoc.translation',
-        _key: translationKey,
+        _key: request.translationKey,
         _createdAt: new Date().toISOString(),
         sourceDocRev: request.sourceDoc._rev,
         projectName: context.translationName,
@@ -92,10 +91,12 @@ function getLockTransaction(context: ContextWithFreshDocuments) {
       }
       if (
         doc.phraseMetadata?._type === 'phrase.main.meta' &&
-        doc.phraseMetadata.translations?.some((t) => t._key === translationKey)
+        doc.phraseMetadata.translations?.some(
+          (t) => t._key === request.translationKey,
+        )
       ) {
         return patch
-          .insert('replace', tPathInMainDoc(translationKey), [
+          .insert('replace', tPathInMainDoc(request.translationKey), [
             translationMetadata,
           ])
           .ifRevisionId(doc._rev)

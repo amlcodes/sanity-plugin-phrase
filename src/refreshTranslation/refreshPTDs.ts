@@ -8,9 +8,9 @@ import {
   Phrase,
   PhraseCredentialsInput,
   PhraseJobInfo,
-  SanityDocumentWithPhraseMetadata,
   SanityPTD,
 } from '~/types'
+import { getLastValidJobInWorkflow } from '~/utils/phrase'
 import { i18nAdapter } from '../adapters'
 import { EffectfulPhraseClient } from '../clients/EffectfulPhraseClient'
 import { PhraseClient } from '../clients/createPhraseClient'
@@ -20,21 +20,17 @@ import phraseDocumentToSanityDocument from '../phraseDocumentToSanityDocument'
 export default function refreshPTDs(inputRequest: {
   sanityClient: SanityClient
   credentials: PhraseCredentialsInput
-  docs: SanityDocumentWithPhraseMetadata[]
+  PTDs: SanityPTD[]
 }) {
-  const PTDs = inputRequest.docs.filter(
-    (doc) =>
-      doc.phraseMetadata?._type === 'phrase.ptd.meta' &&
-      doc.phraseMetadata.jobs?.length,
-  ) as SanityPTD[]
+  const { PTDs, sanityClient } = inputRequest
 
   // For each PTD, find the last job in the workflow - that's the freshest preview possible
   const jobsToRefreshData = PTDs.reduce(
     (acc, doc) => {
-      const lastJobInWorkflow = sortJobsByWorkflowLevel(
+      const lastJobInWorkflow = getLastValidJobInWorkflow(
         doc.phraseMetadata.jobs,
-      )[0]
-      if (!lastJobInWorkflow.uid) return acc
+      )
+      if (!lastJobInWorkflow?.uid) return acc
 
       return {
         ...acc,
@@ -87,13 +83,11 @@ export default function refreshPTDs(inputRequest: {
     ),
     Effect.flatMap((refreshedJobData) =>
       Effect.all(
-        PTDs.map((doc) =>
-          diffPTD(doc, refreshedJobData, inputRequest.sanityClient),
-        ),
+        PTDs.map((doc) => diffPTD(doc, refreshedJobData, sanityClient)),
       ),
     ),
     Effect.flatMap((PTDsToUpdate) => {
-      const transaction = inputRequest.sanityClient.transaction()
+      const transaction = sanityClient.transaction()
 
       PTDsToUpdate.forEach(({ patches }) => {
         for (const { patch } of patches) {
@@ -191,16 +185,6 @@ function diffPTD(
       }
     }),
   )
-}
-
-/** Later steps come first */
-function sortJobsByWorkflowLevel(jobs: PhraseJobInfo[]) {
-  return jobs.sort((a, b) => {
-    if (typeof a.workflowLevel !== 'number') return 1
-    if (typeof b.workflowLevel !== 'number') return -1
-
-    return b.workflowLevel - a.workflowLevel
-  })
 }
 
 function updateJobInPtd(
