@@ -39,12 +39,20 @@ type JobStatusChangedWebhook = {
   jobParts: Phrase['JobInWebhook'][]
 }
 
+type ProjectDeletedWebhook = {
+  event: 'PROJECT_DELETED'
+  timestamp: number
+  eventUid: string
+  project: Phrase['CreatedProject']
+}
+
 export type PhraseWebhook =
   | JobTargetUpdatedWebhook
   | JobDeletedWebhook
   | JobAssignedWebhook
   | JobCreatedWebhook
   | JobStatusChangedWebhook
+  | ProjectDeletedWebhook
 
 export default async function handlePhraseWebhook({
   sanityClient,
@@ -67,7 +75,18 @@ export default async function handlePhraseWebhook({
       ] as PhraseWebhook['event'][]
     ).includes(payload.event)
   ) {
-    return 'Invalid webhook payload or ignored event'
+    return {
+      status: 400,
+      body: { error: 'Invalid webhook payload or ignored event' },
+    } as const
+  }
+
+  if (payload.event === 'PROJECT_DELETED') {
+    // @TODO
+    return {
+      status: 500,
+      body: { error: "Project deletion isn't yet supported" },
+    } as const
   }
 
   if (payload.event === 'JOB_DELETED') {
@@ -78,8 +97,12 @@ export default async function handlePhraseWebhook({
   }
 
   if (payload.event === 'JOB_CREATED') {
-    // wait ~5s to have all language target documents, PTDs & referenced content in Sanity before proceeding
-    await sleep(5000)
+    // eslint-disable-next-line no-console
+    console.info('Waiting for Sanity to be ready before updating PTDs...')
+
+    // wait ~10s to have all language target documents, PTDs & referenced content in Sanity before proceeding
+    // 10s is also hopefully enough time for Phrase to finish its initial Machine Translation on the Job
+    await sleep(10000)
   }
 
   return refreshPTDsInPhraseWebhook({

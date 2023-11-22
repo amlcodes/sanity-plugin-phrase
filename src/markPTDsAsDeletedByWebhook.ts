@@ -1,7 +1,7 @@
 import { SanityClient } from 'sanity'
 import getPTDsFromPhraseWebhook from './getPTDsFromPhraseWebhook'
 import { JobDeletedWebhook } from './handlePhraseWebhook'
-import { METADATA_KEY } from './types'
+import { METADATA_KEY, PhraseJobInfo } from './types'
 
 export default async function markPTDsAsDeletedByWebhook({
   sanityClient,
@@ -28,9 +28,11 @@ export default async function markPTDsAsDeletedByWebhook({
     )
     transaction.patch(PTD._id, (patch) => {
       cancelledJobsInPTD.forEach((uid) => {
-        patch.set({
-          [`${METADATA_KEY}.jobs[uid=="${uid}"].status`]: 'CANCELLED',
-        })
+        const updatedData: Pick<PhraseJobInfo, 'status'> = {
+          [`${METADATA_KEY}.jobs[uid=="${uid}"].status` as 'status']:
+            'CANCELLED',
+        }
+        patch.set(updatedData)
       })
       return patch
     })

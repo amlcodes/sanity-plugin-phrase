@@ -1,5 +1,5 @@
 import { SanityClient } from 'sanity'
-import { Phrase, SanityDocumentWithPhraseMetadata } from './types'
+import { METADATA_KEY, Phrase, SanityDocumentWithPhraseMetadata } from './types'
 import { dedupeArray, jobComesFromSanity } from './utils'
 import { docIsPTD } from './utils/phrase'
 
@@ -26,8 +26,8 @@ export default async function getPTDsFromPhraseWebhook({
   const PTDs = await sanityClient
     .fetch<SanityDocumentWithPhraseMetadata[]>(
       /* groq */ `*[
-      phraseMeta.projectUid in $projectUids &&
-      count(phraseMeta.jobs[uid in $jobUids]) > 0
+      ${METADATA_KEY}.projectUid in $projectUids &&
+      count(${METADATA_KEY}.jobs[uid in $jobUids]) > 0
     ]`,
       {
         projectUids,

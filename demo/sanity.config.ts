@@ -81,7 +81,7 @@ export default defineConfig({
                   .title('Posts')
                   .schemaType('post')
                   .filter(
-                    '_type == "post" && phraseMeta._type != "phrase.ptd.meta"',
+                    '_type == "post" && phraseMetadata._type != "phrase.ptd.meta"',
                   )
                   .apiVersion(apiVersion),
               ),

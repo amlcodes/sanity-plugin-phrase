@@ -81,7 +81,7 @@ export default defineType({
       hidden: true,
     }),
     defineField({
-      name: 'phraseMeta',
+      name: 'phraseMetadata',
       type: 'object',
       readOnly: true,
       hidden: true,
@@ -99,7 +99,7 @@ export default defineType({
       language: 'language',
       author: 'author.name',
       media: 'mainImage',
-      translations: 'phraseMeta.translations',
+      translations: 'phraseMetadata.translations',
     },
     prepare(selection) {
       const hasTranslations = selection.translations?.find(
@@ -135,9 +135,9 @@ export async function isUniqueOtherThanLanguage(
   const id = document._id.replace(/^drafts\./, '')
 
   if (
-    typeof document.phraseMeta === 'object' &&
-    '_type' in document.phraseMeta &&
-    document.phraseMeta._type === 'phrase.ptd.meta'
+    typeof document.phraseMetadata === 'object' &&
+    '_type' in document.phraseMetadata &&
+    document.phraseMetadata._type === 'phrase.ptd.meta'
   ) {
     return true
   }
@@ -146,7 +146,7 @@ export async function isUniqueOtherThanLanguage(
     /* groq */ `defined(*[
       !(_id in [$draft, $published]) &&
       slug.current == $slug &&
-      phraseMeta._type != 'phrase.ptd.meta' &&
+      phraseMetadata._type != 'phrase.ptd.meta' &&
       language == $language
     ][0]._id)`,
     {
