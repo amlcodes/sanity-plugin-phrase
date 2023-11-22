@@ -10,11 +10,8 @@ import { RevMismatchError } from './isRevTheSame'
 
 class FailedLockingError {
   readonly _tag = 'FailedLockingError'
-  readonly error: unknown
 
-  constructor(error: unknown) {
-    this.error = error
-  }
+  constructor(readonly error: unknown) {}
 }
 
 export default function lockDocuments(context: ContextWithFreshDocuments) {
@@ -49,6 +46,9 @@ export default function lockDocuments(context: ContextWithFreshDocuments) {
         return new FailedLockingError(error)
       },
     }),
+    Effect.tapErrorTag('FailedLockingError', (error) =>
+      Effect.logError(error.error),
+    ),
     Effect.tap(() =>
       Effect.logInfo('[lockDocuments] Successfully locked documents'),
     ),

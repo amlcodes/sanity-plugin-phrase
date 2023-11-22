@@ -6,6 +6,7 @@ import {
   isDraft,
   langAdapter,
   makeKeyFriendly,
+  phraseDatetimeToJSDate,
   undraftId,
 } from '~/utils'
 
@@ -32,9 +33,11 @@ export function createTMD({
     {} as Record<PhraseLangCode, Phrase['JobPart'][]>,
   )
 
-  // @TODO: dateCreated is an ISO string?
-  const createdAt =
-    project.dateCreated || jobs[0].dateCreated || new Date().toISOString()
+  const createdAt = (
+    phraseDatetimeToJSDate(project.dateCreated) ||
+    phraseDatetimeToJSDate(jobs[0].dateCreated) ||
+    new Date()
+  ).toISOString()
 
   const targets: SanityTMD['targets'] = Object.entries(jobCollections).map(
     ([targetPhraseLang, jobCollection]) => {

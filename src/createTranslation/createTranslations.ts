@@ -98,7 +98,10 @@ export default function createTranslations(input: CreateTranslationsInput) {
       DocumentsLockedError: (error) =>
         Effect.succeed({ body: { error: error._tag }, status: 400 } as const),
       FailedLockingError: (error) =>
-        Effect.succeed({ body: { error: error._tag }, status: 500 } as const),
+        Effect.succeed({
+          body: { error: error._tag },
+          status: 500,
+        } as const),
     }),
     Effect.catchTag('FailedCreatingPhraseProject', (error) =>
       pipe(

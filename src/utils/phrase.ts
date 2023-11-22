@@ -128,3 +128,17 @@ export function isTranslationFinished(
 ): translation is CompletedMainDocMetadata {
   return translation.status === 'COMPLETED'
 }
+
+export function phraseDatetimeToJSDate<D extends string | undefined>(
+  phraseDate?: D,
+) {
+  if (!phraseDate) return undefined as D extends undefined ? undefined : Date
+
+  try {
+    return new Date(phraseDate) as D extends undefined ? undefined : Date
+  } catch (error) {
+    return new Date(phraseDate.split('+')[0]) as D extends undefined
+      ? undefined
+      : Date
+  }
+}
