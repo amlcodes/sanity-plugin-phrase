@@ -19,7 +19,7 @@ const response = await createMultipleTranslations({
     //   targetLangs: ['pt'],
     // },
     {
-      templateUid: '1dIg0Pc1d8kLUFyM0tgdmt',
+      templateUid: process.env.PHRASE_TEMPLATE_UID,
       sourceDoc: {
         _id: 'drafts.29b6c10d-6c89-4f88-9132-aae1095ad65c',
         _rev: 'yblsDKVOfabu1vzRxiLhB6',

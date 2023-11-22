@@ -60,6 +60,7 @@ export function getTranslationName(
   )} to ${targetLangs
     .map((l) => getReadableLanguageName(l.sanity))
     .join(', ')}) :: ${getTranslationKey(paths, sourceDoc._rev)})`
+
   return {
     translationName: name,
     translationFilename: `${name}.json`,

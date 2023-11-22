@@ -1,18 +1,19 @@
+import { METADATA_KEY } from '../src/types'
 import { testSanityClient } from './testSanityClient'
 
 async function unlockForTesting() {
   const ids = await testSanityClient.fetch<string[]>(
-    `*[defined(phraseMeta)]._id`,
+    `*[defined(${METADATA_KEY})]._id`,
   )
   const transaction = testSanityClient.transaction()
 
   for (const id of ids) {
-    transaction.patch(id, (patch) => patch.unset(['phraseMeta']))
+    transaction.patch(id, (patch) => patch.unset([METADATA_KEY]))
   }
 
   if (process.argv.includes('--remove-ptds')) {
     const ptdIds = await testSanityClient.fetch<string[]>(
-      `*[phraseMeta._type == "phrase.ptd.meta" || _id match "**phrase-translation--**"]._id`,
+      `*[${METADATA_KEY}._type == "phrase.ptd.meta" || _id match "**phrase-translation--**"]._id`,
     )
 
     for (const id of ptdIds) {
