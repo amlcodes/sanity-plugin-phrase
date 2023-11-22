@@ -1,4 +1,4 @@
-import { testSanityClient } from '../src/testSanityClient'
+import { testSanityClient } from './testSanityClient'
 
 async function unlockForTesting() {
   const ids = await testSanityClient.fetch<string[]>(

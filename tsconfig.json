@@ -1,6 +1,6 @@
 {
   "extends": "./tsconfig.settings",
-  "include": ["./src", "./package.config.ts", "testSanityClient.ts"],
+  "include": ["./src", "./package.config.ts"],
   "compilerOptions": {
     "rootDir": ".",
     "jsx": "react-jsx",
