@@ -15,22 +15,23 @@ import {
 } from '../clients/createPhraseClient'
 
 export function ptdMetadataExtractor(metadata: PtdPhraseMetadata) {
-  const { jobs } = metadata
-  const lastJob = jobs[jobs.length - 1]
-  const furthestOngoingJob =
-    jobs.find(
-      (job) =>
-        job.status !== 'COMPLETED' &&
-        job.status !== 'CANCELLED' &&
-        job.status !== 'REJECTED',
-    ) || lastJob
+  return {} as any
+  // const { jobs } = metadata
+  // const lastJob = jobs[jobs.length - 1]
+  // const furthestOngoingJob =
+  //   jobs.find(
+  //     (job) =>
+  //       job.status !== 'COMPLETED' &&
+  //       job.status !== 'CANCELLED' &&
+  //       job.status !== 'REJECTED',
+  //   ) || lastJob
 
-  return {
-    stepName: furthestOngoingJob?.workflowStep?.name || 'Ongoing',
-    stepStatus: furthestOngoingJob?.status || 'NEW',
-    due: lastJob?.dateDue,
-    activeJobUid: furthestOngoingJob?.uid,
-  }
+  // return {
+  //   stepName: furthestOngoingJob?.workflowStep?.name || 'Ongoing',
+  //   stepStatus: furthestOngoingJob?.status || 'NEW',
+  //   due: lastJob?.dateDue,
+  //   activeJobUid: furthestOngoingJob?.uid,
+  // }
 }
 
 export function getProjectURL(
@@ -103,8 +104,7 @@ export function isPTDDoc(
 ): doc is SanityPTD {
   return (
     doc.phraseMetadata?._type === 'phrase.ptd.meta' &&
-    doc.phraseMetadata.jobs &&
-    doc.phraseMetadata.jobs.length > 0
+    !!doc.phraseMetadata.targetLang
   )
 }
 

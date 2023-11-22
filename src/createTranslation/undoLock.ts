@@ -39,8 +39,7 @@ function getUnlockTransaction({
   request,
   freshDocuments,
 }: ContextWithFreshDocuments) {
-  const { paths, sourceDoc } = request
-  const translationKey = getTranslationKey(paths, sourceDoc._rev)
+  const { translationKey } = request
 
   const docs = freshDocuments.flatMap(
     (d) =>

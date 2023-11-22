@@ -1,6 +1,6 @@
 import { Effect, pipe } from 'effect'
 import { ContextWithJobs, FailedPersistingMainDocMetadata } from '~/types'
-import { getTranslationKey, tPathInMainDoc } from '~/utils'
+import { tPathInMainDoc } from '~/utils'
 
 class FailedSalvagingJobsError {
   readonly _tag = 'FailedSalvagingJobsError'
@@ -19,9 +19,8 @@ export default function salvageCreatedJobs({
   jobs,
   freshDocumentsById,
 }: ContextWithJobs) {
-  const { sourceDoc } = request
+  const { translationKey } = request
   const transaction = request.sanityClient.transaction()
-  const translationKey = getTranslationKey(request.paths, sourceDoc._rev)
   const basePath = tPathInMainDoc(translationKey)
 
   Object.keys(freshDocumentsById).forEach((id) => {

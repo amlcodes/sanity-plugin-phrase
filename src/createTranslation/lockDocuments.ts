@@ -79,13 +79,11 @@ function getLockTransaction(context: ContextWithFreshDocuments) {
         } as Pick<SanityDocumentWithPhraseMetadata, 'phraseMetadata'>)
         .ifRevisionId(doc._rev)
 
-      const translationMetadata: MainDocTranslationMetadata = {
+      const metadata: MainDocTranslationMetadata = {
         _type: 'phrase.mainDoc.translation',
         _key: request.translationKey,
         _createdAt: new Date().toISOString(),
         sourceDocRev: request.sourceDoc._rev,
-        projectName: context.translationName,
-        filename: context.translationFilename,
         paths,
         status: 'CREATING',
       }
@@ -96,14 +94,12 @@ function getLockTransaction(context: ContextWithFreshDocuments) {
         )
       ) {
         return patch
-          .insert('replace', tPathInMainDoc(request.translationKey), [
-            translationMetadata,
-          ])
+          .insert('replace', tPathInMainDoc(request.translationKey), [metadata])
           .ifRevisionId(doc._rev)
       }
 
       return patch
-        .append('phraseMetadata.translations', [translationMetadata])
+        .append('phraseMetadata.translations', [metadata])
         .ifRevisionId(doc._rev)
     })
   }

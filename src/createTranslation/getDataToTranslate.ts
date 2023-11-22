@@ -16,11 +16,6 @@ export default function getDataToTranslate({
 }): ContentInPhrase {
   const document = freshDocumentsById[sourceDoc._id]
   return {
-    /** For document-level translations, the full Sanity document is already in `cotnentByPath.__root` */
-    _sanityDocument: paths.some((p) => p.length === 0)
-      ? 'contentByPath'
-      : document,
-
     // @TODO: configurable context
     _sanityContext: `
         <h1>Preview translated content</h1>

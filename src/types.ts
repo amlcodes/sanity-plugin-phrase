@@ -13,7 +13,7 @@ import {
   PhraseClient,
   PhraseDatacenterRegion,
 } from './clients/createPhraseClient'
-import { getTranslationName, pathToString } from './utils'
+import { getTranslationKey, getTranslationName, pathToString } from './utils'
 import { CREDENTIALS_DOC_ID } from './utils/constants'
 import { definitions } from './clients/phraseOpenAPI'
 
@@ -91,8 +91,6 @@ type BaseMainDocMetadata = {
   _key: TranslationRequest['translationKey']
   _createdAt: string
   sourceDocRev: string
-  projectName: string
-  filename: string
   paths: TranslationRequest['paths']
 }
 
@@ -100,10 +98,10 @@ type CreatingMainDocMetadata = BaseMainDocMetadata & {
   status: 'CREATING'
 }
 
-type CompletedMainDocMetadata = BaseMainDocMetadata & {
+export type CompletedMainDocMetadata = BaseMainDocMetadata & {
   status: 'COMPLETED'
-  targetLangs: (CrossSystemLangCode & { ptd: WeakReference })[]
-  projectUid: string
+  tmd: Reference
+  targetLangs: CrossSystemLangCode[]
 }
 
 export type CreatedMainDocMetadata = Omit<
@@ -156,31 +154,52 @@ export interface ReferenceMap {
       }
 }
 
+/** Translation Metadata Document (TMD)
+ * Used for keeping permanent track of data in Phrase &
+ * determining what fields are stale since last translation. */
+export type SanityTMD = SanityDocument & {
+  _type: 'phrase.tmd'
+  _id: `phrase.tmd.${ReturnType<typeof getTranslationKey>}`
+  sourceSnapshot: SanityDocument
+  sourceDoc: Reference
+  sourceLang: CrossSystemLangCode
+  targets: {
+    _key: SanityLangCode
+    lang: CrossSystemLangCode
+    ptd: WeakReference
+    targetDoc: Reference
+    jobs: PhraseJobInfo[]
+  }[]
+  translationKey: TranslationRequest['translationKey']
+  paths: TranslationRequest['paths']
+  phraseProjectUid: string
+}
+
 /** For PTDs (Phrase Translation Documents) only */
 export type PtdPhraseMetadata = {
   _type: 'phrase.ptd.meta'
   sourceDoc: Reference
   targetDoc: Reference
-  translationKey: TranslationRequest['translationKey']
-  paths: TranslationRequest['paths']
-  sourceFileUid?: string
-  dateCreated?: string
+  tmd: Reference
   targetLang: CrossSystemLangCode
-  sourceLang: CrossSystemLangCode
-  filename?: string
-  jobs: PhraseJobInfo[]
-  projectUid: string
-
-  /** Cache of resolved documents referenced by the current PTD */
-  referenceMap?: ReferenceMap
 }
 
 export type SanityDocumentWithPhraseMetadata = SanityDocument & {
   phraseMetadata?: MainDocPhraseMetadata | PtdPhraseMetadata
 }
 
-export type SanityPTD = SanityDocument & {
+export type SanityPTD = SanityDocumentWithPhraseMetadata & {
+  _id: `phrase.ptd.${PhraseLangCode}--${ReturnType<typeof getTranslationKey>}`
   phraseMetadata: PtdPhraseMetadata
+}
+
+export type SanityPTDWithExpandedMetadata = SanityPTD & {
+  phraseMetadata: PtdPhraseMetadata & { expanded: SanityTMD }
+}
+
+/** A "main" document corresponds to either the source or target language */
+export type SanityMainDoc = SanityDocument & {
+  phraseMetadata: MainDocPhraseMetadata
 }
 
 export type SanityTranslationDocPair = {
@@ -190,9 +209,6 @@ export type SanityTranslationDocPair = {
 }
 
 export type ContentInPhrase = {
-  /** For document-level translations, the full Sanity document is already in `cotnentByPath.__root` */
-  _sanityDocument: SanityDocumentWithPhraseMetadata | 'contentByPath'
-
   /** HTML content to show in Phrase's "Context note" in-editor panel */
   _sanityContext?: string
 
@@ -304,4 +320,15 @@ export interface ContextWithProject extends ContextWithFreshDocuments {
 
 export interface ContextWithJobs extends ContextWithProject {
   jobs: Phrase['JobPart'][]
+}
+
+export enum StaleStatus {
+  // eslint-disable-next-line no-unused-vars
+  UNTRANSLATABLE = 'UNTRANSLATABLE',
+  // eslint-disable-next-line no-unused-vars
+  UNTRANSLATED = 'UNTRANSLATED',
+  // eslint-disable-next-line no-unused-vars
+  ONGOING = 'ONGOING',
+  // eslint-disable-next-line no-unused-vars
+  FRESH = 'FRESH',
 }

@@ -1,7 +1,7 @@
 import { SanityClient } from 'sanity'
 import getPTDsFromPhraseWebhook from './getPTDsFromPhraseWebhook'
 import { JobDeletedWebhook } from './handlePhraseWebhook'
-import { METADATA_KEY, PhraseJobInfo } from './types'
+import { PhraseJobInfo } from './types'
 
 export default async function markPTDsAsDeletedByWebhook({
   sanityClient,
@@ -23,13 +23,20 @@ export default async function markPTDsAsDeletedByWebhook({
   const cancelledJobUids = payload.jobParts.flatMap((job) => job.uid || [])
 
   PTDs.forEach((PTD) => {
-    const cancelledJobsInPTD = cancelledJobUids.filter((uid) =>
-      PTD.phraseMetadata.jobs.find((j) => j.uid === uid),
+    const metaDoc = PTD.phraseMetadata.expanded
+    const lang = PTD.phraseMetadata.targetLang
+    const targetInMeta = metaDoc.targets.find(
+      (t) => t.lang.sanity === lang.sanity,
     )
-    transaction.patch(PTD._id, (patch) => {
+    if (!targetInMeta?.jobs) return
+
+    const cancelledJobsInPTD = cancelledJobUids.filter((uid) =>
+      targetInMeta.jobs.find((j) => j.uid === uid),
+    )
+    transaction.patch(metaDoc._id, (patch) => {
       cancelledJobsInPTD.forEach((uid) => {
         const updatedData: Pick<PhraseJobInfo, 'status'> = {
-          [`${METADATA_KEY}.jobs[uid=="${uid}"].status` as 'status']:
+          [`targets[_key == "${lang.sanity}"].jobs[uid=="${uid}"].status` as 'status']:
             'CANCELLED',
         }
         patch.set(updatedData)

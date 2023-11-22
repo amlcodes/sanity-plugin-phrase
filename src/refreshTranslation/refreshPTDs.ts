@@ -8,7 +8,8 @@ import {
   Phrase,
   PhraseCredentialsInput,
   PhraseJobInfo,
-  SanityPTD,
+  SanityPTDWithExpandedMetadata,
+  SanityTMD,
 } from '~/types'
 import { getLastValidJobInWorkflow } from '~/utils/phrase'
 import { i18nAdapter } from '../adapters'
@@ -20,31 +21,34 @@ import phraseDocumentToSanityDocument from '../phraseDocumentToSanityDocument'
 export default function refreshPTDs(input: {
   sanityClient: SanityClient
   credentials: PhraseCredentialsInput
-  PTDs: SanityPTD[]
+  PTDs: SanityPTDWithExpandedMetadata[]
 }) {
   const { PTDs, sanityClient } = input
 
   // For each PTD, find the last job in the workflow - that's the freshest preview possible
   const jobsToRefreshData = PTDs.reduce(
     (acc, doc) => {
-      const lastJobInWorkflow = getLastValidJobInWorkflow(
-        doc.phraseMetadata.jobs,
+      const metadataForLang = doc.phraseMetadata.expanded.targets.find(
+        (t) => t.lang.sanity === doc.phraseMetadata.targetLang.sanity,
       )
+      if (!metadataForLang?.jobs) return acc
+
+      const lastJobInWorkflow = getLastValidJobInWorkflow(metadataForLang.jobs)
       if (!lastJobInWorkflow?.uid) return acc
 
       return {
         ...acc,
         [lastJobInWorkflow.uid]: {
           ...(acc[lastJobInWorkflow.uid] || {}),
-          projectUid: doc.phraseMetadata.projectUid,
-          targetLang: doc.phraseMetadata.targetLang,
+          phraseProjectUid: doc.phraseMetadata.expanded.phraseProjectUid,
+          targetLang: metadataForLang.lang,
           ptdIds: [...(acc[lastJobInWorkflow.uid]?.ptdIds || []), doc._id],
         },
       }
     },
     {} as {
       [jobUid: string]: {
-        projectUid: string
+        phraseProjectUid: string
         targetLang: CrossSystemLangCode
         ptdIds: string[]
       }
@@ -53,13 +57,13 @@ export default function refreshPTDs(input: {
 
   function getFreshJobData(phraseClient: PhraseClient) {
     return Object.entries(jobsToRefreshData).map(
-      ([jobUid, { projectUid, targetLang, ptdIds }]) =>
+      ([jobUid, { phraseProjectUid, targetLang, ptdIds }]) =>
         pipe(
           Effect.retry(
             Effect.tryPromise({
               try: () =>
                 phraseClient.jobs.getPreview({
-                  projectUid,
+                  projectUid: phraseProjectUid,
                   jobUid,
                 }),
               catch: () => new Error('@TODO'),
@@ -68,7 +72,7 @@ export default function refreshPTDs(input: {
           ),
           Effect.map((contentInPhrase) => ({
             contentInPhrase,
-            projectUid,
+            phraseProjectUid,
             targetLang,
             jobUid,
             ptdIds,
@@ -82,27 +86,32 @@ export default function refreshPTDs(input: {
       Effect.all(getFreshJobData(phraseClient), { concurrency: 3 }),
     ),
     Effect.flatMap((refreshedJobData) =>
-      Effect.all(
-        PTDs.map((doc) => diffPTD(doc, refreshedJobData, sanityClient)),
+      pipe(
+        Effect.all(PTDs.map((doc) => diffPTD(doc, refreshedJobData))),
+        Effect.flatMap((PTDsToUpdate) => {
+          const transaction = sanityClient.transaction()
+
+          PTDsToUpdate.forEach(({ patches, originalDoc }) => {
+            for (const { patch } of patches) {
+              transaction.patch(patch.id, patch)
+            }
+
+            const { patches: metadataPatches } = diffTMD(originalDoc)
+            for (const { patch } of metadataPatches) {
+              transaction.patch(patch.id, patch)
+            }
+          })
+
+          return Effect.retry(
+            Effect.tryPromise({
+              try: () => transaction.commit(),
+              catch: () => new Error('@todo'),
+            }),
+            retrySchedule,
+          )
+        }),
       ),
     ),
-    Effect.flatMap((PTDsToUpdate) => {
-      const transaction = sanityClient.transaction()
-
-      PTDsToUpdate.forEach(({ patches }) => {
-        for (const { patch } of patches) {
-          transaction.patch(patch.id, patch)
-        }
-      })
-
-      return Effect.retry(
-        Effect.tryPromise({
-          try: () => transaction.commit(),
-          catch: () => new Error('@todo'),
-        }),
-        retrySchedule,
-      )
-    }),
     Effect.map(
       () =>
         ({
@@ -127,15 +136,14 @@ export default function refreshPTDs(input: {
 }
 
 function diffPTD(
-  doc: SanityPTD,
+  doc: SanityPTDWithExpandedMetadata,
   refreshedJobData: {
     contentInPhrase: ContentInPhrase
-    projectUid: string
+    phraseProjectUid: string
     targetLang: CrossSystemLangCode
     jobUid: string
     ptdIds: string[]
   }[],
-  sanityClient: SanityClient,
 ) {
   const phraseDoc = refreshedJobData.find((job) => job.ptdIds.includes(doc._id))
     ?.contentInPhrase
@@ -159,46 +167,58 @@ function diffPTD(
       const finalDoc = i18nAdapter.injectDocumentLang(
         {
           ...updatedContent,
-          phraseMetadata:
-            doc.phraseMetadata?._type === 'phrase.ptd.meta'
-              ? {
-                  ...doc.phraseMetadata,
-                  jobs: doc.phraseMetadata.jobs.map((job) =>
-                    updateJobInPtd(job, [] /* @Todo */),
-                  ),
-                }
-              : undefined,
+          phraseMetadata: undefined,
         },
         (doc.phraseMetadata?._type === 'phrase.ptd.meta'
-          ? doc.phraseMetadata?.targetLang.sanity
-          : i18nAdapter.getDocumentLang(doc)) ||
-          // @TODO: how to deal with missing targetLang? Can this ever happen?
-          '',
+          ? doc.phraseMetadata.targetLang.sanity
+          : i18nAdapter.getDocumentLang(doc)) as string,
       )
 
       return {
         originalDoc: doc,
         doc: finalDoc,
-        patches: diffPatch(doc, finalDoc),
+        patches: diffPatch({ ...doc, phraseMetadata: undefined }, finalDoc),
       }
     }),
   )
 }
 
-function updateJobInPtd(
-  jobInPtd: PhraseJobInfo,
-  updatedJobs: (Phrase['JobInWebhook'] | PhraseJobInfo)[],
-) {
-  const freshJob = updatedJobs.find((j) => j.uid === jobInPtd.uid)
-  if (!freshJob) return jobInPtd
+function diffTMD(doc: SanityPTDWithExpandedMetadata) {
+  const currentMetadata = doc.phraseMetadata.expanded
+  const newMetadata: SanityTMD = {
+    ...currentMetadata,
+    targets: currentMetadata.targets.map((target) => {
+      if (target.lang.sanity !== doc.phraseMetadata.targetLang.sanity)
+        return target
+
+      return {
+        ...target,
+        jobs: target.jobs.map((job) => updateJobInTMD(job, [] /* @TODO */)),
+      }
+    }),
+  }
 
   return {
-    ...jobInPtd,
+    currentMetadata,
+    newMetadata,
+    patches: diffPatch(currentMetadata, newMetadata),
+  }
+}
+
+function updateJobInTMD(
+  jobInMeta: PhraseJobInfo,
+  updatedJobs: (Phrase['JobInWebhook'] | PhraseJobInfo)[],
+) {
+  const freshJob = updatedJobs.find((j) => j.uid === jobInMeta.uid)
+  if (!freshJob) return jobInMeta
+
+  return {
+    ...jobInMeta,
     status: freshJob.status,
     dateDue: freshJob.dateDue,
     dateCreated: freshJob.dateCreated,
     workflowLevel: freshJob.workflowLevel,
-    workflowStep: freshJob.workflowStep || jobInPtd.workflowStep,
-    providers: freshJob.providers || jobInPtd.providers,
+    workflowStep: freshJob.workflowStep || jobInMeta.workflowStep,
+    providers: freshJob.providers || jobInMeta.providers,
   }
 }

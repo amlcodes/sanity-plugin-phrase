@@ -13,7 +13,7 @@ async function unlockForTesting() {
 
   if (process.argv.includes('--remove-ptds')) {
     const ptdIds = await testSanityClient.fetch<string[]>(
-      `*[${METADATA_KEY}._type == "phrase.ptd.meta" || _id match "**phrase-translation--**"]._id`,
+      `*[${METADATA_KEY}._type == "phrase.ptd.meta" || _id match "**phrase-translation--**" || _type == 'phrase.tmd']._id`,
     )
 
     for (const id of ptdIds) {

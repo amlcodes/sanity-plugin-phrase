@@ -4,8 +4,9 @@ import {
   CreatedMainDocMetadata,
   SanityDocumentWithPhraseMetadata,
 } from '~/types'
-import { getPtdId, langAdapter, tPathInMainDoc } from '~/utils'
+import { tPathInMainDoc } from '~/utils'
 import { createPTDs } from './createPTDs'
+import { createTMD } from './createTMD'
 
 class PersistJobsAndCreatePTDsError {
   readonly context: ContextWithJobs
@@ -38,10 +39,13 @@ export default function persistJobsAndCreatePTDs(context: ContextWithJobs) {
 }
 
 function getTransaction(context: ContextWithJobs) {
-  const { request, project, freshDocumentsById } = context
+  const { request, freshDocumentsById } = context
   const PTDs = createPTDs(context)
+  const TMD = createTMD(context)
 
   const transaction = request.sanityClient.transaction()
+
+  transaction.createOrReplace(TMD)
 
   PTDs.forEach((doc) => transaction.createOrReplace(doc))
 
@@ -56,28 +60,17 @@ function getTransaction(context: ContextWithJobs) {
       } as Pick<SanityDocumentWithPhraseMetadata, 'phraseMetadata'>)
 
       const basePath = tPathInMainDoc(request.translationKey)
-      const targetLangs: CreatedMainDocMetadata['targetLangs'] = langAdapter
-        .phraseToCrossSystem(project.targetLangs || [])
-        .map((lang) => ({
-          ...lang,
-          ptd: {
-            _ref: getPtdId({
-              targetLang: lang,
-              paths: request.paths,
-              sourceDoc: request.sourceDoc,
-            }),
-            _type: 'reference',
-            _weak: true,
-          },
-        }))
 
       const updatedData: Pick<
         CreatedMainDocMetadata,
-        'status' | 'projectUid' | 'targetLangs'
+        'status' | 'targetLangs' | 'tmd'
       > = {
         [`${basePath}.status` as 'status']: 'CREATED',
-        [`${basePath}.projectUid` as 'projectUid']: project.uid,
-        [`${basePath}.targetLangs` as 'targetLangs']: targetLangs,
+        [`${basePath}.targetLangs` as 'targetLangs']: request.targetLangs,
+        [`${basePath}.tmd` as 'tmd']: {
+          _ref: TMD._id,
+          _type: 'reference',
+        },
       }
 
       return (

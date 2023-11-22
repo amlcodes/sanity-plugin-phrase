@@ -9,6 +9,7 @@ import {
   METADATA_KEY,
   Phrase,
   PhraseLangCode,
+  SanityDocumentWithPhraseMetadata,
   SanityLangCode,
   TranslationRequest,
 } from '~/types'
@@ -180,5 +181,12 @@ export function formatDay(date: Date, lang?: string) {
       month: '2-digit',
       year: 'numeric',
     })
+  }
+}
+
+export function getTranslationSnapshot(doc: SanityDocumentWithPhraseMetadata) {
+  return {
+    ...doc,
+    [METADATA_KEY]: undefined,
   }
 }
