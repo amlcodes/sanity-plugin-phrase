@@ -42,6 +42,7 @@
     "openapi-types": "openapi-typescript https://cloud.memsource.com/web/internal/v1/docs/latest/yaml?internal=false --output phraseSchema.d.ts",
     "type-check": "tsc --noEmit",
     "dev:unlockForTesting": "bun dev/unlockForTesting.ts --remove-ptds --remove-translated",
+    "dev:mergePTD": "bun dev/mergePTDTest.ts",
     "dev:getStaleTranslations": "bun dev/getStaleTranslationsTest.ts",
     "dev:createTranslations": "bun dev/createTest.ts",
     "dev:refreshPtdById": "bun dev/refreshByIdTest.ts",
