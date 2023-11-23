@@ -11,7 +11,7 @@ import {
 import {
   draftId,
   getTranslationSnapshot,
-  isMainDoc,
+  isTranslatedMainDoc,
   langAdapter,
   translationsUnfinished,
   undraftId,
@@ -59,7 +59,7 @@ export default async function getStaleTranslations({
     )
     const freshestDoc = docPair?.draft || docPair?.published
 
-    if (!freshestDoc || !isMainDoc(freshestDoc)) {
+    if (!freshestDoc || !isTranslatedMainDoc(freshestDoc)) {
       return {
         sourceDoc,
         targets: targetLangs.map((lang) => ({

@@ -3,7 +3,13 @@ import { useState } from 'react'
 import { StringFieldProps, useFormValue } from 'sanity'
 import { i18nAdapter } from '../../adapters'
 import { SanityDocumentWithPhraseMetadata, TranslationRequest } from '~/types'
-import { langAdapter, undraftId } from '~/utils'
+import {
+  isTranslatedMainDoc,
+  isPTDDoc,
+  langAdapter,
+  undraftId,
+  isMainDoc,
+} from '~/utils'
 import OngoingTranslationsDocDashboard from './OngoingTranslationsDocDashboard'
 import PreviouslyTranslatedDocDashboard from './PreviouslyTranslatedDocDashboard'
 import PtdDocDashboard from './PtdDashboard'
@@ -22,26 +28,21 @@ export default function PhraseDocDashboard(props: StringFieldProps) {
 
   return (
     <Card>
-      {(!document.phraseMetadata ||
-        (document.phraseMetadata._type === 'phrase.main.meta' &&
-          (!document.phraseMetadata.translations ||
-            document.phraseMetadata.translations.length <= 0))) && (
+      {isPTDDoc(document) && (
+        <PtdDocDashboard
+          document={document}
+          ptdMetadata={document.phraseMetadata}
+        />
+      )}
+
+      {isMainDoc(document) && !isTranslatedMainDoc(document) && (
         <UntranslatedDocDashboard
           document={document}
           openDialog={() => setPathsToTranslate([[]])}
         />
       )}
 
-      {document.phraseMetadata &&
-        document.phraseMetadata._type === 'phrase.ptd.meta' && (
-          <PtdDocDashboard
-            document={document}
-            ptdMetadata={document.phraseMetadata}
-          />
-        )}
-
-      {document.phraseMetadata &&
-        document.phraseMetadata._type === 'phrase.main.meta' &&
+      {isTranslatedMainDoc(document) &&
         (() => {
           const sourceDoc: TranslationRequest['sourceDoc'] = {
             _id: undraftId(document._id),

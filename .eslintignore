@@ -13,7 +13,6 @@ tests
 src/types/phraseOpenAPI.d.ts
 
 # Temporary
-createTest.ts
-webhookTest.ts
 playground.ts
 testing-effect
+real-demo

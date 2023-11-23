@@ -11,6 +11,10 @@
     "rootDir": ".",
     "outDir": "./dist",
     "jsx": "react-jsx",
-    "emitDeclarationOnly": true
+    "emitDeclarationOnly": true,
+    "declaration": true,
+    "paths": {
+      "~/*": ["./src/*"]
+    }
   }
 }

@@ -1,4 +1,3 @@
-'use client'
 import { SanityClient, SchemaTypeDefinition } from 'sanity'
 import { EndpointActionTypes, PhraseCredentialsInput } from '~/types'
 import { createResponse } from './backendHelpers'

@@ -1,16 +1,17 @@
 'use client'
 
 import { PublishIcon, RefreshIcon } from '@sanity/icons'
-import { Button, Card, Flex, Heading, Stack, Text } from '@sanity/ui'
+import { Button, Card, Flex, Heading, Spinner, Stack, Text } from '@sanity/ui'
 import { useState } from 'react'
-import { useClient, useSchema } from 'sanity'
+import { useEditState, useSchema } from 'sanity'
 import {
   EndpointActionTypes,
   PtdPhraseMetadata,
-  SanityDocumentWithPhraseMetadata,
+  SanityPTD,
+  SanityTMD,
   TranslationRequest,
 } from '~/types'
-import { getProjectURL, ptdMetadataExtractor } from '~/utils'
+import { getProjectURL, jobsMetadataExtractor } from '~/utils'
 import { TranslationInfo } from './TranslationInfo'
 import { useOpenInSidePane } from './useOpenInSidepane'
 
@@ -20,29 +21,43 @@ export default function PtdDocDashboard({
   document: ptdDocument,
   ptdMetadata,
 }: {
-  document: SanityDocumentWithPhraseMetadata
+  document: SanityPTD
   ptdMetadata: PtdPhraseMetadata
 }) {
-  const sanityClient = useClient({ apiVersion: '2023-11-10' })
+  const { ready, draft, published } = useEditState(
+    ptdDocument?.phraseMetadata?.tmd?._ref || '',
+    ptdDocument?.phraseMetadata?.tmd?._type || 'document',
+  )
+  const TMD = (draft || published) as SanityTMD
+  // const sanityClient = useClient({ apiVersion: '2023-11-10' })
   const [state, setState] = useState<'idle' | 'refreshing' | 'committing'>(
     'idle',
   )
-  const [errors, setError] = useState<
-    { title: string; error: unknown } | undefined
-  >()
+  const [, setError] = useState<{ title: string; error: unknown } | undefined>()
   const schema = useSchema()
   const schemaType = schema.get(ptdDocument._type)
   const openInSidePane = useOpenInSidePane(ptdDocument._id)
-  const sourceDoc: TranslationRequest['sourceDoc'] = {
-    _id: ptdMetadata.sourceDoc._ref,
-    _type: ptdDocument._type,
-    // @TODO: include _ref in PTD metadata
-    _rev: ptdMetadata.sourceDoc._ref,
-    lang: ptdMetadata.targetLang,
+
+  if (!ready) {
+    return <Spinner />
   }
 
-  const meta = ptdMetadataExtractor(ptdMetadata)
-  const readyToMerge = meta.stepStatus === 'COMPLETED'
+  if (!TMD) {
+    return <div>error @todo</div>
+  }
+
+  const sourceDoc: TranslationRequest['sourceDoc'] = {
+    _id: TMD.sourceDoc._ref,
+    _type: ptdDocument._type,
+    _rev: TMD.sourceSnapshot._rev,
+    lang: TMD.sourceLang,
+  }
+  const target = TMD.targets.find(
+    (t) => t.lang.sanity === ptdMetadata.targetLang.sanity,
+  )
+
+  const meta = target && jobsMetadataExtractor(target.jobs)
+  const readyToMerge = meta?.stepStatus === 'COMPLETED'
 
   async function handleRefresh() {
     setState('refreshing')
@@ -95,7 +110,7 @@ export default function PtdDocDashboard({
             size={1}
             as="a"
             href={getProjectURL(
-              ptdMetadata.projectUid,
+              TMD.phraseProjectUid,
               // @TODO: make configurable
               'us',
             )}
@@ -107,9 +122,8 @@ export default function PtdDocDashboard({
         </Flex>
         <TranslationInfo
           sourceDoc={sourceDoc}
-          paths={ptdMetadata.paths}
+          TMD={TMD}
           paneParentDocId={ptdDocument._id}
-          ptdMetadata={ptdMetadata}
           targetLang={ptdMetadata.targetLang}
         />
         <Flex gap={2}>

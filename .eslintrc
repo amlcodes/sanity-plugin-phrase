@@ -21,6 +21,7 @@
     "@typescript-eslint/no-shadow": "error",
     "prettier/prettier": "warn",
     "@typescript-eslint/no-useless-constructor": "off",
-    "no-useless-constructor": "off"
+    "no-useless-constructor": "off",
+    "react/jsx-no-bind": "off"
   }
 }

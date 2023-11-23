@@ -1,48 +1,37 @@
 import { EyeOpenIcon } from '@sanity/icons'
 import { Badge, Button, Flex, Spinner, Stack, Text } from '@sanity/ui'
 import { useSchema } from 'sanity'
-import {
-  CrossSystemLangCode,
-  PtdPhraseMetadata,
-  TranslationRequest,
-} from '~/types'
+import { CrossSystemLangCode, SanityTMD, TranslationRequest } from '~/types'
 import {
   getJobEditorURL,
-  getPtdId,
   getReadableLanguageName,
-  ptdMetadataExtractor,
+  jobsMetadataExtractor,
 } from '~/utils'
 import { PhraseMonogram } from './PhraseLogo'
 import { useOpenInSidePane } from './useOpenInSidepane'
 
 export function TranslationInfo({
   targetLang,
-  paths,
   sourceDoc,
-  ptdMetadata,
   paneParentDocId,
+  TMD,
 }: {
   targetLang: CrossSystemLangCode
-  paths: TranslationRequest['paths']
   sourceDoc: TranslationRequest['sourceDoc']
   paneParentDocId: string
-  ptdMetadata: 'loading' | PtdPhraseMetadata | undefined
+  TMD: SanityTMD | 'loading'
 }) {
   const schema = useSchema()
   const schemaType = schema.get(sourceDoc._type)
-  const ptdId = getPtdId({
-    targetLang,
-    paths,
-    sourceDoc,
-  })
   const openInSidePane = useOpenInSidePane(paneParentDocId)
-  // @TODO
-  const label = getReadableLanguageName(targetLang.sanity || targetLang)
-  console.log({ label, targetLang })
-  const meta =
-    typeof ptdMetadata === 'object' && !!ptdMetadata && ptdMetadata?.jobs
-      ? ptdMetadataExtractor(ptdMetadata)
-      : undefined
+  const label = getReadableLanguageName(targetLang.sanity)
+
+  const target =
+    typeof TMD === 'object' &&
+    TMD.targets.find((t) => t.lang.sanity === targetLang.sanity)
+  const ptdId = target && target?.ptd?._ref
+  const jobsMeta =
+    target && target?.jobs ? jobsMetadataExtractor(target.jobs) : undefined
 
   return (
     <Flex align="flex-start">
@@ -50,27 +39,28 @@ export function TranslationInfo({
         <Text size={2} weight="semibold">
           {label}
         </Text>
-        {ptdMetadata === 'loading' && <Spinner />}
-        {meta && (
+        {TMD === 'loading' && <Spinner />}
+
+        {jobsMeta && (
           <>
             <Text size={1} muted>
-              Step: {meta.stepName} <Badge>{meta.stepStatus}</Badge>
+              Step: {jobsMeta.stepName} <Badge>{jobsMeta.stepStatus}</Badge>
             </Text>
-            {meta.due && (
+            {jobsMeta.due && (
               <Text size={1} muted>
-                Due: {meta.due}
+                Due: {jobsMeta.due}
               </Text>
             )}
           </>
         )}
       </Stack>
-      {meta?.activeJobUid && (
+      {jobsMeta?.activeJobUid && (
         <Button
           icon={PhraseMonogram}
           mode="bleed"
           as="a"
           href={getJobEditorURL(
-            meta.activeJobUid,
+            jobsMeta.activeJobUid,
             // @TODO: make configurable
             'us',
           )}
@@ -79,7 +69,7 @@ export function TranslationInfo({
           label="Edit in Phrase"
         />
       )}
-      {schemaType && (
+      {schemaType && ptdId && (
         <Button
           icon={EyeOpenIcon}
           label="Preview"

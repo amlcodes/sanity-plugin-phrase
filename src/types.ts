@@ -156,6 +156,16 @@ export interface ReferenceMap {
     | ExistingReference
 }
 
+export type TMDTarget = {
+  _key: SanityLangCode
+  lang: CrossSystemLangCode
+  ptd: WeakReference
+  targetDoc: Reference
+  jobs: PhraseJobInfo[]
+  /** Cache of resolved references from source to target languages */
+  referenceMap?: ReferenceMap
+}
+
 /** Translation Metadata Document (TMD)
  * Used for keeping permanent track of data in Phrase &
  * determining what fields are stale since last translation. */
@@ -165,15 +175,7 @@ export type SanityTMD = SanityDocument & {
   sourceSnapshot: SanityDocument
   sourceDoc: Reference
   sourceLang: CrossSystemLangCode
-  targets: {
-    _key: SanityLangCode
-    lang: CrossSystemLangCode
-    ptd: WeakReference
-    targetDoc: Reference
-    jobs: PhraseJobInfo[]
-    /** Cache of resolved references from source to target languages */
-    referenceMap?: ReferenceMap
-  }[]
+  targets: TMDTarget[]
   translationKey: TranslationRequest['translationKey']
   paths: TranslationRequest['paths']
   phraseProjectUid: string
@@ -303,6 +305,16 @@ export type CreateTranslationsInput = Omit<
     lang: SanityLangCode
   }
 }
+
+export type CreateMultipleTranslationsInput = {
+  translations: Omit<
+    CreateTranslationsInput,
+    'sanityClient' | 'credentials' | 'schemaTypes'
+  >[]
+} & Pick<
+  CreateTranslationsInput,
+  'sanityClient' | 'credentials' | 'schemaTypes'
+>
 
 export enum EndpointActionTypes {
   // eslint-disable-next-line no-unused-vars

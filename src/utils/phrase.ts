@@ -14,24 +14,22 @@ import {
   getPhraseBaseUrl,
 } from '../clients/createPhraseClient'
 
-export function ptdMetadataExtractor(metadata: PtdPhraseMetadata) {
-  return {} as any
-  // const { jobs } = metadata
-  // const lastJob = jobs[jobs.length - 1]
-  // const furthestOngoingJob =
-  //   jobs.find(
-  //     (job) =>
-  //       job.status !== 'COMPLETED' &&
-  //       job.status !== 'CANCELLED' &&
-  //       job.status !== 'REJECTED',
-  //   ) || lastJob
+export function jobsMetadataExtractor(jobs: PhraseJobInfo[]) {
+  const lastJob = jobs[jobs.length - 1]
+  const furthestOngoingJob =
+    jobs.find(
+      (job) =>
+        job.status !== 'COMPLETED' &&
+        job.status !== 'CANCELLED' &&
+        job.status !== 'REJECTED',
+    ) || lastJob
 
-  // return {
-  //   stepName: furthestOngoingJob?.workflowStep?.name || 'Ongoing',
-  //   stepStatus: furthestOngoingJob?.status || 'NEW',
-  //   due: lastJob?.dateDue,
-  //   activeJobUid: furthestOngoingJob?.uid,
-  // }
+  return {
+    stepName: furthestOngoingJob?.workflowStep?.name || 'Ongoing',
+    stepStatus: furthestOngoingJob?.status || 'NEW',
+    due: lastJob?.dateDue,
+    activeJobUid: furthestOngoingJob?.uid,
+  }
 }
 
 export function getProjectURL(
@@ -59,7 +57,7 @@ export const usePtdState = createHookFromObservableFactory<
   {
     documentStore: DocumentStore
     /** published version */
-    ptdId: string
+    ptdId: SanityPTD['_id']
   }
 >((props) => {
   return props.documentStore.listenQuery(
@@ -108,12 +106,18 @@ export function isPTDDoc(
   )
 }
 
-/** Only returns if has at least one translation */
 export function isMainDoc(
   doc: SanityDocumentWithPhraseMetadata,
 ): doc is SanityMainDoc {
+  return doc.phraseMetadata?._type === 'phrase.main.meta'
+}
+
+/** Only returns if has at least one translation */
+export function isTranslatedMainDoc(
+  doc: SanityDocumentWithPhraseMetadata,
+): doc is SanityMainDoc {
   return (
-    doc.phraseMetadata?._type === 'phrase.main.meta' &&
+    isMainDoc(doc) &&
     Array.isArray(doc.phraseMetadata.translations) &&
     doc.phraseMetadata.translations.length > 0
   )

@@ -1,18 +1,10 @@
 import { Effect, pipe } from 'effect'
-import { CreateTranslationsInput } from '~/types'
-import createTranslations from '../createTranslation/createTranslations'
+import { CreateMultipleTranslationsInput } from '~/types'
 import { runEffectWithClients } from '../createTranslation/createTranslationHelpers'
+import createTranslations from '../createTranslation/createTranslations'
 
 export default function createMultipleTranslations(
-  input: {
-    translations: Omit<
-      CreateTranslationsInput,
-      'sanityClient' | 'credentials' | 'schemaTypes'
-    >[]
-  } & Pick<
-    CreateTranslationsInput,
-    'sanityClient' | 'credentials' | 'schemaTypes'
-  >,
+  input: CreateMultipleTranslationsInput,
 ) {
   const { translations } = input
   if (!Array.isArray(translations)) {

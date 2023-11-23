@@ -3,7 +3,7 @@ import { defineArrayMember, defineField, defineType } from 'sanity'
 
 import { apiVersion } from '~/lib/sanity.api'
 import { NOT_PTD } from '~/lib/sanity.queries'
-import PhraseDocDashboard from '~/plugin-dist/PhraseDocDashboard/PhraseDocDashboard'
+import {PhraseDocDashboard} from '~/plugin-dist'
 import { draftId, getReadableLanguageName, undraftId } from '~/utils'
 
 export default defineType({

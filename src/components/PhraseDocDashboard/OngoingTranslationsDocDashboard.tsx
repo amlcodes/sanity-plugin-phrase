@@ -1,11 +1,12 @@
-import { Button, Card, Flex, Heading, Stack } from '@sanity/ui'
-import { useDocumentStore } from 'sanity'
+import { Button, Card, Flex, Heading, Spinner, Stack } from '@sanity/ui'
+import { useEditState } from 'sanity'
 import {
-  CrossSystemLangCode,
+  CreatedMainDocMetadata,
   MainDocTranslationMetadata,
+  SanityTMD,
   TranslationRequest,
 } from '~/types'
-import { getPathsLabel, getProjectURL, getPtdId, usePtdState } from '~/utils'
+import { getPathsLabel, getProjectURL } from '~/utils'
 import { TranslationInfo } from './TranslationInfo'
 
 export default function OngoingTranslationsDocDashboard(props: {
@@ -27,6 +28,10 @@ export default function OngoingTranslationsDocDashboard(props: {
               </div>
             )
 
+          if (translation.status === 'FAILED_PERSISTING') {
+            return <div key={translation._key}>failed @TODO</div>
+          }
+
           return (
             <OngoingTranslationCard
               key={translation._key}
@@ -45,9 +50,21 @@ function OngoingTranslationCard({
   sourceDoc,
 }: {
   sourceDoc: TranslationRequest['sourceDoc']
-  translation: MainDocTranslationMetadata
+  translation: CreatedMainDocMetadata
 }) {
-  if (translation.status !== 'CREATED') return null
+  const { ready, draft, published } = useEditState(
+    translation.tmd._ref,
+    translation.tmd._type,
+  )
+  const TMD = (draft || published) as SanityTMD
+
+  if (!ready) {
+    return <Spinner />
+  }
+
+  if (!TMD) {
+    return <div> Error (@todo)</div>
+  }
 
   return (
     <Card padding={3} border radius={1}>
@@ -60,7 +77,7 @@ function OngoingTranslationCard({
             size={1}
             as="a"
             href={getProjectURL(
-              translation.projectUid,
+              TMD.phraseProjectUid,
               // @TODO: make configurable
               'us',
             )}
@@ -71,45 +88,16 @@ function OngoingTranslationCard({
           />
         </Flex>
 
-        {translation.targetLangs.map((targetLang) => (
-          <TranslationInfoInSourceDoc
-            key={targetLang.sanity}
-            paths={translation.paths}
+        {TMD.targets.map((target) => (
+          <TranslationInfo
+            key={target._key}
+            paneParentDocId={sourceDoc._id}
             sourceDoc={{ ...sourceDoc, _rev: translation.sourceDocRev }}
-            targetLang={targetLang}
+            targetLang={target.lang}
+            TMD={TMD}
           />
         ))}
       </Stack>
     </Card>
-  )
-}
-export function TranslationInfoInSourceDoc({
-  targetLang,
-  paths,
-  sourceDoc,
-}: {
-  targetLang: CrossSystemLangCode
-  paths: TranslationRequest['paths']
-  sourceDoc: TranslationRequest['sourceDoc']
-}) {
-  const ptdId = getPtdId({
-    targetLang: targetLang,
-    paths,
-    sourceDoc,
-  })
-  const documentStore = useDocumentStore()
-  const [ptdMetadata, metadataIsLoading] = usePtdState({
-    documentStore,
-    ptdId,
-  })
-
-  return (
-    <TranslationInfo
-      ptdMetadata={metadataIsLoading ? 'loading' : ptdMetadata}
-      paneParentDocId={sourceDoc._id}
-      sourceDoc={sourceDoc}
-      paths={paths}
-      targetLang={targetLang}
-    />
   )
 }

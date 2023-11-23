@@ -13,17 +13,18 @@ import {
 } from '@sanity/ui'
 import { useEffect, useState } from 'react'
 import { FormField, Path, SchemaType, useClient, useSchema } from 'sanity'
-import { ReferencePreview } from '../ReferencePreview/ReferencePreview'
-import getAllDocReferences from '../../getAllDocReferences'
 import {
+  CreateMultipleTranslationsInput,
   CreateTranslationsInput,
   EndpointActionTypes,
   SanityDocumentWithPhraseMetadata,
   SanityLangCode,
 } from '~/types'
 import { getDateDaysFromNow, getIsoDay, getReadableLanguageName } from '~/utils'
-import { PhraseMonogram } from './PhraseLogo'
 import { i18nAdapter } from '../../adapters'
+import getAllDocReferences from '../../getAllDocReferences'
+import { ReferencePreview } from '../ReferencePreview/ReferencePreview'
+import { PhraseMonogram } from './PhraseLogo'
 
 // @TODO: make configurable & remove source from it
 const TARGET_LANGUAGES = ['es', 'pt']
@@ -114,10 +115,7 @@ export default function TranslationForm({
 
     setState('submitting')
 
-    const input: Omit<
-      CreateTranslationsInput,
-      'phraseClient' | 'sanityClient'
-    >[] = [
+    const input: CreateMultipleTranslationsInput['translations'] = [
       {
         sourceDoc: {
           _id: sourceDocId,
@@ -175,7 +173,8 @@ export default function TranslationForm({
     })
 
     if (!res.ok) {
-      return setState('error')
+      setState('error')
+      return
     }
     setState('success')
   }
@@ -232,13 +231,19 @@ export default function TranslationForm({
                 onChange={(e) => {
                   const checked = e.currentTarget.checked
 
-                  setFormValue({
-                    ...formValue,
-                    targetLangs: checked
-                      ? formValue.targetLangs.includes(lang)
+                  const targetLangs = ((): typeof formValue.targetLangs => {
+                    if (checked) {
+                      return formValue.targetLangs.includes(lang)
                         ? formValue.targetLangs
                         : [...formValue.targetLangs, lang]
-                      : formValue.targetLangs.filter((l) => l !== lang),
+                    }
+
+                    return formValue.targetLangs.filter((l) => l !== lang)
+                  })()
+
+                  setFormValue({
+                    ...formValue,
+                    targetLangs,
                   })
                 }}
               />
@@ -280,15 +285,21 @@ export default function TranslationForm({
 
                             const refLangs =
                               references.chosenDocs?.[ref.id] || []
+                            const newLangs = ((): typeof refLangs => {
+                              if (checked) {
+                                return refLangs.includes(lang)
+                                  ? refLangs
+                                  : [...refLangs, lang]
+                              }
+
+                              // eslint-disable-next-line
+                              return refLangs.filter((l) => l !== lang)
+                            })()
                             setReferences({
                               ...references,
                               chosenDocs: {
                                 ...(references.chosenDocs || {}),
-                                [ref.id]: checked
-                                  ? refLangs.includes(lang)
-                                    ? refLangs
-                                    : [...refLangs, lang]
-                                  : refLangs.filter((l) => l !== lang),
+                                [ref.id]: newLangs,
                               },
                             })
                           }}
