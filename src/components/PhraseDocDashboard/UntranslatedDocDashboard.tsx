@@ -1,6 +1,6 @@
 import { Box, Button, Card, Flex, Heading, Stack } from '@sanity/ui'
 import { i18nAdapter } from '../../adapters'
-import { SanityDocumentWithPhraseMetadata } from '~/types'
+import { SanityDocumentWithPhraseMetadata } from '../../types'
 import { PhraseLogo } from './PhraseLogo'
 
 // @TODO: make configurable

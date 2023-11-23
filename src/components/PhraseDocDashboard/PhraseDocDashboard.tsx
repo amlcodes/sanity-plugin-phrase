@@ -2,14 +2,17 @@ import { Box, Card, Dialog } from '@sanity/ui'
 import { useState } from 'react'
 import { StringFieldProps, useFormValue } from 'sanity'
 import { i18nAdapter } from '../../adapters'
-import { SanityDocumentWithPhraseMetadata, TranslationRequest } from '~/types'
+import {
+  SanityDocumentWithPhraseMetadata,
+  TranslationRequest,
+} from '../../types'
 import {
   isTranslatedMainDoc,
   isPTDDoc,
   langAdapter,
   undraftId,
   isMainDoc,
-} from '~/utils'
+} from '../../utils'
 import OngoingTranslationsDocDashboard from './OngoingTranslationsDocDashboard'
 import PreviouslyTranslatedDocDashboard from './PreviouslyTranslatedDocDashboard'
 import PtdDocDashboard from './PtdDashboard'

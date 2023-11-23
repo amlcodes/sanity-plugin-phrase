@@ -1,5 +1,5 @@
-import { CrossSystemLangCode, SanityMainDoc } from '~/types'
-import { isTranslationFinished } from '~/utils'
+import { CrossSystemLangCode, SanityMainDoc } from '../types'
+import { isTranslationFinished } from '../utils'
 
 export default function parseTMDsToDiff(
   doc: SanityMainDoc,

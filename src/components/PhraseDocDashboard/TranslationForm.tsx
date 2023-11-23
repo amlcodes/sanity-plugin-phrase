@@ -19,8 +19,12 @@ import {
   EndpointActionTypes,
   SanityDocumentWithPhraseMetadata,
   SanityLangCode,
-} from '~/types'
-import { getDateDaysFromNow, getIsoDay, getReadableLanguageName } from '~/utils'
+} from '../../types'
+import {
+  getDateDaysFromNow,
+  getIsoDay,
+  getReadableLanguageName,
+} from '../../utils'
 import { i18nAdapter } from '../../adapters'
 import getAllDocReferences from '../../getAllDocReferences'
 import { ReferencePreview } from '../ReferencePreview/ReferencePreview'

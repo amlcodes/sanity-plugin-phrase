@@ -1,12 +1,12 @@
 import { EyeOpenIcon } from '@sanity/icons'
 import { Badge, Button, Flex, Spinner, Stack, Text } from '@sanity/ui'
 import { useSchema } from 'sanity'
-import { CrossSystemLangCode, SanityTMD, TranslationRequest } from '~/types'
+import { CrossSystemLangCode, SanityTMD, TranslationRequest } from '../../types'
 import {
   getJobEditorURL,
   getReadableLanguageName,
   jobsMetadataExtractor,
-} from '~/utils'
+} from '../../utils'
 import { PhraseMonogram } from './PhraseLogo'
 import { useOpenInSidePane } from './useOpenInSidepane'
 

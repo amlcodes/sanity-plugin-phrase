@@ -3,8 +3,8 @@ import {
   ContextWithJobs,
   CreatedMainDocMetadata,
   SanityDocumentWithPhraseMetadata,
-} from '~/types'
-import { tPathInMainDoc } from '~/utils'
+} from '../types'
+import { tPathInMainDoc } from '../utils'
 import { createPTDs } from './createPTDs'
 import { createTMD } from './createTMD'
 

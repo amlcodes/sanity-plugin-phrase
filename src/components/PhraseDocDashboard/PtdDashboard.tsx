@@ -10,8 +10,8 @@ import {
   SanityPTD,
   SanityTMD,
   TranslationRequest,
-} from '~/types'
-import { getProjectURL, jobsMetadataExtractor } from '~/utils'
+} from '../../types'
+import { getProjectURL, jobsMetadataExtractor } from '../../utils'
 import { TranslationInfo } from './TranslationInfo'
 import { useOpenInSidePane } from './useOpenInSidepane'
 

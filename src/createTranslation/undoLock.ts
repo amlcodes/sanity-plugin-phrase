@@ -2,8 +2,8 @@ import { Effect, pipe } from 'effect'
 import {
   ContextWithFreshDocuments,
   SanityDocumentWithPhraseMetadata,
-} from '~/types'
-import { getTranslationKey, tPathInMainDoc } from '~/utils'
+} from '../types'
+import { getTranslationKey, tPathInMainDoc } from '../utils'
 
 class FailedUnlockingError {
   readonly _tag = 'FailedUnlockingError'

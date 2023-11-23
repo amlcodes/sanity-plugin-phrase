@@ -4,8 +4,8 @@ import {
   ContentInPhrase,
   SanityDocumentWithPhraseMetadata,
   TranslationRequest,
-} from '~/types'
-import { pathToString } from '~/utils'
+} from '../types'
+import { pathToString } from '../utils'
 
 export default function getDataToTranslate({
   freshDocumentsById,

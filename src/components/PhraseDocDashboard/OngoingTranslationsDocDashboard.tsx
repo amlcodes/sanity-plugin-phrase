@@ -5,8 +5,8 @@ import {
   MainDocTranslationMetadata,
   SanityTMD,
   TranslationRequest,
-} from '~/types'
-import { getPathsLabel, getProjectURL } from '~/utils'
+} from '../../types'
+import { getPathsLabel, getProjectURL } from '../../utils'
 import { TranslationInfo } from './TranslationInfo'
 
 export default function OngoingTranslationsDocDashboard(props: {

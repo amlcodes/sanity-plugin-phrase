@@ -1,4 +1,4 @@
-import { ContextWithJobs, METADATA_KEY, SanityPTD } from '~/types'
+import { ContextWithJobs, METADATA_KEY, SanityPTD } from '../types'
 import {
   dedupeArray,
   getPtdId,
@@ -6,7 +6,7 @@ import {
   isDraft,
   langAdapter,
   undraftId,
-} from '~/utils'
+} from '../utils'
 import { i18nAdapter } from '../adapters'
 import { mergeDocs } from '../mergeDocs'
 

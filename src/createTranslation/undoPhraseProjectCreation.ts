@@ -1,5 +1,5 @@
 import { Effect, pipe } from 'effect'
-import { ContextWithProject } from '~/types'
+import { ContextWithProject } from '../types'
 
 class FailedDeletingProjectError {
   readonly _tag = 'FailedDeletingProjectError'

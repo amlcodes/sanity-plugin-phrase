@@ -8,7 +8,7 @@ import {
   SanityDocumentWithPhraseMetadata,
   SanityMainDoc,
   SanityPTD,
-} from '~/types'
+} from '../types'
 import {
   PhraseDatacenterRegion,
   getPhraseBaseUrl,

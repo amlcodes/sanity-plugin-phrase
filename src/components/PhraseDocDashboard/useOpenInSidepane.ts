@@ -1,6 +1,6 @@
 import { usePaneRouter } from 'sanity/desk'
 import { useRouter } from 'sanity/router'
-import { undraftId } from '~/utils'
+import { undraftId } from '../../utils'
 
 export function useOpenInSidePane(parentDocId: string) {
   const { routerPanesState } = usePaneRouter()

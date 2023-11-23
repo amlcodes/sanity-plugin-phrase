@@ -1,7 +1,7 @@
 import { uuid } from '@sanity/uuid'
 import { Effect, pipe } from 'effect'
-import { PhraseCredentialsDocument, PhraseCredentialsInput } from '~/types'
-import { CREDENTIALS_DOC_ID, ONE_HOUR } from '~/utils'
+import { PhraseCredentialsDocument, PhraseCredentialsInput } from '../types'
+import { CREDENTIALS_DOC_ID, ONE_HOUR } from '../utils'
 import { UnknownPhraseClientError } from './EffectfulPhraseClient'
 import {
   EffectfulSanityClient,

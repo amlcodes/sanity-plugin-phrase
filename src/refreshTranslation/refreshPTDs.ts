@@ -1,7 +1,12 @@
 import { Effect, pipe } from 'effect'
 import { SanityClient } from 'sanity'
 import { diffPatch } from 'sanity-diff-patch'
-import { retrySchedule } from '~/backendHelpers'
+import { i18nAdapter } from '../adapters'
+import { retrySchedule } from '../backendHelpers'
+import { EffectfulPhraseClient } from '../clients/EffectfulPhraseClient'
+import { PhraseClient } from '../clients/createPhraseClient'
+import { runEffectWithClients } from '../createTranslation/createTranslationHelpers'
+import phraseDocumentToSanityDocument from '../phraseDocumentToSanityDocument'
 import {
   ContentInPhrase,
   CrossSystemLangCode,
@@ -10,13 +15,8 @@ import {
   PhraseJobInfo,
   SanityPTDWithExpandedMetadata,
   SanityTMD,
-} from '~/types'
-import { getLastValidJobInWorkflow } from '~/utils/phrase'
-import { i18nAdapter } from '../adapters'
-import { EffectfulPhraseClient } from '../clients/EffectfulPhraseClient'
-import { PhraseClient } from '../clients/createPhraseClient'
-import { runEffectWithClients } from '../createTranslation/createTranslationHelpers'
-import phraseDocumentToSanityDocument from '../phraseDocumentToSanityDocument'
+} from '../types'
+import { getLastValidJobInWorkflow } from '../utils/phrase'
 
 class FailedDownloadingPhraseDataError {
   readonly _tag = 'FailedDownloadingPhraseData'

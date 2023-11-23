@@ -1,7 +1,7 @@
 import { Effect, pipe } from 'effect'
 import getDataToTranslate from './getDataToTranslate'
-import { ContextWithProject } from '~/types'
-import { langAdapter } from '~/utils'
+import { ContextWithProject } from '../types'
+import { langAdapter } from '../utils'
 
 class FailedCreatingPhraseJobsError {
   readonly _tag = 'FailedCreatingPhraseJobs'

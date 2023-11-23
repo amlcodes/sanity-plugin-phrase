@@ -13,7 +13,7 @@ import {
   useEditState,
 } from 'sanity'
 import { TimeAgo } from './TimeAgo'
-import { undraftId } from '~/utils'
+import { undraftId } from '../../utils'
 import { useOpenInSidePane } from '../PhraseDocDashboard/useOpenInSidepane'
 
 /**

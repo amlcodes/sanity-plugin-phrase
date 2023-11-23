@@ -1,11 +1,11 @@
 import { Effect, pipe } from 'effect'
-import getMutationErrors from '~/backendHelpers'
+import getMutationErrors from '../backendHelpers'
 import {
   ContextWithFreshDocuments,
   MainDocTranslationMetadata,
   SanityDocumentWithPhraseMetadata,
-} from '~/types'
-import { tPathInMainDoc } from '~/utils'
+} from '../types'
+import { tPathInMainDoc } from '../utils'
 import { RevMismatchError } from './isRevTheSame'
 
 class FailedLockingError {

@@ -1,5 +1,5 @@
 import { SanityClient } from 'sanity'
-import { ContentInPhrase, SanityPTDWithExpandedMetadata } from '~/types'
+import { ContentInPhrase, SanityPTDWithExpandedMetadata } from './types'
 import { i18nAdapter } from './adapters'
 import { modifyDocInPath } from './mergeDocs'
 import phraseToSanity from './phraseToSanity'

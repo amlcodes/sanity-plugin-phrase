@@ -1,5 +1,5 @@
 import { PortableTextTextBlock } from 'sanity'
-import { SerializedPtBlock, SerializedPtHtmlTag } from '~/types'
+import { SerializedPtBlock, SerializedPtHtmlTag } from './types'
 import { encodeHTML } from 'entities'
 
 function prepareStringForPhrase(str: string) {

@@ -4,10 +4,10 @@ import { EffectfulPhraseClient } from '../clients/EffectfulPhraseClient'
 import { EffectfulSanityClient } from '../clients/EffectfulSanityClient'
 import { PhraseClient } from '../clients/createPhraseClient'
 import getAuthedPhraseClient from '../clients/getAuthedPhraseClient'
-import { CreateTranslationsInput, TranslationRequest } from '~/types'
+import { CreateTranslationsInput, TranslationRequest } from '../types'
 
 import { fromString } from '@sanity/util/paths'
-import { getTranslationKey, langAdapter } from '~/utils'
+import { getTranslationKey, langAdapter } from '../utils'
 
 export function runEffectWithClients<E = unknown, A = unknown>(
   input: Pick<CreateTranslationsInput, 'credentials' | 'sanityClient'>,

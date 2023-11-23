@@ -12,7 +12,7 @@ import {
   SanityDocumentWithPhraseMetadata,
   SanityLangCode,
   TranslationRequest,
-} from '~/types'
+} from '../types'
 import { i18nAdapter } from '../adapters'
 import { FILENAME_PREFIX } from './constants'
 import { getTranslationKey } from './ids'

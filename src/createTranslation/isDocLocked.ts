@@ -1,5 +1,5 @@
-import { ContextWithFreshDocuments } from '~/types'
-import { translationsIntersect } from '~/utils'
+import { ContextWithFreshDocuments } from '../types'
+import { translationsIntersect } from '../utils'
 
 export class DocumentsLockedError {
   readonly _tag = 'DocumentsLockedError'

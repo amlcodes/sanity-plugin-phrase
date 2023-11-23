@@ -1,6 +1,6 @@
 import { Fetcher } from 'openapi-typescript-fetch'
 import { operations, paths } from './phraseOpenAPI'
-import { ContentInPhrase } from '~/types'
+import { ContentInPhrase } from '../types'
 
 export type PhraseDatacenterRegion = 'us' | 'eur'
 

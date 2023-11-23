@@ -5,8 +5,8 @@ import {
   ExistingReference,
   I18nAdapter,
   ReferenceMap,
-} from '~/types'
-import { draftId, isDraft, undraftId } from '~/utils'
+} from '../types'
+import { draftId, isDraft, undraftId } from '../utils'
 
 // @TODO make configurable
 const languageField = 'language'

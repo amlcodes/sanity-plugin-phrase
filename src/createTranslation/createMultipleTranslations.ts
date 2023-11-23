@@ -1,5 +1,5 @@
 import { Effect, pipe } from 'effect'
-import { CreateMultipleTranslationsInput } from '~/types'
+import { CreateMultipleTranslationsInput } from '../types'
 import { runEffectWithClients } from '../createTranslation/createTranslationHelpers'
 import createTranslations from '../createTranslation/createTranslations'
 

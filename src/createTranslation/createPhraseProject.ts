@@ -1,6 +1,6 @@
 import { Effect, pipe } from 'effect'
-import { ContextWithFreshDocuments, Phrase } from '~/types'
-import { langAdapter } from '~/utils'
+import { ContextWithFreshDocuments, Phrase } from '../types'
+import { langAdapter } from '../utils'
 
 class FailedCreatingPhraseProjectError {
   readonly context: ContextWithFreshDocuments

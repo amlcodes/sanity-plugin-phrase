@@ -1,6 +1,6 @@
 import { Effect, pipe } from 'effect'
-import { ContextWithJobs, FailedPersistingMainDocMetadata } from '~/types'
-import { tPathInMainDoc } from '~/utils'
+import { ContextWithJobs, FailedPersistingMainDocMetadata } from '../types'
+import { tPathInMainDoc } from '../utils'
 
 class FailedSalvagingJobsError {
   readonly _tag = 'FailedSalvagingJobsError'

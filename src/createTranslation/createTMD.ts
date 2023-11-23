@@ -1,4 +1,4 @@
-import { ContextWithJobs, Phrase, PhraseLangCode, SanityTMD } from '~/types'
+import { ContextWithJobs, Phrase, PhraseLangCode, SanityTMD } from '../types'
 import {
   getPtdId,
   getTmdId,
@@ -8,7 +8,7 @@ import {
   makeKeyFriendly,
   phraseDatetimeToJSDate,
   undraftId,
-} from '~/utils'
+} from '../utils'
 
 /**
  * TMD: Translation Metadata Document

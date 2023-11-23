@@ -1,4 +1,4 @@
-import { ContextWithFreshDocuments } from '~/types'
+import { ContextWithFreshDocuments } from '../types'
 
 export class RevMismatchError {
   readonly _tag = 'RevMismatchError'

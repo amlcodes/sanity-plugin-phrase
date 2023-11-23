@@ -1,5 +1,5 @@
 import { SanityClient, SchemaTypeDefinition } from 'sanity'
-import { EndpointActionTypes, PhraseCredentialsInput } from '~/types'
+import { EndpointActionTypes, PhraseCredentialsInput } from './types'
 import { createResponse } from './backendHelpers'
 import createMultipleTranslations from './createTranslation/createMultipleTranslations'
 import handlePhraseWebhook, {

@@ -7,16 +7,16 @@ import {
   StaleStatus,
   TargetLangStaleness,
   TranslationRequest,
-} from '~/types'
+} from '../types'
 import {
   draftId,
+  getChangedPaths,
   getTranslationSnapshot,
   isTranslatedMainDoc,
   langAdapter,
   translationsUnfinished,
   undraftId,
-} from '~/utils'
-import { getChangedPaths } from '~/utils/paths'
+} from '../utils'
 import parseTMDsToDiff from './parseTMDsToDiff'
 
 export default async function getStaleTranslations({
