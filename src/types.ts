@@ -331,4 +331,31 @@ export enum StaleStatus {
   ONGOING = 'ONGOING',
   // eslint-disable-next-line no-unused-vars
   FRESH = 'FRESH',
+  // eslint-disable-next-line no-unused-vars
+  STALE = 'STALE',
+}
+
+export type TargetLangStaleness = {
+  lang: CrossSystemLangCode
+} & (
+  | {
+      error: unknown
+    }
+  | {
+      status:
+        | StaleStatus.FRESH
+        | StaleStatus.ONGOING
+        | StaleStatus.UNTRANSLATABLE
+        | StaleStatus.UNTRANSLATED
+    }
+  | {
+      status: StaleStatus.STALE
+      changedPaths: Path[]
+      translationDate: string
+    }
+)
+
+export type StaleResponse = {
+  sourceDoc: TranslationRequest['sourceDoc']
+  targets: TargetLangStaleness[]
 }
