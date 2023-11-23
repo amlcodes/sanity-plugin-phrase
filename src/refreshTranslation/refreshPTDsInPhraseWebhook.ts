@@ -7,6 +7,7 @@ export default async function refreshPTDsInPhraseWebhook(input: {
   sanityClient: SanityClient
   credentials: PhraseCredentialsInput
   jobsInWebhook: Phrase['JobInWebhook'][]
+  translatableTypes: string[]
 }) {
   const PTDs = await getPTDsFromPhraseWebhook(input)
 

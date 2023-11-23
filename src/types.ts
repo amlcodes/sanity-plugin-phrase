@@ -143,15 +143,17 @@ export type PhraseJobInfo = Pick<
   _key: string
 }
 
+export type ExistingReference = {
+  _type: string
+  targetLanguageDocId: string | null
+  state: 'draft' | 'published' | 'both'
+}
+
 export interface ReferenceMap {
   [referencedSourceLangDocId: string]:
     | 'untranslatable' // for document types that aren't localized
     | 'doc-not-found'
-    | {
-        targetLanguageDocId: string | null
-        _type: string
-        state: 'draft' | 'published' | 'both'
-      }
+    | ExistingReference
 }
 
 /** Translation Metadata Document (TMD)
@@ -169,6 +171,8 @@ export type SanityTMD = SanityDocument & {
     ptd: WeakReference
     targetDoc: Reference
     jobs: PhraseJobInfo[]
+    /** Cache of resolved references from source to target languages */
+    referenceMap?: ReferenceMap
   }[]
   translationKey: TranslationRequest['translationKey']
   paths: TranslationRequest['paths']
@@ -270,7 +274,8 @@ export type I18nAdapter = {
   getTranslatedReferences: (props: {
     sanityClient: SanityClient
     references: string[]
-    targetLanguage: SanityLangCode
+    targetLang: SanityLangCode
+    translatableTypes: string[]
   }) => Promise<ReferenceMap>
 
   langAdapter: {

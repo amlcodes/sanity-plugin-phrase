@@ -1,6 +1,8 @@
 import { defineField, defineArrayMember } from 'sanity'
 import { getReadableLanguageName } from '../src/utils'
 
+export const translatableTypes = ['post']
+
 export const post = {
   name: 'post',
   title: 'Post',

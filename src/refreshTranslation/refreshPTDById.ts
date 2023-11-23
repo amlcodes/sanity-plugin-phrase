@@ -7,6 +7,7 @@ export default async function refreshPTDById(input: {
   sanityClient: SanityClient
   credentials: PhraseCredentialsInput
   ptdId: string
+  translatableTypes: string[]
 }) {
   const PTDs = await input.sanityClient.fetch<SanityPTDWithExpandedMetadata[]>(
     `*[_id == $publishedId || _id == $draftId]{

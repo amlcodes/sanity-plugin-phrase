@@ -8,10 +8,11 @@ import handlePhraseWebhook, {
 } from './handleWebhook/handlePhraseWebhook'
 import refreshPTDById from './refreshTranslation/refreshPTDById'
 
-export default function nextjsRouteHandler({
+export default function backendRequestHandler({
   sanityClient,
   phraseCredentials: credentials,
   schemaTypes,
+  translatableTypes,
 }: {
   /** Sanity client with write token (can modify data) */
   sanityClient: SanityClient
@@ -19,6 +20,7 @@ export default function nextjsRouteHandler({
   phraseCredentials: PhraseCredentialsInput
   /** Your studio schema types to provide */
   schemaTypes: SchemaTypeDefinition[]
+  translatableTypes: string[]
 }) {
   if (!sanityClient.config().token) {
     throw new Error(
@@ -68,6 +70,7 @@ export default function nextjsRouteHandler({
         credentials,
         sanityClient,
         payload: body as PhraseWebhook,
+        translatableTypes,
       })
 
       return updated ? new Response('OK') : new Response('Failed updating')
@@ -96,6 +99,7 @@ export default function nextjsRouteHandler({
         sanityClient: sanityClient,
         credentials: credentials,
         ptdId,
+        translatableTypes,
       })
       return createResponse(res.body, res.status)
     }

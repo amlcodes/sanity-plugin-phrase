@@ -17,8 +17,6 @@ export function createResponse(data: unknown, status: number) {
     status,
     headers: {
       'Content-Type': 'application/json',
-      // @TODO: CORS?
-      // 'Access-Control-Allow-Origin': '*',
     },
   })
 } /** Parses errors returned by Sanity client and returns if mutation */

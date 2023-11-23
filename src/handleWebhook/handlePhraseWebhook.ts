@@ -1,6 +1,6 @@
 import { SanityClient } from 'sanity'
-import refreshPTDsInPhraseWebhook from '../refreshTranslation/refreshPTDsInPhraseWebhook'
 import { Phrase, PhraseCredentialsInput } from '~/types'
+import refreshPTDsInPhraseWebhook from '../refreshTranslation/refreshPTDsInPhraseWebhook'
 import { sleep } from '../utils'
 import markPTDsAsDeletedByWebhook from './markPTDsAsDeletedByWebhook'
 
@@ -58,10 +58,12 @@ export default async function handlePhraseWebhook({
   sanityClient,
   payload,
   credentials,
+  translatableTypes,
 }: {
   sanityClient: SanityClient
   credentials: PhraseCredentialsInput
   payload: PhraseWebhook
+  translatableTypes: string[]
 }) {
   if (
     !payload.event ||
@@ -109,5 +111,6 @@ export default async function handlePhraseWebhook({
     credentials,
     sanityClient,
     jobsInWebhook: payload.jobParts || [],
+    translatableTypes,
   })
 }

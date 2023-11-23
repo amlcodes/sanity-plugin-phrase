@@ -1,6 +1,11 @@
-import { KeyedObject, Reference } from 'sanity'
 import { uuid } from '@sanity/uuid'
-import { DocPairFromAdapter, I18nAdapter, ReferenceMap } from '~/types'
+import { KeyedObject, Reference } from 'sanity'
+import {
+  DocPairFromAdapter,
+  ExistingReference,
+  I18nAdapter,
+  ReferenceMap,
+} from '~/types'
 import { draftId, isDraft, undraftId } from '~/utils'
 
 // @TODO make configurable
@@ -24,38 +29,51 @@ export const documentInternationalizationAdapter: I18nAdapter = {
   getTranslatedReferences: async ({
     sanityClient,
     references,
-    targetLanguage,
+    targetLang,
+    translatableTypes,
   }) => {
-    // @TODO: finish getting reference map - not sure how to get translation.metadata of drafts 🤔
-    // Using previewDrafts for now for simplicity
-    const fetched = await sanityClient
-      .withConfig({ perspective: 'previewDrafts' })
-      .fetch<{ _id: string; _type: string; translation?: Reference }[]>(
-        /* groq */ `*[_id in $ids] {
-      _id,
-      _type,
-      "translation": *[_type == "translation.metadata" && references(^._id)]
-        [0].${TRANSLATIONS_ARRAY_NAME}[_key == $targetLanguage][0].value,
-    }`,
-        {
-          ids: references.map((ref) => undraftId(ref)),
-          targetLanguage,
-        },
-      )
+    const fetched = await sanityClient.fetch<
+      {
+        publishedId: string
+        draftId: string
+        type?: string
+        translation?: Reference | null
+        translationHasDraft: boolean
+        translationHasPublished: boolean
+      }[]
+    >(
+      /* groq */ `$idPairs[] {
+        ...,
+        "type": *[_id == ^.publishedId || _id == ^.draftId][0]._type,
+        "translation": *[
+          _type == "translation.metadata" &&
+          (references(^.publishedId) || references(^.draftId))
+        ][0].${TRANSLATIONS_ARRAY_NAME}[_key == $targetLanguage][0].value 
+      }
+      | {
+        ...,
+        "translationHasDraft": defined(translation) && defined(*[_id == ("drafts." + ^.translation._ref)][0]._id),
+        "translationHasPublished": defined(translation) && defined(*[_id == ^.translation._ref][0]._id),
+      }`,
+      {
+        idPairs: references.flatMap((ref) =>
+          ref ? { publishedId: undraftId(ref), draftId: draftId(ref) } : [],
+        ),
+        targetLanguage: targetLang,
+      },
+    )
 
     return references.reduce((refMap, ref) => {
-      const refDoc = fetched.find((doc) => doc._id === undraftId(ref))
+      const refDoc = fetched.find((doc) => doc.publishedId === undraftId(ref))
 
-      if (!refDoc) {
+      if (!refDoc || !refDoc.type) {
         return {
           ...refMap,
           [ref]: 'doc-not-found',
         }
       }
 
-      // @TODO: make configurable
-      const TRANSLATABLE_TYPES = ['post']
-      if (!TRANSLATABLE_TYPES.includes(refDoc._type)) {
+      if (!translatableTypes.includes(refDoc.type)) {
         return {
           ...refMap,
           [ref]: 'untranslatable',
@@ -66,9 +84,12 @@ export const documentInternationalizationAdapter: I18nAdapter = {
         ...refMap,
         [ref]: {
           targetLanguageDocId: refDoc.translation?._ref || null,
-          _type: refDoc._type,
-          state: 'both', // @TODO how to?
-        },
+          _type: refDoc.type,
+          state: parseState({
+            hasDraft: refDoc.translationHasDraft,
+            hasPublished: refDoc.translationHasPublished,
+          }),
+        } as ExistingReference,
       }
     }, {} as ReferenceMap)
   },
@@ -249,4 +270,22 @@ function createTranslationReference(
       ...(strengthenOnPublish ? { _strengthenOnPublish: { type } } : {}),
     },
   }
+}
+
+function parseState({
+  hasDraft,
+  hasPublished,
+}: {
+  hasDraft: boolean
+  hasPublished: boolean
+}): ExistingReference['state'] {
+  if (hasDraft && hasPublished) {
+    return 'both'
+  }
+
+  if (hasDraft) {
+    return 'draft'
+  }
+
+  return 'published'
 }

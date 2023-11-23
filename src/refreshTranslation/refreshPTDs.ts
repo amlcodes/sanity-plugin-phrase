@@ -18,10 +18,29 @@ import { PhraseClient } from '../clients/createPhraseClient'
 import { runEffectWithClients } from '../createTranslation/createTranslationHelpers'
 import phraseDocumentToSanityDocument from '../phraseDocumentToSanityDocument'
 
+class FailedDownloadingPhraseDataError {
+  readonly _tag = 'FailedDownloadingPhraseData'
+
+  constructor(readonly error: unknown) {}
+}
+
+class FailedUpdatingPTDsAndTMDError {
+  readonly _tag = 'FailedUpdatingPTDsAndTMD'
+
+  constructor(readonly error: unknown) {}
+}
+
+class FailedConvertingPhraseContentToSanityDocumentError {
+  readonly _tag = 'FailedConvertingPhraseContentToSanityDocument'
+
+  constructor(readonly error: unknown) {}
+}
+
 export default function refreshPTDs(input: {
   sanityClient: SanityClient
   credentials: PhraseCredentialsInput
   PTDs: SanityPTDWithExpandedMetadata[]
+  translatableTypes: string[]
 }) {
   const { PTDs, sanityClient } = input
 
@@ -66,7 +85,7 @@ export default function refreshPTDs(input: {
                   projectUid: phraseProjectUid,
                   jobUid,
                 }),
-              catch: () => new Error('@TODO'),
+              catch: (error) => new FailedDownloadingPhraseDataError(error),
             }),
             retrySchedule,
           ),
@@ -87,7 +106,16 @@ export default function refreshPTDs(input: {
     ),
     Effect.flatMap((refreshedJobData) =>
       pipe(
-        Effect.all(PTDs.map((doc) => diffPTD(doc, refreshedJobData))),
+        Effect.all(
+          PTDs.map((doc) =>
+            diffPTD({
+              doc,
+              refreshedJobData,
+              sanityClient,
+              translatableTypes: input.translatableTypes,
+            }),
+          ),
+        ),
         Effect.flatMap((PTDsToUpdate) => {
           const transaction = sanityClient.transaction()
 
@@ -105,7 +133,7 @@ export default function refreshPTDs(input: {
           return Effect.retry(
             Effect.tryPromise({
               try: () => transaction.commit(),
-              catch: () => new Error('@todo'),
+              catch: (error) => new FailedUpdatingPTDsAndTMDError(error),
             }),
             retrySchedule,
           )
@@ -122,29 +150,36 @@ export default function refreshPTDs(input: {
   )
 
   const withErrorRecovery = successfulPath.pipe(
-    // @Todo handle errors
-    Effect.map(
-      () =>
-        ({
-          body: { message: 'PTDs updated' },
-          status: 200,
-        }) as const,
-    ),
+    Effect.catchTags({
+      FailedDownloadingPhraseData: (error) =>
+        Effect.succeed({ body: { error: error._tag }, status: 500 } as const),
+      FailedUpdatingPTDsAndTMD: (error) =>
+        Effect.succeed({ body: { error: error._tag }, status: 500 } as const),
+      FailedConvertingPhraseContentToSanityDocument: (error) =>
+        Effect.succeed({ body: { error: error._tag }, status: 500 } as const),
+    }),
   )
 
   return Effect.runPromise(runEffectWithClients(input, withErrorRecovery))
 }
 
-function diffPTD(
-  doc: SanityPTDWithExpandedMetadata,
+function diffPTD({
+  doc,
+  refreshedJobData,
+  sanityClient,
+  translatableTypes,
+}: {
+  doc: SanityPTDWithExpandedMetadata
   refreshedJobData: {
     contentInPhrase: ContentInPhrase
     phraseProjectUid: string
     targetLang: CrossSystemLangCode
     jobUid: string
     ptdIds: string[]
-  }[],
-) {
+  }[]
+  sanityClient: SanityClient
+  translatableTypes: string[]
+}) {
   const phraseDoc = refreshedJobData.find((job) => job.ptdIds.includes(doc._id))
     ?.contentInPhrase
 
@@ -158,8 +193,15 @@ function diffPTD(
   return pipe(
     Effect.retry(
       Effect.tryPromise({
-        try: () => phraseDocumentToSanityDocument(phraseDoc, doc),
-        catch: () => new Error('@todo'),
+        try: () =>
+          phraseDocumentToSanityDocument({
+            contentInPhrase: phraseDoc,
+            freshPTD: doc,
+            sanityClient,
+            translatableTypes,
+          }),
+        catch: (error) =>
+          new FailedConvertingPhraseContentToSanityDocumentError(error),
       }),
       retrySchedule,
     ),

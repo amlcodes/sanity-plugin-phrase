@@ -1,14 +1,4 @@
-import handlePhraseWebhook from './handleWebhook/handlePhraseWebhook'
-import nextjsRouteHandler from './nextjsRouteHandler'
-import refreshPTDById from './refreshTranslation/refreshPTDById'
+import backendRequestHandler from './backendRequestHandler'
 import { NOT_PTD, draftId, isPtdId, undraftId } from './utils'
 
-export {
-  NOT_PTD,
-  draftId,
-  handlePhraseWebhook,
-  isPtdId,
-  nextjsRouteHandler,
-  refreshPTDById,
-  undraftId,
-}
+export { NOT_PTD, backendRequestHandler, draftId, isPtdId, undraftId }
