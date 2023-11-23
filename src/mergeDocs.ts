@@ -1,21 +1,23 @@
 import { Mutation, arrayToJSONMatchPath } from '@sanity/mutator'
-import { PatchOperations, Path, SanityDocument } from 'sanity'
 import { get } from '@sanity/util/paths'
+import { PatchOperations, Path, SanityDocument } from 'sanity'
 import phraseToSanity from './phraseToSanity'
+import { METADATA_KEY, ReferenceMap } from './types'
+import { injectTranslatedReferences } from './utils/references'
 
 // @TODO: do we include language & i18n adapter specific things here?
-const STATIC_KEYS = ['_id', '_rev', '_type', 'phraseMeta']
+const STATIC_KEYS = ['_id', '_rev', '_type', METADATA_KEY]
 
 // @TODO: try using sanity-diff-patch instead. It has a basePath property we could perhaps leverage
-export function mergeDocs({
+export function mergeDocs<D extends SanityDocument>({
   originalDoc,
   changedDoc,
   paths,
 }: {
-  originalDoc: SanityDocument
-  changedDoc: SanityDocument
+  originalDoc: D
+  changedDoc: D
   paths: Path[]
-}) {
+}): D {
   if (paths.length === 0) return keepStaticValues(originalDoc, changedDoc)
 
   const patches = paths.flatMap((path) =>
@@ -30,45 +32,57 @@ export function mergeDocs({
           patch: { ...patch, id: originalDoc._id },
         })),
       }),
-    ]) as SanityDocument,
+    ]) as D,
   )
 }
 
-export function modifyDocInPath({
+export function modifyDocInPath<D extends SanityDocument>({
   originalDoc,
   changedContent,
   path,
+  referenceMap,
 }: {
-  originalDoc: SanityDocument
+  originalDoc: D
   changedContent: ReturnType<typeof phraseToSanity>
   path: Path
-}): typeof originalDoc {
+  referenceMap: ReferenceMap
+}): D {
+  let updatedDoc = originalDoc
+  // If entire document...
   if (typeof changedContent === 'object' && path.length === 0) {
-    return mergeDocs({
+    updatedDoc = mergeDocs({
       originalDoc,
-      changedDoc: changedContent as SanityDocument,
+      changedDoc: injectTranslatedReferences({
+        data: changedContent,
+        referenceMap,
+      }) as D,
       paths: [path],
     })
-  }
-
-  // @TODO: currently will not take into consideration some of the behavior we have in `getPatchOperations` - do we need to care?
-  return keepStaticValues(
-    originalDoc,
-    Mutation.applyAll(originalDoc, [
-      new Mutation({
-        mutations: [
-          {
-            patch: {
-              id: originalDoc._id,
-              set: {
-                [arrayToJSONMatchPath(path)]: changedContent,
+  } else {
+    // @TODO: currently will not take into consideration some of the behavior we have in `getPatchOperations` - do we need to care?
+    updatedDoc = keepStaticValues(
+      originalDoc,
+      Mutation.applyAll(originalDoc, [
+        new Mutation({
+          mutations: [
+            {
+              patch: {
+                id: originalDoc._id,
+                set: {
+                  [arrayToJSONMatchPath(path)]: injectTranslatedReferences({
+                    data: changedContent,
+                    referenceMap,
+                  }),
+                },
               },
             },
-          },
-        ],
-      }),
-    ]) as SanityDocument,
-  )
+          ],
+        }),
+      ]) as D,
+    )
+  }
+
+  return updatedDoc
 }
 
 export function getPatchOperations({
@@ -161,13 +175,14 @@ export function getPatchOperations({
   return patches
 }
 
-function keepStaticValues(
-  originalDoc: SanityDocument,
-  changedDoc: SanityDocument,
-) {
+function keepStaticValues<D extends SanityDocument>(
+  originalDoc: D,
+  changedDoc: D,
+): D {
   const finalDoc = { ...changedDoc }
   STATIC_KEYS.forEach((key) => {
     if (key in originalDoc) {
+      // @ts-expect-error
       finalDoc[key] = originalDoc[key]
     }
   })

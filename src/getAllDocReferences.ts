@@ -1,8 +1,8 @@
 import { Reference, SanityDocument } from 'sanity'
 import pMap from 'p-map'
 import { SanityClient, collate } from 'sanity'
-import { parseAllReferences } from './parseAllReferences'
-import { SanityDocumentWithPhraseMetadata } from './types'
+import { parseAllReferences } from './utils/references'
+import { SanityDocumentWithPhraseMetadata } from '~/types'
 import { draftId, isDraft, undraftId } from './utils'
 
 /**

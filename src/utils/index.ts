@@ -1,27 +1,70 @@
-import { FILENAME_PREFIX } from './constants'
+import {
+  SanityDocument,
+  SchemaTypeDefinition,
+  createSchema,
+  prepareForPreview,
+} from 'sanity'
 import {
   CrossSystemLangCode,
+  METADATA_KEY,
   Phrase,
   PhraseLangCode,
+  SanityDocumentWithPhraseMetadata,
   SanityLangCode,
   TranslationRequest,
-} from '../types'
-import { getTranslationKey } from './ids'
+} from '~/types'
 import { i18nAdapter } from '../adapters'
+import { FILENAME_PREFIX } from './constants'
+import { getTranslationKey } from './ids'
+export * from './constants'
 export * from './ids'
 export * from './paths'
-export * from './constants'
 export * from './phrase'
 
-// @TODO create friendlier names - requires schema
-export function getTranslationName({ sourceDoc, paths }: TranslationRequest) {
-  const name = `${FILENAME_PREFIX} ${sourceDoc._type} ${getTranslationKey(
+export function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}
+
+export const NOT_PTD = `${METADATA_KEY}._type != "phrase.ptd.meta"`
+
+export function tPathInMainDoc(translationKey: string) {
+  return `${METADATA_KEY}.translations[_key == "${translationKey}"]`
+}
+
+export function getSchema(schemaTypes: SchemaTypeDefinition[]) {
+  return createSchema({
+    name: 'phrase',
+    types: schemaTypes,
+  })
+}
+
+export function getTranslationName(
+  {
+    sourceDoc,
     paths,
-    sourceDoc._rev,
-  )} ${sourceDoc._id}`
+    schemaTypes,
+    targetLangs,
+  }: Pick<
+    TranslationRequest,
+    'sourceDoc' | 'paths' | 'schemaTypes' | 'targetLangs'
+  >,
+  freshSourceDoc: SanityDocument,
+) {
+  const schemaType = getSchema(schemaTypes).get(sourceDoc._type)
+  const previewTitle =
+    (schemaType && prepareForPreview(freshSourceDoc, schemaType)?.title) || null
+
+  const type = schemaType?.title || sourceDoc._type
+  const title = previewTitle || `id#${sourceDoc._id.slice(0, 5)}...`
+  const name = `${FILENAME_PREFIX} ${type}: ${title} (${getReadableLanguageName(
+    sourceDoc.lang.sanity,
+  )} to ${targetLangs
+    .map((l) => getReadableLanguageName(l.sanity))
+    .join(', ')}) :: ${getTranslationKey(paths, sourceDoc._rev)})`
+
   return {
-    name,
-    filename: `${name}.json`,
+    translationName: name,
+    translationFilename: `${name}.json`,
   }
 }
 
@@ -114,7 +157,8 @@ export function getReadableLanguageName(lang: string) {
   }
 }
 
-const ONE_DAY = 1000 * 60 * 60 * 24
+export const ONE_HOUR = 1000 * 60 * 60
+export const ONE_DAY = ONE_HOUR * 24
 
 export function getDateDaysFromNow(dayCount: number) {
   return new Date(new Date().valueOf() + ONE_DAY * dayCount)
@@ -122,4 +166,27 @@ export function getDateDaysFromNow(dayCount: number) {
 
 export function getIsoDay(date: Date) {
   return date.toISOString().split('T')[0]
+}
+
+export function formatDay(date: Date, lang?: string) {
+  try {
+    return date.toLocaleDateString(lang, {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    })
+  } catch (error) {
+    return date.toLocaleDateString('en', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    })
+  }
+}
+
+export function getTranslationSnapshot(doc: SanityDocumentWithPhraseMetadata) {
+  return {
+    ...doc,
+    [METADATA_KEY]: undefined,
+  }
 }

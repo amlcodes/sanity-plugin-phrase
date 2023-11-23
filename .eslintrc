@@ -18,6 +18,9 @@
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "no-warning-comments": "warn",
     "no-shadow": "off",
-    "@typescript-eslint/no-shadow": "error"
+    "@typescript-eslint/no-shadow": "error",
+    "prettier/prettier": "warn",
+    "@typescript-eslint/no-useless-constructor": "off",
+    "no-useless-constructor": "off"
   }
 }

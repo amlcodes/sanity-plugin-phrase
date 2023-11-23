@@ -1,5 +1,5 @@
 import { Path } from 'sanity'
-import { CrossSystemLangCode, TranslationRequest } from '../types'
+import { CrossSystemLangCode, SanityPTD, SanityTMD } from '~/types'
 import { pathToString } from './paths'
 
 export function makeKeyFriendly(str: string) {
@@ -24,17 +24,16 @@ export function isDraft(id: string) {
 
 export function getPtdId({
   targetLang,
-  sourceDoc,
-  paths,
+  translationKey,
 }: {
-  paths: TranslationRequest['paths']
-  sourceDoc: Pick<TranslationRequest['sourceDoc'], '_id' | '_rev'>
+  translationKey: string
   targetLang: CrossSystemLangCode
-}) {
-  // @TODO: is it safe not to include the source document's ID? Is _rev unique system-wide?
-  return `${isDraft(sourceDoc._id) ? 'drafts.' : ''}phrase-translation--${
-    targetLang.phrase
-  }--${getTranslationKey(paths, sourceDoc._rev)}`
+}): SanityPTD['_id'] {
+  return `phrase.ptd.${targetLang.phrase}--${translationKey}`
+}
+
+export function getTmdId(translationKey: string): SanityTMD['_id'] {
+  return `phrase.tmd.${translationKey}`
 }
 
 export function isPtdId(id: string) {

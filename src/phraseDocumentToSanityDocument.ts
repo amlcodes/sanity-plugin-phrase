@@ -1,33 +1,79 @@
+import { SanityClient } from 'sanity'
+import { ContentInPhrase, SanityPTDWithExpandedMetadata } from '~/types'
+import { i18nAdapter } from './adapters'
 import { modifyDocInPath } from './mergeDocs'
-import { parseAllReferences } from './parseAllReferences'
 import phraseToSanity from './phraseToSanity'
-import { ContentInPhrase, SanityDocumentWithPhraseMetadata } from './types'
 import { dedupeArray, stringToPath } from './utils'
+import { parseAllReferences } from './utils/references'
 
-export default async function phraseDocumentToSanityDocument(
-  phrase: ContentInPhrase,
-  startingDoc: SanityDocumentWithPhraseMetadata,
-): Promise<typeof startingDoc> {
-  let finalDoc = { ...startingDoc }
+export default async function phraseDocumentToSanityDocument({
+  contentInPhrase,
+  freshPTD,
+  sanityClient,
+  translatableTypes,
+}: {
+  contentInPhrase: ContentInPhrase
+  freshPTD: SanityPTDWithExpandedMetadata
+  sanityClient: SanityClient
+  translatableTypes: string[]
+}): Promise<typeof freshPTD> {
+  let finalDoc = JSON.parse(JSON.stringify(freshPTD)) as typeof freshPTD
 
   const references = dedupeArray(
-    parseAllReferences(phrase.contentByPath, []).map((ref) => ref._ref),
+    parseAllReferences(contentInPhrase.contentByPath, []).map(
+      (ref) => ref._ref,
+    ),
   )
-  console.log(references)
-  // @TODO: fetch references via i18nAdapter.getTranslatedReferences
-  // (only if we don't have the referenceMap cache in phraseMeta or we want to force re-fetching)
 
-  Object.entries(phrase.contentByPath).forEach(([pathKey, content]) => {
-    const path = stringToPath(pathKey)
-    const parsedContent = phraseToSanity(content)
+  const { targetLang } = freshPTD.phraseMetadata
+  const TMD = finalDoc.phraseMetadata.expanded
+  const TMDTarget = TMD.targets.find((t) => t._key === targetLang.sanity)
 
-    // @TODO: inject translated references, respecting weak & strengthenOnPublish of *each* reference occurrence
-    finalDoc = modifyDocInPath({
-      originalDoc: finalDoc,
-      changedContent: parsedContent,
-      path,
+  let referenceMap = TMDTarget?.referenceMap || {}
+  const uncachedReferences = references.filter((ref) => !referenceMap[ref])
+
+  if (uncachedReferences.length > 0) {
+    const newReferenceMap = await i18nAdapter.getTranslatedReferences({
+      references: uncachedReferences,
+      sanityClient,
+      targetLang: targetLang.sanity,
+      translatableTypes,
     })
-  })
+    referenceMap = {
+      ...referenceMap,
+      ...newReferenceMap,
+    }
+
+    if (TMDTarget?._key) {
+      try {
+        // Cache referenceMap for future requests
+        await sanityClient
+          .patch(finalDoc.phraseMetadata.expanded._id, {
+            set: {
+              [`targets[_key == "${TMDTarget._key}"].referenceMap`]:
+                referenceMap,
+            },
+          })
+          .commit()
+      } catch (_error) {
+        // No need to act on errors - cache will be skipped
+      }
+    }
+  }
+
+  Object.entries(contentInPhrase.contentByPath).forEach(
+    ([pathKey, content]) => {
+      const path = stringToPath(pathKey)
+      const parsedContent = phraseToSanity(content)
+
+      finalDoc = modifyDocInPath({
+        originalDoc: finalDoc,
+        changedContent: parsedContent,
+        path,
+        referenceMap,
+      })
+    },
+  )
 
   return finalDoc
 }

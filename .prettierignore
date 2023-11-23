@@ -3,7 +3,7 @@ pnpm-lock.yaml
 yarn.lock
 package-lock.json
 demo
-example-data
+example-data/gitignored
 patches
 node_modules
 src/types/phraseOpenAPI.d.ts
