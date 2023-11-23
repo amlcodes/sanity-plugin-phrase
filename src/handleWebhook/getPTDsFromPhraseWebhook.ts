@@ -4,9 +4,9 @@ import {
   Phrase,
   SanityPTDWithExpandedMetadata,
   SanityTMD,
-} from './types'
-import { dedupeArray, jobComesFromSanity } from './utils'
-import { isPTDDoc } from './utils/phrase'
+} from '../types'
+import { dedupeArray, jobComesFromSanity } from '../utils'
+import { isPTDDoc } from '../utils/phrase'
 
 export default async function getPTDsFromPhraseWebhook({
   sanityClient,

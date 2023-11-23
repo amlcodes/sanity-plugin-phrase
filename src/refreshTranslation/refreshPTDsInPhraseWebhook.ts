@@ -1,5 +1,5 @@
 import { SanityClient } from 'sanity'
-import getPTDsFromPhraseWebhook from '~/getPTDsFromPhraseWebhook'
+import getPTDsFromPhraseWebhook from '~/handleWebhook/getPTDsFromPhraseWebhook'
 import { Phrase, PhraseCredentialsInput } from '~/types'
 import refreshPTDs from './refreshPTDs'
 
