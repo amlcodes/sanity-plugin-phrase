@@ -1,9 +1,18 @@
 'use client'
 
 import { PublishIcon, RefreshIcon } from '@sanity/icons'
-import { Button, Card, Flex, Heading, Spinner, Stack, Text } from '@sanity/ui'
-import { useState } from 'react'
-import { useEditState, useSchema } from 'sanity'
+import {
+  Button,
+  Card,
+  Flex,
+  Heading,
+  Spinner,
+  Stack,
+  Text,
+  useToast,
+} from '@sanity/ui'
+import React, { useState } from 'react'
+import { useClient, useEditState, useSchema } from 'sanity'
 import {
   EndpointActionTypes,
   PtdPhraseMetadata,
@@ -12,6 +21,7 @@ import {
   TranslationRequest,
 } from '../../types'
 import {
+  SANITY_API_VERSION,
   getProjectURL,
   getReadableLanguageName,
   jobsMetadataExtractor,
@@ -19,6 +29,7 @@ import {
 import { TranslationInfo } from './TranslationInfo'
 import { useOpenInSidePane } from './useOpenInSidepane'
 import { usePluginOptions } from '../PluginOptionsContext'
+import mergePTD from '../../mergePTD'
 
 const API_ENDPOINT = '/api/phrase'
 
@@ -29,16 +40,15 @@ export default function PtdDocDashboard({
   document: SanityPTD
   ptdMetadata: PtdPhraseMetadata
 }) {
+  const sanityClient = useClient({ apiVersion: SANITY_API_VERSION })
+  const toast = useToast()
   const { phraseRegion } = usePluginOptions()
   const { ready, draft, published } = useEditState(
     ptdDocument?.phraseMetadata?.tmd?._ref || '',
     ptdDocument?.phraseMetadata?.tmd?._type || 'document',
   )
   const TMD = (draft || published) as SanityTMD
-  // const sanityClient = useClient({ apiVersion: '2023-11-10' })
-  const [state, setState] = useState<'idle' | 'refreshing' | 'committing'>(
-    'idle',
-  )
+  const [state, setState] = useState<'idle' | 'refreshing' | 'merging'>('idle')
   const [, setError] = useState<{ title: string; error: unknown } | undefined>()
   const schema = useSchema()
   const schemaType = schema.get(ptdDocument._type)
@@ -80,6 +90,30 @@ export default function PtdDocDashboard({
       })
     }
 
+    setState('idle')
+  }
+
+  async function handleMerge(e: React.MouseEvent) {
+    e.preventDefault()
+    setState('merging')
+    const res = await mergePTD({ sanityClient, PTD: ptdDocument })
+
+    if (res.success) {
+      toast.push({
+        status: 'success',
+        title: 'Translation merged successfully',
+        description:
+          'This translation has been merged into the target document',
+        closable: true,
+      })
+    } else {
+      toast.push({
+        status: 'error',
+        title: 'Could not merge translation',
+        description: typeof res.error === 'string' ? res.error : undefined,
+        closable: true,
+      })
+    }
     setState('idle')
   }
 
@@ -165,6 +199,7 @@ export default function PtdDocDashboard({
             tone={readyToMerge ? 'critical' : 'positive'}
             mode={readyToMerge ? 'default' : 'bleed'}
             disabled={state !== 'idle'}
+            onClick={handleMerge}
             icon={PublishIcon}
             style={{ flex: 1 }}
           />

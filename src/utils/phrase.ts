@@ -1,6 +1,7 @@
 import { DocumentStore, Path, createHookFromObservableFactory } from 'sanity'
 import {
   CommittedMainDocMetadata,
+  CreatedMainDocMetadata,
   METADATA_KEY,
   MainDocTranslationMetadata,
   PhraseJobInfo,
@@ -75,12 +76,12 @@ export function jobIsCancelled(job: Pick<PhraseJobInfo, 'status'>) {
   return cancelledStatuses.includes(job.status)
 }
 
+export function jobIsComplete(job: Pick<PhraseJobInfo, 'status'>) {
+  return job.status === 'COMPLETED' || job.status === 'COMPLETED_BY_LINGUIST'
+}
+
 function jobIsOngoing(job: Pick<PhraseJobInfo, 'status'>) {
-  return (
-    !jobIsCancelled(job) &&
-    job.status !== 'COMPLETED' &&
-    job.status !== 'COMPLETED_BY_LINGUIST'
-  )
+  return !jobIsCancelled(job) && !jobIsComplete(job)
 }
 
 export function getLastValidJobInWorkflow(jobs: PhraseJobInfo[]) {
@@ -125,7 +126,7 @@ export function isTranslatedMainDoc(
   )
 }
 
-export function translationsUnfinished(doc: SanityMainDoc) {
+export function hasTranslationsUnfinished(doc: SanityMainDoc) {
   return doc.phraseMetadata.translations.some((t) => !isTranslationCommitted(t))
 }
 
@@ -133,6 +134,12 @@ export function isTranslationCommitted(
   translation: MainDocTranslationMetadata,
 ): translation is CommittedMainDocMetadata {
   return translation.status === 'COMMITTED'
+}
+
+export function isTranslationReadyToCommit(
+  translation: MainDocTranslationMetadata,
+): translation is CreatedMainDocMetadata {
+  return translation.status === 'COMPLETED'
 }
 
 export function phraseDatetimeToJSDate<D extends string | undefined>(

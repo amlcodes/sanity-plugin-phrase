@@ -1,5 +1,5 @@
 import { ContextWithFreshDocuments } from '../types'
-import { translationsIntersect } from '../utils'
+import { isTranslationCommitted, translationsIntersect } from '../utils'
 
 export class DocumentsLockedError {
   readonly _tag = 'DocumentsLockedError'
@@ -19,8 +19,8 @@ export default function isDocLocked({
         []),
     ]
     const ongoingPaths = allMeta.flatMap((m) => {
-      // Ignore completed translations
-      if (m.status === 'COMPLETED') return []
+      // Ignore committed translations
+      if (isTranslationCommitted(m)) return []
 
       return m.paths
     })

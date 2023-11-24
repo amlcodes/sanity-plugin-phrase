@@ -14,7 +14,7 @@ import {
   getTranslationSnapshot,
   isTranslatedMainDoc,
   langAdapter,
-  translationsUnfinished,
+  hasTranslationsUnfinished,
   undraftId,
 } from '../utils'
 import parseTMDsToDiff from './parseTMDsToDiff'
@@ -69,7 +69,7 @@ export default async function getStaleTranslations({
       }
     }
 
-    if (translationsUnfinished(freshestDoc)) {
+    if (hasTranslationsUnfinished(freshestDoc)) {
       return {
         sourceDoc,
         targets: targetLangs.map((lang) => ({

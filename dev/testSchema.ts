@@ -88,7 +88,7 @@ export const post = {
     },
     prepare(selection) {
       const hasTranslations = selection.translations?.find(
-        (t) => t.status !== 'COMPLETED',
+        (t) => t.status !== 'COMMITED',
       )
       return {
         ...selection,

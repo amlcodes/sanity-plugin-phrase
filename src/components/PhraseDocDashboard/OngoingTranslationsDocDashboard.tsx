@@ -10,6 +10,7 @@ import {
   getPathsLabel,
   getProjectURL,
   isTranslationCommitted,
+  isTranslationReadyToCommit,
 } from '../../utils'
 import { TranslationInfo } from './TranslationInfo'
 import { usePluginOptions } from '../PluginOptionsContext'
@@ -104,7 +105,7 @@ function OngoingTranslationCard({
           />
         ))}
 
-        {translation.status === 'COMPLETED' && (
+        {isTranslationReadyToCommit(translation) && (
           <Flex align="center" justify="space-between">
             <Text>Translation is completed</Text>
             <Button

@@ -84,7 +84,7 @@ export default defineType({
     },
     prepare(selection) {
       const hasTranslations = selection.translations?.find(
-        (t) => t.status !== 'COMPLETED',
+        (t) => t.status !== 'COMMITTED',
       )
       return {
         ...selection,
