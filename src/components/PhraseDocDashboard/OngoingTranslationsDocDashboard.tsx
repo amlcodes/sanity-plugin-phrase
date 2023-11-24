@@ -1,5 +1,16 @@
-import { Button, Card, Flex, Heading, Spinner, Stack, Text } from '@sanity/ui'
-import { useEditState } from 'sanity'
+import {
+  Button,
+  Card,
+  Flex,
+  Heading,
+  Spinner,
+  Stack,
+  Text,
+  useToast,
+} from '@sanity/ui'
+import React from 'react'
+import { useClient, useEditState } from 'sanity'
+import commitTranslation from '../../commitTranslation'
 import {
   CreatedMainDocMetadata,
   MainDocTranslationMetadata,
@@ -7,13 +18,14 @@ import {
   TranslationRequest,
 } from '../../types'
 import {
+  SANITY_API_VERSION,
   getPathsLabel,
   getProjectURL,
   isTranslationCommitted,
   isTranslationReadyToCommit,
 } from '../../utils'
-import { TranslationInfo } from './TranslationInfo'
 import { usePluginOptions } from '../PluginOptionsContext'
+import { TranslationInfo } from './TranslationInfo'
 
 export default function OngoingTranslationsDocDashboard(props: {
   ongoingTranslations: MainDocTranslationMetadata[]
@@ -62,12 +74,39 @@ function OngoingTranslationCard({
   sourceDoc: TranslationRequest['sourceDoc']
   translation: CreatedMainDocMetadata
 }) {
+  const sanityClient = useClient({ apiVersion: SANITY_API_VERSION })
+  const toast = useToast()
+  const [state, setState] = React.useState<'idle' | 'committing'>('idle')
   const { phraseRegion } = usePluginOptions()
   const { ready, draft, published } = useEditState(
     translation.tmd._ref,
     translation.tmd._type,
   )
   const TMD = (draft || published) as SanityTMD
+
+  async function handleCommit(e: React.MouseEvent) {
+    e.preventDefault()
+    setState('committing')
+    const res = await commitTranslation({ sanityClient, TMD })
+
+    if (res.success) {
+      toast.push({
+        status: 'success',
+        title: 'Translation committed successfully',
+        description:
+          'This translation has been finalized and merged into the target document(s)',
+        closable: true,
+      })
+    } else {
+      toast.push({
+        status: 'error',
+        title: 'Could not commit translation',
+        description: typeof res.error === 'string' ? res.error : undefined,
+        closable: true,
+      })
+    }
+    setState('idle')
+  }
 
   if (!ready) {
     return <Spinner />
@@ -112,9 +151,8 @@ function OngoingTranslationCard({
               mode="default"
               tone="positive"
               text="Commit translation"
-              onClick={() => {
-                // @TODO
-              }}
+              onClick={handleCommit}
+              disabled={state !== 'idle'}
             />
           </Flex>
         )}

@@ -3,6 +3,39 @@ import { mergeDocs } from './mergeDocs'
 import { SanityDocumentWithPhraseMetadata, SanityPTD, SanityTMD } from './types'
 import { draftId, isPTDDoc, undraftId } from './utils'
 import { diffPatch } from 'sanity-diff-patch'
+import { Transaction } from '@sanity/client'
+
+export function getMergePTDTransaction({
+  PTD,
+  targetDocs,
+  TMD,
+  initialTx: transaction,
+}: {
+  PTD: SanityPTD
+  TMD: SanityTMD
+  targetDocs: SanityDocumentWithPhraseMetadata[]
+  initialTx: Transaction
+}) {
+  targetDocs.forEach((freshTargetDoc) => {
+    const newTargetDoc = {
+      ...mergeDocs({
+        originalDoc: freshTargetDoc,
+        changedDoc: PTD,
+        paths: TMD.paths,
+      }),
+      phraseMetadata: freshTargetDoc.phraseMetadata,
+    }
+    const patches = diffPatch(freshTargetDoc, newTargetDoc, {
+      // Prevent modifying target doc if its _rev has changed since the function started running
+      ifRevisionID: true,
+    })
+    for (const { patch } of patches) {
+      transaction.patch(patch.id, patch)
+    }
+  })
+
+  return transaction
+}
 
 /**
  * Assumes PTD has been already refreshed with Phrase data and is ready to be merged.
@@ -35,24 +68,11 @@ export default async function mergePTD({
       TMDRef: PTD.phraseMetadata.tmd._ref,
     },
   )
-
-  const transaction = sanityClient.transaction()
-  targetDocs.forEach((freshTargetDoc) => {
-    const newTargetDoc = {
-      ...mergeDocs({
-        originalDoc: freshTargetDoc,
-        changedDoc: PTD,
-        paths: TMD.paths,
-      }),
-      phraseMetadata: freshTargetDoc.phraseMetadata,
-    }
-    const patches = diffPatch(freshTargetDoc, newTargetDoc, {
-      // Prevent modifying target doc if its _rev has changed since the function started running
-      ifRevisionID: true,
-    })
-    for (const { patch } of patches) {
-      transaction.patch(patch.id, patch)
-    }
+  const transaction = getMergePTDTransaction({
+    PTD,
+    TMD,
+    targetDocs,
+    initialTx: sanityClient.transaction(),
   })
 
   try {
