@@ -56,7 +56,7 @@ const PHRASE_CONFIG: PhrasePluginOptions = {
     lang.id && lang.id !== SOURCE_LANGUAGE ? [lang.id] : [],
   ),
   sourceLang: SOURCE_LANGUAGE,
-  backendEndpoint: '/api/phrase',
+  apiEndpoint: '/api/phrase',
   phraseRegion: 'us',
   phraseTemplates: [
     {

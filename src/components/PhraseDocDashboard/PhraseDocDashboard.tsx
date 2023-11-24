@@ -10,6 +10,7 @@ import {
 import {
   isPTDDoc,
   isTranslatedMainDoc,
+  isTranslationCommitted,
   langAdapter,
   undraftId,
 } from '../../utils'
@@ -70,7 +71,7 @@ export default function getPhraseDocDashboard(
               }
               const ongoingTranslations =
                 document.phraseMetadata.translations?.filter(
-                  (translations) => translations.status !== 'COMPLETED',
+                  (t) => !isTranslationCommitted(t),
                 )
               if (ongoingTranslations?.length) {
                 return (

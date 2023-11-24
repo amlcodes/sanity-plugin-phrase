@@ -5,7 +5,7 @@ import {
   SanityPTDWithExpandedMetadata,
   SanityTMD,
 } from '../types'
-import { dedupeArray, jobComesFromSanity } from '../utils'
+import { dedupeArray, comesFromSanity } from '../utils'
 import { isPTDDoc } from '../utils/phrase'
 
 export default async function getPTDsFromPhraseWebhook({
@@ -15,7 +15,7 @@ export default async function getPTDsFromPhraseWebhook({
   sanityClient: SanityClient
   jobsInWebhook: Phrase['JobInWebhook'][]
 }) {
-  const jobs = jobsInWebhook.filter(jobComesFromSanity)
+  const jobs = jobsInWebhook.filter(comesFromSanity)
 
   if (jobs.length === 0) {
     return {

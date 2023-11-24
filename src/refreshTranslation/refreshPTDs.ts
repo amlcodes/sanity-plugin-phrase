@@ -17,6 +17,7 @@ import {
   SanityTMD,
 } from '../types'
 import { getLastValidJobInWorkflow } from '../utils/phrase'
+import { Transaction } from '@sanity/client'
 
 class FailedDownloadingPhraseDataError {
   readonly _tag = 'FailedDownloadingPhraseData'
@@ -27,7 +28,15 @@ class FailedDownloadingPhraseDataError {
 class FailedUpdatingPTDsAndTMDError {
   readonly _tag = 'FailedUpdatingPTDsAndTMD'
 
-  constructor(readonly error: unknown) {}
+  constructor(
+    readonly error: unknown,
+    readonly transaction: Transaction,
+  ) {
+    console.error({
+      error: 'FailedUpdatingPTDsAndTMD',
+      attemptedTx: transaction.toJSON(),
+    })
+  }
 }
 
 class FailedConvertingPhraseContentToSanityDocumentError {
@@ -141,7 +150,8 @@ export default function refreshPTDs(input: {
                   ...tx,
                   transactionJson: transaction.toJSON(),
                 })),
-              catch: (error) => new FailedUpdatingPTDsAndTMDError(error),
+              catch: (error) =>
+                new FailedUpdatingPTDsAndTMDError(error, transaction),
             }),
             retrySchedule,
           )

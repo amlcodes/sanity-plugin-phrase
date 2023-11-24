@@ -56,7 +56,7 @@ export default async function mergePTD({
   })
 
   try {
-    await transaction.commit()
+    await transaction.commit({ returnDocuments: false })
     return {
       success: true,
       modifiedDocs: targetDocs.map((d) => d._id),

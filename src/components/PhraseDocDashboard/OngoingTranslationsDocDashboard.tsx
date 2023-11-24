@@ -1,4 +1,4 @@
-import { Button, Card, Flex, Heading, Spinner, Stack } from '@sanity/ui'
+import { Button, Card, Flex, Heading, Spinner, Stack, Text } from '@sanity/ui'
 import { useEditState } from 'sanity'
 import {
   CreatedMainDocMetadata,
@@ -6,7 +6,11 @@ import {
   SanityTMD,
   TranslationRequest,
 } from '../../types'
-import { getPathsLabel, getProjectURL } from '../../utils'
+import {
+  getPathsLabel,
+  getProjectURL,
+  isTranslationCommitted,
+} from '../../utils'
 import { TranslationInfo } from './TranslationInfo'
 import { usePluginOptions } from '../PluginOptionsContext'
 
@@ -19,7 +23,7 @@ export default function OngoingTranslationsDocDashboard(props: {
       <Heading as="h2">This document has translations in progress</Heading>
       <Stack space={4} marginTop={4}>
         {props.ongoingTranslations.map((translation) => {
-          if (translation.status === 'COMPLETED') return null
+          if (isTranslationCommitted(translation)) return null
 
           if (translation.status === 'CREATING')
             return (
@@ -31,6 +35,10 @@ export default function OngoingTranslationsDocDashboard(props: {
 
           if (translation.status === 'FAILED_PERSISTING') {
             return <div key={translation._key}>failed @TODO</div>
+          }
+
+          if (translation.status === 'DELETED') {
+            return <div key={translation._key}>deleted @TODO</div>
           }
 
           return (
@@ -95,6 +103,20 @@ function OngoingTranslationCard({
             TMD={TMD}
           />
         ))}
+
+        {translation.status === 'COMPLETED' && (
+          <Flex align="center" justify="space-between">
+            <Text>Translation is completed</Text>
+            <Button
+              mode="default"
+              tone="positive"
+              text="Commit translation"
+              onClick={() => {
+                // @TODO
+              }}
+            />
+          </Flex>
+        )}
       </Stack>
     </Card>
   )

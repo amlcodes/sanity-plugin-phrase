@@ -16,11 +16,14 @@ export function TranslationInfo({
   sourceDoc,
   paneParentDocId,
   TMD,
+  showOpenPTD = true,
 }: {
   targetLang: CrossSystemLangCode
   sourceDoc: TranslationRequest['sourceDoc']
   paneParentDocId: string
   TMD: SanityTMD | 'loading'
+  // eslint-disable-next-line
+  showOpenPTD?: boolean
 }) {
   const { phraseRegion } = usePluginOptions()
   const schema = useSchema()
@@ -67,7 +70,7 @@ export function TranslationInfo({
           label="Edit in Phrase"
         />
       )}
-      {schemaType && ptdId && (
+      {schemaType && ptdId && showOpenPTD && (
         <Button
           icon={EyeOpenIcon}
           label="Preview"

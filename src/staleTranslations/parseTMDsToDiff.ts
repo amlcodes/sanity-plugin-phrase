@@ -1,5 +1,5 @@
 import { CrossSystemLangCode, SanityMainDoc } from '../types'
-import { isTranslationFinished } from '../utils'
+import { isTranslationCommitted } from '../utils'
 
 export default function parseTMDsToDiff(
   doc: SanityMainDoc,
@@ -11,7 +11,7 @@ export default function parseTMDsToDiff(
       (a, b) =>
         new Date(b._createdAt).valueOf() - new Date(a._createdAt).valueOf(),
     )
-    .filter(isTranslationFinished)
+    .filter(isTranslationCommitted)
 
   const TMDsToDiff = targetLangs.reduce(
     (projects, lang) => {

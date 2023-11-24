@@ -54,7 +54,7 @@ export default async function phraseDocumentToSanityDocument({
                 referenceMap,
             },
           })
-          .commit()
+          .commit({ returnDocuments: false })
       } catch (_error) {
         // No need to act on errors - cache will be skipped
       }

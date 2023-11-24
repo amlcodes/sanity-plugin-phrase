@@ -11,7 +11,11 @@ import {
   SanityTMD,
   TranslationRequest,
 } from '../../types'
-import { getProjectURL, jobsMetadataExtractor } from '../../utils'
+import {
+  getProjectURL,
+  getReadableLanguageName,
+  jobsMetadataExtractor,
+} from '../../utils'
 import { TranslationInfo } from './TranslationInfo'
 import { useOpenInSidePane } from './useOpenInSidepane'
 import { usePluginOptions } from '../PluginOptionsContext'
@@ -48,15 +52,14 @@ export default function PtdDocDashboard({
     return <div>error @todo</div>
   }
 
+  const targetLang = ptdMetadata.targetLang
   const sourceDoc: TranslationRequest['sourceDoc'] = {
     _id: TMD.sourceDoc._ref,
     _type: ptdDocument._type,
     _rev: TMD.sourceSnapshot._rev,
     lang: TMD.sourceLang,
   }
-  const target = TMD.targets.find(
-    (t) => t.lang.sanity === ptdMetadata.targetLang.sanity,
-  )
+  const target = TMD.targets.find((t) => t.lang.sanity === targetLang.sanity)
 
   const meta = target && jobsMetadataExtractor(target.jobs)
   const readyToMerge = meta?.stepStatus === 'COMPLETED'
@@ -90,8 +93,7 @@ export default function PtdDocDashboard({
             </Heading>
             {schemaType && (
               <Text>
-                This content was translated in Phrase to pt and is now ready to
-                merge with the{' '}
+                This content was translated in Phrase from the{' '}
                 <a
                   href={openInSidePane.getHref(sourceDoc._id, schemaType.name)}
                   onClick={(e) => {
@@ -102,8 +104,31 @@ export default function PtdDocDashboard({
                     )
                   }}
                 >
-                  source document
-                </a>
+                  source document in{' '}
+                  {getReadableLanguageName(TMD.sourceLang.sanity)}
+                </a>{' '}
+                to {getReadableLanguageName(targetLang.sanity)} and is now ready
+                to merge with the{' '}
+                {target?.targetDoc?._ref ? (
+                  <a
+                    href={openInSidePane.getHref(
+                      target.targetDoc._ref,
+                      schemaType.name,
+                    )}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      openInSidePane.openImperatively(
+                        target.targetDoc._ref,
+                        schemaType.name,
+                      )
+                    }}
+                  >
+                    target document in{' '}
+                    {getReadableLanguageName(targetLang.sanity)}
+                  </a>
+                ) : (
+                  'target document'
+                )}
                 .
               </Text>
             )}
@@ -123,6 +148,7 @@ export default function PtdDocDashboard({
           TMD={TMD}
           paneParentDocId={ptdDocument._id}
           targetLang={ptdMetadata.targetLang}
+          showOpenPTD={false}
         />
         <Flex gap={2}>
           <Button
@@ -135,7 +161,7 @@ export default function PtdDocDashboard({
             style={{ flex: 1 }}
           />
           <Button
-            text="Commit & merge"
+            text="Merge translation"
             tone={readyToMerge ? 'critical' : 'positive'}
             mode={readyToMerge ? 'default' : 'bleed'}
             disabled={state !== 'idle'}

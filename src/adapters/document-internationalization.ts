@@ -217,7 +217,14 @@ export const documentInternationalizationAdapter: I18nAdapter = {
      */
     if (metaDocument) {
       transaction.patch(metaDocument._id, (patch) =>
-        patch.insert('after', 'translations[-1]', newTranslationsReferences),
+        patch
+          // First make sure we remove previous translations in the metadata document to prevent duplication
+          .unset(
+            newTranslationsReferences.map(
+              (ref) => `translations[_key == "${ref._key}"]`,
+            ),
+          )
+          .insert('after', 'translations[-1]', newTranslationsReferences),
       )
     } else {
       transaction.create({
@@ -231,7 +238,7 @@ export const documentInternationalizationAdapter: I18nAdapter = {
       })
     }
 
-    await transaction.commit()
+    await transaction.commit({ returnDocuments: false })
 
     const finalDocuments: DocPairFromAdapter[] = [
       ...allInitialDocuments,

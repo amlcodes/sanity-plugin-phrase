@@ -46,7 +46,7 @@ export default async function markPTDsAsDeletedByWebhook({
   })
 
   try {
-    await transaction.commit()
+    await transaction.commit({ returnDocuments: false })
     return {
       body: { message: 'Successfully marked PTDs as deleted' },
       status: 200,

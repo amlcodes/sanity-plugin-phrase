@@ -24,7 +24,7 @@ async function unlockForTesting() {
 
   if (process.argv.includes('--remove-translated')) {
     const translatedIds = await testSanityClient.fetch<string[]>(
-      `*[_type == 'post' && language != 'en']._id`,
+      `*[(_type == 'post' && language != 'en') || _type == "translation.metadata"]._id`,
     )
 
     for (const id of translatedIds) {
@@ -32,8 +32,8 @@ async function unlockForTesting() {
     }
   }
 
-  await unsetMetaTx.commit()
-  await deleteDocsTx.commit()
+  await unsetMetaTx.commit({ returnDocuments: false })
+  await deleteDocsTx.commit({ returnDocuments: false })
 }
 
 unlockForTesting()

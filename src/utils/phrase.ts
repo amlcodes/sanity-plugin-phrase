@@ -1,6 +1,6 @@
 import { DocumentStore, Path, createHookFromObservableFactory } from 'sanity'
 import {
-  CompletedMainDocMetadata,
+  CommittedMainDocMetadata,
   METADATA_KEY,
   MainDocTranslationMetadata,
   PhraseJobInfo,
@@ -126,13 +126,13 @@ export function isTranslatedMainDoc(
 }
 
 export function translationsUnfinished(doc: SanityMainDoc) {
-  return doc.phraseMetadata.translations.some((t) => !isTranslationFinished(t))
+  return doc.phraseMetadata.translations.some((t) => !isTranslationCommitted(t))
 }
 
-export function isTranslationFinished(
+export function isTranslationCommitted(
   translation: MainDocTranslationMetadata,
-): translation is CompletedMainDocMetadata {
-  return translation.status === 'COMPLETED'
+): translation is CommittedMainDocMetadata {
+  return translation.status === 'COMMITTED'
 }
 
 export function phraseDatetimeToJSDate<D extends string | undefined>(

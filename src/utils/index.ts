@@ -68,15 +68,18 @@ export function getTranslationName(
   }
 }
 
-export function jobComesFromSanity(
-  job:
+export function comesFromSanity(
+  entity:
     | Pick<Phrase['JobPart'], 'filename'>
-    | Pick<Phrase['JobInWebhook'], 'fileName'>,
+    | Pick<Phrase['JobInWebhook'], 'fileName'>
+    | Pick<Phrase['CreatedProject'], 'name'>,
 ) {
   const name = (() => {
-    if ('filename' in job) return job.filename
+    if ('filename' in entity) return entity.filename
 
-    if ('fileName' in job) return job.fileName
+    if ('fileName' in entity) return entity.fileName
+
+    if ('name' in entity) return entity.name
 
     return undefined
   })()

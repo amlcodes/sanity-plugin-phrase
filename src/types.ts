@@ -61,8 +61,12 @@ export type Phrase = {
       lastWorkflowLevel?: number | null
     }
   }
+  ProjectStatus: Required<definitions['Admin, Project Manager']>['status']
   CreatedProject: Omit<definitions['AbstractProjectDtoV2'], 'uid'> & {
     uid: string
+  }
+  ProjectInWebhook: Phrase['CreatedProject'] & {
+    status: Phrase['ProjectStatus']
   }
 }
 
@@ -98,17 +102,24 @@ type CreatingMainDocMetadata = BaseMainDocMetadata & {
   status: 'CREATING'
 }
 
-export type CompletedMainDocMetadata = BaseMainDocMetadata & {
-  status: 'COMPLETED'
+export type CommittedMainDocMetadata = BaseMainDocMetadata & {
+  status: 'COMMITTED'
   tmd: Reference
   targetLangs: CrossSystemLangCode[]
 }
 
 export type CreatedMainDocMetadata = Omit<
-  CompletedMainDocMetadata,
+  CommittedMainDocMetadata,
   'status'
 > & {
-  status: 'CREATED'
+  status: 'CREATED' | Phrase['ProjectStatus']
+}
+
+export type DeletedMainDocMetadata = Omit<
+  CommittedMainDocMetadata,
+  'status'
+> & {
+  status: 'DELETED'
 }
 
 export type FailedPersistingMainDocMetadata = BaseMainDocMetadata & {
@@ -119,8 +130,9 @@ export type FailedPersistingMainDocMetadata = BaseMainDocMetadata & {
 
 export type MainDocTranslationMetadata =
   | CreatingMainDocMetadata
-  | CompletedMainDocMetadata
+  | CommittedMainDocMetadata
   | CreatedMainDocMetadata
+  | DeletedMainDocMetadata
   | FailedPersistingMainDocMetadata
 
 /** For main documents (source and translated) only */
@@ -384,7 +396,7 @@ export type PhrasePluginOptions = {
    * @example
    * translatableTypes: ['post', 'page', 'lesson'] // etc.
    */
-  translatableTypes: string[]
+  translatableTypes: string[] | readonly string[]
   /**
    * Language code of all languages users can translate to.
    * Should be the same as the one stored in your Sanity documents and used by your front-end. The plugin will automatically translate it to Phrase's format.
