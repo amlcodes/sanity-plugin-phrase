@@ -4,8 +4,12 @@ import { backendRequestHandler } from '~/plugin-dist'
 import { schemaTypes } from '~/schemas'
 
 export const POST = backendRequestHandler({
-  phraseCredentials: {},
+  phraseCredentials: {
+    userName: process.env.PHRASE_USER_NAME || '',
+    password: process.env.PHRASE_PASSWORD || '',
+    region: (process.env.PHRASE_REGION as any) || 'eu',
+  },
   sanityClient: client.withConfig({ token: writeToken }),
   schemaTypes: schemaTypes,
-  translatableTypes: ['post']
+  translatableTypes: ['post'],
 })
