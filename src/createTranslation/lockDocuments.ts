@@ -83,7 +83,7 @@ function getLockTransaction(context: ContextWithFreshDocuments) {
         _type: 'phrase.mainDoc.translation',
         _key: request.translationKey,
         _createdAt: new Date().toISOString(),
-        sourceDocRev: request.sourceDoc._rev,
+        sourceDoc: request.sourceDoc,
         paths,
         status: 'CREATING',
       }

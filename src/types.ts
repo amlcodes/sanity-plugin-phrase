@@ -94,7 +94,7 @@ type BaseMainDocMetadata = {
   _type: 'phrase.mainDoc.translation'
   _key: TranslationRequest['translationKey']
   _createdAt: string
-  sourceDocRev: string
+  sourceDoc: TranslationRequest['sourceDoc']
   paths: TranslationRequest['paths']
 }
 
@@ -396,7 +396,7 @@ export type PhrasePluginOptions = {
    * @example
    * translatableTypes: ['post', 'page', 'lesson'] // etc.
    */
-  translatableTypes: string[] | readonly string[]
+  translatableTypes: readonly string[]
   /**
    * Language code of all languages users can translate to.
    * Should be the same as the one stored in your Sanity documents and used by your front-end. The plugin will automatically translate it to Phrase's format.

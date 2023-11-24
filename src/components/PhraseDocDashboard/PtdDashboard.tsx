@@ -178,7 +178,7 @@ export default function PtdDocDashboard({
           />
         </Flex>
         <TranslationInfo
-          sourceDoc={sourceDoc}
+          parentDoc={ptdDocument}
           TMD={TMD}
           paneParentDocId={ptdDocument._id}
           targetLang={ptdMetadata.targetLang}

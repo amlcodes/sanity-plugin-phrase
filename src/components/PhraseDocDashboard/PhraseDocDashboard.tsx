@@ -11,15 +11,13 @@ import {
   isPTDDoc,
   isTranslatedMainDoc,
   isTranslationCommitted,
-  langAdapter,
-  undraftId,
 } from '../../utils'
+import { PluginOptionsProvider } from '../PluginOptionsContext'
 import OngoingTranslationsDocDashboard from './OngoingTranslationsDocDashboard'
 import PreviouslyTranslatedDocDashboard from './PreviouslyTranslatedDocDashboard'
 import PtdDocDashboard from './PtdDashboard'
 import TranslationForm from './TranslationForm'
 import UntranslatedDocDashboard from './UntranslatedDocDashboard'
-import { PluginOptionsProvider } from '../PluginOptionsContext'
 
 export default function getPhraseDocDashboard(
   pluginOptions: PhrasePluginOptions,
@@ -63,12 +61,6 @@ export default function getPhraseDocDashboard(
 
           {isTranslatedMainDoc(document) &&
             (() => {
-              const sourceDoc: TranslationRequest['sourceDoc'] = {
-                _id: undraftId(document._id),
-                _rev: document._rev,
-                _type: document._type,
-                lang: langAdapter.sanityToCrossSystem(docLang),
-              }
               const ongoingTranslations =
                 document.phraseMetadata.translations?.filter(
                   (t) => !isTranslationCommitted(t),
@@ -77,12 +69,17 @@ export default function getPhraseDocDashboard(
                 return (
                   <OngoingTranslationsDocDashboard
                     ongoingTranslations={ongoingTranslations}
-                    sourceDoc={sourceDoc}
+                    document={document}
                   />
                 )
               }
 
-              return <PreviouslyTranslatedDocDashboard />
+              return (
+                <PreviouslyTranslatedDocDashboard
+                  docLang={docLang}
+                  document={document}
+                />
+              )
             })()}
 
           {pathsToTranslate && (

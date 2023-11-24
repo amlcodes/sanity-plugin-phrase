@@ -2,7 +2,7 @@ import { Reference, SanityDocument } from 'sanity'
 import pMap from 'p-map'
 import { SanityClient, collate } from 'sanity'
 import { parseAllReferences } from './utils/references'
-import { SanityDocumentWithPhraseMetadata } from './types'
+import { PhrasePluginOptions, SanityDocumentWithPhraseMetadata } from './types'
 import { draftId, isDraft, undraftId } from './utils'
 
 type TranslatableRef = {
@@ -38,7 +38,7 @@ export default async function getAllDocReferences({
   sanityClient: SanityClient
   document: SanityDocumentWithPhraseMetadata
   maxDepth?: number
-  translatableTypes: string[]
+  translatableTypes: PhrasePluginOptions['translatableTypes']
 }) {
   const state = {
     referenced: {

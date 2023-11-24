@@ -1,5 +1,6 @@
 import { collate } from 'sanity'
 import {
+  PhrasePluginOptions,
   SanityDocumentWithPhraseMetadata,
   SanityLangCode,
   SanityTMD,
@@ -27,7 +28,7 @@ export default async function getStaleTranslations({
 }: {
   sourceDocs: TranslationRequest['sourceDoc'][]
   sanityClient: TranslationRequest['sanityClient']
-  translatableTypes: string[]
+  translatableTypes: PhrasePluginOptions['translatableTypes']
   targetLangs: SanityLangCode[]
 }) {
   const targetLangs = langAdapter.sanityToCrossSystem(sanityTargetLangs)
@@ -136,7 +137,7 @@ export default async function getStaleTranslations({
           lang,
           error: r.reason,
         })),
-      }
+      } as StaleResponse
     }
 
     return r.value

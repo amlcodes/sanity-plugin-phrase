@@ -14,8 +14,8 @@ import commitTranslation from '../../commitTranslation'
 import {
   CreatedMainDocMetadata,
   MainDocTranslationMetadata,
+  SanityMainDoc,
   SanityTMD,
-  TranslationRequest,
 } from '../../types'
 import {
   SANITY_API_VERSION,
@@ -29,7 +29,7 @@ import { TranslationInfo } from './TranslationInfo'
 
 export default function OngoingTranslationsDocDashboard(props: {
   ongoingTranslations: MainDocTranslationMetadata[]
-  sourceDoc: TranslationRequest['sourceDoc']
+  document: SanityMainDoc
 }) {
   return (
     <Card paddingX={3} padding={4} border radius={2}>
@@ -58,7 +58,7 @@ export default function OngoingTranslationsDocDashboard(props: {
             <OngoingTranslationCard
               key={translation._key}
               translation={translation}
-              sourceDoc={props.sourceDoc}
+              parentDoc={props.document}
             />
           )
         })}
@@ -69,9 +69,9 @@ export default function OngoingTranslationsDocDashboard(props: {
 
 function OngoingTranslationCard({
   translation,
-  sourceDoc,
+  parentDoc,
 }: {
-  sourceDoc: TranslationRequest['sourceDoc']
+  parentDoc: SanityMainDoc
   translation: CreatedMainDocMetadata
 }) {
   const sanityClient = useClient({ apiVersion: SANITY_API_VERSION })
@@ -137,8 +137,8 @@ function OngoingTranslationCard({
         {TMD.targets.map((target) => (
           <TranslationInfo
             key={target._key}
-            paneParentDocId={sourceDoc._id}
-            sourceDoc={{ ...sourceDoc, _rev: translation.sourceDocRev }}
+            paneParentDocId={parentDoc._id}
+            parentDoc={parentDoc}
             targetLang={target.lang}
             TMD={TMD}
           />

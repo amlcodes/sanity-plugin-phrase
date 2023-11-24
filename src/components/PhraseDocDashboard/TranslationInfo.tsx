@@ -1,25 +1,25 @@
 import { EyeOpenIcon } from '@sanity/icons'
 import { Badge, Button, Flex, Spinner, Stack, Text } from '@sanity/ui'
-import { useSchema } from 'sanity'
-import { CrossSystemLangCode, SanityTMD, TranslationRequest } from '../../types'
+import { SanityDocument, useSchema } from 'sanity'
+import { CrossSystemLangCode, SanityTMD } from '../../types'
 import {
   getJobEditorURL,
   getReadableLanguageName,
   jobsMetadataExtractor,
 } from '../../utils'
+import { usePluginOptions } from '../PluginOptionsContext'
 import { PhraseMonogram } from './PhraseLogo'
 import { useOpenInSidePane } from './useOpenInSidepane'
-import { usePluginOptions } from '../PluginOptionsContext'
 
 export function TranslationInfo({
   targetLang,
-  sourceDoc,
+  parentDoc,
   paneParentDocId,
   TMD,
   showOpenPTD = true,
 }: {
   targetLang: CrossSystemLangCode
-  sourceDoc: TranslationRequest['sourceDoc']
+  parentDoc: SanityDocument
   paneParentDocId: string
   TMD: SanityTMD | 'loading'
   // eslint-disable-next-line
@@ -27,7 +27,7 @@ export function TranslationInfo({
 }) {
   const { phraseRegion } = usePluginOptions()
   const schema = useSchema()
-  const schemaType = schema.get(sourceDoc._type)
+  const schemaType = schema.get(parentDoc._type)
   const openInSidePane = useOpenInSidePane(paneParentDocId)
   const label = getReadableLanguageName(targetLang.sanity)
 
