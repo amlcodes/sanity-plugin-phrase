@@ -16,13 +16,7 @@ import {
 
 export function jobsMetadataExtractor(jobs: PhraseJobInfo[]) {
   const lastJob = jobs[jobs.length - 1]
-  const furthestOngoingJob =
-    jobs.find(
-      (job) =>
-        job.status !== 'COMPLETED' &&
-        job.status !== 'CANCELLED' &&
-        job.status !== 'REJECTED',
-    ) || lastJob
+  const furthestOngoingJob = jobs.find((job) => jobIsOngoing(job)) || lastJob
 
   return {
     stepName: furthestOngoingJob?.workflowStep?.name || 'Ongoing',
@@ -79,6 +73,14 @@ const cancelledStatuses: PhraseJobInfo['status'][] = [
 
 export function jobIsCancelled(job: Pick<PhraseJobInfo, 'status'>) {
   return cancelledStatuses.includes(job.status)
+}
+
+function jobIsOngoing(job: Pick<PhraseJobInfo, 'status'>) {
+  return (
+    !jobIsCancelled(job) &&
+    job.status !== 'COMPLETED' &&
+    job.status !== 'COMPLETED_BY_LINGUIST'
+  )
 }
 
 export function getLastValidJobInWorkflow(jobs: PhraseJobInfo[]) {

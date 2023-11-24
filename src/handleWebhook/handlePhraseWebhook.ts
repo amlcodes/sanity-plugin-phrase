@@ -39,6 +39,13 @@ type JobStatusChangedWebhook = {
   jobParts: Phrase['JobInWebhook'][]
 }
 
+type JobDueDateChangedWebhook = {
+  event: 'JOB_DUE_DATE_CHANGED'
+  timestamp: number
+  eventUid: string
+  jobParts: Phrase['JobInWebhook'][]
+}
+
 type ProjectDeletedWebhook = {
   event: 'PROJECT_DELETED'
   timestamp: number
@@ -52,6 +59,7 @@ export type PhraseWebhook =
   | JobAssignedWebhook
   | JobCreatedWebhook
   | JobStatusChangedWebhook
+  | JobDueDateChangedWebhook
   | ProjectDeletedWebhook
 
 export default async function handlePhraseWebhook({
@@ -74,6 +82,7 @@ export default async function handlePhraseWebhook({
         'JOB_STATUS_CHANGED',
         'JOB_CREATED',
         'JOB_DELETED',
+        'JOB_DUE_DATE_CHANGED',
       ] as PhraseWebhook['event'][]
     ).includes(payload.event)
   ) {

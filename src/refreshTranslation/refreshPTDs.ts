@@ -41,6 +41,7 @@ export default function refreshPTDs(input: {
   credentials: PhraseCredentialsInput
   PTDs: SanityPTDWithExpandedMetadata[]
   translatableTypes: string[]
+  jobsInWebhook?: Phrase['JobInWebhook'][]
 }) {
   const { PTDs, sanityClient } = input
 
@@ -124,7 +125,10 @@ export default function refreshPTDs(input: {
               transaction.patch(patch.id, patch)
             }
 
-            const { patches: metadataPatches } = diffTMD(originalDoc)
+            const { patches: metadataPatches } = diffTMD(
+              originalDoc,
+              input.jobsInWebhook,
+            )
             for (const { patch } of metadataPatches) {
               transaction.patch(patch.id, patch)
             }
@@ -132,7 +136,11 @@ export default function refreshPTDs(input: {
 
           return Effect.retry(
             Effect.tryPromise({
-              try: () => transaction.commit(),
+              try: () =>
+                transaction.commit({ returnDocuments: false }).then((tx) => ({
+                  ...tx,
+                  transactionJson: transaction.toJSON(),
+                })),
               catch: (error) => new FailedUpdatingPTDsAndTMDError(error),
             }),
             retrySchedule,
@@ -141,9 +149,13 @@ export default function refreshPTDs(input: {
       ),
     ),
     Effect.map(
-      () =>
+      (tx) =>
         ({
-          body: { message: 'PTDs updated' },
+          body: {
+            message: 'PTDs updated',
+            transactionId: tx.transactionId,
+            transacted: tx.transactionJson,
+          },
           status: 200,
         }) as const,
     ),
@@ -225,7 +237,10 @@ function diffPTD({
   )
 }
 
-function diffTMD(doc: SanityPTDWithExpandedMetadata) {
+function diffTMD(
+  doc: SanityPTDWithExpandedMetadata,
+  jobsInWebhook?: Phrase['JobInWebhook'][],
+) {
   const currentMetadata = doc.phraseMetadata.expanded
   const newMetadata: SanityTMD = {
     ...currentMetadata,
@@ -235,7 +250,7 @@ function diffTMD(doc: SanityPTDWithExpandedMetadata) {
 
       return {
         ...target,
-        jobs: target.jobs.map((job) => updateJobInTMD(job, [] /* @TODO */)),
+        jobs: target.jobs.map((job) => updateJobInTMD(job, jobsInWebhook)),
       }
     }),
   }
@@ -249,9 +264,9 @@ function diffTMD(doc: SanityPTDWithExpandedMetadata) {
 
 function updateJobInTMD(
   jobInMeta: PhraseJobInfo,
-  updatedJobs: (Phrase['JobInWebhook'] | PhraseJobInfo)[],
+  updatedJobs?: Phrase['JobInWebhook'][],
 ) {
-  const freshJob = updatedJobs.find((j) => j.uid === jobInMeta.uid)
+  const freshJob = updatedJobs?.find((j) => j.uid === jobInMeta.uid)
   if (!freshJob) return jobInMeta
 
   return {

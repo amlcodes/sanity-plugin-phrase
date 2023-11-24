@@ -1980,6 +1980,7 @@ export interface definitions {
       | 'DELIVERED'
       | 'EMAILED'
       | 'COMPLETED'
+      | 'COMPLETED_BY_LINGUIST'
       | 'CANCELLED'
     providers?: definitions['ProviderReference'][]
     targetLang?: string
