@@ -8,6 +8,7 @@ import {
 } from '../../types'
 import { getPathsLabel, getProjectURL } from '../../utils'
 import { TranslationInfo } from './TranslationInfo'
+import { usePluginOptions } from '../PluginOptionsContext'
 
 export default function OngoingTranslationsDocDashboard(props: {
   ongoingTranslations: MainDocTranslationMetadata[]
@@ -52,6 +53,7 @@ function OngoingTranslationCard({
   sourceDoc: TranslationRequest['sourceDoc']
   translation: CreatedMainDocMetadata
 }) {
+  const { phraseRegion } = usePluginOptions()
   const { ready, draft, published } = useEditState(
     translation.tmd._ref,
     translation.tmd._type,
@@ -76,11 +78,7 @@ function OngoingTranslationCard({
           <Button
             size={1}
             as="a"
-            href={getProjectURL(
-              TMD.phraseProjectUid,
-              // @TODO: make configurable
-              'us',
-            )}
+            href={getProjectURL(TMD.phraseProjectUid, phraseRegion)}
             target="_blank"
             rel="noopener noreferrer"
             mode="ghost"

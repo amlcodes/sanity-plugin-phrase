@@ -9,6 +9,7 @@ import {
 } from '../../utils'
 import { PhraseMonogram } from './PhraseLogo'
 import { useOpenInSidePane } from './useOpenInSidepane'
+import { usePluginOptions } from '../PluginOptionsContext'
 
 export function TranslationInfo({
   targetLang,
@@ -21,6 +22,7 @@ export function TranslationInfo({
   paneParentDocId: string
   TMD: SanityTMD | 'loading'
 }) {
+  const { phraseRegion } = usePluginOptions()
   const schema = useSchema()
   const schemaType = schema.get(sourceDoc._type)
   const openInSidePane = useOpenInSidePane(paneParentDocId)
@@ -59,11 +61,7 @@ export function TranslationInfo({
           icon={PhraseMonogram}
           mode="bleed"
           as="a"
-          href={getJobEditorURL(
-            jobsMeta.activeJobUid,
-            // @TODO: make configurable
-            'us',
-          )}
+          href={getJobEditorURL(jobsMeta.activeJobUid, phraseRegion)}
           target="_blank"
           rel="noopener noreferrer"
           label="Edit in Phrase"

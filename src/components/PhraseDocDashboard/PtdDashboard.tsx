@@ -14,6 +14,7 @@ import {
 import { getProjectURL, jobsMetadataExtractor } from '../../utils'
 import { TranslationInfo } from './TranslationInfo'
 import { useOpenInSidePane } from './useOpenInSidepane'
+import { usePluginOptions } from '../PluginOptionsContext'
 
 const API_ENDPOINT = '/api/phrase'
 
@@ -24,6 +25,7 @@ export default function PtdDocDashboard({
   document: SanityPTD
   ptdMetadata: PtdPhraseMetadata
 }) {
+  const { phraseRegion } = usePluginOptions()
   const { ready, draft, published } = useEditState(
     ptdDocument?.phraseMetadata?.tmd?._ref || '',
     ptdDocument?.phraseMetadata?.tmd?._type || 'document',
@@ -109,11 +111,7 @@ export default function PtdDocDashboard({
           <Button
             size={1}
             as="a"
-            href={getProjectURL(
-              TMD.phraseProjectUid,
-              // @TODO: make configurable
-              'us',
-            )}
+            href={getProjectURL(TMD.phraseProjectUid, phraseRegion)}
             target="_blank"
             rel="noopener noreferrer"
             mode="ghost"

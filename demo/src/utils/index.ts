@@ -14,6 +14,8 @@ export const LANGUAGES = [
   { id: 'pt', title: 'Portuguese' },
 ] as const
 
+export const SOURCE_LANGUAGE = 'en'
+
 export const isSupportedLanguage = (lang: string): lang is SupportedLanguage =>
   LANGUAGES.some((l) => l.id === lang)
 

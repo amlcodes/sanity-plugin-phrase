@@ -13,9 +13,9 @@ import {
   PhraseClient,
   PhraseDatacenterRegion,
 } from './clients/createPhraseClient'
+import { definitions } from './clients/phraseOpenAPI'
 import { getTranslationKey, getTranslationName, pathToString } from './utils'
 import { CREDENTIALS_DOC_ID } from './utils/constants'
-import { definitions } from './clients/phraseOpenAPI'
 
 export const METADATA_KEY = 'phraseMetadata'
 
@@ -375,4 +375,54 @@ export type TargetLangStaleness = {
 export type StaleResponse = {
   sourceDoc: TranslationRequest['sourceDoc']
   targets: TargetLangStaleness[]
+}
+
+export type PhrasePluginOptions = {
+  /**
+   * Schema types the plugin can translate
+   *
+   * @example
+   * translatableTypes: ['post', 'page', 'lesson'] // etc.
+   */
+  translatableTypes: string[]
+  /**
+   * Language code of all languages users can translate to.
+   * Should be the same as the one stored in your Sanity documents and used by your front-end. The plugin will automatically translate it to Phrase's format.
+   *
+   * @example
+   * supportedTargetLanguages: ['en-US', 'es-ES', 'fr-FR', 'pt', 'cz']
+   */
+  supportedTargetLangs: string[]
+  /**
+   * Language code of the source language that will be translated.
+   * Should be the same as the one stored in your Sanity documents and used by your front-end. The plugin will automatically translate it to Phrase's format.
+   *
+   * @example
+   * sourceLanguage: 'en'
+   */
+  sourceLang: string
+  /**
+   * The URL to your configured plugin backend API.
+   *
+   * **Note:** follow the steps for setting up the endpoint, outlined in the README
+   * @example
+   * backendEndpoint: 'https://my-front-end.com/api/sanity-phrase'
+   * // Or relative to your Sanity studio's URL if same origin
+   * backendEndpoint: '/api/phrase'
+   */
+  apiEndpoint: string
+  /**
+   * As defined by your Phrase account's settings
+   * Either `eur` or `us`
+   */
+  phraseRegion: PhraseDatacenterRegion
+  /**
+   * Phrase project templates your editors can use when requesting translations.
+   *
+   * **Note:** follow the steps for setting templates, outlined in the README
+   */
+  phraseTemplates: {
+    templateUid: string
+    label: string
+  }[]
 }

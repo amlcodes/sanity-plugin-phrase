@@ -3,90 +3,107 @@ import { useState } from 'react'
 import { StringFieldProps, useFormValue } from 'sanity'
 import { i18nAdapter } from '../../adapters'
 import {
+  PhrasePluginOptions,
   SanityDocumentWithPhraseMetadata,
   TranslationRequest,
 } from '../../types'
 import {
-  isTranslatedMainDoc,
   isPTDDoc,
+  isTranslatedMainDoc,
   langAdapter,
   undraftId,
-  isMainDoc,
 } from '../../utils'
 import OngoingTranslationsDocDashboard from './OngoingTranslationsDocDashboard'
 import PreviouslyTranslatedDocDashboard from './PreviouslyTranslatedDocDashboard'
 import PtdDocDashboard from './PtdDashboard'
 import TranslationForm from './TranslationForm'
 import UntranslatedDocDashboard from './UntranslatedDocDashboard'
+import { PluginOptionsProvider } from '../PluginOptionsContext'
 
-export default function PhraseDocDashboard(props: StringFieldProps) {
-  const document = useFormValue([]) as SanityDocumentWithPhraseMetadata
-  const [pathsToTranslate, setPathsToTranslate] = useState<
-    TranslationRequest['paths'] | null
-  >(null)
+export default function getPhraseDocDashboard(
+  pluginOptions: PhrasePluginOptions,
+) {
+  return function PhraseDocDashboard(props: StringFieldProps) {
+    const document = useFormValue([]) as SanityDocumentWithPhraseMetadata
+    const [pathsToTranslate, setPathsToTranslate] = useState<
+      TranslationRequest['paths'] | null
+    >(null)
 
-  const sourceLang = i18nAdapter.getDocumentLang(document)
+    const docLang = i18nAdapter.getDocumentLang(document)
 
-  if (!document || !sourceLang) return null
+    const isUntranslatedMainDoc =
+      !isPTDDoc(document) && !isTranslatedMainDoc(document)
+    if (
+      !document ||
+      !docLang ||
+      // Don't show anything for target langs with no translations - source will show UntranslatedDocDashboard
+      (isUntranslatedMainDoc && docLang !== pluginOptions.sourceLang)
+    )
+      return null
 
-  return (
-    <Card>
-      {isPTDDoc(document) && (
-        <PtdDocDashboard
-          document={document}
-          ptdMetadata={document.phraseMetadata}
-        />
-      )}
-
-      {isMainDoc(document) && !isTranslatedMainDoc(document) && (
-        <UntranslatedDocDashboard
-          document={document}
-          openDialog={() => setPathsToTranslate([[]])}
-        />
-      )}
-
-      {isTranslatedMainDoc(document) &&
-        (() => {
-          const sourceDoc: TranslationRequest['sourceDoc'] = {
-            _id: undraftId(document._id),
-            _rev: document._rev,
-            _type: document._type,
-            lang: langAdapter.sanityToCrossSystem(sourceLang),
-          }
-          const ongoingTranslations =
-            document.phraseMetadata.translations?.filter(
-              (translations) => translations.status !== 'COMPLETED',
-            )
-          if (ongoingTranslations?.length) {
-            return (
-              <OngoingTranslationsDocDashboard
-                ongoingTranslations={ongoingTranslations}
-                sourceDoc={sourceDoc}
-              />
-            )
-          }
-
-          return <PreviouslyTranslatedDocDashboard />
-        })()}
-
-      {pathsToTranslate && (
-        <Dialog
-          header="Translate with Phrase"
-          onClose={() => setPathsToTranslate(null)}
-          zOffset={1000}
-          id={`phrase-translation-dialog--${document._id}`}
-          width={1}
-        >
-          <Box padding={4}>
-            <TranslationForm
-              onCancel={() => setPathsToTranslate(null)}
+    return (
+      <PluginOptionsProvider pluginOptions={pluginOptions}>
+        <Card>
+          {isPTDDoc(document) && (
+            <PtdDocDashboard
               document={document}
-              paths={pathsToTranslate}
-              sourceLang={sourceLang}
+              ptdMetadata={document.phraseMetadata}
             />
-          </Box>
-        </Dialog>
-      )}
-    </Card>
-  )
+          )}
+
+          {!isPTDDoc(document) &&
+            !isTranslatedMainDoc(document) &&
+            docLang === pluginOptions.sourceLang && (
+              <UntranslatedDocDashboard
+                document={document}
+                openDialog={() => setPathsToTranslate([[]])}
+              />
+            )}
+
+          {isTranslatedMainDoc(document) &&
+            (() => {
+              const sourceDoc: TranslationRequest['sourceDoc'] = {
+                _id: undraftId(document._id),
+                _rev: document._rev,
+                _type: document._type,
+                lang: langAdapter.sanityToCrossSystem(docLang),
+              }
+              const ongoingTranslations =
+                document.phraseMetadata.translations?.filter(
+                  (translations) => translations.status !== 'COMPLETED',
+                )
+              if (ongoingTranslations?.length) {
+                return (
+                  <OngoingTranslationsDocDashboard
+                    ongoingTranslations={ongoingTranslations}
+                    sourceDoc={sourceDoc}
+                  />
+                )
+              }
+
+              return <PreviouslyTranslatedDocDashboard />
+            })()}
+
+          {pathsToTranslate && (
+            <Dialog
+              header="Translate with Phrase"
+              onClose={() => setPathsToTranslate(null)}
+              zOffset={1000}
+              id={`phrase-translation-dialog--${document._id}`}
+              width={1}
+            >
+              <Box padding={4}>
+                <TranslationForm
+                  onCancel={() => setPathsToTranslate(null)}
+                  document={document}
+                  paths={pathsToTranslate}
+                  sourceLang={docLang}
+                />
+              </Box>
+            </Dialog>
+          )}
+        </Card>
+      </PluginOptionsProvider>
+    )
+  }
 }

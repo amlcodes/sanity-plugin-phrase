@@ -5,15 +5,41 @@ import { parseAllReferences } from './utils/references'
 import { SanityDocumentWithPhraseMetadata } from './types'
 import { draftId, isDraft, undraftId } from './utils'
 
+type TranslatableRef = {
+  translatable: true
+  doc: SanityDocumentWithPhraseMetadata
+  references: string[]
+  occurrences: {
+    depth: number
+    ref: Reference
+  }[]
+  maxDepth: number
+}
+
+type UnstranslatableRef = {
+  translatable: false
+  doc: SanityDocumentWithPhraseMetadata
+}
+
+type RefsState = {
+  [docId: string]: TranslatableRef | UnstranslatableRef
+}
+
 /**
  * @TODO How can we improve this? We're currently over-fecthing from Sanity.
  * One possible improvement is skipping published docs if drafts are present.
  */
-export default async function getAllDocReferences(
-  sanityClient: SanityClient,
-  parentDocument: SanityDocumentWithPhraseMetadata,
-  maxDepth: number = 3,
-) {
+export default async function getAllDocReferences({
+  sanityClient,
+  document: parentDocument,
+  maxDepth = 3,
+  translatableTypes,
+}: {
+  sanityClient: SanityClient
+  document: SanityDocumentWithPhraseMetadata
+  maxDepth?: number
+  translatableTypes: string[]
+}) {
   const state = {
     referenced: {
       [parentDocument._id]: {
@@ -21,25 +47,17 @@ export default async function getAllDocReferences(
         references: [],
         occurrences: [],
         maxDepth: 0,
+        translatable: true,
       },
-    } as {
-      [docId: string]: {
-        doc: SanityDocumentWithPhraseMetadata
-        references: string[]
-        occurrences: { depth: number; ref: Reference }[]
-        maxDepth: number
-      }
-    },
+    } as RefsState,
     errors: {} as { [docId: string]: unknown },
   }
 
   function addRefOccurrence(ref: Reference, depth: number) {
-    if (state.referenced[ref._ref]) {
-      state.referenced[ref._ref].occurrences.push({ ref, depth })
-      state.referenced[ref._ref].maxDepth = Math.max(
-        state.referenced[ref._ref].maxDepth,
-        depth,
-      )
+    const existing = state.referenced[ref._ref]
+    if (existing && existing.translatable === true) {
+      existing.occurrences.push({ ref, depth })
+      existing.maxDepth = Math.max(existing.maxDepth, depth)
     }
   }
 
@@ -48,18 +66,29 @@ export default async function getAllDocReferences(
     references: Reference[],
     depth: number,
   ) {
-    if (!state.referenced[doc._id]) {
+    if (!translatableTypes.includes(doc._type)) {
+      state.referenced[doc._id] = {
+        doc,
+        translatable: false,
+      }
+
+      return
+    }
+
+    const existing = state.referenced[doc._id]
+    if (!existing) {
       state.referenced[doc._id] = {
         doc,
         occurrences: [],
         references: [],
         maxDepth: depth,
+        translatable: true,
       }
     }
 
-    state.referenced[doc._id].references.push(
-      ...references.map((ref) => ref._ref),
-    )
+    if (existing.translatable) {
+      existing.references.push(...references.map((ref) => ref._ref))
+    }
   }
 
   function persistError(
@@ -133,9 +162,9 @@ export default async function getAllDocReferences(
 
   await fetchDocReferences(parentDocument, 1)
 
-  return collate(
+  const finalDocs = collate(
     Object.values(state.referenced).flatMap((a) => {
-      if (a.doc._id === parentDocument._id) return []
+      if (a.doc._id === parentDocument._id || !a.translatable) return []
 
       return {
         ...a.doc,
@@ -144,4 +173,6 @@ export default async function getAllDocReferences(
       }
     }),
   )
+
+  return finalDocs
 }

@@ -29,16 +29,7 @@ import { i18nAdapter } from '../../adapters'
 import getAllDocReferences from '../../getAllDocReferences'
 import { ReferencePreview } from '../ReferencePreview/ReferencePreview'
 import { PhraseMonogram } from './PhraseLogo'
-
-// @TODO: make configurable & remove source from it
-const TARGET_LANGUAGES = ['es', 'pt']
-const PROJECT_TEMPLATES = [
-  {
-    templateUid: '1dIg0Pc1d8kLUFyM0tgdmt',
-    label: '[Sanity.io] Default template',
-  },
-]
-const API_ENDPOINT = '/api/phrase'
+import { usePluginOptions } from '../PluginOptionsContext'
 
 type FormValue = Pick<
   CreateTranslationsInput,
@@ -72,6 +63,12 @@ export default function TranslationForm({
   onCancel: () => void
   sourceLang: SanityLangCode
 }) {
+  const {
+    translatableTypes,
+    supportedTargetLangs,
+    phraseTemplates,
+    apiEndpoint,
+  } = usePluginOptions()
   const schema = useSchema()
   const [state, setState] = useState<
     'idle' | 'submitting' | 'error' | 'success'
@@ -81,8 +78,7 @@ export default function TranslationForm({
   const sourceDocId = document._id
 
   const [formValue, setFormValue] = useState<FormValue>({
-    templateUid: '',
-    // @TODO make configurable?
+    templateUid: phraseTemplates[0]?.templateUid || '',
     dateDue: getIsoDay(getDateDaysFromNow(14)), // by default, 2 weeks from now
     targetLangs: [],
   })
@@ -97,16 +93,24 @@ export default function TranslationForm({
   >(undefined)
 
   async function refreshReferences() {
-    const newRefs = await getAllDocReferences(sanityClient, document)
+    const newRefs = await getAllDocReferences({
+      sanityClient,
+      document,
+      translatableTypes,
+    })
 
     setReferences({ documentId: sourceDocId, refs: newRefs, chosenDocs: {} })
   }
 
-  useEffect(() => {
-    if (references?.documentId === sourceDocId) return
+  useEffect(
+    () => {
+      if (references?.documentId === sourceDocId) return
 
-    refreshReferences()
-  }, [sourceDocId])
+      refreshReferences()
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [sourceDocId],
+  )
 
   console.log({ formValue, references })
 
@@ -165,7 +169,7 @@ export default function TranslationForm({
         },
       ),
     ]
-    const res = await fetch(API_ENDPOINT, {
+    const res = await fetch(apiEndpoint, {
       body: JSON.stringify({
         action: EndpointActionTypes.CREATE_TRANSLATIONS,
         translations: input,
@@ -185,29 +189,30 @@ export default function TranslationForm({
 
   return (
     <Stack as="form" space={4}>
-      <FormField title="Phrase project template" inputId="phraseTemplate">
-        <Select
-          padding={3}
-          fontSize={2}
-          id="phraseTemplate"
-          value={formValue.templateUid}
-          defaultValue={undefined}
-          onSelect={console.info}
-          onChange={(e) =>
-            setFormValue({
-              ...formValue,
-              templateUid: e.currentTarget.value,
-            })
-          }
-        >
-          <option value="">Choose one of the available templates</option>
-          {PROJECT_TEMPLATES.map((template) => (
-            <option key={template.templateUid} value={template.templateUid}>
-              {template.label}
-            </option>
-          ))}
-        </Select>
-      </FormField>
+      {phraseTemplates.length > 1 && (
+        <FormField title="Phrase project template" inputId="phraseTemplate">
+          <Select
+            padding={3}
+            fontSize={2}
+            id="phraseTemplate"
+            value={formValue.templateUid}
+            defaultValue={undefined}
+            onChange={(e) =>
+              setFormValue({
+                ...formValue,
+                templateUid: e.currentTarget.value,
+              })
+            }
+          >
+            <option value="">Choose one of the available templates</option>
+            {phraseTemplates.map((template) => (
+              <option key={template.templateUid} value={template.templateUid}>
+                {template.label}
+              </option>
+            ))}
+          </Select>
+        </FormField>
+      )}
       <FormField title="Translation due" inputId="dateDue">
         <TextInput
           type="date"
@@ -225,7 +230,7 @@ export default function TranslationForm({
       </FormField>
       <FormField title="Target languages">
         <Stack space={2} paddingLeft={1}>
-          {TARGET_LANGUAGES.map((lang) => (
+          {supportedTargetLangs.map((lang) => (
             <Flex align="center" as="label" key={lang}>
               <Checkbox
                 name="targetLanguages"

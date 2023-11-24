@@ -2,13 +2,11 @@ import {
   documentInternationalization,
   DocumentInternationalizationMenu,
 } from '@sanity/document-internationalization'
-import { SanityDocument } from 'sanity'
 import { visionTool } from '@sanity/vision'
-import { defineConfig } from 'sanity'
-import { deskTool } from 'sanity/desk'
+import { defineConfig, SanityDocument } from 'sanity'
 import { Iframe, IframeOptions } from 'sanity-plugin-iframe-pane'
 import { previewUrl } from 'sanity-plugin-iframe-pane/preview-url'
-
+import { deskTool } from 'sanity/desk'
 import {
   apiVersion,
   dataset,
@@ -16,9 +14,20 @@ import {
   projectId,
 } from '~/lib/sanity.api'
 import { getDocPath } from '~/lib/urls'
-import { isPtdId } from '~/plugin-dist'
+import {
+  isPtdId,
+  NOT_PTD,
+  phrasePlugin,
+  PhrasePluginOptions,
+  injectPhraseIntoSchema,
+} from '~/plugin-dist'
 import { schemaTypes } from '~/schemas'
-import { LANGUAGES, TRANSLATABLE_SCHEMAS, undraftId } from '~/utils'
+import {
+  LANGUAGES,
+  SOURCE_LANGUAGE,
+  TRANSLATABLE_SCHEMAS,
+  undraftId,
+} from '~/utils'
 
 function getPreviewUrl(doc: SanityDocument, urlSecret: string) {
   return `${
@@ -41,6 +50,22 @@ const intlPlugin = documentInternationalization({
   schemaTypes: TRANSLATABLE_SCHEMAS,
 })
 
+const PHRASE_CONFIG: PhrasePluginOptions = {
+  translatableTypes: TRANSLATABLE_SCHEMAS,
+  supportedTargetLangs: LANGUAGES.flatMap((lang) =>
+    lang.id && lang.id !== SOURCE_LANGUAGE ? [lang.id] : [],
+  ),
+  sourceLang: SOURCE_LANGUAGE,
+  backendEndpoint: '/api/phrase',
+  phraseRegion: 'us',
+  phraseTemplates: [
+    {
+      templateUid: '1dIg0Pc1d8kLUFyM0tgdmt',
+      label: '[Sanity.io] Default template',
+    },
+  ],
+}
+
 export default defineConfig({
   basePath: '/studio',
   name: 'phrase-sanity-demo',
@@ -48,7 +73,7 @@ export default defineConfig({
   projectId,
   dataset,
   schema: {
-    types: schemaTypes,
+    types: injectPhraseIntoSchema(schemaTypes, PHRASE_CONFIG),
 
     templates: (prev) =>
       prev.filter((template) => !TRANSLATABLE_SCHEMAS.includes(template.id)),
@@ -80,9 +105,7 @@ export default defineConfig({
                   .id('post')
                   .title('Posts')
                   .schemaType('post')
-                  .filter(
-                    '_type == "post" && phraseMetadata._type != "phrase.ptd.meta"',
-                  )
+                  .filter(`_type == "post" && ${NOT_PTD}`)
                   .apiVersion(apiVersion),
               ),
           ]),
@@ -104,6 +127,8 @@ export default defineConfig({
         unstable_languageFilter: undefined,
       },
     },
+
+    phrasePlugin(PHRASE_CONFIG),
   ],
   document: {
     unstable_languageFilter: (prev, ctx) => {
