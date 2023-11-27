@@ -1,4 +1,5 @@
 import { METADATA_KEY } from '../src/types'
+import { TMD_TYPE } from '../src/utils'
 import { testSanityClient } from './testSanityClient'
 
 async function unlockForTesting() {
@@ -14,7 +15,7 @@ async function unlockForTesting() {
   const deleteDocsTx = testSanityClient.transaction()
   if (process.argv.includes('--remove-ptds')) {
     const ptdIds = await testSanityClient.fetch<string[]>(
-      `*[${METADATA_KEY}._type == "phrase.ptd.meta" || _id match "**phrase-translation--**" || _type == 'phrase.tmd']._id`,
+      `*[${METADATA_KEY}._type == "phrase.ptd.meta" || _id match "**phrase-translation--**" || _type == '${TMD_TYPE}']._id`,
     )
 
     for (const id of ptdIds) {

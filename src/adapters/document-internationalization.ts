@@ -238,15 +238,23 @@ export const documentInternationalizationAdapter: I18nAdapter = {
       })
     }
 
-    await transaction.commit({ returnDocuments: false })
+    const result = await transaction.commit({ returnDocuments: true })
 
     const finalDocuments: DocPairFromAdapter[] = [
       ...allInitialDocuments,
-      ...langsMissingTranslation.map(({ doc, lang }) => ({
-        lang: lang.sanity,
-        draft: doc,
-        published: null,
-      })),
+      ...langsMissingTranslation.map(({ doc, lang }) => {
+        // Find the `_rev` from the resulting document so we can use it to
+        // lock documents safely with `ifRevisionId` in `lockDocuments`.
+        const _rev =
+          result.find((d) => d._id === doc._id)?._rev ||
+          // If no _rev found, don't use `ifRevisionId`
+          (null as any as string)
+        return {
+          lang: lang.sanity,
+          draft: { ...doc, _rev },
+          published: null,
+        }
+      }),
     ]
 
     return finalDocuments

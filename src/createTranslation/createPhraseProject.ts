@@ -3,13 +3,12 @@ import { ContextWithFreshDocuments, Phrase } from '../types'
 import { langAdapter } from '../utils'
 
 class FailedCreatingPhraseProjectError {
-  readonly context: ContextWithFreshDocuments
   readonly _tag = 'FailedCreatingPhraseProject'
 
-  // @TODO fine-grained errors
-  constructor(res: unknown, context: ContextWithFreshDocuments) {
-    this.context = context
-  }
+  constructor(
+    readonly res: unknown,
+    readonly context: ContextWithFreshDocuments,
+  ) {}
 }
 
 export default function createPhraseProject(

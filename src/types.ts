@@ -96,7 +96,7 @@ export enum SerializedPtHtmlTag {
 }
 
 type BaseMainDocMetadata = {
-  _type: 'phrase.mainDoc.translation'
+  _type: 'phrase.main.translation'
   _key: TranslationRequest['translationKey']
   _createdAt: string
   sourceDoc: TranslationRequest['sourceDoc']

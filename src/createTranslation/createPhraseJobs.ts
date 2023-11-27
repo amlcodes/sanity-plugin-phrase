@@ -5,12 +5,11 @@ import { langAdapter } from '../utils'
 
 class FailedCreatingPhraseJobsError {
   readonly _tag = 'FailedCreatingPhraseJobs'
-  readonly context: ContextWithProject
 
-  // @TODO fine grained errors?
-  constructor(error: unknown, context: ContextWithProject) {
-    this.context = context
-  }
+  constructor(
+    readonly error: unknown,
+    readonly context: ContextWithProject,
+  ) {}
 }
 
 export default function createPhraseJobs(context: ContextWithProject) {

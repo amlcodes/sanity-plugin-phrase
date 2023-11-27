@@ -2,6 +2,7 @@ import { Effect, pipe } from 'effect'
 import getMutationErrors from '../backendHelpers'
 import {
   ContextWithFreshDocuments,
+  METADATA_KEY,
   MainDocTranslationMetadata,
   SanityDocumentWithPhraseMetadata,
 } from '../types'
@@ -72,7 +73,7 @@ function getLockTransaction(context: ContextWithFreshDocuments) {
     transaction.patch(doc._id, (patch) => {
       patch
         .setIfMissing({
-          phraseMetadata: {
+          [METADATA_KEY]: {
             _type: 'phrase.main.meta',
             translations: [],
           },
@@ -80,7 +81,7 @@ function getLockTransaction(context: ContextWithFreshDocuments) {
         .ifRevisionId(doc._rev)
 
       const metadata: MainDocTranslationMetadata = {
-        _type: 'phrase.mainDoc.translation',
+        _type: 'phrase.main.translation',
         _key: request.translationKey,
         _createdAt: new Date().toISOString(),
         sourceDoc: request.sourceDoc,
@@ -88,8 +89,8 @@ function getLockTransaction(context: ContextWithFreshDocuments) {
         status: 'CREATING',
       }
       if (
-        doc.phraseMetadata?._type === 'phrase.main.meta' &&
-        doc.phraseMetadata.translations?.some(
+        doc[METADATA_KEY]?._type === 'phrase.main.meta' &&
+        doc[METADATA_KEY].translations?.some(
           (t) => t._key === request.translationKey,
         )
       ) {
@@ -99,7 +100,7 @@ function getLockTransaction(context: ContextWithFreshDocuments) {
       }
 
       return patch
-        .append('phraseMetadata.translations', [metadata])
+        .append(`${METADATA_KEY}.translations`, [metadata])
         .ifRevisionId(doc._rev)
     })
   }

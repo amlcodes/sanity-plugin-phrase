@@ -56,7 +56,9 @@ export default function getOrCreateTranslatedDocuments(
       if (sourceDocMissing) knownError = 'sourceDocMissing'
 
       if (knownError) {
-        return Effect.fail(knownError)
+        return Effect.fail(
+          new AdapterFailedQueryingError({ known: knownError }),
+        )
       }
 
       return Effect.succeed(freshDocumentsSource)
@@ -81,6 +83,7 @@ export default function getOrCreateTranslatedDocuments(
       )
 
       const freshSourceDoc = freshDocumentsById[request.sourceDoc._id]
+
       return {
         freshDocumentsById,
         freshDocuments,
