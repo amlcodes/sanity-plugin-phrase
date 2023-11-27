@@ -65,3 +65,16 @@ export function getChangedPaths(
       )
   )
 }
+
+export function joinPathsByRoot(paths: Path[]) {
+  return paths.reduce(
+    (byRoot, path) => {
+      const root = path[0] ? toString([path[0]]) : ROOT_PATH_STR
+      return {
+        ...byRoot,
+        [root]: [...(byRoot[root] || []), path],
+      }
+    },
+    {} as { [root: string]: Path[] },
+  )
+}
