@@ -75,7 +75,6 @@ export default function backendRequestHandler({
       return updated ? new Response('OK') : new Response('Failed updating')
     }
 
-    // @TODO auth via token in Sanity?
     if (
       !('action' in body) ||
       Object.values(EndpointActionTypes).includes(body.action as any)
