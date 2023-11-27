@@ -1,6 +1,7 @@
 import { Path } from 'sanity'
 import { CrossSystemLangCode, SanityPTD, SanityTMD } from '../types'
 import { pathToString } from './paths'
+import { PTD_ID_PREFIX, TMD_ID_PREFIX } from './constants'
 
 export function makeKeyFriendly(str: string) {
   return str.replace('-', '_')
@@ -29,13 +30,13 @@ export function getPtdId({
   translationKey: string
   targetLang: CrossSystemLangCode
 }): SanityPTD['_id'] {
-  return `phrase.ptd.${targetLang.phrase}--${translationKey}`
+  return `${PTD_ID_PREFIX}.${targetLang.phrase}--${translationKey}`
 }
 
 export function getTmdId(translationKey: string): SanityTMD['_id'] {
-  return `phrase.tmd.${translationKey}`
+  return `${TMD_ID_PREFIX}.${translationKey}`
 }
 
 export function isPtdId(id: string) {
-  return undraftId(id).startsWith('phrase-translation--')
+  return undraftId(id).startsWith(PTD_ID_PREFIX)
 }

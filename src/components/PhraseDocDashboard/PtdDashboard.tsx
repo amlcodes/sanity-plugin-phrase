@@ -71,9 +71,6 @@ export default function PtdDocDashboard({
   }
   const target = TMD.targets.find((t) => t.lang.sanity === targetLang.sanity)
 
-  const meta = target && jobsMetadataExtractor(target.jobs)
-  const readyToMerge = meta?.stepStatus === 'COMPLETED'
-
   async function handleRefresh() {
     setState('refreshing')
     const res = await fetch(API_ENDPOINT, {
@@ -188,7 +185,7 @@ export default function PtdDocDashboard({
           <Button
             text="Refresh translation"
             tone="primary"
-            mode={readyToMerge ? 'bleed' : 'default'}
+            mode={'ghost'}
             onClick={handleRefresh}
             disabled={state !== 'idle'}
             icon={RefreshIcon}
@@ -196,8 +193,8 @@ export default function PtdDocDashboard({
           />
           <Button
             text="Merge translation"
-            tone={readyToMerge ? 'critical' : 'positive'}
-            mode={readyToMerge ? 'default' : 'bleed'}
+            tone={'positive'}
+            mode={'ghost'}
             disabled={state !== 'idle'}
             onClick={handleMerge}
             icon={PublishIcon}

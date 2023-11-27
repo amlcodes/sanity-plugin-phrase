@@ -1,5 +1,6 @@
 import { ContextWithJobs, Phrase, PhraseLangCode, SanityTMD } from '../types'
 import {
+  TMD_TYPE,
   getPtdId,
   getTmdId,
   getTranslationSnapshot,
@@ -87,7 +88,7 @@ export function createTMD({
     _createdAt: createdAt,
     _updatedAt: createdAt,
     _id: getTmdId(translationKey),
-    _type: 'phrase.tmd',
+    _type: TMD_TYPE,
     // @ts-expect-error
     _rev: undefined,
     translationKey,

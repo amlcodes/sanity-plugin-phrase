@@ -1,10 +1,10 @@
 import { Plugin } from 'sanity'
 import { PhraseMonogram } from './components/PhraseDocDashboard/PhraseLogo'
-import PhraseTool from './components/PhraseTool/PhraseTool'
+import createPhraseTool from './components/PhraseTool/PhraseTool'
 import injectPhraseIntoSchema from './injectPhraseIntoSchema'
 import { PhrasePluginOptions } from './types'
 
-const phrasePlugin: Plugin<PhrasePluginOptions> = (options) => {
+const phrasePlugin: Plugin<PhrasePluginOptions> = (pluginOptions) => {
   return {
     name: 'sanity-plugin-phrase',
     document: {
@@ -12,14 +12,14 @@ const phrasePlugin: Plugin<PhrasePluginOptions> = (options) => {
       // @TODO: solution to remove unstable_languageFilter for PTDs
     },
     schema: {
-      types: (prev) => injectPhraseIntoSchema(prev, options),
+      types: (prev) => injectPhraseIntoSchema(prev, pluginOptions),
     },
     tools: [
       {
         name: 'phrase',
         title: 'Phrase',
         icon: PhraseMonogram,
-        component: PhraseTool,
+        component: createPhraseTool(pluginOptions),
       },
     ],
   }

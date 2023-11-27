@@ -1,6 +1,12 @@
 import { SanityClient } from 'sanity'
 import { MainDocTranslationMetadata, SanityTMD } from '../types'
-import { comesFromSanity, draftId, tPathInMainDoc, undraftId } from '../utils'
+import {
+  TMD_TYPE,
+  comesFromSanity,
+  draftId,
+  tPathInMainDoc,
+  undraftId,
+} from '../utils'
 import {
   ProjectDeletedWebhook,
   ProjectStatusChangedWebhook,
@@ -22,7 +28,7 @@ export default async function updateTMDFromProjectWebhook({
   }
 
   const TMD = await sanityClient.fetch<SanityTMD | null>(
-    `*[_type == "phrase.tmd" && phraseProjectUid == $phraseProjectUid][0]`,
+    `*[_type == "${TMD_TYPE}" && phraseProjectUid == $phraseProjectUid][0]`,
     {
       phraseProjectUid: project.uid,
     },

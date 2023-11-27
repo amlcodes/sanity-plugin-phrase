@@ -60,7 +60,7 @@ export default function PreviouslyTranslatedDocDashboard({
 
   return (
     <Card paddingX={3} padding={4} border radius={2}>
-      <Heading as="h2">This document has been translations in progress</Heading>
+      <Heading as="h2">This document has been translated in the past</Heading>
       <Code>{JSON.stringify(staleness, null, 2)}</Code>
     </Card>
   )

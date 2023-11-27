@@ -1,6 +1,7 @@
-import { SchemaTypeDefinition } from 'sanity'
+import { SchemaTypeDefinition, defineType } from 'sanity'
 import getPhraseDocDashboard from './components/PhraseDocDashboard/PhraseDocDashboard'
 import { PhrasePluginOptions } from './types'
+import { isPtdId } from './utils'
 
 export default function injectPhraseIntoSchema(
   types: SchemaTypeDefinition[],
@@ -21,8 +22,23 @@ function injectSchema(
     return schemaType
   }
 
-  return {
+  return defineType({
     ...schemaType,
+    readOnly: (context) => {
+      if (context.document?._id && isPtdId(context.document._id)) {
+        return true
+      }
+
+      if (typeof schemaType.readOnly === 'function') {
+        return schemaType.readOnly(context)
+      }
+
+      if (typeof schemaType.readOnly === 'boolean') {
+        return schemaType.readOnly
+      }
+
+      return false
+    },
     fields: [
       {
         name: 'phraseMetadata',
@@ -41,5 +57,5 @@ function injectSchema(
       },
       ...schemaType.fields,
     ],
-  }
+  })
 }

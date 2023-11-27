@@ -15,7 +15,12 @@ import {
 } from './clients/createPhraseClient'
 import { definitions } from './clients/phraseOpenAPI'
 import { getTranslationKey, getTranslationName, pathToString } from './utils'
-import { CREDENTIALS_DOC_ID } from './utils/constants'
+import {
+  CREDENTIALS_DOC_ID,
+  PTD_ID_PREFIX,
+  TMD_ID_PREFIX,
+  TMD_TYPE,
+} from './utils/constants'
 
 export const METADATA_KEY = 'phraseMetadata'
 
@@ -182,8 +187,8 @@ export type TMDTarget = {
  * Used for keeping permanent track of data in Phrase &
  * determining what fields are stale since last translation. */
 export type SanityTMD = SanityDocument & {
-  _type: 'phrase.tmd'
-  _id: `phrase.tmd.${ReturnType<typeof getTranslationKey>}`
+  _type: typeof TMD_TYPE
+  _id: `${typeof TMD_ID_PREFIX}.${ReturnType<typeof getTranslationKey>}`
   sourceSnapshot: SanityDocument
   sourceDoc: Reference
   sourceLang: CrossSystemLangCode
@@ -207,7 +212,9 @@ export type SanityDocumentWithPhraseMetadata = SanityDocument & {
 }
 
 export type SanityPTD = SanityDocumentWithPhraseMetadata & {
-  _id: `phrase.ptd.${PhraseLangCode}--${ReturnType<typeof getTranslationKey>}`
+  _id: `${typeof PTD_ID_PREFIX}.${PhraseLangCode}--${ReturnType<
+    typeof getTranslationKey
+  >}`
   phraseMetadata: PtdPhraseMetadata
 }
 
