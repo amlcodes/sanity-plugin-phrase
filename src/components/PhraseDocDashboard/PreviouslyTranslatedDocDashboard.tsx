@@ -4,7 +4,7 @@ import { useClient, useEditState } from 'sanity'
 import getStaleTranslations from '../../staleTranslations/getStaleTranslations'
 import { SanityMainDoc, StaleResponse, TranslationRequest } from '../../types'
 import { SANITY_API_VERSION, undraftId } from '../../utils'
-import CollapsibleCard from '../CollapsibleCard'
+import DocDashboardCard from '../DocDashboardCard'
 import { usePluginOptions } from '../PluginOptionsContext'
 
 export default function PreviouslyTranslatedDocDashboard({
@@ -60,8 +60,8 @@ export default function PreviouslyTranslatedDocDashboard({
   }
 
   return (
-    <CollapsibleCard title="This document has been translated in the past">
+    <DocDashboardCard title="This document has been translated in the past">
       <Code>{JSON.stringify(staleness, null, 2)}</Code>
-    </CollapsibleCard>
+    </DocDashboardCard>
   )
 }

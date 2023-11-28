@@ -1,6 +1,6 @@
-import { Box, Button, Card, Flex, Heading, Stack } from '@sanity/ui'
+import { Button, Text } from '@sanity/ui'
 import { SanityDocumentWithPhraseMetadata } from '../../types'
-import { PhraseLogo } from '../PhraseLogo'
+import DocDashboardCard from '../DocDashboardCard'
 import { usePluginOptions } from '../PluginOptionsContext'
 
 export default function UntranslatedDocDashboard(props: {
@@ -16,23 +16,27 @@ export default function UntranslatedDocDashboard(props: {
   const dialogId = `phrase-translation-dialog--${documentId}`
 
   return (
-    <Card paddingX={3} paddingY={4} border radius={2}>
-      <Stack space={4}>
-        <Flex justify="space-between" align="center" gap={3}>
-          <Heading size={2}>Untranslated document</Heading>
-          <PhraseLogo style={{ height: '1em' }} />
-        </Flex>
-        <Box>
-          <Button
-            text="Translate with Phrase"
-            tone="primary"
-            // disabled={state === 'loading'}
-            onClick={props.openDialog}
-            aria-haspopup="dialog"
-            aria-controls={dialogId}
-          />
-        </Box>
-      </Stack>
-    </Card>
+    <DocDashboardCard
+      title="Untranslated document"
+      subtitle={
+        <Text>
+          This document has not been translated to any of the target languages
+          yet.
+        </Text>
+      }
+      collapsible={false}
+      headerActions={
+        <Button
+          text="Translate with Phrase"
+          tone="primary"
+          // disabled={state === 'loading'}
+          onClick={props.openDialog}
+          aria-haspopup="dialog"
+          aria-controls={dialogId}
+        />
+      }
+    >
+      {null}
+    </DocDashboardCard>
   )
 }

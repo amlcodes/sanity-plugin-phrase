@@ -6,7 +6,7 @@ export function formatDate(date: string) {
   })
 }
 
-export const TRANSLATABLE_SCHEMAS = ['post'] as const
+export const TRANSLATABLE_SCHEMAS = ['post']
 
 export const LANGUAGES = [
   { id: 'es', title: 'Spanish' },

@@ -13,19 +13,26 @@ const Accordion = styled(Stack)`
   }
 `
 
-export default function CollapsibleCard(
+export default function DocDashboardCard(
   props: PropsWithChildren<{
     title: string
     subtitle?: ReactNode
     headerActions?: ReactNode
+    collapsible?: boolean
   }>,
 ) {
+  const { collapsible = true } = props
   const summaryRef = useRef<HTMLDivElement>(null)
 
   return (
     <Card style={{ padding: '0.9375rem' }} border radius={1}>
-      <Accordion space={4} as="details">
-        <Flex as="summary" align="flex-start" gap={2} ref={summaryRef}>
+      <Accordion as={collapsible ? 'details' : 'div'}>
+        <Flex
+          as={collapsible ? 'summary' : 'div'}
+          align="flex-start"
+          gap={2}
+          ref={summaryRef}
+        >
           <Stack space={3} flex={1} tabIndex={0} style={{ userSelect: 'text' }}>
             <Flex gap={2} align="center">
               <PhraseMonogram
@@ -42,17 +49,19 @@ export default function CollapsibleCard(
             {props.subtitle || null}
           </Stack>
           {props.headerActions || null}
-          <Button
-            fontSize={1}
-            padding={2}
-            icon={ChevronUpIcon}
-            mode="bleed"
-            onClick={(e) => {
-              e.stopPropagation()
-              summaryRef?.current?.click?.()
-            }}
-            aria-hidden
-          />
+          {collapsible && (
+            <Button
+              fontSize={1}
+              padding={2}
+              icon={ChevronUpIcon}
+              mode="bleed"
+              onClick={(e) => {
+                e.stopPropagation()
+                summaryRef?.current?.click?.()
+              }}
+              aria-hidden
+            />
+          )}
         </Flex>
 
         {props.children}

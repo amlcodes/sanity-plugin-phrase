@@ -15,7 +15,7 @@ import {
   isTranslationCommitted,
   isTranslationReadyToCommit,
 } from '../../utils'
-import CollapsibleCard from '../CollapsibleCard'
+import DocDashboardCard from '../DocDashboardCard'
 import { PhraseMonogram } from '../PhraseLogo'
 import { usePluginOptions } from '../PluginOptionsContext'
 import { TranslationInfo } from './TranslationInfo'
@@ -107,7 +107,7 @@ function OngoingTranslationCard({
   }
 
   return (
-    <CollapsibleCard
+    <DocDashboardCard
       title="Translation in progress"
       subtitle={
         <Text size={1} as="h3" style={{ flex: 1 }}>
@@ -153,6 +153,6 @@ function OngoingTranslationCard({
           />
         </Flex>
       )}
-    </CollapsibleCard>
+    </DocDashboardCard>
   )
 }

@@ -14,7 +14,7 @@ import {
 } from '../../types'
 import { SANITY_API_VERSION, getProjectURL } from '../../utils'
 import { getReadableLanguageName } from '../../utils'
-import CollapsibleCard from '../CollapsibleCard'
+import DocDashboardCard from '../DocDashboardCard'
 import { usePluginOptions } from '../PluginOptionsContext'
 import { TranslationInfo } from './TranslationInfo'
 import { useOpenInSidePane } from './useOpenInSidepane'
@@ -104,7 +104,7 @@ export default function PtdDocDashboard({
   }
 
   return (
-    <CollapsibleCard
+    <DocDashboardCard
       title="This is a Phrase Translation document"
       subtitle={
         schemaType ? (
@@ -192,6 +192,6 @@ export default function PtdDocDashboard({
           icon={PublishIcon}
         />
       </Flex>
-    </CollapsibleCard>
+    </DocDashboardCard>
   )
 }

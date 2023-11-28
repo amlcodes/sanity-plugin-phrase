@@ -3,6 +3,7 @@ import {
   DocumentInternationalizationMenu,
 } from '@sanity/document-internationalization'
 import { visionTool } from '@sanity/vision'
+import { PHRASE_CONFIG } from 'phraseConfig'
 import { defineConfig, SanityDocument } from 'sanity'
 import { Iframe, IframeOptions } from 'sanity-plugin-iframe-pane'
 import { previewUrl } from 'sanity-plugin-iframe-pane/preview-url'
@@ -15,19 +16,13 @@ import {
 } from '~/lib/sanity.api'
 import { getDocPath } from '~/lib/urls'
 import {
+  injectPhraseIntoSchema,
   isPtdId,
   NOT_PTD,
   phrasePlugin,
-  PhrasePluginOptions,
-  injectPhraseIntoSchema,
 } from '~/plugin-dist'
 import { schemaTypes } from '~/schemas'
-import {
-  LANGUAGES,
-  SOURCE_LANGUAGE,
-  TRANSLATABLE_SCHEMAS,
-  undraftId,
-} from '~/utils'
+import { LANGUAGES, TRANSLATABLE_SCHEMAS, undraftId } from '~/utils'
 
 function getPreviewUrl(doc: SanityDocument, urlSecret: string) {
   return `${
@@ -46,25 +41,8 @@ const iframeOptions = {
 const intlPlugin = documentInternationalization({
   // @ts-expect-error
   supportedLanguages: LANGUAGES,
-  // @ts-expect-error
   schemaTypes: TRANSLATABLE_SCHEMAS,
 })
-
-const PHRASE_CONFIG: PhrasePluginOptions = {
-  translatableTypes: TRANSLATABLE_SCHEMAS,
-  supportedTargetLangs: LANGUAGES.flatMap((lang) =>
-    lang.id && lang.id !== SOURCE_LANGUAGE ? [lang.id] : [],
-  ),
-  sourceLang: SOURCE_LANGUAGE,
-  apiEndpoint: '/api/phrase',
-  phraseRegion: 'us',
-  phraseTemplates: [
-    {
-      templateUid: '1dIg0Pc1d8kLUFyM0tgdmt',
-      label: '[Sanity.io] Default template',
-    },
-  ],
-}
 
 export default defineConfig({
   basePath: '/studio',

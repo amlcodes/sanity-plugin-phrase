@@ -1,3 +1,4 @@
+import { PHRASE_CONFIG } from 'phraseConfig'
 import { writeToken } from '~/lib/sanity.api'
 import { client } from '~/lib/sanity.client'
 import { backendRequestHandler } from '~/plugin-dist'
@@ -11,5 +12,5 @@ export const POST = backendRequestHandler({
   },
   sanityClient: client.withConfig({ token: writeToken }),
   schemaTypes: schemaTypes,
-  translatableTypes: ['post'],
+  pluginOptions: PHRASE_CONFIG,
 })
