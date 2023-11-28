@@ -1,7 +1,6 @@
 import { Effect, pipe } from 'effect'
 import getDataToTranslate from './getDataToTranslate'
 import { ContextWithProject } from '../types'
-import { langAdapter } from '../utils'
 
 class FailedCreatingPhraseJobsError {
   readonly _tag = 'FailedCreatingPhraseJobs'
@@ -21,7 +20,9 @@ export default function createPhraseJobs(context: ContextWithProject) {
         request.phraseClient.jobs.create({
           projectUid: project.uid,
           filename: context.translationFilename,
-          targetLangs: langAdapter.crossSystemToPhrase(request.targetLangs),
+          targetLangs: request.pluginOptions.langAdapter.crossSystemToPhrase(
+            request.targetLangs,
+          ),
           dataToTranslate: getDataToTranslate({
             ...request,
             freshDocumentsById: freshDocumentsById,

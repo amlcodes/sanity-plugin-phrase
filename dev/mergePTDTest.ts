@@ -2,7 +2,7 @@ import mergePTD from '../src/mergePTD'
 import { SanityPTD } from '../src/types'
 import { testSanityClient } from './testSanityClient'
 
-const ptdId = 'phrase.ptd.pt--__root__yblsDKVOfabu1vzRxm3I9j'
+const ptdId = 'phrase.ptd.pt--__root__DdA5NPXuRVnUaTtbLvynil'
 
 const PTD = await testSanityClient.getDocument<SanityPTD>(ptdId)
 

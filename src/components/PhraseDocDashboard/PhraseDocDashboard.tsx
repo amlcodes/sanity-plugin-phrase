@@ -1,7 +1,6 @@
 import { Box, Card, Dialog } from '@sanity/ui'
 import { useState } from 'react'
 import { StringFieldProps, useFormValue } from 'sanity'
-import { i18nAdapter } from '../../adapters'
 import {
   PhrasePluginOptions,
   SanityDocumentWithPhraseMetadata,
@@ -22,13 +21,13 @@ import UntranslatedDocDashboard from './UntranslatedDocDashboard'
 export default function getPhraseDocDashboard(
   pluginOptions: PhrasePluginOptions,
 ) {
-  return function PhraseDocDashboard(props: StringFieldProps) {
+  return function PhraseDocDashboard(_props: StringFieldProps) {
     const document = useFormValue([]) as SanityDocumentWithPhraseMetadata
     const [pathsToTranslate, setPathsToTranslate] = useState<
       TranslationRequest['paths'] | null
     >(null)
 
-    const docLang = i18nAdapter.getDocumentLang(document)
+    const docLang = pluginOptions.i18nAdapter.getDocumentLang(document)
 
     const isUntranslatedMainDoc =
       !isPTDDoc(document) && !isTranslatedMainDoc(document)

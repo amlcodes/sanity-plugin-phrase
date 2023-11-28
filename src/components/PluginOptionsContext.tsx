@@ -1,5 +1,9 @@
 import { PropsWithChildren, createContext, useContext } from 'react'
+import { documentInternationalizationAdapter } from '../adapters/document-internationalization'
 import { PhrasePluginOptions } from '../types'
+import { createLangAdapter } from '../utils/langs'
+
+const defaultAdapter = documentInternationalizationAdapter()
 
 const PluginOptionsContext = createContext<PhrasePluginOptions>({
   apiEndpoint: '',
@@ -8,6 +12,8 @@ const PluginOptionsContext = createContext<PhrasePluginOptions>({
   sourceLang: '',
   supportedTargetLangs: [],
   translatableTypes: [],
+  i18nAdapter: defaultAdapter,
+  langAdapter: createLangAdapter(defaultAdapter),
 })
 
 export function PluginOptionsProvider(

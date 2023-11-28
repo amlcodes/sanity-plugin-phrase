@@ -5,20 +5,18 @@ import {
   prepareForPreview,
 } from 'sanity'
 import {
-  CrossSystemLangCode,
   METADATA_KEY,
   Phrase,
-  PhraseLangCode,
   SanityDocumentWithPhraseMetadata,
-  SanityLangCode,
   TranslationRequest,
 } from '../types'
-import { i18nAdapter } from '../adapters'
 import { FILENAME_PREFIX } from './constants'
 import { getTranslationKey } from './ids'
+import { getReadableLanguageName } from './langs'
 export * from './constants'
 export * from './ids'
 export * from './paths'
+export * from './langs'
 export * from './phrase'
 export * from './fieldLabels'
 
@@ -27,10 +25,6 @@ export function sleep(ms: number) {
 }
 
 export const NOT_PTD = `${METADATA_KEY}._type != "phrase.ptd.meta"`
-
-export function tPathInMainDoc(translationKey: string) {
-  return `${METADATA_KEY}.translations[_key == "${translationKey}"]`
-}
 
 export function getSchema(schemaTypes: SchemaTypeDefinition[]) {
   return createSchema({
@@ -90,75 +84,6 @@ export function comesFromSanity(
 
 export function dedupeArray<T>(arr: T[]) {
   return Array.from(new Set(arr))
-}
-
-export const langAdapter = {
-  sanityToCrossSystem: function sanityToCrossSystem<
-    V extends SanityLangCode | SanityLangCode[],
-  >(value: V) {
-    if (Array.isArray(value)) {
-      return value.map((v) => ({
-        sanity: v,
-        phrase: i18nAdapter.langAdapter.toPhrase(v),
-      })) as V extends Array<any> ? CrossSystemLangCode[] : CrossSystemLangCode
-    }
-
-    return {
-      sanity: value,
-      phrase: i18nAdapter.langAdapter.toPhrase(value),
-    } as V extends Array<any> ? CrossSystemLangCode[] : CrossSystemLangCode
-  },
-  phraseToCrossSystem: function phraseToCrossSystem<
-    V extends PhraseLangCode | PhraseLangCode[],
-  >(value: V) {
-    if (Array.isArray(value)) {
-      return value.map((v) => ({
-        phrase: v,
-        sanity: i18nAdapter.langAdapter.toSanity(v),
-      })) as V extends Array<any> ? CrossSystemLangCode[] : CrossSystemLangCode
-    }
-
-    return {
-      phrase: value,
-      sanity: i18nAdapter.langAdapter.toSanity(value),
-    } as V extends Array<any> ? CrossSystemLangCode[] : CrossSystemLangCode
-  },
-  crossSystemToSanity: function crossSystemToSanity<
-    V extends CrossSystemLangCode | CrossSystemLangCode[],
-  >(value: V) {
-    if (Array.isArray(value)) {
-      return value.map((v) => v.sanity) as V extends Array<any>
-        ? SanityLangCode[]
-        : SanityLangCode
-    }
-
-    return value.sanity as V extends Array<any>
-      ? SanityLangCode[]
-      : SanityLangCode
-  },
-  crossSystemToPhrase: function crossSystemToPhrase<
-    V extends CrossSystemLangCode | CrossSystemLangCode[],
-  >(value: V) {
-    if (Array.isArray(value)) {
-      return value.map((v) => v.phrase) as V extends Array<any>
-        ? PhraseLangCode[]
-        : PhraseLangCode
-    }
-
-    return value.phrase as V extends Array<any>
-      ? PhraseLangCode[]
-      : PhraseLangCode
-  },
-}
-
-const displayNames = new Intl.DisplayNames(['en'], { type: 'language' })
-
-export function getReadableLanguageName(lang: string) {
-  try {
-    return displayNames.of(lang) || lang
-  } catch (error) {
-    return lang
-  }
 }
 
 export const ONE_HOUR = 1000 * 60 * 60

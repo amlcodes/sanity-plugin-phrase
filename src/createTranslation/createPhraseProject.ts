@@ -1,6 +1,5 @@
 import { Effect, pipe } from 'effect'
 import { ContextWithFreshDocuments, Phrase } from '../types'
-import { langAdapter } from '../utils'
 
 class FailedCreatingPhraseProjectError {
   readonly _tag = 'FailedCreatingPhraseProject'
@@ -22,7 +21,9 @@ export default function createPhraseProject(
         request.phraseClient.projects.create({
           name: context.translationName,
           templateUid: request.templateUid,
-          targetLangs: langAdapter.crossSystemToPhrase(request.targetLangs),
+          targetLangs: request.pluginOptions.langAdapter.crossSystemToPhrase(
+            request.targetLangs,
+          ),
           sourceLang: request.sourceDoc.lang.phrase,
           dateDue: request.dateDue,
         }),

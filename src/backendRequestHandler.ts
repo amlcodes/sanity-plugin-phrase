@@ -1,5 +1,9 @@
 import { SanityClient, SchemaTypeDefinition } from 'sanity'
-import { EndpointActionTypes, PhraseCredentialsInput } from './types'
+import {
+  EndpointActionTypes,
+  PhraseCredentialsInput,
+  PhrasePluginOptions,
+} from './types'
 import { createResponse } from './backendHelpers'
 import createMultipleTranslations from './createTranslation/createMultipleTranslations'
 import handlePhraseWebhook, {
@@ -11,7 +15,7 @@ export default function backendRequestHandler({
   sanityClient,
   phraseCredentials: credentials,
   schemaTypes,
-  translatableTypes,
+  pluginOptions,
 }: {
   /** Sanity client with write token (can modify data) */
   sanityClient: SanityClient
@@ -19,7 +23,7 @@ export default function backendRequestHandler({
   phraseCredentials: PhraseCredentialsInput
   /** Your studio schema types to provide */
   schemaTypes: SchemaTypeDefinition[]
-  translatableTypes: string[]
+  pluginOptions: PhrasePluginOptions
 }) {
   if (!sanityClient.config().token) {
     throw new Error(
@@ -69,7 +73,7 @@ export default function backendRequestHandler({
         credentials,
         sanityClient,
         payload: body as PhraseWebhook,
-        translatableTypes,
+        pluginOptions,
       })
 
       return updated ? new Response('OK') : new Response('Failed updating')
@@ -97,7 +101,7 @@ export default function backendRequestHandler({
         sanityClient: sanityClient,
         credentials: credentials,
         ptdId,
-        translatableTypes,
+        pluginOptions,
       })
       return createResponse(res.body, res.status)
     }
@@ -118,6 +122,7 @@ export default function backendRequestHandler({
         credentials: credentials,
         sanityClient: sanityClient,
         schemaTypes,
+        pluginOptions,
       })
       return createResponse(res.body, res.status)
     }

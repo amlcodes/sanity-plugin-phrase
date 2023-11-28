@@ -6,7 +6,8 @@ import {
   SanityPTD,
   SanityTMD,
 } from './types'
-import { draftId, tPathInMainDoc, undraftId } from './utils'
+import { draftId, undraftId } from './utils'
+import { tPathInMainDoc } from './utils/paths'
 
 export default async function commitTranslation({
   sanityClient,

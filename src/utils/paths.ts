@@ -1,7 +1,7 @@
 import { fromString, numEqualSegments, toString } from '@sanity/util/paths'
 import { Path } from 'sanity'
 import { diffPatch } from 'sanity-diff-patch'
-import { SanityDocumentWithPhraseMetadata } from '../types'
+import { METADATA_KEY, SanityDocumentWithPhraseMetadata } from '../types'
 import { dedupeArray } from '.'
 import { ROOT_PATH_STR } from './constants'
 
@@ -77,4 +77,8 @@ export function joinPathsByRoot(paths: Path[]) {
     },
     {} as { [root: string]: Path[] },
   )
+}
+
+export function tPathInMainDoc(translationKey: string) {
+  return `${METADATA_KEY}.translations[_key == "${translationKey}"]`
 }

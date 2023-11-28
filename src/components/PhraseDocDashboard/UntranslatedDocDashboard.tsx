@@ -1,5 +1,4 @@
 import { Box, Button, Card, Flex, Heading, Stack } from '@sanity/ui'
-import { i18nAdapter } from '../../adapters'
 import { SanityDocumentWithPhraseMetadata } from '../../types'
 import { PhraseLogo } from '../PhraseLogo'
 import { usePluginOptions } from '../PluginOptionsContext'
@@ -8,7 +7,7 @@ export default function UntranslatedDocDashboard(props: {
   document: SanityDocumentWithPhraseMetadata
   openDialog: () => void
 }) {
-  const { sourceLang } = usePluginOptions()
+  const { sourceLang, i18nAdapter } = usePluginOptions()
   const docLang = i18nAdapter.getDocumentLang(props.document)
   const documentId = props.document._id
 

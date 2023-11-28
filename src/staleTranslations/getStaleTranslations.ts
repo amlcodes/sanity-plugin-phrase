@@ -13,22 +13,22 @@ import {
   draftId,
   getChangedPaths,
   getTranslationSnapshot,
-  isTranslatedMainDoc,
-  langAdapter,
   hasTranslationsUnfinished,
+  isTranslatedMainDoc,
   undraftId,
 } from '../utils'
+
 import parseTMDsToDiff from './parseTMDsToDiff'
 
 export default async function getStaleTranslations({
   sourceDocs,
   sanityClient,
-  translatableTypes,
+  pluginOptions: { langAdapter, translatableTypes },
   targetLangs: sanityTargetLangs,
 }: {
   sourceDocs: TranslationRequest['sourceDoc'][]
   sanityClient: TranslationRequest['sanityClient']
-  translatableTypes: PhrasePluginOptions['translatableTypes']
+  pluginOptions: PhrasePluginOptions
   targetLangs: SanityLangCode[]
 }) {
   const targetLangs = langAdapter.sanityToCrossSystem(sanityTargetLangs)

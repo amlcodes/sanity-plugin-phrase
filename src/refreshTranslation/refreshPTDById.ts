@@ -1,13 +1,17 @@
 import { SanityClient } from 'sanity'
-import { PhraseCredentialsInput, SanityPTDWithExpandedMetadata } from '../types'
-import { draftId, isPTDDoc, undraftId } from '../utils'
 import refreshPTDs from '../refreshTranslation/refreshPTDs'
+import {
+  PhraseCredentialsInput,
+  PhrasePluginOptions,
+  SanityPTDWithExpandedMetadata,
+} from '../types'
+import { draftId, isPTDDoc, undraftId } from '../utils'
 
 export default async function refreshPTDById(input: {
   sanityClient: SanityClient
   credentials: PhraseCredentialsInput
   ptdId: string
-  translatableTypes: string[]
+  pluginOptions: PhrasePluginOptions
 }) {
   const PTDs = await input.sanityClient.fetch<SanityPTDWithExpandedMetadata[]>(
     `*[_id == $publishedId || _id == $draftId]{

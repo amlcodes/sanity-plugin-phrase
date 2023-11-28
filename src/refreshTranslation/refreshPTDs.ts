@@ -1,7 +1,7 @@
+import { Transaction } from '@sanity/client'
 import { Effect, pipe } from 'effect'
 import { SanityClient } from 'sanity'
 import { diffPatch } from 'sanity-diff-patch'
-import { i18nAdapter } from '../adapters'
 import { retrySchedule } from '../backendHelpers'
 import { EffectfulPhraseClient } from '../clients/EffectfulPhraseClient'
 import { PhraseClient } from '../clients/createPhraseClient'
@@ -13,11 +13,11 @@ import {
   Phrase,
   PhraseCredentialsInput,
   PhraseJobInfo,
+  PhrasePluginOptions,
   SanityPTDWithExpandedMetadata,
   SanityTMD,
 } from '../types'
 import { getLastValidJobInWorkflow } from '../utils/phrase'
-import { Transaction } from '@sanity/client'
 
 class FailedDownloadingPhraseDataError {
   readonly _tag = 'FailedDownloadingPhraseData'
@@ -49,8 +49,8 @@ export default function refreshPTDs(input: {
   sanityClient: SanityClient
   credentials: PhraseCredentialsInput
   PTDs: SanityPTDWithExpandedMetadata[]
-  translatableTypes: string[]
   jobsInWebhook?: Phrase['JobInWebhook'][]
+  pluginOptions: PhrasePluginOptions
 }) {
   const { PTDs, sanityClient } = input
 
@@ -122,7 +122,7 @@ export default function refreshPTDs(input: {
               doc,
               refreshedJobData,
               sanityClient,
-              translatableTypes: input.translatableTypes,
+              pluginOptions: input.pluginOptions,
             }),
           ),
         ),
@@ -189,7 +189,7 @@ function diffPTD({
   doc,
   refreshedJobData,
   sanityClient,
-  translatableTypes,
+  pluginOptions,
 }: {
   doc: SanityPTDWithExpandedMetadata
   refreshedJobData: {
@@ -200,7 +200,7 @@ function diffPTD({
     ptdIds: string[]
   }[]
   sanityClient: SanityClient
-  translatableTypes: string[]
+  pluginOptions: PhrasePluginOptions
 }) {
   const phraseDoc = refreshedJobData.find((job) => job.ptdIds.includes(doc._id))
     ?.contentInPhrase
@@ -220,7 +220,7 @@ function diffPTD({
             contentInPhrase: phraseDoc,
             freshPTD: doc,
             sanityClient,
-            translatableTypes,
+            pluginOptions,
           }),
         catch: (error) =>
           new FailedConvertingPhraseContentToSanityDocumentError(error),
@@ -228,14 +228,14 @@ function diffPTD({
       retrySchedule,
     ),
     Effect.map((updatedContent) => {
-      const finalDoc = i18nAdapter.injectDocumentLang(
+      const finalDoc = pluginOptions.i18nAdapter.injectDocumentLang(
         {
           ...updatedContent,
           phraseMetadata: undefined,
         },
         (doc.phraseMetadata?._type === 'phrase.ptd.meta'
           ? doc.phraseMetadata.targetLang.sanity
-          : i18nAdapter.getDocumentLang(doc)) as string,
+          : pluginOptions.i18nAdapter.getDocumentLang(doc)) as string,
       )
 
       return {

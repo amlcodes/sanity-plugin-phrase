@@ -1,14 +1,14 @@
 import testWebhook from '../example-data/webhooks/test-payload.json'
 import handlePhraseWebhook from '../src/handleWebhook/handlePhraseWebhook'
 import { testCredentials } from './testCredentials'
+import { testPluginOptions } from './testPluginOptions'
 import { testSanityClient } from './testSanityClient'
-import { translatableTypes } from './testSchema'
 
 const response = await handlePhraseWebhook({
   credentials: testCredentials,
   sanityClient: testSanityClient,
   payload: testWebhook as any,
-  translatableTypes,
+  pluginOptions: testPluginOptions,
 })
 
 console.log({ final: response })

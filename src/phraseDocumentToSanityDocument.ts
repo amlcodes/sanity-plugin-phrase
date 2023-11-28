@@ -1,8 +1,11 @@
 import { SanityClient } from 'sanity'
-import { ContentInPhrase, SanityPTDWithExpandedMetadata } from './types'
-import { i18nAdapter } from './adapters'
 import { modifyDocInPath } from './mergeDocs'
 import phraseToSanity from './phraseToSanity'
+import {
+  ContentInPhrase,
+  PhrasePluginOptions,
+  SanityPTDWithExpandedMetadata,
+} from './types'
 import { dedupeArray, stringToPath } from './utils'
 import { parseAllReferences } from './utils/references'
 
@@ -10,12 +13,12 @@ export default async function phraseDocumentToSanityDocument({
   contentInPhrase,
   freshPTD,
   sanityClient,
-  translatableTypes,
+  pluginOptions,
 }: {
   contentInPhrase: ContentInPhrase
   freshPTD: SanityPTDWithExpandedMetadata
   sanityClient: SanityClient
-  translatableTypes: string[]
+  pluginOptions: PhrasePluginOptions
 }): Promise<typeof freshPTD> {
   let finalDoc = JSON.parse(JSON.stringify(freshPTD)) as typeof freshPTD
 
@@ -33,12 +36,13 @@ export default async function phraseDocumentToSanityDocument({
   const uncachedReferences = references.filter((ref) => !referenceMap[ref])
 
   if (uncachedReferences.length > 0) {
-    const newReferenceMap = await i18nAdapter.getTranslatedReferences({
-      references: uncachedReferences,
-      sanityClient,
-      targetLang: targetLang.sanity,
-      translatableTypes,
-    })
+    const newReferenceMap =
+      await pluginOptions.i18nAdapter.getTranslatedReferences({
+        references: uncachedReferences,
+        sanityClient,
+        targetLang: targetLang.sanity,
+        translatableTypes: pluginOptions.translatableTypes,
+      })
     referenceMap = {
       ...referenceMap,
       ...newReferenceMap,

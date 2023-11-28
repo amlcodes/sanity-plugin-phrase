@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useClient, useEditState } from 'sanity'
 import getStaleTranslations from '../../staleTranslations/getStaleTranslations'
 import { SanityMainDoc, StaleResponse, TranslationRequest } from '../../types'
-import { SANITY_API_VERSION, langAdapter, undraftId } from '../../utils'
+import { SANITY_API_VERSION, undraftId } from '../../utils'
 import CollapsibleCard from '../CollapsibleCard'
 import { usePluginOptions } from '../PluginOptionsContext'
 
@@ -15,8 +15,8 @@ export default function PreviouslyTranslatedDocDashboard({
   docLang: string
 }) {
   const sanityClient = useClient({ apiVersion: SANITY_API_VERSION })
-  const { sourceLang, supportedTargetLangs, translatableTypes } =
-    usePluginOptions()
+  const pluginOptions = usePluginOptions()
+  const { sourceLang, supportedTargetLangs, langAdapter } = pluginOptions
   const sourceId = document.phraseMetadata.translations[0]?.sourceDoc?._id
   const isSource = docLang === sourceLang
   const { draft, published, ready } = useEditState(
@@ -40,7 +40,7 @@ export default function PreviouslyTranslatedDocDashboard({
     const res = await getStaleTranslations({
       sourceDocs: [sourceDoc],
       sanityClient,
-      translatableTypes,
+      pluginOptions,
       targetLangs: supportedTargetLangs,
     })
     const newStaleness = res.find((r) => r.sourceDoc?._id === sourceDoc._id)

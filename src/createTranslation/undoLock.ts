@@ -3,11 +3,11 @@ import {
   ContextWithFreshDocuments,
   SanityDocumentWithPhraseMetadata,
 } from '../types'
-import { getTranslationKey, tPathInMainDoc } from '../utils'
+import { tPathInMainDoc } from '../utils/paths'
 
 class FailedUnlockingError {
   readonly _tag = 'FailedUnlockingError'
-  constructor(error: unknown) {}
+  constructor(readonly error: unknown) {}
 }
 
 /**

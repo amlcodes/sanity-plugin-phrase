@@ -1,20 +1,17 @@
 import { ContextWithJobs, METADATA_KEY, SanityPTD } from '../types'
-import {
-  dedupeArray,
-  getPtdId,
-  getTmdId,
-  isDraft,
-  langAdapter,
-  undraftId,
-} from '../utils'
-import { i18nAdapter } from '../adapters'
+import { dedupeArray, getPtdId, getTmdId, isDraft, undraftId } from '../utils'
 import { mergeDocs } from '../mergeDocs'
 
 /**
  * PTD: Parallel Translation Document
  */
 export function createPTDs({
-  request: { paths, sourceDoc, translationKey },
+  request: {
+    paths,
+    sourceDoc,
+    translationKey,
+    pluginOptions: { i18nAdapter, langAdapter },
+  },
   jobs,
   freshSourceDoc,
   freshDocuments,

@@ -13,7 +13,6 @@ import {
 } from '@sanity/ui'
 import { useEffect, useState } from 'react'
 import { FormField, Path, SchemaType, useClient, useSchema } from 'sanity'
-import { i18nAdapter } from '../../adapters'
 import getAllDocReferences from '../../getAllDocReferences'
 import {
   CreateMultipleTranslationsInput,
@@ -68,6 +67,7 @@ export default function TranslationForm({
     supportedTargetLangs,
     phraseTemplates,
     apiEndpoint,
+    i18nAdapter,
   } = usePluginOptions()
   const schema = useSchema()
   const [state, setState] = useState<
@@ -111,8 +111,6 @@ export default function TranslationForm({
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [sourceDocId],
   )
-
-  console.log({ formValue, references })
 
   const validation = validateFormValue(formValue)
 

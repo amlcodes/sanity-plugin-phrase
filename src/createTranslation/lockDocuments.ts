@@ -6,7 +6,7 @@ import {
   MainDocTranslationMetadata,
   SanityDocumentWithPhraseMetadata,
 } from '../types'
-import { tPathInMainDoc } from '../utils'
+import { tPathInMainDoc } from '../utils/paths'
 import { RevMismatchError } from './isRevTheSame'
 
 class FailedLockingError {

@@ -14,6 +14,7 @@ import {
   PhraseDatacenterRegion,
 } from './clients/createPhraseClient'
 import { definitions } from './clients/phraseOpenAPI'
+import type { LangAdapter } from './utils'
 import { getTranslationKey, getTranslationName, pathToString } from './utils'
 import {
   CREDENTIALS_DOC_ID,
@@ -39,6 +40,8 @@ export type CrossSystemLangCode = {
 }
 
 export interface TranslationRequest {
+  // eslint-disable-next-line
+  pluginOptions: PhrasePluginOptions
   phraseClient: PhraseClient
   sanityClient: SanityClient
   sourceDoc: {
@@ -296,7 +299,7 @@ export type I18nAdapter = {
     sanityClient: SanityClient
     references: string[]
     targetLang: SanityLangCode
-    translatableTypes: string[]
+    translatableTypes: readonly string[]
   }) => Promise<ReferenceMap>
 
   langAdapter: {
@@ -328,11 +331,11 @@ export type CreateTranslationsInput = Omit<
 export type CreateMultipleTranslationsInput = {
   translations: Omit<
     CreateTranslationsInput,
-    'sanityClient' | 'credentials' | 'schemaTypes'
+    'sanityClient' | 'credentials' | 'schemaTypes' | 'pluginOptions'
   >[]
 } & Pick<
   CreateTranslationsInput,
-  'sanityClient' | 'credentials' | 'schemaTypes'
+  'sanityClient' | 'credentials' | 'schemaTypes' | 'pluginOptions'
 >
 
 export enum EndpointActionTypes {
@@ -397,6 +400,14 @@ export type StaleResponse = {
 }
 
 export type PhrasePluginOptions = {
+  langAdapter: LangAdapter
+  /**
+   * The i18n adapter to use for this plugin.
+   * It'll be responsible for fetching and modifying documents for each target language.
+   *
+   * The plugin offers `documentInternationalizationAdapter` for Sanity's `@sanity/document-internationalization` package.
+   */
+  i18nAdapter: I18nAdapter
   /**
    * Schema types the plugin can translate
    *

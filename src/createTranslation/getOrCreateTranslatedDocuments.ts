@@ -1,12 +1,11 @@
 import { Effect, pipe } from 'effect'
-import { i18nAdapter } from '../adapters'
 import {
   ContextWithFreshDocuments,
   SanityDocumentWithPhraseMetadata,
   SanityTranslationDocPair,
   TranslationRequest,
 } from '../types'
-import { getTranslationName, langAdapter } from '../utils'
+import { getTranslationName } from '../utils'
 
 type StoredError = {
   adapter?: unknown
@@ -27,7 +26,10 @@ export default function getOrCreateTranslatedDocuments(
 ) {
   return pipe(
     Effect.tryPromise({
-      try: () => i18nAdapter.getOrCreateTranslatedDocuments(request),
+      try: () =>
+        request.pluginOptions.i18nAdapter.getOrCreateTranslatedDocuments(
+          request,
+        ),
       catch: (error) => new AdapterFailedQueryingError({ adapter: error }),
     }),
     Effect.tap(() =>
@@ -68,7 +70,7 @@ export default function getOrCreateTranslatedDocuments(
         (d) =>
           ({
             ...d,
-            lang: langAdapter.sanityToCrossSystem(d.lang),
+            lang: request.pluginOptions.langAdapter.sanityToCrossSystem(d.lang),
           }) as SanityTranslationDocPair,
       )
 

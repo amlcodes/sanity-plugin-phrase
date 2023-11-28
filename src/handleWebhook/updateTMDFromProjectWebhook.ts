@@ -1,12 +1,7 @@
 import { SanityClient } from 'sanity'
 import { MainDocTranslationMetadata, SanityTMD } from '../types'
-import {
-  TMD_TYPE,
-  comesFromSanity,
-  draftId,
-  tPathInMainDoc,
-  undraftId,
-} from '../utils'
+import { TMD_TYPE, comesFromSanity, draftId, undraftId } from '../utils'
+import { tPathInMainDoc } from '../utils/paths'
 import {
   ProjectDeletedWebhook,
   ProjectStatusChangedWebhook,

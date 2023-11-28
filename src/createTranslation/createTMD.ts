@@ -5,7 +5,6 @@ import {
   getTmdId,
   getTranslationSnapshot,
   isDraft,
-  langAdapter,
   makeKeyFriendly,
   phraseDatetimeToJSDate,
   undraftId,
@@ -15,7 +14,7 @@ import {
  * TMD: Translation Metadata Document
  */
 export function createTMD({
-  request: { paths, sourceDoc, translationKey },
+  request: { paths, sourceDoc, translationKey, pluginOptions },
   project,
   jobs,
   freshSourceDoc,
@@ -42,7 +41,8 @@ export function createTMD({
 
   const targets: SanityTMD['targets'] = Object.entries(jobCollections).map(
     ([targetPhraseLang, jobCollection]) => {
-      const lang = langAdapter.phraseToCrossSystem(targetPhraseLang)
+      const lang =
+        pluginOptions.langAdapter.phraseToCrossSystem(targetPhraseLang)
       const targetLangDocPair = freshDocuments.find(
         (d) => d.lang.phrase === targetPhraseLang,
       )

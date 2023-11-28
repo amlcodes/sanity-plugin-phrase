@@ -2,11 +2,8 @@ import { EyeOpenIcon } from '@sanity/icons'
 import { Badge, Button, Flex, Spinner, Stack, Text } from '@sanity/ui'
 import { SanityDocument, useSchema } from 'sanity'
 import { CrossSystemLangCode, SanityTMD } from '../../types'
-import {
-  getJobEditorURL,
-  getReadableLanguageName,
-  jobsMetadataExtractor,
-} from '../../utils'
+import { getJobEditorURL, jobsMetadataExtractor } from '../../utils'
+import { getReadableLanguageName } from '../../utils/langs'
 import { PhraseMonogram } from '../PhraseLogo'
 import { usePluginOptions } from '../PluginOptionsContext'
 import { useOpenInSidePane } from './useOpenInSidepane'

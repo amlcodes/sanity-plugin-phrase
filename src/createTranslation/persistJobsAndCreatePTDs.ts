@@ -4,7 +4,7 @@ import {
   CreatedMainDocMetadata,
   SanityDocumentWithPhraseMetadata,
 } from '../types'
-import { tPathInMainDoc } from '../utils'
+import { tPathInMainDoc } from '../utils/paths'
 import { createPTDs } from './createPTDs'
 import { createTMD } from './createTMD'
 

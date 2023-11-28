@@ -12,11 +12,8 @@ import {
   SanityTMD,
   TranslationRequest,
 } from '../../types'
-import {
-  SANITY_API_VERSION,
-  getProjectURL,
-  getReadableLanguageName,
-} from '../../utils'
+import { SANITY_API_VERSION, getProjectURL } from '../../utils'
+import { getReadableLanguageName } from '../../utils'
 import CollapsibleCard from '../CollapsibleCard'
 import { usePluginOptions } from '../PluginOptionsContext'
 import { TranslationInfo } from './TranslationInfo'

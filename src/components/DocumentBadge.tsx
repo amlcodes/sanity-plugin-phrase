@@ -1,13 +1,13 @@
 import { DocumentBadgeDescription, DocumentBadgeProps } from 'sanity'
 import { PhrasePluginOptions, SanityDocumentWithPhraseMetadata } from '../types'
 import {
-  getReadableLanguageName,
   hasTranslationsUnfinished,
   isPTDDoc,
   isPtdId,
   isTranslatedMainDoc,
   isTranslationCommitted,
 } from '../utils'
+import { getReadableLanguageName } from '../utils'
 import { PhraseMonogram } from './PhraseLogo'
 
 export function createDocumentBadge(pluginOptions: PhrasePluginOptions) {
