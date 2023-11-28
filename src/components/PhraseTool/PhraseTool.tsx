@@ -1,6 +1,5 @@
-import { CheckmarkCircleIcon } from '@sanity/icons'
-import { Badge, Card, Flex, Heading, Spinner, Stack, Text } from '@sanity/ui'
-import React from 'react'
+import { Card, Heading, Spinner, Stack, Text } from '@sanity/ui'
+import React, { useEffect, useRef, useState } from 'react'
 import {
   DocumentStore,
   Tool,
@@ -10,6 +9,7 @@ import {
   useEditState,
   useSchema,
 } from 'sanity'
+import styled from 'styled-components'
 import {
   CreatedMainDocMetadata,
   PhrasePluginOptions,
@@ -19,12 +19,12 @@ import {
 import {
   SANITY_API_VERSION,
   getFieldLabel,
-  getReadableLanguageName,
   jobsMetadataExtractor,
   joinPathsByRoot,
 } from '../../utils'
 import { PhraseLogo } from '../PhraseLogo'
 import { PluginOptionsProvider } from '../PluginOptionsContext'
+import StatusBadge from '../StatusBadge'
 
 const useOngoingTranslations = createHookFromObservableFactory<
   // Pick<SanityMainDoc, '_id' | '_type' | '_rev' | 'phraseMetadata'>[],
@@ -53,6 +53,17 @@ const useOngoingTranslations = createHookFromObservableFactory<
   )
 })
 
+function getTallestCell(rowEl: HTMLTableRowElement) {
+  const cells = Array.from(
+    rowEl.querySelectorAll('td'),
+  ) as HTMLTableCellElement[]
+  return cells.reduce((tallest, cell) => {
+    const contentsHeight = cell.children?.[0]?.getBoundingClientRect().height
+
+    return contentsHeight > tallest ? contentsHeight : tallest
+  }, 0)
+}
+
 function OngoingTranslation({
   document,
   translation,
@@ -67,46 +78,70 @@ function OngoingTranslation({
     translation.tmd._type,
   )
   const TMD = (draft || published) as SanityTMD
+  const rowRef = useRef<HTMLTableRowElement>(null)
+  const [rowHeight, setRowHeight] = useState<number | undefined>(undefined)
+
+  useEffect(() => {
+    const rowEl = rowRef.current
+    if (!rowEl) return undefined
+
+    setRowHeight(getTallestCell(rowEl))
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        if (!(entry instanceof HTMLTableRowElement)) return
+
+        setRowHeight(getTallestCell(entry))
+      }
+    })
+
+    resizeObserver.observe(rowEl)
+
+    return () => {
+      resizeObserver.unobserve(rowEl)
+    }
+  }, [])
 
   return (
-    <tr>
+    <tr
+      ref={rowRef}
+      style={
+        {
+          '--row-height': rowHeight ? `${rowHeight}px` : undefined,
+        } as any
+      }
+    >
       {!ready && <Spinner />}
-      <Stack as="td" space={2}>
-        <Text size={1}>
-          {(schemaType && prepareForPreview(document, schemaType)?.title) ||
-            `${document._id} (unknown type)`}
-        </Text>
-        {schemaType && (
-          <Stack space={1}>
-            {Object.entries(joinPathsByRoot(translation.paths)).map(
-              ([rootPath, fullPathsInRoot]) => (
-                <Text size={0} key={rootPath}>
-                  {getFieldLabel(rootPath, fullPathsInRoot, schemaType)}
-                </Text>
-              ),
-            )}
-          </Stack>
-        )}
-      </Stack>
+      <td>
+        <Stack space={2}>
+          <Text size={1}>
+            {(schemaType && prepareForPreview(document, schemaType)?.title) ||
+              `${document._id} (unknown type)`}
+          </Text>
+          {schemaType && (
+            <Stack space={1}>
+              {Object.entries(joinPathsByRoot(translation.paths)).map(
+                ([rootPath, fullPathsInRoot]) => (
+                  <Text size={0} key={rootPath}>
+                    {getFieldLabel(rootPath, fullPathsInRoot, schemaType)}
+                  </Text>
+                ),
+              )}
+            </Stack>
+          )}
+        </Stack>
+      </td>
       <td>
         {ready && TMD && (
           <Stack space={2}>
             {TMD.targets.map((target) => {
               const metadata = jobsMetadataExtractor(target.jobs)
               return (
-                <Flex
+                <StatusBadge
                   key={target._key}
-                  gap={2}
-                  style={{ alignItems: 'center' }}
-                >
-                  <Text style={{ color: 'rgb(24, 49, 34)' }}>
-                    <CheckmarkCircleIcon style={{ marginRight: '0.1em' }} />{' '}
-                    {getReadableLanguageName(target.lang.sanity)}
-                  </Text>
-                  <Badge mode="outline" tone="positive">
-                    {metadata.stepName}
-                  </Badge>
-                </Flex>
+                  status={metadata.stepStatus}
+                  step={metadata.stepName}
+                  language={target.lang.sanity}
+                />
               )
             })}
           </Stack>
@@ -119,6 +154,21 @@ function OngoingTranslation({
     </tr>
   )
 }
+
+const StyledTable = styled.table`
+  border-collapse: collapse;
+  border-spacing: 0;
+
+  th,
+  td {
+    text-align: left;
+    padding: 0.75em 0.875em;
+    border-bottom: 1px solid var(--card-shadow-outline-color);
+  }
+  td {
+    height: var(--row-height, 100%);
+  }
+`
 
 export default function createPhraseTool(pluginOptions: PhrasePluginOptions) {
   return function PhraseTool({
@@ -140,12 +190,28 @@ export default function createPhraseTool(pluginOptions: PhrasePluginOptions) {
             <Heading>Ongoing translations</Heading>
             {loading && <Spinner />}
             {!loading && ongoingTranslations && (
-              <table>
+              <StyledTable>
                 <thead>
-                  <th>Item</th>
-                  <th>Target languages</th>
-                  <th>Due</th>
-                  <th>Actions</th>
+                  <th>
+                    <Text size={1} weight="semibold">
+                      Item
+                    </Text>
+                  </th>
+                  <th>
+                    <Text size={1} weight="semibold">
+                      Target languages
+                    </Text>
+                  </th>
+                  <th>
+                    <Text size={1} weight="semibold">
+                      Due
+                    </Text>
+                  </th>
+                  <th>
+                    <Text size={1} weight="semibold">
+                      Actions
+                    </Text>
+                  </th>
                 </thead>
                 <tbody>
                   {ongoingTranslations.map((doc) => (
@@ -170,7 +236,7 @@ export default function createPhraseTool(pluginOptions: PhrasePluginOptions) {
                     </React.Fragment>
                   ))}
                 </tbody>
-              </table>
+              </StyledTable>
             )}
           </Stack>
         </Card>
