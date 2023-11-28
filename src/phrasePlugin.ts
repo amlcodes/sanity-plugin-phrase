@@ -1,9 +1,9 @@
 import { Plugin } from 'sanity'
-import { PhraseMonogram } from './components/PhraseDocDashboard/PhraseLogo'
+import { createDocumentBadge } from './components/DocumentBadge'
+import { PhraseMonogram } from './components/PhraseLogo'
 import createPhraseTool from './components/PhraseTool/PhraseTool'
 import injectPhraseIntoSchema from './injectPhraseIntoSchema'
 import { PhrasePluginOptions } from './types'
-import { createDocumentBadge } from './components/DocumentBadge'
 
 const phrasePlugin: Plugin<PhrasePluginOptions> = (pluginOptions) => {
   return {

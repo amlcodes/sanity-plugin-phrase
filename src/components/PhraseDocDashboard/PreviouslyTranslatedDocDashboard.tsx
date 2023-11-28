@@ -1,9 +1,10 @@
-import { Card, Code, Heading, Spinner } from '@sanity/ui'
+import { Code, Spinner } from '@sanity/ui'
 import { useEffect, useState } from 'react'
 import { useClient, useEditState } from 'sanity'
 import getStaleTranslations from '../../staleTranslations/getStaleTranslations'
 import { SanityMainDoc, StaleResponse, TranslationRequest } from '../../types'
 import { SANITY_API_VERSION, langAdapter, undraftId } from '../../utils'
+import CollapsibleCard from '../CollapsibleCard'
 import { usePluginOptions } from '../PluginOptionsContext'
 
 export default function PreviouslyTranslatedDocDashboard({
@@ -59,9 +60,8 @@ export default function PreviouslyTranslatedDocDashboard({
   }
 
   return (
-    <Card paddingX={3} padding={4} border radius={2}>
-      <Heading as="h2">This document has been translated in the past</Heading>
+    <CollapsibleCard title="This document has been translated in the past">
       <Code>{JSON.stringify(staleness, null, 2)}</Code>
-    </Card>
+    </CollapsibleCard>
   )
 }

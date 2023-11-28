@@ -1,18 +1,10 @@
 'use client'
 
 import { PublishIcon, RefreshIcon } from '@sanity/icons'
-import {
-  Button,
-  Card,
-  Flex,
-  Heading,
-  Spinner,
-  Stack,
-  Text,
-  useToast,
-} from '@sanity/ui'
+import { Button, Flex, Spinner, Text, useToast } from '@sanity/ui'
 import React, { useState } from 'react'
 import { useClient, useEditState, useSchema } from 'sanity'
+import mergePTD from '../../mergePTD'
 import {
   EndpointActionTypes,
   PtdPhraseMetadata,
@@ -24,12 +16,12 @@ import {
   SANITY_API_VERSION,
   getProjectURL,
   getReadableLanguageName,
-  jobsMetadataExtractor,
 } from '../../utils'
+import CollapsibleCard from '../CollapsibleCard'
+import { usePluginOptions } from '../PluginOptionsContext'
 import { TranslationInfo } from './TranslationInfo'
 import { useOpenInSidePane } from './useOpenInSidepane'
-import { usePluginOptions } from '../PluginOptionsContext'
-import mergePTD from '../../mergePTD'
+import { PhraseMonogram } from '../PhraseLogo'
 
 const API_ENDPOINT = '/api/phrase'
 
@@ -115,93 +107,94 @@ export default function PtdDocDashboard({
   }
 
   return (
-    <Card paddingX={3} paddingY={4} border radius={2}>
-      <Stack space={4}>
-        <Flex align="flex-start" gap={5}>
-          <Stack space={3}>
-            <Heading size={2} as="h2" style={{ flex: 1 }}>
-              This is a Phrase Translation document
-            </Heading>
-            {schemaType && (
-              <Text>
-                This content was translated in Phrase from the{' '}
-                <a
-                  href={openInSidePane.getHref(sourceDoc._id, schemaType.name)}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    openInSidePane.openImperatively(
-                      sourceDoc._id,
-                      schemaType.name,
-                    )
-                  }}
-                >
-                  source document in{' '}
-                  {getReadableLanguageName(TMD.sourceLang.sanity)}
-                </a>{' '}
-                to {getReadableLanguageName(targetLang.sanity)} and is now ready
-                to merge with the{' '}
-                {target?.targetDoc?._ref ? (
-                  <a
-                    href={openInSidePane.getHref(
-                      target.targetDoc._ref,
-                      schemaType.name,
-                    )}
-                    onClick={(e) => {
-                      e.preventDefault()
-                      openInSidePane.openImperatively(
-                        target.targetDoc._ref,
-                        schemaType.name,
-                      )
-                    }}
-                  >
-                    target document in{' '}
-                    {getReadableLanguageName(targetLang.sanity)}
-                  </a>
-                ) : (
-                  'target document'
+    <CollapsibleCard
+      title="This is a Phrase Translation document"
+      subtitle={
+        schemaType ? (
+          <Text>
+            This content was translated in Phrase from the{' '}
+            <a
+              href={openInSidePane.getHref(sourceDoc._id, schemaType.name)}
+              onClick={(e) => {
+                e.preventDefault()
+                openInSidePane.openImperatively(sourceDoc._id, schemaType.name)
+              }}
+            >
+              source document in{' '}
+              {getReadableLanguageName(TMD.sourceLang.sanity)}
+            </a>{' '}
+            to {getReadableLanguageName(targetLang.sanity)} and is now ready to
+            merge with the{' '}
+            {target?.targetDoc?._ref ? (
+              <a
+                href={openInSidePane.getHref(
+                  target.targetDoc._ref,
+                  schemaType.name,
                 )}
-                .
-              </Text>
+                onClick={(e) => {
+                  e.preventDefault()
+                  openInSidePane.openImperatively(
+                    target.targetDoc._ref,
+                    schemaType.name,
+                  )
+                }}
+              >
+                target document in {getReadableLanguageName(targetLang.sanity)}
+              </a>
+            ) : (
+              'target document'
             )}
-          </Stack>
-          <Button
-            size={1}
-            as="a"
-            href={getProjectURL(TMD.phraseProjectUid, phraseRegion)}
-            target="_blank"
-            rel="noopener noreferrer"
-            mode="ghost"
-            text="Project in Phrase"
-          />
-        </Flex>
-        <TranslationInfo
-          parentDoc={ptdDocument}
-          TMD={TMD}
-          paneParentDocId={ptdDocument._id}
-          targetLang={ptdMetadata.targetLang}
-          showOpenPTD={false}
+            .
+          </Text>
+        ) : null
+      }
+      headerActions={
+        <Button
+          size={1}
+          as="a"
+          href={getProjectURL(TMD.phraseProjectUid, phraseRegion)}
+          target="_blank"
+          rel="noopener noreferrer"
+          text="Project in Phrase"
+          mode="ghost"
+          tone="primary"
+          iconRight={PhraseMonogram}
+          fontSize={1}
+          padding={2}
+          // Prevent the card from collapsing when clicking the button
+          onClick={(e) => e.stopPropagation()}
         />
-        <Flex gap={2}>
-          <Button
-            text="Refresh translation"
-            tone="primary"
-            mode={'ghost'}
-            onClick={handleRefresh}
-            disabled={state !== 'idle'}
-            icon={RefreshIcon}
-            style={{ flex: 1 }}
-          />
-          <Button
-            text="Merge translation"
-            tone={'positive'}
-            mode={'ghost'}
-            disabled={state !== 'idle'}
-            onClick={handleMerge}
-            icon={PublishIcon}
-            style={{ flex: 1 }}
-          />
-        </Flex>
-      </Stack>
-    </Card>
+      }
+    >
+      <TranslationInfo
+        parentDoc={ptdDocument}
+        TMD={TMD}
+        paneParentDocId={ptdDocument._id}
+        targetLang={ptdMetadata.targetLang}
+        showOpenPTD={false}
+      />
+      <Flex gap={2} justify="space-between">
+        <Button
+          fontSize={1}
+          padding={3}
+          text="Refresh Phrase data"
+          tone="primary"
+          mode={'ghost'}
+          onClick={handleRefresh}
+          disabled={state !== 'idle'}
+          icon={RefreshIcon}
+        />
+        <Button
+          fontSize={1}
+          padding={3}
+          text="Merge translation"
+          tone={'positive'}
+          mode={'ghost'}
+          disabled={state !== 'idle'}
+          onClick={handleMerge}
+          icon={PublishIcon}
+        />
+      </Flex>
+    </CollapsibleCard>
   )
 }

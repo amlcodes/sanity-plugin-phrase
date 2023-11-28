@@ -7,8 +7,8 @@ import {
   getReadableLanguageName,
   jobsMetadataExtractor,
 } from '../../utils'
+import { PhraseMonogram } from '../PhraseLogo'
 import { usePluginOptions } from '../PluginOptionsContext'
-import { PhraseMonogram } from './PhraseLogo'
 import { useOpenInSidePane } from './useOpenInSidepane'
 
 export function TranslationInfo({

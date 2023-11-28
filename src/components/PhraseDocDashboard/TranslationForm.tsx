@@ -13,6 +13,8 @@ import {
 } from '@sanity/ui'
 import { useEffect, useState } from 'react'
 import { FormField, Path, SchemaType, useClient, useSchema } from 'sanity'
+import { i18nAdapter } from '../../adapters'
+import getAllDocReferences from '../../getAllDocReferences'
 import {
   CreateMultipleTranslationsInput,
   CreateTranslationsInput,
@@ -25,11 +27,9 @@ import {
   getIsoDay,
   getReadableLanguageName,
 } from '../../utils'
-import { i18nAdapter } from '../../adapters'
-import getAllDocReferences from '../../getAllDocReferences'
-import { ReferencePreview } from '../ReferencePreview/ReferencePreview'
-import { PhraseMonogram } from './PhraseLogo'
+import { PhraseMonogram } from '../PhraseLogo'
 import { usePluginOptions } from '../PluginOptionsContext'
+import { ReferencePreview } from '../ReferencePreview/ReferencePreview'
 
 type FormValue = Pick<
   CreateTranslationsInput,

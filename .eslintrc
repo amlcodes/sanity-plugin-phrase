@@ -23,6 +23,7 @@
     "@typescript-eslint/no-useless-constructor": "off",
     "no-useless-constructor": "off",
     "react/jsx-no-bind": "off",
-    "no-empty-function": "off"
+    "no-empty-function": "off",
+    "react/require-default-props": "off"
   }
 }

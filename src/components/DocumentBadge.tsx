@@ -8,7 +8,7 @@ import {
   isTranslatedMainDoc,
   isTranslationCommitted,
 } from '../utils'
-import { PhraseMonogram } from './PhraseDocDashboard/PhraseLogo'
+import { PhraseMonogram } from './PhraseLogo'
 
 export function createDocumentBadge(pluginOptions: PhrasePluginOptions) {
   return function DocumentBadge(

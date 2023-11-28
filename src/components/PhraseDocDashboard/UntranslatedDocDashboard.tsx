@@ -1,8 +1,8 @@
 import { Box, Button, Card, Flex, Heading, Stack } from '@sanity/ui'
 import { i18nAdapter } from '../../adapters'
 import { SanityDocumentWithPhraseMetadata } from '../../types'
+import { PhraseLogo } from '../PhraseLogo'
 import { usePluginOptions } from '../PluginOptionsContext'
-import { PhraseLogo } from './PhraseLogo'
 
 export default function UntranslatedDocDashboard(props: {
   document: SanityDocumentWithPhraseMetadata

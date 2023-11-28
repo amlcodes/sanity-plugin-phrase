@@ -23,7 +23,7 @@ import {
   jobsMetadataExtractor,
   joinPathsByRoot,
 } from '../../utils'
-import { PhraseLogo } from '../PhraseDocDashboard/PhraseLogo'
+import { PhraseLogo } from '../PhraseLogo'
 import { PluginOptionsProvider } from '../PluginOptionsContext'
 
 const useOngoingTranslations = createHookFromObservableFactory<

@@ -64,9 +64,9 @@ For the plugin, the most important settings to get right are:
 
 **JSON file import**
 
-- Exclude specific keys (use regexp): `(^|.*\/)(_createdAt|_id|_rev|_type|_updatedAt|_ref|_key|style|_sanityContext|_sanityDocument|_spanMeta|_blockMeta|phraseMeta|_strengthenOnPublish)(^|.*\/)?`
+- Exclude specific keys (use regexp): `(^|.*\/)(_createdAt|_id|_rev|(_strengthenOnPublish|phraseMetadata|_spanMeta|_blockMeta|marks)/.*|_type|_updatedAt|_ref|_key|style|_sanityRev|_sanityContext|YOUR_IGNORED_KEYS_HERE)`
   - You must exclude localization-specific data, like the `language` of a given document if you're using `@sanity/document-internationalization`
-  - Include to this any project-specific keys that you don't want to be translated, such as a `slug` for content using the same path across all languages
+  - Include any project-specific keys that you don't want to be translated, such as a `slug` for content using the same path across all languages. Replace `YOUR_IGNORED_KEYS_HERE` with a pipe-separated list of keys to ignore.
 - Context note: `/_sanityContext`
 
 **Source language**
