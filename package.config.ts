@@ -4,6 +4,7 @@ export default defineConfig({
   legacyExports: true,
   dist: 'dist',
   tsconfig: 'tsconfig.dist.json',
+  minify: false,
   bundles: [
     {
       source: './src/exports/index.ts',

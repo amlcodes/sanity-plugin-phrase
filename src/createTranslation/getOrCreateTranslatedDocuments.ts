@@ -5,7 +5,6 @@ import {
   SanityTranslationDocPair,
   TranslationRequest,
 } from '../types'
-import { getTranslationName } from '../utils'
 
 type StoredError = {
   adapter?: unknown
@@ -91,7 +90,6 @@ export default function getOrCreateTranslatedDocuments(
         freshDocuments,
         request,
         freshSourceDoc,
-        ...getTranslationName(request, freshSourceDoc),
       } as ContextWithFreshDocuments
     }),
     Effect.withSpan('getOrCreateTranslatedDocuments'),

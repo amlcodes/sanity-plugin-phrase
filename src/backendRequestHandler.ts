@@ -1,28 +1,25 @@
-import { SanityClient, SchemaTypeDefinition } from 'sanity'
-import {
-  EndpointActionTypes,
-  PhraseCredentialsInput,
-  PhrasePluginOptions,
-} from './types'
+import { SanityClient } from 'sanity'
 import { createResponse } from './backendHelpers'
 import createMultipleTranslations from './createTranslation/createMultipleTranslations'
 import handlePhraseWebhook, {
   PhraseWebhook,
 } from './handleWebhook/handlePhraseWebhook'
 import refreshPTDById from './refreshTranslation/refreshPTDById'
+import {
+  EndpointActionTypes,
+  PhraseCredentialsInput,
+  PhrasePluginOptions,
+} from './types'
 
 export default function backendRequestHandler({
   sanityClient,
   phraseCredentials: credentials,
-  schemaTypes,
   pluginOptions,
 }: {
   /** Sanity client with write token (can modify data) */
   sanityClient: SanityClient
   /** Necessary to issue access tokens from Phrase */
   phraseCredentials: PhraseCredentialsInput
-  /** Your studio schema types to provide */
-  schemaTypes: SchemaTypeDefinition[]
   pluginOptions: PhrasePluginOptions
 }) {
   if (!sanityClient.config().token) {
@@ -121,7 +118,6 @@ export default function backendRequestHandler({
         translations: body.translations,
         credentials: credentials,
         sanityClient: sanityClient,
-        schemaTypes,
         pluginOptions,
       })
       return createResponse(res.body, res.status)

@@ -27,6 +27,7 @@ import {
   getDateDaysFromNow,
   getIsoDay,
   getReadableLanguageName,
+  getTranslationName,
 } from '../../utils'
 import { PhraseMonogram } from '../PhraseLogo'
 import { usePluginOptions } from '../PluginOptionsContext'
@@ -123,18 +124,31 @@ export default function TranslationForm({
 
     setState('submitting')
 
+    const MAIN: Omit<
+      CreateMultipleTranslationsInput['translations'][number],
+      'translationName'
+    > = {
+      sourceDoc: {
+        _id: sourceDocId,
+        _rev: document._rev,
+        _type: document._type,
+        lang: sourceLang,
+      },
+      targetLangs: formValue.targetLangs,
+      templateUid: formValue.templateUid,
+      dateDue: formValue.dateDue,
+      paths,
+    }
     const input: CreateMultipleTranslationsInput['translations'] = [
       {
-        sourceDoc: {
-          _id: sourceDocId,
-          _rev: document._rev,
-          _type: document._type,
-          lang: sourceLang,
-        },
-        targetLangs: formValue.targetLangs,
-        templateUid: formValue.templateUid,
-        dateDue: formValue.dateDue,
-        paths,
+        ...MAIN,
+        translationName: getTranslationName({
+          paths: MAIN.paths,
+          sourceDoc: MAIN.sourceDoc,
+          targetLangs: MAIN.targetLangs,
+          freshDoc: document,
+          schemaType: schema.get(document._type),
+        }),
       },
       ...Object.entries(references?.chosenDocs || {}).flatMap(
         ([refId, langs]) => {
@@ -143,8 +157,6 @@ export default function TranslationForm({
           )
           const doc = references?.refs.find((r) => r.id === refId)
           // If we have a draft, translate that instead
-          // @TODO: is this a good UX decision?
-          // Will editors know when a piece of content is incomplete in order to finish it before sending for translation?
           const freshDoc = doc?.draft || doc?.published
 
           if (!freshDoc) return []
@@ -165,6 +177,13 @@ export default function TranslationForm({
             templateUid: formValue.templateUid,
             dateDue: formValue.dateDue,
             paths,
+            translationName: getTranslationName({
+              paths,
+              targetLangs: acceptedLangs,
+              sourceDoc,
+              freshDoc,
+              schemaType: schema.get(document._type),
+            }),
           }
         },
       ),

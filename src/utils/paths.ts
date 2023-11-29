@@ -1,8 +1,13 @@
 import { fromString, numEqualSegments, toString } from '@sanity/util/paths'
 import { Path } from 'sanity'
 import { diffPatch } from 'sanity-diff-patch'
-import { METADATA_KEY, SanityDocumentWithPhraseMetadata } from '../types'
 import { dedupeArray } from '.'
+import {
+  CreateTranslationsInput,
+  METADATA_KEY,
+  SanityDocumentWithPhraseMetadata,
+  TranslationRequest,
+} from '../types'
 import { ROOT_PATH_STR } from './constants'
 
 export function translationsIntersect(a: Path, b: Path) {
@@ -81,4 +86,12 @@ export function joinPathsByRoot(paths: Path[]) {
 
 export function tPathInMainDoc(translationKey: string) {
   return `${METADATA_KEY}.translations[_key == "${translationKey}"]`
+}
+
+export function formatInputPaths(inputPaths: CreateTranslationsInput['paths']) {
+  return (
+    Array.isArray(inputPaths) && inputPaths.length > 0 ? inputPaths : [[]]
+  ).map((p) =>
+    typeof p === 'string' ? fromString(p) : p || [],
+  ) as TranslationRequest['paths']
 }

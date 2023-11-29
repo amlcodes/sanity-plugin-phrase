@@ -19,7 +19,7 @@ export default function createPhraseProject(
     Effect.tryPromise({
       try: () =>
         request.phraseClient.projects.create({
-          name: context.translationName,
+          name: request.translationName,
           templateUid: request.templateUid,
           targetLangs: request.pluginOptions.langAdapter.crossSystemToPhrase(
             request.targetLangs,

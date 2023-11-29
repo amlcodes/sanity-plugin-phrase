@@ -1,24 +1,20 @@
+import { SanityDocument, SchemaType, prepareForPreview } from 'sanity'
 import {
-  SanityDocument,
-  SchemaTypeDefinition,
-  createSchema,
-  prepareForPreview,
-} from 'sanity'
-import {
+  CreateTranslationsInput,
   METADATA_KEY,
   Phrase,
   SanityDocumentWithPhraseMetadata,
-  TranslationRequest,
 } from '../types'
 import { FILENAME_PREFIX } from './constants'
 import { getTranslationKey } from './ids'
 import { getReadableLanguageName } from './langs'
+import { formatInputPaths } from './paths'
 export * from './constants'
-export * from './ids'
-export * from './paths'
-export * from './langs'
-export * from './phrase'
 export * from './fieldLabels'
+export * from './ids'
+export * from './langs'
+export * from './paths'
+export * from './phrase'
 
 export function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms))
@@ -26,41 +22,32 @@ export function sleep(ms: number) {
 
 export const NOT_PTD = `${METADATA_KEY}._type != "phrase.ptd.meta"`
 
-export function getSchema(schemaTypes: SchemaTypeDefinition[]) {
-  return createSchema({
-    name: 'phrase',
-    types: schemaTypes,
-  })
-}
-
-export function getTranslationName(
-  {
-    sourceDoc,
-    paths,
-    schemaTypes,
-    targetLangs,
-  }: Pick<
-    TranslationRequest,
-    'sourceDoc' | 'paths' | 'schemaTypes' | 'targetLangs'
-  >,
-  freshSourceDoc: SanityDocument,
-) {
-  const schemaType = getSchema(schemaTypes).get(sourceDoc._type)
+export function getTranslationName({
+  sourceDoc,
+  paths: inputPaths,
+  targetLangs,
+  freshDoc,
+  schemaType,
+}: {
+  sourceDoc: CreateTranslationsInput['sourceDoc']
+  paths: CreateTranslationsInput['paths']
+  targetLangs: CreateTranslationsInput['targetLangs']
+  freshDoc: SanityDocument
+  schemaType?: SchemaType
+}) {
+  const paths = formatInputPaths(inputPaths)
   const previewTitle =
-    (schemaType && prepareForPreview(freshSourceDoc, schemaType)?.title) || null
+    (schemaType && prepareForPreview(freshDoc, schemaType)?.title) || null
 
   const type = schemaType?.title || sourceDoc._type
   const title = previewTitle || `id#${sourceDoc._id.slice(0, 5)}...`
   const name = `${FILENAME_PREFIX} ${type}: ${title} (${getReadableLanguageName(
-    sourceDoc.lang.sanity,
+    sourceDoc.lang,
   )} to ${targetLangs
-    .map((l) => getReadableLanguageName(l.sanity))
+    .map((l) => getReadableLanguageName(l))
     .join(', ')}) :: ${getTranslationKey(paths, sourceDoc._rev)})`
 
-  return {
-    translationName: name,
-    translationFilename: `${name}.json`,
-  }
+  return name
 }
 
 export function comesFromSanity(

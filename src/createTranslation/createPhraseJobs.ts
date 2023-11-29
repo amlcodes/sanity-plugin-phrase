@@ -19,7 +19,7 @@ export default function createPhraseJobs(context: ContextWithProject) {
       try: () =>
         request.phraseClient.jobs.create({
           projectUid: project.uid,
-          filename: context.translationFilename,
+          filename: request.translationFilename,
           targetLangs: request.pluginOptions.langAdapter.crossSystemToPhrase(
             request.targetLangs,
           ),

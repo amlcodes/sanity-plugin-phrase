@@ -26,7 +26,6 @@ export default function createMultipleTranslations(
           ...t,
           sanityClient: input.sanityClient,
           credentials: input.credentials,
-          schemaTypes: input.schemaTypes,
           pluginOptions: input.pluginOptions,
         }).pipe(Effect.map((res) => ({ res, t }))),
       { concurrency: 2 },

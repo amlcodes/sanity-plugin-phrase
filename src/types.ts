@@ -6,7 +6,6 @@ import {
   PortableTextTextBlock,
   Reference,
   SanityDocument,
-  SchemaTypeDefinition,
   WeakReference,
 } from 'sanity'
 import {
@@ -15,7 +14,7 @@ import {
 } from './clients/createPhraseClient'
 import { definitions } from './clients/phraseOpenAPI'
 import type { LangAdapter } from './utils'
-import { getTranslationKey, getTranslationName, pathToString } from './utils'
+import { getTranslationKey, pathToString } from './utils'
 import {
   CREDENTIALS_DOC_ID,
   PTD_ID_PREFIX,
@@ -56,7 +55,8 @@ export interface TranslationRequest {
   targetLangs: CrossSystemLangCode[]
   templateUid: string
   dateDue?: string
-  schemaTypes: SchemaTypeDefinition[]
+  translationName: string
+  translationFilename: `${TranslationRequest['translationName']}.json`
 }
 
 export type Phrase = {
@@ -319,7 +319,12 @@ export type I18nAdapter = {
 
 export type CreateTranslationsInput = Omit<
   TranslationRequest,
-  'paths' | 'targetLangs' | 'sourceDoc' | 'phraseClient' | 'translationKey'
+  | 'paths'
+  | 'targetLangs'
+  | 'sourceDoc'
+  | 'phraseClient'
+  | 'translationKey'
+  | 'translationFilename'
 > & {
   credentials: PhraseCredentialsInput
   paths?: (Path | string)[]
@@ -332,11 +337,11 @@ export type CreateTranslationsInput = Omit<
 export type CreateMultipleTranslationsInput = {
   translations: Omit<
     CreateTranslationsInput,
-    'sanityClient' | 'credentials' | 'schemaTypes' | 'pluginOptions'
+    'sanityClient' | 'credentials' | 'pluginOptions'
   >[]
 } & Pick<
   CreateTranslationsInput,
-  'sanityClient' | 'credentials' | 'schemaTypes' | 'pluginOptions'
+  'sanityClient' | 'credentials' | 'pluginOptions'
 >
 
 export enum EndpointActionTypes {
@@ -346,8 +351,7 @@ export enum EndpointActionTypes {
   CREATE_TRANSLATIONS = 'CREATE_TRANSLATIONS',
 }
 
-export interface ContextWithFreshDocuments
-  extends ReturnType<typeof getTranslationName> {
+export interface ContextWithFreshDocuments {
   request: TranslationRequest
   freshSourceDoc: SanityDocumentWithPhraseMetadata
   freshDocuments: SanityTranslationDocPair[]
