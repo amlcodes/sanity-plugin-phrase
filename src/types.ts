@@ -199,6 +199,7 @@ export type SanityTMD = SanityDocument & {
   translationKey: TranslationRequest['translationKey']
   paths: TranslationRequest['paths']
   phraseProjectUid: string
+  projectDueDate: string | null | undefined
 }
 
 /** For PTDs (Phrase Translation Documents) only */

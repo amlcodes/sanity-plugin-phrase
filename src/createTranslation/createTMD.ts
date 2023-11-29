@@ -14,7 +14,7 @@ import {
  * TMD: Translation Metadata Document
  */
 export function createTMD({
-  request: { paths, sourceDoc, translationKey, pluginOptions },
+  request: { paths, sourceDoc, translationKey, pluginOptions, dateDue },
   project,
   jobs,
   freshSourceDoc,
@@ -94,6 +94,7 @@ export function createTMD({
     translationKey,
     paths,
     phraseProjectUid: project.uid || 'invalid-project',
+    projectDueDate: dateDue,
     sourceDoc: {
       _type: 'reference',
       _ref: sourceDoc._id,

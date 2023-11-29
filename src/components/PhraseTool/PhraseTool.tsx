@@ -1,4 +1,4 @@
-import { Card, Heading, Spinner, Stack, Text } from '@sanity/ui'
+import { Button, Card, Flex, Heading, Spinner, Stack, Text } from '@sanity/ui'
 import React, { useEffect, useRef, useState } from 'react'
 import {
   DocumentStore,
@@ -18,12 +18,17 @@ import {
 } from '../../types'
 import {
   SANITY_API_VERSION,
+  formatDay,
   getFieldLabel,
+  getProjectURL,
   jobsMetadataExtractor,
   joinPathsByRoot,
 } from '../../utils'
-import { PhraseLogo } from '../PhraseLogo'
-import { PluginOptionsProvider } from '../PluginOptionsContext'
+import { PhraseLogo, PhraseMonogram } from '../PhraseLogo'
+import {
+  PluginOptionsProvider,
+  usePluginOptions,
+} from '../PluginOptionsContext'
 import StatusBadge from '../StatusBadge'
 
 const useOngoingTranslations = createHookFromObservableFactory<
@@ -71,6 +76,7 @@ function OngoingTranslation({
   document: SanityMainDoc
   translation: CreatedMainDocMetadata
 }) {
+  const { phraseRegion } = usePluginOptions()
   const schema = useSchema()
   const schemaType = schema.get(document._type)
   const { ready, draft, published } = useEditState(
@@ -101,6 +107,8 @@ function OngoingTranslation({
     }
   }, [])
 
+  const dueDate =
+    ready && TMD?.projectDueDate ? new Date(TMD.projectDueDate) : undefined
   return (
     <tr
       ref={rowRef}
@@ -110,7 +118,6 @@ function OngoingTranslation({
         } as any
       }
     >
-      {!ready && <Spinner />}
       <td>
         <Stack space={2}>
           <Text size={1}>
@@ -131,7 +138,7 @@ function OngoingTranslation({
         </Stack>
       </td>
       <td>
-        {ready && TMD && (
+        {ready && TMD ? (
           <Stack space={2}>
             {TMD.targets.map((target) => {
               const metadata = jobsMetadataExtractor(target.jobs)
@@ -145,11 +152,27 @@ function OngoingTranslation({
               )
             })}
           </Stack>
+        ) : (
+          <Spinner />
         )}
       </td>
+      <td>{dueDate ? formatDay(dueDate) : 'N/A'}</td>
       <td>
-        {/* {translation.} */}
-        (due date @ToDo)
+        {ready && TMD ? (
+          <Flex align="center" gap={2}>
+            <Button
+              as="a"
+              href={getProjectURL(TMD.phraseProjectUid, phraseRegion)}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Project in Phrase"
+              mode="bleed"
+              iconRight={PhraseMonogram}
+            />
+          </Flex>
+        ) : (
+          <Spinner />
+        )}
       </td>
     </tr>
   )
@@ -167,6 +190,18 @@ const StyledTable = styled.table`
   }
   td {
     height: var(--row-height, 100%);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
   }
 `
 
@@ -204,12 +239,12 @@ export default function createPhraseTool(pluginOptions: PhrasePluginOptions) {
                   </th>
                   <th>
                     <Text size={1} weight="semibold">
-                      Due
+                      Due dates
                     </Text>
                   </th>
                   <th>
                     <Text size={1} weight="semibold">
-                      Actions
+                      <span className="sr-only">Actions</span>
                     </Text>
                   </th>
                 </thead>
