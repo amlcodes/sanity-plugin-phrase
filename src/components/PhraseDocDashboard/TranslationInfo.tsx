@@ -1,3 +1,5 @@
+'use client'
+
 import { EyeOpenIcon } from '@sanity/icons'
 import { Badge, Button, Flex, Spinner, Stack, Text } from '@sanity/ui'
 import { SanityDocument, useSchema } from 'sanity'

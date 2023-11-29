@@ -1,3 +1,5 @@
+'use client'
+
 import { PropsWithChildren, createContext, useContext } from 'react'
 import { documentInternationalizationAdapter } from '../adapters/document-internationalization'
 import { PhrasePluginOptions } from '../types'

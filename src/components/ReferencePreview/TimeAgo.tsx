@@ -1,3 +1,5 @@
+'use client'
+
 // Adapted from: https://github.com/sanity-io/sanity/blob/main/packages/sanity/src/core/form/inputs/ReferenceInput/utils/TimeAgo.tsx
 
 import { useTimeAgo } from 'sanity'

@@ -1,7 +1,5 @@
-import {
-  definePhraseOptions,
-  documentInternationalizationAdapter,
-} from '~/plugin-dist'
+import { definePhraseOptions } from '~/plugin-dist/index.esm'
+import { documentInternationalizationAdapter } from '~/plugin-dist/adapters.esm'
 import { LANGUAGES, SOURCE_LANGUAGE, TRANSLATABLE_SCHEMAS } from '~/utils'
 
 export const PHRASE_CONFIG = definePhraseOptions({

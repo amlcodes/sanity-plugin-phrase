@@ -14,6 +14,5 @@ export class SanityCreateOrReplaceError {
   readonly _tag = 'SanityCreateOrReplaceError'
 }
 
-// @TODO make effectful
 export const EffectfulSanityClient =
   Context.Tag<SanityClientDef>('@sanity/client')

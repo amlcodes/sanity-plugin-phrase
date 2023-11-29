@@ -1,3 +1,5 @@
+'use client'
+
 import { Button, Text } from '@sanity/ui'
 import { SanityDocumentWithPhraseMetadata } from '../../types'
 import DocDashboardCard from '../DocDashboardCard'

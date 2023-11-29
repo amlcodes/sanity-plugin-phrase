@@ -1,3 +1,5 @@
+'use client'
+
 import { Box, Card, Dialog } from '@sanity/ui'
 import { useState } from 'react'
 import { StringFieldProps, useFormValue } from 'sanity'

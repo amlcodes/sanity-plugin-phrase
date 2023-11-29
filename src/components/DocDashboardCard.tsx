@@ -1,3 +1,5 @@
+'use client'
+
 import { ChevronUpIcon } from '@sanity/icons'
 import { Button, Card, Flex, Heading, Stack } from '@sanity/ui'
 import { PropsWithChildren, ReactNode, useRef } from 'react'

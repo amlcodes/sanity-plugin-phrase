@@ -1,3 +1,5 @@
+'use client'
+
 import { CloseIcon } from '@sanity/icons'
 import {
   Box,

@@ -6,5 +6,4 @@ export class UnknownPhraseClientError {
   constructor(readonly error: unknown) {}
 }
 
-// @TODO make effectful?
 export const EffectfulPhraseClient = Context.Tag<PhraseClient>('@phrase/client')

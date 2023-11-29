@@ -1,7 +1,7 @@
 import { PHRASE_CONFIG } from 'phraseConfig'
 import { writeToken } from '~/lib/sanity.api'
 import { client } from '~/lib/sanity.client'
-import { backendRequestHandler } from '~/plugin-dist'
+import { backendRequestHandler } from '~/plugin-dist/backend.esm'
 import { schemaTypes } from '~/schemas'
 
 export const POST = backendRequestHandler({

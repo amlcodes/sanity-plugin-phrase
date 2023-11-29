@@ -1,3 +1,5 @@
+'use client'
+
 import { Button, Flex, Spinner, Stack, Text, useToast } from '@sanity/ui'
 import React from 'react'
 import { useClient, useEditState } from 'sanity'

@@ -20,7 +20,7 @@ import {
   isPtdId,
   NOT_PTD,
   phrasePlugin,
-} from '~/plugin-dist'
+} from '~/plugin-dist/index.esm'
 import { schemaTypes } from '~/schemas'
 import { LANGUAGES, TRANSLATABLE_SCHEMAS, undraftId } from '~/utils'
 

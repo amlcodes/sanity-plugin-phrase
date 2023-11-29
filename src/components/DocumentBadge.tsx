@@ -1,3 +1,5 @@
+'use client'
+
 import { DocumentBadgeDescription, DocumentBadgeProps } from 'sanity'
 import { PhrasePluginOptions, SanityDocumentWithPhraseMetadata } from '../types'
 import {

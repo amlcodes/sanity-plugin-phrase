@@ -1,3 +1,5 @@
+'use client'
+
 import { Button, Card, Flex, Heading, Spinner, Stack, Text } from '@sanity/ui'
 import React, { useEffect, useRef, useState } from 'react'
 import {

@@ -19,16 +19,42 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "source": "./src/index.ts",
-      "import": "./dist/index.esm.js",
+      "source": "./src/_exports/index.ts",
       "require": "./dist/index.cjs",
+      "node": {
+        "module": "./dist/index.esm.js",
+        "import": "./dist/index.cjs.mjs"
+      },
+      "import": "./dist/index.esm.js",
       "default": "./dist/index.esm.js"
+    },
+    "./adapters": {
+      "types": "./dist/adapters.d.ts",
+      "source": "./src/_exports/adapters.ts",
+      "require": "./dist/adapters.cjs",
+      "node": {
+        "module": "./dist/adapters.esm.js",
+        "import": "./dist/adapters.cjs.mjs"
+      },
+      "import": "./dist/adapters.esm.js",
+      "default": "./dist/adapters.esm.js"
+    },
+    "./backend": {
+      "types": "./dist/backend.d.ts",
+      "source": "./src/_exports/backend.ts",
+      "require": "./dist/backend.cjs",
+      "node": {
+        "module": "./dist/backend.esm.js",
+        "import": "./dist/backend.cjs.mjs"
+      },
+      "import": "./dist/backend.esm.js",
+      "default": "./dist/backend.esm.js"
     },
     "./package.json": "./package.json"
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.esm.js",
-  "source": "./src/index.ts",
+  "source": "./src/_exports/index.ts",
   "types": "./dist/index.d.ts",
   "files": [
     "dist",
@@ -53,8 +79,8 @@
     "lint": "eslint . --fix",
     "prepublishOnly": "run-s build",
     "dev:demo": "run-p watch demo:watch",
-    "demo:watch": "nodemon --watch ./dist/index.esm.js --exec 'npm run demo:copy'",
-    "demo:copy": "ncp ./dist/index.esm.js ./demo/src/plugin-dist/index.js && ncp ./dist/index.d.ts ./demo/src/plugin-dist/index.d.ts"
+    "demo:watch": "nodemon --watch ./dist --exec 'npm run demo:copy'",
+    "demo:copy": "ncp ./dist ./demo/src/plugin-dist"
   },
   "dependencies": {
     "@effect/schema": "^0.48.1",

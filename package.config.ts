@@ -4,6 +4,23 @@ export default defineConfig({
   legacyExports: true,
   dist: 'dist',
   tsconfig: 'tsconfig.dist.json',
+  bundles: [
+    {
+      source: './src/exports/index.ts',
+      require: './dist/index.js',
+      import: './dist/index.esm.js',
+    },
+    {
+      source: './src/exports/adapters.ts',
+      require: './dist/adapters.js',
+      import: './dist/adapters.esm.js',
+    },
+    {
+      source: './src/exports/backend.ts',
+      require: './dist/backend.js',
+      import: './dist/backend.esm.js',
+    },
+  ],
 
   // Remove this block to enable strict export validation
   extract: {

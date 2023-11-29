@@ -1,3 +1,5 @@
+'use client'
+
 import { Code, Spinner } from '@sanity/ui'
 import { useEffect, useState } from 'react'
 import { useClient, useEditState } from 'sanity'
