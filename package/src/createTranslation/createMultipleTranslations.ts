@@ -3,6 +3,10 @@ import { CreateMultipleTranslationsInput } from '../types'
 import { runEffectWithClients } from './createTranslationHelpers'
 import createTranslations from './createTranslations'
 
+export type CreateTranslationsResponse = Awaited<
+  ReturnType<typeof createMultipleTranslations>
+>
+
 export default function createMultipleTranslations(
   input: CreateMultipleTranslationsInput,
 ) {

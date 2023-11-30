@@ -45,6 +45,7 @@ export default async function handler(
   res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS')
   res.setHeader('Access-Control-Allow-Headers', '*')
+
   if (req.method?.toUpperCase() === 'OPTIONS') {
     res.status(200).json({})
     return

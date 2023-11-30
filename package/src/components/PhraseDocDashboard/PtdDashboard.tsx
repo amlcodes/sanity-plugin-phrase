@@ -20,8 +20,6 @@ import { TranslationInfo } from './TranslationInfo'
 import { useOpenInSidePane } from './useOpenInSidepane'
 import { PhraseMonogram } from '../PhraseLogo'
 
-const API_ENDPOINT = '/api/phrase'
-
 export default function PtdDocDashboard({
   document: ptdDocument,
   ptdMetadata,
@@ -31,7 +29,7 @@ export default function PtdDocDashboard({
 }) {
   const sanityClient = useClient({ apiVersion: SANITY_API_VERSION })
   const toast = useToast()
-  const { phraseRegion } = usePluginOptions()
+  const { phraseRegion, apiEndpoint } = usePluginOptions()
   const { ready, draft, published } = useEditState(
     ptdDocument?.phraseMetadata?.tmd?._ref || '',
     ptdDocument?.phraseMetadata?.tmd?._type || 'document',
@@ -62,12 +60,15 @@ export default function PtdDocDashboard({
 
   async function handleRefresh() {
     setState('refreshing')
-    const res = await fetch(API_ENDPOINT, {
+    const res = await fetch(apiEndpoint, {
       method: 'POST',
       body: JSON.stringify({
         action: EndpointActionTypes.REFRESH_PTD,
         ptdId: ptdDocument._id,
       }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     })
     if (!res.ok) {
       setError({

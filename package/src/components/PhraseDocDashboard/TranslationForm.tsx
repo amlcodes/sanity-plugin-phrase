@@ -12,9 +12,11 @@ import {
   Stack,
   Text,
   TextInput,
+  useToast,
 } from '@sanity/ui'
 import { useEffect, useState } from 'react'
 import { FormField, Path, SchemaType, useClient, useSchema } from 'sanity'
+import type { CreateTranslationsResponse } from '../../createTranslation/createMultipleTranslations'
 import getAllDocReferences from '../../getAllDocReferences'
 import {
   CreateMultipleTranslationsInput,
@@ -65,6 +67,7 @@ export default function TranslationForm({
   onCancel: () => void
   sourceLang: SanityLangCode
 }) {
+  const toast = useToast()
   const {
     translatableTypes,
     supportedTargetLangs,
@@ -200,13 +203,30 @@ export default function TranslationForm({
         },
       })
 
-      if (!res.ok) {
-        setState('error')
+      const body = (await res.json()).body as CreateTranslationsResponse
+      console.log({ body })
+      if (!res.ok || body.status !== 200) {
+        // @TODO error management
+        toast.push({
+          status: 'error',
+          title: 'Something went wrong',
+          description: JSON.stringify(body),
+        })
         return
       }
+
       setState('success')
+      onCancel()
+      toast.push({
+        status: 'success',
+        title: 'Translations requested',
+      })
     } catch (error) {
       setState('error')
+      toast.push({
+        status: 'error',
+        title: 'Something went wrong',
+      })
     }
   }
 
@@ -359,6 +379,7 @@ export default function TranslationForm({
           text="Cancel"
           icon={CloseIcon}
           onClick={onCancel}
+          disabled={state === 'submitting'}
           mode="ghost"
           style={{ flex: 1 }}
         />

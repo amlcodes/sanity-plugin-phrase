@@ -1,4 +1,4 @@
-import { Fetcher } from 'openapi-typescript-fetch'
+import { Fetcher } from '../openapi-typescript-fetch'
 import { operations, paths } from './phraseOpenAPI'
 import { ContentInPhrase } from '../types'
 
