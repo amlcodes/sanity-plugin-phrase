@@ -8,7 +8,6 @@ import {
   Checkbox,
   Flex,
   Select,
-  Spinner,
   Stack,
   Text,
   TextInput,
@@ -34,6 +33,7 @@ import {
 import { PhraseMonogram } from '../PhraseLogo'
 import { usePluginOptions } from '../PluginOptionsContext'
 import { ReferencePreview } from '../ReferencePreview/ReferencePreview'
+import SpinnerBox from '../SpinnerBox'
 
 type FormValue = Pick<
   CreateTranslationsInput,
@@ -120,7 +120,7 @@ export default function TranslationForm({
 
   const validation = validateFormValue(formValue)
 
-  if (!references) return <Spinner />
+  if (!references) return <SpinnerBox />
 
   async function handleSubmit() {
     if (validation !== true) return

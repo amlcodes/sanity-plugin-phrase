@@ -387,7 +387,6 @@ export type TargetLangStaleness = {
     }
   | {
       status:
-        | StaleStatus.FRESH
         | StaleStatus.ONGOING
         | StaleStatus.UNTRANSLATABLE
         | StaleStatus.UNTRANSLATED
@@ -395,6 +394,10 @@ export type TargetLangStaleness = {
   | {
       status: StaleStatus.STALE
       changedPaths: Path[]
+      translationDate: string
+    }
+  | {
+      status: StaleStatus.FRESH
       translationDate: string
     }
 )

@@ -50,6 +50,37 @@ export function getChangedPaths(
     if ('set' in patch) {
       paths.push(...Object.keys(patch.set))
     }
+    if ('insert' in patch) {
+      const itemPaths = patch.insert.items.map((item) => {
+        let base = ''
+
+        if ('before' in patch.insert) {
+          base = patch.insert.before
+        }
+        if ('after' in patch.insert) {
+          base = patch.insert.after
+        }
+        if ('replace' in patch.insert) {
+          base = patch.insert.replace
+        }
+
+        /** `content[_key == "3dadae45cc25"].blurbs[-1]` -> `content[_key == "3dadae45cc25"].blurbs` */
+        base = base.split('[').slice(0, -1).join('[')
+
+        // @TODO: how to deal with inserts' positions when requesting translations?
+
+        const selector =
+          typeof item === 'object' && '_key' in item ? item._key : undefined
+
+        // When we can't ask to translate a specific key, all we'd have is an index, which
+        // we can't be sure would point to the right item to be translated.
+        // In this case, better to translate the entire parent field.
+        if (!selector) return base
+
+        return `${base}[_key == "${selector}"]`
+      })
+      paths.push(...itemPaths)
+    }
     if ('unset' in patch) {
       paths.push(...Object.keys(patch.unset))
     }

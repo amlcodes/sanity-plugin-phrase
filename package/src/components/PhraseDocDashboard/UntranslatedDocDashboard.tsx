@@ -29,7 +29,7 @@ export default function UntranslatedDocDashboard(props: {
       collapsible={false}
       headerActions={
         <Button
-          text="Translate with Phrase"
+          text="Translate in Phrase"
           tone="primary"
           // disabled={state === 'loading'}
           onClick={props.openDialog}

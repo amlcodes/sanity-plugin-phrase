@@ -1,6 +1,6 @@
 'use client'
 
-import { Button, Flex, Spinner, Stack, Text, useToast } from '@sanity/ui'
+import { Button, Flex, Stack, Text, useToast } from '@sanity/ui'
 import React from 'react'
 import { useClient, useEditState } from 'sanity'
 import commitTranslation from '../../commitTranslation'
@@ -20,6 +20,7 @@ import {
 import DocDashboardCard from '../DocDashboardCard'
 import { PhraseMonogram } from '../PhraseLogo'
 import { usePluginOptions } from '../PluginOptionsContext'
+import SpinnerBox from '../SpinnerBox'
 import { TranslationInfo } from './TranslationInfo'
 
 export default function OngoingTranslationsDocDashboard(props: {
@@ -101,7 +102,7 @@ function OngoingTranslationCard({
   }
 
   if (!ready) {
-    return <Spinner />
+    return <SpinnerBox />
   }
 
   if (!TMD) {

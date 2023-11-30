@@ -108,6 +108,7 @@ export default async function getStaleTranslations({
         return {
           lang,
           status: StaleStatus.FRESH,
+          translationDate: diff.translationDate,
         }
       }
 

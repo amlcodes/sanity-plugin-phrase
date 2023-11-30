@@ -31,7 +31,7 @@ export function createInternalHandler(rawInput: BackendInput) {
       })
     }
 
-    if ('event' in body && 'jobParts' in body) {
+    if ('event' in body && ('jobParts' in body || 'project' in body)) {
       const updated = await handlePhraseWebhook({
         credentials,
         sanityClient,

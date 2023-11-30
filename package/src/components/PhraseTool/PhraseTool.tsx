@@ -1,7 +1,8 @@
 'use client'
 
+import { InfoOutlineIcon } from '@sanity/icons'
 import { Button, Card, Flex, Heading, Spinner, Stack, Text } from '@sanity/ui'
-import React, { useEffect, useRef, useState } from 'react'
+import React from 'react'
 import {
   DocumentStore,
   Tool,
@@ -11,7 +12,6 @@ import {
   useEditState,
   useSchema,
 } from 'sanity'
-import styled from 'styled-components'
 import {
   CreatedMainDocMetadata,
   PhrasePluginOptions,
@@ -31,7 +31,9 @@ import {
   PluginOptionsProvider,
   usePluginOptions,
 } from '../PluginOptionsContext'
+import SpinnerBox from '../SpinnerBox'
 import StatusBadge from '../StatusBadge'
+import { StyledTable, TableRow } from '../StyledTable'
 
 const useOngoingTranslations = createHookFromObservableFactory<
   // Pick<SanityMainDoc, '_id' | '_type' | '_rev' | 'phraseMetadata'>[],
@@ -60,17 +62,6 @@ const useOngoingTranslations = createHookFromObservableFactory<
   )
 })
 
-function getTallestCell(rowEl: HTMLTableRowElement) {
-  const cells = Array.from(
-    rowEl.querySelectorAll('td'),
-  ) as HTMLTableCellElement[]
-  return cells.reduce((tallest, cell) => {
-    const contentsHeight = cell.children?.[0]?.getBoundingClientRect().height
-
-    return contentsHeight > tallest ? contentsHeight : tallest
-  }, 0)
-}
-
 function OngoingTranslation({
   document,
   translation,
@@ -86,40 +77,11 @@ function OngoingTranslation({
     translation.tmd._type,
   )
   const TMD = (draft || published) as SanityTMD
-  const rowRef = useRef<HTMLTableRowElement>(null)
-  const [rowHeight, setRowHeight] = useState<number | undefined>(undefined)
-
-  useEffect(() => {
-    const rowEl = rowRef.current
-    if (!rowEl) return undefined
-
-    setRowHeight(getTallestCell(rowEl))
-    const resizeObserver = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        if (!(entry instanceof HTMLTableRowElement)) return
-
-        setRowHeight(getTallestCell(entry))
-      }
-    })
-
-    resizeObserver.observe(rowEl)
-
-    return () => {
-      resizeObserver.unobserve(rowEl)
-    }
-  }, [])
 
   const dueDate =
     ready && TMD?.projectDueDate ? new Date(TMD.projectDueDate) : undefined
   return (
-    <tr
-      ref={rowRef}
-      style={
-        {
-          '--row-height': rowHeight ? `${rowHeight}px` : undefined,
-        } as any
-      }
-    >
+    <TableRow>
       <td>
         <Stack space={2}>
           <Text size={1}>
@@ -147,8 +109,8 @@ function OngoingTranslation({
               return (
                 <StatusBadge
                   key={target._key}
-                  status={metadata.stepStatus}
-                  step={metadata.stepName}
+                  jobStatus={metadata.stepStatus}
+                  label={metadata.stepName}
                   language={target.lang.sanity}
                 />
               )
@@ -176,44 +138,12 @@ function OngoingTranslation({
           <Spinner />
         )}
       </td>
-    </tr>
+    </TableRow>
   )
 }
 
-const StyledTable = styled.table`
-  border-collapse: collapse;
-  border-spacing: 0;
-
-  th,
-  td {
-    text-align: left;
-    padding: 0.75em 0.875em;
-    border-bottom: 1px solid var(--card-shadow-outline-color);
-  }
-  td {
-    height: var(--row-height, 100%);
-  }
-
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
-  }
-`
-
 export default function createPhraseTool(pluginOptions: PhrasePluginOptions) {
-  return function PhraseTool({
-    tool,
-    ...props
-  }: {
-    tool: Tool<PhrasePluginOptions>
-  }) {
+  return function PhraseTool({ tool }: { tool: Tool<PhrasePluginOptions> }) {
     const documentStore = useDocumentStore()
     const [ongoingTranslations, loading] = useOngoingTranslations({
       documentStore,
@@ -225,56 +155,71 @@ export default function createPhraseTool(pluginOptions: PhrasePluginOptions) {
           <Stack space={3}>
             <PhraseLogo style={{ maxWidth: '74px' }} />
             <Heading>Ongoing translations</Heading>
-            {loading && <Spinner />}
-            {!loading && ongoingTranslations && (
-              <StyledTable>
-                <thead>
-                  <th>
-                    <Text size={1} weight="semibold">
-                      Item
+            {loading && <SpinnerBox />}
+            {!loading &&
+              (!ongoingTranslations || ongoingTranslations.length === 0) && (
+                <Card padding={4} border radius={2} tone="primary">
+                  <Flex gap={3} align="flex-start">
+                    <Text size={2}>
+                      <InfoOutlineIcon />
                     </Text>
-                  </th>
-                  <th>
-                    <Text size={1} weight="semibold">
-                      Target languages
+                    <Text size={2} weight="semibold">
+                      No ongoing translations
                     </Text>
-                  </th>
-                  <th>
-                    <Text size={1} weight="semibold">
-                      Due dates
-                    </Text>
-                  </th>
-                  <th>
-                    <Text size={1} weight="semibold">
-                      <span className="sr-only">Actions</span>
-                    </Text>
-                  </th>
-                </thead>
-                <tbody>
-                  {ongoingTranslations.map((doc) => (
-                    <React.Fragment key={doc._id}>
-                      {doc.phraseMetadata.translations?.map((t) => {
-                        if (
-                          t.status === 'COMMITTED' ||
-                          t.status === 'CREATING' ||
-                          t.status === 'DELETED' ||
-                          t.status === 'FAILED_PERSISTING'
-                        )
-                          return null
+                  </Flex>
+                </Card>
+              )}
+            {!loading &&
+              ongoingTranslations &&
+              ongoingTranslations.length > 0 && (
+                <StyledTable>
+                  <thead>
+                    <th>
+                      <Text size={1} weight="semibold">
+                        Document
+                      </Text>
+                    </th>
+                    <th>
+                      <Text size={1} weight="semibold">
+                        Target languages
+                      </Text>
+                    </th>
+                    <th>
+                      <Text size={1} weight="semibold">
+                        Due dates
+                      </Text>
+                    </th>
+                    <th>
+                      <Text size={1} weight="semibold">
+                        <span className="sr-only">Actions</span>
+                      </Text>
+                    </th>
+                  </thead>
+                  <tbody>
+                    {ongoingTranslations.map((doc) => (
+                      <React.Fragment key={doc._id}>
+                        {doc.phraseMetadata.translations?.map((t) => {
+                          if (
+                            t.status === 'COMMITTED' ||
+                            t.status === 'CREATING' ||
+                            t.status === 'DELETED' ||
+                            t.status === 'FAILED_PERSISTING'
+                          )
+                            return null
 
-                        return (
-                          <OngoingTranslation
-                            key={t._key}
-                            document={doc}
-                            translation={t}
-                          />
-                        )
-                      })}
-                    </React.Fragment>
-                  ))}
-                </tbody>
-              </StyledTable>
-            )}
+                          return (
+                            <OngoingTranslation
+                              key={t._key}
+                              document={doc}
+                              translation={t}
+                            />
+                          )
+                        })}
+                      </React.Fragment>
+                    ))}
+                  </tbody>
+                </StyledTable>
+              )}
           </Stack>
         </Card>
       </PluginOptionsProvider>
