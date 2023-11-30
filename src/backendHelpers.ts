@@ -6,10 +6,8 @@ export const retrySchedule = pipe(
   Schedule.exponential(Duration.millis(100), 4),
   // At most 1 second between retries
   Schedule.either(Schedule.spaced(Duration.seconds(1.5))),
-  // Include the time elapsed so far
-  Schedule.compose(Schedule.elapsed),
-  // And use it to stop retrying after a total of 15 seconds have elapsed
-  Schedule.whileOutput(Duration.lessThanOrEqualTo(Duration.seconds(10))),
+  // And use it to stop retrying after a total of 10 seconds have elapsed
+  Schedule.upTo('10 seconds'),
 )
 
 export function createResponse(data: unknown, status: number) {

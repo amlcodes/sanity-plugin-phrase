@@ -17,6 +17,11 @@ export default defineConfig({
       import: './dist/adapters.esm.js',
     },
     {
+      source: './src/exports/config.ts',
+      require: './dist/config.js',
+      import: './dist/config.esm.js',
+    },
+    {
       source: './src/exports/backend.ts',
       require: './dist/backend.js',
       import: './dist/backend.esm.js',

@@ -32,12 +32,7 @@ export default function createTranslations(input: CreateTranslationsInput) {
         }),
 
         // #3 ensure there aren't any conflicting translations
-        Effect.flatMap((context) => {
-          const isLocked = isDocLocked(context)
-          return isLocked
-            ? Effect.fail(new DocumentsLockedError())
-            : Effect.succeed(context)
-        }),
+        Effect.filterOrFail(isDocLocked, () => new DocumentsLockedError()),
 
         // #4 lock documents to prevent concurrent translations
         Effect.tap((context) =>

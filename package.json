@@ -50,6 +50,17 @@
       "import": "./dist/backend.esm.js",
       "default": "./dist/backend.esm.js"
     },
+    "./config": {
+      "types": "./dist/config.d.ts",
+      "source": "./src/_exports/config.ts",
+      "require": "./dist/config.cjs",
+      "node": {
+        "module": "./dist/config.esm.js",
+        "import": "./dist/config.cjs.mjs"
+      },
+      "import": "./dist/config.esm.js",
+      "default": "./dist/config.esm.js"
+    },
     "./package.json": "./package.json"
   },
   "main": "./dist/index.cjs",

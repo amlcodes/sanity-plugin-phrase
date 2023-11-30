@@ -18,7 +18,7 @@
     "@sanity/client": "^6.9.1",
     "@sanity/document-internationalization": "^2.0.2",
     "@sanity/vision": "3.19.2",
-    "next": "14.0.2",
+    "next": "^14.0.3",
     "next-sanity": "^7.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
