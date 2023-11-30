@@ -16,6 +16,7 @@ import {
   SanityPTD,
 } from '../types'
 import { FILENAME_PREFIX } from './constants'
+import { isPtdId } from './ids'
 
 export function jobsMetadataExtractor(jobs: PhraseJobInfo[]) {
   const lastJob = jobs[jobs.length - 1]
@@ -105,10 +106,7 @@ function sortJobsByWorkflowLevel(jobs: PhraseJobInfo[]) {
 export function isPTDDoc(
   doc: SanityDocumentWithPhraseMetadata,
 ): doc is SanityPTD {
-  return (
-    doc.phraseMetadata?._type === 'phrase.ptd.meta' &&
-    !!doc.phraseMetadata.targetLang
-  )
+  return isPtdId(doc._id) && doc.phraseMetadata?._type === 'phrase.ptd.meta'
 }
 
 export function isMainDoc(

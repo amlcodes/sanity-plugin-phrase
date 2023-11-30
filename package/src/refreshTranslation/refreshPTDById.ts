@@ -16,7 +16,7 @@ export default async function refreshPTDById(input: {
   const PTDs = await input.sanityClient.fetch<SanityPTDWithExpandedMetadata[]>(
     `*[_id == $publishedId || _id == $draftId]{
     ...,
-    phraseMetadata->{
+    phraseMetadata {
       ...,
       "expanded": tmd->
     }
