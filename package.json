@@ -4,7 +4,8 @@
   "packageManager": "yarn@4.0.2",
   "workspaces": [
     "package",
-    "demo-nextjs"
+    "demo-nextjs",
+    "demo-backend"
   ],
   "scripts": {
     "build": "turbo run build",

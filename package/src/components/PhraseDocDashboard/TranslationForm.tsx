@@ -188,22 +188,26 @@ export default function TranslationForm({
         },
       ),
     ]
-    const res = await fetch(apiEndpoint, {
-      body: JSON.stringify({
-        action: EndpointActionTypes.CREATE_TRANSLATIONS,
-        translations: input,
-      }),
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
+    try {
+      const res = await fetch(apiEndpoint, {
+        body: JSON.stringify({
+          action: EndpointActionTypes.CREATE_TRANSLATIONS,
+          translations: input,
+        }),
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
 
-    if (!res.ok) {
+      if (!res.ok) {
+        setState('error')
+        return
+      }
+      setState('success')
+    } catch (error) {
       setState('error')
-      return
     }
-    setState('success')
   }
 
   return (

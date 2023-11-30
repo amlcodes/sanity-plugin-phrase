@@ -13,11 +13,8 @@ type StoredError = {
 
 class AdapterFailedQueryingError {
   readonly _tag = 'AdapterFailedQueryingError'
-  readonly error: StoredError
 
-  constructor(error: StoredError) {
-    this.error = error
-  }
+  constructor(readonly error: StoredError) {}
 }
 
 export default function getOrCreateTranslatedDocuments(

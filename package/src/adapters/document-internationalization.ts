@@ -100,6 +100,30 @@ export function documentInternationalizationAdapter({
       (document?.[languageField] as string) || null,
     getOrCreateTranslatedDocuments: async (props) => {
       const { sanityClient, sourceDoc } = props
+      const query = /* groq */ `
+      coalesce(
+        // For documents with translations, fetch the translations metadata
+        *[_type == $metadataType && references($publishedId)][0] {
+          _id,
+          _type,
+          "translations": ${TRANSLATIONS_ARRAY_NAME}[] {
+            "lang": _key,
+            "published": value->,
+            "draft": *[_id == ("drafts." + ^.value._ref)][0],
+          }
+        },
+        // Otherwise, fetch the document itself and handle its draft & published states
+        *[_id == $publishedId][0]{
+          "lang": ${languageField},
+          "published": @,
+          "draft": *[_id == $draftId][0],
+        },
+        *[_id == $draftId][0]{
+          "lang": ${languageField},
+          "published": null,
+          "draft": @,
+        },
+      )`
       const fetched = await sanityClient.fetch<
         | {
             _id: string
@@ -107,38 +131,11 @@ export function documentInternationalizationAdapter({
             translations: DocPairFromAdapter[]
           }
         | DocPairFromAdapter
-      >(
-        /* groq */ `
-    coalesce(
-      // For documents with translations, fetch the translations metadata
-      *[_type == $metadataType && references($publishedId)][0] {
-        _id,
-        _type,
-        "translations": ${TRANSLATIONS_ARRAY_NAME}[] {
-          "lang": _key,
-          "published": value->,
-          "draft": *[_id == ("drafts." + ^.value._ref)][0],
-        }
-      },
-      // Otherwise, fetch the document itself and handle its draft & published states
-      *[_id == $publishedId][0]{
-        "lang": ${languageField},
-        "published": @,
-        "draft": *[_id == $draftId][0],
-      },
-      *[_id == $draftId][0]{
-        "lang": ${languageField},
-        "published": null,
-        "draft": @,
-      },
-    )
-    `,
-        {
-          publishedId: undraftId(sourceDoc._id),
-          draftId: draftId(sourceDoc._id),
-          metadataType: METADATA_SCHEMA_NAME,
-        },
-      )
+      >(query, {
+        publishedId: undraftId(sourceDoc._id),
+        draftId: draftId(sourceDoc._id),
+        metadataType: METADATA_SCHEMA_NAME,
+      })
 
       if (!fetched) throw new Error('Failed fetching fresh documents')
 

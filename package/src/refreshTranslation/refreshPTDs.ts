@@ -143,18 +143,15 @@ export default function refreshPTDs(input: {
             }
           })
 
-          return Effect.retry(
-            Effect.tryPromise({
-              try: () =>
-                transaction.commit({ returnDocuments: false }).then((tx) => ({
-                  ...tx,
-                  transactionJson: transaction.toJSON(),
-                })),
-              catch: (error) =>
-                new FailedUpdatingPTDsAndTMDError(error, transaction),
-            }),
-            retrySchedule,
-          )
+          return Effect.tryPromise({
+            try: () =>
+              transaction.commit({ returnDocuments: false }).then((tx) => ({
+                ...tx,
+                transactionJson: transaction.toJSON(),
+              })),
+            catch: (error) =>
+              new FailedUpdatingPTDsAndTMDError(error, transaction),
+          })
         }),
       ),
     ),

@@ -1,3 +1,3 @@
-import backendRequestHandler from '../backendRequestHandler'
+import { createRequestHandler, createInternalHandler } from '../backendHandler'
 
-export { backendRequestHandler }
+export { createRequestHandler, createInternalHandler }

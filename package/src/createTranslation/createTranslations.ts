@@ -35,9 +35,7 @@ export default function createTranslations(input: CreateTranslationsInput) {
         Effect.filterOrFail(isDocLocked, () => new DocumentsLockedError()),
 
         // #4 lock documents to prevent concurrent translations
-        Effect.tap((context) =>
-          Effect.retry(lockDocuments(context), retrySchedule),
-        ),
+        Effect.tap(lockDocuments),
 
         // #5 create Phrase project
         Effect.flatMap((context) =>

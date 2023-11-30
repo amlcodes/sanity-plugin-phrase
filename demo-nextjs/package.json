@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "dev": "next",
+    "dev": "next -p 3333",
     "format": "npx prettier --write . --ignore-path .gitignore",
     "lint": "next lint -- --ignore-path .gitignore",
     "lint:fix": "npm run format && npm run lint -- --fix",
@@ -15,10 +15,10 @@
     "singleQuote": true
   },
   "dependencies": {
-    "@portabletext/react": "3.0.11",
+    "@portabletext/react": "^3.0.11",
     "@sanity/client": "^6.9.1",
     "@sanity/document-internationalization": "^2.0.2",
-    "@sanity/vision": "3.19.2",
+    "@sanity/vision": "^3.20.0",
     "next": "^14.0.3",
     "next-sanity": "^7.0.0",
     "react": "^18.2.0",

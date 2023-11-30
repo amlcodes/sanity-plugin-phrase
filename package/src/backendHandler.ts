@@ -11,54 +11,20 @@ import {
   PhrasePluginOptions,
 } from './types'
 
-export default function backendRequestHandler({
-  sanityClient,
-  phraseCredentials: credentials,
-  pluginOptions,
-}: {
+type BackendInput = {
   /** Sanity client with write token (can modify data) */
   sanityClient: SanityClient
   /** Necessary to issue access tokens from Phrase */
   phraseCredentials: PhraseCredentialsInput
   pluginOptions: PhrasePluginOptions
-}) {
-  if (!sanityClient.config().token) {
-    throw new Error(
-      '[sanity-plugin-phrase / nextRouteHandler] Missing write token in Sanity client',
-    )
-  }
+}
 
-  if (!credentials) {
-    throw new Error(
-      '[sanity-plugin-phrase / nextRouteHandler] Missing `phraseCredentials`',
-    )
-  }
+export function createInternalHandler(rawInput: BackendInput) {
+  const input = parseInput(rawInput)
 
-  if (!credentials.userName || typeof credentials.userName !== 'string') {
-    throw new Error(
-      '[sanity-plugin-phrase / nextRouteHandler] Missing `phraseCredentials.userName`',
-    )
-  }
+  const { sanityClient, phraseCredentials: credentials, pluginOptions } = input
 
-  if (!credentials.password || typeof credentials.password !== 'string') {
-    throw new Error(
-      '[sanity-plugin-phrase / nextRouteHandler] Missing `phraseCredentials.password`',
-    )
-  }
-
-  if (
-    !credentials.region ||
-    typeof credentials.region !== 'string' ||
-    !['eur', 'us'].includes(credentials.region)
-  ) {
-    throw new Error(
-      '[sanity-plugin-phrase / nextRouteHandler] Missing or invalid `phraseCredentials.region`',
-    )
-  }
-
-  return async function phraseRouteHandler(request: Request) {
-    const body = await request.json().catch(() => {})
-
+  return async function internalHandler(body: Object) {
     if (typeof body !== 'object' || !body) {
       return new Response(JSON.stringify({ error: 'Invalid request' }), {
         status: 400,
@@ -78,7 +44,7 @@ export default function backendRequestHandler({
 
     if (
       !('action' in body) ||
-      Object.values(EndpointActionTypes).includes(body.action as any)
+      !Object.values(EndpointActionTypes).includes(body.action as any)
     ) {
       return new Response(JSON.stringify({ error: 'Invalid request' }), {
         status: 400,
@@ -126,5 +92,69 @@ export default function backendRequestHandler({
     return new Response(JSON.stringify({ error: 'Invalid request' }), {
       status: 400,
     })
+  }
+}
+
+/**
+ * Request / Response handler for the backend endpoints
+ */
+export function createRequestHandler(input: BackendInput) {
+  const handler = createInternalHandler(input)
+
+  return async function phraseRouteHandler(request: Request) {
+    const body = await request.json().catch(() => {})
+
+    return handler(body)
+  }
+}
+
+function parseInput(input: BackendInput): BackendInput {
+  const { sanityClient, phraseCredentials: credentials } = input
+  if (!sanityClient.config().token) {
+    throw new Error(
+      '[sanity-plugin-phrase/backend] Missing write Sanity client',
+    )
+  }
+
+  if (!sanityClient.config().token) {
+    throw new Error(
+      '[sanity-plugin-phrase/backend] Missing write token in Sanity client',
+    )
+  }
+
+  if (!credentials) {
+    throw new Error(
+      '[sanity-plugin-phrase/backend] Missing `phraseCredentials`',
+    )
+  }
+
+  if (!credentials.userName || typeof credentials.userName !== 'string') {
+    throw new Error(
+      '[sanity-plugin-phrase/backend] Missing `phraseCredentials.userName`',
+    )
+  }
+
+  if (!credentials.password || typeof credentials.password !== 'string') {
+    throw new Error(
+      '[sanity-plugin-phrase/backend] Missing `phraseCredentials.password`',
+    )
+  }
+
+  if (
+    !credentials.region ||
+    typeof credentials.region !== 'string' ||
+    !['eur', 'us'].includes(credentials.region)
+  ) {
+    throw new Error(
+      '[sanity-plugin-phrase/backend] Missing or invalid `phraseCredentials.region`',
+    )
+  }
+
+  return {
+    ...input,
+    sanityClient: sanityClient.withConfig({
+      perspective: 'raw',
+      useCdn: false,
+    }),
   }
 }

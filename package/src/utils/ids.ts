@@ -4,7 +4,7 @@ import { pathToString } from './paths'
 import { PTD_ID_PREFIX, TMD_ID_PREFIX } from './constants'
 
 export function makeKeyFriendly(str: string) {
-  return str.replace('-', '_')
+  return str?.replace('-', '_') || ''
 }
 
 export function getTranslationKey(paths: Path[], _rev: string) {

@@ -2490,6 +2490,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@next/env@npm:13.5.6":
+  version: 13.5.6
+  resolution: "@next/env@npm:13.5.6"
+  checksum: 5e8f3f6f987a15dad3cd7b2bcac64a6382c2ec372d95d0ce6ab295eb59c9731222017eebf71ff3005932de2571f7543bce7e5c6a8c90030207fb819404138dc2
+  languageName: node
+  linkType: hard
+
 "@next/env@npm:14.0.3":
   version: 14.0.3
   resolution: "@next/env@npm:14.0.3"
@@ -2506,10 +2513,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@next/swc-darwin-arm64@npm:13.5.6":
+  version: 13.5.6
+  resolution: "@next/swc-darwin-arm64@npm:13.5.6"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
 "@next/swc-darwin-arm64@npm:14.0.3":
   version: 14.0.3
   resolution: "@next/swc-darwin-arm64@npm:14.0.3"
   conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@next/swc-darwin-x64@npm:13.5.6":
+  version: 13.5.6
+  resolution: "@next/swc-darwin-x64@npm:13.5.6"
+  conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
@@ -2520,10 +2541,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@next/swc-linux-arm64-gnu@npm:13.5.6":
+  version: 13.5.6
+  resolution: "@next/swc-linux-arm64-gnu@npm:13.5.6"
+  conditions: os=linux & cpu=arm64 & libc=glibc
+  languageName: node
+  linkType: hard
+
 "@next/swc-linux-arm64-gnu@npm:14.0.3":
   version: 14.0.3
   resolution: "@next/swc-linux-arm64-gnu@npm:14.0.3"
   conditions: os=linux & cpu=arm64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@next/swc-linux-arm64-musl@npm:13.5.6":
+  version: 13.5.6
+  resolution: "@next/swc-linux-arm64-musl@npm:13.5.6"
+  conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
@@ -2534,10 +2569,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@next/swc-linux-x64-gnu@npm:13.5.6":
+  version: 13.5.6
+  resolution: "@next/swc-linux-x64-gnu@npm:13.5.6"
+  conditions: os=linux & cpu=x64 & libc=glibc
+  languageName: node
+  linkType: hard
+
 "@next/swc-linux-x64-gnu@npm:14.0.3":
   version: 14.0.3
   resolution: "@next/swc-linux-x64-gnu@npm:14.0.3"
   conditions: os=linux & cpu=x64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@next/swc-linux-x64-musl@npm:13.5.6":
+  version: 13.5.6
+  resolution: "@next/swc-linux-x64-musl@npm:13.5.6"
+  conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
@@ -2548,6 +2597,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@next/swc-win32-arm64-msvc@npm:13.5.6":
+  version: 13.5.6
+  resolution: "@next/swc-win32-arm64-msvc@npm:13.5.6"
+  conditions: os=win32 & cpu=arm64
+  languageName: node
+  linkType: hard
+
 "@next/swc-win32-arm64-msvc@npm:14.0.3":
   version: 14.0.3
   resolution: "@next/swc-win32-arm64-msvc@npm:14.0.3"
@@ -2555,10 +2611,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@next/swc-win32-ia32-msvc@npm:13.5.6":
+  version: 13.5.6
+  resolution: "@next/swc-win32-ia32-msvc@npm:13.5.6"
+  conditions: os=win32 & cpu=ia32
+  languageName: node
+  linkType: hard
+
 "@next/swc-win32-ia32-msvc@npm:14.0.3":
   version: 14.0.3
   resolution: "@next/swc-win32-ia32-msvc@npm:14.0.3"
   conditions: os=win32 & cpu=ia32
+  languageName: node
+  linkType: hard
+
+"@next/swc-win32-x64-msvc@npm:13.5.6":
+  version: 13.5.6
+  resolution: "@next/swc-win32-x64-msvc@npm:13.5.6"
+  conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
@@ -2666,7 +2736,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@portabletext/react@npm:3.0.11, @portabletext/react@npm:^3.0.0":
+"@portabletext/react@npm:^3.0.0, @portabletext/react@npm:^3.0.11":
   version: 3.0.11
   resolution: "@portabletext/react@npm:3.0.11"
   dependencies:
@@ -3499,7 +3569,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/ui@npm:^1.0.0, @sanity/ui@npm:^1.2.2, @sanity/ui@npm:^1.8.2, @sanity/ui@npm:^1.8.3, @sanity/ui@npm:^1.9.3":
+"@sanity/ui@npm:^1.0.0, @sanity/ui@npm:^1.2.2, @sanity/ui@npm:^1.8.2, @sanity/ui@npm:^1.9.3":
   version: 1.9.3
   resolution: "@sanity/ui@npm:1.9.3"
   dependencies:
@@ -3539,32 +3609,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/vision@npm:3.19.2":
-  version: 3.19.2
-  resolution: "@sanity/vision@npm:3.19.2"
+"@sanity/vision@npm:^3.20.0":
+  version: 3.20.2
+  resolution: "@sanity/vision@npm:3.20.2"
   dependencies:
-    "@codemirror/autocomplete": "npm:^6.1.0"
-    "@codemirror/commands": "npm:^6.0.1"
-    "@codemirror/lang-javascript": "npm:^6.0.2"
-    "@codemirror/language": "npm:^6.2.1"
-    "@codemirror/search": "npm:^6.0.1"
-    "@codemirror/view": "npm:^6.1.1"
-    "@juggle/resize-observer": "npm:^3.3.1"
-    "@lezer/highlight": "npm:^1.0.0"
-    "@rexxars/react-json-inspector": "npm:^8.0.1"
-    "@rexxars/react-split-pane": "npm:^0.1.93"
-    "@sanity/color": "npm:^2.1.20"
-    "@sanity/icons": "npm:^2.6.0"
-    "@sanity/ui": "npm:^1.8.3"
-    "@uiw/react-codemirror": "npm:^4.11.4"
-    hashlru: "npm:^2.3.0"
-    is-hotkey: "npm:^0.1.6"
-    json5: "npm:^2.2.3"
-    lodash: "npm:^4.17.21"
+    "@codemirror/autocomplete": ^6.1.0
+    "@codemirror/commands": ^6.0.1
+    "@codemirror/lang-javascript": ^6.0.2
+    "@codemirror/language": ^6.2.1
+    "@codemirror/search": ^6.0.1
+    "@codemirror/view": ^6.1.1
+    "@juggle/resize-observer": ^3.3.1
+    "@lezer/highlight": ^1.0.0
+    "@rexxars/react-json-inspector": ^8.0.1
+    "@rexxars/react-split-pane": ^0.1.93
+    "@sanity/color": ^2.1.20
+    "@sanity/icons": ^2.6.0
+    "@sanity/ui": ^1.9.3
+    "@uiw/react-codemirror": ^4.11.4
+    hashlru: ^2.3.0
+    is-hotkey: ^0.1.6
+    json5: ^2.2.3
+    lodash: ^4.17.21
   peerDependencies:
     react: ^18
     styled-components: ^5.2 || ^6
-  checksum: e03cf670db922a10ee7a179109b82fa007929f6f03f0c628900dd248ce8c99cc2b08d10d80e12cfb493930c51c44876889163aa32ddc25e10d2cacb9629e21ec
+  checksum: 3a83670e9b8904fcfb8aa8f1570faac1c63b713d46323fe4b7be836075539190bed4c266f4b7fcc4fe35ef685329b65ee329eb902753b58778b0e32abc707675
   languageName: node
   linkType: hard
 
@@ -3794,7 +3864,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*":
+"@types/node@npm:*, @types/node@npm:^20":
   version: 20.10.1
   resolution: "@types/node@npm:20.10.1"
   dependencies:
@@ -3833,7 +3903,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:latest":
+"@types/react-dom@npm:^18, @types/react-dom@npm:latest":
   version: 18.2.17
   resolution: "@types/react-dom@npm:18.2.17"
   dependencies:
@@ -3851,7 +3921,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^18.0.25, @types/react@npm:latest":
+"@types/react@npm:*, @types/react@npm:^18, @types/react@npm:^18.0.25, @types/react@npm:latest":
   version: 18.2.39
   resolution: "@types/react@npm:18.2.39"
   dependencies:
@@ -5775,15 +5845,33 @@ __metadata:
   languageName: node
   linkType: hard
 
-"demo-nextjs@workspace:demo":
+"demo-backend@workspace:demo-backend":
   version: 0.0.0-use.local
-  resolution: "demo-nextjs@workspace:demo"
+  resolution: "demo-backend@workspace:demo-backend"
   dependencies:
-    "@portabletext/react": 3.0.11
+    "@sanity/client": ^6.9.1
+    "@types/node": ^20
+    "@types/react": ^18
+    "@types/react-dom": ^18
+    next: 13.5.6
+    react: ^18
+    react-dom: ^18
+    sanity: ^3.20.2
+    sanity-plugin-phrase: 0.1.0
+    styled-components: ^6.1.1
+    typescript: ^5
+  languageName: unknown
+  linkType: soft
+
+"demo-nextjs@workspace:demo-nextjs":
+  version: 0.0.0-use.local
+  resolution: "demo-nextjs@workspace:demo-nextjs"
+  dependencies:
+    "@portabletext/react": ^3.0.11
     "@portabletext/types": ^2.0.8
     "@sanity/client": ^6.9.1
     "@sanity/document-internationalization": ^2.0.2
-    "@sanity/vision": 3.19.2
+    "@sanity/vision": ^3.20.0
     "@types/react": latest
     autoprefixer: latest
     eslint: ^8.54.0
@@ -9702,6 +9790,61 @@ __metadata:
   languageName: node
   linkType: hard
 
+"next@npm:13.5.6":
+  version: 13.5.6
+  resolution: "next@npm:13.5.6"
+  dependencies:
+    "@next/env": 13.5.6
+    "@next/swc-darwin-arm64": 13.5.6
+    "@next/swc-darwin-x64": 13.5.6
+    "@next/swc-linux-arm64-gnu": 13.5.6
+    "@next/swc-linux-arm64-musl": 13.5.6
+    "@next/swc-linux-x64-gnu": 13.5.6
+    "@next/swc-linux-x64-musl": 13.5.6
+    "@next/swc-win32-arm64-msvc": 13.5.6
+    "@next/swc-win32-ia32-msvc": 13.5.6
+    "@next/swc-win32-x64-msvc": 13.5.6
+    "@swc/helpers": 0.5.2
+    busboy: 1.6.0
+    caniuse-lite: ^1.0.30001406
+    postcss: 8.4.31
+    styled-jsx: 5.1.1
+    watchpack: 2.4.0
+  peerDependencies:
+    "@opentelemetry/api": ^1.1.0
+    react: ^18.2.0
+    react-dom: ^18.2.0
+    sass: ^1.3.0
+  dependenciesMeta:
+    "@next/swc-darwin-arm64":
+      optional: true
+    "@next/swc-darwin-x64":
+      optional: true
+    "@next/swc-linux-arm64-gnu":
+      optional: true
+    "@next/swc-linux-arm64-musl":
+      optional: true
+    "@next/swc-linux-x64-gnu":
+      optional: true
+    "@next/swc-linux-x64-musl":
+      optional: true
+    "@next/swc-win32-arm64-msvc":
+      optional: true
+    "@next/swc-win32-ia32-msvc":
+      optional: true
+    "@next/swc-win32-x64-msvc":
+      optional: true
+  peerDependenciesMeta:
+    "@opentelemetry/api":
+      optional: true
+    sass:
+      optional: true
+  bin:
+    next: dist/bin/next
+  checksum: c869b0014ae921ada3bf22301985027ec320aebcd6aa9c16e8afbded68bb8def5874cca034c680e8c351a79578f1e514971d02777f6f0a5a1d7290f25970ac0d
+  languageName: node
+  linkType: hard
+
 "next@npm:^14.0.3":
   version: 14.0.3
   resolution: "next@npm:14.0.3"
@@ -11092,7 +11235,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:^18.2.0":
+"react-dom@npm:^18, react-dom@npm:^18.2.0":
   version: 18.2.0
   resolution: "react-dom@npm:18.2.0"
   dependencies:
@@ -11195,7 +11338,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:^18.2.0":
+"react@npm:^18, react@npm:^18.2.0":
   version: 18.2.0
   resolution: "react@npm:18.2.0"
   dependencies:
@@ -13378,7 +13521,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.3.2":
+"typescript@npm:^5, typescript@npm:^5.3.2":
   version: 5.3.2
   resolution: "typescript@npm:5.3.2"
   bin:
@@ -13398,7 +13541,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^5.3.2#~builtin<compat/typescript>":
+"typescript@patch:typescript@^5#~builtin<compat/typescript>, typescript@patch:typescript@^5.3.2#~builtin<compat/typescript>":
   version: 5.3.2
   resolution: "typescript@patch:typescript@npm%3A5.3.2#~builtin<compat/typescript>::version=5.3.2&hash=ad5954"
   bin:

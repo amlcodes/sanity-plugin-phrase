@@ -9,7 +9,7 @@ export const PHRASE_CONFIG = definePhraseOptions({
     lang.id && lang.id !== SOURCE_LANGUAGE ? [lang.id] : [],
   ),
   sourceLang: SOURCE_LANGUAGE,
-  apiEndpoint: '/api/phrase',
+  apiEndpoint: 'http://localhost:3000/api/phrase',
   phraseRegion: 'us',
   phraseTemplates: [
     {
