@@ -1,160 +1,32 @@
 {
-  "name": "sanity-plugin-phrase",
-  "version": "1.0.0",
-  "description": "",
-  "keywords": [
-    "sanity",
-    "sanity-plugin"
-  ],
-  "homepage": "https://github.com/hdoro/test-implementation#readme",
-  "bugs": {
-    "url": "https://github.com/hdoro/test-implementation/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/hdoro/test-implementation.git"
-  },
-  "license": "Apache-2.0",
-  "author": "Henrique Doro <me@hdoro.dev>",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "source": "./src/_exports/index.ts",
-      "require": "./dist/index.cjs",
-      "node": {
-        "module": "./dist/index.esm.js",
-        "import": "./dist/index.cjs.mjs"
-      },
-      "import": "./dist/index.esm.js",
-      "default": "./dist/index.esm.js"
-    },
-    "./adapters": {
-      "types": "./dist/adapters.d.ts",
-      "source": "./src/_exports/adapters.ts",
-      "require": "./dist/adapters.cjs",
-      "node": {
-        "module": "./dist/adapters.esm.js",
-        "import": "./dist/adapters.cjs.mjs"
-      },
-      "import": "./dist/adapters.esm.js",
-      "default": "./dist/adapters.esm.js"
-    },
-    "./backend": {
-      "types": "./dist/backend.d.ts",
-      "source": "./src/_exports/backend.ts",
-      "require": "./dist/backend.cjs",
-      "node": {
-        "module": "./dist/backend.esm.js",
-        "import": "./dist/backend.cjs.mjs"
-      },
-      "import": "./dist/backend.esm.js",
-      "default": "./dist/backend.esm.js"
-    },
-    "./config": {
-      "types": "./dist/config.d.ts",
-      "source": "./src/_exports/config.ts",
-      "require": "./dist/config.cjs",
-      "node": {
-        "module": "./dist/config.esm.js",
-        "import": "./dist/config.cjs.mjs"
-      },
-      "import": "./dist/config.esm.js",
-      "default": "./dist/config.esm.js"
-    },
-    "./package.json": "./package.json"
-  },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.esm.js",
-  "source": "./src/_exports/index.ts",
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist",
-    "sanity.json",
-    "src",
-    "v2-incompatible.js"
+  "name": "phrase",
+  "private": true,
+  "packageManager": "yarn@4.0.2",
+  "workspaces": [
+    "package",
+    "demo"
   ],
   "scripts": {
-    "openapi-types": "openapi-typescript https://cloud.memsource.com/web/internal/v1/docs/latest/yaml?internal=false --output src/clients/phraseOpenAPI.d.ts",
-    "type-check": "tsc --noEmit",
-    "dev:unlockForTesting": "bun dev/unlockForTesting.ts --remove-ptds --remove-translated",
-    "dev:mergePTD": "bun dev/mergePTDTest.ts",
-    "dev:getStaleTranslations": "bun dev/getStaleTranslationsTest.ts",
-    "dev:createTranslations": "bun dev/createTest.ts",
-    "dev:refreshPtdById": "bun dev/refreshByIdTest.ts",
-    "dev:handleWebhook": "bun dev/webhookTest.ts",
-    "build": "run-s clean && plugin-kit verify-package --silent && pkg-utils build --strict && pkg-utils --strict",
-    "clean": "rimraf dist",
-    "format": "prettier --write --cache --ignore-unknown .",
-    "link-watch": "plugin-kit link-watch",
-    "watch": "pkg-utils watch --strict",
-    "lint": "eslint . --fix",
-    "prepublishOnly": "run-s build",
-    "dev:demo": "run-p watch demo:watch",
-    "demo:watch": "nodemon --watch ./dist --exec 'npm run demo:copy'",
-    "demo:copy": "ncp ./dist ./demo/src/plugin-dist"
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "test:watch": "turbo run test:watch",
+    "test": "turbo run test",
+    "publish-packages": "yarn run lint && changeset version && yarn run build && changeset publish",
+    "update-package-versions": "changeset version",
+    "check-versions": "manypkg check",
+    "fix-versions": "manypkg fix"
   },
   "dependencies": {
-    "@sanity/client": "^6.9.1",
-    "@sanity/icons": "^2.7.0",
-    "@sanity/incompatible-plugin": "^1.0.4",
-    "@sanity/mutator": "^3.20.2",
-    "@sanity/util": "^3.20.2",
-    "@sanity/uuid": "^3.0.2",
-    "effect": "2.0.0-next.56",
-    "entities": "^4.5.0",
-    "openapi-typescript-fetch": "^1.1.3",
-    "p-map": "^6.0.0",
-    "parse5": "^7.1.2",
-    "sanity-diff-patch": "^3.0.2"
-  },
-  "devDependencies": {
-    "@sanity/document-internationalization": "^2.0.2",
-    "@sanity/pkg-utils": "^3.3.0",
-    "@sanity/plugin-kit": "^3.1.10",
-    "@sanity/ui": "^1.9.3",
-    "@types/react": "latest",
-    "@types/react-dom": "latest",
-    "@typescript-eslint/eslint-plugin": "^6.11.0",
-    "@typescript-eslint/parser": "^6.11.0",
-    "bun-types": "latest",
-    "esbuild": "^0.19.8",
-    "eslint": "^8.54.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-config-sanity": "^7.0.1",
-    "eslint-plugin-prettier": "^5.0.1",
-    "eslint-plugin-react": "^7.33.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "ncp": "^2.0.0",
-    "nodemon": "^3.0.1",
-    "npm-run-all": "^4.1.5",
-    "openapi-typescript": "5.4.1",
+    "@changesets/cli": "latest",
+    "@manypkg/cli": "latest",
+    "eslint": "latest",
+    "eslint-config-prettier": "latest",
+    "eslint-config-turbo": "latest",
     "prettier": "^3.1.0",
-    "prettier-plugin-packagejson": "^2.4.6",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-is": "^18.2.0",
-    "rimraf": "^5.0.5",
-    "sanity": "^3.20.2",
-    "styled-components": "^6.1.1",
-    "tsx": "^3.14.0",
-    "typescript": "^5.2.2",
-    "vitest": "^0.34.6"
-  },
-  "peerDependencies": {
-    "@sanity/ui": "^1.9.0",
-    "react": "^18",
-    "react-dom": "^18",
-    "sanity": "^3",
-    "typescript": "^5.0.0",
-    "styled-components": "^5 || ^6"
+    "turbo": "latest"
   },
   "engines": {
-    "node": ">=14"
-  },
-  "type": "module",
-  "pnpm": {
-    "patchedDependencies": {
-      "openapi-typescript-fetch@1.1.3": "patches/openapi-typescript-fetch@1.1.3.patch"
-    }
+    "node": ">=18.0.0"
   }
 }

@@ -1,23 +1,22 @@
 import createMultipleTranslations from '../src/createTranslation/createMultipleTranslations'
-import { testSanityClient } from './testSanityClient'
-import testSchema from './testSchema'
 import { testCredentials } from './testCredentials'
 import { testPluginOptions } from './testPluginOptions'
+import { testSanityClient } from './testSanityClient'
 
 const response = await createMultipleTranslations({
-  schemaTypes: testSchema,
   credentials: testCredentials,
   sanityClient: testSanityClient,
   translations: [
     {
       templateUid: '1dIg0Pc1d8kLUFyM0tgdmt',
       sourceDoc: {
-        _id: 'drafts.597c3426-c389-42f0-ad62-c8224256a6b3',
-        _rev: '8ec3dd5e-ff7b-4439-bb7e-247572fa13b6',
+        _id: 'drafts.d5d369b5-22e0-413f-ac34-03f3fe9f09e3',
+        _rev: '495c30ec-de75-4e90-b2a8-a275418a152c',
         _type: 'post',
         lang: 'en',
       },
-      targetLangs: ['pt'],
+      targetLangs: ['pt', 'es'],
+      translationName: '[Sanity.io] Demonstration November 29th',
     },
   ],
   pluginOptions: testPluginOptions,

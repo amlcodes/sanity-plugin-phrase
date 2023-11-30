@@ -53,12 +53,12 @@ build/Release
 
 # Dependency directories
 
-node_modules/
-jspm_packages/
+node_modules
+jspm_packages
 
 # Snowpack dependency directory (https://snowpack.dev/)
 
-web_modules/
+web_modules
 
 # TypeScript cache
 
@@ -161,7 +161,7 @@ dist
 
 .vscode-test
 
-# yarn v2
+# yarn v2+
 
 .yarn/cache
 .yarn/unplugged
@@ -169,13 +169,17 @@ dist
 .yarn/install-state.gz
 .pnp.\*
 
+# Turborepo
+.turbo
+
 # IntelliJ based IDEs
 .idea
 
 next-app-test
 test-studio
 test-output
-example-data/gitignored
 
-testing-effect
+#TEMP
 real-demo
+scratchpad.md
+.vscode

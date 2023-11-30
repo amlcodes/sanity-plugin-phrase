@@ -1,0 +1,107 @@
+{
+  "project": {
+    "accessSettings": { "id": "54416" },
+    "analyseSettings": { "id": "118381" },
+    "businessUnit": null,
+    "client": null,
+    "costCenter": null,
+    "createdBy": {
+      "email": "henrique.doro@tinloof.com",
+      "firstName": "henrique",
+      "id": "20015355",
+      "lastName": "doro",
+      "role": "ADMIN",
+      "uid": "uonuQNieqGoM5N3rlxffY0",
+      "userName": "hdoro"
+    },
+    "dateCreated": "2023-11-29T13:44:58Z",
+    "dateDue": null,
+    "domain": null,
+    "financialSettings": { "id": "57990" },
+    "id": "38775",
+    "internalId": 88,
+    "isPublishedOnJobBoard": false,
+    "mtSettingsPerLanguageList": [
+      {
+        "machineTranslateSettings": {
+          "id": "20079195",
+          "name": "Phrase Language AI",
+          "type": "MEMSOURCE_TRANSLATE_SETTINGS",
+          "uid": "znA52MFuHDGN0izX9sSbx1"
+        },
+        "targetLang": "es"
+      },
+      {
+        "machineTranslateSettings": {
+          "id": "20079195",
+          "name": "Phrase Language AI",
+          "type": "MEMSOURCE_TRANSLATE_SETTINGS",
+          "uid": "znA52MFuHDGN0izX9sSbx1"
+        },
+        "targetLang": "pt"
+      },
+      { "machineTranslateSettings": null, "targetLang": "pt_st" },
+      { "machineTranslateSettings": null, "targetLang": "en_aw" },
+      { "machineTranslateSettings": null, "targetLang": "pt_br" },
+      { "machineTranslateSettings": null, "targetLang": "es_419" },
+      { "machineTranslateSettings": null, "targetLang": "en_ax" }
+    ],
+    "name": "[Sanity.io] Demonstration November 29th",
+    "note": null,
+    "owner": {
+      "email": "henrique.doro@tinloof.com",
+      "firstName": "henrique",
+      "id": "20015355",
+      "lastName": "doro",
+      "role": "ADMIN",
+      "uid": "uonuQNieqGoM5N3rlxffY0",
+      "userName": "hdoro"
+    },
+    "progress": { "finishedCount": 4, "overdueCount": 0, "totalCount": 4 },
+    "projectWorkflowSettings": {
+      "propagateTranslationsToLowerWfDuringUpdateSource": false
+    },
+    "purchaseOrder": null,
+    "qualityAssuranceSettings": { "id": "66060" },
+    "references": [],
+    "shared": false,
+    "sourceLang": "en",
+    "status": "COMPLETED",
+    "subDomain": null,
+    "targetLangs": ["es", "pt"],
+    "type": "PROJECT",
+    "uid": "w5GoI54qEn9Ufpjr03BNS3",
+    "userRole": null,
+    "workflowSteps": [
+      {
+        "abbreviation": "T",
+        "id": 41012,
+        "name": "Translation",
+        "workflowLevel": 1,
+        "workflowStep": {
+          "id": "20041366",
+          "lqaEnabled": false,
+          "name": "Translation",
+          "order": 10,
+          "uid": "D25IPKc2Dg9F71qR1zCxw2"
+        }
+      },
+      {
+        "abbreviation": "R",
+        "id": 41013,
+        "name": "Revision",
+        "workflowLevel": 2,
+        "workflowStep": {
+          "id": "20041367",
+          "lqaEnabled": false,
+          "name": "Revision",
+          "order": 20,
+          "uid": "YBiX40ZvYGML9aomJDKS72"
+        }
+      }
+    ]
+  },
+  "event": "PROJECT_STATUS_CHANGED",
+  "timestamp": 1701265830,
+  "eventUid": "k6bk9ndYip8f1ylQL5g6u1"
+}

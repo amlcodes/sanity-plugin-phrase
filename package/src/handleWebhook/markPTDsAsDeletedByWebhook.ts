@@ -1,6 +1,6 @@
 import { SanityClient } from 'sanity'
-import getPTDsFromPhraseWebhook from '../handleWebhook/getPTDsFromPhraseWebhook'
-import { JobDeletedWebhook } from '../handleWebhook/handlePhraseWebhook'
+import getPTDsFromPhraseWebhook from './getPTDsFromPhraseWebhook'
+import { JobDeletedWebhook } from './handlePhraseWebhook'
 import { PhraseJobInfo } from '../types'
 
 export default async function markPTDsAsDeletedByWebhook({

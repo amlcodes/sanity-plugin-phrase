@@ -3,10 +3,15 @@ import {
   DocumentInternationalizationMenu,
 } from '@sanity/document-internationalization'
 import { visionTool } from '@sanity/vision'
-import { PHRASE_CONFIG } from 'phraseConfig'
 import { defineConfig, SanityDocument } from 'sanity'
 import { Iframe, IframeOptions } from 'sanity-plugin-iframe-pane'
 import { previewUrl } from 'sanity-plugin-iframe-pane/preview-url'
+import {
+  injectPhraseIntoSchema,
+  isPtdId,
+  NOT_PTD,
+  phrasePlugin,
+} from 'sanity-plugin-phrase'
 import { deskTool } from 'sanity/desk'
 import {
   apiVersion,
@@ -15,14 +20,9 @@ import {
   projectId,
 } from '~/lib/sanity.api'
 import { getDocPath } from '~/lib/urls'
-import {
-  injectPhraseIntoSchema,
-  isPtdId,
-  NOT_PTD,
-  phrasePlugin,
-} from '~/plugin-dist/index.esm'
 import { schemaTypes } from '~/schemas'
 import { LANGUAGES, TRANSLATABLE_SCHEMAS, undraftId } from '~/utils'
+import { PHRASE_CONFIG } from './phraseConfig'
 
 function getPreviewUrl(doc: SanityDocument, urlSecret: string) {
   return `${

@@ -1,0 +1,8 @@
+
+example-data/gitignored
+/playground.ts
+
+# Generated package entrypoints don't need to be in git - will be in npm
+/adapters.js
+/backend.js
+/config.js

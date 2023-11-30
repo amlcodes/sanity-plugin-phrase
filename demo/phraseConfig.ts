@@ -1,5 +1,5 @@
-import { definePhraseOptions } from '~/plugin-dist/index.esm'
-import { documentInternationalizationAdapter } from '~/plugin-dist/adapters.esm'
+import { documentInternationalizationAdapter } from 'sanity-plugin-phrase/adapters'
+import { definePhraseOptions } from 'sanity-plugin-phrase/config'
 import { LANGUAGES, SOURCE_LANGUAGE, TRANSLATABLE_SCHEMAS } from '~/utils'
 
 export const PHRASE_CONFIG = definePhraseOptions({

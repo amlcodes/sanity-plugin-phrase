@@ -1,7 +1,7 @@
 import { Effect, pipe } from 'effect'
 import { CreateMultipleTranslationsInput } from '../types'
-import { runEffectWithClients } from '../createTranslation/createTranslationHelpers'
-import createTranslations from '../createTranslation/createTranslations'
+import { runEffectWithClients } from './createTranslationHelpers'
+import createTranslations from './createTranslations'
 
 export default function createMultipleTranslations(
   input: CreateMultipleTranslationsInput,

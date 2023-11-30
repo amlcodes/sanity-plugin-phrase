@@ -1,7 +1,7 @@
 import { PHRASE_CONFIG } from 'phraseConfig'
+import { backendRequestHandler } from 'sanity-plugin-phrase/backend'
 import { writeToken } from '~/lib/sanity.api'
 import { client } from '~/lib/sanity.client'
-import { backendRequestHandler } from '~/plugin-dist/backend.esm'
 
 export const POST = backendRequestHandler({
   phraseCredentials: {

@@ -1,0 +1,83 @@
+{
+  "headers": {
+    "x-frame-options": "DENY",
+    "x-content-type-options": "nosniff",
+    "referrer-policy": "strict-origin-when-cross-origin",
+    "strict-transport-security": "max-age=15552000; includeSubdomains, max-age=31536000; includeSubDomains",
+    "x-xss-protection": "1; mode=block",
+    "content-security-policy": "img-src 'self' * data:; child-src 'self' * blob:; frame-src 'self' * blob:; worker-src 'self' blob:; default-src 'self' data: 'unsafe-inline' 'unsafe-eval' https://*.zdassets.com https://*.zendesk.com wss://*.zendesk.com https://zendesk-eu.my.sentry.io https://*.google.com https://*.googleapis.com https://*.googleadservices.com https://*.googletagmanager.com https://*.googleanalytics.com https://*.google-analytics.com https://*.doubleclick.net https://*.gstatic.com https://*.memsource.com https://*.userpilot.io wss://*.userpilot.io https://api.ipstack.com https://*.chargebee.com https://*.cookiepro.com https://*.onetrust.com https://*.phrase-qa.com https://*.phrase-staging.com https://*.phrase.com https://*.intercom.io https://*.hotjar.com https://*.hs-scripts.com https://*.hs-analytics.net https://*.hs-banner.com https://*.intercomcdn.com",
+    "cache-control": "no-store, private, max-age=0",
+    "expires": "Fri, 10 Nov 2023 17:13:51 GMT",
+    "last-modified": "Fri, 10 Nov 2023 18:13:51 GMT",
+    "date": "Fri, 10 Nov 2023 18:13:51 GMT",
+    "vary": "accept-encoding",
+    "content-type": "application/json",
+    "transfer-encoding": "chunked",
+    "keep-alive": "timeout=1",
+    "memsource-action-id": "d37277de42a3435c8892421f9dd2d101",
+    "ratelimit-limit": "100",
+    "ratelimit-remaining": "99",
+    "x-permitted-cross-domain-policies": "none",
+    "permissions-policy": "accelerometer=(), ambient-light-sensor=(), battery=(), camera=(), display-capture=(), fullscreen=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), midi=(), payment=(), screen-wake-lock=(), usb=(), web-share=()"
+  },
+  "url": "https://us.cloud.memsource.com/web/api2/v1/projects/E0EX18x72NIcwQKC3MgMDd/jobs",
+  "ok": true,
+  "status": 201,
+  "statusText": "",
+  "data": {
+    "asyncRequest": {
+      "action": "IMPORT_JOB",
+      "dateCreated": "2023-11-10T18:13:51+0000",
+      "id": "950791"
+    },
+    "jobs": [
+      {
+        "workflowLevel": 1,
+        "workflowStep": {
+          "uid": "D25IPKc2Dg9F71qR1zCxw2",
+          "order": 10,
+          "id": "20041366",
+          "lqaEnabled": false,
+          "name": "Translation"
+        },
+        "imported": false,
+        "dateCreated": "2023-11-10T18:13:51+0000",
+        "notificationIntervalInMinutes": -1,
+        "updateSourceDate": null,
+        "dateDue": null,
+        "targetLang": "pt",
+        "continuous": false,
+        "jobAssignedEmailTemplate": null,
+        "uid": "bzm2LviS3nWAeRGjcEI281",
+        "status": "NEW",
+        "filename": "[Sanity.io] post __root__WgP4APm0i0FcIV3twu7ysp a2bafcca-fc41-4f4b-85c4-adb3307993d2.json",
+        "sourceFileUid": "SbkW0muNR2mxl2Z6WO53O0",
+        "providers": []
+      },
+      {
+        "workflowLevel": 2,
+        "workflowStep": {
+          "uid": "YBiX40ZvYGML9aomJDKS72",
+          "order": 20,
+          "id": "20041367",
+          "lqaEnabled": false,
+          "name": "Revision"
+        },
+        "imported": false,
+        "dateCreated": "2023-11-10T18:13:51+0000",
+        "notificationIntervalInMinutes": -1,
+        "updateSourceDate": null,
+        "dateDue": null,
+        "targetLang": "pt",
+        "continuous": false,
+        "jobAssignedEmailTemplate": null,
+        "uid": "6P8YPjf8qWrB6lmnq0O0k9",
+        "status": "NEW",
+        "filename": "[Sanity.io] post __root__WgP4APm0i0FcIV3twu7ysp a2bafcca-fc41-4f4b-85c4-adb3307993d2.json",
+        "sourceFileUid": "SbkW0muNR2mxl2Z6WO53O0",
+        "providers": []
+      }
+    ],
+    "unsupportedFiles": []
+  }
+}

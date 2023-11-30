@@ -1,5 +1,5 @@
 import { SanityClient } from 'sanity'
-import refreshPTDs from '../refreshTranslation/refreshPTDs'
+import refreshPTDs from './refreshPTDs'
 import {
   PhraseCredentialsInput,
   PhrasePluginOptions,
