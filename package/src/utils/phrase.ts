@@ -1,19 +1,21 @@
 import { DocumentStore, Path, createHookFromObservableFactory } from 'sanity'
 import {
+  PhraseDatacenterRegion,
+  getPhraseBaseUrl,
+} from '../clients/createPhraseClient'
+import {
   CommittedMainDocMetadata,
   CreatedMainDocMetadata,
   METADATA_KEY,
   MainDocTranslationMetadata,
+  Phrase,
   PhraseJobInfo,
   PtdPhraseMetadata,
   SanityDocumentWithPhraseMetadata,
   SanityMainDoc,
   SanityPTD,
 } from '../types'
-import {
-  PhraseDatacenterRegion,
-  getPhraseBaseUrl,
-} from '../clients/createPhraseClient'
+import { FILENAME_PREFIX } from './constants'
 
 export function jobsMetadataExtractor(jobs: PhraseJobInfo[]) {
   const lastJob = jobs[jobs.length - 1]
@@ -153,5 +155,31 @@ export function phraseDatetimeToJSDate<D extends string | undefined>(
     return new Date(phraseDate.split('+')[0]) as D extends undefined
       ? undefined
       : Date
+  }
+}
+
+export function comesFromSanity(
+  entity:
+    | Pick<Phrase['JobPart'], 'filename'>
+    | Pick<Phrase['JobInWebhook'], 'fileName'>
+    | Pick<Phrase['CreatedProject'], 'name'>,
+) {
+  const name = (() => {
+    if ('filename' in entity) return entity.filename
+
+    if ('fileName' in entity) return entity.fileName
+
+    if ('name' in entity) return entity.name
+
+    return undefined
+  })()
+
+  return name && name.startsWith(FILENAME_PREFIX)
+}
+
+export function getTranslationSnapshot(doc: SanityDocumentWithPhraseMetadata) {
+  return {
+    ...doc,
+    [METADATA_KEY]: undefined,
   }
 }

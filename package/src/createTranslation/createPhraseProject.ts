@@ -1,6 +1,10 @@
 import { Effect, pipe } from 'effect'
 import { ContextWithFreshDocuments, Phrase } from '../types'
+import { prepareDateForPhrase } from '../utils'
 
+/**
+ * @TODO if res.status === 400, don't retry
+ */
 class FailedCreatingPhraseProjectError {
   readonly _tag = 'FailedCreatingPhraseProject'
 
@@ -25,7 +29,7 @@ export default function createPhraseProject(
             request.targetLangs,
           ),
           sourceLang: request.sourceDoc.lang.phrase,
-          dateDue: request.dateDue,
+          dateDue: prepareDateForPhrase(request.dateDue),
         }),
       catch: (error) => new FailedCreatingPhraseProjectError(error, context),
     }),

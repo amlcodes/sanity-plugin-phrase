@@ -1,13 +1,13 @@
 import { fromString, numEqualSegments, toString } from '@sanity/util/paths'
 import { Path } from 'sanity'
 import { diffPatch } from 'sanity-diff-patch'
-import { dedupeArray } from '.'
 import {
   CreateTranslationsInput,
   METADATA_KEY,
   SanityDocumentWithPhraseMetadata,
   TranslationRequest,
 } from '../types'
+import { dedupeArray } from './arrays'
 import { ROOT_PATH_STR } from './constants'
 
 export function translationsIntersect(a: Path, b: Path) {

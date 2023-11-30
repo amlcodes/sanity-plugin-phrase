@@ -32,7 +32,10 @@ export default function createTranslations(input: CreateTranslationsInput) {
         }),
 
         // #3 ensure there aren't any conflicting translations
-        Effect.filterOrFail(isDocLocked, () => new DocumentsLockedError()),
+        Effect.filterOrFail(
+          (context) => !isDocLocked(context),
+          () => new DocumentsLockedError(),
+        ),
 
         // #4 lock documents to prevent concurrent translations
         Effect.tap(lockDocuments),
@@ -83,6 +86,7 @@ export default function createTranslations(input: CreateTranslationsInput) {
   )
 
   const withErrorRecovery = successfulPath.pipe(
+    Effect.tapError((error) => Effect.logError(error)),
     Effect.catchTags({
       AdapterFailedQueryingError: (error) =>
         Effect.succeed({ body: { error: error._tag }, status: 500 } as const),

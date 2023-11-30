@@ -3,7 +3,8 @@
 import injectPhraseIntoSchema from '../injectPhraseIntoSchema'
 import phrasePlugin from '../phrasePlugin'
 import { PhrasePluginOptions } from '../types'
-import { NOT_PTD, draftId, isPtdId, undraftId } from '../utils'
+import { draftId, isPtdId, undraftId } from '../utils/ids'
+import { NOT_PTD } from '../utils/constants'
 
 export {
   NOT_PTD,

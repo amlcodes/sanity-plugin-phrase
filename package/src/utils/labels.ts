@@ -1,5 +1,11 @@
-import { Path, SchemaType } from 'sanity'
-import { ROOT_PATH_STR, dedupeArray, truncate } from '.'
+import { Path, SanityDocument, SchemaType, prepareForPreview } from 'sanity'
+import { CreateTranslationsInput } from '../types'
+import { FILENAME_PREFIX, ROOT_PATH_STR } from './constants'
+import { getTranslationKey } from './ids'
+import { getReadableLanguageName } from './langs'
+import { formatInputPaths } from './paths'
+import { truncate } from './strings'
+import { dedupeArray } from './arrays'
 
 export function getFieldLabel(
   rootPath: string,
@@ -51,4 +57,32 @@ export function getFieldLabel(
     }),
   ).join(', ')
   return `${rootFieldTitle} (${subFields})`
+}
+
+export function getTranslationName({
+  sourceDoc,
+  paths: inputPaths,
+  targetLangs,
+  freshDoc,
+  schemaType,
+}: {
+  sourceDoc: CreateTranslationsInput['sourceDoc']
+  paths: CreateTranslationsInput['paths']
+  targetLangs: CreateTranslationsInput['targetLangs']
+  freshDoc: SanityDocument
+  schemaType?: SchemaType
+}) {
+  const paths = formatInputPaths(inputPaths)
+  const previewTitle =
+    (schemaType && prepareForPreview(freshDoc, schemaType)?.title) || null
+
+  const type = schemaType?.title || sourceDoc._type
+  const title = previewTitle || `id#${sourceDoc._id.slice(0, 5)}...`
+  const name = `${FILENAME_PREFIX} ${type}: ${title} (${getReadableLanguageName(
+    sourceDoc.lang,
+  )} to ${targetLangs
+    .map((l) => getReadableLanguageName(l))
+    .join(', ')}) :: ${getTranslationKey(paths, sourceDoc._rev)})`
+
+  return name
 }
