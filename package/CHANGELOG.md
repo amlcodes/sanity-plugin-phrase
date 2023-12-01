@@ -1,5 +1,11 @@
 # sanity-plugin-phrase
 
+## 0.1.2
+
+### Patch Changes
+
+- Fix: include root .js files in bundle
+
 ## 0.1.1
 
 ### Patch Changes

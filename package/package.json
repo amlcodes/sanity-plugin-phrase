@@ -1,6 +1,6 @@
 {
   "name": "sanity-plugin-phrase",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "",
   "keywords": [
     "sanity",
@@ -68,6 +68,9 @@
   "source": "./src/_exports/index.ts",
   "types": "./dist/index.d.ts",
   "files": [
+    "adapters.js",
+    "backend.js",
+    "config.js",
     "dist",
     "sanity.json",
     "src",
