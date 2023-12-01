@@ -13,14 +13,13 @@ import {
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useClient, useEditState, useSchema } from 'sanity'
 import useDebounce from '../../hooks/useDebounce'
-import getStaleTranslations from '../../staleTranslations/getStaleTranslations'
+import getStaleTranslations, {
+  getStaleTargetsByPath,
+} from '../../staleTranslations/getStaleTranslations'
 import {
   CrossSystemLangCode,
   SanityMainDoc,
   StaleResponse,
-  StaleStatus,
-  StaleTargetStatus,
-  TargetLangStaleness,
   TranslationRequest,
 } from '../../types'
 import {
@@ -52,7 +51,7 @@ export default function PreviouslyTranslatedDocDashboard(props: {
 }) {
   const schema = useSchema()
   const schemaType = schema.get(props.document._type)
-  const { ready, staleness, stalenessLoading } = useStaleness(props)
+  const { ready, staleness, stalenessReloading } = useStaleness(props)
 
   if (!ready) {
     return <SpinnerBox />
@@ -60,7 +59,7 @@ export default function PreviouslyTranslatedDocDashboard(props: {
 
   const stalenessByPath = getStaleTargetsByPath(staleness?.targets)
 
-  const canRequestTranslation = ready && !stalenessLoading && !!staleness
+  const canRequestTranslation = ready && !stalenessReloading && !!staleness
 
   function handleRequestTranslation(
     s: (typeof stalenessByPath)[keyof typeof stalenessByPath],
@@ -79,7 +78,7 @@ export default function PreviouslyTranslatedDocDashboard(props: {
       subtitle="The document has been translated into the following languages"
     >
       {!staleness && <SpinnerBox />}
-      {stalenessLoading && (
+      {stalenessReloading && (
         <Card padding={4} border radius={2} tone="primary">
           <Flex gap={3} align="flex-start">
             <Spinner />
@@ -303,36 +302,7 @@ function useStaleness({
   return {
     ready,
     staleness,
-    stalenessLoading: freshHash && !!staleness && staleness.hash !== freshHash,
+    stalenessReloading:
+      !!freshHash && !!staleness && staleness.hash !== freshHash,
   }
-}
-
-function isTargetStale(
-  target: TargetLangStaleness,
-): target is StaleTargetStatus {
-  return 'status' in target && target.status === StaleStatus.STALE
-}
-
-function getStaleTargetsByPath(targets: TargetLangStaleness[] = []) {
-  return targets.reduce(
-    (byPath, t) => {
-      if (!isTargetStale(t)) return byPath
-
-      const pathKey = getPathsKey(t.changedPaths)
-      return {
-        ...byPath,
-        [pathKey]: {
-          langs: [...(byPath[pathKey]?.langs || []), t.lang],
-          changedPaths: t.changedPaths,
-          translationDate: t.translationDate,
-        },
-      }
-    },
-    {} as Record<
-      string,
-      {
-        langs: StaleTargetStatus['lang'][]
-      } & Pick<StaleTargetStatus, 'changedPaths' | 'translationDate'>
-    >,
-  )
 }

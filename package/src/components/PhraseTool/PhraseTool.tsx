@@ -35,6 +35,7 @@ import {
 import SpinnerBox from '../SpinnerBox'
 import StatusBadge from '../StatusBadge'
 import { StyledTable, TableRow } from '../StyledTable'
+import { IntentLink } from 'sanity/router'
 
 const useOngoingTranslations = createHookFromObservableFactory<
   // Pick<SanityMainDoc, '_id' | '_type' | '_rev' | 'phraseMetadata'>[],
@@ -86,8 +87,14 @@ function OngoingTranslation({
       <td>
         <Stack space={2}>
           <Text size={1}>
-            {(schemaType && prepareForPreview(document, schemaType)?.title) ||
-              `${document._id} (unknown type)`}
+            <IntentLink
+              intent="edit"
+              params={{ id: document._id, type: document._type }}
+              style={{ textDecoration: 'underline', color: 'currentcolor' }}
+            >
+              {(schemaType && prepareForPreview(document, schemaType)?.title) ||
+                `${document._id} (unknown type)`}
+            </IntentLink>
           </Text>
           {schemaType && (
             <Stack space={1}>
@@ -121,7 +128,9 @@ function OngoingTranslation({
           <Spinner />
         )}
       </td>
-      <td>{dueDate ? formatDay(dueDate) : 'N/A'}</td>
+      <td>
+        <Text size={1}>{dueDate ? formatDay(dueDate) : 'N/A'}</Text>
+      </td>
       <td>
         {ready && TMD ? (
           <Flex align="center" gap={2}>
@@ -152,8 +161,8 @@ export default function createPhraseTool(pluginOptions: PhrasePluginOptions) {
     })
     return (
       <PluginOptionsProvider pluginOptions={pluginOptions}>
-        <Card paddingX={2} paddingY={3}>
-          <Stack space={3}>
+        <Card padding={4}>
+          <Stack space={3} style={{ maxWidth: '1000px' }}>
             <PhraseLogo style={{ maxWidth: '74px' }} />
             <Heading>Ongoing translations</Heading>
             {loading && <SpinnerBox />}

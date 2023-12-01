@@ -8,12 +8,13 @@ import {
   Checkbox,
   Flex,
   Select,
+  Spinner,
   Stack,
   Text,
   TextInput,
   useToast,
 } from '@sanity/ui'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import {
   FormField,
   Path,
@@ -24,6 +25,11 @@ import {
 } from 'sanity'
 import type { CreateTranslationsResponse } from '../../createTranslation/createMultipleTranslations'
 import getAllDocReferences from '../../getAllDocReferences'
+import useDebounce from '../../hooks/useDebounce'
+import getStaleTranslations, {
+  isTargetStale,
+} from '../../staleTranslations/getStaleTranslations'
+import { joinLangsByPath } from '../../utils/paths'
 import {
   CreateMultipleTranslationsInput,
   CreateTranslationsInput,
@@ -32,6 +38,9 @@ import {
   PhrasePluginOptions,
   SanityDocumentWithPhraseMetadata,
   SanityLangCode,
+  StaleResponse,
+  StaleStatus,
+  StaleTargetStatus,
 } from '../../types'
 import {
   getDateDaysFromNow,
@@ -46,11 +55,26 @@ import { PhraseMonogram } from '../PhraseLogo'
 import { usePluginOptions } from '../PluginOptionsContext'
 import { ReferencePreview } from '../ReferencePreview/ReferencePreview'
 import SpinnerBox from '../SpinnerBox'
+import StatusBadge from '../StatusBadge'
 
 type FormValue = Pick<
   CreateTranslationsInput,
   'templateUid' | 'dateDue' | 'targetLangs'
 >
+
+type ReferencesState = {
+  documentId: string
+  refs: Awaited<ReturnType<typeof getAllDocReferences>>
+  chosenDocs: Record<
+    string,
+    {
+      lang: SanityLangCode
+      paths: StaleTargetStatus['changedPaths']
+    }[]
+  >
+  staleness?: StaleResponse[]
+  stalenessHash?: string
+}
 
 function validateFormValue(formValue: FormValue) {
   if (!formValue.templateUid) {
@@ -98,14 +122,69 @@ export default function TranslationForm({
     targetLangs: desiredTargetLangs?.map((l) => l.sanity) || [],
   })
 
-  const [references, setReferences] = useState<
-    | undefined
-    | {
-        documentId: string
-        refs: Awaited<ReturnType<typeof getAllDocReferences>>
-        chosenDocs: Record<string, FormValue['targetLangs']>
-      }
-  >(undefined)
+  const [references, setReferences] = useState<undefined | ReferencesState>(
+    undefined,
+  )
+  const freshReferencesHash = references?.documentId
+    ? `${references.documentId}-${references.refs.map((r) => r.id).join('-')}`
+    : undefined
+  const debouncedReferencesHash = useDebounce(freshReferencesHash, 1000)
+  const stalenessReloading =
+    !!freshReferencesHash &&
+    !!references?.staleness &&
+    references.stalenessHash !== freshReferencesHash
+
+  const getStaleness = useCallback(
+    async function getStaleness() {
+      if (!references?.refs) return
+
+      const staleness = await getStaleTranslations({
+        sourceDocs: references.refs.flatMap((ref) => {
+          const freshest = ref.draft || ref.published
+          const lang =
+            freshest && pluginOptions.i18nAdapter.getDocumentLang(freshest)
+
+          if (!freshest || !lang) return []
+
+          return {
+            _id: ref.id,
+            _rev: freshest._rev,
+            _type: ref.type,
+            lang: pluginOptions.langAdapter.sanityToCrossSystem(lang),
+          }
+        }),
+        sanityClient,
+        pluginOptions,
+        targetLangs: supportedTargetLangs,
+      })
+
+      setReferences((prev) => {
+        if (!prev) return prev
+
+        return {
+          ...prev,
+          staleness,
+          stalenessHash: freshReferencesHash,
+        }
+      })
+    },
+    [
+      sanityClient,
+      pluginOptions,
+      supportedTargetLangs,
+      setReferences,
+      references,
+      freshReferencesHash,
+    ],
+  )
+
+  useEffect(
+    () => {
+      if (debouncedReferencesHash) getStaleness()
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [debouncedReferencesHash],
+  )
 
   async function refreshReferences() {
     const newRefs = await getAllDocReferences({
@@ -147,6 +226,7 @@ export default function TranslationForm({
         references,
         pluginOptions,
       })
+      console.log({ body })
 
       if (body.status !== 200) {
         // @TODO error management
@@ -165,6 +245,7 @@ export default function TranslationForm({
         title: 'Translations requested',
       })
     } catch (error) {
+      console.log({ error })
       setState('error')
       toast.push({
         status: 'error',
@@ -276,63 +357,116 @@ export default function TranslationForm({
         </FormField>
       )}
       {formValue.targetLangs.length > 0 ? (
-        <FormField title="Referenced documents to translate">
+        <FormField
+          title="Referenced documents to translate"
+          description="Documents with up-to-date translations can't be re-translated"
+        >
+          {stalenessReloading && (
+            <Card padding={4} border radius={2} tone="primary">
+              <Flex gap={3} align="flex-start">
+                <Spinner />
+                <Text size={2} weight="semibold">
+                  Re-analyzing changed content...
+                </Text>
+              </Flex>
+            </Card>
+          )}
           {references.refs.length > 0 ? (
             <Stack space={3}>
-              {references.refs.map((ref) => (
-                <Stack key={ref.id} space={2}>
-                  <ReferencePreview
-                    reference={{
-                      _ref: ref.id,
-                      _type: ref.type,
-                    }}
-                    parentDocId={document._id}
-                    schemaType={schema.get(ref.type) as SchemaType}
-                    referenceOpen={false}
-                  />
-                  {!desiredTargetLangs?.length && (
-                    <Flex gap={3} align="center">
-                      {formValue.targetLangs.map((lang) => (
-                        <Flex gap={2} align="center" key={lang} as="label">
-                          <Checkbox
-                            name="referencedDocuments"
-                            id={`${ref.id}-${lang}`}
-                            style={{ display: 'block' }}
-                            checked={
-                              references.chosenDocs?.[ref.id]?.includes(lang) ||
-                              false
-                            }
-                            onChange={(e) => {
-                              const checked = e.currentTarget.checked
+              {references.refs.map((ref) => {
+                const staleness = references.staleness?.find(
+                  (r) => r.sourceDoc?._id === ref.id,
+                )
+                return (
+                  <Stack key={ref.id} space={2}>
+                    <ReferencePreview
+                      reference={{
+                        _ref: ref.id,
+                        _type: ref.type,
+                      }}
+                      parentDocId={document._id}
+                      schemaType={schema.get(ref.type) as SchemaType}
+                      referenceOpen={false}
+                    />
+                    {!desiredTargetLangs?.length && (
+                      <Flex gap={3} align="center">
+                        {formValue.targetLangs.map((lang) => {
+                          const langStaleness = staleness?.targets.find(
+                            (t) => t.lang.sanity === lang,
+                          )
+                          const canTranslate =
+                            !!staleness &&
+                            !!langStaleness &&
+                            !('error' in langStaleness) &&
+                            (langStaleness.status === StaleStatus.STALE ||
+                              langStaleness.status === StaleStatus.UNTRANSLATED)
+                          const included =
+                            references.chosenDocs?.[ref.id]?.some(
+                              (l) => l.lang === lang,
+                            ) || false
+                          return (
+                            <Flex gap={2} align="center" key={lang} as="label">
+                              <Checkbox
+                                name="referencedDocuments"
+                                id={`${ref.id}-${lang}`}
+                                style={{ display: 'block' }}
+                                disabled={!canTranslate}
+                                checked={included}
+                                onChange={(e) => {
+                                  if (!staleness || !langStaleness) return
 
-                              const refLangs =
-                                references.chosenDocs?.[ref.id] || []
-                              const newLangs = ((): typeof refLangs => {
-                                if (checked) {
-                                  return refLangs.includes(lang)
-                                    ? refLangs
-                                    : [...refLangs, lang]
-                                }
+                                  const checked = e.currentTarget.checked
 
-                                // eslint-disable-next-line
-                                return refLangs.filter((l) => l !== lang)
-                              })()
-                              setReferences({
-                                ...references,
-                                chosenDocs: {
-                                  ...(references.chosenDocs || {}),
-                                  [ref.id]: newLangs,
-                                },
-                              })
-                            }}
-                          />
-                          <Text>{getReadableLanguageName(lang)}</Text>
-                        </Flex>
-                      ))}
-                    </Flex>
-                  )}
-                </Stack>
-              ))}
+                                  const refLangs =
+                                    references.chosenDocs?.[ref.id] || []
+                                  const newLangs = ((): typeof refLangs => {
+                                    if (checked) {
+                                      return included
+                                        ? refLangs
+                                        : [
+                                            ...refLangs,
+                                            {
+                                              lang,
+                                              paths:
+                                                langStaleness &&
+                                                isTargetStale(langStaleness)
+                                                  ? langStaleness.changedPaths
+                                                  : [[]],
+                                            },
+                                          ]
+                                    }
+
+                                    return refLangs.filter(
+                                      // eslint-disable-next-line
+                                      (l) => l.lang !== lang,
+                                    )
+                                  })()
+                                  setReferences({
+                                    ...references,
+                                    chosenDocs: {
+                                      ...(references.chosenDocs || {}),
+                                      [ref.id]: newLangs,
+                                    },
+                                  })
+                                }}
+                              />
+                              <Text>{getReadableLanguageName(lang)}</Text>
+                              {langStaleness && 'error' in langStaleness
+                                ? 'Failed fetching'
+                                : langStaleness && (
+                                    <StatusBadge
+                                      label={langStaleness.status}
+                                      staleStatus={langStaleness.status}
+                                    />
+                                  )}
+                            </Flex>
+                          )
+                        })}
+                      </Flex>
+                    )}
+                  </Stack>
+                )
+              })}
             </Stack>
           ) : (
             <Card tone="transparent" border radius={2} padding={3}>
@@ -358,7 +492,13 @@ export default function TranslationForm({
           text="Send to Phrase"
           icon={PhraseMonogram}
           tone="primary"
-          disabled={validation !== true || state === 'submitting'}
+          disabled={
+            validation !== true ||
+            state === 'submitting' ||
+            !references ||
+            !references.staleness ||
+            !!stalenessReloading
+          }
           onClick={handleSubmit}
           mode="ghost"
           style={{ flex: 1 }}
@@ -390,10 +530,7 @@ async function submitMultipleTranslations({
   paths: Path[]
   sourceLang: SanityLangCode
   sourceDocId: string
-  references?: {
-    refs: Awaited<ReturnType<typeof getAllDocReferences>>
-    chosenDocs: Record<string, FormValue['targetLangs']>
-  }
+  references?: ReferencesState
 }) {
   const MAIN: Omit<
     CreateMultipleTranslationsInput['translations'][number],
@@ -422,11 +559,13 @@ async function submitMultipleTranslations({
       }),
     },
     ...Object.entries(references?.chosenDocs || {}).flatMap(
-      ([refId, langs]) => {
-        const acceptedLangs = langs.filter((l) =>
-          formValue.targetLangs.includes(l),
+      ([refId, byLangs]) => {
+        const acceptedLangs = Object.values(byLangs).filter((l) =>
+          formValue.targetLangs.includes(l.lang),
         )
+
         const doc = references?.refs.find((r) => r.id === refId)
+
         // If we have a draft, translate that instead
         const freshDoc = doc?.draft || doc?.published
 
@@ -443,20 +582,24 @@ async function submitMultipleTranslations({
           lang: sourceLangNested,
         }
 
-        return {
-          sourceDoc,
-          targetLangs: acceptedLangs,
-          templateUid: formValue.templateUid,
-          dateDue: formValue.dateDue,
-          paths,
-          translationName: getTranslationName({
-            paths,
-            targetLangs: acceptedLangs,
+        const joinedByPath = joinLangsByPath(acceptedLangs)
+
+        return Object.values(joinedByPath).map((byPath) => {
+          return {
             sourceDoc,
-            freshDoc,
-            schemaType: schema.get(document._type),
-          }),
-        }
+            dateDue: formValue.dateDue,
+            templateUid: formValue.templateUid,
+            targetLangs: byPath.langs,
+            paths: byPath.paths,
+            translationName: getTranslationName({
+              paths,
+              targetLangs: byPath.langs,
+              sourceDoc,
+              freshDoc,
+              schemaType: schema.get(document._type),
+            }),
+          }
+        })
       },
     ),
   ]

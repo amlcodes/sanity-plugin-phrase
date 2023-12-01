@@ -5,6 +5,7 @@ import {
   CreateTranslationsInput,
   METADATA_KEY,
   SanityDocumentWithPhraseMetadata,
+  SanityLangCode,
   TranslationRequest,
 } from '../types'
 import { dedupeArray } from './arrays'
@@ -132,7 +133,7 @@ export function formatInputPaths(inputPaths: CreateTranslationsInput['paths']) {
 export function getPathsKey(paths: Path[]) {
   return (
     paths
-      ?.map((p) => toString(p))
+      ?.map((p) => pathToString(p))
       .sort((a, b) => a.localeCompare(b))
       .join('||') || ''
   )
@@ -144,4 +145,30 @@ export function parsePathsString(pathsString: string): Path[] {
   } catch (error) {
     return []
   }
+}
+
+export function joinLangsByPath(
+  entries: { lang: SanityLangCode; paths: TranslationRequest['paths'] }[] = [],
+) {
+  return entries.reduce(
+    (byPath, t) => {
+      if (!('paths' in t) || !t.paths.length) return byPath
+
+      const pathKey = getPathsKey(t.paths)
+      return {
+        ...byPath,
+        [pathKey]: {
+          langs: [...(byPath[pathKey]?.langs || []), t.lang],
+          paths: t.paths,
+        },
+      }
+    },
+    {} as Record<
+      string,
+      {
+        langs: SanityLangCode[]
+        paths: TranslationRequest['paths']
+      }
+    >,
+  )
 }

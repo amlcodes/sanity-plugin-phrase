@@ -6,12 +6,14 @@ import {
   SanityTMD,
   StaleResponse,
   StaleStatus,
+  StaleTargetStatus,
   TargetLangStaleness,
   TranslationRequest,
 } from '../types'
 import {
   draftId,
   getChangedPaths,
+  getPathsKey,
   getTranslationSnapshot,
   hasTranslationsUnfinished,
   isTranslatedMainDoc,
@@ -146,4 +148,34 @@ export default async function getStaleTranslations({
   })
 
   return res
+}
+
+export function isTargetStale(
+  target: TargetLangStaleness,
+): target is StaleTargetStatus {
+  return 'status' in target && target.status === StaleStatus.STALE
+}
+
+export function getStaleTargetsByPath(targets: TargetLangStaleness[] = []) {
+  return targets.reduce(
+    (byPath, t) => {
+      if (!isTargetStale(t)) return byPath
+
+      const pathKey = getPathsKey(t.changedPaths)
+      return {
+        ...byPath,
+        [pathKey]: {
+          langs: [...(byPath[pathKey]?.langs || []), t.lang],
+          changedPaths: t.changedPaths,
+          translationDate: t.translationDate,
+        },
+      }
+    },
+    {} as Record<
+      string,
+      {
+        langs: StaleTargetStatus['lang'][]
+      } & Pick<StaleTargetStatus, 'changedPaths' | 'translationDate'>
+    >,
+  )
 }
