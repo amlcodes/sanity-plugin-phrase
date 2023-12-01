@@ -5,7 +5,6 @@ import {
 import { visionTool } from '@sanity/vision'
 import { defineConfig, SanityDocument } from 'sanity'
 import { Iframe, IframeOptions } from 'sanity-plugin-iframe-pane'
-import { previewUrl } from 'sanity-plugin-iframe-pane/preview-url'
 import {
   injectPhraseIntoSchema,
   isPtdId,
@@ -87,12 +86,6 @@ export default defineConfig({
                   .apiVersion(apiVersion),
               ),
           ]),
-    }),
-    // Add the "Open preview" action
-    previewUrl({
-      base: '/api/draft',
-      requiresSlug: ['post'],
-      urlSecretId: previewSecretId,
     }),
     // Vision lets you query your content with GROQ in the studio
     // https://www.sanity.io/docs/the-vision-plugin

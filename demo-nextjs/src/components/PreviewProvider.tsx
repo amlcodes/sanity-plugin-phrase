@@ -18,10 +18,11 @@ export default function PreviewProvider({
 }) {
   const pathname = usePathname()
 
-  if (pathname.startsWith('/studio')) return null
+  if (pathname.startsWith('/studio')) return children
 
   const { client } = suspend(() => import('~/lib/sanity.client'), [UniqueKey])
   if (!token) throw new TypeError('Missing token')
+
   return (
     <LiveQueryProvider client={client} token={token} logger={console}>
       {children}
