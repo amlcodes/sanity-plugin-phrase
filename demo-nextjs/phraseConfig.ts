@@ -9,7 +9,7 @@ export const PHRASE_CONFIG = definePhraseOptions({
     lang.id && lang.id !== SOURCE_LANGUAGE ? [lang.id] : [],
   ),
   sourceLang: SOURCE_LANGUAGE,
-  apiEndpoint: 'http://localhost:3000/api/phrase',
+  apiEndpoint: process.env.NEXT_PUBLIC_PHRASE_PLUGIN_API_ENDPOINT,
   phraseRegion: 'us',
   phraseTemplates: [
     {

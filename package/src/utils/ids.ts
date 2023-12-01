@@ -3,12 +3,21 @@ import { CrossSystemLangCode, SanityPTD, SanityTMD } from '../types'
 import { pathToString } from './paths'
 import { PTD_ID_PREFIX, TMD_ID_PREFIX } from './constants'
 
-export function makeKeyFriendly(str: string) {
-  return str?.replace('-', '_') || ''
+/**
+ * Ensures a given string is suitable to serve as a document's _id or an array item's _key in Sanity.
+ */
+export function makeKeyAndIdFriendly(str: string) {
+  return (
+    str
+      // Remove all characters that aren't letters, numbers, or periods
+      ?.replace(/[^\d\w.]/g, '_')
+      // Remove repeated underscores
+      .replace(/_{2,}/, '_') || ''
+  )
 }
 
 export function getTranslationKey(paths: Path[], _rev: string) {
-  return [...paths.map(pathToString), _rev].map(makeKeyFriendly).join('__')
+  return [...paths.map(pathToString), _rev].map(makeKeyAndIdFriendly).join('__')
 }
 
 export function undraftId(id: string) {

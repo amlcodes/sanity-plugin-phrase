@@ -16,3 +16,12 @@ export function truncate(str: string, maxLength: number) {
 
   return `${str.slice(0, firstWhitespaceAfterTruncation)}...`
 }
+
+const formatter = new Intl.ListFormat('en', {
+  style: 'long',
+  type: 'conjunction',
+})
+
+export function semanticListItems(items: string[]) {
+  return formatter.format(items)
+}

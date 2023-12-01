@@ -1,5 +1,9 @@
 import { ContextWithFreshDocuments } from '../types'
-import { isTranslationCommitted, translationsIntersect } from '../utils'
+import {
+  isTranslationCommitted,
+  parsePathsString,
+  translationsIntersect,
+} from '../utils'
 
 export class DocumentsLockedError {
   readonly _tag = 'DocumentsLockedError'
@@ -22,7 +26,7 @@ export default function isDocLocked({
       // Ignore committed translations
       if (isTranslationCommitted(m)) return []
 
-      return m.paths
+      return parsePathsString(m.paths) || []
     })
 
     return ongoingPaths.some(

@@ -85,7 +85,7 @@ function getLockTransaction(context: ContextWithFreshDocuments) {
         _key: request.translationKey,
         _createdAt: new Date().toISOString(),
         sourceDoc: request.sourceDoc,
-        paths,
+        paths: JSON.stringify(paths),
         status: 'CREATING',
       }
       if (

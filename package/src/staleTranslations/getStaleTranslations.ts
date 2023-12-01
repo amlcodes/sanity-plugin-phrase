@@ -15,6 +15,7 @@ import {
   getTranslationSnapshot,
   hasTranslationsUnfinished,
   isTranslatedMainDoc,
+  parseTranslationSnapshot,
   undraftId,
 } from '../utils'
 
@@ -86,8 +87,8 @@ export default async function getStaleTranslations({
     })
     const diffs = TMDs.flatMap((tmd) => {
       const changedPaths = getChangedPaths(
-        getTranslationSnapshot(freshestDoc),
-        tmd.sourceSnapshot,
+        parseTranslationSnapshot(getTranslationSnapshot(freshestDoc)),
+        parseTranslationSnapshot(tmd.sourceSnapshot),
       )
       return tmd.targets.map((t) => ({
         lang: t.lang,
@@ -115,7 +116,7 @@ export default async function getStaleTranslations({
       return {
         lang,
         status: StaleStatus.STALE,
-        changedPaths: diff.changedPaths,
+        changedPaths: diff.changedPaths as TranslationRequest['paths'],
         translationDate: diff.translationDate,
       }
     })

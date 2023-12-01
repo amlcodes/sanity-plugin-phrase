@@ -14,6 +14,7 @@ import {
   SanityDocumentWithPhraseMetadata,
   SanityMainDoc,
   SanityPTD,
+  SanityTMD,
 } from '../types'
 import { FILENAME_PREFIX } from './constants'
 import { isPtdId } from './ids'
@@ -176,8 +177,20 @@ export function comesFromSanity(
 }
 
 export function getTranslationSnapshot(doc: SanityDocumentWithPhraseMetadata) {
-  return {
+  return JSON.stringify({
     ...doc,
     [METADATA_KEY]: undefined,
+  }) as SanityTMD['sourceSnapshot']
+}
+
+export function parseTranslationSnapshot(
+  doc: SanityTMD['sourceSnapshot'] | SanityDocumentWithPhraseMetadata,
+) {
+  if (typeof doc === 'object') return doc
+
+  try {
+    return JSON.parse(doc) as SanityDocumentWithPhraseMetadata
+  } catch (error) {
+    return undefined
   }
 }

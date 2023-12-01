@@ -27,14 +27,9 @@ export function getFieldLabel(
   }
 
   const rootFieldTitle = truncate(field.type.title || rootPath, 30)
-
-  if (fullPathsInRoot.length === 1 || field.type.name === 'slug') {
-    return rootFieldTitle
-  }
-
   const count = fullPathsInRoot.length
 
-  if (field.type.name === 'array') {
+  if (field.type.jsonType === 'array') {
     let subLabel = `${count} item${count > 1 ? 's' : ''}`
 
     if (fullPathsInRoot.every((path) => typeof path[1] === 'number')) {
@@ -44,6 +39,10 @@ export function getFieldLabel(
     }
 
     return `${rootFieldTitle} (${subLabel})`
+  }
+
+  if (count === 1 || field.type.name === 'slug') {
+    return rootFieldTitle
   }
 
   const subFields = dedupeArray(

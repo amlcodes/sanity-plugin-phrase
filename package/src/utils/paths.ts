@@ -41,9 +41,11 @@ export function stringToPath(str: string): Path {
 }
 
 export function getChangedPaths(
-  currentVersion: SanityDocumentWithPhraseMetadata,
-  historicVersion: SanityDocumentWithPhraseMetadata,
+  currentVersion?: SanityDocumentWithPhraseMetadata,
+  historicVersion?: SanityDocumentWithPhraseMetadata,
 ): Path[] {
+  if (!currentVersion || !historicVersion) return []
+
   const diffPatches = diffPatch(historicVersion, currentVersion)
   const pathsChanged = diffPatches.flatMap(({ patch }) => {
     const paths: string[] = []
@@ -125,4 +127,21 @@ export function formatInputPaths(inputPaths: CreateTranslationsInput['paths']) {
   ).map((p) =>
     typeof p === 'string' ? fromString(p) : p || [],
   ) as TranslationRequest['paths']
+}
+
+export function getPathsKey(paths: Path[]) {
+  return (
+    paths
+      ?.map((p) => toString(p))
+      .sort((a, b) => a.localeCompare(b))
+      .join('||') || ''
+  )
+}
+
+export function parsePathsString(pathsString: string): Path[] {
+  try {
+    return JSON.parse(pathsString) as TranslationRequest['paths']
+  } catch (error) {
+    return []
+  }
 }

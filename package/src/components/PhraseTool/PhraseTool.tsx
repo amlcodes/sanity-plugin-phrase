@@ -25,6 +25,7 @@ import {
   getProjectURL,
   jobsMetadataExtractor,
   joinPathsByRoot,
+  parsePathsString,
 } from '../../utils'
 import { PhraseLogo, PhraseMonogram } from '../PhraseLogo'
 import {
@@ -90,13 +91,13 @@ function OngoingTranslation({
           </Text>
           {schemaType && (
             <Stack space={1}>
-              {Object.entries(joinPathsByRoot(translation.paths)).map(
-                ([rootPath, fullPathsInRoot]) => (
-                  <Text size={0} key={rootPath}>
-                    {getFieldLabel(rootPath, fullPathsInRoot, schemaType)}
-                  </Text>
-                ),
-              )}
+              {Object.entries(
+                joinPathsByRoot(parsePathsString(translation.paths)),
+              ).map(([rootPath, fullPathsInRoot]) => (
+                <Text size={0} key={rootPath}>
+                  {getFieldLabel(rootPath, fullPathsInRoot, schemaType)}
+                </Text>
+              ))}
             </Stack>
           )}
         </Stack>

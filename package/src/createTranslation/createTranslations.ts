@@ -65,7 +65,7 @@ export default function createTranslations(input: CreateTranslationsInput) {
         // #7 persist jobs and create PTD documents in Sanity
         Effect.flatMap((context) =>
           pipe(
-            Effect.retry(persistJobsAndCreatePTDs(context), retrySchedule),
+            persistJobsAndCreatePTDs(context),
             Effect.map((PTDs) => ({
               ...context,
               PTDs,

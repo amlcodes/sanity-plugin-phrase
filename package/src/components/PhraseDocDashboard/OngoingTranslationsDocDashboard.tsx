@@ -2,20 +2,23 @@
 
 import { Button, Flex, Stack, Text, useToast } from '@sanity/ui'
 import React from 'react'
-import { useClient, useEditState } from 'sanity'
+import { useClient, useEditState, useSchema } from 'sanity'
 import commitTranslation from '../../commitTranslation'
 import {
   CreatedMainDocMetadata,
+  CreatingMainDocMetadata,
   MainDocTranslationMetadata,
   SanityMainDoc,
   SanityTMD,
 } from '../../types'
 import {
   SANITY_API_VERSION,
-  getPathsLabel,
+  getFieldLabel,
   getProjectURL,
   isTranslationCommitted,
   isTranslationReadyToCommit,
+  joinPathsByRoot,
+  parsePathsString,
 } from '../../utils'
 import DocDashboardCard from '../DocDashboardCard'
 import { PhraseMonogram } from '../PhraseLogo'
@@ -28,16 +31,17 @@ export default function OngoingTranslationsDocDashboard(props: {
   document: SanityMainDoc
 }) {
   return (
-    <Stack space={4} marginTop={4}>
+    <Stack space={4}>
       {props.ongoingTranslations.map((translation) => {
         if (isTranslationCommitted(translation)) return null
 
         if (translation.status === 'CREATING')
           return (
-            <div key={translation._key}>
-              Project being created in Phrase for{' '}
-              {translation.paths.map((p) => `[${p.join(', ')}]`).join(', ')}
-            </div>
+            <CreatingTranslationCard
+              key={translation._key}
+              translation={translation}
+              parentDoc={props.document}
+            />
           )
 
         if (translation.status === 'FAILED_PERSISTING') {
@@ -67,6 +71,8 @@ function OngoingTranslationCard({
   parentDoc: SanityMainDoc
   translation: CreatedMainDocMetadata
 }) {
+  const schema = useSchema()
+  const sourceSchemaType = schema.get(translation.sourceDoc._type)
   const sanityClient = useClient({ apiVersion: SANITY_API_VERSION })
   const toast = useToast()
   const [state, setState] = React.useState<'idle' | 'committing'>('idle')
@@ -113,9 +119,17 @@ function OngoingTranslationCard({
     <DocDashboardCard
       title="Translation in progress"
       subtitle={
-        <Text size={1} as="h3" style={{ flex: 1 }}>
-          {getPathsLabel(translation.paths)}
-        </Text>
+        sourceSchemaType && (
+          <>
+            {Object.entries(
+              joinPathsByRoot(parsePathsString(translation.paths)),
+            ).map(([rootPath, fullPathsInRoot]) => (
+              <Text key={rootPath} size={1} muted>
+                {getFieldLabel(rootPath, fullPathsInRoot, sourceSchemaType)}
+              </Text>
+            ))}
+          </>
+        )
       }
       headerActions={
         <Button
@@ -157,5 +171,34 @@ function OngoingTranslationCard({
         </Flex>
       )}
     </DocDashboardCard>
+  )
+}
+
+function CreatingTranslationCard({
+  translation,
+}: {
+  parentDoc: SanityMainDoc
+  translation: CreatingMainDocMetadata
+}) {
+  const schema = useSchema()
+  const sourceSchemaType = schema.get(translation.sourceDoc._type)
+  return (
+    <DocDashboardCard
+      title="Translation being created"
+      collapsible={false}
+      subtitle={
+        sourceSchemaType && (
+          <>
+            {Object.entries(
+              joinPathsByRoot(parsePathsString(translation.paths)),
+            ).map(([rootPath, fullPathsInRoot]) => (
+              <Text key={rootPath} size={1} muted>
+                {getFieldLabel(rootPath, fullPathsInRoot, sourceSchemaType)}
+              </Text>
+            ))}
+          </>
+        )
+      }
+    />
   )
 }

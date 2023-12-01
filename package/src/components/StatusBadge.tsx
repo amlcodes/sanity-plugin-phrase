@@ -37,13 +37,15 @@ export default function StatusBadge(
       : getStaleIcon(props.staleStatus)
   return (
     <Card tone={tone} border={false} style={{ background: 'transparent' }}>
-      <Flex gap={1} style={{ alignItems: 'center' }}>
+      <Flex gap={2} style={{ alignItems: 'center' }}>
         {language && (
           <Text muted size={1}>
             {getReadableLanguageName(language)}
           </Text>
         )}
-        <Icon />{' '}
+        <Text muted size={1}>
+          <Icon />
+        </Text>
         <Badge mode="outline" tone={tone} size={1}>
           {props.label}
         </Badge>

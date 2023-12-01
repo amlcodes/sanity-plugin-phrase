@@ -4,6 +4,7 @@ import { Box, Card, Dialog } from '@sanity/ui'
 import { useState } from 'react'
 import { StringFieldProps, useFormValue } from 'sanity'
 import {
+  CrossSystemLangCode,
   PhrasePluginOptions,
   SanityDocumentWithPhraseMetadata,
   TranslationRequest,
@@ -25,9 +26,10 @@ export default function getPhraseDocDashboard(
 ) {
   return function PhraseDocDashboard(_props: StringFieldProps) {
     const document = useFormValue([]) as SanityDocumentWithPhraseMetadata
-    const [pathsToTranslate, setPathsToTranslate] = useState<
-      TranslationRequest['paths'] | null
-    >(null)
+    const [toTranslate, setToTranslate] = useState<{
+      paths: TranslationRequest['paths']
+      targetLangs?: CrossSystemLangCode[]
+    } | null>(null)
 
     const docLang = pluginOptions.i18nAdapter.getDocumentLang(document)
 
@@ -56,7 +58,7 @@ export default function getPhraseDocDashboard(
             docLang === pluginOptions.sourceLang && (
               <UntranslatedDocDashboard
                 document={document}
-                openDialog={() => setPathsToTranslate([[]])}
+                openDialog={() => setToTranslate({ paths: [[]] })}
               />
             )}
 
@@ -79,23 +81,24 @@ export default function getPhraseDocDashboard(
                 <PreviouslyTranslatedDocDashboard
                   docLang={docLang}
                   document={document}
+                  setToTranslate={setToTranslate}
                 />
               )
             })()}
 
-          {pathsToTranslate && (
+          {toTranslate && (
             <Dialog
               header="Translate with Phrase"
-              onClose={() => setPathsToTranslate(null)}
+              onClose={() => setToTranslate(null)}
               zOffset={1000}
               id={`phrase-translation-dialog--${document._id}`}
               width={1}
             >
               <Box padding={4}>
                 <TranslationForm
-                  onCancel={() => setPathsToTranslate(null)}
+                  onCancel={() => setToTranslate(null)}
                   document={document}
-                  paths={pathsToTranslate}
+                  toTranslate={toTranslate}
                   sourceLang={docLang}
                 />
               </Box>

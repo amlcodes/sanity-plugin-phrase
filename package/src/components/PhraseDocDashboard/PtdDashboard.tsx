@@ -12,7 +12,11 @@ import {
   SanityTMD,
   TranslationRequest,
 } from '../../types'
-import { SANITY_API_VERSION, getProjectURL } from '../../utils'
+import {
+  SANITY_API_VERSION,
+  getProjectURL,
+  parseTranslationSnapshot,
+} from '../../utils'
 import { getReadableLanguageName } from '../../utils'
 import DocDashboardCard from '../DocDashboardCard'
 import { usePluginOptions } from '../PluginOptionsContext'
@@ -53,7 +57,7 @@ export default function PtdDocDashboard({
   const sourceDoc: TranslationRequest['sourceDoc'] = {
     _id: TMD.sourceDoc._ref,
     _type: ptdDocument._type,
-    _rev: TMD.sourceSnapshot._rev,
+    _rev: parseTranslationSnapshot(TMD.sourceSnapshot)?._rev || '',
     lang: TMD.sourceLang,
   }
   const target = TMD.targets.find((t) => t.lang.sanity === targetLang.sanity)

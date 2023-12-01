@@ -103,10 +103,11 @@ type BaseMainDocMetadata = {
   _key: TranslationRequest['translationKey']
   _createdAt: string
   sourceDoc: TranslationRequest['sourceDoc']
-  paths: TranslationRequest['paths']
+  /** Stringified `TranslationRequest['paths']` */
+  paths: ReturnType<typeof JSON.stringify>
 }
 
-type CreatingMainDocMetadata = BaseMainDocMetadata & {
+export type CreatingMainDocMetadata = BaseMainDocMetadata & {
   status: 'CREATING'
 }
 
@@ -192,7 +193,8 @@ export type TMDTarget = {
 export type SanityTMD = SanityDocument & {
   _type: typeof TMD_TYPE
   _id: `${typeof TMD_ID_PREFIX}.${ReturnType<typeof getTranslationKey>}`
-  sourceSnapshot: SanityDocument
+  /** Stringified `SanityMainDoc` */
+  sourceSnapshot: ReturnType<typeof JSON.stringify>
   sourceDoc: Reference
   sourceLang: CrossSystemLangCode
   targets: TMDTarget[]
@@ -379,6 +381,13 @@ export enum StaleStatus {
   STALE = 'STALE',
 }
 
+export type StaleTargetStatus = {
+  lang: CrossSystemLangCode
+  status: StaleStatus.STALE
+  changedPaths: TranslationRequest['paths']
+  translationDate: string
+}
+
 export type TargetLangStaleness = {
   lang: CrossSystemLangCode
 } & (
@@ -391,11 +400,7 @@ export type TargetLangStaleness = {
         | StaleStatus.UNTRANSLATABLE
         | StaleStatus.UNTRANSLATED
     }
-  | {
-      status: StaleStatus.STALE
-      changedPaths: Path[]
-      translationDate: string
-    }
+  | StaleTargetStatus
   | {
       status: StaleStatus.FRESH
       translationDate: string

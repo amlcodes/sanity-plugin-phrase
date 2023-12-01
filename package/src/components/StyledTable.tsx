@@ -53,8 +53,13 @@ export const TableRow = (props: PropsWithChildren<{}>) => {
 }
 
 export const StyledTable = styled.table`
+  caption-side: bottom;
   border-collapse: collapse;
   border-spacing: 0;
+
+  th {
+    vertical-align: bottom;
+  }
 
   th,
   td {

@@ -14,21 +14,33 @@ import {
   useToast,
 } from '@sanity/ui'
 import { useEffect, useState } from 'react'
-import { FormField, Path, SchemaType, useClient, useSchema } from 'sanity'
+import {
+  FormField,
+  Path,
+  Schema,
+  SchemaType,
+  useClient,
+  useSchema,
+} from 'sanity'
 import type { CreateTranslationsResponse } from '../../createTranslation/createMultipleTranslations'
 import getAllDocReferences from '../../getAllDocReferences'
 import {
   CreateMultipleTranslationsInput,
   CreateTranslationsInput,
+  CrossSystemLangCode,
   EndpointActionTypes,
+  PhrasePluginOptions,
   SanityDocumentWithPhraseMetadata,
   SanityLangCode,
 } from '../../types'
 import {
   getDateDaysFromNow,
+  getFieldLabel,
   getIsoDay,
   getReadableLanguageName,
   getTranslationName,
+  joinPathsByRoot,
+  semanticListItems,
 } from '../../utils'
 import { PhraseMonogram } from '../PhraseLogo'
 import { usePluginOptions } from '../PluginOptionsContext'
@@ -57,25 +69,22 @@ function validateFormValue(formValue: FormValue) {
 }
 
 export default function TranslationForm({
-  paths,
+  toTranslate: { paths, targetLangs: desiredTargetLangs },
   document,
   onCancel,
   sourceLang,
 }: {
-  paths: Path[]
+  toTranslate: { paths: Path[]; targetLangs?: CrossSystemLangCode[] }
   document: SanityDocumentWithPhraseMetadata
   onCancel: () => void
   sourceLang: SanityLangCode
 }) {
   const toast = useToast()
-  const {
-    translatableTypes,
-    supportedTargetLangs,
-    phraseTemplates,
-    apiEndpoint,
-    i18nAdapter,
-  } = usePluginOptions()
+  const pluginOptions = usePluginOptions()
+  const { translatableTypes, supportedTargetLangs, phraseTemplates } =
+    pluginOptions
   const schema = useSchema()
+  const sourceDocSchema = schema.get(document._type)
   const [state, setState] = useState<
     'idle' | 'submitting' | 'error' | 'success'
   >('idle')
@@ -86,7 +95,7 @@ export default function TranslationForm({
   const [formValue, setFormValue] = useState<FormValue>({
     templateUid: phraseTemplates[0]?.templateUid || '',
     dateDue: getIsoDay(getDateDaysFromNow(14)), // by default, 2 weeks from now
-    targetLangs: [],
+    targetLangs: desiredTargetLangs?.map((l) => l.sanity) || [],
   })
 
   const [references, setReferences] = useState<
@@ -127,85 +136,19 @@ export default function TranslationForm({
 
     setState('submitting')
 
-    const MAIN: Omit<
-      CreateMultipleTranslationsInput['translations'][number],
-      'translationName'
-    > = {
-      sourceDoc: {
-        _id: sourceDocId,
-        _rev: document._rev,
-        _type: document._type,
-        lang: sourceLang,
-      },
-      targetLangs: formValue.targetLangs,
-      templateUid: formValue.templateUid,
-      dateDue: formValue.dateDue,
-      paths,
-    }
-    const input: CreateMultipleTranslationsInput['translations'] = [
-      {
-        ...MAIN,
-        translationName: getTranslationName({
-          paths: MAIN.paths,
-          sourceDoc: MAIN.sourceDoc,
-          targetLangs: MAIN.targetLangs,
-          freshDoc: document,
-          schemaType: schema.get(document._type),
-        }),
-      },
-      ...Object.entries(references?.chosenDocs || {}).flatMap(
-        ([refId, langs]) => {
-          const acceptedLangs = langs.filter((l) =>
-            formValue.targetLangs.includes(l),
-          )
-          const doc = references?.refs.find((r) => r.id === refId)
-          // If we have a draft, translate that instead
-          const freshDoc = doc?.draft || doc?.published
-
-          if (!freshDoc) return []
-
-          const sourceLangNested = i18nAdapter.getDocumentLang(freshDoc)
-          if (!sourceLangNested) return []
-
-          const sourceDoc: CreateTranslationsInput['sourceDoc'] = {
-            _id: freshDoc._id,
-            _rev: freshDoc?._rev,
-            _type: doc.type,
-            lang: sourceLangNested,
-          }
-
-          return {
-            sourceDoc,
-            targetLangs: acceptedLangs,
-            templateUid: formValue.templateUid,
-            dateDue: formValue.dateDue,
-            paths,
-            translationName: getTranslationName({
-              paths,
-              targetLangs: acceptedLangs,
-              sourceDoc,
-              freshDoc,
-              schemaType: schema.get(document._type),
-            }),
-          }
-        },
-      ),
-    ]
     try {
-      const res = await fetch(apiEndpoint, {
-        body: JSON.stringify({
-          action: EndpointActionTypes.CREATE_TRANSLATIONS,
-          translations: input,
-        }),
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      const body = await submitMultipleTranslations({
+        schema,
+        document,
+        formValue,
+        paths,
+        sourceLang,
+        sourceDocId,
+        references,
+        pluginOptions,
       })
 
-      const body = (await res.json()).body as CreateTranslationsResponse
-      console.log({ body })
-      if (!res.ok || body.status !== 200) {
+      if (body.status !== 200) {
         // @TODO error management
         toast.push({
           status: 'error',
@@ -230,9 +173,33 @@ export default function TranslationForm({
     }
   }
 
+  const langsConfigurable =
+    !desiredTargetLangs || desiredTargetLangs.length === 0
+  const templateConfigurable = phraseTemplates.length > 1
+
   return (
     <Stack as="form" space={4}>
-      {phraseTemplates.length > 1 && (
+      {!langsConfigurable && desiredTargetLangs && (
+        <Stack space={3} flex={1}>
+          <Text size={1} weight="semibold">
+            Requesting translations for{' '}
+            {semanticListItems(
+              desiredTargetLangs.map((lang) =>
+                getReadableLanguageName(lang.sanity),
+              ),
+            )}
+          </Text>
+          {sourceDocSchema &&
+            Object.entries(joinPathsByRoot(paths)).map(
+              ([rootPath, fullPathsInRoot]) => (
+                <Text key={rootPath} size={1} muted>
+                  {getFieldLabel(rootPath, fullPathsInRoot, sourceDocSchema)}
+                </Text>
+              ),
+            )}
+        </Stack>
+      )}
+      {templateConfigurable && (
         <FormField title="Phrase project template" inputId="phraseTemplate">
           <Select
             padding={3}
@@ -271,41 +238,43 @@ export default function TranslationForm({
           }
         />
       </FormField>
-      <FormField title="Target languages">
-        <Stack space={2} paddingLeft={1}>
-          {supportedTargetLangs.map((lang) => (
-            <Flex align="center" as="label" key={lang}>
-              <Checkbox
-                name="targetLanguages"
-                id={lang}
-                style={{ display: 'block' }}
-                checked={formValue.targetLangs.includes(lang)}
-                onChange={(e) => {
-                  const checked = e.currentTarget.checked
+      {langsConfigurable && (
+        <FormField title="Target languages">
+          <Stack space={2} paddingLeft={1}>
+            {supportedTargetLangs.map((lang) => (
+              <Flex align="center" as="label" key={lang}>
+                <Checkbox
+                  name="targetLanguages"
+                  id={lang}
+                  style={{ display: 'block' }}
+                  checked={formValue.targetLangs.includes(lang)}
+                  onChange={(e) => {
+                    const checked = e.currentTarget.checked
 
-                  const targetLangs = ((): typeof formValue.targetLangs => {
-                    if (checked) {
-                      return formValue.targetLangs.includes(lang)
-                        ? formValue.targetLangs
-                        : [...formValue.targetLangs, lang]
-                    }
+                    const targetLangs = ((): typeof formValue.targetLangs => {
+                      if (checked) {
+                        return formValue.targetLangs.includes(lang)
+                          ? formValue.targetLangs
+                          : [...formValue.targetLangs, lang]
+                      }
 
-                    return formValue.targetLangs.filter((l) => l !== lang)
-                  })()
+                      return formValue.targetLangs.filter((l) => l !== lang)
+                    })()
 
-                  setFormValue({
-                    ...formValue,
-                    targetLangs,
-                  })
-                }}
-              />
-              <Box flex={1} paddingLeft={3}>
-                <Text>{getReadableLanguageName(lang)}</Text>
-              </Box>
-            </Flex>
-          ))}
-        </Stack>
-      </FormField>
+                    setFormValue({
+                      ...formValue,
+                      targetLangs,
+                    })
+                  }}
+                />
+                <Box flex={1} paddingLeft={3}>
+                  <Text>{getReadableLanguageName(lang)}</Text>
+                </Box>
+              </Flex>
+            ))}
+          </Stack>
+        </FormField>
+      )}
       {formValue.targetLangs.length > 0 ? (
         <FormField title="Referenced documents to translate">
           {references.refs.length > 0 ? (
@@ -321,45 +290,47 @@ export default function TranslationForm({
                     schemaType={schema.get(ref.type) as SchemaType}
                     referenceOpen={false}
                   />
-                  <Flex gap={3} align="center">
-                    {formValue.targetLangs.map((lang) => (
-                      <Flex gap={2} align="center" key={lang} as="label">
-                        <Checkbox
-                          name="referencedDocuments"
-                          id={`${ref.id}-${lang}`}
-                          style={{ display: 'block' }}
-                          checked={
-                            references.chosenDocs?.[ref.id]?.includes(lang) ||
-                            false
-                          }
-                          onChange={(e) => {
-                            const checked = e.currentTarget.checked
+                  {!desiredTargetLangs?.length && (
+                    <Flex gap={3} align="center">
+                      {formValue.targetLangs.map((lang) => (
+                        <Flex gap={2} align="center" key={lang} as="label">
+                          <Checkbox
+                            name="referencedDocuments"
+                            id={`${ref.id}-${lang}`}
+                            style={{ display: 'block' }}
+                            checked={
+                              references.chosenDocs?.[ref.id]?.includes(lang) ||
+                              false
+                            }
+                            onChange={(e) => {
+                              const checked = e.currentTarget.checked
 
-                            const refLangs =
-                              references.chosenDocs?.[ref.id] || []
-                            const newLangs = ((): typeof refLangs => {
-                              if (checked) {
-                                return refLangs.includes(lang)
-                                  ? refLangs
-                                  : [...refLangs, lang]
-                              }
+                              const refLangs =
+                                references.chosenDocs?.[ref.id] || []
+                              const newLangs = ((): typeof refLangs => {
+                                if (checked) {
+                                  return refLangs.includes(lang)
+                                    ? refLangs
+                                    : [...refLangs, lang]
+                                }
 
-                              // eslint-disable-next-line
-                              return refLangs.filter((l) => l !== lang)
-                            })()
-                            setReferences({
-                              ...references,
-                              chosenDocs: {
-                                ...(references.chosenDocs || {}),
-                                [ref.id]: newLangs,
-                              },
-                            })
-                          }}
-                        />
-                        <Text>{getReadableLanguageName(lang)}</Text>
-                      </Flex>
-                    ))}
-                  </Flex>
+                                // eslint-disable-next-line
+                                return refLangs.filter((l) => l !== lang)
+                              })()
+                              setReferences({
+                                ...references,
+                                chosenDocs: {
+                                  ...(references.chosenDocs || {}),
+                                  [ref.id]: newLangs,
+                                },
+                              })
+                            }}
+                          />
+                          <Text>{getReadableLanguageName(lang)}</Text>
+                        </Flex>
+                      ))}
+                    </Flex>
+                  )}
                 </Stack>
               ))}
             </Stack>
@@ -400,4 +371,105 @@ export default function TranslationForm({
       )}
     </Stack>
   )
+}
+
+async function submitMultipleTranslations({
+  document,
+  formValue,
+  paths,
+  sourceLang,
+  sourceDocId,
+  references,
+  schema,
+  pluginOptions,
+}: {
+  schema: Schema
+  pluginOptions: PhrasePluginOptions
+  document: SanityDocumentWithPhraseMetadata
+  formValue: FormValue
+  paths: Path[]
+  sourceLang: SanityLangCode
+  sourceDocId: string
+  references?: {
+    refs: Awaited<ReturnType<typeof getAllDocReferences>>
+    chosenDocs: Record<string, FormValue['targetLangs']>
+  }
+}) {
+  const MAIN: Omit<
+    CreateMultipleTranslationsInput['translations'][number],
+    'translationName'
+  > = {
+    sourceDoc: {
+      _id: sourceDocId,
+      _rev: document._rev,
+      _type: document._type,
+      lang: sourceLang,
+    },
+    targetLangs: formValue.targetLangs,
+    templateUid: formValue.templateUid,
+    dateDue: formValue.dateDue,
+    paths,
+  }
+  const input: CreateMultipleTranslationsInput['translations'] = [
+    {
+      ...MAIN,
+      translationName: getTranslationName({
+        paths: MAIN.paths,
+        sourceDoc: MAIN.sourceDoc,
+        targetLangs: MAIN.targetLangs,
+        freshDoc: document,
+        schemaType: schema.get(document._type),
+      }),
+    },
+    ...Object.entries(references?.chosenDocs || {}).flatMap(
+      ([refId, langs]) => {
+        const acceptedLangs = langs.filter((l) =>
+          formValue.targetLangs.includes(l),
+        )
+        const doc = references?.refs.find((r) => r.id === refId)
+        // If we have a draft, translate that instead
+        const freshDoc = doc?.draft || doc?.published
+
+        if (!freshDoc) return []
+
+        const sourceLangNested =
+          pluginOptions.i18nAdapter.getDocumentLang(freshDoc)
+        if (!sourceLangNested) return []
+
+        const sourceDoc: CreateTranslationsInput['sourceDoc'] = {
+          _id: freshDoc._id,
+          _rev: freshDoc?._rev,
+          _type: doc.type,
+          lang: sourceLangNested,
+        }
+
+        return {
+          sourceDoc,
+          targetLangs: acceptedLangs,
+          templateUid: formValue.templateUid,
+          dateDue: formValue.dateDue,
+          paths,
+          translationName: getTranslationName({
+            paths,
+            targetLangs: acceptedLangs,
+            sourceDoc,
+            freshDoc,
+            schemaType: schema.get(document._type),
+          }),
+        }
+      },
+    ),
+  ]
+  const res = await fetch(pluginOptions.apiEndpoint, {
+    body: JSON.stringify({
+      action: EndpointActionTypes.CREATE_TRANSLATIONS,
+      translations: input,
+    }),
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+
+  return (await res.json()).body as CreateTranslationsResponse
 }

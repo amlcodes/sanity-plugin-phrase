@@ -5,7 +5,7 @@ import {
   getTmdId,
   getTranslationSnapshot,
   isDraft,
-  makeKeyFriendly,
+  makeKeyAndIdFriendly,
   phraseDatetimeToJSDate,
   undraftId,
 } from '../utils'
@@ -71,7 +71,7 @@ export function createTMD({
         },
         jobs: jobCollection.map((j) => ({
           _type: 'phrase.job',
-          _key: makeKeyFriendly(j.uid || 'invalid-job'),
+          _key: makeKeyAndIdFriendly(j.uid || 'invalid-job'),
           uid: j.uid,
           status: j.status,
           dateDue: j.dateDue,

@@ -9,33 +9,38 @@ import { createPTDs } from './createPTDs'
 import { createTMD } from './createTMD'
 
 class PersistJobsAndCreatePTDsError {
-  readonly context: ContextWithJobs
   readonly _tag = 'PersistJobsAndCreatePTDs'
 
-  // @TODO: further divide this error. If the transaction is broken (rev changed, etc), we can't recover, need to fail. If Sanity is down, we can keep retrying.
-  constructor(error: unknown, context: ContextWithJobs) {
-    this.context = context
+  constructor(
+    readonly error: unknown,
+    readonly context: ContextWithJobs,
+  ) {
+    console.error(`[PersistJobsAndCreatePTDs] ${error}`, error)
   }
 }
 
 export default function persistJobsAndCreatePTDs(context: ContextWithJobs) {
-  const { transaction, PTDs } = getTransaction(context)
+  try {
+    const { transaction, PTDs } = getTransaction(context)
 
-  return pipe(
-    Effect.tryPromise({
-      try: () =>
-        transaction.commit({
-          returnDocuments: false,
-          autoGenerateArrayKeys: true,
-        }),
-      catch: (error) => new PersistJobsAndCreatePTDsError(error, context),
-    }),
-    Effect.map(() => PTDs),
-    Effect.tap(() =>
-      Effect.logInfo('[persistJobsAndCreatePTDs] Successfully created PTDs'),
-    ),
-    Effect.withLogSpan('persistJobsAndCreatePTDs'),
-  )
+    return pipe(
+      Effect.tryPromise({
+        try: () =>
+          transaction.commit({
+            returnDocuments: false,
+            autoGenerateArrayKeys: true,
+          }),
+        catch: (error) => new PersistJobsAndCreatePTDsError(error, context),
+      }),
+      Effect.map(() => PTDs),
+      Effect.tap(() =>
+        Effect.logInfo('[persistJobsAndCreatePTDs] Successfully created PTDs'),
+      ),
+      Effect.withLogSpan('persistJobsAndCreatePTDs'),
+    )
+  } catch (error) {
+    return Effect.fail(new PersistJobsAndCreatePTDsError(error, context))
+  }
 }
 
 function getTransaction(context: ContextWithJobs) {
