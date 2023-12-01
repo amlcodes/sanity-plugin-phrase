@@ -97,7 +97,12 @@ export function createTMD({
     projectDueDate: dateDue,
     sourceDoc: {
       _type: 'reference',
-      _ref: sourceDoc._id,
+      _ref: undraftId(sourceDoc._id),
+      _strengthenOnPublish: isDraft(sourceDoc._id)
+        ? {
+            type: sourceDoc._type,
+          }
+        : undefined,
     },
     sourceLang: sourceDoc.lang,
     sourceSnapshot: getTranslationSnapshot(freshSourceDoc),
