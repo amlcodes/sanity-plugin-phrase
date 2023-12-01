@@ -1,3 +1,4 @@
+import { PHRASE_CONFIG } from 'phraseConfig'
 import {
   SlugValidationContext,
   defineArrayMember,
@@ -84,7 +85,10 @@ export default defineType({
     },
     prepare(selection) {
       const hasTranslations = selection.translations?.find(
-        (t) => t.status !== 'COMMITTED',
+        (t) =>
+          t.status !== 'COMMITTED' &&
+          (selection.language === PHRASE_CONFIG.sourceLang ||
+            t.targetLangs?.some((l) => l?.sanity === selection.language)),
       )
       return {
         ...selection,

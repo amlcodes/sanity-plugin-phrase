@@ -156,18 +156,28 @@ export function isTargetStale(
   return 'status' in target && target.status === StaleStatus.STALE
 }
 
-export function getStaleTargetsByPath(targets: TargetLangStaleness[] = []) {
+export function getTranslatableTargetsByPath(
+  targets: TargetLangStaleness[] = [],
+) {
   return targets.reduce(
     (byPath, t) => {
-      if (!isTargetStale(t)) return byPath
+      if (
+        !('status' in t) ||
+        (!isTargetStale(t) && t.status !== StaleStatus.UNTRANSLATED)
+      )
+        return byPath
 
-      const pathKey = getPathsKey(t.changedPaths)
+      const paths: TranslationRequest['paths'] = isTargetStale(t)
+        ? t.changedPaths
+        : [[]]
+      const pathKey = getPathsKey(paths)
       return {
         ...byPath,
         [pathKey]: {
           langs: [...(byPath[pathKey]?.langs || []), t.lang],
-          changedPaths: t.changedPaths,
-          translationDate: t.translationDate,
+          paths,
+          translationDate:
+            'translationDate' in t ? t.translationDate : undefined,
         },
       }
     },
@@ -175,7 +185,8 @@ export function getStaleTargetsByPath(targets: TargetLangStaleness[] = []) {
       string,
       {
         langs: StaleTargetStatus['lang'][]
-      } & Pick<StaleTargetStatus, 'changedPaths' | 'translationDate'>
+        paths: TranslationRequest['paths']
+      } & Pick<Partial<StaleTargetStatus>, 'translationDate'>
     >,
   )
 }

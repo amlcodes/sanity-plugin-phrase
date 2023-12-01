@@ -14,7 +14,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useClient, useEditState, useSchema } from 'sanity'
 import useDebounce from '../../hooks/useDebounce'
 import getStaleTranslations, {
-  getStaleTargetsByPath,
+  getTranslatableTargetsByPath,
 } from '../../staleTranslations/getStaleTranslations'
 import {
   CrossSystemLangCode,
@@ -57,7 +57,7 @@ export default function PreviouslyTranslatedDocDashboard(props: {
     return <SpinnerBox />
   }
 
-  const stalenessByPath = getStaleTargetsByPath(staleness?.targets)
+  const stalenessByPath = getTranslatableTargetsByPath(staleness?.targets)
 
   const canRequestTranslation = ready && !stalenessReloading && !!staleness
 
@@ -66,7 +66,7 @@ export default function PreviouslyTranslatedDocDashboard(props: {
   ) {
     return function requestTranslation() {
       props.setToTranslate({
-        paths: s.changedPaths,
+        paths: s.paths,
         targetLangs: s.langs,
       })
     }
@@ -171,13 +171,12 @@ export default function PreviouslyTranslatedDocDashboard(props: {
             )}
           </Flex>
           {Object.values(stalenessByPath).map((s) => {
-            const key = getPathsKey(s.changedPaths)
+            const key = getPathsKey(s.paths)
             if (!schemaType) {
-              return (
-                <Code key={key}>{JSON.stringify(s.changedPaths, null, 2)}</Code>
-              )
+              return <Code key={key}>{JSON.stringify(s.paths, null, 2)}</Code>
             }
 
+            const isTranslated = s.paths.length > 1 || s.paths[0].length > 0
             return (
               <Flex
                 gap={3}
@@ -191,7 +190,7 @@ export default function PreviouslyTranslatedDocDashboard(props: {
               >
                 <Stack space={3} flex={1}>
                   <Text size={1} weight="semibold">
-                    Outdated for{' '}
+                    {isTranslated ? 'Outdated for' : 'Not translated into'}{' '}
                     {semanticListItems(
                       s.langs.map((lang) =>
                         getReadableLanguageName(lang.sanity),
@@ -199,7 +198,7 @@ export default function PreviouslyTranslatedDocDashboard(props: {
                     )}
                     :
                   </Text>
-                  {Object.entries(joinPathsByRoot(s.changedPaths)).map(
+                  {Object.entries(joinPathsByRoot(s.paths)).map(
                     ([rootPath, fullPathsInRoot]) => (
                       <Text key={rootPath} size={1} muted>
                         {getFieldLabel(rootPath, fullPathsInRoot, schemaType)}

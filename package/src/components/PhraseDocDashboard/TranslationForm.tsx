@@ -1,6 +1,6 @@
 'use client'
 
-import { CloseIcon } from '@sanity/icons'
+import { CloseIcon, InfoOutlineIcon } from '@sanity/icons'
 import {
   Box,
   Button,
@@ -373,6 +373,20 @@ export default function TranslationForm({
           )}
           {references.refs.length > 0 ? (
             <Stack space={3}>
+              {desiredTargetLangs && desiredTargetLangs.length > 0 && (
+                <Card padding={4} border radius={2} tone="critical">
+                  <Flex gap={3} align="flex-start">
+                    <Text size={2}>
+                      <InfoOutlineIcon />
+                    </Text>
+                    {/* @TODO: remove this */}
+                    <Text size={2}>
+                      DEV: References selection for previously translated
+                      documents is broken ATM.
+                    </Text>
+                  </Flex>
+                </Card>
+              )}
               {references.refs.map((ref) => {
                 const staleness = references.staleness?.find(
                   (r) => r.sourceDoc?._id === ref.id,
@@ -388,82 +402,81 @@ export default function TranslationForm({
                       schemaType={schema.get(ref.type) as SchemaType}
                       referenceOpen={false}
                     />
-                    {!desiredTargetLangs?.length && (
-                      <Flex gap={3} align="center">
-                        {formValue.targetLangs.map((lang) => {
-                          const langStaleness = staleness?.targets.find(
-                            (t) => t.lang.sanity === lang,
-                          )
-                          const canTranslate =
-                            !!staleness &&
-                            !!langStaleness &&
-                            !('error' in langStaleness) &&
-                            (langStaleness.status === StaleStatus.STALE ||
-                              langStaleness.status === StaleStatus.UNTRANSLATED)
-                          const included =
-                            references.chosenDocs?.[ref.id]?.some(
-                              (l) => l.lang === lang,
-                            ) || false
-                          return (
-                            <Flex gap={2} align="center" key={lang} as="label">
-                              <Checkbox
-                                name="referencedDocuments"
-                                id={`${ref.id}-${lang}`}
-                                style={{ display: 'block' }}
-                                disabled={!canTranslate}
-                                checked={included}
-                                onChange={(e) => {
-                                  if (!staleness || !langStaleness) return
 
-                                  const checked = e.currentTarget.checked
+                    <Flex gap={3} align="center">
+                      {formValue.targetLangs.map((lang) => {
+                        const langStaleness = staleness?.targets.find(
+                          (t) => t.lang.sanity === lang,
+                        )
+                        const canTranslate =
+                          !!staleness &&
+                          !!langStaleness &&
+                          !('error' in langStaleness) &&
+                          (langStaleness.status === StaleStatus.STALE ||
+                            langStaleness.status === StaleStatus.UNTRANSLATED)
+                        const included =
+                          references.chosenDocs?.[ref.id]?.some(
+                            (l) => l.lang === lang,
+                          ) || false
+                        return (
+                          <Flex gap={2} align="center" key={lang} as="label">
+                            <Checkbox
+                              name="referencedDocuments"
+                              id={`${ref.id}-${lang}`}
+                              style={{ display: 'block' }}
+                              disabled={!canTranslate}
+                              checked={included}
+                              onChange={(e) => {
+                                if (!staleness || !langStaleness) return
 
-                                  const refLangs =
-                                    references.chosenDocs?.[ref.id] || []
-                                  const newLangs = ((): typeof refLangs => {
-                                    if (checked) {
-                                      return included
-                                        ? refLangs
-                                        : [
-                                            ...refLangs,
-                                            {
-                                              lang,
-                                              paths:
-                                                langStaleness &&
-                                                isTargetStale(langStaleness)
-                                                  ? langStaleness.changedPaths
-                                                  : [[]],
-                                            },
-                                          ]
-                                    }
+                                const checked = e.currentTarget.checked
 
-                                    return refLangs.filter(
-                                      // eslint-disable-next-line
-                                      (l) => l.lang !== lang,
-                                    )
-                                  })()
-                                  setReferences({
-                                    ...references,
-                                    chosenDocs: {
-                                      ...(references.chosenDocs || {}),
-                                      [ref.id]: newLangs,
-                                    },
-                                  })
-                                }}
-                              />
-                              <Text>{getReadableLanguageName(lang)}</Text>
-                              {langStaleness && 'error' in langStaleness
-                                ? 'Failed fetching'
-                                : langStaleness && (
-                                    <StatusBadge
-                                      label={langStaleness.status}
-                                      staleStatus={langStaleness.status}
-                                    />
-                                  )}
-                            </Flex>
-                          )
-                        })}
-                      </Flex>
-                    )}
+                                const refLangs =
+                                  references.chosenDocs?.[ref.id] || []
+                                const newLangs = ((): typeof refLangs => {
+                                  if (checked) {
+                                    return included
+                                      ? refLangs
+                                      : [
+                                          ...refLangs,
+                                          {
+                                            lang,
+                                            paths:
+                                              langStaleness &&
+                                              isTargetStale(langStaleness)
+                                                ? langStaleness.changedPaths
+                                                : [[]],
+                                          },
+                                        ]
+                                  }
+
+                                  return refLangs.filter(
+                                    // eslint-disable-next-line
+                                    (l) => l.lang !== lang,
+                                  )
+                                })()
+                                setReferences({
+                                  ...references,
+                                  chosenDocs: {
+                                    ...(references.chosenDocs || {}),
+                                    [ref.id]: newLangs,
+                                  },
+                                })
+                              }}
+                            />
+                            <Text>{getReadableLanguageName(lang)}</Text>
+                            {langStaleness && 'error' in langStaleness
+                              ? 'Failed fetching'
+                              : langStaleness && (
+                                  <StatusBadge
+                                    label={langStaleness.status}
+                                    staleStatus={langStaleness.status}
+                                  />
+                                )}
+                          </Flex>
+                        )
+                      })}
+                    </Flex>
                   </Stack>
                 )
               })}
