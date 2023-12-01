@@ -7,22 +7,22 @@ export default defineConfig({
   minify: false,
   bundles: [
     {
-      source: './src/exports/index.ts',
+      source: './src/_exports/index.ts',
       require: './dist/index.js',
       import: './dist/index.esm.js',
     },
     {
-      source: './src/exports/adapters.ts',
+      source: './src/_exports/adapters.ts',
       require: './dist/adapters.js',
       import: './dist/adapters.esm.js',
     },
     {
-      source: './src/exports/config.ts',
+      source: './src/_exports/config.ts',
       require: './dist/config.js',
       import: './dist/config.esm.js',
     },
     {
-      source: './src/exports/backend.ts',
+      source: './src/_exports/backend.ts',
       require: './dist/backend.js',
       import: './dist/backend.esm.js',
     },

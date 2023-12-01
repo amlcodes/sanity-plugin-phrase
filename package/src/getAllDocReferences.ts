@@ -1,5 +1,4 @@
 import { Reference, SanityDocument } from 'sanity'
-import pMap from 'p-map'
 import { SanityClient, collate } from 'sanity'
 import { parseAllReferences } from './utils/references'
 import { PhrasePluginOptions, SanityDocumentWithPhraseMetadata } from './types'
@@ -134,29 +133,30 @@ export default async function getAllDocReferences({
       },
     )
 
-    await pMap(
-      referencedDocuments,
-      async (d: SanityDocument) => {
-        try {
-          // If we have a draft of the current published document, let that drive the references.
-          // @TODO: is this valid? It leads to some missing published documents in the final data as compared to not having this check.
-          // Come back to this once I'm ready to work with the references
-          if (
-            !isDraft(d._id) &&
-            referencedDocuments.find((a) => a._id === draftId(d._id))
-          ) {
-            return
-          }
+    // @TODO alternative to p-map
+    await Promise.allSettled(
+      referencedDocuments.map(
+        (d) =>
+          new Promise(async (resolve, reject) => {
+            try {
+              // If we have a draft of the current published document, let that drive the references.
+              // @TODO: is this valid? It leads to some missing published documents in the final data as compared to not having this check.
+              // Come back to this once I'm ready to work with the references
+              if (
+                !isDraft(d._id) &&
+                referencedDocuments.find((a) => a._id === draftId(d._id))
+              ) {
+                resolve('')
+                return
+              }
 
-          await fetchDocReferences(d, currentDepth + 1)
-        } catch (error) {
-          persistError(d, error)
-        }
-      },
-      {
-        stopOnError: false,
-        concurrency: 2,
-      },
+              resolve(await fetchDocReferences(d, currentDepth + 1))
+            } catch (error) {
+              persistError(d, error)
+              reject(error)
+            }
+          }),
+      ),
     )
   }
 
