@@ -21,18 +21,18 @@ export default function getPreviewContext(context: ContextWithProject) {
   }
 
   return `
-  <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', 'Liberation Sans', Helvetica, Arial, system-ui, sans-serif; font-size: 1.2em; line-height: 1.5; padding: 2em;">
+  <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', 'Liberation Sans', Helvetica, Arial, system-ui, sans-serif; font-size: 19px; line-height: 1.5; padding: 2em; white-space: normal">
   <h1 style="font-size: 2em; font-weight: 600; font-family: inherit; margin: 0; line-height: 1.25; color: rgb(16, 17, 18)">
     Preview translated content
   </h1>
   <p style="font-size: 1em; font-family: inherit; margin: 0; color: rgb(110, 118, 131)">
     Find the preview for this content by choosing one of the languages below:
   </p>
-  <ul style="padding: 0 0 0 1em">
+  <ul style="padding: 0 0 0 1em; list-style: circle; margin-top: 2em;">
     ${languages
       .map(
         (l, i) => `
-      <li style="font-size: 1em; font-family: inherit ${
+      <li style="font-size: 1em; font-family: inherit; ${
         i > 0 ? `margin-top: 1em;` : ''
       }" >
         <a

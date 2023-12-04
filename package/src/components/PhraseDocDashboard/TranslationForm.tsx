@@ -229,26 +229,31 @@ export default function TranslationForm({
         references,
         pluginOptions,
       })
-      console.log({ body })
 
-      if (body.status !== 200) {
-        // @TODO error management
+      if (!('successes' in body)) {
         toast.push({
           status: 'error',
-          title: 'Something went wrong',
-          description: JSON.stringify(body),
+          title: body.error,
+          description: JSON.stringify(body.errors),
         })
         return
       }
 
       setState('success')
       onCancel()
-      toast.push({
-        status: 'success',
-        title: 'Translations requested',
-      })
+      if ('errors' in body) {
+        toast.push({
+          status: 'warning',
+          title: body.message,
+          description: JSON.stringify(body.errors),
+        })
+      } else {
+        toast.push({
+          status: 'success',
+          title: body.message,
+        })
+      }
     } catch (error) {
-      console.log({ error })
       setState('error')
       toast.push({
         status: 'error',
@@ -628,5 +633,5 @@ async function submitMultipleTranslations({
     },
   })
 
-  return (await res.json()).body as CreateTranslationsResponse
+  return (await res.json()) as CreateTranslationsResponse['body']
 }

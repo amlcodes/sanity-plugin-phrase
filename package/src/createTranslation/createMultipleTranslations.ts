@@ -12,13 +12,16 @@ export default function createMultipleTranslations(
 ) {
   const { translations } = input
   if (!Array.isArray(translations)) {
-    return { status: 400, body: { error: 'Invalid translations set' } } as const
+    return {
+      status: 400,
+      body: { error: 'Invalid translations set', errors: [] },
+    } as const
   }
 
   if (translations.length === 0) {
     return {
       status: 200,
-      body: { message: 'No translations to create' },
+      body: { message: 'No translations to create', successes: [] },
     } as const
   }
 
@@ -48,14 +51,14 @@ export default function createMultipleTranslations(
       if (errors.length === 0) {
         return {
           status: 200,
-          body: { error: 'All translations created', successes },
+          body: { message: 'All translations created', successes },
         } as const
       }
 
       return {
         status: 207,
         body: {
-          error: `${successes.length} translations created and ${errors.length} failed`,
+          message: `${successes.length} translations created and ${errors.length} failed`,
           successes,
           errors,
         },
