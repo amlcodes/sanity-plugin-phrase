@@ -16,6 +16,7 @@ const PluginOptionsContext = createContext<PhrasePluginOptions>({
   translatableTypes: [],
   i18nAdapter: defaultAdapter,
   langAdapter: createLangAdapter(defaultAdapter),
+  getDocumentPreview: () => '',
 })
 
 export function PluginOptionsProvider(
