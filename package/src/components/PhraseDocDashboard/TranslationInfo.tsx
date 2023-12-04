@@ -5,7 +5,7 @@ import { Badge, Button, Flex, Spinner, Stack, Text } from '@sanity/ui'
 import { SanityDocument, useSchema } from 'sanity'
 import { CrossSystemLangCode, SanityTMD } from '../../types'
 import { getJobEditorURL, jobsMetadataExtractor } from '../../utils'
-import { getReadableLanguageName } from '../../utils/langs'
+import { getReadableLanguageName, langsAreTheSame } from '../../utils/langs'
 import { PhraseMonogram } from '../PhraseLogo'
 import { usePluginOptions } from '../PluginOptionsContext'
 import { useOpenInSidePane } from './useOpenInSidepane'
@@ -32,7 +32,7 @@ export function TranslationInfo({
 
   const target =
     typeof TMD === 'object' &&
-    TMD.targets.find((t) => t.lang.sanity === targetLang.sanity)
+    TMD.targets.find((t) => langsAreTheSame(t.lang, targetLang))
   const ptdId = target && target?.ptd?._ref
   const jobsMeta =
     target && target?.jobs ? jobsMetadataExtractor(target.jobs) : undefined

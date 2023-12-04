@@ -6,6 +6,7 @@ import {
 import {
   CommittedMainDocMetadata,
   CreatedMainDocMetadata,
+  CrossSystemLangCode,
   METADATA_KEY,
   MainDocTranslationMetadata,
   Phrase,
@@ -18,6 +19,7 @@ import {
 } from '../types'
 import { FILENAME_PREFIX } from './constants'
 import { isPtdId } from './ids'
+import { langsAreTheSame } from './langs'
 
 export function jobsMetadataExtractor(jobs: PhraseJobInfo[]) {
   const lastJob = jobs[jobs.length - 1]
@@ -127,8 +129,42 @@ export function isTranslatedMainDoc(
   )
 }
 
+export function isMainDocAndTranslatedForLang(
+  doc: SanityDocumentWithPhraseMetadata,
+  lang: CrossSystemLangCode,
+): doc is SanityMainDoc {
+  return (
+    isTranslatedMainDoc(doc) &&
+    doc.phraseMetadata.translations.some(
+      (t) =>
+        'targetLangs' in t &&
+        t.targetLangs.some((tl) => langsAreTheSame(tl, lang)),
+    )
+  )
+}
+
 export function hasTranslationsUnfinished(doc: SanityMainDoc) {
   return doc.phraseMetadata.translations.some((t) => !isTranslationCommitted(t))
+}
+
+/**
+ * All `targetLangs` are ongoing.
+ */
+export function allTranslationsUnfinished(
+  doc: SanityMainDoc,
+  targetLangs: CrossSystemLangCode[],
+) {
+  return (
+    hasTranslationsUnfinished(doc) &&
+    targetLangs.every((l) =>
+      doc.phraseMetadata.translations.some(
+        (t) =>
+          !isTranslationCommitted(t) &&
+          'targetLangs' in t &&
+          t.targetLangs.some((tl) => langsAreTheSame(l, tl)),
+      ),
+    )
+  )
 }
 
 export function isTranslationCommitted(

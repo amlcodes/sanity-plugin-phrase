@@ -75,3 +75,13 @@ export function getReadableLanguageName(lang: string) {
     return lang
   }
 }
+
+export function langsAreTheSame(
+  lang1: CrossSystemLangCode | SanityLangCode | PhraseLangCode,
+  lang2: CrossSystemLangCode | SanityLangCode | PhraseLangCode,
+) {
+  const lang1Value = typeof lang1 === 'string' ? lang1 : lang1.sanity
+  const lang2Value = typeof lang2 === 'string' ? lang2 : lang2.sanity
+
+  return lang1Value === lang2Value
+}

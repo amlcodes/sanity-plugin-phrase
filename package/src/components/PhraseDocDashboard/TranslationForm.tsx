@@ -49,6 +49,7 @@ import {
   getReadableLanguageName,
   getTranslationName,
   joinPathsByRoot,
+  langsAreTheSame,
   semanticListItems,
 } from '../../utils'
 import { PhraseMonogram } from '../PhraseLogo'
@@ -405,8 +406,8 @@ export default function TranslationForm({
 
                     <Flex gap={3} align="center">
                       {formValue.targetLangs.map((lang) => {
-                        const langStaleness = staleness?.targets.find(
-                          (t) => t.lang.sanity === lang,
+                        const langStaleness = staleness?.targets.find((t) =>
+                          langsAreTheSame(t.lang, lang),
                         )
                         const canTranslate =
                           !!staleness &&

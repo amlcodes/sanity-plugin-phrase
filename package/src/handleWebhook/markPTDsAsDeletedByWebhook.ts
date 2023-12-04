@@ -2,6 +2,7 @@ import { SanityClient } from 'sanity'
 import getPTDsFromPhraseWebhook from './getPTDsFromPhraseWebhook'
 import { JobDeletedWebhook } from './handlePhraseWebhook'
 import { PhraseJobInfo } from '../types'
+import { langsAreTheSame } from '../utils'
 
 export default async function markPTDsAsDeletedByWebhook({
   sanityClient,
@@ -25,8 +26,8 @@ export default async function markPTDsAsDeletedByWebhook({
   PTDs.forEach((PTD) => {
     const metaDoc = PTD.phraseMetadata.expanded
     const lang = PTD.phraseMetadata.targetLang
-    const targetInMeta = metaDoc.targets.find(
-      (t) => t.lang.sanity === lang.sanity,
+    const targetInMeta = metaDoc.targets.find((t) =>
+      langsAreTheSame(t.lang, lang),
     )
     if (!targetInMeta?.jobs) return
 

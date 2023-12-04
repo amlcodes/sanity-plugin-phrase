@@ -18,6 +18,7 @@ import {
   SanityTMD,
 } from '../types'
 import { getLastValidJobInWorkflow } from '../utils/phrase'
+import { langsAreTheSame } from '../utils'
 
 class FailedDownloadingPhraseDataError {
   readonly _tag = 'FailedDownloadingPhraseData'
@@ -57,8 +58,8 @@ export default function refreshPTDs(input: {
   // For each PTD, find the last job in the workflow - that's the freshest preview possible
   const jobsToRefreshData = PTDs.reduce(
     (acc, doc) => {
-      const metadataForLang = doc.phraseMetadata.expanded.targets.find(
-        (t) => t.lang.sanity === doc.phraseMetadata.targetLang.sanity,
+      const metadataForLang = doc.phraseMetadata.expanded.targets.find((t) =>
+        langsAreTheSame(t.lang, doc.phraseMetadata.targetLang),
       )
       if (!metadataForLang?.jobs) return acc
 

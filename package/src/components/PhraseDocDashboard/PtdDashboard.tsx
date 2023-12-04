@@ -15,6 +15,7 @@ import {
 import {
   SANITY_API_VERSION,
   getProjectURL,
+  langsAreTheSame,
   parseTranslationSnapshot,
 } from '../../utils'
 import { getReadableLanguageName } from '../../utils'
@@ -60,7 +61,7 @@ export default function PtdDocDashboard({
     _rev: parseTranslationSnapshot(TMD.sourceSnapshot)?._rev || '',
     lang: TMD.sourceLang,
   }
-  const target = TMD.targets.find((t) => t.lang.sanity === targetLang.sanity)
+  const target = TMD.targets.find((t) => langsAreTheSame(t.lang, targetLang))
 
   async function handleRefresh() {
     setState('refreshing')
