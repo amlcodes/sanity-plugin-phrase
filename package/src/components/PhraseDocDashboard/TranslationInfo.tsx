@@ -28,7 +28,7 @@ export function TranslationInfo({
   const schema = useSchema()
   const schemaType = schema.get(parentDoc._type)
   const openInSidePane = useOpenInSidePane(paneParentDocId)
-  const label = getReadableLanguageName(targetLang.sanity)
+  const label = getReadableLanguageName(targetLang)
 
   const target =
     typeof TMD === 'object' &&

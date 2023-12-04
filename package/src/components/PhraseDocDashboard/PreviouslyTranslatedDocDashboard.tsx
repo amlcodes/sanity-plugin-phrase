@@ -116,9 +116,7 @@ export default function PreviouslyTranslatedDocDashboard(props: {
             {staleness.targets.map((target) => (
               <TableRow key={target.lang.sanity}>
                 <td style={{ width: '100%' }}>
-                  <Text size={1}>
-                    {getReadableLanguageName(target.lang.sanity)}
-                  </Text>
+                  <Text size={1}>{getReadableLanguageName(target.lang)}</Text>
                 </td>
                 <td style={{ width: 'min-content' }}>
                   {'error' in target ? (
@@ -192,9 +190,7 @@ export default function PreviouslyTranslatedDocDashboard(props: {
                   <Text size={1} weight="semibold">
                     {isTranslated ? 'Outdated for' : 'Not translated into'}{' '}
                     {semanticListItems(
-                      s.langs.map((lang) =>
-                        getReadableLanguageName(lang.sanity),
-                      ),
+                      s.langs.map((lang) => getReadableLanguageName(lang)),
                     )}
                     :
                   </Text>

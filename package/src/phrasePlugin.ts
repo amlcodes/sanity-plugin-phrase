@@ -16,7 +16,6 @@ const phrasePlugin: Plugin<PhrasePluginOptions> = (pluginOptions) => {
 
         return [createDocumentBadge(pluginOptions)]
       },
-      // @TODO: solution to remove unstable_languageFilter for PTDs
     },
     schema: {
       types: (prev) => injectPhraseIntoSchema(prev, pluginOptions),

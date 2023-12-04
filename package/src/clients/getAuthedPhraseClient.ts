@@ -113,7 +113,6 @@ function tokenStillValid(
     credentials?.token &&
     credentials.expires &&
     // Must have at least one more hour of validity, else we'll refresh beforehand to avoid errors
-    // @TODO: it seems Phrase always return the same token while it doesn't expire - what does this mean for workflows running in the middle of refreshes?
     new Date(credentials.expires) > new Date(Date.now() + ONE_HOUR)
   )
 }

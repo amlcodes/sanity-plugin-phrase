@@ -4,6 +4,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { createInternalHandler } from 'sanity-plugin-phrase/backend'
 import { definePhraseOptions } from 'sanity-plugin-phrase/config'
 import { documentInternationalizationAdapter } from 'sanity-plugin-phrase/adapters'
+import { undraftId } from 'sanity-plugin-phrase'
 
 export const writeToken = process.env.SANITY_WRITE_TOKEN || ''
 
@@ -27,7 +28,7 @@ const phraseHandler = createInternalHandler({
     translatableTypes: ['post'],
     supportedTargetLangs: ['es', 'pt'],
     sourceLang: 'en',
-    apiEndpoint: '/api/phrase',
+    apiEndpoint: process.env.NEXT_PUBLIC_PHRASE_PLUGIN_API_ENDPOINT || '',
     phraseRegion: 'us',
     phraseTemplates: [
       {
@@ -35,6 +36,18 @@ const phraseHandler = createInternalHandler({
         label: '[Sanity.io] Default template',
       },
     ],
+    getDocumentPreview: async (doc, sanityClient) => {
+      const previewSecretId = 'preview.secret'
+      const previewSecret = await sanityClient.fetch(
+        `*[_id == "${previewSecretId}"][0].secret`,
+      )
+      return `${
+        process.env.NEXT_PUBLIC_FRONT_END_URL
+      }/api/draft?pathToRedirect=${encodeURIComponent(
+        `${doc.language === 'en' ? '' : `/${doc.language}`}/${(doc.slug as any)
+          ?.current}`,
+      )}&publishedId=${undraftId(doc._id)}&secret=${previewSecret}`
+    },
   }),
 })
 
@@ -51,12 +64,17 @@ export default async function handler(
     return
   }
 
-  if (!req.method || req.method.toUpperCase() !== 'POST') {
+  if (
+    !req.method ||
+    (req.method.toUpperCase() !== 'POST' && req.method.toUpperCase() !== 'GET')
+  ) {
     res.status(405).json({ error: 'Method not allowed' })
     return
   }
 
-  const phraseRes = await phraseHandler(req.body)
+  const phraseRes = await phraseHandler(
+    req.method.toUpperCase() === 'POST' ? req.body : req.query,
+  )
   const resBody = await phraseRes.json().catch(() => {})
 
   Array.from(phraseRes.headers.entries()).forEach((value) => {

@@ -123,11 +123,10 @@ export default function PtdDocDashboard({
                 openInSidePane.openImperatively(sourceDoc._id, schemaType.name)
               }}
             >
-              source document in{' '}
-              {getReadableLanguageName(TMD.sourceLang.sanity)}
+              source document in {getReadableLanguageName(TMD.sourceLang)}
             </a>{' '}
-            to {getReadableLanguageName(targetLang.sanity)} and is now ready to
-            merge with the{' '}
+            to {getReadableLanguageName(targetLang)} and is now ready to merge
+            with the{' '}
             {target?.targetDoc?._ref ? (
               <a
                 href={openInSidePane.getHref(

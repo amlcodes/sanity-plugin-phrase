@@ -12,7 +12,7 @@ class FailedCreatingPhraseJobsError {
 }
 
 export default function createPhraseJobs(context: ContextWithProject) {
-  const { request, project, freshDocumentsById } = context
+  const { request, project } = context
 
   return pipe(
     Effect.tryPromise({
@@ -23,10 +23,7 @@ export default function createPhraseJobs(context: ContextWithProject) {
           targetLangs: request.pluginOptions.langAdapter.crossSystemToPhrase(
             request.targetLangs,
           ),
-          dataToTranslate: getDataToTranslate({
-            ...request,
-            freshDocumentsById: freshDocumentsById,
-          }),
+          dataToTranslate: getDataToTranslate(context),
         }),
       catch: (error) => new FailedCreatingPhraseJobsError(error, context),
     }),

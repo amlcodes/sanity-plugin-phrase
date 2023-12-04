@@ -359,6 +359,8 @@ export enum EndpointActionTypes {
   REFRESH_PTD = 'REFRESH_PTD',
   // eslint-disable-next-line no-unused-vars
   CREATE_TRANSLATIONS = 'CREATE_TRANSLATIONS',
+  // eslint-disable-next-line no-unused-vars
+  GET_PREVIEW_URL = 'GET_PREVIEW_URL',
 }
 
 export interface ContextWithFreshDocuments {
@@ -476,4 +478,11 @@ export type PhrasePluginOptions = {
     templateUid: string
     label: string
   }[]
+  /**
+   * Used to redirect linguists from the Phrase dashboard to the front-end preview of their translations.
+   */
+  getDocumentPreview: (
+    document: SanityDocument,
+    sanityClient: SanityClient,
+  ) => string | undefined | Promise<string | undefined>
 }

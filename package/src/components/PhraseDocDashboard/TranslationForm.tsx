@@ -268,9 +268,7 @@ export default function TranslationForm({
           <Text size={1} weight="semibold">
             Requesting translations for{' '}
             {semanticListItems(
-              desiredTargetLangs.map((lang) =>
-                getReadableLanguageName(lang.sanity),
-              ),
+              desiredTargetLangs.map((lang) => getReadableLanguageName(lang)),
             )}
           </Text>
           {sourceDocSchema &&

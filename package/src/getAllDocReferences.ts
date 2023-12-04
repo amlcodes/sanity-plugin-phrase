@@ -29,10 +29,6 @@ type RefsState = {
   [docId: string]: TranslatableRef | UnstranslatableRef
 }
 
-/**
- * @TODO How can we improve this? We're currently over-fecthing from Sanity.
- * One possible improvement is skipping published docs if drafts are present.
- */
 export default async function getAllDocReferences({
   sanityClient,
   document: parentDocument,
@@ -148,15 +144,12 @@ export default async function getAllDocReferences({
       },
     )
 
-    // @TODO alternative to p-map
     await Promise.allSettled(
       referencedDocuments.map(
         (d) =>
           new Promise(async (resolve, reject) => {
             try {
               // If we have a draft of the current published document, let that drive the references.
-              // @TODO: is this valid? It leads to some missing published documents in the final data as compared to not having this check.
-              // Come back to this once I'm ready to work with the references
               if (
                 !isDraft(d._id) &&
                 referencedDocuments.find((a) => a._id === draftId(d._id))

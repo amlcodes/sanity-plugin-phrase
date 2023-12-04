@@ -32,9 +32,7 @@ export async function sanityFetch<QueryResponse>({
       perspective: 'previewDrafts',
     }),
     next: {
-      // @TODO: potentially re-enable caching?
-      revalidate: isDraftMode ? 0 : 0,
-      // revalidate: isDraftMode ? 0 : false,
+      revalidate: 0,
       tags,
     },
   })

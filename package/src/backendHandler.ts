@@ -1,4 +1,4 @@
-import { SanityClient } from 'sanity'
+import { SanityClient, SanityDocument } from 'sanity'
 import { createResponse } from './backendHelpers'
 import createMultipleTranslations from './createTranslation/createMultipleTranslations'
 import handlePhraseWebhook, {
@@ -10,6 +10,7 @@ import {
   PhraseCredentialsInput,
   PhrasePluginOptions,
 } from './types'
+import { draftId, undraftId } from './utils'
 
 type BackendInput = {
   /** Sanity client with write token (can modify data) */
@@ -89,6 +90,55 @@ export function createInternalHandler(rawInput: BackendInput) {
       return createResponse(res.body, res.status)
     }
 
+    if (body.action === EndpointActionTypes.GET_PREVIEW_URL) {
+      if (!('documentId' in body) || typeof body.documentId !== 'string') {
+        return new Response(JSON.stringify({ error: 'Invalid request' }), {
+          status: 400,
+        })
+      }
+
+      const document = await sanityClient.fetch<SanityDocument>(
+        `*[_id in $ids]|order(_updatedAt desc)[0]`,
+        {
+          ids: [undraftId(body.documentId), draftId(body.documentId)],
+        },
+      )
+
+      if (!document) {
+        return new Response(
+          JSON.stringify({
+            error: "Document not found - can't redirect to preview",
+          }),
+          {
+            status: 404,
+          },
+        )
+      }
+
+      const previewUrl = await input.pluginOptions.getDocumentPreview(
+        document,
+        sanityClient,
+      )
+
+      if (!previewUrl) {
+        return new Response(
+          JSON.stringify({
+            error: "Preview not found - can't redirect to it",
+          }),
+          {
+            status: 404,
+          },
+        )
+      }
+
+      return new Response(null, {
+        status: 302,
+        headers: {
+          Location: previewUrl,
+        },
+      })
+    }
+
     return new Response(JSON.stringify({ error: 'Invalid request' }), {
       status: 400,
     })
@@ -102,7 +152,12 @@ export function createRequestHandler(input: BackendInput) {
   const handler = createInternalHandler(input)
 
   return async function phraseRouteHandler(request: Request) {
-    const body = await request.json().catch(() => {})
+    const body =
+      request.method.toUpperCase() === 'POST'
+        ? await request.json?.().catch(() => {})
+        : Object.fromEntries(
+            Array.from(new URL(request.url).searchParams.entries()),
+          )
 
     return handler(body)
   }
@@ -147,6 +202,12 @@ function parseInput(input: BackendInput): BackendInput {
   ) {
     throw new Error(
       '[sanity-plugin-phrase/backend] Missing or invalid `phraseCredentials.region`',
+    )
+  }
+
+  if (!input.pluginOptions.getDocumentPreview) {
+    throw new Error(
+      '[sanity-plugin-phrase/backend] Missing `pluginOptions.getDocumentPreview`',
     )
   }
 

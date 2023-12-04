@@ -68,11 +68,12 @@ export type LangAdapter = ReturnType<typeof createLangAdapter>
 
 const displayNames = new Intl.DisplayNames(['en'], { type: 'language' })
 
-export function getReadableLanguageName(lang: string) {
+export function getReadableLanguageName(lang: string | CrossSystemLangCode) {
+  const langValue = typeof lang === 'string' ? lang : lang.sanity
   try {
-    return displayNames.of(lang) || lang
+    return displayNames.of(langValue) || langValue
   } catch (error) {
-    return lang
+    return langValue
   }
 }
 

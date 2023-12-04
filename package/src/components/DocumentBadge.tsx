@@ -55,7 +55,7 @@ export function createDocumentBadge(pluginOptions: PhrasePluginOptions) {
         ongoing.length === 1 &&
         (ongoing[0].status === 'COMPLETED' || ongoing[0].status === 'CREATED')
           ? `Document being translated to ${ongoing[0].targetLangs
-              .map((t) => getReadableLanguageName(t.sanity))
+              .map(getReadableLanguageName)
               .join(', ')}`
           : undefined,
       icon: PhraseMonogram,
