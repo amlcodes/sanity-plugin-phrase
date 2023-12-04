@@ -75,6 +75,7 @@ export type Phrase = {
   }
   ProjectInWebhook: Phrase['CreatedProject'] & {
     status: Phrase['ProjectStatus']
+    dateDue: string
   }
 }
 

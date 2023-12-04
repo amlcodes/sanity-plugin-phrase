@@ -23,8 +23,10 @@ export default function DocDashboardCard(
     collapsible?: boolean
   }>,
 ) {
-  const { collapsible = true } = props
+  const { collapsible: inputCollapsible = true } = props
   const summaryRef = useRef<HTMLDivElement>(null)
+
+  const collapsible = inputCollapsible && props.children !== null
 
   return (
     <Card style={{ padding: '0.9375rem' }} border radius={1}>

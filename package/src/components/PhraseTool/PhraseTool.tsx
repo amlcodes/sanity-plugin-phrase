@@ -12,6 +12,7 @@ import {
   useEditState,
   useSchema,
 } from 'sanity'
+import { IntentLink } from 'sanity/router'
 import {
   CreatedMainDocMetadata,
   PhrasePluginOptions,
@@ -21,11 +22,8 @@ import {
 import {
   SANITY_API_VERSION,
   formatDay,
-  getFieldLabel,
   getProjectURL,
   jobsMetadataExtractor,
-  joinPathsByRoot,
-  parsePathsString,
 } from '../../utils'
 import { PhraseLogo, PhraseMonogram } from '../PhraseLogo'
 import {
@@ -35,7 +33,7 @@ import {
 import SpinnerBox from '../SpinnerBox'
 import StatusBadge from '../StatusBadge'
 import { StyledTable, TableRow } from '../StyledTable'
-import { IntentLink } from 'sanity/router'
+import { TranslationPathsDisplay } from '../TranslationPathsDisplay'
 
 const useOngoingTranslations = createHookFromObservableFactory<
   // Pick<SanityMainDoc, '_id' | '_type' | '_rev' | 'phraseMetadata'>[],
@@ -92,17 +90,7 @@ function OngoingTranslation({
                 `${document._id} (unknown type)`}
             </IntentLink>
           </Text>
-          {schemaType && (
-            <Stack space={1}>
-              {Object.entries(
-                joinPathsByRoot(parsePathsString(translation.paths)),
-              ).map(([rootPath, fullPathsInRoot]) => (
-                <Text size={0} key={rootPath}>
-                  {getFieldLabel(rootPath, fullPathsInRoot, schemaType)}
-                </Text>
-              ))}
-            </Stack>
-          )}
+          <TranslationPathsDisplay {...translation} />
         </Stack>
       </td>
       <td>

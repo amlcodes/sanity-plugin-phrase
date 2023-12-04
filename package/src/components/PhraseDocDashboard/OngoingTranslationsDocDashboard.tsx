@@ -1,30 +1,31 @@
 'use client'
 
-import { Button, Flex, Stack, Text, useToast } from '@sanity/ui'
+import { Button, Card, Flex, Stack, Text, useToast } from '@sanity/ui'
 import React from 'react'
-import { useClient, useEditState, useSchema } from 'sanity'
+import { useClient, useEditState } from 'sanity'
 import commitTranslation from '../../commitTranslation'
 import {
   CreatedMainDocMetadata,
   CreatingMainDocMetadata,
+  DeletedMainDocMetadata,
+  FailedPersistingMainDocMetadata,
   MainDocTranslationMetadata,
   SanityMainDoc,
   SanityTMD,
 } from '../../types'
 import {
   SANITY_API_VERSION,
-  getFieldLabel,
   getProjectURL,
   isTranslationCommitted,
   isTranslationReadyToCommit,
-  joinPathsByRoot,
-  parsePathsString,
 } from '../../utils'
 import DocDashboardCard from '../DocDashboardCard'
 import { PhraseMonogram } from '../PhraseLogo'
 import { usePluginOptions } from '../PluginOptionsContext'
 import SpinnerBox from '../SpinnerBox'
 import { TranslationInfo } from './TranslationInfo'
+import { TranslationPathsDisplay } from '../TranslationPathsDisplay'
+import { InfoOutlineIcon } from '@sanity/icons'
 
 export default function OngoingTranslationsDocDashboard(props: {
   ongoingTranslations: MainDocTranslationMetadata[]
@@ -45,11 +46,23 @@ export default function OngoingTranslationsDocDashboard(props: {
           )
 
         if (translation.status === 'FAILED_PERSISTING') {
-          return <div key={translation._key}>failed @TODO</div>
+          return (
+            <FailedPersistingTranslationCard
+              key={translation._key}
+              translation={translation}
+              parentDoc={props.document}
+            />
+          )
         }
 
         if (translation.status === 'DELETED') {
-          return <div key={translation._key}>deleted @TODO</div>
+          return (
+            <DeletedTranslationCard
+              key={translation._key}
+              translation={translation}
+              parentDoc={props.document}
+            />
+          )
         }
 
         return (
@@ -71,8 +84,6 @@ function OngoingTranslationCard({
   parentDoc: SanityMainDoc
   translation: CreatedMainDocMetadata
 }) {
-  const schema = useSchema()
-  const sourceSchemaType = schema.get(translation.sourceDoc._type)
   const sanityClient = useClient({ apiVersion: SANITY_API_VERSION })
   const toast = useToast()
   const [state, setState] = React.useState<'idle' | 'committing'>('idle')
@@ -112,25 +123,23 @@ function OngoingTranslationCard({
   }
 
   if (!TMD) {
-    return <div> Error (@todo)</div>
+    return (
+      <DocDashboardCard
+        title="Broken translation"
+        subtitle={<TranslationPathsDisplay {...translation} />}
+      >
+        <Text>
+          This document reached a broken translation state. Please contact
+          support.
+        </Text>
+      </DocDashboardCard>
+    )
   }
 
   return (
     <DocDashboardCard
       title="Translation in progress"
-      subtitle={
-        sourceSchemaType && (
-          <>
-            {Object.entries(
-              joinPathsByRoot(parsePathsString(translation.paths)),
-            ).map(([rootPath, fullPathsInRoot]) => (
-              <Text key={rootPath} size={1} muted>
-                {getFieldLabel(rootPath, fullPathsInRoot, sourceSchemaType)}
-              </Text>
-            ))}
-          </>
-        )
-      }
+      subtitle={<TranslationPathsDisplay {...translation} />}
       headerActions={
         <Button
           as="a"
@@ -174,31 +183,76 @@ function OngoingTranslationCard({
   )
 }
 
+function DeletedTranslationCard({
+  translation,
+  parentDoc,
+}: {
+  parentDoc: SanityMainDoc
+  translation: DeletedMainDocMetadata
+}) {
+  const { ready, draft, published } = useEditState(
+    translation.tmd._ref,
+    translation.tmd._type,
+  )
+  const TMD = (draft || published) as SanityTMD
+
+  return (
+    <DocDashboardCard
+      title="Translation deleted in Phrase"
+      subtitle={<TranslationPathsDisplay {...translation} />}
+    >
+      {!ready && <SpinnerBox />}
+      {TMD?.targets.map((target) => (
+        <TranslationInfo
+          key={target._key}
+          paneParentDocId={parentDoc._id}
+          parentDoc={parentDoc}
+          targetLang={target.lang}
+          TMD={TMD}
+        />
+      ))}
+    </DocDashboardCard>
+  )
+}
+
 function CreatingTranslationCard({
   translation,
 }: {
   parentDoc: SanityMainDoc
   translation: CreatingMainDocMetadata
 }) {
-  const schema = useSchema()
-  const sourceSchemaType = schema.get(translation.sourceDoc._type)
   return (
     <DocDashboardCard
       title="Translation being created"
       collapsible={false}
-      subtitle={
-        sourceSchemaType && (
-          <>
-            {Object.entries(
-              joinPathsByRoot(parsePathsString(translation.paths)),
-            ).map(([rootPath, fullPathsInRoot]) => (
-              <Text key={rootPath} size={1} muted>
-                {getFieldLabel(rootPath, fullPathsInRoot, sourceSchemaType)}
-              </Text>
-            ))}
-          </>
-        )
-      }
+      subtitle={<TranslationPathsDisplay {...translation} />}
     />
+  )
+}
+
+function FailedPersistingTranslationCard({
+  translation,
+}: {
+  parentDoc: SanityMainDoc
+  translation: FailedPersistingMainDocMetadata
+}) {
+  return (
+    <DocDashboardCard
+      title="Translation creation failed"
+      collapsible={false}
+      subtitle={<TranslationPathsDisplay {...translation} />}
+    >
+      <Card padding={4} border radius={2} tone="critical">
+        <Flex gap={3} align="flex-start">
+          <Text size={2}>
+            <InfoOutlineIcon />
+          </Text>
+          {/* @TODO: attempt to salvage translation */}
+          <Text size={2}>
+            DEV: Ability to salvage failed translations isn't yet implemented
+          </Text>
+        </Flex>
+      </Card>
+    </DocDashboardCard>
   )
 }
