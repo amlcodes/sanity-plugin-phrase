@@ -42,21 +42,17 @@ const useOngoingTranslations = createHookFromObservableFactory<
   SanityMainDoc[],
   {
     documentStore: DocumentStore
-  } & Pick<PhrasePluginOptions, 'translatableTypes' | 'sourceLang'>
->(({ documentStore, translatableTypes, sourceLang }) => {
-  // @TODO: adapter for querying language field
+  } & Pick<
+    PhrasePluginOptions,
+    'translatableTypes' | 'sourceLang' | 'i18nAdapter'
+  >
+>(({ documentStore, translatableTypes, sourceLang, i18nAdapter }) => {
   return documentStore.listenQuery(
     /* groq */ `*[
       _type in $translatableTypes &&
-      language == $sourceLang &&
+      ${i18nAdapter.getLangGROQFilter(sourceLang)} &&
       count(phraseMetadata.translations[status != "COMMITTED"]) > 0
-    ]{
-      ...,
-      _id,
-      _type,
-      _rev,
-      phraseMetadata
-    }`,
+    ]`,
     { translatableTypes: translatableTypes as string[], sourceLang },
     {
       apiVersion: SANITY_API_VERSION,

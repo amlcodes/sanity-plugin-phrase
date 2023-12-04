@@ -318,6 +318,12 @@ export type I18nAdapter = {
   getDocumentLang: (
     document: SanityDocumentWithPhraseMetadata,
   ) => SanityLangCode | null
+
+  /**
+   * @example
+   * getLangGROQFilter: (lang) => `language == "${lang}"`
+   */
+  getLangGROQFilter: (lang: SanityLangCode) => string
 }
 
 export type CreateTranslationsInput = Omit<

@@ -264,6 +264,7 @@ export function documentInternationalizationAdapter({
       toPhrase: (sanityLang) => sanityLang.replace(/_/g, '-'),
       toSanity: (phraseLang) => phraseLang.replace(/-/g, '_'),
     },
+    getLangGROQFilter: (lang) => `${languageField} == "${lang}"`,
   }
 }
 
