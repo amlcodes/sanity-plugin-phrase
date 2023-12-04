@@ -1,5 +1,11 @@
 # sanity-plugin-phrase
 
+## 0.1.4
+
+### Patch Changes
+
+- Fix: ensure getStaleTranslations work across draft/published changes
+
 ## 0.1.3
 
 ### Patch Changes

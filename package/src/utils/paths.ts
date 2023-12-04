@@ -10,6 +10,7 @@ import {
 } from '../types'
 import { dedupeArray } from './arrays'
 import { ROOT_PATH_STR } from './constants'
+import { undraftId } from './ids'
 
 export function translationsIntersect(a: Path, b: Path) {
   if (JSON.stringify(a) === JSON.stringify(b)) return true
@@ -47,7 +48,10 @@ export function getChangedPaths(
 ): Path[] {
   if (!currentVersion || !historicVersion) return []
 
-  const diffPatches = diffPatch(historicVersion, currentVersion)
+  const diffPatches = diffPatch(
+    { ...historicVersion, _id: undraftId(historicVersion._id) },
+    { ...currentVersion, _id: undraftId(currentVersion._id) },
+  )
   const pathsChanged = diffPatches.flatMap(({ patch }) => {
     const paths: string[] = []
     if ('set' in patch) {
