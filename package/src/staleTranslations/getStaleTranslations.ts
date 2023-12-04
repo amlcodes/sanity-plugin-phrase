@@ -212,7 +212,14 @@ function parsePerLang({
     }
   }
 
-  if (allTranslationsUnfinished(freshestDoc, [lang])) {
+  if (
+    allTranslationsUnfinished(freshestDoc, [lang]) ||
+    freshestDoc.phraseMetadata.translations.some(
+      (t) =>
+        t.status === 'FAILED_PERSISTING' &&
+        t.targetLangs.some((l) => langsAreTheSame(l, lang)),
+    )
+  ) {
     return {
       freshestDoc,
       sourceDoc,

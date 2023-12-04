@@ -135,6 +135,7 @@ export type FailedPersistingMainDocMetadata = BaseMainDocMetadata & {
   status: 'FAILED_PERSISTING'
   project: Phrase['CreatedProject']
   jobs: Phrase['JobPart'][]
+  targetLangs: CrossSystemLangCode[]
 }
 
 export type MainDocTranslationMetadata =

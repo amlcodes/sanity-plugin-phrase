@@ -98,6 +98,7 @@ export function createTMD({
     sourceDoc: {
       _type: 'reference',
       _ref: undraftId(sourceDoc._id),
+      _weak: isDraft(sourceDoc._id) ? true : undefined,
       _strengthenOnPublish: isDraft(sourceDoc._id)
         ? {
             type: sourceDoc._type,

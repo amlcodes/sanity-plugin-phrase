@@ -27,9 +27,10 @@ export default function salvageCreatedJobs({
     transaction.patch(id, (patch) => {
       const updatedData: Pick<
         FailedPersistingMainDocMetadata,
-        'status' | 'project' | 'jobs'
+        'status' | 'project' | 'jobs' | 'targetLangs'
       > = {
         [`${basePath}.status` as 'status']: 'FAILED_PERSISTING',
+        [`${basePath}.targetLangs` as 'targetLangs']: request.targetLangs,
         [`${basePath}.jobs` as 'jobs']: jobs,
         [`${basePath}.project` as 'project']: project,
       }

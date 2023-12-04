@@ -85,3 +85,10 @@ export function langsAreTheSame(
 
   return lang1Value === lang2Value
 }
+
+export function targetLangsIntersect(
+  langs1: (CrossSystemLangCode | SanityLangCode | PhraseLangCode)[],
+  langs2: (CrossSystemLangCode | SanityLangCode | PhraseLangCode)[],
+) {
+  return langs1.some((l1) => langs2.some((l2) => langsAreTheSame(l1, l2)))
+}
