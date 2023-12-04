@@ -55,18 +55,32 @@ type PreTranslationFinishedWebhook = {
   metadata: unknown
 }
 
-export type ProjectDeletedWebhook = {
-  event: 'PROJECT_DELETED'
-  timestamp: number
-  eventUid: string
-  project: Phrase['ProjectInWebhook']
-}
-
 export type ProjectStatusChangedWebhook = {
   event: 'PROJECT_STATUS_CHANGED'
   timestamp: number
   eventUid: string
   project: Phrase['ProjectInWebhook']
+}
+
+export type ProjectDeletedWebhook = Omit<
+  ProjectStatusChangedWebhook,
+  'event'
+> & {
+  event: 'PROJECT_DELETED'
+}
+
+export type ProjectMetadataUpdatedWebhook = Omit<
+  ProjectStatusChangedWebhook,
+  'event'
+> & {
+  event: 'PROJECT_METADATA_UPDATED'
+}
+
+export type ProjectDueDateChangedWebhook = Omit<
+  ProjectStatusChangedWebhook,
+  'event'
+> & {
+  event: 'PROJECT_DUE_DATE_CHANGED'
 }
 
 export type PhraseWebhook =
@@ -79,6 +93,8 @@ export type PhraseWebhook =
   | PreTranslationFinishedWebhook
   | ProjectDeletedWebhook
   | ProjectStatusChangedWebhook
+  | ProjectMetadataUpdatedWebhook
+  | ProjectDueDateChangedWebhook
 
 export default async function handlePhraseWebhook({
   sanityClient,
@@ -104,6 +120,8 @@ export default async function handlePhraseWebhook({
         'PRE_TRANSLATION_FINISHED',
         'PROJECT_STATUS_CHANGED',
         'PROJECT_DELETED',
+        'PROJECT_METADATA_UPDATED',
+        'PROJECT_DUE_DATE_CHANGED',
       ] as PhraseWebhook['event'][]
     ).includes(payload.event)
   ) {
@@ -115,7 +133,9 @@ export default async function handlePhraseWebhook({
 
   if (
     payload.event === 'PROJECT_DELETED' ||
-    payload.event === 'PROJECT_STATUS_CHANGED'
+    payload.event === 'PROJECT_STATUS_CHANGED' ||
+    payload.event === 'PROJECT_METADATA_UPDATED' ||
+    payload.event === 'PROJECT_DUE_DATE_CHANGED'
   ) {
     return updateTMDFromProjectWebhook({
       sanityClient,

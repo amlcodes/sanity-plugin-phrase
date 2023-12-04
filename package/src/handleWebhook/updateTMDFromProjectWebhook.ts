@@ -4,6 +4,8 @@ import { TMD_TYPE, comesFromSanity, draftId, undraftId } from '../utils'
 import { tPathInMainDoc } from '../utils/paths'
 import {
   ProjectDeletedWebhook,
+  ProjectDueDateChangedWebhook,
+  ProjectMetadataUpdatedWebhook,
   ProjectStatusChangedWebhook,
 } from './handlePhraseWebhook'
 
@@ -12,7 +14,11 @@ export default async function updateTMDFromProjectWebhook({
   payload,
 }: {
   sanityClient: SanityClient
-  payload: ProjectDeletedWebhook | ProjectStatusChangedWebhook
+  payload:
+    | ProjectDeletedWebhook
+    | ProjectStatusChangedWebhook
+    | ProjectDueDateChangedWebhook
+    | ProjectMetadataUpdatedWebhook
 }) {
   const { project } = payload
   if (!comesFromSanity(project)) {
@@ -54,6 +60,17 @@ export default async function updateTMDFromProjectWebhook({
       }),
     )
   })
+
+  if (
+    payload.project?.dateDue &&
+    payload.project.dateDue !== TMD.projectDueDate
+  ) {
+    tx.patch(TMD._id, (patch) =>
+      patch.set({
+        projectDueDate: payload.project.dateDue,
+      }),
+    )
+  }
 
   try {
     await tx.commit({ returnDocuments: false })
