@@ -1,8 +1,13 @@
 import { Reference, SanityDocument } from 'sanity'
 import { SanityClient, collate } from 'sanity'
 import { parseAllReferences } from './utils/references'
-import { PhrasePluginOptions, SanityDocumentWithPhraseMetadata } from './types'
-import { draftId, isDraft, undraftId } from './utils'
+import {
+  PhrasePluginOptions,
+  SanityDocumentWithPhraseMetadata,
+  TranslationRequest,
+} from './types'
+import { draftId, getPathsKey, isDraft, undraftId } from './utils'
+import { get } from '@sanity/util/paths'
 
 type TranslatableRef = {
   translatable: true
@@ -33,11 +38,13 @@ export default async function getAllDocReferences({
   document: parentDocument,
   maxDepth = 3,
   translatableTypes,
+  paths,
 }: {
   sanityClient: SanityClient
   document: SanityDocumentWithPhraseMetadata
   maxDepth?: number
   translatableTypes: PhrasePluginOptions['translatableTypes']
+  paths: TranslationRequest['paths']
 }) {
   const state = {
     referenced: {
@@ -100,8 +107,17 @@ export default async function getAllDocReferences({
   async function fetchDocReferences(
     doc: SanityDocumentWithPhraseMetadata,
     currentDepth: number,
+    subPaths?: TranslationRequest['paths'],
   ) {
-    const docReferences = parseAllReferences(doc, [])
+    const docReferences = parseAllReferences(
+      // If checking a specific set of sub-paths, only parse references from there
+      subPaths
+        ? Object.fromEntries(
+            subPaths.map((path) => [getPathsKey([path]), get(doc, path)]),
+          )
+        : doc,
+      [],
+    )
 
     addDocReferences(doc, docReferences, currentDepth)
     docReferences.forEach((ref) => addRefOccurrence(ref, currentDepth))
@@ -124,7 +140,6 @@ export default async function getAllDocReferences({
       {} as Record<string, Reference[]>,
     )
 
-    console.log('QUERYING FROM SANITY', doc._id)
     const referencedDocuments = await sanityClient.fetch<SanityDocument[]>(
       `*[_id in $publishedIds || _id in $draftIds]`,
       {
@@ -160,7 +175,7 @@ export default async function getAllDocReferences({
     )
   }
 
-  await fetchDocReferences(parentDocument, 1)
+  await fetchDocReferences(parentDocument, 1, paths)
 
   const finalDocs = collate(
     Object.values(state.referenced).flatMap((a) => {

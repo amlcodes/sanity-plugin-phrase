@@ -41,6 +41,7 @@ import {
   StaleResponse,
   StaleStatus,
   StaleTargetStatus,
+  TranslationRequest,
 } from '../../types'
 import {
   getDateDaysFromNow,
@@ -192,6 +193,7 @@ export default function TranslationForm({
       sanityClient,
       document,
       translatableTypes,
+      paths: (paths.length > 0 ? paths : [[]]) as TranslationRequest['paths'],
     })
 
     setReferences({ documentId: sourceDocId, refs: newRefs, chosenDocs: {} })
@@ -484,7 +486,7 @@ export default function TranslationForm({
             </Stack>
           ) : (
             <Card tone="transparent" border radius={2} padding={3}>
-              <Text muted>No references found</Text>
+              <Text muted>No references found in selected content</Text>
             </Card>
           )}
         </FormField>
