@@ -74,8 +74,6 @@ export function getChangedPaths(
         /** `content[_key == "3dadae45cc25"].blurbs[-1]` -> `content[_key == "3dadae45cc25"].blurbs` */
         base = base.split('[').slice(0, -1).join('[')
 
-        // @TODO: how to deal with inserts' positions when requesting translations?
-
         const selector =
           typeof item === 'object' && '_key' in item ? item._key : undefined
 

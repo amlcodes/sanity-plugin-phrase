@@ -1,6 +1,6 @@
 'use client'
 
-import { Box, Card, Dialog } from '@sanity/ui'
+import { Box, Card, Dialog, Stack } from '@sanity/ui'
 import { useState } from 'react'
 import { StringFieldProps, useFormValue } from 'sanity'
 import {
@@ -13,6 +13,7 @@ import {
   isPTDDoc,
   isTranslatedMainDoc,
   isTranslationCommitted,
+  targetLangsIntersect,
 } from '../../utils'
 import { PluginOptionsProvider } from '../PluginOptionsContext'
 import OngoingTranslationsDocDashboard from './OngoingTranslationsDocDashboard'
@@ -67,22 +68,32 @@ export default function getPhraseDocDashboard(
               const ongoingTranslations =
                 document.phraseMetadata.translations?.filter(
                   (t) => !isTranslationCommitted(t),
-                )
-              if (ongoingTranslations?.length) {
-                return (
-                  <OngoingTranslationsDocDashboard
-                    ongoingTranslations={ongoingTranslations}
-                    document={document}
-                  />
-                )
-              }
+                ) || []
+              const langsNotOngoing = pluginOptions.supportedTargetLangs.filter(
+                (supportedLang) =>
+                  !ongoingTranslations.some(
+                    (t) =>
+                      'targetLangs' in t &&
+                      targetLangsIntersect(t.targetLangs, [supportedLang]),
+                  ),
+              )
 
               return (
-                <PreviouslyTranslatedDocDashboard
-                  docLang={docLang}
-                  document={document}
-                  setToTranslate={setToTranslate}
-                />
+                <Stack space={3}>
+                  {ongoingTranslations.length > 0 && (
+                    <OngoingTranslationsDocDashboard
+                      ongoingTranslations={ongoingTranslations}
+                      document={document}
+                    />
+                  )}
+                  {langsNotOngoing.length > 0 && (
+                    <PreviouslyTranslatedDocDashboard
+                      docLang={docLang}
+                      document={document}
+                      setToTranslate={setToTranslate}
+                    />
+                  )}
+                </Stack>
               )
             })()}
 

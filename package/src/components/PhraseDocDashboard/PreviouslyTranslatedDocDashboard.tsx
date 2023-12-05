@@ -72,6 +72,15 @@ export default function PreviouslyTranslatedDocDashboard(props: {
     }
   }
 
+  const stalenessTitle =
+    stalenessByPath &&
+    Object.values(stalenessByPath).every((s) => {
+      const isTranslated = s.paths.length > 1 || s.paths[0].length > 0
+      return !isTranslated
+    })
+      ? 'There are missing translations'
+      : 'Translation is outdated'
+
   return (
     <DocDashboardCard
       title="Translation in Phrase"
@@ -145,7 +154,7 @@ export default function PreviouslyTranslatedDocDashboard(props: {
           <Flex gap={3} align="flex-start">
             <Stack space={2} flex={1}>
               <Heading size={1} style={{ fontWeight: 600 }}>
-                Translation is outdated
+                {stalenessTitle}
               </Heading>
               <Text size={1} muted>
                 This document has been modified since last translation

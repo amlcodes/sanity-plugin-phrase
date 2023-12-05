@@ -2,9 +2,6 @@ import { Effect, pipe } from 'effect'
 import { ContextWithFreshDocuments, Phrase } from '../types'
 import { prepareDateForPhrase } from '../utils'
 
-/**
- * @TODO if res.status === 400, don't retry
- */
 class FailedCreatingPhraseProjectError {
   readonly _tag = 'FailedCreatingPhraseProject'
 

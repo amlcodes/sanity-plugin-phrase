@@ -29,13 +29,16 @@ export default function DocDashboardCard(
   const collapsible = inputCollapsible && props.children !== null
 
   return (
-    <Card style={{ padding: '0.9375rem' }} border radius={1}>
+    <Card style={{ padding: '0.9375rem 0.65rem' }} border radius={1}>
       <Accordion as={collapsible ? 'details' : 'div'}>
         <Flex
           as={collapsible ? 'summary' : 'div'}
           align="flex-start"
           gap={2}
           ref={summaryRef}
+          style={{
+            paddingLeft: '0.875rem',
+          }}
         >
           <Stack space={3} flex={1} tabIndex={0} style={{ userSelect: 'text' }}>
             <Flex gap={2} align="center">

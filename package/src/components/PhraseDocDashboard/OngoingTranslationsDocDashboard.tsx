@@ -1,5 +1,6 @@
 'use client'
 
+import { InfoOutlineIcon } from '@sanity/icons'
 import { Button, Card, Flex, Stack, Text, useToast } from '@sanity/ui'
 import React from 'react'
 import { useClient, useEditState } from 'sanity'
@@ -23,9 +24,8 @@ import DocDashboardCard from '../DocDashboardCard'
 import { PhraseMonogram } from '../PhraseLogo'
 import { usePluginOptions } from '../PluginOptionsContext'
 import SpinnerBox from '../SpinnerBox'
-import { TranslationInfo } from './TranslationInfo'
 import { TranslationPathsDisplay } from '../TranslationPathsDisplay'
-import { InfoOutlineIcon } from '@sanity/icons'
+import { TranslationInfo, TranslationInfoTable } from './TranslationInfo'
 
 export default function OngoingTranslationsDocDashboard(props: {
   ongoingTranslations: MainDocTranslationMetadata[]
@@ -157,15 +157,17 @@ function OngoingTranslationCard({
         />
       }
     >
-      {TMD.targets.map((target) => (
-        <TranslationInfo
-          key={target._key}
-          paneParentDocId={parentDoc._id}
-          parentDoc={parentDoc}
-          targetLang={target.lang}
-          TMD={TMD}
-        />
-      ))}
+      <TranslationInfoTable>
+        {TMD.targets.map((target) => (
+          <TranslationInfo
+            key={target._key}
+            paneParentDocId={parentDoc._id}
+            parentDoc={parentDoc}
+            targetLang={target.lang}
+            TMD={TMD}
+          />
+        ))}
+      </TranslationInfoTable>
 
       {isTranslationReadyToCommit(translation) && (
         <Flex align="center" justify="space-between">
@@ -202,15 +204,17 @@ function DeletedTranslationCard({
       subtitle={<TranslationPathsDisplay {...translation} />}
     >
       {!ready && <SpinnerBox />}
-      {TMD?.targets.map((target) => (
-        <TranslationInfo
-          key={target._key}
-          paneParentDocId={parentDoc._id}
-          parentDoc={parentDoc}
-          targetLang={target.lang}
-          TMD={TMD}
-        />
-      ))}
+      <TranslationInfoTable>
+        {TMD?.targets.map((target) => (
+          <TranslationInfo
+            key={target._key}
+            paneParentDocId={parentDoc._id}
+            parentDoc={parentDoc}
+            targetLang={target.lang}
+            TMD={TMD}
+          />
+        ))}
+      </TranslationInfoTable>
     </DocDashboardCard>
   )
 }

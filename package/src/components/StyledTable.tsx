@@ -64,7 +64,7 @@ export const StyledTable = styled.table`
   th,
   td {
     text-align: left;
-    padding: 0.75em 0.875em;
+    padding: 0.75rem 0.875rem;
     border-bottom: 1px solid var(--card-shadow-outline-color);
   }
   td {

@@ -14,9 +14,9 @@ import {
   useDocumentPresence,
   useEditState,
 } from 'sanity'
-import { TimeAgo } from './TimeAgo'
+import { useOpenInSidePane } from '../../hooks/useOpenInSidepane'
 import { undraftId } from '../../utils'
-import { useOpenInSidePane } from '../PhraseDocDashboard/useOpenInSidepane'
+import { TimeAgo } from './TimeAgo'
 
 /**
  * Used to preview a referenced type

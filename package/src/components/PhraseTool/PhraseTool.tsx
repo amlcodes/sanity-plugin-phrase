@@ -222,7 +222,7 @@ export default function createPhraseTool(pluginOptions: PhrasePluginOptions) {
                 <Text size={2}>
                   <InfoOutlineIcon />
                 </Text>
-                {/* @TODO: remove this */}
+                {/* @TODO: implement bulk request */}
                 <Text size={2}>
                   DEV: The UI for listing and requesting missing translations is
                   not yet ready
