@@ -34,6 +34,7 @@ import SpinnerBox from '../SpinnerBox'
 import StatusBadge from '../StatusBadge'
 import { StyledTable, TableRow } from '../StyledTable'
 import { TranslationPathsDisplay } from '../TranslationPathsDisplay'
+import IssueNewTranslations from './IssueNewTranslations'
 
 const useOngoingTranslations = createHookFromObservableFactory<
   // Pick<SanityMainDoc, '_id' | '_type' | '_rev' | 'phraseMetadata'>[],
@@ -216,19 +217,7 @@ export default function createPhraseTool(pluginOptions: PhrasePluginOptions) {
                   </StyledTable>
                 )}
             </Stack>
-
-            <Card padding={4} border radius={2} tone="critical">
-              <Flex gap={3} align="flex-start">
-                <Text size={2}>
-                  <InfoOutlineIcon />
-                </Text>
-                {/* @TODO: implement bulk request */}
-                <Text size={2}>
-                  DEV: The UI for listing and requesting missing translations is
-                  not yet ready
-                </Text>
-              </Flex>
-            </Card>
+            <IssueNewTranslations />
           </Flex>
         </Card>
       </PluginOptionsProvider>
