@@ -1,5 +1,11 @@
 # sanity-plugin-phrase
 
+## 0.1.5
+
+### Patch Changes
+
+- Style: UI improvements - start of Phrase tool and better doc dashboard
+
 ## 0.1.4
 
 ### Patch Changes

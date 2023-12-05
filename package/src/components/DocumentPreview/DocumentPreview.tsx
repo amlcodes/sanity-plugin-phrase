@@ -1,9 +1,8 @@
 // Adapted from https://github.com/sanity-io/sanity/blob/next/packages/sanity/src/desk/components/paneItem/PaneItem.tsx
 
 import { DocumentIcon } from '@sanity/icons'
-import type { SanityDocument } from '@sanity/types'
 import React, { useMemo } from 'react'
-import type { CollatedHit, FIXME, SchemaType } from 'sanity'
+import type { CollatedHit, SanityDocument, SchemaType } from 'sanity'
 import {
   PreviewCard,
   useDocumentPresence,
@@ -70,7 +69,8 @@ export function DocumentPreview(props: DocumentPreviewProps) {
   return (
     <PreviewCard
       __unstable_focusRing
-      as={IntentLink as FIXME}
+      // @ts-expect-error
+      as={IntentLink}
       data-as="a"
       data-ui="PaneItem"
       padding={2}
