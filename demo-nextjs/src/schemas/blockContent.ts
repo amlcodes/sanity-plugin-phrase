@@ -67,5 +67,40 @@ export default defineType({
       type: 'image',
       options: { hotspot: true },
     }),
+    defineArrayMember({
+      name: 'tempQuiz',
+      title: 'Quiz',
+      type: 'object',
+      fields: [
+        {
+          name: 'title',
+          title: 'Title',
+          type: 'string',
+        },
+        {
+          name: 'quizType',
+          title: 'Quiz Type',
+          type: 'string',
+          options: {
+            list: [
+              { title: 'Multiple Choice', value: 'multipleChoice' },
+              { title: 'True or False', value: 'trueFalse' },
+            ],
+          },
+        },
+        {
+          name: 'questions',
+          title: 'Questions',
+          type: 'array',
+          of: [
+            {
+              name: 'question',
+              title: 'Question',
+              type: 'string',
+            },
+          ],
+        },
+      ],
+    }),
   ],
 })
