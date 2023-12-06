@@ -3883,6 +3883,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/multipipe@npm:^3.0.0":
+  version: 3.0.5
+  resolution: "@types/multipipe@npm:3.0.5"
+  dependencies:
+    "@types/node": "*"
+  checksum: fc83066067b58980cff203e5d0d4940e9ceb44992b731e44438fce1459e739c6ad2839a688b144bf4b48bba74b9b917508cdd0393d832b39bfe2b07086ea679d
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:*, @types/node@npm:^20":
   version: 20.10.1
   resolution: "@types/node@npm:20.10.1"
@@ -4650,6 +4659,13 @@ __metadata:
   version: 0.4.0
   resolution: "asynckit@npm:0.4.0"
   checksum: 7b78c451df768adba04e2d02e63e2d0bf3b07adcd6e42b4cf665cb7ce899bedd344c69a1dcbce355b5f972d597b25aaa1c1742b52cffd9caccb22f348114f6be
+  languageName: node
+  linkType: hard
+
+"attr-accept@npm:^2.2.2":
+  version: 2.2.2
+  resolution: "attr-accept@npm:2.2.2"
+  checksum: 496f7249354ab53e522510c1dc8f67a1887382187adde4dc205507d2f014836a247073b05e9d9ea51e2e9c7f71b0d2aa21730af80efa9af2d68303e5f0565c4d
   languageName: node
   linkType: hard
 
@@ -5876,7 +5892,7 @@ __metadata:
     react: ^18
     react-dom: ^18
     sanity: ^3.20.2
-    sanity-plugin-phrase: 0.1.2
+    sanity-plugin-phrase: 0.1.5
     styled-components: ^6.1.1
     typescript: ^5
   languageName: unknown
@@ -5896,6 +5912,7 @@ __metadata:
     eslint: ^8.54.0
     eslint-config-next: ^14.0.3
     eslint-plugin-simple-import-sort: ^10.0.0
+    nanoid: 3
     next: 14.0.4-canary.39
     next-sanity: ^6.1.4
     postcss: ^8.4.31
@@ -5903,10 +5920,12 @@ __metadata:
     prettier-plugin-packagejson: ^2.4.6
     react: ^18.2.0
     react-dom: ^18.2.0
+    react-dropzone: ^14.2.3
     sanity: ^3.20.2
     sanity-plugin-iframe-pane: ^2.6.1
-    sanity-plugin-phrase: 0.1.2
+    sanity-plugin-phrase: 0.1.5
     styled-components: ^6.1.1
+    subtitle: ^4.2.1
     suspend-react: ^0.1.3
     typescript: ^5.3.2
   languageName: unknown
@@ -6026,6 +6045,15 @@ __metadata:
   version: 16.0.3
   resolution: "dotenv@npm:16.0.3"
   checksum: afcf03f373d7a6d62c7e9afea6328e62851d627a4e73f2e12d0a8deae1cd375892004f3021883f8aec85932cd2834b091f568ced92b4774625b321db83b827f8
+  languageName: node
+  linkType: hard
+
+"duplexer2@npm:^0.1.2":
+  version: 0.1.4
+  resolution: "duplexer2@npm:0.1.4"
+  dependencies:
+    readable-stream: ^2.0.2
+  checksum: 744961f03c7f54313f90555ac20284a3fb7bf22fdff6538f041a86c22499560eb6eac9d30ab5768054137cb40e6b18b40f621094e0261d7d8c35a37b7a5ad241
   languageName: node
   linkType: hard
 
@@ -7021,6 +7049,15 @@ __metadata:
   dependencies:
     flat-cache: ^3.0.4
   checksum: f49701feaa6314c8127c3c2f6173cfefff17612f5ed2daaafc6da13b5c91fd43e3b2a58fd0d63f9f94478a501b167615931e7200e31485e320f74a33885a9c74
+  languageName: node
+  linkType: hard
+
+"file-selector@npm:^0.6.0":
+  version: 0.6.0
+  resolution: "file-selector@npm:0.6.0"
+  dependencies:
+    tslib: ^2.4.0
+  checksum: 7d051b6e5d793f3c6e2ab287ba5e7c2c6a0971bccc9d56e044c8047ba483e18f60fc0b5771c951dc707c0d15f4f36ccb4f1f1aaf385d21ec8f7700dadf8325ba
   languageName: node
   linkType: hard
 
@@ -9751,6 +9788,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"multipipe@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "multipipe@npm:4.0.0"
+  dependencies:
+    duplexer2: ^0.1.2
+    object-assign: ^4.1.0
+  checksum: 5a494ec2ce5bfdb389882ca595e3c4a33cae6c90dad879db2e3aa9a94484d8b164b0fb7b58ccf7593ae7e8c6213fd3f53a736b2c98e4f14c5ed1d38debc33f98
+  languageName: node
+  linkType: hard
+
 "mute-stream@npm:0.0.8":
   version: 0.0.8
   resolution: "mute-stream@npm:0.0.8"
@@ -9765,7 +9812,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nanoid@npm:^3.1.12, nanoid@npm:^3.1.30, nanoid@npm:^3.3.6":
+"nanoid@npm:3, nanoid@npm:^3.1.12, nanoid@npm:^3.1.30, nanoid@npm:^3.3.6":
   version: 3.3.7
   resolution: "nanoid@npm:3.3.7"
   bin:
@@ -10135,7 +10182,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"object-assign@npm:^4.1.1":
+"object-assign@npm:^4.1.0, object-assign@npm:^4.1.1":
   version: 4.1.1
   resolution: "object-assign@npm:4.1.1"
   checksum: fcc6e4ea8c7fe48abfbb552578b1c53e0d194086e2e6bbbf59e0a536381a292f39943c6e9628af05b5528aa5e3318bb30d6b2e53cadaf5b8fe9e12c4b69af23f
@@ -11267,6 +11314,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-dropzone@npm:^14.2.3":
+  version: 14.2.3
+  resolution: "react-dropzone@npm:14.2.3"
+  dependencies:
+    attr-accept: ^2.2.2
+    file-selector: ^0.6.0
+    prop-types: ^15.8.1
+  peerDependencies:
+    react: ">= 16.8 || 18.0.0"
+  checksum: 174b744d5ca898cf3d84ec1aeb6cef5211c446697e45dc8ece8287a03d291f8d07253206d5a1247ef156fd385d65e7de666d4d5c2986020b8543b8f2434e8b40
+  languageName: node
+  linkType: hard
+
 "react-fast-compare@npm:3.2.2, react-fast-compare@npm:^3.2.0":
   version: 3.2.2
   resolution: "react-fast-compare@npm:3.2.2"
@@ -11436,7 +11496,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"readable-stream@npm:2, readable-stream@npm:^2.0.0, readable-stream@npm:^2.0.5, readable-stream@npm:^2.1.5, readable-stream@npm:~2.3.6":
+"readable-stream@npm:2, readable-stream@npm:^2.0.0, readable-stream@npm:^2.0.2, readable-stream@npm:^2.0.5, readable-stream@npm:^2.1.5, readable-stream@npm:~2.3.6":
   version: 2.3.8
   resolution: "readable-stream@npm:2.3.8"
   dependencies:
@@ -12020,7 +12080,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sanity-plugin-phrase@0.1.2, sanity-plugin-phrase@workspace:package":
+"sanity-plugin-phrase@0.1.5, sanity-plugin-phrase@workspace:package":
   version: 0.0.0-use.local
   resolution: "sanity-plugin-phrase@workspace:package"
   dependencies:
@@ -12876,6 +12936,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"strip-bom@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "strip-bom@npm:4.0.0"
+  checksum: 9dbcfbaf503c57c06af15fe2c8176fb1bf3af5ff65003851a102749f875a6dbe0ab3b30115eccf6e805e9d756830d3e40ec508b62b3f1ddf3761a20ebe29d3f3
+  languageName: node
+  linkType: hard
+
 "strip-final-newline@npm:^2.0.0":
   version: 2.0.0
   resolution: "strip-final-newline@npm:2.0.0"
@@ -12991,6 +13058,18 @@ __metadata:
   version: 4.3.0
   resolution: "stylis@npm:4.3.0"
   checksum: 6120de3f03eacf3b5adc8e7919c4cca991089156a6badc5248752a3088106afaaf74996211a6817a7760ebeadca09004048eea31875bd8d4df51386365c50025
+  languageName: node
+  linkType: hard
+
+"subtitle@npm:^4.2.1":
+  version: 4.2.1
+  resolution: "subtitle@npm:4.2.1"
+  dependencies:
+    "@types/multipipe": ^3.0.0
+    multipipe: ^4.0.0
+    split2: ^3.2.2
+    strip-bom: ^4.0.0
+  checksum: 0aa6ff70bd039345e9cd810d547f0536dccf12092a1fbda0c34060a875a0793de97de9e54af8855877247677b345a9b8f62b1671289c52402cd170c449ba363b
   languageName: node
   linkType: hard
 

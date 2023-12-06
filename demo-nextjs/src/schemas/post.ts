@@ -5,6 +5,7 @@ import {
   defineField,
   defineType,
 } from 'sanity'
+import { vttField } from '~/components/VTTInput'
 import { apiVersion } from '~/lib/sanity.api'
 import { NOT_PTD } from '~/lib/sanity.queries'
 import { draftId, getReadableLanguageName, undraftId } from '~/utils'
@@ -44,6 +45,22 @@ export default defineType({
         hotspot: true,
       },
     }),
+    {
+      name: 'video',
+      title: 'Featured video',
+      type: 'object',
+      fields: [
+        {
+          name: 'videoFile',
+          title: 'Video file',
+          type: 'file',
+          options: {
+            accept: 'text/vtt',
+          },
+        },
+        vttField,
+      ],
+    },
     defineField({
       name: 'relatedPosts',
       title: 'Related posts',
