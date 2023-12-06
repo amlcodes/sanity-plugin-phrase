@@ -15,7 +15,7 @@ import { customAlphabet } from 'nanoid'
 import React, { useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { ArrayOfObjectsInputProps, defineField, set, unset } from 'sanity'
-import { Cue, NodeHeader, formatTimestamp, parseSync } from 'subtitle'
+import { Cue, formatTimestamp, NodeHeader, parseSync } from 'subtitle'
 
 export const generateItemKey = customAlphabet(
   '0123456789abcdefghijklmnopqrstuvwxyz',
@@ -103,33 +103,36 @@ const FileUpload = React.forwardRef<
     setValue: (newValue: StoredNode[]) => void
     inputId: string
   }
->(({ setValue: setVttContents, inputId }, ref) => {
+>(function FileUpload({ setValue: setVttContents, inputId }, ref) {
   const toast = useToast()
 
-  const onDrop = useCallback((acceptedFiles) => {
-    const file = acceptedFiles[0]
-    if (/\.(vtt)$/i.test(file.name)) {
-      const reader = new FileReader()
-      reader.onload = () => {
-        let captions = reader.result as string
-        try {
-          setVttContents(stringToNodes(captions))
-        } catch (error) {
-          toast.push({
-            status: 'error',
-            title: 'Error parsing VTT file',
-            description:
-              'message' in error
-                ? error.message
-                : "Make sure it's a valid VTT file",
-          })
+  const onDrop = useCallback(
+    (acceptedFiles) => {
+      const file = acceptedFiles[0]
+      if (/\.(vtt)$/i.test(file.name)) {
+        const reader = new FileReader()
+        reader.onload = () => {
+          let captions = reader.result as string
+          try {
+            setVttContents(stringToNodes(captions))
+          } catch (error) {
+            toast.push({
+              status: 'error',
+              title: 'Error parsing VTT file',
+              description:
+                'message' in error
+                  ? error.message
+                  : "Make sure it's a valid VTT file",
+            })
+          }
         }
-      }
 
-      reader.readAsText(file)
-    }
-    // Do something with the files
-  }, [])
+        reader.readAsText(file)
+      }
+      // Do something with the files
+    },
+    [setVttContents, toast],
+  )
 
   const dropzone = useDropzone({
     onDrop,
@@ -200,7 +203,7 @@ const FileUpload = React.forwardRef<
 })
 
 const VTTInput = React.forwardRef<any, ArrayOfObjectsInputProps<StoredNode>>(
-  (props, ref) => {
+  function VTTInput(props, ref) {
     const clearSelection = () => props.onChange(unset())
     const setValue = (contents: StoredNode[]): void =>
       props.onChange(set(contents))

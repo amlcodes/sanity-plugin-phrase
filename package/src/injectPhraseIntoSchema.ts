@@ -1,4 +1,4 @@
-import { SchemaTypeDefinition, defineType } from 'sanity'
+import { SchemaTypeDefinition, defineField, defineType } from 'sanity'
 import getPhraseDocDashboard from './components/PhraseDocDashboard/PhraseDocDashboard'
 import { PhrasePluginOptions } from './types'
 import { isPtdId } from './utils'
@@ -40,21 +40,27 @@ function injectSchema(
       return false
     },
     fields: [
-      {
+      defineField({
         name: 'phraseMetadata',
         title: 'here',
         type: 'object',
         components: {
+          // @ts-expect-error
           field: getPhraseDocDashboard(pluginOptions),
         },
         readOnly: true,
+        hidden: (context) => {
+          return (
+            context.currentUser?.name?.toLowerCase()?.includes('matt') || false
+          )
+        },
         fields: [
           {
             name: 'fakefield',
             type: 'string',
           },
         ],
-      },
+      }),
       ...schemaType.fields,
     ],
   })

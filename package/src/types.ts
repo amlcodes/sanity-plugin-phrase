@@ -1,5 +1,6 @@
 import { SanityClient } from '@sanity/client'
 import {
+  ConditionalPropertyCallback,
   Path,
   PortableTextObject,
   PortableTextSpan,
@@ -485,4 +486,11 @@ export type PhrasePluginOptions = {
     document: SanityDocument,
     sanityClient: SanityClient,
   ) => string | undefined | Promise<string | undefined>
+  /**
+   * Function equivalent to the one you’d pass to the `hidden` property of a field in Sanity.
+   * Use it to show or hide the Phrase dashboard according to user privileges.
+   *
+   * Receives a context with the current user and document and must return a boolean.
+   */
+  isPhraseDashboardHidden?: ConditionalPropertyCallback
 }
