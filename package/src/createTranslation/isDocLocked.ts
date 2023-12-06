@@ -13,9 +13,12 @@ export class DocumentsLockedError {
 export default function isDocLocked({
   request,
   freshDocuments,
-}: ContextWithFreshDocuments) {
+}: {
+  freshDocuments: ContextWithFreshDocuments['freshDocuments']
+  request: Pick<ContextWithFreshDocuments['request'], 'paths' | 'targetLangs'>
+}) {
   const someDocLocked = freshDocuments.some((d) => {
-    const allMeta = [
+    const allTranslationsMatchingLangs = [
       ...((d.draft?.phraseMetadata?._type === 'phrase.main.meta' &&
         d.draft.phraseMetadata.translations) ||
         []),
@@ -27,7 +30,7 @@ export default function isDocLocked({
         !('targetLangs' in translation) ||
         targetLangsIntersect(translation.targetLangs, request.targetLangs),
     )
-    const ongoingPaths = allMeta.flatMap((m) => {
+    const ongoingPaths = allTranslationsMatchingLangs.flatMap((m) => {
       // Ignore committed translations
       if (isTranslationCommitted(m)) return []
 

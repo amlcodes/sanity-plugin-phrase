@@ -1,23 +1,26 @@
 import { describe, expect, test } from 'bun:test'
-import { Path } from 'sanity'
 import example from '../example-data/isDocLocked.json'
 import isDocLocked from '../src/createTranslation/isDocLocked'
-import { SanityTranslationDocPair } from '../src/types'
+import { SanityTranslationDocPair, TranslationRequest } from '../src/types'
 
 const exampleFreshDocuments =
   example as unknown as (SanityTranslationDocPair & {
-    unlocked?: { paths: Path[]; label: string }[]
-    locked?: { paths: Path[]; label: string }[]
+    targetLangs: TranslationRequest['targetLangs']
+    unlocked?: { paths: TranslationRequest['paths']; label: string }[]
+    locked?: { paths: TranslationRequest['paths']; label: string }[]
   })[]
 
 describe('ensureDocNotLocked', () => {
   exampleFreshDocuments.forEach(
-    ({ unlocked = [], locked = [], ...freshDocument }, docIndex) => {
+    (
+      { unlocked = [], locked = [], targetLangs, ...freshDocument },
+      docIndex,
+    ) => {
       unlocked.forEach(({ paths, label }) => {
         test(`${label} (UNLOCKED - doc #${docIndex + 1})`, () => {
           expect(
             isDocLocked({
-              request: { paths },
+              request: { paths, targetLangs },
               freshDocuments: [freshDocument],
             }),
           ).toEqual(false)
@@ -27,7 +30,7 @@ describe('ensureDocNotLocked', () => {
         test(`${label} (LOCKED - doc #${docIndex + 1})`, () => {
           expect(
             isDocLocked({
-              request: { paths },
+              request: { paths, targetLangs },
               freshDocuments: [freshDocument],
             }),
           ).toEqual(true)

@@ -96,12 +96,12 @@ function validateFormValue(formValue: FormValue) {
 
 export default function TranslationForm({
   toTranslate: { paths, targetLangs: desiredTargetLangs },
-  document,
+  currentDocument,
   onCancel,
   sourceLang,
 }: {
   toTranslate: { paths: Path[]; targetLangs?: CrossSystemLangCode[] }
-  document: SanityDocumentWithPhraseMetadata
+  currentDocument: SanityDocumentWithPhraseMetadata
   onCancel: () => void
   sourceLang: SanityLangCode
 }) {
@@ -110,13 +110,13 @@ export default function TranslationForm({
   const { translatableTypes, supportedTargetLangs, phraseTemplates } =
     pluginOptions
   const schema = useSchema()
-  const sourceDocSchema = schema.get(document._type)
+  const sourceDocSchema = schema.get(currentDocument._type)
   const [state, setState] = useState<
     'idle' | 'submitting' | 'error' | 'success'
   >('idle')
 
   const sanityClient = useClient()
-  const sourceDocId = document._id
+  const sourceDocId = currentDocument._id
 
   const [formValue, setFormValue] = useState<FormValue>({
     templateUid: phraseTemplates[0]?.templateUid || '',
@@ -191,7 +191,7 @@ export default function TranslationForm({
   async function refreshReferences() {
     const newRefs = await getAllDocReferences({
       sanityClient,
-      document,
+      document: currentDocument,
       translatableTypes,
       paths: (paths.length > 0 ? paths : [[]]) as TranslationRequest['paths'],
     })
@@ -221,7 +221,7 @@ export default function TranslationForm({
     try {
       const body = await submitMultipleTranslations({
         schema,
-        document,
+        currentDocument: currentDocument,
         formValue,
         paths,
         sourceLang,
@@ -404,7 +404,7 @@ export default function TranslationForm({
                         _ref: ref.id,
                         _type: ref.type,
                       }}
-                      parentDocId={document._id}
+                      parentDocId={currentDocument._id}
                       schemaType={schema.get(ref.type) as SchemaType}
                       referenceOpen={false}
                     />
@@ -533,7 +533,7 @@ export default function TranslationForm({
 }
 
 async function submitMultipleTranslations({
-  document,
+  currentDocument,
   formValue,
   paths,
   sourceLang,
@@ -544,7 +544,7 @@ async function submitMultipleTranslations({
 }: {
   schema: Schema
   pluginOptions: PhrasePluginOptions
-  document: SanityDocumentWithPhraseMetadata
+  currentDocument: SanityDocumentWithPhraseMetadata
   formValue: FormValue
   paths: Path[]
   sourceLang: SanityLangCode
@@ -557,8 +557,8 @@ async function submitMultipleTranslations({
   > = {
     sourceDoc: {
       _id: sourceDocId,
-      _rev: document._rev,
-      _type: document._type,
+      _rev: currentDocument._rev,
+      _type: currentDocument._type,
       lang: sourceLang,
     },
     targetLangs: formValue.targetLangs,
@@ -573,8 +573,8 @@ async function submitMultipleTranslations({
         paths: MAIN.paths,
         sourceDoc: MAIN.sourceDoc,
         targetLangs: MAIN.targetLangs,
-        freshDoc: document,
-        schemaType: schema.get(document._type),
+        freshDoc: currentDocument,
+        schemaType: schema.get(currentDocument._type),
       }),
     },
     ...Object.entries(references?.chosenDocs || {}).flatMap(
@@ -615,7 +615,7 @@ async function submitMultipleTranslations({
               targetLangs: byPath.langs,
               sourceDoc,
               freshDoc,
-              schemaType: schema.get(document._type),
+              schemaType: schema.get(currentDocument._type),
             }),
           }
         })
