@@ -70,10 +70,10 @@ export default defineType({
           type: 'reference',
           to: { type: 'post' },
           options: {
-            filter: ({ document }) => {
+            filter: (context) => {
               return {
                 filter: `language == $language && ${NOT_PTD}`,
-                params: { language: document.language },
+                params: { language: context.document.language },
               }
             },
           },
@@ -129,17 +129,17 @@ export async function isUniqueOtherThanLanguage(
   slug: string,
   context: SlugValidationContext,
 ) {
-  const { document, getClient } = context
-  if (!document?.language) {
+  const { getClient } = context
+  if (!context.document?.language) {
     return true
   }
   const client = getClient({ apiVersion })
-  const id = document._id.replace(/^drafts\./, '')
+  const id = context.document._id.replace(/^drafts\./, '')
 
   if (
-    typeof document.phraseMetadata === 'object' &&
-    '_type' in document.phraseMetadata &&
-    document.phraseMetadata._type === 'phrase.ptd.meta'
+    typeof context.document.phraseMetadata === 'object' &&
+    '_type' in context.document.phraseMetadata &&
+    context.document.phraseMetadata._type === 'phrase.ptd.meta'
   ) {
     return true
   }
@@ -154,7 +154,7 @@ export async function isUniqueOtherThanLanguage(
     {
       draft: draftId(id),
       published: undraftId(id),
-      language: document.language,
+      language: context.document.language,
       slug,
     },
   )

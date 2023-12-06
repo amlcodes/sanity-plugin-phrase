@@ -40,7 +40,7 @@ import StatusBadge from '../StatusBadge'
 import { StyledTable, TableRow } from '../StyledTable'
 
 export default function PreviouslyTranslatedDocDashboard(props: {
-  document: SanityMainDoc
+  currentDocument: SanityMainDoc
   docLang: string
   setToTranslate: React.Dispatch<
     React.SetStateAction<{
@@ -50,7 +50,7 @@ export default function PreviouslyTranslatedDocDashboard(props: {
   >
 }) {
   const schema = useSchema()
-  const schemaType = schema.get(props.document._type)
+  const schemaType = schema.get(props.currentDocument._type)
   const { ready, staleness, stalenessReloading } = useStaleness(props)
 
   if (!ready) {
@@ -234,20 +234,21 @@ export default function PreviouslyTranslatedDocDashboard(props: {
 }
 
 function useStaleness({
-  document,
+  currentDocument,
   docLang,
 }: {
-  document: SanityMainDoc
+  currentDocument: SanityMainDoc
   docLang: string
 }) {
   const sanityClient = useClient({ apiVersion: SANITY_API_VERSION })
   const pluginOptions = usePluginOptions()
   const { sourceLang, supportedTargetLangs, langAdapter } = pluginOptions
-  const sourceId = document.phraseMetadata.translations[0]?.sourceDoc?._id
+  const sourceId =
+    currentDocument.phraseMetadata.translations[0]?.sourceDoc?._id
   const isSource = docLang === sourceLang
   const { draft, published, ready } = useEditState(
-    undraftId(isSource ? document._id : sourceId) || '',
-    document._type,
+    undraftId(isSource ? currentDocument._id : sourceId) || '',
+    currentDocument._type,
   )
   const freshSourceDoc = draft || published
   const rev = freshSourceDoc?._rev

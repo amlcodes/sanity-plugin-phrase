@@ -10,7 +10,10 @@ export function PublishedStatus(props: {
   document?: PreviewValue | Partial<SanityDocument> | null
 }) {
   const { document } = props
-  const updatedAt = document && '_updatedAt' in document && document._updatedAt
+  const updatedAt =
+    props.document &&
+    '_updatedAt' in props.document &&
+    props.document._updatedAt
 
   return (
     <Tooltip
@@ -29,8 +32,8 @@ export function PublishedStatus(props: {
     >
       <TextWithTone
         tone="positive"
-        dimmed={!document}
-        muted={!document}
+        dimmed={!props.document}
+        muted={!props.document}
         size={1}
       >
         <PublishIcon />

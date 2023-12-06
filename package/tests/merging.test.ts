@@ -278,11 +278,11 @@ describe('Document merging', () => {
     })
   })
 
-  exampleDocuments.forEach(({ filename, document }) => {
+  exampleDocuments.forEach(({ filename, document: currentDocument }) => {
     if (filename === 'simple-pt.json') {
       const changedBlockIdx = 0
       const changedBlock = {
-        _key: document.body[changedBlockIdx]._key,
+        _key: currentDocument.body[changedBlockIdx]._key,
         _type: 'block',
         children: [
           {
@@ -299,7 +299,7 @@ describe('Document merging', () => {
       const manuallyMerged = {
         ...document,
         body: [
-          ...(document.body as any[]).map((block, idx) => {
+          ...(currentDocument.body as any[]).map((block, idx) => {
             if (idx === changedBlockIdx) {
               return changedBlock
             }
@@ -310,7 +310,7 @@ describe('Document merging', () => {
       test(`auto merge (${filename}) | specific block`, () => {
         expect(
           mergeDocs({
-            originalDoc: document,
+            originalDoc: currentDocument,
             changedDoc: {
               _id: '_id',
               _rev: '_rev',
@@ -319,7 +319,9 @@ describe('Document merging', () => {
               _createdAt: '_createdAt',
               body: [changedBlock],
             },
-            paths: [['body', { _key: document.body[changedBlockIdx]._key }]],
+            paths: [
+              ['body', { _key: currentDocument.body[changedBlockIdx]._key }],
+            ],
           }),
         ).toStrictEqual(manuallyMerged)
       })

@@ -24,10 +24,10 @@ import { usePluginOptions } from '../PluginOptionsContext'
 import { TranslationInfo, TranslationInfoTable } from './TranslationInfo'
 
 export default function PtdDocDashboard({
-  document: ptdDocument,
+  currentDocument: ptdDocument,
   ptdMetadata,
 }: {
-  document: SanityPTD
+  currentDocument: SanityPTD
   ptdMetadata: PtdPhraseMetadata
 }) {
   const { phraseRegion } = usePluginOptions()

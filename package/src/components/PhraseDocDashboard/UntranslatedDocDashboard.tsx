@@ -6,12 +6,12 @@ import DocDashboardCard from '../DocDashboardCard'
 import { usePluginOptions } from '../PluginOptionsContext'
 
 export default function UntranslatedDocDashboard(props: {
-  document: SanityDocumentWithPhraseMetadata
+  currentDocument: SanityDocumentWithPhraseMetadata
   openDialog: () => void
 }) {
   const { sourceLang, i18nAdapter } = usePluginOptions()
-  const docLang = i18nAdapter.getDocumentLang(props.document)
-  const documentId = props.document._id
+  const docLang = i18nAdapter.getDocumentLang(props.currentDocument)
+  const documentId = props.currentDocument._id
 
   if (!docLang || docLang !== sourceLang) return null
 

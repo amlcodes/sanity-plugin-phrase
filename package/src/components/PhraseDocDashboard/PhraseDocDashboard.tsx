@@ -26,18 +26,18 @@ export default function getPhraseDocDashboard(
   pluginOptions: PhrasePluginOptions,
 ) {
   return function PhraseDocDashboard(_props: StringFieldProps) {
-    const document = useFormValue([]) as SanityDocumentWithPhraseMetadata
+    const currentDocument = useFormValue([]) as SanityDocumentWithPhraseMetadata
     const [toTranslate, setToTranslate] = useState<{
       paths: TranslationRequest['paths']
       targetLangs?: CrossSystemLangCode[]
     } | null>(null)
 
-    const docLang = pluginOptions.i18nAdapter.getDocumentLang(document)
+    const docLang = pluginOptions.i18nAdapter.getDocumentLang(currentDocument)
 
     const isUntranslatedMainDoc =
-      !isPTDDoc(document) && !isTranslatedMainDoc(document)
+      !isPTDDoc(currentDocument) && !isTranslatedMainDoc(currentDocument)
     if (
-      !document ||
+      !currentDocument ||
       !docLang ||
       // Don't show anything for target langs with no translations - source will show UntranslatedDocDashboard
       (isUntranslatedMainDoc && docLang !== pluginOptions.sourceLang)
@@ -47,26 +47,26 @@ export default function getPhraseDocDashboard(
     return (
       <PluginOptionsProvider pluginOptions={pluginOptions}>
         <Card>
-          {isPTDDoc(document) && (
+          {isPTDDoc(currentDocument) && (
             <PtdDocDashboard
-              document={document}
-              ptdMetadata={document.phraseMetadata}
+              currentDocument={currentDocument}
+              ptdMetadata={currentDocument.phraseMetadata}
             />
           )}
 
-          {!isPTDDoc(document) &&
-            !isTranslatedMainDoc(document) &&
+          {!isPTDDoc(currentDocument) &&
+            !isTranslatedMainDoc(currentDocument) &&
             docLang === pluginOptions.sourceLang && (
               <UntranslatedDocDashboard
-                document={document}
+                currentDocument={currentDocument}
                 openDialog={() => setToTranslate({ paths: [[]] })}
               />
             )}
 
-          {isTranslatedMainDoc(document) &&
+          {isTranslatedMainDoc(currentDocument) &&
             (() => {
               const ongoingTranslations =
-                document.phraseMetadata.translations?.filter(
+                currentDocument.phraseMetadata.translations?.filter(
                   (t) => !isTranslationCommitted(t),
                 ) || []
               const langsNotOngoing = pluginOptions.supportedTargetLangs.filter(
@@ -83,13 +83,13 @@ export default function getPhraseDocDashboard(
                   {ongoingTranslations.length > 0 && (
                     <OngoingTranslationsDocDashboard
                       ongoingTranslations={ongoingTranslations}
-                      document={document}
+                      currentDocument={currentDocument}
                     />
                   )}
                   {langsNotOngoing.length > 0 && (
                     <PreviouslyTranslatedDocDashboard
                       docLang={docLang}
-                      document={document}
+                      currentDocument={currentDocument}
                       setToTranslate={setToTranslate}
                     />
                   )}
@@ -102,13 +102,13 @@ export default function getPhraseDocDashboard(
               header="Translate with Phrase"
               onClose={() => setToTranslate(null)}
               zOffset={1000}
-              id={`phrase-translation-dialog--${document._id}`}
+              id={`phrase-translation-dialog--${currentDocument._id}`}
               width={1}
             >
               <Box padding={4}>
                 <TranslationForm
                   onCancel={() => setToTranslate(null)}
-                  document={document}
+                  currentDocument={currentDocument}
                   toTranslate={toTranslate}
                   sourceLang={docLang}
                 />

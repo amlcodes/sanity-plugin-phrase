@@ -60,15 +60,15 @@ const useOngoingTranslations = createHookFromObservableFactory<
 })
 
 function OngoingTranslation({
-  document,
+  currentDocument,
   translation,
 }: {
-  document: SanityMainDoc
+  currentDocument: SanityMainDoc
   translation: CreatedMainDocMetadata
 }) {
   const { phraseRegion } = usePluginOptions()
   const schema = useSchema()
-  const schemaType = schema.get(document._type)
+  const schemaType = schema.get(currentDocument._type)
   const { ready, draft, published } = useEditState(
     translation.tmd._ref,
     translation.tmd._type,
@@ -84,11 +84,12 @@ function OngoingTranslation({
           <Text size={1}>
             <IntentLink
               intent="edit"
-              params={{ id: document._id, type: document._type }}
+              params={{ id: currentDocument._id, type: currentDocument._type }}
               style={{ textDecoration: 'underline', color: 'currentcolor' }}
             >
-              {(schemaType && prepareForPreview(document, schemaType)?.title) ||
-                `${document._id} (unknown type)`}
+              {(schemaType &&
+                prepareForPreview(currentDocument, schemaType)?.title) ||
+                `${currentDocument._id} (unknown type)`}
             </IntentLink>
           </Text>
           <TranslationPathsDisplay {...translation} />
@@ -206,7 +207,7 @@ export default function createPhraseTool(pluginOptions: PhrasePluginOptions) {
                             return (
                               <OngoingTranslation
                                 key={t._key}
-                                document={doc}
+                                currentDocument={doc}
                                 translation={t}
                               />
                             )

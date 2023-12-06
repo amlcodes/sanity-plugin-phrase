@@ -29,7 +29,7 @@ import { TranslationInfo, TranslationInfoTable } from './TranslationInfo'
 
 export default function OngoingTranslationsDocDashboard(props: {
   ongoingTranslations: MainDocTranslationMetadata[]
-  document: SanityMainDoc
+  currentDocument: SanityMainDoc
 }) {
   return (
     <Stack space={4}>
@@ -41,7 +41,7 @@ export default function OngoingTranslationsDocDashboard(props: {
             <CreatingTranslationCard
               key={translation._key}
               translation={translation}
-              parentDoc={props.document}
+              parentDoc={props.currentDocument}
             />
           )
 
@@ -50,7 +50,7 @@ export default function OngoingTranslationsDocDashboard(props: {
             <FailedPersistingTranslationCard
               key={translation._key}
               translation={translation}
-              parentDoc={props.document}
+              parentDoc={props.currentDocument}
             />
           )
         }
@@ -60,7 +60,7 @@ export default function OngoingTranslationsDocDashboard(props: {
             <DeletedTranslationCard
               key={translation._key}
               translation={translation}
-              parentDoc={props.document}
+              parentDoc={props.currentDocument}
             />
           )
         }
@@ -69,7 +69,7 @@ export default function OngoingTranslationsDocDashboard(props: {
           <OngoingTranslationCard
             key={translation._key}
             translation={translation}
-            parentDoc={props.document}
+            parentDoc={props.currentDocument}
           />
         )
       })}

@@ -35,19 +35,6 @@ export async function GET(request: Request) {
     return new Response('Invalid token', { status: 401 })
   }
 
-  const authClient = client.withConfig({
-    useCdn: false,
-    token: writeToken,
-  })
-
-  // This is the most common way to check for auth, but we encourage you to use your existing auth
-  // infra to protect your token and securely transmit it to the client
-  const validSecret = await isValidSecret(authClient, previewSecretId, secret)
-  console.log({ validSecret, pathToRedirect, id })
-  if (!validSecret) {
-    return new Response('Invalid token', { status: 401 })
-  }
-
   draftMode().enable()
   return redirect(pathToAbsUrl(`/${pathToRedirect}?id=${id}`))
 }
