@@ -4,7 +4,7 @@ import { ContentInPhrase, ContextWithProject } from '../types'
 import { pathToString } from '../utils'
 import getPreviewContext from './getPreviewContext'
 
-export default function getDataToTranslate(
+export default function getContentInPhrase(
   context: ContextWithProject,
 ): ContentInPhrase {
   const {

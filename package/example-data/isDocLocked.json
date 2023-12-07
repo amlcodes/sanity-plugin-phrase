@@ -1,5 +1,6 @@
 [
   {
+    "targetLangs": [{ "sanity": "pt", "phrase": "pt" }],
     "locked": [
       {
         "paths": [[]],
@@ -14,7 +15,7 @@
         "label": "[locked root] root + title + slug"
       },
       {
-        "paths": [[], ["phraseMeta", "translations"]],
+        "paths": [[], ["phraseMetadata", "translations"]],
         "label": "[locked root] root + nested object"
       },
       {
@@ -22,56 +23,59 @@
         "label": "[locked root] title + slug"
       },
       {
-        "paths": [["phraseMeta", "translations"]],
+        "paths": [["phraseMetadata", "translations"]],
         "label": "[locked root] nested object"
       }
     ],
     "published": {
-      "phraseMeta": {
+      "phraseMetadata": {
         "_type": "phrase.main.meta",
         "translations": [
           {
-            "paths": [[]],
-            "status": "CREATED"
+            "paths": "[[]]",
+            "status": "CREATED",
+            "targetLangs": [{ "sanity": "pt", "phrase": "pt" }]
           }
         ]
       }
     }
   },
   {
+    "targetLangs": [{ "sanity": "pt", "phrase": "pt" }],
     "unlocked": [
       {
         "paths": [[]],
-        "label": "[fully unlocked published; completed draft] root"
+        "label": "[fully unlocked published; committed draft] root"
       },
       {
         "paths": [[], ["title"]],
-        "label": "[fully unlocked published; completed draft] root + title"
+        "label": "[fully unlocked published; committed draft] root + title"
       },
       {
         "paths": [[], ["title"], ["slug"]],
-        "label": "[fully unlocked published; completed draft] root + title + slug"
+        "label": "[fully unlocked published; committed draft] root + title + slug"
       },
       {
-        "paths": [[], ["phraseMeta", "translations"]],
-        "label": "[fully unlocked published; completed draft] root + nested object"
+        "paths": [[], ["phraseMetadata", "translations"]],
+        "label": "[fully unlocked published; committed draft] root + nested object"
       },
       {
         "paths": [["title"], ["slug"]],
-        "label": "[fully unlocked published; completed draft] title + slug"
+        "label": "[fully unlocked published; committed draft] title + slug"
       },
       {
-        "paths": [["phraseMeta", "translations"]],
-        "label": "[fully unlocked published; completed draft] nested object"
+        "paths": [["phraseMetadata", "translations"]],
+        "label": "[fully unlocked published; committed draft] nested object"
       }
     ],
     "draft": {
-      "phraseMeta": {
+      "phraseMetadata": {
         "_type": "phrase.main.meta",
         "translations": [
           {
-            "paths": [[]],
-            "status": "COMPLETED"
+            "paths": "[[]]",
+            "status": "COMMITTED",
+            "targetLangs": [{ "sanity": "pt", "phrase": "pt" }]
           }
         ]
       }
@@ -79,6 +83,7 @@
     "published": {}
   },
   {
+    "targetLangs": [{ "sanity": "pt", "phrase": "pt" }],
     "unlocked": [
       {
         "paths": [[]],
@@ -93,7 +98,7 @@
         "label": "[unlocked root after complete translation] root + title + slug"
       },
       {
-        "paths": [[], ["phraseMeta", "translations"]],
+        "paths": [[], ["phraseMetadata", "translations"]],
         "label": "[unlocked root after complete translation] root + nested object"
       },
       {
@@ -101,7 +106,7 @@
         "label": "[unlocked root after complete translation] title + slug"
       },
       {
-        "paths": [["phraseMeta", "translations"]],
+        "paths": [["phraseMetadata", "translations"]],
         "label": "[unlocked root after complete translation] nested object"
       }
     ],
@@ -109,18 +114,20 @@
       "_id": "a80f2791-d4e4-45eb-84d0-1a59fe78edbc",
       "_rev": "6A1LlYz54jYGCn2JRruTUa",
       "_type": "post",
-      "phraseMeta": {
+      "phraseMetadata": {
         "_type": "phrase.main.meta",
         "translations": [
           {
-            "paths": [[]],
-            "status": "COMPLETED"
+            "paths": "[[]]",
+            "status": "COMMITTED",
+            "targetLangs": [{ "sanity": "pt", "phrase": "pt" }]
           }
         ]
       }
     }
   },
   {
+    "targetLangs": [{ "sanity": "pt", "phrase": "pt" }],
     "locked": [
       {
         "paths": [[], ["title"]],
@@ -145,11 +152,11 @@
         "label": "[unlocked root after completion; locked title] root"
       },
       {
-        "paths": [[], ["phraseMeta", "translations"]],
+        "paths": [[], ["phraseMetadata", "translations"]],
         "label": "[unlocked root after completion; locked title] root + nested object"
       },
       {
-        "paths": [["phraseMeta", "translations"]],
+        "paths": [["phraseMetadata", "translations"]],
         "label": "[unlocked root after completion; locked title] nested object"
       }
     ],
@@ -157,22 +164,25 @@
       "_id": "a80f2791-d4e4-45eb-84d0-1a59fe78edbc",
       "_rev": "6A1LlYz54jYGCn2JRruTUa",
       "_type": "post",
-      "phraseMeta": {
+      "phraseMetadata": {
         "_type": "phrase.main.meta",
         "translations": [
           {
-            "paths": [[]],
-            "status": "COMPLETED"
+            "paths": "[[]]",
+            "status": "COMMITTED",
+            "targetLangs": [{ "sanity": "pt", "phrase": "pt" }]
           },
           {
-            "paths": [["title"]],
-            "status": "CREATED"
+            "paths": "[[\"title\"]]",
+            "status": "CREATED",
+            "targetLangs": [{ "sanity": "pt", "phrase": "pt" }]
           }
         ]
       }
     }
   },
   {
+    "targetLangs": [{ "sanity": "pt", "phrase": "pt" }],
     "locked": [
       {
         "paths": [["seo", "title"]],
@@ -205,7 +215,7 @@
         "label": "[locked item in object] root + title + slug"
       },
       {
-        "paths": [[], ["phraseMeta", "translations"]],
+        "paths": [[], ["phraseMetadata", "translations"]],
         "label": "[locked item in object] root + nested object"
       },
       {
@@ -213,7 +223,7 @@
         "label": "[locked item in object] title + slug"
       },
       {
-        "paths": [["phraseMeta", "translations"]],
+        "paths": [["phraseMetadata", "translations"]],
         "label": "[locked item in object] other nested object"
       },
       {
@@ -226,18 +236,20 @@
       }
     ],
     "published": {
-      "phraseMeta": {
+      "phraseMetadata": {
         "_type": "phrase.main.meta",
         "translations": [
           {
-            "paths": [["seo", "title"]],
-            "status": "CREATED"
+            "paths": "[[\"seo\", \"title\"]]",
+            "status": "CREATED",
+            "targetLangs": [{ "sanity": "pt", "phrase": "pt" }]
           }
         ]
       }
     }
   },
   {
+    "targetLangs": [{ "sanity": "pt", "phrase": "pt" }],
     "locked": [
       {
         "paths": [["body", { "_key": "block-1" }]],
@@ -266,7 +278,7 @@
         "label": "[locked entry in array] root + title + slug"
       },
       {
-        "paths": [[], ["phraseMeta", "translations"]],
+        "paths": [[], ["phraseMetadata", "translations"]],
         "label": "[locked entry in array] root + nested object"
       },
       {
@@ -274,7 +286,7 @@
         "label": "[locked entry in array] title + slug"
       },
       {
-        "paths": [["phraseMeta", "translations"]],
+        "paths": [["phraseMetadata", "translations"]],
         "label": "[locked entry in array] nested object"
       },
       {
@@ -287,18 +299,20 @@
       }
     ],
     "published": {
-      "phraseMeta": {
+      "phraseMetadata": {
         "_type": "phrase.main.meta",
         "translations": [
           {
-            "paths": [["body", { "_key": "block-1" }]],
-            "status": "CREATED"
+            "paths": "[[\"body\", { \"_key\": \"block-1\" }]]",
+            "status": "CREATED",
+            "targetLangs": [{ "sanity": "pt", "phrase": "pt" }]
           }
         ]
       }
     }
   },
   {
+    "targetLangs": [{ "sanity": "pt", "phrase": "pt" }],
     "locked": [
       {
         "paths": [["body", { "_key": "block-1" }]],
@@ -335,7 +349,7 @@
         "label": "[locked root array] root + title + slug"
       },
       {
-        "paths": [[], ["phraseMeta", "translations"]],
+        "paths": [[], ["phraseMetadata", "translations"]],
         "label": "[locked root array] root + nested object"
       },
       {
@@ -343,17 +357,42 @@
         "label": "[locked root array] title + slug"
       },
       {
-        "paths": [["phraseMeta", "translations"]],
+        "paths": [["phraseMetadata", "translations"]],
         "label": "[locked root array] nested object"
       }
     ],
     "published": {
-      "phraseMeta": {
+      "phraseMetadata": {
         "_type": "phrase.main.meta",
         "translations": [
           {
-            "paths": [["body"]],
-            "status": "CREATED"
+            "paths": "[[\"body\"]]",
+            "status": "CREATED",
+            "targetLangs": [{ "sanity": "pt", "phrase": "pt" }]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "targetLangs": [
+      { "sanity": "cz", "phrase": "cz" },
+      { "sanity": "es", "phrase": "es" }
+    ],
+    "unlocked": [
+      {
+        "paths": [[]],
+        "label": "allow if different target langs"
+      }
+    ],
+    "published": {
+      "phraseMetadata": {
+        "_type": "phrase.main.meta",
+        "translations": [
+          {
+            "paths": "[[\"body\"]]",
+            "status": "CREATED",
+            "targetLangs": [{ "sanity": "pt", "phrase": "pt" }]
           }
         ]
       }

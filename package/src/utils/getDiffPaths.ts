@@ -21,8 +21,12 @@ import { pathToString } from './paths'
  *
  * For example, if an element of an array was removed at position 0, and then a new one was
  * added, `sanity-diff-patch` would calculate that as a series of `set` operations, even
- * changing the item's _key. On certain edge cases, this would lead to incorrect formatting
+ * changing the item's `_key`. On certain edge cases, this would lead to incorrect formatting
  * on PortableText marks, patches that can't be applied, etc.
+ *
+ * Instead, we'd rather first remove the item at position 0, via its `_key` if possible (unchanged
+ * across reorders), and then insert the new one at that position, preferrably anchored on
+ * the `_key` of its prev/next siblings.
  *
  * This function has a simpler algorithm that makes a few assumptions:
  * 1. First, keep track of object properties or keyed array items that were either added
