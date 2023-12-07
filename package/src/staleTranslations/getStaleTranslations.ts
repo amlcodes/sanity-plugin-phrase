@@ -12,10 +12,11 @@ import {
   TranslationRequest,
 } from '../types'
 import {
+  FULL_DOC_DIFF_PATH,
   allTranslationsUnfinished,
   dedupeArray,
   draftId,
-  getChangedPaths,
+  getDiffPaths,
   getPathsKey,
   getTranslationSnapshot,
   isMainDocAndTranslatedForLang,
@@ -90,7 +91,7 @@ export default async function getStaleTranslations({
         }
       }
 
-      const changedPaths = getChangedPaths({
+      const changedPaths = getDiffPaths({
         currentVersion: parseTranslationSnapshot(
           getTranslationSnapshot(parsedLang.freshestDoc),
         ),
@@ -152,7 +153,7 @@ export function getTranslatableTargetsByPath(
 
       const paths: TranslationRequest['paths'] = isTargetStale(t)
         ? t.changedPaths
-        : [[]]
+        : [FULL_DOC_DIFF_PATH]
       const pathKey = getPathsKey(paths)
       return {
         ...byPath,

@@ -10,6 +10,7 @@ import {
   TranslationRequest,
 } from '../../types'
 import {
+  FULL_DOC_DIFF_PATH,
   isPTDDoc,
   isTranslatedMainDoc,
   isTranslationCommitted,
@@ -59,7 +60,9 @@ export default function getPhraseDocDashboard(
             docLang === pluginOptions.sourceLang && (
               <UntranslatedDocDashboard
                 currentDocument={currentDocument}
-                openDialog={() => setToTranslate({ paths: [[]] })}
+                openDialog={() =>
+                  setToTranslate({ paths: [FULL_DOC_DIFF_PATH] })
+                }
               />
             )}
 

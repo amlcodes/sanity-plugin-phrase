@@ -109,7 +109,7 @@ export default async function getAllDocReferences({
       // If checking a specific set of sub-paths, only parse references from there
       subPaths
         ? Object.fromEntries(
-            subPaths.map((path) => [getPathsKey([path]), get(doc, path)]),
+            subPaths.map(({ path }) => [getPathsKey([path]), get(doc, path)]),
           )
         : doc,
       [],

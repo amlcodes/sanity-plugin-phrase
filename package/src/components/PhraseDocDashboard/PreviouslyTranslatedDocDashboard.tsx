@@ -75,7 +75,7 @@ export default function PreviouslyTranslatedDocDashboard(props: {
   const stalenessTitle =
     stalenessByPath &&
     Object.values(stalenessByPath).every((s) => {
-      const isTranslated = s.paths.length > 1 || s.paths[0].length > 0
+      const isTranslated = s.paths.length > 1 || s.paths[0]?.path?.length > 0
       return !isTranslated
     })
       ? 'There are missing translations'
@@ -183,7 +183,8 @@ export default function PreviouslyTranslatedDocDashboard(props: {
               return <Code key={key}>{JSON.stringify(s.paths, null, 2)}</Code>
             }
 
-            const isTranslated = s.paths.length > 1 || s.paths[0].length > 0
+            const isTranslated =
+              s.paths.length > 1 || s.paths[0]?.path?.length > 0
             return (
               <Flex
                 gap={3}

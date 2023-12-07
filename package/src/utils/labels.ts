@@ -1,15 +1,15 @@
-import { Path, SanityDocument, SchemaType, prepareForPreview } from 'sanity'
-import { CreateTranslationsInput } from '../types'
+import { SanityDocument, SchemaType, prepareForPreview } from 'sanity'
+import { CreateTranslationsInput, DiffPath } from '../types'
+import { dedupeArray } from './arrays'
 import { FILENAME_PREFIX, ROOT_PATH_STR } from './constants'
 import { getTranslationKey } from './ids'
 import { getReadableLanguageName } from './langs'
 import { formatInputPaths } from './paths'
 import { truncate } from './strings'
-import { dedupeArray } from './arrays'
 
 export function getFieldLabel(
   rootPath: string,
-  fullPathsInRoot: Path[],
+  fullPathsInRoot: DiffPath[],
   schemaType: SchemaType,
 ) {
   if (rootPath === ROOT_PATH_STR) {
@@ -32,9 +32,9 @@ export function getFieldLabel(
   if (field.type.jsonType === 'array') {
     let subLabel = `${count} item${count > 1 ? 's' : ''}`
 
-    if (fullPathsInRoot.every((path) => typeof path[1] === 'number')) {
+    if (fullPathsInRoot.every(({ path }) => typeof path[1] === 'number')) {
       subLabel = `item${count > 1 ? 's' : ''} ${fullPathsInRoot
-        .map((p) => `#${(p[1] as number) + 1}`)
+        .map(({ path: p }) => `#${(p[1] as number) + 1}`)
         .join(', ')}`
     }
 
@@ -46,13 +46,13 @@ export function getFieldLabel(
   }
 
   const subFields = dedupeArray(
-    fullPathsInRoot.map((p) => {
+    fullPathsInRoot.map(({ path }) => {
       const subfield =
         ('fields' in field.type &&
-          field.type.fields.find((f) => f.name === p[1])) ||
+          field.type.fields.find((f) => f.name === path[1])) ||
         undefined
 
-      return subfield?.type?.title || p[1]
+      return subfield?.type?.title || path[1]
     }),
   ).join(', ')
   return `${rootFieldTitle} (${subFields})`

@@ -3,13 +3,14 @@ import {
   isTranslationCommitted,
   parsePathsString,
   targetLangsIntersect,
-  translationsIntersect,
+  translationPathsIntersect,
 } from '../utils'
 
 export class DocumentsLockedError {
   readonly _tag = 'DocumentsLockedError'
 }
 
+// @TODO: rewrite JSON to be diffPath instead of path
 export default function isDocLocked({
   request,
   freshDocuments,
@@ -38,12 +39,12 @@ export default function isDocLocked({
     })
 
     return ongoingPaths.some(
-      (ongoingPath) =>
+      ({ path: ongoingPath }) =>
         // If the ongoing path is empty, it's a translation for the whole document, at which point it's definitely locked
         ongoingPath.length === 0 ||
         // Or if there's any overlap on field-level translations, it's also locked
-        request.paths.some((requestedPath) =>
-          translationsIntersect(ongoingPath, requestedPath),
+        request.paths.some(({ path: requestedPath }) =>
+          translationPathsIntersect(ongoingPath, requestedPath),
         ),
     )
   })

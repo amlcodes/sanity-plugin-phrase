@@ -395,7 +395,7 @@ export type CreateTranslationsInput = Omit<
   | 'translationFilename'
 > & {
   credentials: PhraseCredentialsInput
-  paths?: (Path | string)[]
+  paths?: TranslationRequest['paths']
   targetLangs: SanityLangCode[]
   sourceDoc: Omit<TranslationRequest['sourceDoc'], 'lang'> & {
     lang: SanityLangCode

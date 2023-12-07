@@ -29,11 +29,12 @@ import useDebounce from '../../hooks/useDebounce'
 import getStaleTranslations, {
   isTargetStale,
 } from '../../staleTranslations/getStaleTranslations'
-import { joinLangsByPath } from '../../utils/paths'
+import { FULL_DOC_DIFF_PATH, joinLangsByPath } from '../../utils/paths'
 import {
   CreateMultipleTranslationsInput,
   CreateTranslationsInput,
   CrossSystemLangCode,
+  DiffPath,
   EndpointActionTypes,
   PhrasePluginOptions,
   SanityDocumentWithPhraseMetadata,
@@ -100,7 +101,10 @@ export default function TranslationForm({
   onCancel,
   sourceLang,
 }: {
-  toTranslate: { paths: Path[]; targetLangs?: CrossSystemLangCode[] }
+  toTranslate: {
+    paths: TranslationRequest['paths']
+    targetLangs?: CrossSystemLangCode[]
+  }
   currentDocument: SanityDocumentWithPhraseMetadata
   onCancel: () => void
   sourceLang: SanityLangCode
@@ -451,7 +455,7 @@ export default function TranslationForm({
                                               langStaleness &&
                                               isTargetStale(langStaleness)
                                                 ? langStaleness.changedPaths
-                                                : [[]],
+                                                : [FULL_DOC_DIFF_PATH],
                                           },
                                         ]
                                   }
@@ -546,7 +550,7 @@ async function submitMultipleTranslations({
   pluginOptions: PhrasePluginOptions
   currentDocument: SanityDocumentWithPhraseMetadata
   formValue: FormValue
-  paths: Path[]
+  paths: TranslationRequest['paths']
   sourceLang: SanityLangCode
   sourceDocId: string
   references?: ReferencesState
