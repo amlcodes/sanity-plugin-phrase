@@ -30,9 +30,9 @@ export function createPTDs({
 
     // For content in `path`, use `sourceDoc` instead as we'd rather have the original language as the reference in previews for linguists.
     const baseDoc = mergeDocs({
-      originalDoc: targetLangDoc,
-      changedDoc: freshSourceDoc,
-      paths,
+      startingDocument: targetLangDoc,
+      updatedDocument: freshSourceDoc,
+      diffPaths: paths,
     })
 
     const targetLang = langAdapter.phraseToCrossSystem(targetPhraseLang)

@@ -15,7 +15,7 @@ import {
 } from './clients/createPhraseClient'
 import { definitions } from './clients/phraseOpenAPI'
 import type { LangAdapter } from './utils'
-import { getTranslationKey, pathToString } from './utils'
+import { getTranslationKey } from './utils'
 import {
   CREDENTIALS_DOC_ID,
   PTD_ID_PREFIX,
@@ -76,7 +76,7 @@ export interface TranslationRequest {
     _type: string
     lang: CrossSystemLangCode
   }
-  paths: [Path, ...Path[]]
+  paths: [DiffPath, ...DiffPath[]]
   /** @see getTranslationKey */
   translationKey: string
   targetLangs: CrossSystemLangCode[]
@@ -268,33 +268,64 @@ export type SanityTranslationDocPair = {
   published?: SanityDocumentWithPhraseMetadata | null
 }
 
+export type ToTranslateItem =
+  | {
+      _diffPath: DiffPathUnset
+    }
+  | {
+      _diffPath: DiffPathInsert
+      data: unknown
+    }
+  | {
+      _diffPath: DiffPathSet
+      data: unknown
+    }
+
 export type ContentInPhrase = {
   /** HTML content to show in Phrase's "Context note" in-editor panel */
   _sanityContext?: string
 
   /**
-   * The formatted content sent to Phrase by field path.
-   * Keys are the result of `@sanity/util/paths`'s `toString(path)` and need to be decoded back to `Path` before usage.
+   * The formatted content sent to Phrase. It carries the information of whether each
+   * piece of content is new (inserted), updated (set) or removed (unset).
+   *
+   * Refer to `getDiffPaths` for more information on `_diffPath`.
    *
    * @example
-   * // Document-level translations (entire document)
+   * // Entire document
    * {
-   *  contentByPath: {
-   *    __root: {
-   *      _id: 'document-id' // ...
+   *  toTranslate: [
+   *    {
+   *      _diffPath: { op: 'set', path: [] },
+   *      content: {
+   *        _id: 'document-id' // ...
+   *      }
    *    }
-   *  }
+   *  ]
    * }
    *
    * // Field-level translations
    * {
-   *  contentByPath: {
-   *    title: 'Document title',
-   *    "body[_key == 'block-1'].cta": { _type: 'cta', title: 'CTA title' }
-   *  }
+   *  toTranslate: [
+   *    {
+   *      _diffPath: { op: 'set', path: ['title'] },
+   *      content: 'Document title'
+   *    },
+   *    {
+   *      _diffPath: { op: 'insert', path: ['body', { _key: 'new-block' }], insertAt: { index: 1, nextKey: 'block-1' } },
+   *      content: { _key: 'new-block' }
+   *    },
+   *    {
+   *      _diffPath: { op: 'set', path: ['body', { _key: 'block-1' }, 'cta'] },
+   *      content: { _type: 'cta', title: 'CTA title' }
+   *    },
+   *    {
+   *      _diffPath: { op: 'unset', path: ['body', { _key: 'block-2' }] },
+   *    },
+   *  ]
    * }
    **/
-  contentByPath: Record<ReturnType<typeof pathToString>, unknown>
+  toTranslate: ToTranslateItem[]
 }
 
 export type PhraseCredentialsInput = {

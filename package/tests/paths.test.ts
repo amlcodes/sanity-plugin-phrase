@@ -13,7 +13,7 @@ import {
   exampleHistoricVersionUnsetted,
 } from './pathOperations.data'
 
-describe.only('Path operations', () => {
+describe('Path operations', () => {
   test('getUnsettedPaths', () =>
     expect(
       getUnsettedPaths({
@@ -88,7 +88,7 @@ describe.only('Path operations', () => {
     objectsMatch(
       applyDiffPaths({
         startingDocument: exampleHistoricVersion,
-        comparisonDocument: exampleCurrentVersion,
+        updatedDocument: exampleCurrentVersion,
         diffPaths: getUnsettedPaths({
           currentVersion: exampleCurrentVersion,
           historicVersion: exampleHistoricVersion,
@@ -101,7 +101,7 @@ describe.only('Path operations', () => {
     objectsMatch(
       applyDiffPaths({
         startingDocument: exampleHistoricVersion,
-        comparisonDocument: exampleCurrentVersion,
+        updatedDocument: exampleCurrentVersion,
         diffPaths: getInsertedPaths({
           currentVersion: exampleCurrentVersion,
           historicVersion: exampleHistoricVersion,
@@ -114,7 +114,7 @@ describe.only('Path operations', () => {
     objectsMatch(
       applyDiffPaths({
         startingDocument: exampleHistoricVersion,
-        comparisonDocument: exampleCurrentVersion,
+        updatedDocument: exampleCurrentVersion,
         diffPaths: getArrayOfPrimitivesResets({
           currentVersion: exampleCurrentVersion,
           historicVersion: exampleHistoricVersion,

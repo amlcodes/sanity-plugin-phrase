@@ -4,12 +4,43 @@ import { Element, TextNode } from 'parse5/dist/tree-adapters/default'
 import { SerializedPtBlock, SerializedPtHtmlTag } from './types'
 import { decodeHTML } from 'entities'
 
+/**
+ * Make content stored & translated in Phrase usable in Sanity.
+ *
+ * Refer to `encodeToPhrase` for more details on the transformations ran.
+ */
+export default function decodeFromPhrase<C = unknown>(content: C): C {
+  if (Array.isArray(content)) {
+    return content.map((c) => decodeFromPhrase(c)) as C
+  }
+
+  if (typeof content === 'object' && content !== null) {
+    if ('_type' in content && content._type === 'block') {
+      return deserializeBlock(content as any as SerializedPtBlock) as C
+    }
+
+    return Object.fromEntries(
+      Object.entries(content).map(([key, value]) => [
+        key,
+        decodeFromPhrase(value),
+      ]),
+    ) as C
+  }
+
+  if (typeof content === 'string') {
+    return decodeStringFromPhrase(content) as C
+  }
+
+  return content
+}
+
 function decodeStringFromPhrase(str: string) {
   return decodeHTML(str)
 }
 
 /**
- * Sligthly reduce the possibility of error states for PT blocks by auto-closing tags not yet properly closed in the Phrase editor.
+ * Sligthly reduces the possibility of error states for PT blocks by auto-closing tags
+ * not yet properly closed in the Phrase editor.
  *
  * Assumptions:
  * - No nested tags
@@ -66,29 +97,4 @@ function deserializeBlock(block: SerializedPtBlock): PortableTextBlock {
     markDefs: block.markDefs,
     children,
   }
-}
-
-export default function phraseToSanity<C = unknown>(content: C): C {
-  if (Array.isArray(content)) {
-    return content.map((c) => phraseToSanity(c)) as C
-  }
-
-  if (typeof content === 'object' && content !== null) {
-    if ('_type' in content && content._type === 'block') {
-      return deserializeBlock(content as any as SerializedPtBlock) as C
-    }
-
-    return Object.fromEntries(
-      Object.entries(content).map(([key, value]) => [
-        key,
-        phraseToSanity(value),
-      ]),
-    ) as C
-  }
-
-  if (typeof content === 'string') {
-    return decodeStringFromPhrase(content) as C
-  }
-
-  return content
 }

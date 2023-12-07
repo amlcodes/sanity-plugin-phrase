@@ -1,7 +1,5 @@
 import { get } from '@sanity/util/paths'
-import sanityToPhrase from '../sanityToPhrase'
-import { ContentInPhrase, ContextWithProject } from '../types'
-import { pathToString } from '../utils'
+import { ContentInPhrase, ContextWithProject, ToTranslateItem } from '../types'
 import getPreviewContext from './getPreviewContext'
 
 export default function getContentInPhrase(
@@ -14,11 +12,14 @@ export default function getContentInPhrase(
   const document = freshDocumentsById[sourceDoc._id]
   return {
     _sanityContext: getPreviewContext(context),
-    contentByPath: Object.fromEntries(
-      paths.map((path) => [
-        pathToString(path),
-        sanityToPhrase(get(document, path)),
-      ]),
-    ),
+    toTranslate: paths.map((_diffPath): ToTranslateItem => {
+      if (_diffPath.op === 'unset')
+        return {
+          _diffPath,
+        }
+
+      // @ts-expect-error not sure how to model `ToTranslateItem` in a way that respects the different '_diffPaths'
+      return { _diffPath, data: get(document, _diffPath.path) }
+    }),
   }
 }

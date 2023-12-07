@@ -10,7 +10,6 @@ import {
   SanityDocumentWithPhraseMetadata,
 } from '../types'
 import { undraftId } from './ids'
-import { pathToString } from './paths'
 
 /**
  * Get the DiffPath[] that have changed between two versions of a document.
@@ -65,7 +64,7 @@ export function getDiffPaths({
     {
       ...applyDiffPaths({
         startingDocument: historicVersion,
-        comparisonDocument: currentVersion,
+        updatedDocument: currentVersion,
         diffPaths: [...unsettedPaths, ...insertedPaths, ...resetArrayPaths],
       }),
       _id: undraftId(historicVersion._id),
@@ -87,10 +86,10 @@ export function getDiffPaths({
     ...resetArrayPaths,
     ...setDiffPaths,
   ]
-  const pathKeys = allDiffPaths.map((diffPath) => pathToString(diffPath.path))
+  const pathKeys = allDiffPaths.map((diffPath) => toString(diffPath.path))
 
   return allDiffPaths.filter((diffPath, index) => {
-    const key = pathToString(diffPath.path)
+    const key = toString(diffPath.path)
     return pathKeys.indexOf(key) === index
   })
 }
@@ -287,75 +286,121 @@ export function getArrayOfPrimitivesResets({
   }, [] as Path[])
 }
 
+export function applyPatches<Doc extends SanityDocument>(
+  document: Doc,
+  patches: PatchOperations[],
+) {
+  return (Mutation.applyAll(document, [
+    new Mutation({
+      mutations: patches.map((patchOperations) => ({
+        patch: { ...patchOperations, id: document._id },
+      })),
+    }),
+  ]) || document) as Doc
+}
+
 export function applyDiffPaths({
   startingDocument,
-  comparisonDocument,
+  updatedDocument,
   diffPaths,
 }: {
   startingDocument: SanityDocument
-  comparisonDocument: SanityDocument
+  updatedDocument: SanityDocument
   diffPaths: DiffPath[]
 }) {
-  const patches = diffPaths.map((diffPath): PatchOperations => {
-    const { path } = diffPath
+  // If changing the entire root, no need to apply patches
+  if (diffPaths.length === 0) return updatedDocument
 
-    if (diffPath.op === 'set') {
-      return {
-        set: {
-          [toString(path)]: get(comparisonDocument, path),
-        },
-      }
-    }
-
-    if (diffPath.op === 'unset') {
-      return {
-        unset: [toString(path)],
-      }
-    }
-
-    const { insertAt } = diffPath
-    const value = get(comparisonDocument, path)
-
-    if (!insertAt) {
-      return {
-        set: {
-          [toString(path)]: value,
-        },
-      }
-    }
-
-    const parentPath = path.slice(0, -1)
-    const insertPosition: Omit<PatchOperations['insert'], 'items'> =
-      insertAt.nextKey || insertAt.prevKey
-        ? {
-            before: insertAt.nextKey
-              ? toString([...parentPath, { _key: insertAt.nextKey }])
-              : undefined,
-            after: insertAt.prevKey
-              ? toString([...parentPath, { _key: insertAt.prevKey }])
-              : undefined,
-          }
-        : {
-            after: toString([...parentPath, insertAt.index - 1]),
-          }
-
-    return {
-      insert: {
-        ...insertPosition,
-        items: [get(comparisonDocument, path)],
-      } as PatchOperations['insert'],
-    }
+  const patches = diffPathsToPatches({
+    diffPaths,
+    updatedDocument,
   })
 
-  return (
-    Mutation.applyAll(startingDocument, [
-      new Mutation({
-        mutations: patches.map((patchOperations) => ({
-          patch: { ...patchOperations, id: startingDocument._id },
-        })),
-      }),
-    ]) || startingDocument
-  )
+  return applyPatches(startingDocument, patches)
+}
+
+function insertDiffPathToPatch(
+  { path, insertAt }: DiffPathInsert,
+  value: unknown,
+): PatchOperations {
+  // Only array items have `insertAt`
+  if (!insertAt) {
+    return {
+      set: {
+        [toString(path)]: value,
+      },
+    }
+  }
+
+  const parentPath = path.slice(0, -1)
+  let insertPosition: Omit<PatchOperations['insert'], 'items'> = {
+    after: toString([...parentPath, insertAt.index - 1]),
+  }
+
+  if (insertAt.prevKey) {
+    insertPosition = {
+      after: toString([...parentPath, { _key: insertAt.prevKey }]),
+    }
+  }
+
+  // Similarly to Sanity's Mutator, give preference to `before` over `after`
+  if (insertAt.nextKey) {
+    insertPosition = {
+      before: toString([...parentPath, { _key: insertAt.nextKey }]),
+    }
+  }
+
+  return {
+    insert: {
+      ...insertPosition,
+      items: [value],
+    } as PatchOperations['insert'],
+  }
+}
+
+export function diffPathToPatch(
+  diffPath: DiffPath,
+  value: unknown,
+): PatchOperations {
+  if (diffPath.op === 'unset') {
+    return {
+      unset: [toString(diffPath.path)],
+    }
+  }
+
+  if (diffPath.op === 'set') {
+    return {
+      set: {
+        [toString(diffPath.path)]: value,
+      },
+    }
+  }
+
+  if (diffPath.op === 'insert') {
+    return insertDiffPathToPatch(diffPath, value)
+  }
+
+  return {}
+}
+
+function diffPathsToPatches({
+  diffPaths,
+  updatedDocument,
+}: {
+  diffPaths: DiffPath[]
+  updatedDocument: SanityDocument
+}) {
+  return diffPaths.map((diffPath) => {
+    const value = (() => {
+      try {
+        return get(updatedDocument, diffPath.path)
+      } catch (error) {
+        return undefined
+      }
+    })()
+
+    return diffPathToPatch(diffPath, value)
+  })
 }
 
 function getDataKey(data: unknown) {
