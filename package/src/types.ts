@@ -39,6 +39,32 @@ export type CrossSystemLangCode = {
   phrase: PhraseLangCode
 }
 
+export type DiffPathInsert = {
+  path: Path
+  op: 'insert'
+  /** Applicable only to array items */
+  insertAt?: {
+    index: number
+    prevKey?: string
+    nextKey?: string
+  }
+}
+
+export type DiffPathUnset = {
+  path: Path
+  op: 'unset'
+}
+
+export type DiffPathSet = {
+  path: Path
+  op: 'set'
+}
+
+export type DiffPath = DiffPathInsert | DiffPathUnset | DiffPathSet
+
+/** Result of `JSON.stringify` for `DiffPath` */
+export type StringifiedDiffPath = string
+
 export interface TranslationRequest {
   // eslint-disable-next-line
   pluginOptions: PhrasePluginOptions

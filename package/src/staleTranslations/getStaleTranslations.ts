@@ -90,12 +90,12 @@ export default async function getStaleTranslations({
         }
       }
 
-      const changedPaths = getChangedPaths(
-        parseTranslationSnapshot(
+      const changedPaths = getChangedPaths({
+        currentVersion: parseTranslationSnapshot(
           getTranslationSnapshot(parsedLang.freshestDoc),
         ),
-        parseTranslationSnapshot(TMD.sourceSnapshot),
-      )
+        historicVersion: parseTranslationSnapshot(TMD.sourceSnapshot),
+      })
 
       if (changedPaths.length === 0) {
         return {
