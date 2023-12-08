@@ -16,8 +16,8 @@ import {
   allTranslationsUnfinished,
   dedupeArray,
   draftId,
-  getDiffPaths,
-  getPathsKey,
+  getDiffs,
+  getDiffsKey,
   getTranslationSnapshot,
   isMainDocAndTranslatedForLang,
   isTranslationCommitted,
@@ -91,14 +91,14 @@ export default async function getStaleTranslations({
         }
       }
 
-      const changedPaths = getDiffPaths({
+      const diffs = getDiffs({
         currentVersion: parseTranslationSnapshot(
           getTranslationSnapshot(parsedLang.freshestDoc),
         ),
         historicVersion: parseTranslationSnapshot(TMD.sourceSnapshot),
       })
 
-      if (changedPaths.length === 0) {
+      if (diffs.length === 0) {
         return {
           ...parsedLang,
           status: StaleStatus.FRESH,
@@ -109,7 +109,7 @@ export default async function getStaleTranslations({
       return {
         ...parsedLang,
         status: StaleStatus.STALE,
-        changedPaths: changedPaths as TranslationRequest['paths'],
+        diffs: diffs as TranslationRequest['diffs'],
         translationDate: TMD._createdAt,
       }
     },
@@ -151,15 +151,15 @@ export function getTranslatableTargetsByPath(
       )
         return byPath
 
-      const paths: TranslationRequest['paths'] = isTargetStale(t)
-        ? t.changedPaths
+      const diffs: TranslationRequest['diffs'] = isTargetStale(t)
+        ? t.diffs
         : [FULL_DOC_DIFF_PATH]
-      const pathKey = getPathsKey(paths)
+      const pathKey = getDiffsKey(diffs)
       return {
         ...byPath,
         [pathKey]: {
           langs: [...(byPath[pathKey]?.langs || []), t.lang],
-          paths,
+          diffs,
           translationDate:
             'translationDate' in t ? t.translationDate : undefined,
         },
@@ -169,7 +169,7 @@ export function getTranslatableTargetsByPath(
       string,
       {
         langs: StaleTargetStatus['lang'][]
-        paths: TranslationRequest['paths']
+        diffs: TranslationRequest['diffs']
       } & Pick<Partial<StaleTargetStatus>, 'translationDate'>
     >,
   )

@@ -1,24 +1,24 @@
 import { SanityDocument } from 'sanity'
-import { DiffPath, METADATA_KEY } from './types'
-import { applyDiffPaths } from './utils'
+import { TranslationDiff, METADATA_KEY } from './types'
+import { applyDiffs } from './utils'
 
 const STATIC_KEYS = ['_id', '_rev', '_type', METADATA_KEY] as const
 
 export function mergeDocs<D extends SanityDocument>({
   startingDocument,
   updatedDocument,
-  diffPaths,
+  diffs,
 }: {
   startingDocument: D
   updatedDocument: D
-  diffPaths: DiffPath[]
+  diffs: TranslationDiff[]
 }): D {
   return keepStaticValues(
     startingDocument,
-    applyDiffPaths({
+    applyDiffs({
       startingDocument,
-      updatedDocument: updatedDocument,
-      diffPaths,
+      updatedDocument,
+      diffs,
     }) as D,
   )
 }

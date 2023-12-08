@@ -10,8 +10,8 @@ const response = await createMultipleTranslations({
     {
       templateUid: '1dIg0Pc1d8kLUFyM0tgdmt',
       sourceDoc: {
-        _id: 'drafts.d5d369b5-22e0-413f-ac34-03f3fe9f09e3',
-        _rev: '495c30ec-de75-4e90-b2a8-a275418a152c',
+        _id: 'drafts.31c34d6f-d295-4bf1-8f77-7a51a459a1b1',
+        _rev: 'zHeFW2t7bUb3lAyGGnWe8T',
         _type: 'post',
         lang: 'en',
       },

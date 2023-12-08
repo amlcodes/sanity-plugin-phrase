@@ -26,9 +26,9 @@ import {
   SANITY_API_VERSION,
   formatDay,
   getFieldLabel,
-  getPathsKey,
+  getDiffsKey,
   getReadableLanguageName,
-  joinPathsByRoot,
+  joinDiffsByRoot,
   semanticListItems,
   undraftId,
 } from '../../utils'
@@ -44,7 +44,7 @@ export default function PreviouslyTranslatedDocDashboard(props: {
   docLang: string
   setToTranslate: React.Dispatch<
     React.SetStateAction<{
-      paths: TranslationRequest['paths']
+      diffs: TranslationRequest['diffs']
       targetLangs?: CrossSystemLangCode[] | undefined
     } | null>
   >
@@ -66,7 +66,7 @@ export default function PreviouslyTranslatedDocDashboard(props: {
   ) {
     return function requestTranslation() {
       props.setToTranslate({
-        paths: s.paths,
+        diffs: s.diffs,
         targetLangs: s.langs,
       })
     }
@@ -75,7 +75,7 @@ export default function PreviouslyTranslatedDocDashboard(props: {
   const stalenessTitle =
     stalenessByPath &&
     Object.values(stalenessByPath).every((s) => {
-      const isTranslated = s.paths.length > 1 || s.paths[0]?.path?.length > 0
+      const isTranslated = s.diffs.length > 1 || s.diffs[0]?.path?.length > 0
       return !isTranslated
     })
       ? 'There are missing translations'
@@ -178,13 +178,13 @@ export default function PreviouslyTranslatedDocDashboard(props: {
             )}
           </Flex>
           {Object.values(stalenessByPath).map((s) => {
-            const key = getPathsKey(s.paths)
+            const key = getDiffsKey(s.diffs)
             if (!schemaType) {
-              return <Code key={key}>{JSON.stringify(s.paths, null, 2)}</Code>
+              return <Code key={key}>{JSON.stringify(s.diffs, null, 2)}</Code>
             }
 
             const isTranslated =
-              s.paths.length > 1 || s.paths[0]?.path?.length > 0
+              s.diffs.length > 1 || s.diffs[0]?.path?.length > 0
             return (
               <Flex
                 gap={3}
@@ -204,7 +204,7 @@ export default function PreviouslyTranslatedDocDashboard(props: {
                     )}
                     :
                   </Text>
-                  {Object.entries(joinPathsByRoot(s.paths)).map(
+                  {Object.entries(joinDiffsByRoot(s.diffs)).map(
                     ([rootPath, fullPathsInRoot]) => (
                       <Text key={rootPath} size={1} muted>
                         {getFieldLabel(rootPath, fullPathsInRoot, schemaType)}

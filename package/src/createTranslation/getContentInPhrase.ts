@@ -7,19 +7,19 @@ export default function getContentInPhrase(
 ): ContentInPhrase {
   const {
     freshDocumentsById,
-    request: { paths, sourceDoc },
+    request: { diffs, sourceDoc },
   } = context
   const document = freshDocumentsById[sourceDoc._id]
   return {
     _sanityContext: getPreviewContext(context),
-    toTranslate: paths.map((_diffPath): ToTranslateItem => {
-      if (_diffPath.op === 'unset')
+    toTranslate: diffs.map((_diff): ToTranslateItem => {
+      if (_diff.op === 'unset')
         return {
-          _diffPath,
+          _diff,
         }
 
-      // @ts-expect-error not sure how to model `ToTranslateItem` in a way that respects the different '_diffPaths'
-      return { _diffPath, data: get(document, _diffPath.path) }
+      // @ts-expect-error not sure how to model `ToTranslateItem` in a way that respects the different '_diff's
+      return { _diff, data: get(document, _diff.path) }
     }),
   }
 }

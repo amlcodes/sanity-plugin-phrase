@@ -6,7 +6,7 @@ import { PhraseClient } from '../clients/createPhraseClient'
 import getAuthedPhraseClient from '../clients/getAuthedPhraseClient'
 import { CreateTranslationsInput, TranslationRequest } from '../types'
 import { getTranslationKey } from '../utils'
-import { formatInputPaths } from '../utils/paths'
+import { formatInputDiffs } from '../utils/paths'
 
 export function runEffectWithClients<E = unknown, A = unknown>(
   input: Pick<CreateTranslationsInput, 'credentials' | 'sanityClient'>,
@@ -40,10 +40,10 @@ export function formatRequest(
   request: CreateTranslationsInput,
   phraseClient: PhraseClient,
 ): TranslationRequest {
-  const { paths: inputPaths, targetLangs: inputTargetLangs } = request
+  const { diffs: inputDiffs, targetLangs: inputTargetLangs } = request
   const { langAdapter } = request.pluginOptions
 
-  const paths = formatInputPaths(inputPaths)
+  const diffs = formatInputDiffs(inputDiffs)
 
   const targetLangs = langAdapter.sanityToCrossSystem(
     // Don't allow translating to the same language as the source
@@ -58,11 +58,11 @@ export function formatRequest(
   }
   return {
     ...request,
-    paths,
+    diffs,
     targetLangs,
     sourceDoc,
     phraseClient,
-    translationKey: getTranslationKey(paths, sourceDoc._rev),
+    translationKey: getTranslationKey(diffs, sourceDoc._rev),
     translationFilename: `${request.translationName}.json`,
   }
 }

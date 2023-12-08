@@ -59,7 +59,7 @@ export default function lockDocuments(context: ContextWithFreshDocuments) {
 
 function getLockTransaction(context: ContextWithFreshDocuments) {
   const { request, freshDocuments } = context
-  const { paths } = request
+  const { diffs } = request
 
   const docs = freshDocuments.flatMap(
     (d) =>
@@ -85,7 +85,7 @@ function getLockTransaction(context: ContextWithFreshDocuments) {
         _key: request.translationKey,
         _createdAt: new Date().toISOString(),
         sourceDoc: request.sourceDoc,
-        paths: JSON.stringify(paths),
+        diffs: JSON.stringify(diffs),
         status: 'CREATING',
       }
       if (

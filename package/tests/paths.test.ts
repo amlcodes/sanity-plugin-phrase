@@ -2,7 +2,7 @@ import { describe, expect, test } from 'bun:test'
 import {
   getInsertedPaths,
   getUnsettedPaths,
-  applyDiffPaths,
+  applyDiffs,
   getArrayOfPrimitivesResets,
 } from '../src/utils'
 import {
@@ -86,7 +86,7 @@ describe('Path operations', () => {
 
   test('unsetPaths', () =>
     objectsMatch(
-      applyDiffPaths({
+      applyDiffs({
         startingDocument: exampleHistoricVersion,
         updatedDocument: exampleCurrentVersion,
         diffPaths: getUnsettedPaths({
@@ -99,7 +99,7 @@ describe('Path operations', () => {
 
   test('insertPaths', () =>
     objectsMatch(
-      applyDiffPaths({
+      applyDiffs({
         startingDocument: exampleHistoricVersion,
         updatedDocument: exampleCurrentVersion,
         diffPaths: getInsertedPaths({
@@ -112,7 +112,7 @@ describe('Path operations', () => {
 
   test('resetArraysOfPrimitives', () =>
     objectsMatch(
-      applyDiffPaths({
+      applyDiffs({
         startingDocument: exampleHistoricVersion,
         updatedDocument: exampleCurrentVersion,
         diffPaths: getArrayOfPrimitivesResets({

@@ -39,7 +39,7 @@ export type CrossSystemLangCode = {
   phrase: PhraseLangCode
 }
 
-export type DiffPathInsert = {
+export type TranslationDiffInsert = {
   path: Path
   op: 'insert'
   /** Applicable only to array items */
@@ -50,20 +50,20 @@ export type DiffPathInsert = {
   }
 }
 
-export type DiffPathUnset = {
+export type TranslationDiffUnset = {
   path: Path
   op: 'unset'
 }
 
-export type DiffPathSet = {
+export type TranslationDiffSet = {
   path: Path
   op: 'set'
 }
 
-export type DiffPath = DiffPathInsert | DiffPathUnset | DiffPathSet
-
-/** Result of `JSON.stringify` for `DiffPath` */
-export type StringifiedDiffPath = string
+export type TranslationDiff =
+  | TranslationDiffInsert
+  | TranslationDiffUnset
+  | TranslationDiffSet
 
 export interface TranslationRequest {
   // eslint-disable-next-line
@@ -76,7 +76,7 @@ export interface TranslationRequest {
     _type: string
     lang: CrossSystemLangCode
   }
-  paths: [DiffPath, ...DiffPath[]]
+  diffs: [TranslationDiff, ...TranslationDiff[]]
   /** @see getTranslationKey */
   translationKey: string
   targetLangs: CrossSystemLangCode[]
@@ -126,13 +126,15 @@ export enum SerializedPtHtmlTag {
   BLOCK = 'c-b',
 }
 
+/** Stringified `TranslationRequest['diffs']` */
+type StringifiedDiffs = ReturnType<typeof JSON.stringify>
+
 type BaseMainDocMetadata = {
   _type: 'phrase.main.translation'
   _key: TranslationRequest['translationKey']
   _createdAt: string
   sourceDoc: TranslationRequest['sourceDoc']
-  /** Stringified `TranslationRequest['paths']` */
-  paths: ReturnType<typeof JSON.stringify>
+  diffs: StringifiedDiffs
 }
 
 export type CreatingMainDocMetadata = BaseMainDocMetadata & {
@@ -228,7 +230,7 @@ export type SanityTMD = SanityDocument & {
   sourceLang: CrossSystemLangCode
   targets: TMDTarget[]
   translationKey: TranslationRequest['translationKey']
-  paths: TranslationRequest['paths']
+  diffs: TranslationRequest['diffs']
   phraseProjectUid: string
   projectDueDate: string | null | undefined
 }
@@ -270,14 +272,14 @@ export type SanityTranslationDocPair = {
 
 export type ToTranslateItem =
   | {
-      _diffPath: DiffPathUnset
+      _diff: TranslationDiffUnset
     }
   | {
-      _diffPath: DiffPathInsert
+      _diff: TranslationDiffInsert
       data: unknown
     }
   | {
-      _diffPath: DiffPathSet
+      _diff: TranslationDiffSet
       data: unknown
     }
 
@@ -289,14 +291,14 @@ export type ContentInPhrase = {
    * The formatted content sent to Phrase. It carries the information of whether each
    * piece of content is new (inserted), updated (set) or removed (unset).
    *
-   * Refer to `getDiffPaths` for more information on `_diffPath`.
+   * Refer to `getDiffPaths` for more information on `_diff`.
    *
    * @example
    * // Entire document
    * {
    *  toTranslate: [
    *    {
-   *      _diffPath: { op: 'set', path: [] },
+   *      _diff: { op: 'set', path: [] },
    *      content: {
    *        _id: 'document-id' // ...
    *      }
@@ -308,19 +310,19 @@ export type ContentInPhrase = {
    * {
    *  toTranslate: [
    *    {
-   *      _diffPath: { op: 'set', path: ['title'] },
+   *      _diff: { op: 'set', path: ['title'] },
    *      content: 'Document title'
    *    },
    *    {
-   *      _diffPath: { op: 'insert', path: ['body', { _key: 'new-block' }], insertAt: { index: 1, nextKey: 'block-1' } },
+   *      _diff: { op: 'insert', path: ['body', { _key: 'new-block' }], insertAt: { index: 1, nextKey: 'block-1' } },
    *      content: { _key: 'new-block' }
    *    },
    *    {
-   *      _diffPath: { op: 'set', path: ['body', { _key: 'block-1' }, 'cta'] },
+   *      _diff: { op: 'set', path: ['body', { _key: 'block-1' }, 'cta'] },
    *      content: { _type: 'cta', title: 'CTA title' }
    *    },
    *    {
-   *      _diffPath: { op: 'unset', path: ['body', { _key: 'block-2' }] },
+   *      _diff: { op: 'unset', path: ['body', { _key: 'block-2' }] },
    *    },
    *  ]
    * }
@@ -387,7 +389,7 @@ export type I18nAdapter = {
 
 export type CreateTranslationsInput = Omit<
   TranslationRequest,
-  | 'paths'
+  | 'diffs'
   | 'targetLangs'
   | 'sourceDoc'
   | 'phraseClient'
@@ -395,7 +397,7 @@ export type CreateTranslationsInput = Omit<
   | 'translationFilename'
 > & {
   credentials: PhraseCredentialsInput
-  paths?: TranslationRequest['paths']
+  diffs?: TranslationRequest['diffs']
   targetLangs: SanityLangCode[]
   sourceDoc: Omit<TranslationRequest['sourceDoc'], 'lang'> & {
     lang: SanityLangCode
@@ -452,7 +454,7 @@ export enum StaleStatus {
 export type StaleTargetStatus = {
   lang: CrossSystemLangCode
   status: StaleStatus.STALE
-  changedPaths: TranslationRequest['paths']
+  diffs: TranslationRequest['diffs']
   translationDate: string
 }
 

@@ -253,7 +253,9 @@ function FailedPersistingTranslationCard({
           </Text>
           {/* @TODO: attempt to salvage translation */}
           <Text size={2}>
-            DEV: Ability to salvage failed translations isn't yet implemented
+            {
+              "DEV: Ability to salvage failed translations isn't yet implemented"
+            }
           </Text>
         </Flex>
       </Card>

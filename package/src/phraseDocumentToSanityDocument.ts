@@ -71,7 +71,7 @@ export default async function phraseDocumentToSanityDocument({
       referenceMap,
     })
 
-    return diffPathToPatch(toTranslate._diffPath, dataWithReferences)
+    return diffPathToPatch(toTranslate._diff, dataWithReferences)
   })
 
   return applyPatches(freshPTD, patches)

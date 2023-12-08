@@ -3,10 +3,10 @@ import { fromString, get, toString } from '@sanity/util/paths'
 import { PatchOperations, Path, SanityDocument } from 'sanity'
 import { PathSegment, diffPatch } from 'sanity-diff-patch'
 import {
-  DiffPath,
-  DiffPathInsert,
-  DiffPathSet,
-  DiffPathUnset,
+  TranslationDiff,
+  TranslationDiffInsert,
+  TranslationDiffSet,
+  TranslationDiffUnset,
   SanityDocumentWithPhraseMetadata,
 } from '../types'
 import { undraftId } from './ids'
@@ -38,13 +38,13 @@ import { undraftId } from './ids'
  * It's slightly more inefficient, sending extra data to Phrase, but leads to more robust and
  * reliable results.
  */
-export function getDiffPaths({
+export function getDiffs({
   currentVersion,
   historicVersion,
 }: {
   currentVersion?: SanityDocumentWithPhraseMetadata
   historicVersion?: SanityDocumentWithPhraseMetadata
-}): DiffPath[] {
+}): TranslationDiff[] {
   if (!currentVersion || !historicVersion) return []
 
   const unsettedPaths = getUnsettedPaths({
@@ -62,24 +62,26 @@ export function getDiffPaths({
 
   const diffPatches = diffPatch(
     {
-      ...applyDiffPaths({
+      ...applyDiffs({
         startingDocument: historicVersion,
         updatedDocument: currentVersion,
-        diffPaths: [...unsettedPaths, ...insertedPaths, ...resetArrayPaths],
+        diffs: [...unsettedPaths, ...insertedPaths, ...resetArrayPaths],
       }),
       _id: undraftId(historicVersion._id),
     },
     { ...currentVersion, _id: undraftId(currentVersion._id) },
   )
 
-  const setDiffPaths = diffPatches.flatMap(({ patch }): DiffPathSet[] => {
-    if (!('set' in patch)) return []
+  const setDiffPaths = diffPatches.flatMap(
+    ({ patch }): TranslationDiffSet[] => {
+      if (!('set' in patch)) return []
 
-    return Object.keys(patch.set).map((path) => ({
-      op: 'set',
-      path: fromString(path),
-    }))
-  })
+      return Object.keys(patch.set).map((path) => ({
+        op: 'set',
+        path: fromString(path),
+      }))
+    },
+  )
   const allDiffPaths = [
     ...unsettedPaths,
     ...insertedPaths,
@@ -127,7 +129,7 @@ export function getUnsettedPaths({
   currentVersion: unknown
   historicVersion: unknown
   basePath?: Path
-}): DiffPathUnset[] {
+}): TranslationDiffUnset[] {
   if (
     typeof historicVersion !== 'object' ||
     !historicVersion ||
@@ -193,12 +195,12 @@ export function getInsertedPaths({
   currentVersion: unknown
   historicVersion: unknown
   basePath?: Path
-}): DiffPathInsert[] {
+}): TranslationDiffInsert[] {
   return getUnsettedPaths({
     currentVersion: historicVersion,
     historicVersion: currentVersion,
     basePath,
-  }).map(({ path }): DiffPathInsert => {
+  }).map(({ path }): TranslationDiffInsert => {
     const parentPath = path.slice(0, -1)
     const parentValue = get(currentVersion, parentPath)
     if (!Array.isArray(parentValue))
@@ -239,7 +241,7 @@ export function getArrayOfPrimitivesResets({
   currentVersion: unknown
   historicVersion: unknown
   basePath?: Path
-}): DiffPathSet[] {
+}): TranslationDiffSet[] {
   if (
     typeof historicVersion !== 'object' ||
     !historicVersion ||
@@ -299,20 +301,20 @@ export function applyPatches<Doc extends SanityDocument>(
   ]) || document) as Doc
 }
 
-export function applyDiffPaths({
+export function applyDiffs({
   startingDocument,
   updatedDocument,
-  diffPaths,
+  diffs,
 }: {
   startingDocument: SanityDocument
   updatedDocument: SanityDocument
-  diffPaths: DiffPath[]
+  diffs: TranslationDiff[]
 }) {
   // If changing the entire root, no need to apply patches
-  if (diffPaths.length === 0) return updatedDocument
+  if (diffs.length === 0) return updatedDocument
 
   const patches = diffPathsToPatches({
-    diffPaths,
+    diffPaths: diffs,
     updatedDocument,
   })
 
@@ -320,7 +322,7 @@ export function applyDiffPaths({
 }
 
 function insertDiffPathToPatch(
-  { path, insertAt }: DiffPathInsert,
+  { path, insertAt }: TranslationDiffInsert,
   value: unknown,
 ): PatchOperations {
   // Only array items have `insertAt`
@@ -359,7 +361,7 @@ function insertDiffPathToPatch(
 }
 
 export function diffPathToPatch(
-  diffPath: DiffPath,
+  diffPath: TranslationDiff,
   value: unknown,
 ): PatchOperations {
   if (diffPath.op === 'unset') {
@@ -387,7 +389,7 @@ function diffPathsToPatches({
   diffPaths,
   updatedDocument,
 }: {
-  diffPaths: DiffPath[]
+  diffPaths: TranslationDiff[]
   updatedDocument: SanityDocument
 }) {
   return diffPaths.map((diffPath) => {

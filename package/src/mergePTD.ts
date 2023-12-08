@@ -21,7 +21,7 @@ export function getMergePTDTransaction({
       ...mergeDocs({
         startingDocument: freshTargetDoc,
         updatedDocument: PTD,
-        diffPaths: TMD.paths,
+        diffs: TMD.diffs,
       }),
       phraseMetadata: freshTargetDoc.phraseMetadata,
     }

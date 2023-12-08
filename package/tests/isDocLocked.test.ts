@@ -6,8 +6,8 @@ import { SanityTranslationDocPair, TranslationRequest } from '../src/types'
 const exampleFreshDocuments =
   example as unknown as (SanityTranslationDocPair & {
     targetLangs: TranslationRequest['targetLangs']
-    unlocked?: { paths: TranslationRequest['paths']; label: string }[]
-    locked?: { paths: TranslationRequest['paths']; label: string }[]
+    unlocked?: { diffs: TranslationRequest['diffs']; label: string }[]
+    locked?: { diffs: TranslationRequest['diffs']; label: string }[]
   })[]
 
 describe('ensureDocNotLocked', () => {
@@ -16,21 +16,21 @@ describe('ensureDocNotLocked', () => {
       { unlocked = [], locked = [], targetLangs, ...freshDocument },
       docIndex,
     ) => {
-      unlocked.forEach(({ paths, label }) => {
+      unlocked.forEach(({ diffs, label }) => {
         test(`${label} (UNLOCKED - doc #${docIndex + 1})`, () => {
           expect(
             isDocLocked({
-              request: { paths, targetLangs },
+              request: { diffs, targetLangs },
               freshDocuments: [freshDocument],
             }),
           ).toEqual(false)
         })
       })
-      locked.forEach(({ paths, label }) => {
+      locked.forEach(({ diffs, label }) => {
         test(`${label} (LOCKED - doc #${docIndex + 1})`, () => {
           expect(
             isDocLocked({
-              request: { paths, targetLangs },
+              request: { diffs, targetLangs },
               freshDocuments: [freshDocument],
             }),
           ).toEqual(true)

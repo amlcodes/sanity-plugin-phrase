@@ -1,15 +1,15 @@
 import { SanityDocument, SchemaType, prepareForPreview } from 'sanity'
-import { CreateTranslationsInput, DiffPath } from '../types'
+import { CreateTranslationsInput, TranslationDiff } from '../types'
 import { dedupeArray } from './arrays'
 import { FILENAME_PREFIX, ROOT_PATH_STR } from './constants'
 import { getTranslationKey } from './ids'
 import { getReadableLanguageName } from './langs'
-import { formatInputPaths } from './paths'
+import { formatInputDiffs } from './paths'
 import { truncate } from './strings'
 
 export function getFieldLabel(
   rootPath: string,
-  fullPathsInRoot: DiffPath[],
+  fullDiffsInRoot: TranslationDiff[],
   schemaType: SchemaType,
 ) {
   if (rootPath === ROOT_PATH_STR) {
@@ -27,13 +27,13 @@ export function getFieldLabel(
   }
 
   const rootFieldTitle = truncate(field.type.title || rootPath, 30)
-  const count = fullPathsInRoot.length
+  const count = fullDiffsInRoot.length
 
   if (field.type.jsonType === 'array') {
     let subLabel = `${count} item${count > 1 ? 's' : ''}`
 
-    if (fullPathsInRoot.every(({ path }) => typeof path[1] === 'number')) {
-      subLabel = `item${count > 1 ? 's' : ''} ${fullPathsInRoot
+    if (fullDiffsInRoot.every(({ path }) => typeof path[1] === 'number')) {
+      subLabel = `item${count > 1 ? 's' : ''} ${fullDiffsInRoot
         .map(({ path: p }) => `#${(p[1] as number) + 1}`)
         .join(', ')}`
     }
@@ -46,7 +46,7 @@ export function getFieldLabel(
   }
 
   const subFields = dedupeArray(
-    fullPathsInRoot.map(({ path }) => {
+    fullDiffsInRoot.map(({ path }) => {
       const subfield =
         ('fields' in field.type &&
           field.type.fields.find((f) => f.name === path[1])) ||
@@ -60,18 +60,18 @@ export function getFieldLabel(
 
 export function getTranslationName({
   sourceDoc,
-  paths: inputPaths,
+  diffs: inputDiffs,
   targetLangs,
   freshDoc,
   schemaType,
 }: {
   sourceDoc: CreateTranslationsInput['sourceDoc']
-  paths: CreateTranslationsInput['paths']
+  diffs: CreateTranslationsInput['diffs']
   targetLangs: CreateTranslationsInput['targetLangs']
   freshDoc: SanityDocument
   schemaType?: SchemaType
 }) {
-  const paths = formatInputPaths(inputPaths)
+  const diffs = formatInputDiffs(inputDiffs)
   const previewTitle =
     (schemaType && prepareForPreview(freshDoc, schemaType)?.title) || null
 
@@ -81,7 +81,7 @@ export function getTranslationName({
     sourceDoc.lang,
   )} to ${targetLangs
     .map((l) => getReadableLanguageName(l))
-    .join(', ')}) :: ${getTranslationKey(paths, sourceDoc._rev)})`
+    .join(', ')}) :: ${getTranslationKey(diffs, sourceDoc._rev)})`
 
   return name
 }

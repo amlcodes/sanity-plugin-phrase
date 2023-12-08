@@ -1,4 +1,9 @@
-import { CrossSystemLangCode, DiffPath, SanityPTD, SanityTMD } from '../types'
+import {
+  CrossSystemLangCode,
+  TranslationDiff,
+  SanityPTD,
+  SanityTMD,
+} from '../types'
 import { PTD_ID_PREFIX, TMD_ID_PREFIX } from './constants'
 import { pathToString } from './paths'
 
@@ -16,8 +21,8 @@ export function makeKeyAndIdFriendly(str: string) {
 }
 
 /** Used as an id and _key for the translation. Never gets parsed back to its contents. */
-export function getTranslationKey(paths: DiffPath[], _rev: string) {
-  return [...paths.map(({ path }) => pathToString(path)), _rev]
+export function getTranslationKey(diffs: TranslationDiff[], _rev: string) {
+  return [...diffs.map(({ path }) => pathToString(path)), _rev]
     .map(makeKeyAndIdFriendly)
     .join('__')
 }

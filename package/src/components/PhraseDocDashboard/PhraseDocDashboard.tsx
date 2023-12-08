@@ -29,7 +29,7 @@ export default function getPhraseDocDashboard(
   return function PhraseDocDashboard(_props: StringFieldProps) {
     const currentDocument = useFormValue([]) as SanityDocumentWithPhraseMetadata
     const [toTranslate, setToTranslate] = useState<{
-      paths: TranslationRequest['paths']
+      diffs: TranslationRequest['diffs']
       targetLangs?: CrossSystemLangCode[]
     } | null>(null)
 
@@ -61,7 +61,7 @@ export default function getPhraseDocDashboard(
               <UntranslatedDocDashboard
                 currentDocument={currentDocument}
                 openDialog={() =>
-                  setToTranslate({ paths: [FULL_DOC_DIFF_PATH] })
+                  setToTranslate({ diffs: [FULL_DOC_DIFF_PATH] })
                 }
               />
             )}

@@ -7,7 +7,7 @@ import { mergeDocs } from '../mergeDocs'
  */
 export function createPTDs({
   request: {
-    paths,
+    diffs,
     sourceDoc,
     translationKey,
     pluginOptions: { i18nAdapter, langAdapter },
@@ -32,7 +32,7 @@ export function createPTDs({
     const baseDoc = mergeDocs({
       startingDocument: targetLangDoc,
       updatedDocument: freshSourceDoc,
-      diffPaths: paths,
+      diffs,
     })
 
     const targetLang = langAdapter.phraseToCrossSystem(targetPhraseLang)

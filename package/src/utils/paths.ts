@@ -2,7 +2,7 @@ import { fromString, numEqualSegments, toString } from '@sanity/util/paths'
 import { Path } from 'sanity'
 import {
   CreateTranslationsInput,
-  DiffPath,
+  TranslationDiff,
   METADATA_KEY,
   MainDocTranslationMetadata,
   SanityLangCode,
@@ -40,13 +40,13 @@ export function stringToPath(str: string): Path {
   return fromString(str)
 }
 
-export const FULL_DOC_DIFF_PATH: DiffPath = {
+export const FULL_DOC_DIFF_PATH: TranslationDiff = {
   op: 'set',
   path: [],
 }
 
-export function joinPathsByRoot(paths: DiffPath[]) {
-  return paths.reduce(
+export function joinDiffsByRoot(diffs: TranslationDiff[]) {
+  return diffs.reduce(
     (byRoot, p) => {
       const root = p.path[0] ? toString([p.path[0]]) : ROOT_PATH_STR
       return {
@@ -54,7 +54,7 @@ export function joinPathsByRoot(paths: DiffPath[]) {
         [root]: [...(byRoot[root] || []), p],
       }
     },
-    {} as { [root: string]: typeof paths },
+    {} as { [root: string]: typeof diffs },
   )
 }
 
@@ -62,48 +62,48 @@ export function tPathInMainDoc(translationKey: string) {
   return `${METADATA_KEY}.translations[_key == "${translationKey}"]`
 }
 
-export function formatInputPaths(
-  inputPaths: CreateTranslationsInput['paths'],
-): TranslationRequest['paths'] {
-  return Array.isArray(inputPaths) && inputPaths.length > 0
-    ? inputPaths
+export function formatInputDiffs(
+  inputDiffs: CreateTranslationsInput['diffs'],
+): TranslationRequest['diffs'] {
+  return Array.isArray(inputDiffs) && inputDiffs.length > 0
+    ? inputDiffs
     : [FULL_DOC_DIFF_PATH]
 }
 
 /** Returns a predictable string for a given path, that can be
  * used for joining translations / targets / staleness together */
-export function getPathsKey(paths: (DiffPath | Path)[]) {
+export function getDiffsKey(diffs: TranslationDiff[]) {
   return (
-    paths
-      ?.map((p) => pathToString(Array.isArray(p) ? p : p.path))
+    diffs
+      ?.map(({ path }) => pathToString(path))
       .sort((a, b) => a.localeCompare(b))
       .join('||') || ''
   )
 }
 
-export function parsePathsString(
-  pathsString: MainDocTranslationMetadata['paths'],
-): DiffPath[] {
+export function parseStringifiedDiffs(
+  stingifiedDiffs: MainDocTranslationMetadata['diffs'],
+): TranslationDiff[] {
   try {
-    return JSON.parse(pathsString) as TranslationRequest['paths']
+    return JSON.parse(stingifiedDiffs) as TranslationRequest['diffs']
   } catch (error) {
     return []
   }
 }
 
-export function joinLangsByPath(
-  entries: { lang: SanityLangCode; paths: TranslationRequest['paths'] }[] = [],
+export function joinLangsByDiffs(
+  entries: { lang: SanityLangCode; diffs: TranslationRequest['diffs'] }[] = [],
 ) {
   return entries.reduce(
-    (byPath, t) => {
-      if (!('paths' in t) || !t.paths.length) return byPath
+    (byDiff, t) => {
+      if (!('diffs' in t) || !t.diffs.length) return byDiff
 
-      const pathKey = getPathsKey(t.paths)
+      const pathKey = getDiffsKey(t.diffs)
       return {
-        ...byPath,
+        ...byDiff,
         [pathKey]: {
-          langs: [...(byPath[pathKey]?.langs || []), t.lang],
-          paths: t.paths,
+          langs: [...(byDiff[pathKey]?.langs || []), t.lang],
+          diffs: t.diffs,
         },
       }
     },
@@ -111,7 +111,7 @@ export function joinLangsByPath(
       string,
       {
         langs: SanityLangCode[]
-        paths: TranslationRequest['paths']
+        diffs: TranslationRequest['diffs']
       }
     >,
   )

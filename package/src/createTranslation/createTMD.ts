@@ -14,7 +14,7 @@ import {
  * TMD: Translation Metadata Document
  */
 export function createTMD({
-  request: { paths, sourceDoc, translationKey, pluginOptions, dateDue },
+  request: { diffs, sourceDoc, translationKey, pluginOptions, dateDue },
   project,
   jobs,
   freshSourceDoc,
@@ -92,7 +92,7 @@ export function createTMD({
     // @ts-expect-error
     _rev: undefined,
     translationKey,
-    paths,
+    diffs,
     phraseProjectUid: project.uid || 'invalid-project',
     projectDueDate: dateDue,
     sourceDoc: {

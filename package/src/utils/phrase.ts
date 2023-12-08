@@ -47,12 +47,6 @@ export function getJobEditorURL(
   return `${getPhraseBaseUrl(region)}/job/${jobUid}/translate/`
 }
 
-export function getPathsLabel(paths: Path[]) {
-  return paths
-    .map((p) => (p.length ? `[${p.join(', ')}]` : "Entire document's content"))
-    .join(', ')
-}
-
 export const usePtdState = createHookFromObservableFactory<
   PtdPhraseMetadata,
   {
