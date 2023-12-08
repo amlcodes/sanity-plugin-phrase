@@ -10,6 +10,7 @@ import {
   injectTranslatedReferences,
   parseAllReferences,
 } from './utils/references'
+import { keepStaticValues } from './mergeDocs'
 
 export default async function phraseDocumentToSanityDocument({
   contentInPhrase,
@@ -27,7 +28,13 @@ export default async function phraseDocumentToSanityDocument({
   )
 
   const { targetLang } = freshPTD.phraseMetadata
-  const TMD = freshPTD.phraseMetadata.expanded
+  const TMD = freshPTD.phraseMetadata.expandedTMD
+  const target = freshPTD.phraseMetadata.expandedTarget
+
+  if (!TMD || !target) {
+    return freshPTD
+  }
+
   const TMDTarget = TMD.targets.find((t) => t._key === targetLang.sanity)
 
   let referenceMap = TMDTarget?.referenceMap || {}
@@ -50,7 +57,7 @@ export default async function phraseDocumentToSanityDocument({
       try {
         // Cache referenceMap for future requests
         await sanityClient
-          .patch(freshPTD.phraseMetadata.expanded._id, {
+          .patch(TMD._id, {
             set: {
               [`targets[_key == "${TMDTarget._key}"].referenceMap`]:
                 referenceMap,
@@ -72,5 +79,11 @@ export default async function phraseDocumentToSanityDocument({
     return diffToPatch(item._diff, dataWithReferences)
   })
 
-  return applyPatches(freshPTD, patches)
+  /** Make sure we always apply patches based on the target's original state */
+  const originalTargetContent = keepStaticValues(
+    freshPTD,
+    target as any as typeof freshPTD,
+  )
+
+  return applyPatches(originalTargetContent, patches)
 }

@@ -6,6 +6,7 @@ import {
   SanityPTDWithExpandedMetadata,
 } from '../types'
 import { draftId, isPTDDoc, undraftId } from '../utils'
+import { PTDWithExpandedDataQuery } from './refreshPTDs'
 
 export default async function refreshPTDById(input: {
   sanityClient: SanityClient
@@ -17,8 +18,7 @@ export default async function refreshPTDById(input: {
     `*[_id == $publishedId || _id == $draftId]{
     ...,
     phraseMetadata {
-      ...,
-      "expanded": tmd->
+      ${PTDWithExpandedDataQuery}
     }
   }`,
     {

@@ -89,7 +89,7 @@ describe('Path operations', () => {
       applyDiffs({
         startingDocument: exampleHistoricVersion,
         updatedDocument: exampleCurrentVersion,
-        diffPaths: getUnsettedPaths({
+        diffs: getUnsettedPaths({
           currentVersion: exampleCurrentVersion,
           historicVersion: exampleHistoricVersion,
         }),
@@ -102,7 +102,7 @@ describe('Path operations', () => {
       applyDiffs({
         startingDocument: exampleHistoricVersion,
         updatedDocument: exampleCurrentVersion,
-        diffPaths: getInsertedPaths({
+        diffs: getInsertedPaths({
           currentVersion: exampleCurrentVersion,
           historicVersion: exampleHistoricVersion,
         }),
@@ -115,7 +115,7 @@ describe('Path operations', () => {
       applyDiffs({
         startingDocument: exampleHistoricVersion,
         updatedDocument: exampleCurrentVersion,
-        diffPaths: getArrayOfPrimitivesResets({
+        diffs: getArrayOfPrimitivesResets({
           currentVersion: exampleCurrentVersion,
           historicVersion: exampleHistoricVersion,
         }),

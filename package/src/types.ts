@@ -269,6 +269,7 @@ export type SanityMainDoc = SanityDocument & {
   phraseMetadata: MainDocPhraseMetadata
 }
 
+/** @see `PTDWithExpandedDataQuery` for the GROQ fragment that generates this type */
 export type SanityPTDWithExpandedMetadata = SanityPTD & {
   phraseMetadata: PtdPhraseMetadata & {
     expandedTMD: SanityTMD | null

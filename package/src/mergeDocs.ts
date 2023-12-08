@@ -21,7 +21,7 @@ export function mergeDocs<D extends SanityDocument>({
   )
 }
 
-function keepStaticValues<D extends SanityDocument>(
+export function keepStaticValues<D extends SanityDocument>(
   originalDoc: D,
   changedDoc: D,
 ): D {

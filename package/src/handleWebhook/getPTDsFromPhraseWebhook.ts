@@ -7,6 +7,7 @@ import {
 } from '../types'
 import { dedupeArray, comesFromSanity } from '../utils'
 import { isPTDDoc } from '../utils/phrase'
+import { PTDWithExpandedDataQuery } from '../refreshTranslation/refreshPTDs'
 
 export default async function getPTDsFromPhraseWebhook({
   sanityClient,
@@ -58,8 +59,7 @@ export default async function getPTDsFromPhraseWebhook({
       /* groq */ `*[_id in $ids] {
       ...,
       ${METADATA_KEY} {
-        ...,
-        "expanded": tmd->,
+        ${PTDWithExpandedDataQuery}
       },
     }`,
       {

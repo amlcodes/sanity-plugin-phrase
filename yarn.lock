@@ -2449,7 +2449,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@microsoft/api-extractor@npm:^7.38.0, @microsoft/api-extractor@npm:^7.38.5":
+"@microsoft/api-extractor@npm:^7.38.0, @microsoft/api-extractor@npm:^7.38.3":
   version: 7.38.5
   resolution: "@microsoft/api-extractor@npm:7.38.5"
   dependencies:
@@ -3263,6 +3263,57 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sanity/pkg-utils@npm:3.3.0":
+  version: 3.3.0
+  resolution: "@sanity/pkg-utils@npm:3.3.0"
+  dependencies:
+    "@babel/core": ^7.23.5
+    "@babel/preset-env": ^7.23.5
+    "@babel/types": ^7.23.5
+    "@microsoft/api-extractor": ^7.38.3
+    "@microsoft/tsdoc-config": ^0.16.2
+    "@rollup/plugin-alias": ^5.1.0
+    "@rollup/plugin-babel": ^6.0.4
+    "@rollup/plugin-commonjs": ^25.0.7
+    "@rollup/plugin-json": ^6.0.1
+    "@rollup/plugin-node-resolve": ^15.2.3
+    "@rollup/plugin-replace": ^5.0.5
+    "@rollup/plugin-terser": ^0.4.4
+    browserslist: ^4.22.1
+    cac: ^6.7.14
+    chalk: ^4.1.2
+    chokidar: ^3.5.3
+    esbuild: ^0.19.8
+    esbuild-register: ^3.5.0
+    find-config: ^1.0.0
+    get-latest-version: ^5.1.0
+    git-url-parse: ^13.1.1
+    globby: ^11.1.0
+    jsonc-parser: ^3.2.0
+    mkdirp: ^3.0.1
+    outdent: ^0.8.0
+    parse-git-config: ^3.0.0
+    pkg-up: ^3.1.0
+    prettier: ^3.1.0
+    prettier-plugin-packagejson: ^2.4.6
+    pretty-bytes: ^5.6.0
+    prompts: ^2.4.2
+    rimraf: ^4.4.1
+    rollup: ^4.6.0
+    rollup-plugin-esbuild: ^6.1.0
+    rxjs: ^7.8.1
+    treeify: ^1.1.0
+    uuid: ^9.0.1
+    zod: ^3.22.4
+  peerDependencies:
+    typescript: ^4.7 || ^5
+  bin:
+    pkg: bin/pkg-utils.cjs
+    pkg-utils: bin/pkg-utils.cjs
+  checksum: 6a9a184b212690741ea50748028cdd36ca455694ba4c5289e933d87167cd14c4adaed652069027d94a50c1d40f3ce34f98f70f3ee291adc4db1fa71896880022
+  languageName: node
+  linkType: hard
+
 "@sanity/pkg-utils@npm:^2.4.5":
   version: 2.4.10
   resolution: "@sanity/pkg-utils@npm:2.4.10"
@@ -3312,57 +3363,6 @@ __metadata:
     pkg: bin/pkg-utils.cjs
     pkg-utils: bin/pkg-utils.cjs
   checksum: b1ee67a1f925a56b449eee613c82e8cae9b44b2c43e69ebd2c3ca73a9faefebbee45b02566f3a3a2281ed3f1a3f1f728d0c02590686f5a22abba2e6dfed2e67a
-  languageName: node
-  linkType: hard
-
-"@sanity/pkg-utils@npm:^3.3.3":
-  version: 3.3.3
-  resolution: "@sanity/pkg-utils@npm:3.3.3"
-  dependencies:
-    "@babel/core": ^7.23.5
-    "@babel/preset-env": ^7.23.5
-    "@babel/types": ^7.23.5
-    "@microsoft/api-extractor": ^7.38.5
-    "@microsoft/tsdoc-config": ^0.16.2
-    "@rollup/plugin-alias": ^5.1.0
-    "@rollup/plugin-babel": ^6.0.4
-    "@rollup/plugin-commonjs": ^25.0.7
-    "@rollup/plugin-json": ^6.0.1
-    "@rollup/plugin-node-resolve": ^15.2.3
-    "@rollup/plugin-replace": ^5.0.5
-    "@rollup/plugin-terser": ^0.4.4
-    browserslist: ^4.22.2
-    cac: ^6.7.14
-    chalk: ^4.1.2
-    chokidar: ^3.5.3
-    esbuild: ^0.19.8
-    esbuild-register: ^3.5.0
-    find-config: ^1.0.0
-    get-latest-version: ^5.1.0
-    git-url-parse: ^13.1.1
-    globby: ^11.1.0
-    jsonc-parser: ^3.2.0
-    mkdirp: ^3.0.1
-    outdent: ^0.8.0
-    parse-git-config: ^3.0.0
-    pkg-up: ^3.1.0
-    prettier: ^3.1.0
-    prettier-plugin-packagejson: ^2.4.7
-    pretty-bytes: ^5.6.0
-    prompts: ^2.4.2
-    rimraf: ^4.4.1
-    rollup: ^4.6.1
-    rollup-plugin-esbuild: ^6.1.0
-    rxjs: ^7.8.1
-    treeify: ^1.1.0
-    uuid: ^9.0.1
-    zod: ^3.22.4
-  peerDependencies:
-    typescript: ^4.7 || ^5
-  bin:
-    pkg: bin/pkg-utils.cjs
-    pkg-utils: bin/pkg-utils.cjs
-  checksum: 56bb214d2bd1ca02cdddcb04bba3903253ed6a79f8eda705e528b55488f87043a060800f88ae5a59af70e8841ba056f3711db1b10946f8b06d4a53c8ff478ac6
   languageName: node
   linkType: hard
 
@@ -10919,7 +10919,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier-plugin-packagejson@npm:^2.4.6, prettier-plugin-packagejson@npm:^2.4.7":
+"prettier-plugin-packagejson@npm:^2.4.6":
   version: 2.4.7
   resolution: "prettier-plugin-packagejson@npm:2.4.7"
   dependencies:
@@ -11815,7 +11815,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rollup@npm:^4.2.0, rollup@npm:^4.6.1":
+"rollup@npm:^4.2.0, rollup@npm:^4.6.0":
   version: 4.7.0
   resolution: "rollup@npm:4.7.0"
   dependencies:
@@ -12021,7 +12021,7 @@ __metadata:
     "@sanity/icons": ^2.7.0
     "@sanity/incompatible-plugin": ^1.0.4
     "@sanity/mutator": ^3.21.1
-    "@sanity/pkg-utils": ^3.3.3
+    "@sanity/pkg-utils": 3.3.0
     "@sanity/plugin-kit": ^3.1.10
     "@sanity/ui": ^1.9.3
     "@sanity/util": ^3.21.1

@@ -3,6 +3,8 @@ import { parse } from 'parse5'
 import { Element, TextNode } from 'parse5/dist/tree-adapters/default'
 import { SerializedPtBlock, SerializedPtHtmlTag } from './types'
 import { decodeHTML } from 'entities'
+import { makeKeyAndIdFriendly } from './utils'
+import { uuid } from '@sanity/uuid'
 
 /**
  * Make content stored & translated in Phrase usable in Sanity.
@@ -48,7 +50,7 @@ const tags = Object.values(SerializedPtHtmlTag)
  * - No nested tags
  * - No self-closing tags
  */
-function autocloseTags(html: string): string {
+function autoCloseTags(html: string): string {
   if (!html) return html
 
   return html.replace(
@@ -64,8 +66,39 @@ function autocloseTags(html: string): string {
   )
 }
 
+const HTML_TAG_START_REGEX = new RegExp(`<(?:${tags.join('|')})[^>]*>`, 'g')
+
+/**
+ * Sometimes, Phrase returns strings without the HTML tags applied.
+ *
+ * This gets solved with QA steps before the project is finished, but in the meantime, we want to
+ * make sure `deserializeBlock` will be able to create keys
+ *
+ * @TODO refactor to cover whole string, not only first tag
+ */
+export function autoWrapTags(html: string, block: SerializedPtBlock): string {
+  if (html.startsWith('<')) return html
+
+  const allTags = Array.from(html.matchAll(HTML_TAG_START_REGEX)).map(
+    (m) => m[0],
+  )
+  const firstTagIndex = allTags[0] ? html.indexOf(allTags[0]) : -1
+  const [unwrappedContent, wrappedContent] = [
+    firstTagIndex >= 0 ? html.slice(0, firstTagIndex) : html,
+    firstTagIndex >= 0 ? html.slice(firstTagIndex) : '',
+  ]
+
+  const usedKeys = allTags.map((t) => t.match(/data-key="([^"]+)"/)?.[1] || '')
+  const allSpanKeys = Object.keys(block._spanMeta || {})
+  const spanKey =
+    allSpanKeys.find((k) => !usedKeys.includes(k)) ||
+    makeKeyAndIdFriendly(uuid())
+
+  return `<${SerializedPtHtmlTag.SPAN} data-key="${spanKey}">${unwrappedContent}</${SerializedPtHtmlTag.SPAN}>${wrappedContent}`
+}
+
 function deserializeBlock(block: SerializedPtBlock): PortableTextBlock {
-  const parsed = parse(autocloseTags(block.serializedHtml))
+  const parsed = parse(autoWrapTags(autoCloseTags(block.serializedHtml), block))
   const html = parsed.childNodes[0] as Element
   const body = html?.childNodes?.find((n) => n.nodeName === 'body') as Element
 

@@ -62,22 +62,32 @@ export function getDiffs({
     historicVersion,
   })
 
+  const preDiffPatchDiffs = [
+    ...unsettedPaths,
+    ...insertedPaths,
+    ...resetArrayPaths,
+  ]
   const diffPatches = diffPatch(
     {
-      ...applyDiffs({
-        startingDocument: historicVersion,
-        updatedDocument: currentVersion,
-        diffs: [...unsettedPaths, ...insertedPaths, ...resetArrayPaths],
-      }),
+      ...(preDiffPatchDiffs.length > 0
+        ? applyDiffs({
+            startingDocument: historicVersion,
+            updatedDocument: currentVersion,
+            diffs: preDiffPatchDiffs,
+          })
+        : historicVersion),
       _id: undraftId(historicVersion._id),
     },
     { ...currentVersion, _id: undraftId(currentVersion._id) },
   )
 
   const setDiffs = diffPatches.flatMap(({ patch }): TranslationDiffSet[] => {
-    if (!('set' in patch)) return []
+    const toSet = {
+      ...('set' in patch ? patch.set : {}),
+      ...('diffMatchPatch' in patch ? patch.diffMatchPatch : {}),
+    }
 
-    return Object.keys(patch.set).map((path) => ({
+    return Object.keys(toSet).map((path) => ({
       op: 'set',
       path: fromString(path),
     }))
@@ -202,8 +212,9 @@ export function getInsertedPaths({
     basePath,
   }).map(({ path }): TranslationDiffInsert => {
     const parentPath = path.slice(0, -1)
-    const parentValue = get(currentVersion, parentPath)
-    if (!Array.isArray(parentValue))
+    const currentParent = get(currentVersion, parentPath)
+    const historicParent = get(historicVersion, parentPath)
+    if (!Array.isArray(currentParent))
       return {
         path,
         op: 'insert',
@@ -211,15 +222,33 @@ export function getInsertedPaths({
 
     const value = get(currentVersion, path)
     const valueKey = getDataKey(value)
-    const index = parentValue.findIndex((item) => {
+    const index = currentParent.findIndex((item) => {
       const itemKey = getDataKey(item)
 
       return itemKey && valueKey ? itemKey === valueKey : item === value
     })
-    const prevItem = parentValue[index - 1]
-    const prevKey = getDataKey(prevItem)
-    const nextItem = parentValue[index + 1]
-    const nextKey = getDataKey(nextItem)
+
+    const prevItemAlsoInHistoric =
+      Array.isArray(historicParent) &&
+      currentParent
+        .slice(0, index)
+        .reverse()
+        .find((item) =>
+          historicParent.some(
+            (i) => getDataKey(i) && getDataKey(i) === getDataKey(item),
+          ),
+        )
+    const prevKey = getDataKey(prevItemAlsoInHistoric)
+    const nextItemAlsoInHistoric =
+      Array.isArray(historicParent) &&
+      currentParent
+        .slice(index + 1)
+        .find((item) =>
+          historicParent.some(
+            (i) => getDataKey(i) && getDataKey(i) === getDataKey(item),
+          ),
+        )
+    const nextKey = getDataKey(nextItemAlsoInHistoric)
 
     return {
       path,

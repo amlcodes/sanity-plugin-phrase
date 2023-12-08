@@ -24,7 +24,10 @@ export default async function markPTDsAsDeletedByWebhook({
   const cancelledJobUids = payload.jobParts.flatMap((job) => job.uid || [])
 
   PTDs.forEach((PTD) => {
-    const metaDoc = PTD.phraseMetadata.expanded
+    const metaDoc = PTD.phraseMetadata.expandedTMD
+
+    if (!metaDoc) return
+
     const lang = PTD.phraseMetadata.targetLang
     const targetInMeta = metaDoc.targets.find((t) =>
       langsAreTheSame(t.lang, lang),
