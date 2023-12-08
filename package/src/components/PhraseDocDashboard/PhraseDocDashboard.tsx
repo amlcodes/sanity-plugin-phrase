@@ -2,7 +2,8 @@
 
 import { Box, Card, Dialog, Stack } from '@sanity/ui'
 import { useState } from 'react'
-import { StringFieldProps, useFormValue } from 'sanity'
+import { StringFieldProps, useDocumentStore, useFormValue } from 'sanity'
+import { useTMDs } from '../../hooks/useTMDs'
 import {
   CrossSystemLangCode,
   PhrasePluginOptions,
@@ -11,10 +12,10 @@ import {
 } from '../../types'
 import {
   FULL_DOC_DIFF_PATH,
+  isMainDoc,
   isPTDDoc,
-  isTranslatedMainDoc,
   isTranslationCommitted,
-  targetLangsIntersect,
+  langsAreTheSame,
 } from '../../utils'
 import { PluginOptionsProvider } from '../PluginOptionsContext'
 import OngoingTranslationsDocDashboard from './OngoingTranslationsDocDashboard'
@@ -28,6 +29,11 @@ export default function getPhraseDocDashboard(
 ) {
   return function PhraseDocDashboard(_props: StringFieldProps) {
     const currentDocument = useFormValue([]) as SanityDocumentWithPhraseMetadata
+    const documentStore = useDocumentStore()
+    const [TMDs, TMDsLoading] = useTMDs({
+      documentStore,
+      docId: currentDocument._id,
+    })
     const [toTranslate, setToTranslate] = useState<{
       diffs: TranslationRequest['diffs']
       targetLangs?: CrossSystemLangCode[]
@@ -35,10 +41,14 @@ export default function getPhraseDocDashboard(
 
     const docLang = pluginOptions.i18nAdapter.getDocumentLang(currentDocument)
 
+    const isTranslatedMainDoc =
+      (isMainDoc(currentDocument) && TMDs && TMDs.length > 0) || false
     const isUntranslatedMainDoc =
-      !isPTDDoc(currentDocument) && !isTranslatedMainDoc(currentDocument)
+      isMainDoc(currentDocument) && !isTranslatedMainDoc
+
     if (
       !currentDocument ||
+      TMDsLoading ||
       !docLang ||
       // Don't show anything for target langs with no translations - source will show UntranslatedDocDashboard
       (isUntranslatedMainDoc && docLang !== pluginOptions.sourceLang)
@@ -49,35 +59,30 @@ export default function getPhraseDocDashboard(
       <PluginOptionsProvider pluginOptions={pluginOptions}>
         <Card>
           {isPTDDoc(currentDocument) && (
-            <PtdDocDashboard
+            <PtdDocDashboard currentDocument={currentDocument} />
+          )}
+
+          {isUntranslatedMainDoc && (
+            <UntranslatedDocDashboard
               currentDocument={currentDocument}
-              ptdMetadata={currentDocument.phraseMetadata}
+              openDialog={() => setToTranslate({ diffs: [FULL_DOC_DIFF_PATH] })}
             />
           )}
 
-          {!isPTDDoc(currentDocument) &&
-            !isTranslatedMainDoc(currentDocument) &&
-            docLang === pluginOptions.sourceLang && (
-              <UntranslatedDocDashboard
-                currentDocument={currentDocument}
-                openDialog={() =>
-                  setToTranslate({ diffs: [FULL_DOC_DIFF_PATH] })
-                }
-              />
-            )}
-
-          {isTranslatedMainDoc(currentDocument) &&
+          {isTranslatedMainDoc &&
+            TMDs &&
             (() => {
               const ongoingTranslations =
-                currentDocument.phraseMetadata.translations?.filter(
-                  (t) => !isTranslationCommitted(t),
-                ) || []
+                TMDs.filter((t) => !isTranslationCommitted(t)) || []
               const langsNotOngoing = pluginOptions.supportedTargetLangs.filter(
                 (supportedLang) =>
                   !ongoingTranslations.some(
-                    (t) =>
-                      'targetLangs' in t &&
-                      targetLangsIntersect(t.targetLangs, [supportedLang]),
+                    (TMD) =>
+                      'targets' in TMD &&
+                      // eslint-disable-next-line
+                      TMD.targets.some((t) =>
+                        langsAreTheSame(t.lang, supportedLang),
+                      ),
                   ),
               )
 
@@ -94,6 +99,7 @@ export default function getPhraseDocDashboard(
                       docLang={docLang}
                       currentDocument={currentDocument}
                       setToTranslate={setToTranslate}
+                      TMDs={TMDs}
                     />
                   )}
                 </Stack>
@@ -114,6 +120,7 @@ export default function getPhraseDocDashboard(
                   currentDocument={currentDocument}
                   toTranslate={toTranslate}
                   sourceLang={docLang}
+                  TMDs={TMDs || []}
                 />
               </Box>
             </Dialog>

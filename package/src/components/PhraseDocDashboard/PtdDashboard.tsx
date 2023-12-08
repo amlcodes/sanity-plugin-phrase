@@ -3,12 +3,7 @@
 import { Button, Spinner, Text } from '@sanity/ui'
 import { useEditState, useSchema } from 'sanity'
 import { useOpenInSidePane } from '../../hooks/useOpenInSidepane'
-import {
-  PtdPhraseMetadata,
-  SanityPTD,
-  SanityTMD,
-  TranslationRequest,
-} from '../../types'
+import { SanityPTD, SanityTMD, TranslationRequest } from '../../types'
 import {
   getProjectURL,
   getReadableLanguageName,
@@ -25,11 +20,10 @@ import { TranslationInfo, TranslationInfoTable } from './TranslationInfo'
 
 export default function PtdDocDashboard({
   currentDocument: ptdDocument,
-  ptdMetadata,
 }: {
   currentDocument: SanityPTD
-  ptdMetadata: PtdPhraseMetadata
 }) {
+  const { phraseMetadata } = ptdDocument
   const { phraseRegion } = usePluginOptions()
   const { ready, draft, published } = useEditState(
     ptdDocument?.phraseMetadata?.tmd?._ref || '',
@@ -55,9 +49,9 @@ export default function PtdDocDashboard({
     )
   }
 
-  const targetLang = ptdMetadata.targetLang
+  const targetLang = phraseMetadata.targetLang
   const sourceDoc: TranslationRequest['sourceDoc'] = {
-    _id: TMD.sourceDoc._ref,
+    _id: TMD.sourceDoc._id,
     _type: ptdDocument._type,
     _rev: parseTranslationSnapshot(TMD.sourceSnapshot)?._rev || '',
     lang: TMD.sourceLang,
@@ -147,21 +141,23 @@ export default function PtdDocDashboard({
         ) : null
       }
       headerActions={
-        <Button
-          size={1}
-          as="a"
-          href={getProjectURL(TMD.phraseProjectUid, phraseRegion)}
-          target="_blank"
-          rel="noopener noreferrer"
-          text="Project in Phrase"
-          mode="ghost"
-          tone="primary"
-          iconRight={PhraseMonogram}
-          fontSize={1}
-          padding={2}
-          // Prevent the card from collapsing when clicking the button
-          onClick={(e) => e.stopPropagation()}
-        />
+        TMD.phraseProjectUid && (
+          <Button
+            size={1}
+            as="a"
+            href={getProjectURL(TMD.phraseProjectUid, phraseRegion)}
+            target="_blank"
+            rel="noopener noreferrer"
+            text="Project in Phrase"
+            mode="ghost"
+            tone="primary"
+            iconRight={PhraseMonogram}
+            fontSize={1}
+            padding={2}
+            // Prevent the card from collapsing when clicking the button
+            onClick={(e) => e.stopPropagation()}
+          />
+        )
       }
     >
       <TranslationInfoTable>
@@ -169,7 +165,7 @@ export default function PtdDocDashboard({
           parentDoc={ptdDocument}
           TMD={TMD}
           paneParentDocId={ptdDocument._id}
-          targetLang={ptdMetadata.targetLang}
+          targetLang={phraseMetadata.targetLang}
           showOpenPTD={false}
         />
       </TranslationInfoTable>

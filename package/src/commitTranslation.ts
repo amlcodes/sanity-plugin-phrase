@@ -1,13 +1,7 @@
 import { SanityClient } from 'sanity'
 import { getMergePTDTransaction } from './mergePTD'
-import {
-  MainDocTranslationMetadata,
-  SanityMainDoc,
-  SanityPTD,
-  SanityTMD,
-} from './types'
+import { SanityMainDoc, SanityPTD, SanityTMD } from './types'
 import { draftId, undraftId } from './utils'
-import { tPathInMainDoc } from './utils/paths'
 
 export default async function commitTranslation({
   sanityClient,
@@ -16,11 +10,10 @@ export default async function commitTranslation({
   sanityClient: SanityClient
   TMD: SanityTMD
 }) {
-  const newStatus: MainDocTranslationMetadata['status'] = 'COMMITTED'
   const transaction = sanityClient.transaction()
 
   const mainDocIds = [
-    TMD.sourceDoc._ref,
+    TMD.sourceDoc._id,
     ...TMD.targets.map((t) => t.targetDoc._ref),
   ]
   const PTDIds = TMD.targets.flatMap((t) => t.ptd?._ref || [])
@@ -47,14 +40,10 @@ export default async function commitTranslation({
     return { error: fetchError }
   }
 
-  // 1. Modify status of translations in main docs to `COMMITTED`
-  mainDocs.forEach((doc) => {
-    transaction.patch(doc._id, (patch) =>
-      patch.set({
-        [`${tPathInMainDoc(TMD.translationKey)}.status`]: newStatus,
-      }),
-    )
-  })
+  // 1. Modify status of translation to `COMMITTED`
+  transaction.patch(TMD._id, (patch) =>
+    patch.set({ status: 'COMMITTED' } as SanityTMD<'COMMITTED'>),
+  )
 
   // 2. Merge PTDs into targets
   PTDs.forEach((PTD) => {

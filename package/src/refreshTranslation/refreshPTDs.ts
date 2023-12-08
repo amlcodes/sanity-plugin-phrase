@@ -79,8 +79,7 @@ export default function refreshPTDs(input: {
       }
     },
     {} as {
-      [jobUid: string]: {
-        phraseProjectUid: string
+      [jobUid: string]: Pick<SanityTMD, 'phraseProjectUid'> & {
         targetLang: CrossSystemLangCode
         ptdIds: string[]
       }
@@ -88,9 +87,11 @@ export default function refreshPTDs(input: {
   )
 
   function getFreshJobData(phraseClient: PhraseClient) {
-    return Object.entries(jobsToRefreshData).map(
-      ([jobUid, { phraseProjectUid, targetLang, ptdIds }]) =>
-        pipe(
+    return Object.entries(jobsToRefreshData).flatMap(
+      ([jobUid, { phraseProjectUid, targetLang, ptdIds }]) => {
+        if (!phraseProjectUid || !targetLang || !ptdIds.length) return []
+
+        return pipe(
           Effect.retry(
             Effect.tryPromise({
               try: () =>
@@ -109,7 +110,8 @@ export default function refreshPTDs(input: {
             jobUid,
             ptdIds,
           })),
-        ),
+        )
+      },
     )
   }
 
@@ -252,7 +254,10 @@ function diffTMD(
   const newMetadata: SanityTMD = {
     ...currentMetadata,
     targets: currentMetadata.targets.map((target) => {
-      if (target.lang.sanity !== doc.phraseMetadata.targetLang.sanity)
+      if (
+        target.lang.sanity !== doc.phraseMetadata.targetLang.sanity ||
+        !target.jobs
+      )
         return target
 
       return {

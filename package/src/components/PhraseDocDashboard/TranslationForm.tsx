@@ -30,6 +30,7 @@ import {
   PhrasePluginOptions,
   SanityDocumentWithPhraseMetadata,
   SanityLangCode,
+  SanityTMD,
   StaleResponse,
   StaleStatus,
   StaleTargetStatus,
@@ -88,18 +89,20 @@ function validateFormValue(formValue: FormValue) {
 }
 
 export default function TranslationForm({
-  toTranslate: { diffs, targetLangs: desiredTargetLangs },
   currentDocument,
   onCancel,
   sourceLang,
+  TMDs,
+  toTranslate: { diffs, targetLangs: desiredTargetLangs },
 }: {
+  currentDocument: SanityDocumentWithPhraseMetadata
+  onCancel: () => void
+  sourceLang: SanityLangCode
+  TMDs: SanityTMD[]
   toTranslate: {
     diffs: TranslationRequest['diffs']
     targetLangs?: CrossSystemLangCode[]
   }
-  currentDocument: SanityDocumentWithPhraseMetadata
-  onCancel: () => void
-  sourceLang: SanityLangCode
 }) {
   const toast = useToast()
   const pluginOptions = usePluginOptions()
@@ -154,6 +157,7 @@ export default function TranslationForm({
         sanityClient,
         pluginOptions,
         targetLangs: supportedTargetLangs,
+        TMDs,
       })
 
       setReferences((prev) => {
@@ -173,6 +177,7 @@ export default function TranslationForm({
       setReferences,
       references,
       freshReferencesHash,
+      TMDs,
     ],
   )
 

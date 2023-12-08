@@ -3,77 +3,48 @@
 import { InfoOutlineIcon, TrashIcon } from '@sanity/icons'
 import { Button, Card, Flex, Stack, Text, useToast } from '@sanity/ui'
 import React, { MouseEvent } from 'react'
-import { useClient, useEditState } from 'sanity'
+import { useClient } from 'sanity'
 import commitTranslation from '../../commitTranslation'
-import {
-  CreatedMainDocMetadata,
-  CreatingMainDocMetadata,
-  DeletedMainDocMetadata,
-  FailedPersistingMainDocMetadata,
-  MainDocTranslationMetadata,
-  SanityMainDoc,
-  SanityTMD,
-} from '../../types'
+import { SanityMainDoc, SanityTMD } from '../../types'
 import {
   SANITY_API_VERSION,
-  draftId,
   getProjectURL,
+  isTranslationCancelled,
   isTranslationCommitted,
+  isTranslationCreating,
+  isTranslationFailedPersisting,
   isTranslationReadyToCommit,
-  undraftId,
 } from '../../utils'
 import DocDashboardCard from '../DocDashboardCard'
 import { PhraseMonogram } from '../PhraseLogo'
 import { usePluginOptions } from '../PluginOptionsContext'
-import SpinnerBox from '../SpinnerBox'
 import { TranslationPathsDisplay } from '../TranslationPathsDisplay'
 import { TranslationInfo, TranslationInfoTable } from './TranslationInfo'
 
 export default function OngoingTranslationsDocDashboard(props: {
-  ongoingTranslations: MainDocTranslationMetadata[]
+  ongoingTranslations: SanityTMD[]
   currentDocument: SanityMainDoc
 }) {
   return (
     <Stack space={4}>
-      {props.ongoingTranslations.map((translation) => {
-        if (isTranslationCommitted(translation)) return null
+      {props.ongoingTranslations.map((TMD) => {
+        if (isTranslationCommitted(TMD)) return null
 
-        if (translation.status === 'CREATING')
-          return (
-            <CreatingTranslationCard
-              key={translation._key}
-              translation={translation}
-              parentDoc={props.currentDocument}
-            />
-          )
+        if (isTranslationCreating(TMD))
+          return <CreatingTranslationCard key={TMD._id} TMD={TMD} />
 
-        if (translation.status === 'FAILED_PERSISTING') {
-          return (
-            <FailedPersistingTranslationCard
-              key={translation._key}
-              translation={translation}
-              parentDoc={props.currentDocument}
-            />
-          )
+        if (isTranslationFailedPersisting(TMD)) {
+          return <FailedPersistingTranslationCard key={TMD._id} TMD={TMD} />
         }
 
-        if (
-          translation.status === 'DELETED' ||
-          translation.status === 'CANCELLED'
-        ) {
-          return (
-            <DeletedTranslationCard
-              key={translation._key}
-              translation={translation as DeletedMainDocMetadata}
-              parentDoc={props.currentDocument}
-            />
-          )
+        if (isTranslationCancelled(TMD)) {
+          return <DeletedTranslationCard key={TMD._id} TMD={TMD} />
         }
 
         return (
           <OngoingTranslationCard
-            key={translation._key}
-            translation={translation as CreatedMainDocMetadata}
+            key={TMD._id}
+            TMD={TMD}
             parentDoc={props.currentDocument}
           />
         )
@@ -83,21 +54,16 @@ export default function OngoingTranslationsDocDashboard(props: {
 }
 
 function OngoingTranslationCard({
-  translation,
+  TMD,
   parentDoc,
 }: {
   parentDoc: SanityMainDoc
-  translation: CreatedMainDocMetadata
+  TMD: SanityTMD
 }) {
   const sanityClient = useClient({ apiVersion: SANITY_API_VERSION })
   const toast = useToast()
   const [state, setState] = React.useState<'idle' | 'committing'>('idle')
   const { phraseRegion } = usePluginOptions()
-  const { ready, draft, published } = useEditState(
-    translation.tmd._ref,
-    translation.tmd._type,
-  )
-  const TMD = (draft || published) as SanityTMD
 
   async function handleCommit(e: React.MouseEvent) {
     e.preventDefault()
@@ -123,28 +89,12 @@ function OngoingTranslationCard({
     setState('idle')
   }
 
-  if (!ready) {
-    return <SpinnerBox />
-  }
-
-  if (!TMD) {
-    return (
-      <DocDashboardCard
-        title="Broken translation"
-        subtitle={<TranslationPathsDisplay {...translation} />}
-      >
-        <Text>
-          This document reached a broken translation state. Please contact
-          support.
-        </Text>
-      </DocDashboardCard>
-    )
-  }
+  if (!TMD.phraseProjectUid) return null
 
   return (
     <DocDashboardCard
       title="Translation in progress"
-      subtitle={<TranslationPathsDisplay {...translation} />}
+      subtitle={<TranslationPathsDisplay {...TMD} />}
       headerActions={
         <Button
           as="a"
@@ -174,7 +124,7 @@ function OngoingTranslationCard({
         ))}
       </TranslationInfoTable>
 
-      {isTranslationReadyToCommit(translation) && (
+      {isTranslationReadyToCommit(TMD) && (
         <Flex align="center" justify="space-between">
           <Text>Translation is completed</Text>
           <Button
@@ -191,40 +141,31 @@ function OngoingTranslationCard({
 }
 
 function DeletedTranslationCard({
-  translation,
-  parentDoc,
+  TMD,
 }: {
-  parentDoc: SanityMainDoc
-  translation: DeletedMainDocMetadata
+  TMD: SanityTMD<'CANCELLED'> | SanityTMD<'DELETED'>
 }) {
   const client = useClient({ apiVersion: SANITY_API_VERSION })
   const toast = useToast()
-  const { ready, draft, published } = useEditState(
-    translation.tmd._ref,
-    translation.tmd._type,
-  )
-  const TMD = (draft || published) as SanityTMD
 
   async function deleteTranslation(e: MouseEvent) {
     e.preventDefault()
-    const mainDocRefs = [
-      TMD.sourceDoc._ref,
-      ...TMD.targets.map((t) => t.targetDoc._ref),
-    ].filter(Boolean)
-    const mainDocIds = await client.fetch<string[]>('*[_id in $ids]._id', {
-      ids: mainDocRefs.flatMap((ref) => [undraftId(ref), draftId(ref)]),
+
+    const tx = client.transaction()
+    tx.delete(TMD._id)
+    TMD.targets.forEach((target) => {
+      tx.delete(target.ptd._ref)
     })
 
-    const translationKey = TMD.translationKey
-
-    const unsetTx = client.transaction()
-    mainDocIds.forEach((id) => {
-      unsetTx.patch(id, (patch) =>
-        patch.unset([`phraseMetadata.translations[_key=="${translationKey}"]`]),
-      )
-    })
     try {
-      await unsetTx.commit()
+      await tx.commit()
+
+      toast.push({
+        status: 'success',
+        title: 'Translation deleted successfully',
+        description: 'This translation has been deleted from the document',
+        closable: true,
+      })
     } catch (error) {
       toast.push({
         status: 'error',
@@ -232,80 +173,50 @@ function DeletedTranslationCard({
         description: typeof error === 'string' ? error : undefined,
         closable: true,
       })
-      return
     }
-
-    const deleteTMDAndPTDsTx = client.transaction()
-    deleteTMDAndPTDsTx.delete(TMD._id)
-    TMD.targets.forEach((target) => {
-      deleteTMDAndPTDsTx.delete(target.ptd._ref)
-    })
-
-    try {
-      await deleteTMDAndPTDsTx.commit()
-    } catch (error) {
-      console.error("Couldn't delete TMD and PTDs", error)
-      // Do nothing about dangling TMDs & PTDs - let them be cleaned up later
-    }
-
-    toast.push({
-      status: 'success',
-      title: 'Translation deleted successfully',
-      description: 'This translation has been deleted from the document',
-      closable: true,
-    })
   }
   return (
     <DocDashboardCard
       title="Translation deleted in Phrase"
-      subtitle={<TranslationPathsDisplay {...translation} />}
+      subtitle={<TranslationPathsDisplay {...TMD} />}
       collapsible={false}
     >
-      {!ready && <SpinnerBox />}
-      {ready && (
-        <Stack space={4}>
-          <Text>
-            In order to issue a new translation, you must first delete this one
-          </Text>
-          <Button
-            text="Delete translation"
-            onClick={deleteTranslation}
-            mode="ghost"
-            tone="caution"
-            icon={TrashIcon}
-          />
-        </Stack>
-      )}
+      <Stack space={4}>
+        <Text>
+          In order to issue a new translation, you must first delete this one
+        </Text>
+        <Button
+          text="Delete translation"
+          onClick={deleteTranslation}
+          mode="ghost"
+          tone="caution"
+          icon={TrashIcon}
+        />
+      </Stack>
     </DocDashboardCard>
   )
 }
 
-function CreatingTranslationCard({
-  translation,
-}: {
-  parentDoc: SanityMainDoc
-  translation: CreatingMainDocMetadata
-}) {
+function CreatingTranslationCard({ TMD }: { TMD: SanityTMD<'CREATING'> }) {
   return (
     <DocDashboardCard
       title="Translation being created"
       collapsible={false}
-      subtitle={<TranslationPathsDisplay {...translation} />}
+      subtitle={<TranslationPathsDisplay {...TMD} />}
     />
   )
 }
 
 function FailedPersistingTranslationCard({
-  translation,
+  TMD,
 }: {
-  parentDoc: SanityMainDoc
-  translation: FailedPersistingMainDocMetadata
+  TMD: SanityTMD<'FAILED_PERSISTING'>
 }) {
   return (
     <DocDashboardCard
       title="Translation creation failed"
       collapsible={false}
-      subtitle={<TranslationPathsDisplay {...translation} />}
+      subtitle={<TranslationPathsDisplay {...TMD} />}
     >
       <Card padding={4} border radius={2} tone="critical">
         <Flex gap={3} align="flex-start">

@@ -2,7 +2,7 @@ import { SanityClient } from 'sanity'
 import getPTDsFromPhraseWebhook from './getPTDsFromPhraseWebhook'
 import { JobDeletedWebhook } from './handlePhraseWebhook'
 import { PhraseJobInfo } from '../types'
-import { langsAreTheSame } from '../utils'
+import { langsAreTheSame, targetPathInTMD } from '../utils'
 
 export default async function markPTDsAsDeletedByWebhook({
   sanityClient,
@@ -32,16 +32,18 @@ export default async function markPTDsAsDeletedByWebhook({
     const targetInMeta = metaDoc.targets.find((t) =>
       langsAreTheSame(t.lang, lang),
     )
-    if (!targetInMeta?.jobs) return
+
+    if (!targetInMeta?.jobs || !Array.isArray(targetInMeta.jobs)) return
 
     const cancelledJobsInPTD = cancelledJobUids.filter((uid) =>
-      targetInMeta.jobs.find((j) => j.uid === uid),
+      (targetInMeta.jobs as PhraseJobInfo[]).find((j) => j.uid === uid),
     )
     transaction.patch(metaDoc._id, (patch) => {
       cancelledJobsInPTD.forEach((uid) => {
         const updatedData: Pick<PhraseJobInfo, 'status'> = {
-          [`targets[_key == "${lang.sanity}"].jobs[uid=="${uid}"].status` as 'status']:
-            'CANCELLED',
+          [`${targetPathInTMD(
+            lang.sanity,
+          )}.jobs[uid=="${uid}"].status` as 'status']: 'CANCELLED',
         }
         patch.set(updatedData)
       })

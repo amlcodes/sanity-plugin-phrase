@@ -1,5 +1,5 @@
 import { Effect, pipe } from 'effect'
-import { ContextWithFreshDocuments, Phrase } from '../types'
+import { ContextWithActiveTMD, Phrase } from '../types'
 import { prepareDateForPhrase } from '../utils'
 
 class FailedCreatingPhraseProjectError {
@@ -7,13 +7,11 @@ class FailedCreatingPhraseProjectError {
 
   constructor(
     readonly res: unknown,
-    readonly context: ContextWithFreshDocuments,
+    readonly context: ContextWithActiveTMD,
   ) {}
 }
 
-export default function createPhraseProject(
-  context: ContextWithFreshDocuments,
-) {
+export default function createPhraseProject(context: ContextWithActiveTMD) {
   const { request } = context
 
   return pipe(

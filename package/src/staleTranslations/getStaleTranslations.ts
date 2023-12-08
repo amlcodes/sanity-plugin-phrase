@@ -14,28 +14,29 @@ import {
 import {
   FULL_DOC_DIFF_PATH,
   allTranslationsUnfinished,
-  dedupeArray,
   draftId,
   getDiffs,
   getDiffsKey,
   getTranslationSnapshot,
-  isMainDocAndTranslatedForLang,
   isTranslationCommitted,
+  langInTMDs,
   langsAreTheSame,
   parseTranslationSnapshot,
   undraftId,
 } from '../utils'
 
 export default async function getStaleTranslations({
-  sourceDocs,
-  sanityClient,
   pluginOptions,
+  sanityClient,
+  sourceDocs,
   targetLangs: sanityTargetLangs,
+  TMDs,
 }: {
-  sourceDocs: TranslationRequest['sourceDoc'][]
-  sanityClient: TranslationRequest['sanityClient']
   pluginOptions: PhrasePluginOptions
+  sanityClient: TranslationRequest['sanityClient']
+  sourceDocs: TranslationRequest['sourceDoc'][]
   targetLangs: SanityLangCode[]
+  TMDs: SanityTMD[]
 }) {
   const targetLangs =
     pluginOptions.langAdapter.sanityToCrossSystem(sanityTargetLangs)
@@ -55,25 +56,9 @@ export default async function getStaleTranslations({
     )
     const freshestDoc = docPair?.draft || docPair?.published
     return targetLangs.map((lang) =>
-      parsePerLang({ sourceDoc, lang, freshestDoc, pluginOptions }),
+      parsePerLang({ sourceDoc, lang, freshestDoc, pluginOptions, TMDs }),
     )
   })
-
-  const TMDsToDiff = dedupeArray(
-    parsedPerLang.flatMap((parsedLang) => {
-      if ('tmdRefToDiff' in parsedLang) {
-        return parsedLang.tmdRefToDiff
-      }
-      return []
-    }),
-  )
-
-  const TMDs =
-    TMDsToDiff.length > 0
-      ? await sanityClient.fetch<SanityTMD[]>('*[_id in $ids]', {
-          ids: TMDsToDiff,
-        })
-      : []
 
   const finalPerLang = parsedPerLang.map(
     (
@@ -176,15 +161,17 @@ export function getTranslatableTargetsByPath(
 }
 
 function parsePerLang({
-  sourceDoc,
-  lang,
   freshestDoc,
+  lang,
   pluginOptions: { translatableTypes },
+  sourceDoc,
+  TMDs,
 }: {
   freshestDoc: SanityDocumentWithPhraseMetadata | undefined
-  sourceDoc: TranslationRequest['sourceDoc']
   lang: CrossSystemLangCode
   pluginOptions: PhrasePluginOptions
+  sourceDoc: TranslationRequest['sourceDoc']
+  TMDs: SanityTMD[]
 }): {
   sourceDoc: typeof sourceDoc
   freshestDoc: typeof freshestDoc
@@ -204,7 +191,7 @@ function parsePerLang({
     }
   }
 
-  if (!freshestDoc || !isMainDocAndTranslatedForLang(freshestDoc, lang)) {
+  if (!freshestDoc || !langInTMDs(TMDs, lang)) {
     return {
       freshestDoc,
       sourceDoc,
@@ -214,11 +201,11 @@ function parsePerLang({
   }
 
   if (
-    allTranslationsUnfinished(freshestDoc, [lang]) ||
-    freshestDoc.phraseMetadata.translations.some(
-      (t) =>
-        t.status === 'FAILED_PERSISTING' &&
-        t.targetLangs.some((l) => langsAreTheSame(l, lang)),
+    allTranslationsUnfinished(TMDs, [lang]) ||
+    TMDs.some(
+      (TMD) =>
+        TMD.status === 'FAILED_PERSISTING' &&
+        TMD.targets.some((t) => langsAreTheSame(t.lang, lang)),
     )
   ) {
     return {
@@ -229,15 +216,14 @@ function parsePerLang({
     }
   }
 
-  const lastCommittedTranslation = freshestDoc.phraseMetadata.translations
-    .sort(
-      (a, b) =>
-        new Date(b._createdAt).valueOf() - new Date(a._createdAt).valueOf(),
-    )
+  const lastCommittedTranslation = TMDs.sort(
+    (a, b) =>
+      new Date(b._createdAt).valueOf() - new Date(a._createdAt).valueOf(),
+  )
     .filter(isTranslationCommitted)
-    .filter((t) => t.targetLangs.some((l) => langsAreTheSame(l, lang)))[0]
+    .filter((TMD) => TMD.targets.some((t) => langsAreTheSame(t.lang, lang)))[0]
 
-  if (!lastCommittedTranslation?.tmd?._ref) {
+  if (!lastCommittedTranslation) {
     return {
       freshestDoc,
       sourceDoc,
@@ -250,6 +236,6 @@ function parsePerLang({
     freshestDoc,
     sourceDoc,
     lang,
-    tmdRefToDiff: lastCommittedTranslation.tmd._ref,
+    tmdRefToDiff: lastCommittedTranslation._id,
   }
 }

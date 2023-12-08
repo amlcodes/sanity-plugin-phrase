@@ -1,26 +1,20 @@
 'use client'
 
 import { InfoOutlineIcon } from '@sanity/icons'
-import { Button, Card, Flex, Heading, Spinner, Stack, Text } from '@sanity/ui'
-import React from 'react'
+import { Button, Card, Flex, Heading, Stack, Text } from '@sanity/ui'
 import {
   DocumentStore,
   Tool,
   createHookFromObservableFactory,
   prepareForPreview,
   useDocumentStore,
-  useEditState,
   useSchema,
 } from 'sanity'
 import { IntentLink } from 'sanity/router'
-import {
-  CreatedMainDocMetadata,
-  PhrasePluginOptions,
-  SanityMainDoc,
-  SanityTMD,
-} from '../../types'
+import { PhrasePluginOptions, SanityTMD } from '../../types'
 import {
   SANITY_API_VERSION,
+  TMD_TYPE,
   formatDay,
   getProjectURL,
   jobsMetadataExtractor,
@@ -38,45 +32,30 @@ import IssueNewTranslations from './IssueNewTranslations'
 
 const useOngoingTranslations = createHookFromObservableFactory<
   // Pick<SanityMainDoc, '_id' | '_type' | '_rev' | 'phraseMetadata'>[],
-  SanityMainDoc[],
+  SanityTMD[],
   {
     documentStore: DocumentStore
-  } & Pick<
-    PhrasePluginOptions,
-    'translatableTypes' | 'sourceLang' | 'i18nAdapter'
-  >
->(({ documentStore, translatableTypes, sourceLang, i18nAdapter }) => {
+  }
+>(({ documentStore }) => {
   return documentStore.listenQuery(
     /* groq */ `*[
-      _type in $translatableTypes &&
-      ${i18nAdapter.getLangGROQFilter(sourceLang)} &&
-      count(phraseMetadata.translations[status != "COMMITTED"]) > 0
+      _type == "${TMD_TYPE}" &&
+      !(status in ["COMMITTED", "CANCELLED", "DELETED", "FAILED_PERSISTING"])
     ]`,
-    { translatableTypes: translatableTypes as string[], sourceLang },
+    {},
     {
       apiVersion: SANITY_API_VERSION,
     },
   )
 })
 
-function OngoingTranslation({
-  currentDocument,
-  translation,
-}: {
-  currentDocument: SanityMainDoc
-  translation: CreatedMainDocMetadata
-}) {
+function OngoingTranslation({ TMD }: { TMD: SanityTMD }) {
   const { phraseRegion } = usePluginOptions()
   const schema = useSchema()
-  const schemaType = schema.get(currentDocument._type)
-  const { ready, draft, published } = useEditState(
-    translation.tmd._ref,
-    translation.tmd._type,
-  )
-  const TMD = (draft || published) as SanityTMD
+  const { sourceDoc } = TMD
+  const schemaType = schema.get(sourceDoc._type)
 
-  const dueDate =
-    ready && TMD?.projectDueDate ? new Date(TMD.projectDueDate) : undefined
+  const dueDate = TMD?.projectDueDate ? new Date(TMD.projectDueDate) : undefined
   return (
     <TableRow>
       <td>
@@ -84,41 +63,40 @@ function OngoingTranslation({
           <Text size={1}>
             <IntentLink
               intent="edit"
-              params={{ id: currentDocument._id, type: currentDocument._type }}
+              params={{ id: sourceDoc._id, type: sourceDoc._type }}
               style={{ textDecoration: 'underline', color: 'currentcolor' }}
             >
               {(schemaType &&
-                prepareForPreview(currentDocument, schemaType)?.title) ||
-                `${currentDocument._id} (unknown type)`}
+                prepareForPreview(JSON.parse(TMD.sourceSnapshot), schemaType)
+                  ?.title) ||
+                `${sourceDoc._id} (unknown type)`}
             </IntentLink>
           </Text>
-          <TranslationPathsDisplay {...translation} />
+          <TranslationPathsDisplay {...TMD} />
         </Stack>
       </td>
       <td>
-        {ready && TMD ? (
-          <Stack space={2}>
-            {TMD.targets.map((target) => {
-              const metadata = jobsMetadataExtractor(target.jobs)
-              return (
-                <StatusBadge
-                  key={target._key}
-                  jobStatus={metadata.stepStatus}
-                  label={metadata.stepName}
-                  language={target.lang.sanity}
-                />
-              )
-            })}
-          </Stack>
-        ) : (
-          <Spinner />
-        )}
+        <Stack space={2}>
+          {TMD.targets.map((target) => {
+            if (!target.jobs) return null
+
+            const metadata = jobsMetadataExtractor(target.jobs)
+            return (
+              <StatusBadge
+                key={target._key}
+                jobStatus={metadata.stepStatus}
+                label={metadata.stepName}
+                language={target.lang.sanity}
+              />
+            )
+          })}
+        </Stack>
       </td>
       <td>
         <Text size={1}>{dueDate ? formatDay(dueDate) : 'N/A'}</Text>
       </td>
       <td>
-        {ready && TMD ? (
+        {TMD.phraseProjectUid && (
           <Flex align="center" gap={2}>
             <Button
               as="a"
@@ -130,8 +108,6 @@ function OngoingTranslation({
               iconRight={PhraseMonogram}
             />
           </Flex>
-        ) : (
-          <Spinner />
         )}
       </td>
     </TableRow>
@@ -193,26 +169,8 @@ export default function createPhraseTool(pluginOptions: PhrasePluginOptions) {
                       </th>
                     </thead>
                     <tbody>
-                      {ongoingTranslations.map((doc) => (
-                        <React.Fragment key={doc._id}>
-                          {doc.phraseMetadata.translations?.map((t) => {
-                            if (
-                              t.status === 'COMMITTED' ||
-                              t.status === 'CREATING' ||
-                              t.status === 'DELETED' ||
-                              t.status === 'FAILED_PERSISTING'
-                            )
-                              return null
-
-                            return (
-                              <OngoingTranslation
-                                key={t._key}
-                                currentDocument={doc}
-                                translation={t}
-                              />
-                            )
-                          })}
-                        </React.Fragment>
+                      {ongoingTranslations.map((TMD) => (
+                        <OngoingTranslation key={TMD._id} TMD={TMD} />
                       ))}
                     </tbody>
                   </StyledTable>

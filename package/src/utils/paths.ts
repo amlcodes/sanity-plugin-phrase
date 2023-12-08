@@ -2,10 +2,8 @@ import { fromString, numEqualSegments, toString } from '@sanity/util/paths'
 import { Path } from 'sanity'
 import {
   CreateTranslationsInput,
-  TranslationDiff,
-  METADATA_KEY,
-  MainDocTranslationMetadata,
   SanityLangCode,
+  TranslationDiff,
   TranslationRequest,
 } from '../types'
 import { ROOT_PATH_STR } from './constants'
@@ -65,8 +63,8 @@ export function joinDiffsByRoot(diffs: TranslationDiff[]) {
   )
 }
 
-export function tPathInMainDoc(translationKey: string) {
-  return `${METADATA_KEY}.translations[_key == "${translationKey}"]`
+export function targetPathInTMD(targetKey: string) {
+  return `targets[_key == "${targetKey}"]`
 }
 
 export function formatInputDiffs(
@@ -86,16 +84,6 @@ export function getDiffsKey(diffs: TranslationDiff[]) {
       .sort((a, b) => a.localeCompare(b))
       .join('||') || ''
   )
-}
-
-export function parseStringifiedDiffs(
-  stingifiedDiffs: MainDocTranslationMetadata['diffs'],
-): TranslationDiff[] {
-  try {
-    return JSON.parse(stingifiedDiffs) as TranslationRequest['diffs']
-  } catch (error) {
-    return []
-  }
 }
 
 export function joinLangsByDiffs(

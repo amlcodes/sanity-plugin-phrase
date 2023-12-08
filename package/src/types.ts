@@ -126,70 +126,6 @@ export enum SerializedPtHtmlTag {
   BLOCK = 'c-b',
 }
 
-/** Stringified `TranslationRequest['diffs']` */
-type StringifiedDiffs = ReturnType<typeof JSON.stringify>
-
-type BaseMainDocMetadata = {
-  _type: 'phrase.main.translation'
-  _key: TranslationRequest['translationKey']
-  _createdAt: string
-  sourceDoc: TranslationRequest['sourceDoc']
-  diffs: StringifiedDiffs
-}
-
-export type CreatingMainDocMetadata = BaseMainDocMetadata & {
-  status: 'CREATING'
-}
-
-export type CommittedMainDocMetadata = BaseMainDocMetadata & {
-  status: 'COMMITTED'
-  tmd: Reference
-  targetLangs: CrossSystemLangCode[]
-}
-
-export type CreatedMainDocMetadata = Omit<
-  CommittedMainDocMetadata,
-  'status'
-> & {
-  status:
-    | 'CREATED'
-    // From Phrase["ProjectStatus"]
-    | 'NEW'
-    | 'COMPLETED'
-    | 'CANCELLED'
-    | 'ASSIGNED'
-    | 'ACCEPTED_BY_VENDOR'
-    | 'DECLINED_BY_VENDOR'
-    | 'COMPLETED_BY_VENDOR'
-}
-
-export type DeletedMainDocMetadata = Omit<
-  CommittedMainDocMetadata,
-  'status'
-> & {
-  status: 'DELETED' | 'CANCELLED'
-}
-
-export type FailedPersistingMainDocMetadata = BaseMainDocMetadata & {
-  status: 'FAILED_PERSISTING'
-  project: Phrase['CreatedProject']
-  jobs: Phrase['JobPart'][]
-  targetLangs: CrossSystemLangCode[]
-}
-
-export type MainDocTranslationMetadata =
-  | CreatingMainDocMetadata
-  | CommittedMainDocMetadata
-  | CreatedMainDocMetadata
-  | DeletedMainDocMetadata
-  | FailedPersistingMainDocMetadata
-
-/** For main documents (source and translated) only */
-export type MainDocPhraseMetadata = {
-  _type: 'phrase.main.meta'
-  translations: MainDocTranslationMetadata[]
-}
-
 export type PhraseJobInfo = Pick<
   Phrase['JobPart'],
   | 'uid'
@@ -217,31 +153,52 @@ export interface ReferenceMap {
     | ExistingReference
 }
 
-export type TMDTarget = {
+export type TMDStatus =
+  | 'CREATING'
+  | 'FAILED_PERSISTING'
+  | Phrase['ProjectStatus']
+  | 'COMMITTED'
+  | 'DELETED'
+
+export type TMDTarget<Status extends TMDStatus = TMDStatus> = {
   _key: SanityLangCode
   lang: CrossSystemLangCode
   ptd: WeakReference
   targetDoc: Reference
-  jobs: PhraseJobInfo[]
+  jobs: Status extends 'CREATING' | 'FAILED_PERSISTING'
+    ? undefined
+    : PhraseJobInfo[]
   /** Cache of resolved references from source to target languages */
   referenceMap?: ReferenceMap
 }
 
-/** Translation Metadata Document (TMD)
+/**
+ * **Translation Metadata Document (TMD)**
+ *
  * Used for keeping permanent track of data in Phrase &
  * determining what fields are stale since last translation. */
-export type SanityTMD = SanityDocument & {
+export type SanityTMD<Status extends TMDStatus = TMDStatus> = SanityDocument & {
   _type: typeof TMD_TYPE
   _id: `${typeof TMD_ID_PREFIX}.${ReturnType<typeof getTranslationKey>}`
   /** Stringified `SanityMainDoc` */
   sourceSnapshot: ReturnType<typeof JSON.stringify>
-  sourceDoc: Reference
+  sourceDoc: TranslationRequest['sourceDoc']
+  sourceRef: Reference
   sourceLang: CrossSystemLangCode
-  targets: TMDTarget[]
+  targets: TMDTarget<Status>[]
   translationKey: TranslationRequest['translationKey']
   diffs: TranslationRequest['diffs']
-  phraseProjectUid: string
+  phraseProjectUid: Status extends 'CREATING' | 'FAILED_PERSISTING'
+    ? undefined
+    : string
   projectDueDate: string | null | undefined
+  status: Status
+  salvaged: Status extends 'FAILED_PERSISTING'
+    ? {
+        project: Phrase['CreatedProject']
+        jobs: Phrase['JobPart'][]
+      }
+    : undefined
 }
 
 /** For PTDs (Phrase Translation Documents) only */
@@ -254,7 +211,7 @@ export type PtdPhraseMetadata = {
 }
 
 export type SanityDocumentWithPhraseMetadata = SanityDocument & {
-  phraseMetadata?: MainDocPhraseMetadata | PtdPhraseMetadata
+  phraseMetadata?: PtdPhraseMetadata
 }
 
 export type SanityPTD = SanityDocumentWithPhraseMetadata & {
@@ -265,9 +222,7 @@ export type SanityPTD = SanityDocumentWithPhraseMetadata & {
 }
 
 /** A "main" document corresponds to either the source or target language */
-export type SanityMainDoc = SanityDocument & {
-  phraseMetadata: MainDocPhraseMetadata
-}
+export type SanityMainDoc = SanityDocument
 
 /** @see `PTDWithExpandedDataQuery` for the GROQ fragment that generates this type */
 export type SanityPTDWithExpandedMetadata = SanityPTD & {
@@ -441,9 +396,14 @@ export interface ContextWithFreshDocuments {
   freshSourceDoc: SanityDocumentWithPhraseMetadata
   freshDocuments: SanityTranslationDocPair[]
   freshDocumentsById: Record<string, SanityDocumentWithPhraseMetadata>
+  otherTMDs: SanityTMD[]
 }
 
-export interface ContextWithProject extends ContextWithFreshDocuments {
+export interface ContextWithActiveTMD extends ContextWithFreshDocuments {
+  activeTMD: SanityTMD
+}
+
+export interface ContextWithProject extends ContextWithActiveTMD {
   project: Phrase['CreatedProject']
 }
 

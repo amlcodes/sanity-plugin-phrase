@@ -50,7 +50,9 @@ export default async function getPTDsFromPhraseWebhook({
   const jobUids = dedupeArray(jobs.flatMap((job) => job.uid || []))
   const PTDsToFetch = TMDs.flatMap((TMD) =>
     TMD.targets.flatMap((t) =>
-      t.jobs.some((j) => j.uid && jobUids.includes(j.uid)) ? t.ptd._ref : [],
+      t.jobs && t.jobs.some((j) => j.uid && jobUids.includes(j.uid))
+        ? t.ptd._ref
+        : [],
     ),
   )
 
