@@ -375,20 +375,6 @@ export default function TranslationForm({
           )}
           {references.refs.length > 0 ? (
             <Stack space={3}>
-              {desiredTargetLangs && desiredTargetLangs.length > 0 && (
-                <Card padding={4} border radius={2} tone="critical">
-                  <Flex gap={3} align="flex-start">
-                    <Text size={2}>
-                      <InfoOutlineIcon />
-                    </Text>
-                    {/* @TODO: remove this */}
-                    <Text size={2}>
-                      DEV: References selection for previously translated
-                      documents is broken ATM.
-                    </Text>
-                  </Flex>
-                </Card>
-              )}
               {references.refs.map((ref) => {
                 const staleness = references.staleness?.find(
                   (r) => r.sourceDoc?._id === ref.id,

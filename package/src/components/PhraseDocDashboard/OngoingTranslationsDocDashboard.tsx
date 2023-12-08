@@ -1,8 +1,8 @@
 'use client'
 
-import { InfoOutlineIcon } from '@sanity/icons'
+import { InfoOutlineIcon, TrashIcon } from '@sanity/icons'
 import { Button, Card, Flex, Stack, Text, useToast } from '@sanity/ui'
-import React from 'react'
+import React, { MouseEvent } from 'react'
 import { useClient, useEditState } from 'sanity'
 import commitTranslation from '../../commitTranslation'
 import {
@@ -16,9 +16,11 @@ import {
 } from '../../types'
 import {
   SANITY_API_VERSION,
+  draftId,
   getProjectURL,
   isTranslationCommitted,
   isTranslationReadyToCommit,
+  undraftId,
 } from '../../utils'
 import DocDashboardCard from '../DocDashboardCard'
 import { PhraseMonogram } from '../PhraseLogo'
@@ -55,11 +57,14 @@ export default function OngoingTranslationsDocDashboard(props: {
           )
         }
 
-        if (translation.status === 'DELETED') {
+        if (
+          translation.status === 'DELETED' ||
+          translation.status === 'CANCELLED'
+        ) {
           return (
             <DeletedTranslationCard
               key={translation._key}
-              translation={translation}
+              translation={translation as DeletedMainDocMetadata}
               parentDoc={props.currentDocument}
             />
           )
@@ -68,7 +73,7 @@ export default function OngoingTranslationsDocDashboard(props: {
         return (
           <OngoingTranslationCard
             key={translation._key}
-            translation={translation}
+            translation={translation as CreatedMainDocMetadata}
             parentDoc={props.currentDocument}
           />
         )
@@ -192,29 +197,85 @@ function DeletedTranslationCard({
   parentDoc: SanityMainDoc
   translation: DeletedMainDocMetadata
 }) {
+  const client = useClient({ apiVersion: SANITY_API_VERSION })
+  const toast = useToast()
   const { ready, draft, published } = useEditState(
     translation.tmd._ref,
     translation.tmd._type,
   )
   const TMD = (draft || published) as SanityTMD
 
+  async function deleteTranslation(e: MouseEvent) {
+    e.preventDefault()
+    const mainDocRefs = [
+      TMD.sourceDoc._ref,
+      ...TMD.targets.map((t) => t.targetDoc._ref),
+    ].filter(Boolean)
+    const mainDocIds = await client.fetch<string[]>('*[_id in $ids]._id', {
+      ids: mainDocRefs.flatMap((ref) => [undraftId(ref), draftId(ref)]),
+    })
+
+    const translationKey = TMD.translationKey
+
+    const unsetTx = client.transaction()
+    mainDocIds.forEach((id) => {
+      unsetTx.patch(id, (patch) =>
+        patch.unset([`phraseMetadata.translations[_key=="${translationKey}"]`]),
+      )
+    })
+    try {
+      await unsetTx.commit()
+    } catch (error) {
+      toast.push({
+        status: 'error',
+        title: 'Could not delete translation',
+        description: typeof error === 'string' ? error : undefined,
+        closable: true,
+      })
+      return
+    }
+
+    const deleteTMDAndPTDsTx = client.transaction()
+    deleteTMDAndPTDsTx.delete(TMD._id)
+    TMD.targets.forEach((target) => {
+      deleteTMDAndPTDsTx.delete(target.ptd._ref)
+    })
+
+    try {
+      await deleteTMDAndPTDsTx.commit()
+    } catch (error) {
+      console.error("Couldn't delete TMD and PTDs", error)
+      // Do nothing about dangling TMDs & PTDs - let them be cleaned up later
+    }
+
+    toast.push({
+      status: 'success',
+      title: 'Translation deleted successfully',
+      description: 'This translation has been deleted from the document',
+      closable: true,
+    })
+  }
   return (
     <DocDashboardCard
       title="Translation deleted in Phrase"
       subtitle={<TranslationPathsDisplay {...translation} />}
+      collapsible={false}
     >
       {!ready && <SpinnerBox />}
-      <TranslationInfoTable>
-        {TMD?.targets.map((target) => (
-          <TranslationInfo
-            key={target._key}
-            paneParentDocId={parentDoc._id}
-            parentDoc={parentDoc}
-            targetLang={target.lang}
-            TMD={TMD}
+      {ready && (
+        <Stack space={4}>
+          <Text>
+            In order to issue a new translation, you must first delete this one
+          </Text>
+          <Button
+            text="Delete translation"
+            onClick={deleteTranslation}
+            mode="ghost"
+            tone="caution"
+            icon={TrashIcon}
           />
-        ))}
-      </TranslationInfoTable>
+        </Stack>
+      )}
     </DocDashboardCard>
   )
 }

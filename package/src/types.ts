@@ -151,14 +151,23 @@ export type CreatedMainDocMetadata = Omit<
   CommittedMainDocMetadata,
   'status'
 > & {
-  status: 'CREATED' | Phrase['ProjectStatus']
+  status:
+    | 'CREATED'
+    // From Phrase["ProjectStatus"]
+    | 'NEW'
+    | 'COMPLETED'
+    | 'CANCELLED'
+    | 'ASSIGNED'
+    | 'ACCEPTED_BY_VENDOR'
+    | 'DECLINED_BY_VENDOR'
+    | 'COMPLETED_BY_VENDOR'
 }
 
 export type DeletedMainDocMetadata = Omit<
   CommittedMainDocMetadata,
   'status'
 > & {
-  status: 'DELETED'
+  status: 'DELETED' | 'CANCELLED'
 }
 
 export type FailedPersistingMainDocMetadata = BaseMainDocMetadata & {
@@ -255,13 +264,16 @@ export type SanityPTD = SanityDocumentWithPhraseMetadata & {
   phraseMetadata: PtdPhraseMetadata
 }
 
-export type SanityPTDWithExpandedMetadata = SanityPTD & {
-  phraseMetadata: PtdPhraseMetadata & { expanded: SanityTMD }
-}
-
 /** A "main" document corresponds to either the source or target language */
 export type SanityMainDoc = SanityDocument & {
   phraseMetadata: MainDocPhraseMetadata
+}
+
+export type SanityPTDWithExpandedMetadata = SanityPTD & {
+  phraseMetadata: PtdPhraseMetadata & {
+    expandedTMD: SanityTMD | null
+    expandedTarget: SanityMainDoc | null
+  }
 }
 
 export type SanityTranslationDocPair = {
