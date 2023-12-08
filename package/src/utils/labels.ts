@@ -77,11 +77,14 @@ export function getTranslationName({
 
   const type = schemaType?.title || sourceDoc._type
   const title = previewTitle || `id#${sourceDoc._id.slice(0, 5)}...`
-  const name = `${FILENAME_PREFIX} ${type}: ${title} (${getReadableLanguageName(
-    sourceDoc.lang,
-  )} to ${targetLangs
+  const languages = `${getReadableLanguageName(sourceDoc.lang)} to ${targetLangs
     .map((l) => getReadableLanguageName(l))
-    .join(', ')}) :: ${getTranslationKey({
+    .join(', ')}`
+
+  const name = `${FILENAME_PREFIX} ${truncate(type, 40)}: ${truncate(
+    title,
+    70,
+  )} (${truncate(languages, 70)}) :: ${getTranslationKey({
     diffs,
     _rev: sourceDoc._rev,
     _id: sourceDoc._id,

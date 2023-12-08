@@ -1,3 +1,4 @@
+import JsSHA from 'jssha'
 import {
   CrossSystemLangCode,
   TranslationDiff,
@@ -20,7 +21,7 @@ export function makeKeyAndIdFriendly(str: string) {
   )
 }
 
-/** Used as an id and _key for the translation. Never gets parsed back to its contents. */
+/** Used as an id and _key for the translation. */
 export function getTranslationKey({
   diffs,
   _rev,
@@ -30,13 +31,18 @@ export function getTranslationKey({
   _rev: string
   _id: string
 }) {
-  return [
+  const templatedId = [
     ...diffs.map(({ path }) => pathToString(path)),
     _id.replace('.', '_'),
     _rev,
   ]
     .map(makeKeyAndIdFriendly)
     .join('__')
+
+  const sha = new JsSHA('SHA-256', 'TEXT', { encoding: 'UTF8' })
+  sha.update(templatedId)
+  // Never gets parsed back to its contents.
+  return sha.getHash('HEX').slice(0, 8)
 }
 
 export function undraftId(id: string) {
