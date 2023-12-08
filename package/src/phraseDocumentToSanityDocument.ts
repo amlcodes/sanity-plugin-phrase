@@ -5,7 +5,7 @@ import {
   PhrasePluginOptions,
   SanityPTDWithExpandedMetadata,
 } from './types'
-import { applyPatches, dedupeArray, diffPathToPatch } from './utils'
+import { applyPatches, dedupeArray, diffToPatch } from './utils'
 import {
   injectTranslatedReferences,
   parseAllReferences,
@@ -63,15 +63,13 @@ export default async function phraseDocumentToSanityDocument({
     }
   }
 
-  const patches = contentInPhrase.toTranslate.map((toTranslate) => {
+  const patches = contentInPhrase.toTranslate.map((item) => {
     const dataWithReferences = injectTranslatedReferences({
-      data: decodeFromPhrase(
-        'data' in toTranslate ? toTranslate.data : undefined,
-      ),
+      data: decodeFromPhrase('data' in item ? item.data : undefined),
       referenceMap,
     })
 
-    return diffPathToPatch(toTranslate._diff, dataWithReferences)
+    return diffToPatch(item._diff, dataWithReferences)
   })
 
   return applyPatches(freshPTD, patches)

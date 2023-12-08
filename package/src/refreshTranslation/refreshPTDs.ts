@@ -43,7 +43,9 @@ class FailedUpdatingPTDsAndTMDError {
 class FailedConvertingPhraseContentToSanityDocumentError {
   readonly _tag = 'FailedConvertingPhraseContentToSanityDocument'
 
-  constructor(readonly error: unknown) {}
+  constructor(readonly error: unknown) {
+    console.error('\n[FailedConvertingPhraseContentToSanityDocument]', error)
+  }
 }
 
 export default function refreshPTDs(input: {
@@ -211,20 +213,17 @@ function diffPTD({
     })
 
   return pipe(
-    Effect.retry(
-      Effect.tryPromise({
-        try: () =>
-          phraseDocumentToSanityDocument({
-            contentInPhrase: phraseDoc,
-            freshPTD: doc,
-            sanityClient,
-            pluginOptions,
-          }),
-        catch: (error) =>
-          new FailedConvertingPhraseContentToSanityDocumentError(error),
-      }),
-      retrySchedule,
-    ),
+    Effect.tryPromise({
+      try: () =>
+        phraseDocumentToSanityDocument({
+          contentInPhrase: phraseDoc,
+          freshPTD: doc,
+          sanityClient,
+          pluginOptions,
+        }),
+      catch: (error) =>
+        new FailedConvertingPhraseContentToSanityDocumentError(error),
+    }),
     Effect.map((updatedContent) => {
       const finalDoc = pluginOptions.i18nAdapter.injectDocumentLang(
         {

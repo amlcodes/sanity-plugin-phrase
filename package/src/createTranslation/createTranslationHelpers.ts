@@ -62,7 +62,11 @@ export function formatRequest(
     targetLangs,
     sourceDoc,
     phraseClient,
-    translationKey: getTranslationKey(diffs, sourceDoc._rev),
+    translationKey: getTranslationKey({
+      diffs,
+      _rev: sourceDoc._rev,
+      _id: sourceDoc._id,
+    }),
     translationFilename: `${request.translationName}.json`,
   }
 }

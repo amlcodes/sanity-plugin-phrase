@@ -1,6 +1,7 @@
 import { get } from '@sanity/util/paths'
 import { ContentInPhrase, ContextWithProject, ToTranslateItem } from '../types'
 import getPreviewContext from './getPreviewContext'
+import encodeToPhrase from '../encodeToPhrase'
 
 export default function getContentInPhrase(
   context: ContextWithProject,
@@ -19,7 +20,7 @@ export default function getContentInPhrase(
         }
 
       // @ts-expect-error not sure how to model `ToTranslateItem` in a way that respects the different '_diff's
-      return { _diff, data: get(document, _diff.path) }
+      return { _diff, data: encodeToPhrase(get(document, _diff.path)) }
     }),
   }
 }

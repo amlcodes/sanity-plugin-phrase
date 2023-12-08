@@ -38,6 +38,8 @@ function decodeStringFromPhrase(str: string) {
   return decodeHTML(str)
 }
 
+const tags = Object.values(SerializedPtHtmlTag)
+
 /**
  * Sligthly reduces the possibility of error states for PT blocks by auto-closing tags
  * not yet properly closed in the Phrase editor.
@@ -47,7 +49,7 @@ function decodeStringFromPhrase(str: string) {
  * - No self-closing tags
  */
 function autocloseTags(html: string): string {
-  const tags = Object.values(SerializedPtHtmlTag)
+  if (!html) return html
 
   return html.replace(
     new RegExp(`<(${tags.join('|')})[^>]*>[^<]*`, 'g'),

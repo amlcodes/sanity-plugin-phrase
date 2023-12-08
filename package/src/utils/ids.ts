@@ -21,8 +21,20 @@ export function makeKeyAndIdFriendly(str: string) {
 }
 
 /** Used as an id and _key for the translation. Never gets parsed back to its contents. */
-export function getTranslationKey(diffs: TranslationDiff[], _rev: string) {
-  return [...diffs.map(({ path }) => pathToString(path)), _rev]
+export function getTranslationKey({
+  diffs,
+  _rev,
+  _id,
+}: {
+  diffs: TranslationDiff[]
+  _rev: string
+  _id: string
+}) {
+  return [
+    ...diffs.map(({ path }) => pathToString(path)),
+    _id.replace('.', '_'),
+    _rev,
+  ]
     .map(makeKeyAndIdFriendly)
     .join('__')
 }

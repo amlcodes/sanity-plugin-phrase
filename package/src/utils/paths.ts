@@ -45,6 +45,13 @@ export const FULL_DOC_DIFF_PATH: TranslationDiff = {
   path: [],
 }
 
+export function diffIsFullDoc(diff: TranslationDiff) {
+  return (
+    diff.op === FULL_DOC_DIFF_PATH.op &&
+    JSON.stringify(diff.path) === JSON.stringify(FULL_DOC_DIFF_PATH.path)
+  )
+}
+
 export function joinDiffsByRoot(diffs: TranslationDiff[]) {
   return diffs.reduce(
     (byRoot, p) => {

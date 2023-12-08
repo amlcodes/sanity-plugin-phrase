@@ -81,7 +81,11 @@ export function getTranslationName({
     sourceDoc.lang,
   )} to ${targetLangs
     .map((l) => getReadableLanguageName(l))
-    .join(', ')}) :: ${getTranslationKey(diffs, sourceDoc._rev)})`
+    .join(', ')}) :: ${getTranslationKey({
+    diffs,
+    _rev: sourceDoc._rev,
+    _id: sourceDoc._id,
+  })}`
 
   return name
 }

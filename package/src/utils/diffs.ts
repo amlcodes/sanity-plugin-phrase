@@ -3,16 +3,18 @@ import { fromString, get, toString } from '@sanity/util/paths'
 import { PatchOperations, Path, SanityDocument } from 'sanity'
 import { PathSegment, diffPatch } from 'sanity-diff-patch'
 import {
+  SanityDocumentWithPhraseMetadata,
   TranslationDiff,
   TranslationDiffInsert,
   TranslationDiffSet,
   TranslationDiffUnset,
-  SanityDocumentWithPhraseMetadata,
 } from '../types'
 import { undraftId } from './ids'
+import { diffIsFullDoc } from './paths'
+import { STATIC_DOC_KEYS } from './constants'
 
 /**
- * Get the DiffPath[] that have changed between two versions of a document.
+ * Get the TranslationDiff[] that have changed between two versions of a document.
  *
  * We can't rely on `sanity-diff-patch`: it calculates the minimal set of patches needed
  * to get `historicVersion` to become `currentVersion`, but we need to optimize our patches
@@ -72,26 +74,24 @@ export function getDiffs({
     { ...currentVersion, _id: undraftId(currentVersion._id) },
   )
 
-  const setDiffPaths = diffPatches.flatMap(
-    ({ patch }): TranslationDiffSet[] => {
-      if (!('set' in patch)) return []
+  const setDiffs = diffPatches.flatMap(({ patch }): TranslationDiffSet[] => {
+    if (!('set' in patch)) return []
 
-      return Object.keys(patch.set).map((path) => ({
-        op: 'set',
-        path: fromString(path),
-      }))
-    },
-  )
-  const allDiffPaths = [
+    return Object.keys(patch.set).map((path) => ({
+      op: 'set',
+      path: fromString(path),
+    }))
+  })
+  const allDiffs = [
     ...unsettedPaths,
     ...insertedPaths,
     ...resetArrayPaths,
-    ...setDiffPaths,
+    ...setDiffs,
   ]
-  const pathKeys = allDiffPaths.map((diffPath) => toString(diffPath.path))
+  const pathKeys = allDiffs.map((diff) => toString(diff.path))
 
-  return allDiffPaths.filter((diffPath, index) => {
-    const key = toString(diffPath.path)
+  return allDiffs.filter((diff, index) => {
+    const key = toString(diff.path)
     return pathKeys.indexOf(key) === index
   })
 }
@@ -311,17 +311,17 @@ export function applyDiffs({
   diffs: TranslationDiff[]
 }) {
   // If changing the entire root, no need to apply patches
-  if (diffs.length === 0) return updatedDocument
+  if (diffs.length === 0 || diffIsFullDoc(diffs[0])) return updatedDocument
 
-  const patches = diffPathsToPatches({
-    diffPaths: diffs,
+  const patches = diffsToPatches({
+    diffs: diffs,
     updatedDocument,
   })
 
   return applyPatches(startingDocument, patches)
 }
 
-function insertDiffPathToPatch(
+function insertDiffToPatch(
   { path, insertAt }: TranslationDiffInsert,
   value: unknown,
 ): PatchOperations {
@@ -360,48 +360,60 @@ function insertDiffPathToPatch(
   }
 }
 
-export function diffPathToPatch(
-  diffPath: TranslationDiff,
+export function diffToPatch(
+  diff: TranslationDiff,
   value: unknown,
 ): PatchOperations {
-  if (diffPath.op === 'unset') {
+  if (diff.op === 'unset') {
     return {
-      unset: [toString(diffPath.path)],
+      unset: [toString(diff.path)],
     }
   }
 
-  if (diffPath.op === 'set') {
+  if (diff.op === 'set') {
+    // If setting the entire document, `set` is the value itself, minus
+    // fields we don't want to change
+    if (diff.path.length === 0 && typeof value === 'object' && !!value) {
+      return {
+        set: Object.fromEntries(
+          Object.entries(value).filter(
+            ([key]) => !STATIC_DOC_KEYS.includes(key as any),
+          ),
+        ),
+      }
+    }
+
     return {
       set: {
-        [toString(diffPath.path)]: value,
+        [toString(diff.path)]: value,
       },
     }
   }
 
-  if (diffPath.op === 'insert') {
-    return insertDiffPathToPatch(diffPath, value)
+  if (diff.op === 'insert') {
+    return insertDiffToPatch(diff, value)
   }
 
   return {}
 }
 
-function diffPathsToPatches({
-  diffPaths,
+function diffsToPatches({
+  diffs,
   updatedDocument,
 }: {
-  diffPaths: TranslationDiff[]
+  diffs: TranslationDiff[]
   updatedDocument: SanityDocument
 }) {
-  return diffPaths.map((diffPath) => {
+  return diffs.map((diff) => {
     const value = (() => {
       try {
-        return get(updatedDocument, diffPath.path)
+        return get(updatedDocument, diff.path)
       } catch (error) {
         return undefined
       }
     })()
 
-    return diffPathToPatch(diffPath, value)
+    return diffToPatch(diff, value)
   })
 }
 

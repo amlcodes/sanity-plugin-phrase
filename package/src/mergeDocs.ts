@@ -1,8 +1,6 @@
 import { SanityDocument } from 'sanity'
 import { TranslationDiff, METADATA_KEY } from './types'
-import { applyDiffs } from './utils'
-
-const STATIC_KEYS = ['_id', '_rev', '_type', METADATA_KEY] as const
+import { STATIC_DOC_KEYS, applyDiffs } from './utils'
 
 export function mergeDocs<D extends SanityDocument>({
   startingDocument,
@@ -28,7 +26,7 @@ function keepStaticValues<D extends SanityDocument>(
   changedDoc: D,
 ): D {
   const finalDoc = { ...changedDoc }
-  STATIC_KEYS.forEach((key) => {
+  STATIC_DOC_KEYS.forEach((key) => {
     if (key in originalDoc) {
       // @ts-expect-error
       finalDoc[key] = originalDoc[key]
