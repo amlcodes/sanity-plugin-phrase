@@ -1,13 +1,13 @@
 'use client'
+
 import { Text } from '@sanity/ui'
 import { useSchema } from 'sanity'
-import { MainDocTranslationMetadata } from '../types'
-import { getFieldLabel, joinPathsByRoot, parsePathsString } from '../utils'
+import { getFieldLabel, joinDiffsByRoot } from '../utils'
+import { SanityTMD } from '../types'
 
-export function TranslationPathsDisplay(props: {
-  sourceDoc: MainDocTranslationMetadata['sourceDoc']
-  paths: MainDocTranslationMetadata['paths']
-}) {
+export function TranslationPathsDisplay(
+  props: Pick<SanityTMD, 'sourceDoc' | 'diffs'>,
+) {
   const schema = useSchema()
   const sourceSchemaType = schema.get(props.sourceDoc._type)
 
@@ -15,7 +15,7 @@ export function TranslationPathsDisplay(props: {
 
   return (
     <>
-      {Object.entries(joinPathsByRoot(parsePathsString(props.paths))).map(
+      {Object.entries(joinDiffsByRoot(props.diffs)).map(
         ([rootPath, fullPathsInRoot]) => (
           <Text key={rootPath} size={1} muted>
             {getFieldLabel(rootPath, fullPathsInRoot, sourceSchemaType)}

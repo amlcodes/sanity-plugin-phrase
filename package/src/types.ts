@@ -15,7 +15,7 @@ import {
 } from './clients/createPhraseClient'
 import { definitions } from './clients/phraseOpenAPI'
 import type { LangAdapter } from './utils'
-import { getTranslationKey, pathToString } from './utils'
+import { getTranslationKey } from './utils'
 import {
   CREDENTIALS_DOC_ID,
   PTD_ID_PREFIX,
@@ -39,6 +39,32 @@ export type CrossSystemLangCode = {
   phrase: PhraseLangCode
 }
 
+export type TranslationDiffInsert = {
+  path: Path
+  op: 'insert'
+  /** Applicable only to array items */
+  insertAt?: {
+    index: number
+    prevKey?: string
+    nextKey?: string
+  }
+}
+
+export type TranslationDiffUnset = {
+  path: Path
+  op: 'unset'
+}
+
+export type TranslationDiffSet = {
+  path: Path
+  op: 'set'
+}
+
+export type TranslationDiff =
+  | TranslationDiffInsert
+  | TranslationDiffUnset
+  | TranslationDiffSet
+
 export interface TranslationRequest {
   // eslint-disable-next-line
   pluginOptions: PhrasePluginOptions
@@ -50,7 +76,7 @@ export interface TranslationRequest {
     _type: string
     lang: CrossSystemLangCode
   }
-  paths: [Path, ...Path[]]
+  diffs: [TranslationDiff, ...TranslationDiff[]]
   /** @see getTranslationKey */
   translationKey: string
   targetLangs: CrossSystemLangCode[]
@@ -100,59 +126,6 @@ export enum SerializedPtHtmlTag {
   BLOCK = 'c-b',
 }
 
-type BaseMainDocMetadata = {
-  _type: 'phrase.main.translation'
-  _key: TranslationRequest['translationKey']
-  _createdAt: string
-  sourceDoc: TranslationRequest['sourceDoc']
-  /** Stringified `TranslationRequest['paths']` */
-  paths: ReturnType<typeof JSON.stringify>
-}
-
-export type CreatingMainDocMetadata = BaseMainDocMetadata & {
-  status: 'CREATING'
-}
-
-export type CommittedMainDocMetadata = BaseMainDocMetadata & {
-  status: 'COMMITTED'
-  tmd: Reference
-  targetLangs: CrossSystemLangCode[]
-}
-
-export type CreatedMainDocMetadata = Omit<
-  CommittedMainDocMetadata,
-  'status'
-> & {
-  status: 'CREATED' | Phrase['ProjectStatus']
-}
-
-export type DeletedMainDocMetadata = Omit<
-  CommittedMainDocMetadata,
-  'status'
-> & {
-  status: 'DELETED'
-}
-
-export type FailedPersistingMainDocMetadata = BaseMainDocMetadata & {
-  status: 'FAILED_PERSISTING'
-  project: Phrase['CreatedProject']
-  jobs: Phrase['JobPart'][]
-  targetLangs: CrossSystemLangCode[]
-}
-
-export type MainDocTranslationMetadata =
-  | CreatingMainDocMetadata
-  | CommittedMainDocMetadata
-  | CreatedMainDocMetadata
-  | DeletedMainDocMetadata
-  | FailedPersistingMainDocMetadata
-
-/** For main documents (source and translated) only */
-export type MainDocPhraseMetadata = {
-  _type: 'phrase.main.meta'
-  translations: MainDocTranslationMetadata[]
-}
-
 export type PhraseJobInfo = Pick<
   Phrase['JobPart'],
   | 'uid'
@@ -180,31 +153,52 @@ export interface ReferenceMap {
     | ExistingReference
 }
 
-export type TMDTarget = {
+export type TMDStatus =
+  | 'CREATING'
+  | 'FAILED_PERSISTING'
+  | Phrase['ProjectStatus']
+  | 'COMMITTED'
+  | 'DELETED'
+
+export type TMDTarget<Status extends TMDStatus = TMDStatus> = {
   _key: SanityLangCode
   lang: CrossSystemLangCode
   ptd: WeakReference
   targetDoc: Reference
-  jobs: PhraseJobInfo[]
+  jobs: Status extends 'CREATING' | 'FAILED_PERSISTING'
+    ? undefined
+    : PhraseJobInfo[]
   /** Cache of resolved references from source to target languages */
   referenceMap?: ReferenceMap
 }
 
-/** Translation Metadata Document (TMD)
+/**
+ * **Translation Metadata Document (TMD)**
+ *
  * Used for keeping permanent track of data in Phrase &
  * determining what fields are stale since last translation. */
-export type SanityTMD = SanityDocument & {
+export type SanityTMD<Status extends TMDStatus = TMDStatus> = SanityDocument & {
   _type: typeof TMD_TYPE
   _id: `${typeof TMD_ID_PREFIX}.${ReturnType<typeof getTranslationKey>}`
   /** Stringified `SanityMainDoc` */
   sourceSnapshot: ReturnType<typeof JSON.stringify>
-  sourceDoc: Reference
+  sourceDoc: TranslationRequest['sourceDoc']
+  sourceRef: Reference
   sourceLang: CrossSystemLangCode
-  targets: TMDTarget[]
+  targets: TMDTarget<Status>[]
   translationKey: TranslationRequest['translationKey']
-  paths: TranslationRequest['paths']
-  phraseProjectUid: string
+  diffs: TranslationRequest['diffs']
+  phraseProjectUid: Status extends 'CREATING' | 'FAILED_PERSISTING'
+    ? undefined
+    : string
   projectDueDate: string | null | undefined
+  status: Status
+  salvaged: Status extends 'FAILED_PERSISTING'
+    ? {
+        project: Phrase['CreatedProject']
+        jobs: Phrase['JobPart'][]
+      }
+    : undefined
 }
 
 /** For PTDs (Phrase Translation Documents) only */
@@ -217,7 +211,7 @@ export type PtdPhraseMetadata = {
 }
 
 export type SanityDocumentWithPhraseMetadata = SanityDocument & {
-  phraseMetadata?: MainDocPhraseMetadata | PtdPhraseMetadata
+  phraseMetadata?: PtdPhraseMetadata
 }
 
 export type SanityPTD = SanityDocumentWithPhraseMetadata & {
@@ -227,13 +221,15 @@ export type SanityPTD = SanityDocumentWithPhraseMetadata & {
   phraseMetadata: PtdPhraseMetadata
 }
 
-export type SanityPTDWithExpandedMetadata = SanityPTD & {
-  phraseMetadata: PtdPhraseMetadata & { expanded: SanityTMD }
-}
-
 /** A "main" document corresponds to either the source or target language */
-export type SanityMainDoc = SanityDocument & {
-  phraseMetadata: MainDocPhraseMetadata
+export type SanityMainDoc = SanityDocument
+
+/** @see `PTDWithExpandedDataQuery` for the GROQ fragment that generates this type */
+export type SanityPTDWithExpandedMetadata = SanityPTD & {
+  phraseMetadata: PtdPhraseMetadata & {
+    expandedTMD: SanityTMD | null
+    expandedTarget: SanityMainDoc | null
+  }
 }
 
 export type SanityTranslationDocPair = {
@@ -242,33 +238,64 @@ export type SanityTranslationDocPair = {
   published?: SanityDocumentWithPhraseMetadata | null
 }
 
+export type ToTranslateItem =
+  | {
+      _diff: TranslationDiffUnset
+    }
+  | {
+      _diff: TranslationDiffInsert
+      data: unknown
+    }
+  | {
+      _diff: TranslationDiffSet
+      data: unknown
+    }
+
 export type ContentInPhrase = {
   /** HTML content to show in Phrase's "Context note" in-editor panel */
   _sanityContext?: string
 
   /**
-   * The formatted content sent to Phrase by field path.
-   * Keys are the result of `@sanity/util/paths`'s `toString(path)` and need to be decoded back to `Path` before usage.
+   * The formatted content sent to Phrase. It carries the information of whether each
+   * piece of content is new (inserted), updated (set) or removed (unset).
+   *
+   * Refer to `getDiffPaths` for more information on `_diff`.
    *
    * @example
-   * // Document-level translations (entire document)
+   * // Entire document
    * {
-   *  contentByPath: {
-   *    __root: {
-   *      _id: 'document-id' // ...
+   *  toTranslate: [
+   *    {
+   *      _diff: { op: 'set', path: [] },
+   *      content: {
+   *        _id: 'document-id' // ...
+   *      }
    *    }
-   *  }
+   *  ]
    * }
    *
    * // Field-level translations
    * {
-   *  contentByPath: {
-   *    title: 'Document title',
-   *    "body[_key == 'block-1'].cta": { _type: 'cta', title: 'CTA title' }
-   *  }
+   *  toTranslate: [
+   *    {
+   *      _diff: { op: 'set', path: ['title'] },
+   *      content: 'Document title'
+   *    },
+   *    {
+   *      _diff: { op: 'insert', path: ['body', { _key: 'new-block' }], insertAt: { index: 1, nextKey: 'block-1' } },
+   *      content: { _key: 'new-block' }
+   *    },
+   *    {
+   *      _diff: { op: 'set', path: ['body', { _key: 'block-1' }, 'cta'] },
+   *      content: { _type: 'cta', title: 'CTA title' }
+   *    },
+   *    {
+   *      _diff: { op: 'unset', path: ['body', { _key: 'block-2' }] },
+   *    },
+   *  ]
    * }
    **/
-  contentByPath: Record<ReturnType<typeof pathToString>, unknown>
+  toTranslate: ToTranslateItem[]
 }
 
 export type PhraseCredentialsInput = {
@@ -330,7 +357,7 @@ export type I18nAdapter = {
 
 export type CreateTranslationsInput = Omit<
   TranslationRequest,
-  | 'paths'
+  | 'diffs'
   | 'targetLangs'
   | 'sourceDoc'
   | 'phraseClient'
@@ -338,7 +365,7 @@ export type CreateTranslationsInput = Omit<
   | 'translationFilename'
 > & {
   credentials: PhraseCredentialsInput
-  paths?: (Path | string)[]
+  diffs?: TranslationRequest['diffs']
   targetLangs: SanityLangCode[]
   sourceDoc: Omit<TranslationRequest['sourceDoc'], 'lang'> & {
     lang: SanityLangCode
@@ -369,9 +396,14 @@ export interface ContextWithFreshDocuments {
   freshSourceDoc: SanityDocumentWithPhraseMetadata
   freshDocuments: SanityTranslationDocPair[]
   freshDocumentsById: Record<string, SanityDocumentWithPhraseMetadata>
+  otherTMDs: SanityTMD[]
 }
 
-export interface ContextWithProject extends ContextWithFreshDocuments {
+export interface ContextWithActiveTMD extends ContextWithFreshDocuments {
+  activeTMD: SanityTMD
+}
+
+export interface ContextWithProject extends ContextWithActiveTMD {
   project: Phrase['CreatedProject']
 }
 
@@ -395,7 +427,7 @@ export enum StaleStatus {
 export type StaleTargetStatus = {
   lang: CrossSystemLangCode
   status: StaleStatus.STALE
-  changedPaths: TranslationRequest['paths']
+  diffs: TranslationRequest['diffs']
   translationDate: string
 }
 

@@ -6,7 +6,7 @@ import {
   SanityDocumentWithPhraseMetadata,
   TranslationRequest,
 } from './types'
-import { draftId, getPathsKey, isDraft, undraftId } from './utils'
+import { draftId, getDiffsKey, isDraft, undraftId } from './utils'
 import { get } from '@sanity/util/paths'
 
 type TranslatableRef = {
@@ -34,13 +34,13 @@ export default async function getAllDocReferences({
   document: parentDocument,
   maxDepth = 3,
   translatableTypes,
-  paths,
+  diffs,
 }: {
   sanityClient: SanityClient
   document: SanityDocumentWithPhraseMetadata
   maxDepth?: number
   translatableTypes: PhrasePluginOptions['translatableTypes']
-  paths: TranslationRequest['paths']
+  diffs: TranslationRequest['diffs']
 }) {
   const state = {
     referenced: {
@@ -103,13 +103,13 @@ export default async function getAllDocReferences({
   async function fetchDocReferences(
     doc: SanityDocumentWithPhraseMetadata,
     currentDepth: number,
-    subPaths?: TranslationRequest['paths'],
+    subDiffs?: TranslationRequest['diffs'],
   ) {
     const docReferences = parseAllReferences(
       // If checking a specific set of sub-paths, only parse references from there
-      subPaths
+      subDiffs
         ? Object.fromEntries(
-            subPaths.map((path) => [getPathsKey([path]), get(doc, path)]),
+            subDiffs.map((diff) => [getDiffsKey([diff]), get(doc, diff.path)]),
           )
         : doc,
       [],
@@ -168,7 +168,7 @@ export default async function getAllDocReferences({
     )
   }
 
-  await fetchDocReferences(parentDocument, 1, paths)
+  await fetchDocReferences(parentDocument, 1, diffs)
 
   const finalDocs = collate(
     Object.values(state.referenced).flatMap((a) => {

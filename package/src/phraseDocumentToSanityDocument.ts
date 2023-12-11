@@ -1,13 +1,16 @@
 import { SanityClient } from 'sanity'
-import { modifyDocInPath } from './mergeDocs'
-import phraseToSanity from './phraseToSanity'
+import decodeFromPhrase from './decodeFromPhrase'
 import {
   ContentInPhrase,
   PhrasePluginOptions,
   SanityPTDWithExpandedMetadata,
 } from './types'
-import { dedupeArray, stringToPath } from './utils'
-import { parseAllReferences } from './utils/references'
+import { applyPatches, dedupeArray, diffToPatch } from './utils'
+import {
+  injectTranslatedReferences,
+  parseAllReferences,
+} from './utils/references'
+import { keepStaticValues } from './mergeDocs'
 
 export default async function phraseDocumentToSanityDocument({
   contentInPhrase,
@@ -20,16 +23,18 @@ export default async function phraseDocumentToSanityDocument({
   sanityClient: SanityClient
   pluginOptions: PhrasePluginOptions
 }): Promise<typeof freshPTD> {
-  let finalDoc = JSON.parse(JSON.stringify(freshPTD)) as typeof freshPTD
-
   const references = dedupeArray(
-    parseAllReferences(contentInPhrase.contentByPath, []).map(
-      (ref) => ref._ref,
-    ),
+    parseAllReferences(contentInPhrase.toTranslate, []).map((ref) => ref._ref),
   )
 
   const { targetLang } = freshPTD.phraseMetadata
-  const TMD = finalDoc.phraseMetadata.expanded
+  const TMD = freshPTD.phraseMetadata.expandedTMD
+  const target = freshPTD.phraseMetadata.expandedTarget
+
+  if (!TMD || !target) {
+    return freshPTD
+  }
+
   const TMDTarget = TMD.targets.find((t) => t._key === targetLang.sanity)
 
   let referenceMap = TMDTarget?.referenceMap || {}
@@ -52,7 +57,7 @@ export default async function phraseDocumentToSanityDocument({
       try {
         // Cache referenceMap for future requests
         await sanityClient
-          .patch(finalDoc.phraseMetadata.expanded._id, {
+          .patch(TMD._id, {
             set: {
               [`targets[_key == "${TMDTarget._key}"].referenceMap`]:
                 referenceMap,
@@ -65,19 +70,20 @@ export default async function phraseDocumentToSanityDocument({
     }
   }
 
-  Object.entries(contentInPhrase.contentByPath).forEach(
-    ([pathKey, content]) => {
-      const path = stringToPath(pathKey)
-      const parsedContent = phraseToSanity(content)
+  const patches = contentInPhrase.toTranslate.map((item) => {
+    const dataWithReferences = injectTranslatedReferences({
+      data: decodeFromPhrase('data' in item ? item.data : undefined),
+      referenceMap,
+    })
 
-      finalDoc = modifyDocInPath({
-        originalDoc: finalDoc,
-        changedContent: parsedContent,
-        path,
-        referenceMap,
-      })
-    },
+    return diffToPatch(item._diff, dataWithReferences)
+  })
+
+  /** Make sure we always apply patches based on the target's original state */
+  const originalTargetContent = keepStaticValues(
+    freshPTD,
+    target as any as typeof freshPTD,
   )
 
-  return finalDoc
+  return applyPatches(originalTargetContent, patches)
 }

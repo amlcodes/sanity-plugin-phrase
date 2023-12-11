@@ -2,6 +2,40 @@ import { PortableTextTextBlock } from 'sanity'
 import { SerializedPtBlock, SerializedPtHtmlTag } from './types'
 import { encodeHTML } from 'entities'
 
+/**
+ * We can't simply send a Sanity document to Phrase as-is:
+ *
+ * - PortableText needs to be serialized to HTML so linguists can see the full
+ *   paragraphs in context as opposed to individual PT spans
+ *
+ * - We must escape any HTML-like characters in strings to avoid having Phrase
+ *   parse them as HTML
+ */
+export default function encodeToPhrase<C = unknown>(content: C): C {
+  if (Array.isArray(content)) {
+    return content.map((c) => encodeToPhrase(c)) as C
+  }
+
+  if (typeof content === 'object' && content !== null) {
+    if ('_type' in content && content._type === 'block') {
+      return serializeBlock(content as any as PortableTextTextBlock) as C
+    }
+
+    return Object.fromEntries(
+      Object.entries(content).map(([key, value]) => [
+        key,
+        encodeToPhrase(value),
+      ]),
+    ) as C
+  }
+
+  if (typeof content === 'string') {
+    return prepareStringForPhrase(content) as C
+  }
+
+  return content as C
+}
+
 function prepareStringForPhrase(str: string) {
   return encodeHTML(str)
 }
@@ -81,29 +115,4 @@ function serializeBlock(block: PortableTextTextBlock): SerializedPtBlock {
     /** Analyzed by Phrase for human-readable properties like a link's `title` */
     markDefs,
   }
-}
-
-export default function sanityToPhrase<C = unknown>(content: C): C {
-  if (Array.isArray(content)) {
-    return content.map((c) => sanityToPhrase(c)) as C
-  }
-
-  if (typeof content === 'object' && content !== null) {
-    if ('_type' in content && content._type === 'block') {
-      return serializeBlock(content as any as PortableTextTextBlock) as C
-    }
-
-    return Object.fromEntries(
-      Object.entries(content).map(([key, value]) => [
-        key,
-        sanityToPhrase(value),
-      ]),
-    ) as C
-  }
-
-  if (typeof content === 'string') {
-    return prepareStringForPhrase(content) as C
-  }
-
-  return content as C
 }

@@ -1,10 +1,9 @@
 import { Effect, pipe } from 'effect'
-import { ContextWithJobs, FailedPersistingMainDocMetadata } from '../types'
-import { tPathInMainDoc } from '../utils/paths'
+import { ContextWithJobs, SanityTMD } from '../types'
 
 class FailedSalvagingJobsError {
   readonly _tag = 'FailedSalvagingJobsError'
-  constructor(error: unknown) {}
+  constructor(readonly error: unknown) {}
 }
 
 /**
@@ -17,25 +16,22 @@ export default function salvageCreatedJobs({
   request,
   project,
   jobs,
-  freshDocumentsById,
+  activeTMD,
 }: ContextWithJobs) {
-  const { translationKey } = request
   const transaction = request.sanityClient.transaction()
-  const basePath = tPathInMainDoc(translationKey)
 
-  Object.keys(freshDocumentsById).forEach((id) => {
-    transaction.patch(id, (patch) => {
-      const updatedData: Pick<
-        FailedPersistingMainDocMetadata,
-        'status' | 'project' | 'jobs' | 'targetLangs'
-      > = {
-        [`${basePath}.status` as 'status']: 'FAILED_PERSISTING',
-        [`${basePath}.targetLangs` as 'targetLangs']: request.targetLangs,
-        [`${basePath}.jobs` as 'jobs']: jobs,
-        [`${basePath}.project` as 'project']: project,
-      }
-      return patch.set(updatedData)
-    })
+  transaction.patch(activeTMD._id, (patch) => {
+    const updatedData: Pick<
+      SanityTMD<'FAILED_PERSISTING'>,
+      'status' | 'salvaged'
+    > = {
+      status: 'FAILED_PERSISTING',
+      salvaged: {
+        jobs,
+        project,
+      },
+    }
+    return patch.set(updatedData)
   })
 
   return pipe(

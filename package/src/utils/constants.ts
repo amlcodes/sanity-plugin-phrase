@@ -15,3 +15,5 @@ export const TMD_ID_PREFIX = 'phrase.tmd'
 export const TMD_TYPE = TMD_ID_PREFIX
 
 export const NOT_PTD = `${METADATA_KEY}._type != "phrase.ptd.meta"`
+
+export const STATIC_DOC_KEYS = ['_id', '_rev', '_type', METADATA_KEY] as const

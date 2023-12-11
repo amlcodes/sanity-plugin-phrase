@@ -25,10 +25,12 @@ export const generateItemKey = customAlphabet(
 type StoredNode = { _key: string } & (
   | {
       _type: 'vtt.header'
+      _key: string
       text: NodeHeader['data']
     }
   | {
       _type: 'vtt.cue'
+      _key: string
       text: Cue['text']
       cueStart: Cue['start']
       cueEnd: Cue['end']

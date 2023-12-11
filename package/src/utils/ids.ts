@@ -1,7 +1,12 @@
-import { Path } from 'sanity'
-import { CrossSystemLangCode, SanityPTD, SanityTMD } from '../types'
-import { pathToString } from './paths'
+import JsSHA from 'jssha'
+import {
+  CrossSystemLangCode,
+  TranslationDiff,
+  SanityPTD,
+  SanityTMD,
+} from '../types'
 import { PTD_ID_PREFIX, TMD_ID_PREFIX } from './constants'
+import { pathToString } from './paths'
 
 /**
  * Ensures a given string is suitable to serve as a document's _id or an array item's _key in Sanity.
@@ -16,8 +21,28 @@ export function makeKeyAndIdFriendly(str: string) {
   )
 }
 
-export function getTranslationKey(paths: Path[], _rev: string) {
-  return [...paths.map(pathToString), _rev].map(makeKeyAndIdFriendly).join('__')
+/** Used as an id and _key for the translation. */
+export function getTranslationKey({
+  diffs,
+  _rev,
+  _id,
+}: {
+  diffs: TranslationDiff[]
+  _rev: string
+  _id: string
+}) {
+  const templatedId = [
+    ...diffs.map(({ path }) => pathToString(path)),
+    _id.replace('.', '_'),
+    _rev,
+  ]
+    .map(makeKeyAndIdFriendly)
+    .join('__')
+
+  const sha = new JsSHA('SHA-256', 'TEXT', { encoding: 'UTF8' })
+  sha.update(templatedId)
+  // Never gets parsed back to its contents.
+  return sha.getHash('HEX').slice(0, 8)
 }
 
 export function undraftId(id: string) {

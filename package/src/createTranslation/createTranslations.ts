@@ -6,9 +6,11 @@ import createPhraseJobs from './createPhraseJobs'
 import createPhraseProject from './createPhraseProject'
 import { formatRequest } from './createTranslationHelpers'
 import getOrCreateTranslatedDocuments from './getOrCreateTranslatedDocuments'
-import isDocLocked, { DocumentsLockedError } from './isDocLocked'
+import isTranslationLocked, {
+  TranslationLockedError,
+} from './isTranslationLocked'
 import isRevTheSame from './isRevTheSame'
-import lockDocuments from './lockDocuments'
+import createTMD from './createTMD'
 import persistJobsAndCreatePTDs from './persistJobsAndCreatePTDs'
 import salvageCreatedJobs from './salvageCreatedJobs'
 import undoLock from './undoLock'
@@ -33,12 +35,12 @@ export default function createTranslations(input: CreateTranslationsInput) {
 
         // #3 ensure there aren't any conflicting translations
         Effect.filterOrFail(
-          (context) => !isDocLocked(context),
-          () => new DocumentsLockedError(),
+          (context) => !isTranslationLocked(context),
+          () => new TranslationLockedError(),
         ),
 
-        // #4 lock documents to prevent concurrent translations
-        Effect.tap(lockDocuments),
+        // #4 create Translation Metadata Document, that will lock translation to prevent concurrent requests
+        Effect.flatMap(createTMD),
 
         // #5 create Phrase project
         Effect.flatMap((context) =>
@@ -92,9 +94,9 @@ export default function createTranslations(input: CreateTranslationsInput) {
         Effect.succeed({ body: { error: error._tag }, status: 500 } as const),
       RevMismatchError: (error) =>
         Effect.succeed({ body: { error: error._tag }, status: 400 } as const),
-      DocumentsLockedError: (error) =>
+      TranslationLockedError: (error) =>
         Effect.succeed({ body: { error: error._tag }, status: 400 } as const),
-      FailedLockingError: (error) =>
+      FailedCreatingTMDError: (error) =>
         Effect.succeed({
           body: { error: error._tag },
           status: 500,

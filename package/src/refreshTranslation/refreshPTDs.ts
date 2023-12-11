@@ -43,7 +43,9 @@ class FailedUpdatingPTDsAndTMDError {
 class FailedConvertingPhraseContentToSanityDocumentError {
   readonly _tag = 'FailedConvertingPhraseContentToSanityDocument'
 
-  constructor(readonly error: unknown) {}
+  constructor(readonly error: unknown) {
+    console.error('\n[FailedConvertingPhraseContentToSanityDocument]', error)
+  }
 }
 
 export default function refreshPTDs(input: {
@@ -58,10 +60,10 @@ export default function refreshPTDs(input: {
   // For each PTD, find the last job in the workflow - that's the freshest preview possible
   const jobsToRefreshData = PTDs.reduce(
     (acc, doc) => {
-      const metadataForLang = doc.phraseMetadata.expanded.targets.find((t) =>
-        langsAreTheSame(t.lang, doc.phraseMetadata.targetLang),
+      const metadataForLang = doc.phraseMetadata.expandedTMD?.targets.find(
+        (t) => langsAreTheSame(t.lang, doc.phraseMetadata.targetLang),
       )
-      if (!metadataForLang?.jobs) return acc
+      if (!doc.phraseMetadata.expandedTMD || !metadataForLang?.jobs) return acc
 
       const lastJobInWorkflow = getLastValidJobInWorkflow(metadataForLang.jobs)
       if (!lastJobInWorkflow?.uid) return acc
@@ -70,15 +72,14 @@ export default function refreshPTDs(input: {
         ...acc,
         [lastJobInWorkflow.uid]: {
           ...(acc[lastJobInWorkflow.uid] || {}),
-          phraseProjectUid: doc.phraseMetadata.expanded.phraseProjectUid,
+          phraseProjectUid: doc.phraseMetadata.expandedTMD.phraseProjectUid,
           targetLang: metadataForLang.lang,
           ptdIds: [...(acc[lastJobInWorkflow.uid]?.ptdIds || []), doc._id],
         },
       }
     },
     {} as {
-      [jobUid: string]: {
-        phraseProjectUid: string
+      [jobUid: string]: Pick<SanityTMD, 'phraseProjectUid'> & {
         targetLang: CrossSystemLangCode
         ptdIds: string[]
       }
@@ -86,9 +87,11 @@ export default function refreshPTDs(input: {
   )
 
   function getFreshJobData(phraseClient: PhraseClient) {
-    return Object.entries(jobsToRefreshData).map(
-      ([jobUid, { phraseProjectUid, targetLang, ptdIds }]) =>
-        pipe(
+    return Object.entries(jobsToRefreshData).flatMap(
+      ([jobUid, { phraseProjectUid, targetLang, ptdIds }]) => {
+        if (!phraseProjectUid || !targetLang || !ptdIds.length) return []
+
+        return pipe(
           Effect.retry(
             Effect.tryPromise({
               try: () =>
@@ -107,7 +110,8 @@ export default function refreshPTDs(input: {
             jobUid,
             ptdIds,
           })),
-        ),
+        )
+      },
     )
   }
 
@@ -135,10 +139,7 @@ export default function refreshPTDs(input: {
               transaction.patch(patch.id, patch)
             }
 
-            const { patches: metadataPatches } = diffTMD(
-              originalDoc,
-              input.jobsInWebhook,
-            )
+            const metadataPatches = diffTMD(originalDoc, input.jobsInWebhook)
             for (const { patch } of metadataPatches) {
               transaction.patch(patch.id, patch)
             }
@@ -211,22 +212,19 @@ function diffPTD({
     })
 
   return pipe(
-    Effect.retry(
-      Effect.tryPromise({
-        try: () =>
-          phraseDocumentToSanityDocument({
-            contentInPhrase: phraseDoc,
-            freshPTD: doc,
-            sanityClient,
-            pluginOptions,
-          }),
-        catch: (error) =>
-          new FailedConvertingPhraseContentToSanityDocumentError(error),
-      }),
-      retrySchedule,
-    ),
+    Effect.tryPromise({
+      try: () =>
+        phraseDocumentToSanityDocument({
+          contentInPhrase: phraseDoc,
+          freshPTD: doc,
+          sanityClient,
+          pluginOptions,
+        }),
+      catch: (error) =>
+        new FailedConvertingPhraseContentToSanityDocumentError(error),
+    }),
     Effect.map((updatedContent) => {
-      const finalDoc = pluginOptions.i18nAdapter.injectDocumentLang(
+      const updatedDoc = pluginOptions.i18nAdapter.injectDocumentLang(
         {
           ...updatedContent,
           phraseMetadata: undefined,
@@ -238,8 +236,8 @@ function diffPTD({
 
       return {
         originalDoc: doc,
-        doc: finalDoc,
-        patches: diffPatch({ ...doc, phraseMetadata: undefined }, finalDoc),
+        updatedDoc: updatedDoc,
+        patches: diffPatch({ ...doc, phraseMetadata: undefined }, updatedDoc),
       }
     }),
   )
@@ -249,11 +247,17 @@ function diffTMD(
   doc: SanityPTDWithExpandedMetadata,
   jobsInWebhook?: Phrase['JobInWebhook'][],
 ) {
-  const currentMetadata = doc.phraseMetadata.expanded
+  const currentMetadata = doc.phraseMetadata.expandedTMD
+
+  if (!currentMetadata) return []
+
   const newMetadata: SanityTMD = {
     ...currentMetadata,
     targets: currentMetadata.targets.map((target) => {
-      if (target.lang.sanity !== doc.phraseMetadata.targetLang.sanity)
+      if (
+        target.lang.sanity !== doc.phraseMetadata.targetLang.sanity ||
+        !target.jobs
+      )
         return target
 
       return {
@@ -263,11 +267,7 @@ function diffTMD(
     }),
   }
 
-  return {
-    currentMetadata,
-    newMetadata,
-    patches: diffPatch(currentMetadata, newMetadata),
-  }
+  return diffPatch(currentMetadata, newMetadata)
 }
 
 function updateJobInTMD(
@@ -287,3 +287,9 @@ function updateJobInTMD(
     providers: freshJob.providers || jobInMeta.providers,
   }
 }
+
+export const PTDWithExpandedDataQuery = /* groq */ `
+...,
+"expandedTMD": tmd->,
+"expandedTarget": *[_id in [^.targetDoc._ref, "drafts." + ^.targetDoc._ref]]|order(_updatedAt)[0],
+`

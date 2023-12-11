@@ -1,14 +1,11 @@
-import { DocumentStore, Path, createHookFromObservableFactory } from 'sanity'
+import { DocumentStore, createHookFromObservableFactory } from 'sanity'
 import {
   PhraseDatacenterRegion,
   getPhraseBaseUrl,
 } from '../clients/createPhraseClient'
 import {
-  CommittedMainDocMetadata,
-  CreatedMainDocMetadata,
   CrossSystemLangCode,
   METADATA_KEY,
-  MainDocTranslationMetadata,
   Phrase,
   PhraseJobInfo,
   PtdPhraseMetadata,
@@ -22,8 +19,10 @@ import { isPtdId } from './ids'
 import { langsAreTheSame } from './langs'
 
 export function jobsMetadataExtractor(jobs: PhraseJobInfo[]) {
-  const lastJob = jobs[jobs.length - 1]
-  const furthestOngoingJob = jobs.find((job) => jobIsOngoing(job)) || lastJob
+  const earlyStepsFirst = sortJobsByWorkflowLevel(jobs).reverse()
+  const lastJob = earlyStepsFirst[earlyStepsFirst.length - 1]
+  const furthestOngoingJob =
+    earlyStepsFirst.find((job) => jobIsOngoing(job)) || lastJob
 
   return {
     stepName: furthestOngoingJob?.workflowStep?.name || 'Ongoing',
@@ -45,12 +44,6 @@ export function getJobEditorURL(
   region: PhraseDatacenterRegion,
 ) {
   return `${getPhraseBaseUrl(region)}/job/${jobUid}/translate/`
-}
-
-export function getPathsLabel(paths: Path[]) {
-  return paths
-    .map((p) => (p.length ? `[${p.join(', ')}]` : "Entire document's content"))
-    .join(', ')
 }
 
 export const usePtdState = createHookFromObservableFactory<
@@ -97,7 +90,7 @@ export function getLastValidJobInWorkflow(jobs: PhraseJobInfo[]) {
 }
 
 /** Later steps come first */
-function sortJobsByWorkflowLevel(jobs: PhraseJobInfo[]) {
+export function sortJobsByWorkflowLevel(jobs: PhraseJobInfo[]) {
   return jobs.sort((a, b) => {
     if (typeof a.workflowLevel !== 'number') return 1
     if (typeof b.workflowLevel !== 'number') return -1
@@ -115,68 +108,69 @@ export function isPTDDoc(
 export function isMainDoc(
   doc: SanityDocumentWithPhraseMetadata,
 ): doc is SanityMainDoc {
-  return doc.phraseMetadata?._type === 'phrase.main.meta'
+  return !isPtdId(doc._id)
 }
 
-/** Only returns if has at least one translation */
-export function isTranslatedMainDoc(
-  doc: SanityDocumentWithPhraseMetadata,
-): doc is SanityMainDoc {
-  return (
-    isMainDoc(doc) &&
-    Array.isArray(doc.phraseMetadata.translations) &&
-    doc.phraseMetadata.translations.length > 0
+export function hasTranslationsUnfinished(TMDs: SanityTMD[]) {
+  return TMDs.some((t) => !isTranslationCommitted(t))
+}
+
+export function langInTMDs(TMDs: SanityTMD[], lang: CrossSystemLangCode) {
+  return TMDs.some(
+    (TMD) =>
+      'targets' in TMD &&
+      TMD.targets.some((t) => langsAreTheSame(t.lang, lang)),
   )
-}
-
-export function isMainDocAndTranslatedForLang(
-  doc: SanityDocumentWithPhraseMetadata,
-  lang: CrossSystemLangCode,
-): doc is SanityMainDoc {
-  return (
-    isTranslatedMainDoc(doc) &&
-    doc.phraseMetadata.translations.some(
-      (t) =>
-        'targetLangs' in t &&
-        t.targetLangs.some((tl) => langsAreTheSame(tl, lang)),
-    )
-  )
-}
-
-export function hasTranslationsUnfinished(doc: SanityMainDoc) {
-  return doc.phraseMetadata.translations.some((t) => !isTranslationCommitted(t))
 }
 
 /**
  * All `targetLangs` are ongoing.
  */
 export function allTranslationsUnfinished(
-  doc: SanityMainDoc,
+  TMDs: SanityTMD[],
   targetLangs: CrossSystemLangCode[],
 ) {
   return (
-    hasTranslationsUnfinished(doc) &&
+    hasTranslationsUnfinished(TMDs) &&
     targetLangs.every((l) =>
-      doc.phraseMetadata.translations.some(
+      TMDs.some(
         (t) =>
           !isTranslationCommitted(t) &&
-          'targetLangs' in t &&
-          t.targetLangs.some((tl) => langsAreTheSame(l, tl)),
+          'targets' in t &&
+          t.targets.some(({ lang }) => langsAreTheSame(l, lang)),
       ),
     )
   )
 }
 
 export function isTranslationCommitted(
-  translation: MainDocTranslationMetadata,
-): translation is CommittedMainDocMetadata {
+  translation: SanityTMD,
+): translation is SanityTMD<'COMMITTED'> {
   return translation.status === 'COMMITTED'
 }
 
+export function isTranslationCancelled(
+  translation: SanityTMD,
+): translation is SanityTMD<'DELETED'> | SanityTMD<'CANCELLED'> {
+  return translation.status === 'DELETED' || translation.status === 'CANCELLED'
+}
+
 export function isTranslationReadyToCommit(
-  translation: MainDocTranslationMetadata,
-): translation is CreatedMainDocMetadata {
+  translation: SanityTMD,
+): translation is SanityTMD<'COMPLETED'> {
   return translation.status === 'COMPLETED'
+}
+
+export function isTranslationFailedPersisting(
+  translation: SanityTMD,
+): translation is SanityTMD<'FAILED_PERSISTING'> {
+  return translation.status === 'FAILED_PERSISTING'
+}
+
+export function isTranslationCreating(
+  translation: SanityTMD,
+): translation is SanityTMD<'CREATING'> {
+  return translation.status === 'CREATING'
 }
 
 export function phraseDatetimeToJSDate<D extends string | undefined>(

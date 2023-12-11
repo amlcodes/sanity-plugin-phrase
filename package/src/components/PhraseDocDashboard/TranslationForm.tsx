@@ -15,21 +15,13 @@ import {
   useToast,
 } from '@sanity/ui'
 import { useCallback, useEffect, useState } from 'react'
-import {
-  FormField,
-  Path,
-  Schema,
-  SchemaType,
-  useClient,
-  useSchema,
-} from 'sanity'
+import { FormField, Schema, SchemaType, useClient, useSchema } from 'sanity'
 import type { CreateTranslationsResponse } from '../../createTranslation/createMultipleTranslations'
 import getAllDocReferences from '../../getAllDocReferences'
 import useDebounce from '../../hooks/useDebounce'
 import getStaleTranslations, {
   isTargetStale,
 } from '../../staleTranslations/getStaleTranslations'
-import { joinLangsByPath } from '../../utils/paths'
 import {
   CreateMultipleTranslationsInput,
   CreateTranslationsInput,
@@ -38,6 +30,7 @@ import {
   PhrasePluginOptions,
   SanityDocumentWithPhraseMetadata,
   SanityLangCode,
+  SanityTMD,
   StaleResponse,
   StaleStatus,
   StaleTargetStatus,
@@ -49,10 +42,11 @@ import {
   getIsoDay,
   getReadableLanguageName,
   getTranslationName,
-  joinPathsByRoot,
+  joinDiffsByRoot,
   langsAreTheSame,
   semanticListItems,
 } from '../../utils'
+import { FULL_DOC_DIFF_PATH, joinLangsByDiffs } from '../../utils/paths'
 import { PhraseMonogram } from '../PhraseLogo'
 import { usePluginOptions } from '../PluginOptionsContext'
 import { ReferencePreview } from '../ReferencePreview/ReferencePreview'
@@ -71,7 +65,7 @@ type ReferencesState = {
     string,
     {
       lang: SanityLangCode
-      paths: StaleTargetStatus['changedPaths']
+      diffs: StaleTargetStatus['diffs']
     }[]
   >
   staleness?: StaleResponse[]
@@ -95,15 +89,20 @@ function validateFormValue(formValue: FormValue) {
 }
 
 export default function TranslationForm({
-  toTranslate: { paths, targetLangs: desiredTargetLangs },
   currentDocument,
   onCancel,
   sourceLang,
+  TMDs,
+  toTranslate: { diffs, targetLangs: desiredTargetLangs },
 }: {
-  toTranslate: { paths: Path[]; targetLangs?: CrossSystemLangCode[] }
   currentDocument: SanityDocumentWithPhraseMetadata
   onCancel: () => void
   sourceLang: SanityLangCode
+  TMDs: SanityTMD[]
+  toTranslate: {
+    diffs: TranslationRequest['diffs']
+    targetLangs?: CrossSystemLangCode[]
+  }
 }) {
   const toast = useToast()
   const pluginOptions = usePluginOptions()
@@ -158,6 +157,7 @@ export default function TranslationForm({
         sanityClient,
         pluginOptions,
         targetLangs: supportedTargetLangs,
+        TMDs,
       })
 
       setReferences((prev) => {
@@ -177,6 +177,7 @@ export default function TranslationForm({
       setReferences,
       references,
       freshReferencesHash,
+      TMDs,
     ],
   )
 
@@ -193,7 +194,7 @@ export default function TranslationForm({
       sanityClient,
       document: currentDocument,
       translatableTypes,
-      paths: (paths.length > 0 ? paths : [[]]) as TranslationRequest['paths'],
+      diffs: (diffs.length > 0 ? diffs : [[]]) as TranslationRequest['diffs'],
     })
 
     setReferences({ documentId: sourceDocId, refs: newRefs, chosenDocs: {} })
@@ -223,7 +224,7 @@ export default function TranslationForm({
         schema,
         currentDocument: currentDocument,
         formValue,
-        paths,
+        diffs: diffs,
         sourceLang,
         sourceDocId,
         references,
@@ -277,7 +278,7 @@ export default function TranslationForm({
             )}
           </Text>
           {sourceDocSchema &&
-            Object.entries(joinPathsByRoot(paths)).map(
+            Object.entries(joinDiffsByRoot(diffs)).map(
               ([rootPath, fullPathsInRoot]) => (
                 <Text key={rootPath} size={1} muted>
                   {getFieldLabel(rootPath, fullPathsInRoot, sourceDocSchema)}
@@ -379,20 +380,6 @@ export default function TranslationForm({
           )}
           {references.refs.length > 0 ? (
             <Stack space={3}>
-              {desiredTargetLangs && desiredTargetLangs.length > 0 && (
-                <Card padding={4} border radius={2} tone="critical">
-                  <Flex gap={3} align="flex-start">
-                    <Text size={2}>
-                      <InfoOutlineIcon />
-                    </Text>
-                    {/* @TODO: remove this */}
-                    <Text size={2}>
-                      DEV: References selection for previously translated
-                      documents is broken ATM.
-                    </Text>
-                  </Flex>
-                </Card>
-              )}
               {references.refs.map((ref) => {
                 const staleness = references.staleness?.find(
                   (r) => r.sourceDoc?._id === ref.id,
@@ -447,11 +434,11 @@ export default function TranslationForm({
                                           ...refLangs,
                                           {
                                             lang,
-                                            paths:
+                                            diffs:
                                               langStaleness &&
                                               isTargetStale(langStaleness)
-                                                ? langStaleness.changedPaths
-                                                : [[]],
+                                                ? langStaleness.diffs
+                                                : [FULL_DOC_DIFF_PATH],
                                           },
                                         ]
                                   }
@@ -535,7 +522,7 @@ export default function TranslationForm({
 async function submitMultipleTranslations({
   currentDocument,
   formValue,
-  paths,
+  diffs,
   sourceLang,
   sourceDocId,
   references,
@@ -546,7 +533,7 @@ async function submitMultipleTranslations({
   pluginOptions: PhrasePluginOptions
   currentDocument: SanityDocumentWithPhraseMetadata
   formValue: FormValue
-  paths: Path[]
+  diffs: TranslationRequest['diffs']
   sourceLang: SanityLangCode
   sourceDocId: string
   references?: ReferencesState
@@ -564,13 +551,13 @@ async function submitMultipleTranslations({
     targetLangs: formValue.targetLangs,
     templateUid: formValue.templateUid,
     dateDue: formValue.dateDue,
-    paths,
+    diffs: diffs,
   }
   const input: CreateMultipleTranslationsInput['translations'] = [
     {
       ...MAIN,
       translationName: getTranslationName({
-        paths: MAIN.paths,
+        diffs: MAIN.diffs,
         sourceDoc: MAIN.sourceDoc,
         targetLangs: MAIN.targetLangs,
         freshDoc: currentDocument,
@@ -601,18 +588,18 @@ async function submitMultipleTranslations({
           lang: sourceLangNested,
         }
 
-        const joinedByPath = joinLangsByPath(acceptedLangs)
+        const joinedByDiff = joinLangsByDiffs(acceptedLangs)
 
-        return Object.values(joinedByPath).map((byPath) => {
+        return Object.values(joinedByDiff).map((byDiff) => {
           return {
             sourceDoc,
             dateDue: formValue.dateDue,
             templateUid: formValue.templateUid,
-            targetLangs: byPath.langs,
-            paths: byPath.paths,
+            targetLangs: byDiff.langs,
+            diffs: byDiff.diffs,
             translationName: getTranslationName({
-              paths,
-              targetLangs: byPath.langs,
+              diffs: byDiff.diffs,
+              targetLangs: byDiff.langs,
               sourceDoc,
               freshDoc,
               schemaType: schema.get(currentDocument._type),

@@ -1,5 +1,5 @@
 import { Effect, pipe } from 'effect'
-import getDataToTranslate from './getDataToTranslate'
+import getContentInPhrase from './getContentInPhrase'
 import { ContextWithProject } from '../types'
 
 class FailedCreatingPhraseJobsError {
@@ -23,7 +23,7 @@ export default function createPhraseJobs(context: ContextWithProject) {
           targetLangs: request.pluginOptions.langAdapter.crossSystemToPhrase(
             request.targetLangs,
           ),
-          dataToTranslate: getDataToTranslate(context),
+          dataToTranslate: getContentInPhrase(context),
         }),
       catch: (error) => new FailedCreatingPhraseJobsError(error, context),
     }),

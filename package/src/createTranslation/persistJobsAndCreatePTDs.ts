@@ -1,12 +1,8 @@
 import { Effect, pipe } from 'effect'
-import {
-  ContextWithJobs,
-  CreatedMainDocMetadata,
-  SanityDocumentWithPhraseMetadata,
-} from '../types'
-import { tPathInMainDoc } from '../utils/paths'
+import { ContextWithJobs, PhraseJobInfo, SanityTMD, TMDTarget } from '../types'
+import { makeKeyAndIdFriendly, sortJobsByWorkflowLevel } from '../utils'
+import { targetPathInTMD } from '../utils/paths'
 import { createPTDs } from './createPTDs'
-import { createTMD } from './createTMD'
 
 class PersistJobsAndCreatePTDsError {
   readonly _tag = 'PersistJobsAndCreatePTDs'
@@ -44,47 +40,54 @@ export default function persistJobsAndCreatePTDs(context: ContextWithJobs) {
 }
 
 function getTransaction(context: ContextWithJobs) {
-  const { request, freshDocumentsById } = context
+  const { request, activeTMD, jobs, project } = context
   const PTDs = createPTDs(context)
-  const TMD = createTMD(context)
 
   const transaction = request.sanityClient.transaction()
 
-  transaction.createOrReplace(TMD)
-
   PTDs.forEach((doc) => transaction.createOrReplace(doc))
 
-  Object.keys(freshDocumentsById).forEach((id) => {
-    // And mark this translation as CREATED for each of the source & target documents
-    transaction.patch(id, (patch) => {
-      patch.setIfMissing({
-        phraseMetadata: {
-          _type: 'phrase.main.meta',
-          translations: [],
-        },
-      } as Pick<SanityDocumentWithPhraseMetadata, 'phraseMetadata'>)
+  transaction.patch(activeTMD._id, (patch) => {
+    const metadata: Pick<SanityTMD<'NEW'>, 'status' | 'phraseProjectUid'> = {
+      status: 'status' in project ? (project.status as 'NEW') : 'NEW',
+      phraseProjectUid: project.uid,
+    }
 
-      const basePath = tPathInMainDoc(request.translationKey)
+    const updatedTargets = activeTMD.targets.map(
+      (target): Pick<TMDTarget<'NEW'>, 'jobs' | '_key'> => {
+        const targetJobs = jobs.filter(
+          (job) => job.targetLang && job.targetLang === target.lang.phrase,
+        )
+        const formattedJobs: PhraseJobInfo[] = targetJobs.map((j) => ({
+          _type: 'phrase.job',
+          _key: makeKeyAndIdFriendly(j.uid || 'invalid-job'),
+          uid: j.uid,
+          status: j.status,
+          dateDue: j.dateDue,
+          dateCreated: j.dateCreated,
+          workflowLevel: j.workflowLevel,
+          workflowStep: j.workflowStep,
+          providers: j.providers,
+        }))
 
-      const updatedData: Pick<
-        CreatedMainDocMetadata,
-        'status' | 'targetLangs' | 'tmd'
-      > = {
-        [`${basePath}.status` as 'status']: 'CREATED',
-        [`${basePath}.targetLangs` as 'targetLangs']: request.targetLangs,
-        [`${basePath}.tmd` as 'tmd']: {
-          _ref: TMD._id,
-          _type: 'reference',
-        },
-      }
+        return {
+          _key: target._key,
+          // Early steps first
+          jobs: sortJobsByWorkflowLevel(formattedJobs).reverse(),
+        }
+      },
+    )
 
-      return (
-        patch
-          .set(updatedData)
-          // in case this is a retry, remove the properties from FailedPersistingMainDocMetadata
-          .unset([`${basePath}.jobs`, `${basePath}.project`])
+    return patch
+      .set(metadata)
+      .set(
+        Object.fromEntries(
+          updatedTargets.map((t) => [
+            `${targetPathInTMD(t._key)}.jobs`,
+            t.jobs,
+          ]),
+        ),
       )
-    })
   })
 
   return { transaction, PTDs }

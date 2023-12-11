@@ -5,6 +5,7 @@ export * from './ids'
 export * from './labels'
 export * from './langs'
 export * from './paths'
+export * from './diffs'
 export * from './phrase'
 export * from './strings'
 

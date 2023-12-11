@@ -7,6 +7,7 @@ import {
 } from '../types'
 import { dedupeArray, comesFromSanity } from '../utils'
 import { isPTDDoc } from '../utils/phrase'
+import { PTDWithExpandedDataQuery } from '../refreshTranslation/refreshPTDs'
 
 export default async function getPTDsFromPhraseWebhook({
   sanityClient,
@@ -49,7 +50,9 @@ export default async function getPTDsFromPhraseWebhook({
   const jobUids = dedupeArray(jobs.flatMap((job) => job.uid || []))
   const PTDsToFetch = TMDs.flatMap((TMD) =>
     TMD.targets.flatMap((t) =>
-      t.jobs.some((j) => j.uid && jobUids.includes(j.uid)) ? t.ptd._ref : [],
+      t.jobs && t.jobs.some((j) => j.uid && jobUids.includes(j.uid))
+        ? t.ptd._ref
+        : [],
     ),
   )
 
@@ -58,8 +61,7 @@ export default async function getPTDsFromPhraseWebhook({
       /* groq */ `*[_id in $ids] {
       ...,
       ${METADATA_KEY} {
-        ...,
-        "expanded": tmd->,
+        ${PTDWithExpandedDataQuery}
       },
     }`,
       {

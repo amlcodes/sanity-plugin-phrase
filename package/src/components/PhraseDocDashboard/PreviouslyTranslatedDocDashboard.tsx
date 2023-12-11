@@ -19,16 +19,18 @@ import getStaleTranslations, {
 import {
   CrossSystemLangCode,
   SanityMainDoc,
+  SanityTMD,
   StaleResponse,
+  StaleStatus,
   TranslationRequest,
 } from '../../types'
 import {
   SANITY_API_VERSION,
   formatDay,
   getFieldLabel,
-  getPathsKey,
+  getDiffsKey,
   getReadableLanguageName,
-  joinPathsByRoot,
+  joinDiffsByRoot,
   semanticListItems,
   undraftId,
 } from '../../utils'
@@ -44,10 +46,11 @@ export default function PreviouslyTranslatedDocDashboard(props: {
   docLang: string
   setToTranslate: React.Dispatch<
     React.SetStateAction<{
-      paths: TranslationRequest['paths']
+      diffs: TranslationRequest['diffs']
       targetLangs?: CrossSystemLangCode[] | undefined
     } | null>
   >
+  TMDs: SanityTMD[]
 }) {
   const schema = useSchema()
   const schemaType = schema.get(props.currentDocument._type)
@@ -66,25 +69,54 @@ export default function PreviouslyTranslatedDocDashboard(props: {
   ) {
     return function requestTranslation() {
       props.setToTranslate({
-        paths: s.paths,
+        diffs: s.diffs,
         targetLangs: s.langs,
       })
     }
   }
 
-  const stalenessTitle =
-    stalenessByPath &&
-    Object.values(stalenessByPath).every((s) => {
-      const isTranslated = s.paths.length > 1 || s.paths[0].length > 0
-      return !isTranslated
-    })
-      ? 'There are missing translations'
-      : 'Translation is outdated'
+  const nonFreshCount = Object.keys(stalenessByPath || {}).length
+  const untranslatedCount = Object.values(stalenessByPath || {}).filter((s) => {
+    const isTranslated = s.diffs.length > 1 || s.diffs[0]?.path?.length > 0
+    return !isTranslated
+  }).length
+  const stalenessAggregate = (() => {
+    if (nonFreshCount === 0) return 'fresh'
+    if (untranslatedCount === nonFreshCount) return 'untranslated'
+    if (untranslatedCount === 0) return 'stale'
+    return 'staleAndUntranslated'
+  })()
+
+  const stalenessLabels: Record<
+    typeof stalenessAggregate,
+    { title: string; subtitle: string }
+  > = {
+    fresh: {
+      title: 'Translations up-to-date',
+      subtitle:
+        'The document has been translated into the following languages:',
+    },
+    untranslated: {
+      title: 'Translations missing',
+      subtitle: 'All translations are missing for this document',
+    },
+    stale: {
+      title: 'Translations outdated',
+      subtitle:
+        'The document has been translated into the following languages, which are outdated:',
+    },
+    staleAndUntranslated: {
+      title: `${
+        nonFreshCount - untranslatedCount
+      } translations outdated, ${untranslatedCount} missing`,
+      subtitle: 'The following languages require your attention:',
+    },
+  }
 
   return (
     <DocDashboardCard
-      title="Translation in Phrase"
-      subtitle="The document has been translated into the following languages"
+      title={stalenessLabels[stalenessAggregate].title}
+      subtitle={stalenessLabels[stalenessAggregate].subtitle}
     >
       {!staleness && <SpinnerBox />}
       {stalenessReloading && (
@@ -132,7 +164,11 @@ export default function PreviouslyTranslatedDocDashboard(props: {
                     'Failed fetching'
                   ) : (
                     <StatusBadge
-                      label={target.status}
+                      label={
+                        target.status === StaleStatus.STALE
+                          ? 'Outdated'
+                          : target.status
+                      }
                       staleStatus={target.status}
                     />
                   )}
@@ -154,7 +190,7 @@ export default function PreviouslyTranslatedDocDashboard(props: {
           <Flex gap={3} align="flex-start">
             <Stack space={2} flex={1}>
               <Heading size={1} style={{ fontWeight: 600 }}>
-                {stalenessTitle}
+                {stalenessLabels[stalenessAggregate].title}
               </Heading>
               <Text size={1} muted>
                 This document has been modified since last translation
@@ -178,12 +214,13 @@ export default function PreviouslyTranslatedDocDashboard(props: {
             )}
           </Flex>
           {Object.values(stalenessByPath).map((s) => {
-            const key = getPathsKey(s.paths)
+            const key = getDiffsKey(s.diffs)
             if (!schemaType) {
-              return <Code key={key}>{JSON.stringify(s.paths, null, 2)}</Code>
+              return <Code key={key}>{JSON.stringify(s.diffs, null, 2)}</Code>
             }
 
-            const isTranslated = s.paths.length > 1 || s.paths[0].length > 0
+            const isTranslated =
+              s.diffs.length > 1 || s.diffs[0]?.path?.length > 0
             return (
               <Flex
                 gap={3}
@@ -203,7 +240,7 @@ export default function PreviouslyTranslatedDocDashboard(props: {
                     )}
                     :
                   </Text>
-                  {Object.entries(joinPathsByRoot(s.paths)).map(
+                  {Object.entries(joinDiffsByRoot(s.diffs)).map(
                     ([rootPath, fullPathsInRoot]) => (
                       <Text key={rootPath} size={1} muted>
                         {getFieldLabel(rootPath, fullPathsInRoot, schemaType)}
@@ -235,16 +272,17 @@ export default function PreviouslyTranslatedDocDashboard(props: {
 
 function useStaleness({
   currentDocument,
+  TMDs,
   docLang,
 }: {
   currentDocument: SanityMainDoc
+  TMDs: SanityTMD[]
   docLang: string
 }) {
   const sanityClient = useClient({ apiVersion: SANITY_API_VERSION })
   const pluginOptions = usePluginOptions()
   const { sourceLang, supportedTargetLangs, langAdapter } = pluginOptions
-  const sourceId =
-    currentDocument.phraseMetadata.translations[0]?.sourceDoc?._id
+  const sourceId = TMDs[0]?.sourceDoc?._id
   const isSource = docLang === sourceLang
   const { draft, published, ready } = useEditState(
     undraftId(isSource ? currentDocument._id : sourceId) || '',
@@ -280,6 +318,7 @@ function useStaleness({
         sanityClient,
         pluginOptions,
         targetLangs: supportedTargetLangs,
+        TMDs,
       })
       const newStaleness = res.find((r) => r.sourceDoc?._id === sourceDoc._id)
       setStaleness(
@@ -293,6 +332,7 @@ function useStaleness({
       supportedTargetLangs,
       setStaleness,
       debouncedHash,
+      TMDs,
     ],
   )
 

@@ -1,22 +1,29 @@
 'use client'
 
-import { DocumentBadgeDescription, DocumentBadgeProps } from 'sanity'
+import {
+  DocumentBadgeDescription,
+  DocumentBadgeProps,
+  useDocumentStore,
+} from 'sanity'
+import { useTMDs } from '../hooks/useTMDs'
 import { PhrasePluginOptions, SanityDocumentWithPhraseMetadata } from '../types'
 import {
-  hasTranslationsUnfinished,
+  getReadableLanguageName,
   isPTDDoc,
   isPtdId,
-  isTranslatedMainDoc,
   isTranslationCommitted,
 } from '../utils'
-import { getReadableLanguageName } from '../utils'
 import { PhraseMonogram } from './PhraseLogo'
 
 export function createDocumentBadge(pluginOptions: PhrasePluginOptions) {
   return function DocumentBadge(
     props: DocumentBadgeProps,
   ): DocumentBadgeDescription | null {
-    if (!pluginOptions.translatableTypes.includes(props.type)) return null
+    const documentStore = useDocumentStore()
+    const [TMDs, TMDSLoading] = useTMDs({
+      documentStore,
+      docId: props.id,
+    })
 
     const source = (props?.draft || props?.published) as
       | SanityDocumentWithPhraseMetadata
@@ -36,28 +43,23 @@ export function createDocumentBadge(pluginOptions: PhrasePluginOptions) {
       }
     }
 
-    const hasOngoingTranslations =
-      !!source &&
-      isTranslatedMainDoc(source) &&
-      hasTranslationsUnfinished(source)
+    if (!pluginOptions.translatableTypes.includes(props.type) || !TMDSLoading)
+      return null
 
-    if (!hasOngoingTranslations) {
+    const ongoing =
+      !!source && !!TMDs && TMDs.filter((t) => !isTranslationCommitted(t))
+
+    if (!ongoing || ongoing.length === 0) {
       return null
     }
 
-    const ongoing = source.phraseMetadata.translations.filter(
-      (t) => !isTranslationCommitted(t),
-    )
-
     return {
       label: `Translation${ongoing.length > 0 ? 's' : ''} ongoing`,
-      title:
-        ongoing.length === 1 &&
-        (ongoing[0].status === 'COMPLETED' || ongoing[0].status === 'CREATED')
-          ? `Document being translated to ${ongoing[0].targetLangs
-              .map(getReadableLanguageName)
-              .join(', ')}`
-          : undefined,
+      title: `Document being translated to ${ongoing
+        .map((TMD) =>
+          TMD.targets.map((t) => getReadableLanguageName(t.lang)).join(', '),
+        )
+        .join(', ')}`,
       icon: PhraseMonogram,
     }
   }

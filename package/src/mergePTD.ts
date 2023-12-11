@@ -19,9 +19,9 @@ export function getMergePTDTransaction({
   targetDocs.forEach((freshTargetDoc) => {
     const newTargetDoc = {
       ...mergeDocs({
-        originalDoc: freshTargetDoc,
-        changedDoc: PTD,
-        paths: TMD.paths,
+        startingDocument: freshTargetDoc,
+        updatedDocument: PTD,
+        diffs: TMD.diffs,
       }),
       phraseMetadata: freshTargetDoc.phraseMetadata,
     }

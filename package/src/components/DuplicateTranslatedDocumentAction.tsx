@@ -71,7 +71,7 @@ export const DuplicateTranslatedDocumentAction: DocumentActionComponent = ({
       label: 'Duplicate',
       title: (
         <InsufficientPermissionsMessage
-          operationLabel="duplicate this document"
+          context="duplicate-document"
           currentUser={currentUser}
         />
       ),

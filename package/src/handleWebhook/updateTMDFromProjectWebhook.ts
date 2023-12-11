@@ -1,7 +1,6 @@
 import { SanityClient } from 'sanity'
-import { MainDocTranslationMetadata, SanityTMD } from '../types'
-import { TMD_TYPE, comesFromSanity, draftId, undraftId } from '../utils'
-import { tPathInMainDoc } from '../utils/paths'
+import { SanityTMD, TMDStatus } from '../types'
+import { TMD_TYPE, comesFromSanity } from '../utils'
 import {
   ProjectDeletedWebhook,
   ProjectDueDateChangedWebhook,
@@ -42,42 +41,33 @@ export default async function updateTMDFromProjectWebhook({
     } as const
   }
 
-  const mainDocIds = [
-    TMD.sourceDoc._ref,
-    ...TMD.targets.map((t) => t.targetDoc._ref),
-  ]
-  const docsToPatch = await sanityClient.fetch<string[]>('*[_id in $ids]._id', {
-    ids: mainDocIds.flatMap((id) => (id ? [undraftId(id), draftId(id)] : [])),
-  })
-
-  const newStatus: MainDocTranslationMetadata['status'] =
+  const newStatus: TMDStatus =
     payload.event === 'PROJECT_DELETED' ? 'DELETED' : payload.project.status
-  const tx = sanityClient.transaction()
-  docsToPatch.forEach((id) => {
-    tx.patch(id, (patch) =>
-      patch.set({
-        [`${tPathInMainDoc(TMD.translationKey)}.status`]: newStatus,
-      }),
-    )
-  })
 
-  if (
-    payload.project?.dateDue &&
-    payload.project.dateDue !== TMD.projectDueDate
-  ) {
-    tx.patch(TMD._id, (patch) =>
+  const tx = sanityClient.transaction()
+  tx.patch(TMD._id, (patch) => {
+    patch.set({
+      status: newStatus,
+    } as Pick<SanityTMD, 'status'>)
+
+    if (
+      payload.project?.dateDue &&
+      payload.project.dateDue !== TMD.projectDueDate
+    ) {
       patch.set({
         projectDueDate: payload.project.dateDue,
-      }),
-    )
-  }
+      } as Pick<SanityTMD, 'projectDueDate'>)
+    }
+
+    return patch
+  })
 
   try {
     await tx.commit({ returnDocuments: false })
     return {
       status: 200,
       body: {
-        message: `Updated ${docsToPatch.length} documents with status ${newStatus}`,
+        message: `Updated TMD with status ${newStatus}`,
       },
     }
   } catch (error) {
