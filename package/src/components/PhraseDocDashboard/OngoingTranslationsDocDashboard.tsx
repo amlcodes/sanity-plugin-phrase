@@ -140,11 +140,7 @@ function OngoingTranslationCard({
   )
 }
 
-function DeletedTranslationCard({
-  TMD,
-}: {
-  TMD: SanityTMD<'CANCELLED'> | SanityTMD<'DELETED'>
-}) {
+function useDeleteTranslation(TMD: SanityTMD) {
   const client = useClient({ apiVersion: SANITY_API_VERSION })
   const toast = useToast()
 
@@ -175,6 +171,16 @@ function DeletedTranslationCard({
       })
     }
   }
+
+  return deleteTranslation
+}
+
+function DeletedTranslationCard({
+  TMD,
+}: {
+  TMD: SanityTMD<'CANCELLED'> | SanityTMD<'DELETED'>
+}) {
+  const deleteTranslation = useDeleteTranslation(TMD)
   return (
     <DocDashboardCard
       title="Translation deleted in Phrase"
@@ -212,23 +218,47 @@ function FailedPersistingTranslationCard({
 }: {
   TMD: SanityTMD<'FAILED_PERSISTING'>
 }) {
+  const deleteTranslation = useDeleteTranslation(TMD)
+  const { phraseRegion } = usePluginOptions()
+
   return (
     <DocDashboardCard
       title="Translation creation failed"
       collapsible={false}
       subtitle={<TranslationPathsDisplay {...TMD} />}
     >
-      <Card padding={4} border radius={2} tone="critical">
+      <Card padding={4} border radius={2} tone="caution">
         <Flex gap={3} align="flex-start">
-          <Text size={2}>
+          <Text size={3} muted>
             <InfoOutlineIcon />
           </Text>
-          {/* @TODO: attempt to salvage translation */}
-          <Text size={2}>
-            {
-              "DEV: Ability to salvage failed translations isn't yet implemented"
-            }
-          </Text>
+          <Stack space={4}>
+            <Text size={2}>
+              This translation created in Phrase but couldn't be brought back
+              into this content. Please delete the project in Phrase and then
+              click below to delete this translation
+            </Text>
+
+            <Flex gap={2} align="center">
+              {!!(TMD.salvaged?.project?.id || TMD.phraseProjectUid) && (
+                <Button
+                  text="Project in Phrase"
+                  as="a"
+                  href={getProjectURL(
+                    TMD.salvaged?.project?.id || TMD.phraseProjectUid,
+                    phraseRegion,
+                  )}
+                  icon={PhraseMonogram}
+                  tone="primary"
+                />
+              )}
+              <Button
+                text="Delete translation"
+                onClick={deleteTranslation}
+                icon={TrashIcon}
+              />
+            </Flex>
+          </Stack>
         </Flex>
       </Card>
     </DocDashboardCard>

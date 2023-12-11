@@ -25,6 +25,7 @@
     "react/jsx-no-bind": "off",
     "no-empty-function": "off",
     "react/require-default-props": "off",
-    "react/no-unused-prop-types": "off"
+    "react/no-unused-prop-types": "off",
+    "react/no-unescaped-entities": "off"
   }
 }

@@ -1,5 +1,5 @@
 import { SanityDocument } from 'sanity'
-import { TranslationDiff, METADATA_KEY } from './types'
+import { TranslationDiff } from './types'
 import { STATIC_DOC_KEYS, applyDiffs } from './utils'
 
 export function mergeDocs<D extends SanityDocument>({
