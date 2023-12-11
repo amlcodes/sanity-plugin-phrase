@@ -72,7 +72,8 @@ function getTransaction(context: ContextWithJobs) {
 
         return {
           _key: target._key,
-          jobs: sortJobsByWorkflowLevel(formattedJobs),
+          // Early steps first
+          jobs: sortJobsByWorkflowLevel(formattedJobs).reverse(),
         }
       },
     )

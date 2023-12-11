@@ -19,8 +19,10 @@ import { isPtdId } from './ids'
 import { langsAreTheSame } from './langs'
 
 export function jobsMetadataExtractor(jobs: PhraseJobInfo[]) {
-  const lastJob = jobs[jobs.length - 1]
-  const furthestOngoingJob = jobs.find((job) => jobIsOngoing(job)) || lastJob
+  const earlyStepsFirst = sortJobsByWorkflowLevel(jobs).reverse()
+  const lastJob = earlyStepsFirst[earlyStepsFirst.length - 1]
+  const furthestOngoingJob =
+    earlyStepsFirst.find((job) => jobIsOngoing(job)) || lastJob
 
   return {
     stepName: furthestOngoingJob?.workflowStep?.name || 'Ongoing',

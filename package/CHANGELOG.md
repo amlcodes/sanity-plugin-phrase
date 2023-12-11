@@ -1,5 +1,13 @@
 # sanity-plugin-phrase
 
+## 0.1.6
+
+### Patch Changes
+
+- Fix: new diffing algorithm & data structure that can catch unsets & more precise inserts;
+
+  Refactor: no more translation metadata stored in main documents. All ported to TMDs
+
 ## 0.1.5
 
 ### Patch Changes
