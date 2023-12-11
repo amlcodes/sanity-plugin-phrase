@@ -1,5 +1,11 @@
 # sanity-plugin-phrase
 
+## 0.1.7
+
+### Patch Changes
+
+- Fix: autowrap content in PT blocks
+
 ## 0.1.6
 
 ### Patch Changes
