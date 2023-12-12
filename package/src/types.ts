@@ -493,8 +493,6 @@ export type PhrasePluginOptions = {
    * **Note:** follow the steps for setting up the endpoint, outlined in the README
    * @example
    * backendEndpoint: 'https://my-front-end.com/api/sanity-phrase'
-   * // Or relative to your Sanity studio's URL if same origin
-   * backendEndpoint: '/api/phrase'
    */
   apiEndpoint: string
   /**
@@ -519,6 +517,7 @@ export type PhrasePluginOptions = {
     sanityClient: SanityClient,
   ) => string | undefined | Promise<string | undefined>
   /**
+   * @optional
    * Function equivalent to the one you’d pass to the `hidden` property of a field in Sanity.
    * Use it to show or hide the Phrase dashboard according to user privileges.
    *

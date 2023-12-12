@@ -143,22 +143,23 @@ export function TranslationInfo({
   const dueDate = jobsMeta?.due || TMD.projectDueDate
   return (
     <TableRow>
-      <td style={{ width: '100%' }}>
+      <td>
         <Text size={1}>{getReadableLanguageName(targetLang)}</Text>
       </td>
 
-      <td style={{ width: 'min-content' }}>
+      <td style={{ minWidth: '200px' }}>
         {jobsMeta && (
           <StatusBadge
             label={jobsMeta.stepName}
             jobStatus={jobsMeta.stepStatus}
+            inTable
           />
         )}
       </td>
-      <td style={{ width: 'max-content' }}>
+      <td>
         <Text size={1}>{dueDate ? formatDay(new Date(dueDate)) : ''}</Text>
       </td>
-      <td style={{ width: 'max-content' }}>
+      <td>
         <Flex align="center" gap={1}>
           {jobsMeta?.activeJobUid && (
             <Button

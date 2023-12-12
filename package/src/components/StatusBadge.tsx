@@ -16,11 +16,13 @@ import styled from 'styled-components'
 import { ComponentProps } from 'react'
 
 const StyledCard = styled(Card)`
-  container-type: inline-size;
+  &[data-in-table='true'] {
+    container-type: inline-size;
 
-  @container (max-width: 180px) {
-    & > *[data-ui='Flex'] {
-      flex-wrap: wrap;
+    @container (max-width: 180px) {
+      & > *[data-ui='Flex'] {
+        flex-wrap: wrap;
+      }
     }
   }
 `
@@ -39,6 +41,7 @@ export default function StatusBadge(
     language?: SanityLangCode
     label: string
     badgeProps?: ComponentProps<typeof StyledBadge>
+    inTable?: boolean
   } & (
     | {
         jobStatus: PhraseJobInfo['status']
@@ -63,6 +66,7 @@ export default function StatusBadge(
       border={false}
       {...props.badgeProps}
       style={{ background: 'transparent', ...(props.badgeProps?.style || {}) }}
+      data-in-table={!!props.inTable}
     >
       <Flex gap={2} align="center">
         {language && (

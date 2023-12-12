@@ -57,6 +57,7 @@ const StyledTable = styled.table`
   border-collapse: collapse;
   border-spacing: 0;
   overflow-x: auto;
+  width: 100%;
 
   th {
     vertical-align: bottom;

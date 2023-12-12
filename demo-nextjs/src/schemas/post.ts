@@ -5,9 +5,9 @@ import {
   defineField,
   defineType,
 } from 'sanity'
+import { NOT_PTD } from 'sanity-plugin-phrase'
 import { vttField } from '~/components/VTTInput'
 import { apiVersion } from '~/lib/sanity.api'
-import { NOT_PTD } from '~/lib/sanity.queries'
 import { draftId, getReadableLanguageName, undraftId } from '~/utils'
 
 export default defineType({

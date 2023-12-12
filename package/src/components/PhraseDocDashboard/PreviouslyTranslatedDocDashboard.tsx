@@ -170,6 +170,7 @@ export default function PreviouslyTranslatedDocDashboard(props: {
                           : target.status
                       }
                       staleStatus={target.status}
+                      inTable
                     />
                   )}
                 </td>

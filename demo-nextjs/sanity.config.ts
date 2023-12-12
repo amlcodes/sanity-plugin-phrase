@@ -10,7 +10,6 @@ import {
   isPtdId,
   NOT_PTD,
   phrasePlugin,
-  DuplicateTranslatedDocumentAction,
 } from 'sanity-plugin-phrase'
 import { deskTool } from 'sanity/desk'
 import {
@@ -116,12 +115,5 @@ export default defineConfig({
           ]
         : prev
     },
-
-    actions: (prev) =>
-      prev.map((originalAction) =>
-        originalAction.action === 'duplicate'
-          ? DuplicateTranslatedDocumentAction
-          : originalAction,
-      ),
   },
 })

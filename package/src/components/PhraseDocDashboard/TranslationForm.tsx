@@ -414,7 +414,7 @@ export default function TranslationForm({
         />
         <Button
           text="Send to Phrase"
-          icon={PhraseMonogram}
+          icon={state === 'submitting' ? Spinner : PhraseMonogram}
           tone="primary"
           disabled={
             validation !== true ||

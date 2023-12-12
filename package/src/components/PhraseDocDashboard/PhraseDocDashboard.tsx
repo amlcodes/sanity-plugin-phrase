@@ -109,7 +109,8 @@ export default function getPhraseDocDashboard(
           {toTranslate && (
             <Dialog
               header="Translate with Phrase"
-              onClose={() => setToTranslate(null)}
+              // Prohibit closing directly, only allow closing by clicking the Cancel button in TranslationForm
+              onClose={undefined}
               zOffset={1000}
               id={`phrase-translation-dialog--${currentDocument._id}`}
               width={1}

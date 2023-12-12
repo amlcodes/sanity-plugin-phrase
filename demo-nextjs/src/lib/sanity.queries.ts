@@ -3,8 +3,7 @@ import type { ImageAsset, Slug } from 'sanity'
 import { type SanityClient } from 'next-sanity'
 
 import { SupportedLanguage } from '~/utils'
-
-export const NOT_PTD = `phraseMeta._type != "phrase.ptd.meta"`
+import { NOT_PTD } from 'sanity-plugin-phrase'
 
 export const postsQuery = /* groq */ `*[
   _type == "post" &&

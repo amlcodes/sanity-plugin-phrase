@@ -88,6 +88,7 @@ function OngoingTranslation({ TMD }: { TMD: SanityTMD }) {
                 jobStatus={metadata.stepStatus}
                 label={metadata.stepName}
                 language={target.lang.sanity}
+                inTable
               />
             )
           })}
