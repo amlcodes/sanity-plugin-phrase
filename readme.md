@@ -277,7 +277,7 @@ const { data } = await sanityClient.fetch(
 Phrase Translation Documents (PTDs) are copies of source and target documents, and are stored in the same dataset. This means that if you're querying documents from Sanity, you'll get both the source and target documents, as well as their PTDs. This can lead to duplication or incorrect data in the front-end. To ensure this doesn't happen, make sure you exclude PTDs from your queries:
 
 ```ts
-import { NOT_PTD } from 'sanity-plugin-phrase'
+import { NOT_PTD } from 'sanity-plugin-phrase/utils'
 
 // ❌ Before - can return the PTD instead of the desired document
 const lessonQuery = `*[_type == 'lesson' && slug.current == $slug && publishedAt < now() && language == $language]`

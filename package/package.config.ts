@@ -26,6 +26,11 @@ export default defineConfig({
       require: './dist/backend.js',
       import: './dist/backend.esm.js',
     },
+    {
+      source: './src/_exports/utils.ts',
+      require: './dist/utils.js',
+      import: './dist/utils.esm.js',
+    },
   ],
 
   // Remove this block to enable strict export validation

@@ -5,12 +5,8 @@ import {
 import { visionTool } from '@sanity/vision'
 import { defineConfig, SanityDocument } from 'sanity'
 import { Iframe, IframeOptions } from 'sanity-plugin-iframe-pane'
-import {
-  injectPhraseIntoSchema,
-  isPtdId,
-  NOT_PTD,
-  phrasePlugin,
-} from 'sanity-plugin-phrase'
+import { injectPhraseIntoSchema, phrasePlugin } from 'sanity-plugin-phrase'
+import { isPtdId, NOT_PTD } from 'sanity-plugin-phrase/utils'
 import { deskTool } from 'sanity/desk'
 import {
   apiVersion,

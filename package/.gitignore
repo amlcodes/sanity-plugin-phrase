@@ -6,3 +6,4 @@ example-data/gitignored
 /adapters.js
 /backend.js
 /config.js
+/utils.js

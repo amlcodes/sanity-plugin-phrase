@@ -1,6 +1,6 @@
 {
   "name": "sanity-plugin-phrase",
-  "version": "0.1.8",
+  "version": "0.1.10",
   "description": "",
   "keywords": [
     "sanity",
@@ -61,6 +61,17 @@
       "import": "./dist/config.esm.js",
       "default": "./dist/config.esm.js"
     },
+    "./utils": {
+      "types": "./dist/utils.d.ts",
+      "source": "./src/_exports/utils.ts",
+      "require": "./dist/utils.js",
+      "node": {
+        "module": "./dist/utils.esm.js",
+        "import": "./dist/utils.cjs.mjs"
+      },
+      "import": "./dist/utils.esm.js",
+      "default": "./dist/utils.esm.js"
+    },
     "./package.json": "./package.json"
   },
   "main": "./dist/index.js",
@@ -71,6 +82,7 @@
     "adapters.js",
     "backend.js",
     "config.js",
+    "utils.js",
     "dist",
     "sanity.json",
     "src",

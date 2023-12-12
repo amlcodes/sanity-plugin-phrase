@@ -4,7 +4,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { createInternalHandler } from 'sanity-plugin-phrase/backend'
 import { definePhraseOptions } from 'sanity-plugin-phrase/config'
 import { documentInternationalizationAdapter } from 'sanity-plugin-phrase/adapters'
-import { undraftId } from 'sanity-plugin-phrase'
+import { undraftId } from 'sanity-plugin-phrase/utils'
 
 export const writeToken = process.env.SANITY_WRITE_TOKEN || ''
 

@@ -1,5 +1,17 @@
 # sanity-plugin-phrase
 
+## 0.1.10
+
+### Patch Changes
+
+- Fix: expose root-level .js files for NextJS 14
+
+## 0.1.9
+
+### Patch Changes
+
+- chore: split utils for NextJS 14 compatibility
+
 ## 0.1.8
 
 ### Patch Changes
