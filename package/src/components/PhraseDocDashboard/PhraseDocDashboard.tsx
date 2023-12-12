@@ -120,7 +120,6 @@ export default function getPhraseDocDashboard(
                   currentDocument={currentDocument}
                   toTranslate={toTranslate}
                   sourceLang={docLang}
-                  TMDs={TMDs || []}
                 />
               </Box>
             </Dialog>

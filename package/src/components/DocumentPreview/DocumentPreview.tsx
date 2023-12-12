@@ -16,6 +16,7 @@ import { PaneItemPreview } from './PaneItemPreview'
 interface DocumentPreviewProps {
   schemaType?: SchemaType
   docPair: CollatedHit<SanityDocument>
+  openOnClick?: boolean
 }
 
 /**
@@ -37,7 +38,7 @@ export function getIconWithFallback(
 }
 
 export function DocumentPreview(props: DocumentPreviewProps) {
-  const { schemaType, docPair } = props
+  const { schemaType, docPair, openOnClick = true } = props
   const doc = docPair?.draft || docPair?.published
   const id = docPair.id || ''
   const documentPreviewStore = useDocumentPreviewStore()
@@ -65,6 +66,14 @@ export function DocumentPreview(props: DocumentPreviewProps) {
       />
     )
   }, [hasSchemaType, schemaType, documentPresence, doc, documentPreviewStore])
+
+  if (!openOnClick) {
+    return (
+      <PreviewCard data-ui="PaneItem" padding={2} radius={2} tone="inherit">
+        {PreviewComponent}
+      </PreviewCard>
+    )
+  }
 
   return (
     <PreviewCard

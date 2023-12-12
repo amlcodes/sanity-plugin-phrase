@@ -1,6 +1,6 @@
 'use client'
 
-import { CloseIcon, InfoOutlineIcon } from '@sanity/icons'
+import { CloseIcon } from '@sanity/icons'
 import {
   Box,
   Button,
@@ -14,7 +14,13 @@ import {
   TextInput,
   useToast,
 } from '@sanity/ui'
-import { useCallback, useEffect, useState } from 'react'
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react'
 import { FormField, Schema, SchemaType, useClient, useSchema } from 'sanity'
 import type { CreateTranslationsResponse } from '../../createTranslation/createMultipleTranslations'
 import getAllDocReferences from '../../getAllDocReferences'
@@ -30,7 +36,6 @@ import {
   PhrasePluginOptions,
   SanityDocumentWithPhraseMetadata,
   SanityLangCode,
-  SanityTMD,
   StaleResponse,
   StaleStatus,
   StaleTargetStatus,
@@ -45,6 +50,7 @@ import {
   joinDiffsByRoot,
   langsAreTheSame,
   semanticListItems,
+  targetLangsIntersect,
 } from '../../utils'
 import { FULL_DOC_DIFF_PATH, joinLangsByDiffs } from '../../utils/paths'
 import { PhraseMonogram } from '../PhraseLogo'
@@ -58,16 +64,15 @@ type FormValue = Pick<
   'templateUid' | 'dateDue' | 'targetLangs'
 >
 
+type ChosenDocLangState = {
+  lang: SanityLangCode
+  diffs: StaleTargetStatus['diffs']
+}
+
 type ReferencesState = {
   documentId: string
   refs: Awaited<ReturnType<typeof getAllDocReferences>>
-  chosenDocs: Record<
-    string,
-    {
-      lang: SanityLangCode
-      diffs: StaleTargetStatus['diffs']
-    }[]
-  >
+  chosenDocs: Record<string, ChosenDocLangState[]>
   staleness?: StaleResponse[]
   stalenessHash?: string
 }
@@ -92,13 +97,11 @@ export default function TranslationForm({
   currentDocument,
   onCancel,
   sourceLang,
-  TMDs,
   toTranslate: { diffs, targetLangs: desiredTargetLangs },
 }: {
   currentDocument: SanityDocumentWithPhraseMetadata
   onCancel: () => void
   sourceLang: SanityLangCode
-  TMDs: SanityTMD[]
   toTranslate: {
     diffs: TranslationRequest['diffs']
     targetLangs?: CrossSystemLangCode[]
@@ -157,7 +160,6 @@ export default function TranslationForm({
         sanityClient,
         pluginOptions,
         targetLangs: supportedTargetLangs,
-        TMDs,
       })
 
       setReferences((prev) => {
@@ -177,7 +179,6 @@ export default function TranslationForm({
       setReferences,
       references,
       freshReferencesHash,
-      TMDs,
     ],
   )
 
@@ -380,99 +381,16 @@ export default function TranslationForm({
           )}
           {references.refs.length > 0 ? (
             <Stack space={3}>
-              {references.refs.map((ref) => {
-                const staleness = references.staleness?.find(
-                  (r) => r.sourceDoc?._id === ref.id,
-                )
-                return (
-                  <Stack key={ref.id} space={2}>
-                    <ReferencePreview
-                      reference={{
-                        _ref: ref.id,
-                        _type: ref.type,
-                      }}
-                      parentDocId={currentDocument._id}
-                      schemaType={schema.get(ref.type) as SchemaType}
-                      referenceOpen={false}
-                    />
-
-                    <Flex gap={3} align="center">
-                      {formValue.targetLangs.map((lang) => {
-                        const langStaleness = staleness?.targets.find((t) =>
-                          langsAreTheSame(t.lang, lang),
-                        )
-                        const canTranslate =
-                          !!staleness &&
-                          !!langStaleness &&
-                          !('error' in langStaleness) &&
-                          (langStaleness.status === StaleStatus.STALE ||
-                            langStaleness.status === StaleStatus.UNTRANSLATED)
-                        const included =
-                          references.chosenDocs?.[ref.id]?.some(
-                            (l) => l.lang === lang,
-                          ) || false
-                        return (
-                          <Flex gap={2} align="center" key={lang} as="label">
-                            <Checkbox
-                              name="referencedDocuments"
-                              id={`${ref.id}-${lang}`}
-                              style={{ display: 'block' }}
-                              disabled={!canTranslate}
-                              checked={included}
-                              onChange={(e) => {
-                                if (!staleness || !langStaleness) return
-
-                                const checked = e.currentTarget.checked
-
-                                const refLangs =
-                                  references.chosenDocs?.[ref.id] || []
-                                const newLangs = ((): typeof refLangs => {
-                                  if (checked) {
-                                    return included
-                                      ? refLangs
-                                      : [
-                                          ...refLangs,
-                                          {
-                                            lang,
-                                            diffs:
-                                              langStaleness &&
-                                              isTargetStale(langStaleness)
-                                                ? langStaleness.diffs
-                                                : [FULL_DOC_DIFF_PATH],
-                                          },
-                                        ]
-                                  }
-
-                                  return refLangs.filter(
-                                    // eslint-disable-next-line
-                                    (l) => l.lang !== lang,
-                                  )
-                                })()
-                                setReferences({
-                                  ...references,
-                                  chosenDocs: {
-                                    ...(references.chosenDocs || {}),
-                                    [ref.id]: newLangs,
-                                  },
-                                })
-                              }}
-                            />
-                            <Text>{getReadableLanguageName(lang)}</Text>
-                            {langStaleness && 'error' in langStaleness
-                              ? 'Failed fetching'
-                              : langStaleness && (
-                                  <StatusBadge
-                                    label={langStaleness.status}
-                                    staleStatus={langStaleness.status}
-                                  />
-                                )}
-                          </Flex>
-                        )
-                      })}
-                    </Flex>
-                  </Stack>
-                )
-              })}
+              {references.refs.map((reference) => (
+                <ReferenceCheckbox
+                  key={reference.id}
+                  reference={reference}
+                  referencesState={references}
+                  currentDocument={currentDocument}
+                  formValue={formValue}
+                  setReferences={setReferences}
+                />
+              ))}
             </Stack>
           ) : (
             <Card tone="transparent" border radius={2} padding={3}>
@@ -516,6 +434,180 @@ export default function TranslationForm({
         </Card>
       )}
     </Stack>
+  )
+}
+
+function ReferenceCheckbox({
+  reference,
+  formValue,
+  currentDocument,
+  referencesState,
+  setReferences,
+}: {
+  reference: ReferencesState['refs'][number]
+  formValue: FormValue
+  currentDocument: SanityDocumentWithPhraseMetadata
+  referencesState: ReferencesState
+  setReferences: Dispatch<SetStateAction<ReferencesState | undefined>>
+}) {
+  const schema = useSchema()
+
+  const staleness = referencesState.staleness?.find(
+    (r) => r.sourceDoc?._id === reference.id,
+  )
+  const availableTargets = (staleness?.targets || []).filter(
+    (t) =>
+      !('error' in t) &&
+      (t.status === StaleStatus.STALE ||
+        t.status === StaleStatus.UNTRANSLATED) &&
+      targetLangsIntersect(formValue.targetLangs, [t.lang]),
+  )
+  const chosenLangs = referencesState.chosenDocs?.[reference.id] || []
+  const allToggleState = (() => {
+    if (availableTargets.length === 0) return 'disabled'
+
+    if (availableTargets.length === chosenLangs.length) return 'checked'
+
+    if (chosenLangs.length === 0) return 'unchecked'
+
+    return 'indeterminate'
+  })()
+
+  return (
+    <Card border padding={3}>
+      <Stack space={2}>
+        <ReferencePreview
+          reference={{
+            _ref: reference.id,
+            _type: reference.type,
+          }}
+          parentDocId={currentDocument._id}
+          schemaType={schema.get(reference.type) as SchemaType}
+          referenceOpen={false}
+        />
+
+        <Flex gap={3} align="flex-start">
+          <Flex
+            gap={2}
+            align="center"
+            as="label"
+            id={`${reference.id}-all-toggle-label`}
+          >
+            <Checkbox
+              name="referencedDocuments"
+              id={`${reference.id}-all-toggle`}
+              disabled={allToggleState === 'disabled'}
+              checked={allToggleState === 'checked'}
+              indeterminate={allToggleState === 'indeterminate'}
+              onInput={(e) => {
+                e.preventDefault()
+                if (allToggleState === 'disabled') return
+
+                if (allToggleState === 'checked') {
+                  setReferences({
+                    ...referencesState,
+                    chosenDocs: {
+                      ...(referencesState.chosenDocs || {}),
+                      [reference.id]: [],
+                    },
+                  })
+                  return
+                }
+
+                const newLangs = availableTargets.map(
+                  (target): ChosenDocLangState => ({
+                    lang: target.lang.sanity,
+                    diffs: isTargetStale(target)
+                      ? target.diffs
+                      : [FULL_DOC_DIFF_PATH],
+                  }),
+                )
+
+                setReferences({
+                  ...referencesState,
+                  chosenDocs: {
+                    ...(referencesState.chosenDocs || {}),
+                    [reference.id]: newLangs,
+                  },
+                })
+              }}
+            />
+            <Text>All</Text>
+          </Flex>
+          <Flex flex={1} gap={3} align="center" wrap="wrap">
+            {formValue.targetLangs.map((lang) => {
+              const langStaleness = staleness?.targets.find((t) =>
+                langsAreTheSame(t.lang, lang),
+              )
+              const canTranslate = availableTargets?.some((l) =>
+                langsAreTheSame(l.lang, lang),
+              )
+              const included =
+                referencesState.chosenDocs?.[reference.id]?.some(
+                  (l) => l.lang === lang,
+                ) || false
+              return (
+                <Flex gap={2} align="center" key={lang} as="label">
+                  <Checkbox
+                    name="referencedDocuments"
+                    id={`${reference.id}-${lang}`}
+                    style={{ display: 'block' }}
+                    disabled={!canTranslate}
+                    checked={included}
+                    onChange={(e) => {
+                      if (!staleness || !langStaleness) return
+
+                      const checked = e.currentTarget.checked
+
+                      const refLangs =
+                        referencesState.chosenDocs?.[reference.id] || []
+                      const newLangs = ((): typeof refLangs => {
+                        if (checked) {
+                          return included
+                            ? refLangs
+                            : [
+                                ...refLangs,
+                                {
+                                  lang,
+                                  diffs:
+                                    langStaleness &&
+                                    isTargetStale(langStaleness)
+                                      ? langStaleness.diffs
+                                      : [FULL_DOC_DIFF_PATH],
+                                },
+                              ]
+                        }
+
+                        return refLangs.filter(
+                          // eslint-disable-next-line
+                          (l) => l.lang !== lang,
+                        )
+                      })()
+                      setReferences({
+                        ...referencesState,
+                        chosenDocs: {
+                          ...(referencesState.chosenDocs || {}),
+                          [reference.id]: newLangs,
+                        },
+                      })
+                    }}
+                  />
+                  <Text>{getReadableLanguageName(lang)}</Text>
+                  {langStaleness && 'error' in langStaleness
+                    ? 'Failed fetching'
+                    : langStaleness && (
+                        <StatusBadge
+                          label={langStaleness.status}
+                          staleStatus={langStaleness.status}
+                        />
+                      )}
+                </Flex>
+              )
+            })}
+          </Flex>
+        </Flex>
+      </Stack>
+    </Card>
   )
 }
 

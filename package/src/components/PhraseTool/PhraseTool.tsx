@@ -26,9 +26,10 @@ import {
 } from '../PluginOptionsContext'
 import SpinnerBox from '../SpinnerBox'
 import StatusBadge from '../StatusBadge'
-import { StyledTable, TableRow } from '../StyledTable'
+import { Table, TableRow } from '../StyledTable'
 import { TranslationPathsDisplay } from '../TranslationPathsDisplay'
 import IssueNewTranslations from './IssueNewTranslations'
+import styled from 'styled-components'
 
 const useOngoingTranslations = createHookFromObservableFactory<
   // Pick<SanityMainDoc, '_id' | '_type' | '_rev' | 'phraseMetadata'>[],
@@ -59,7 +60,7 @@ function OngoingTranslation({ TMD }: { TMD: SanityTMD }) {
   return (
     <TableRow>
       <td>
-        <Stack space={2}>
+        <Stack space={3} style={{ minWidth: '300px' }}>
           <Text size={1}>
             <IntentLink
               intent="edit"
@@ -76,7 +77,7 @@ function OngoingTranslation({ TMD }: { TMD: SanityTMD }) {
         </Stack>
       </td>
       <td>
-        <Stack space={2}>
+        <Stack space={3} style={{ minWidth: '200px' }}>
           {TMD.targets.map((target) => {
             if (!target.jobs) return null
 
@@ -114,6 +115,27 @@ function OngoingTranslation({ TMD }: { TMD: SanityTMD }) {
   )
 }
 
+const Layout = styled(Flex)`
+  flex-direction: column;
+
+  @media (min-width: 900px) and (max-width: 1199px) {
+    padding: 5vmin;
+  }
+
+  @media (min-width: 1200px) {
+    flex-direction: row;
+
+    #ongoing {
+      max-width: 1000px;
+    }
+
+    > * {
+      position: sticky;
+      top: 1.25rem;
+    }
+  }
+`
+
 export default function createPhraseTool(pluginOptions: PhrasePluginOptions) {
   return function PhraseTool({ tool }: { tool: Tool<PhrasePluginOptions> }) {
     const documentStore = useDocumentStore()
@@ -124,10 +146,12 @@ export default function createPhraseTool(pluginOptions: PhrasePluginOptions) {
     return (
       <PluginOptionsProvider pluginOptions={pluginOptions}>
         <Card padding={4}>
-          <Flex align="flex-start" gap={4}>
-            <Stack space={3} style={{ maxWidth: '1000px' }} flex={1}>
-              <PhraseLogo style={{ maxWidth: '74px' }} />
-              <Heading>Ongoing translations</Heading>
+          <Layout align="flex-start" gap={5} wrap="wrap">
+            <Stack space={3} flex={1} id="ongoing">
+              <Stack space={3} paddingLeft={3}>
+                <PhraseLogo style={{ maxWidth: '74px' }} />
+                <Heading>Ongoing translations</Heading>
+              </Stack>
               {loading && <SpinnerBox />}
               {!loading &&
                 (!ongoingTranslations || ongoingTranslations.length === 0) && (
@@ -145,7 +169,7 @@ export default function createPhraseTool(pluginOptions: PhrasePluginOptions) {
               {!loading &&
                 ongoingTranslations &&
                 ongoingTranslations.length > 0 && (
-                  <StyledTable>
+                  <Table>
                     <thead>
                       <th>
                         <Text size={1} weight="semibold">
@@ -173,11 +197,10 @@ export default function createPhraseTool(pluginOptions: PhrasePluginOptions) {
                         <OngoingTranslation key={TMD._id} TMD={TMD} />
                       ))}
                     </tbody>
-                  </StyledTable>
+                  </Table>
                 )}
             </Stack>
-            <IssueNewTranslations />
-          </Flex>
+          </Layout>
         </Card>
       </PluginOptionsProvider>
     )

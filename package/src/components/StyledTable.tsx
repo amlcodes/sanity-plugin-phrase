@@ -52,10 +52,11 @@ export const TableRow = (props: PropsWithChildren<{}>) => {
   )
 }
 
-export const StyledTable = styled.table`
+const StyledTable = styled.table`
   caption-side: bottom;
   border-collapse: collapse;
   border-spacing: 0;
+  overflow-x: auto;
 
   th {
     vertical-align: bottom;
@@ -69,6 +70,7 @@ export const StyledTable = styled.table`
   }
   td {
     height: var(--row-height, 100%);
+    vertical-align: top;
   }
 
   .sr-only {
@@ -83,3 +85,11 @@ export const StyledTable = styled.table`
     border-width: 0;
   }
 `
+
+export const Table = (props: PropsWithChildren<{}>) => {
+  return (
+    <div style={{ overflowX: 'auto' }}>
+      <StyledTable>{props.children}</StyledTable>
+    </div>
+  )
+}

@@ -12,11 +12,33 @@ import {
   jobIsComplete,
 } from '../utils'
 import { PhraseJobInfo, SanityLangCode, StaleStatus } from '../types'
+import styled from 'styled-components'
+import { ComponentProps } from 'react'
+
+const StyledCard = styled(Card)`
+  container-type: inline-size;
+
+  @container (max-width: 180px) {
+    & > *[data-ui='Flex'] {
+      flex-wrap: wrap;
+    }
+  }
+`
+
+const StyledBadge = styled(Badge)`
+  white-space: nowrap;
+
+  span {
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+`
 
 export default function StatusBadge(
   props: {
     language?: SanityLangCode
     label: string
+    badgeProps?: ComponentProps<typeof StyledBadge>
   } & (
     | {
         jobStatus: PhraseJobInfo['status']
@@ -36,8 +58,13 @@ export default function StatusBadge(
       ? getJobIcon(props.jobStatus)
       : getStaleIcon(props.staleStatus)
   return (
-    <Card tone={tone} border={false} style={{ background: 'transparent' }}>
-      <Flex gap={2} style={{ alignItems: 'center' }}>
+    <StyledCard
+      tone={tone}
+      border={false}
+      {...props.badgeProps}
+      style={{ background: 'transparent', ...(props.badgeProps?.style || {}) }}
+    >
+      <Flex gap={2} align="center">
         {language && (
           <Text muted size={1}>
             {getReadableLanguageName(language)}
@@ -46,11 +73,11 @@ export default function StatusBadge(
         <Text muted size={1}>
           <Icon />
         </Text>
-        <Badge mode="outline" tone={tone} size={1}>
+        <StyledBadge mode="outline" tone={tone} size={1}>
           {props.label}
-        </Badge>
+        </StyledBadge>
       </Flex>
-    </Card>
+    </StyledCard>
   )
 }
 

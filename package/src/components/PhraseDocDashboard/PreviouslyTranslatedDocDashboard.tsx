@@ -27,8 +27,8 @@ import {
 import {
   SANITY_API_VERSION,
   formatDay,
-  getFieldLabel,
   getDiffsKey,
+  getFieldLabel,
   getReadableLanguageName,
   joinDiffsByRoot,
   semanticListItems,
@@ -39,7 +39,7 @@ import { PhraseMonogram } from '../PhraseLogo'
 import { usePluginOptions } from '../PluginOptionsContext'
 import SpinnerBox from '../SpinnerBox'
 import StatusBadge from '../StatusBadge'
-import { StyledTable, TableRow } from '../StyledTable'
+import { Table, TableRow } from '../StyledTable'
 
 export default function PreviouslyTranslatedDocDashboard(props: {
   currentDocument: SanityMainDoc
@@ -130,7 +130,7 @@ export default function PreviouslyTranslatedDocDashboard(props: {
         </Card>
       )}
       {staleness && (
-        <StyledTable>
+        <Table>
           <thead>
             <th>
               <Text size={1} weight="semibold">
@@ -183,7 +183,7 @@ export default function PreviouslyTranslatedDocDashboard(props: {
               </TableRow>
             ))}
           </tbody>
-        </StyledTable>
+        </Table>
       )}
       {Object.keys(stalenessByPath).length > 0 && (
         <Card tone="caution" padding={2} radius={1} border>
@@ -318,7 +318,6 @@ function useStaleness({
         sanityClient,
         pluginOptions,
         targetLangs: supportedTargetLangs,
-        TMDs,
       })
       const newStaleness = res.find((r) => r.sourceDoc?._id === sourceDoc._id)
       setStaleness(
@@ -332,7 +331,6 @@ function useStaleness({
       supportedTargetLangs,
       setStaleness,
       debouncedHash,
-      TMDs,
     ],
   )
 

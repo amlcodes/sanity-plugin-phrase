@@ -16,8 +16,10 @@ import {
   Text,
   useToast,
 } from '@sanity/ui'
+import { MouseEvent, PropsWithChildren, useState } from 'react'
 import { SanityDocument, useClient, useEditState, useSchema } from 'sanity'
 import { useOpenInSidePane } from '../../hooks/useOpenInSidepane'
+import mergePTD from '../../mergePTD'
 import {
   CrossSystemLangCode,
   EndpointActionTypes,
@@ -34,9 +36,7 @@ import { getReadableLanguageName, langsAreTheSame } from '../../utils/langs'
 import { PhraseMonogram } from '../PhraseLogo'
 import { usePluginOptions } from '../PluginOptionsContext'
 import StatusBadge from '../StatusBadge'
-import { StyledTable, TableRow } from '../StyledTable'
-import { MouseEvent, PropsWithChildren, useState } from 'react'
-import mergePTD from '../../mergePTD'
+import { Table, TableRow } from '../StyledTable'
 
 export function TranslationInfo({
   targetLang,
@@ -218,7 +218,7 @@ export function TranslationInfo({
 
 export function TranslationInfoTable(props: PropsWithChildren<{}>) {
   return (
-    <StyledTable style={{ marginTop: '1.5rem' }}>
+    <Table>
       <thead>
         <th>
           <Text size={1} weight="semibold">
@@ -242,6 +242,6 @@ export function TranslationInfoTable(props: PropsWithChildren<{}>) {
         </th>
       </thead>
       <tbody>{props.children}</tbody>
-    </StyledTable>
+    </Table>
   )
 }

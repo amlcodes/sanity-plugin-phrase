@@ -13,6 +13,7 @@ import {
 } from '../types'
 import {
   FULL_DOC_DIFF_PATH,
+  TMD_TYPE,
   allTranslationsUnfinished,
   draftId,
   getDiffs,
@@ -30,23 +31,28 @@ export default async function getStaleTranslations({
   sanityClient,
   sourceDocs,
   targetLangs: sanityTargetLangs,
-  TMDs,
 }: {
   pluginOptions: PhrasePluginOptions
   sanityClient: TranslationRequest['sanityClient']
   sourceDocs: TranslationRequest['sourceDoc'][]
   targetLangs: SanityLangCode[]
-  TMDs: SanityTMD[]
 }) {
   const targetLangs =
     pluginOptions.langAdapter.sanityToCrossSystem(sanityTargetLangs)
-  const freshDocuments = await sanityClient.fetch<
-    SanityDocumentWithPhraseMetadata[]
-  >(`*[_id in $ids]`, {
-    ids: sourceDocs.flatMap((d) =>
-      d._id ? [undraftId(d._id), draftId(d._id)] : [],
-    ),
-  })
+  const { freshDocuments, TMDs } = await sanityClient.fetch<{
+    freshDocuments: SanityDocumentWithPhraseMetadata[]
+    TMDs: SanityTMD[]
+  }>(
+    /* groq */ `{
+    "freshDocuments": *[_id in $ids],
+    "TMDs": *[_type == "${TMD_TYPE}" && references($ids)],
+  }`,
+    {
+      ids: sourceDocs.flatMap((d) =>
+        d._id ? [undraftId(d._id), draftId(d._id)] : [],
+      ),
+    },
+  )
 
   const collated = collate(freshDocuments)
 
@@ -165,7 +171,7 @@ function parsePerLang({
   lang,
   pluginOptions: { translatableTypes },
   sourceDoc,
-  TMDs,
+  TMDs: allTMDs,
 }: {
   freshestDoc: SanityDocumentWithPhraseMetadata | undefined
   lang: CrossSystemLangCode
@@ -182,6 +188,10 @@ function parsePerLang({
       tmdRefToDiff: string
     }
 ) {
+  const TMDs = allTMDs.filter((t) =>
+    t.sourceRef._ref.includes(undraftId(sourceDoc._id)),
+  )
+
   if (!translatableTypes.includes(sourceDoc._type)) {
     return {
       freshestDoc,
