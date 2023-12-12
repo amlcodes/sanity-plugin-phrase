@@ -1,5 +1,11 @@
 # sanity-plugin-phrase
 
+## 0.1.8
+
+### Patch Changes
+
+- Initial documentation and polishing styles
+
 ## 0.1.7
 
 ### Patch Changes

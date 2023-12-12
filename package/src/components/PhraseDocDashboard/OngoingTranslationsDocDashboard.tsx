@@ -221,6 +221,7 @@ function FailedPersistingTranslationCard({
   const deleteTranslation = useDeleteTranslation(TMD)
   const { phraseRegion } = usePluginOptions()
 
+  const phraseProjectUid = TMD.salvaged?.project?.id || TMD.phraseProjectUid
   return (
     <DocDashboardCard
       title="Translation creation failed"
@@ -240,14 +241,11 @@ function FailedPersistingTranslationCard({
             </Text>
 
             <Flex gap={2} align="center">
-              {!!(TMD.salvaged?.project?.id || TMD.phraseProjectUid) && (
+              {!!phraseProjectUid && (
                 <Button
                   text="Project in Phrase"
                   as="a"
-                  href={getProjectURL(
-                    TMD.salvaged?.project?.id || TMD.phraseProjectUid,
-                    phraseRegion,
-                  )}
+                  href={getProjectURL(phraseProjectUid, phraseRegion)}
                   icon={PhraseMonogram}
                   tone="primary"
                 />
