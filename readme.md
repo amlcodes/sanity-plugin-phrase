@@ -10,7 +10,7 @@ Translate [Sanity.io](https://sanity.io) content with [Phrase](https://phrase.co
 
 ⚠️ This plugin only supports document-level translations, such as done by [Sanity's official document-internationalization plugin](https://github.com/sanity-io/document-internationalization). Field-level translations are not supported.
 
-<video src="./docs/demo-flow.mp4" muted autoplay loop></video>
+https://github.com/tinloof/sanity-plugin-phrase/assets/27744332/6914fee8-c09e-4e15-9b78-7619feb6ff35
 
 ## Installation
 
