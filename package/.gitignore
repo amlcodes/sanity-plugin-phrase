@@ -7,3 +7,6 @@ example-data/gitignored
 /backend.js
 /config.js
 /utils.js
+
+# Copied from the root README.md (copyReadme.js)
+README.md

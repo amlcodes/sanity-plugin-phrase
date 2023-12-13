@@ -6,16 +6,16 @@
     "sanity",
     "sanity-plugin"
   ],
-  "homepage": "https://github.com/hdoro/test-implementation#readme",
+  "homepage": "https://github.com/tinloof/sanity-plugin-phrase#readme",
   "bugs": {
-    "url": "https://github.com/hdoro/test-implementation/issues"
+    "url": "https://github.com/tinloof/sanity-plugin-phrase/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/hdoro/test-implementation.git"
+    "url": "https://github.com/tinloof/sanity-plugin-phrase.git"
   },
   "license": "Apache-2.0",
-  "author": "Henrique Doro <me@hdoro.dev>",
+  "author": "Henrique Doro <henrique@hdoro.dev>",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -97,7 +97,7 @@
     "dev:createTranslations": "bun dev/createTest.ts",
     "dev:refreshPtdById": "bun dev/refreshByIdTest.ts",
     "dev:handleWebhook": "bun dev/webhookTest.ts",
-    "build": "run-s clean && plugin-kit verify-package --silent && pkg-utils build --strict && pkg-utils --strict",
+    "build": "node copyReadme.js && run-s clean && plugin-kit verify-package --silent && pkg-utils build --strict && pkg-utils --strict",
     "clean": "rimraf dist",
     "format": "prettier --write --cache --ignore-unknown .",
     "dev": "pkg-utils watch --strict",
