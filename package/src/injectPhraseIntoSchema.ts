@@ -49,11 +49,7 @@ function injectSchema(
           field: getPhraseDocDashboard(pluginOptions),
         },
         readOnly: true,
-        hidden: (context) => {
-          return (
-            context.currentUser?.name?.toLowerCase()?.includes('matt') || false
-          )
-        },
+        hidden: pluginOptions.isPhraseDashboardHidden,
         fields: [
           {
             name: 'fakefield',

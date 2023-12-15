@@ -11,7 +11,12 @@ export function TranslationPathsDisplay(
   const schema = useSchema()
   const sourceSchemaType = schema.get(props.sourceDoc._type)
 
-  if (!sourceSchemaType) return null
+  if (
+    !sourceSchemaType ||
+    !Array.isArray(props.diffs) ||
+    props.diffs.length === 0
+  )
+    return null
 
   return (
     <>

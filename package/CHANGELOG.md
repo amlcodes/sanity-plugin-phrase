@@ -1,5 +1,11 @@
 # sanity-plugin-phrase
 
+## 0.1.11
+
+### Patch Changes
+
+- Fix: properly use isPhraseDashboardHidden
+
 ## 0.1.10
 
 ### Patch Changes

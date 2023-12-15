@@ -50,7 +50,7 @@ export function diffIsFullDoc(diff: TranslationDiff) {
   )
 }
 
-export function joinDiffsByRoot(diffs: TranslationDiff[]) {
+export function joinDiffsByRoot(diffs: TranslationDiff[] = []) {
   return diffs.reduce(
     (byRoot, p) => {
       const root = p.path[0] ? toString([p.path[0]]) : ROOT_PATH_STR
