@@ -1,6 +1,11 @@
 import { documentInternationalizationAdapter } from 'sanity-plugin-phrase/adapters'
 import { definePhraseOptions } from 'sanity-plugin-phrase/config'
-import { LANGUAGES, SOURCE_LANGUAGE, TRANSLATABLE_SCHEMAS } from '~/utils'
+import {
+  LANGUAGES,
+  SOURCE_LANGUAGE,
+  TRANSLATABLE_SCHEMAS,
+  undraftId,
+} from '~/utils'
 
 export const PHRASE_CONFIG = definePhraseOptions({
   i18nAdapter: documentInternationalizationAdapter(),
@@ -17,4 +22,16 @@ export const PHRASE_CONFIG = definePhraseOptions({
       label: '[Sanity.io] Default template',
     },
   ],
+  getDocumentPreview: async (doc, sanityClient) => {
+    const previewSecretId = 'preview.secret'
+    const previewSecret = await sanityClient.fetch(
+      `*[_id == "${previewSecretId}"][0].secret`,
+    )
+    return `${
+      process.env.NEXT_PUBLIC_BASE_URL
+    }/api/draft?pathToRedirect=${encodeURIComponent(
+      `${doc.language === 'en' ? '' : `/${doc.language}`}/${(doc.slug as any)
+        ?.current}`,
+    )}&publishedId=${undraftId(doc._id)}&secret=${previewSecret}`
+  },
 })

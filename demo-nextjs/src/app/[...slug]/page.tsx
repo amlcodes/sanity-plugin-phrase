@@ -34,15 +34,6 @@ export default async function PostRoute({
     tags: ['post'],
   })
 
-  console.log({
-    postId,
-    slug,
-    lang,
-    query,
-    queryParams,
-    enabled: draftMode().isEnabled,
-  })
-
   if (!post) {
     return notFound()
   }

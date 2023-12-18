@@ -113,13 +113,16 @@ You must create a custom API endpoint in your Sanity project to handle these req
 
 You can access configure the handler with a Request -> Response pattern via `import { createRequestHandler } from 'sanity-plugin-phrase/backend'` or use the internal handler directly via `import { createInternalHandler } from 'sanity-plugin-phrase/backend'`. In either case, make sure you handle CORS requests correctly, in case your studio and endpoint are in different origins.
 
-Here's an example using NextJS v13 that has very permissive CORS settings:
+Here's an example using NextJS v14 API route that has very permissive CORS settings:
 
 ```ts
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { createClient } from '@sanity/client'
+// src/pages/api/phrase.ts
+// Next.js API route: https://nextjs.org/docs/pages/building-your-application/routing/api-routes
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { PHRASE_CONFIG } from 'phraseConfig'
 import { createInternalHandler } from 'sanity-plugin-phrase/backend'
+import { writeToken } from '~/lib/sanity.api'
+import { client } from '~/lib/sanity.client'
 
 const phraseHandler = createInternalHandler({
   phraseCredentials: {
@@ -127,16 +130,7 @@ const phraseHandler = createInternalHandler({
     password: process.env.PHRASE_PASSWORD || '',
     region: (process.env.PHRASE_REGION as any) || 'eu',
   },
-  sanityClient: createClient({
-    projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
-    apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2022-11-15',
-    token: process.env.SANITY_WRITE_TOKEN || '',
-    useCdn: false,
-    perspective: 'raw',
-  }),
-
-  /** The same config you pass to the Sanity plugin */
+  sanityClient: client.withConfig({ token: writeToken }),
   pluginOptions: PHRASE_CONFIG,
 })
 
@@ -173,7 +167,7 @@ export default async function handler(
 }
 ```
 
-**Note**: the Next 14 is currently not supported as it incorrectly parses the backend handler as a React client component.
+**Note**: the NextJS's app directory is currently not supported as it incorrectly parses the backend handler as a React client component.
 
 ### i18n adapters
 
@@ -356,17 +350,15 @@ To start developing, run:
 ```bash
 yarn install # using Yarn v4
 
-yarn dev # starts the demo studio, backend and plugin watcher
+yarn dev # starts the demo app and plugin watcher
 
-# Open localhost:3333/studio
-# The backend endpoint will be running on localhost:3000/api/phrase
+# Open localhost:3000/studio
 ```
 
 You'll need to create `.env`` files and include the right environment variables to make it work:
 
 - Duplicate `demo-nextjs/.env.example` into `demo-nextjs/.env` and populate its values
-- `demo-backend/.env.local.example` into `demo-nextjs/.env.local`
-- `package/.env.example` into `demo-nextjs/.env`
+- `package/.env.example` into `package/.env`
 
 ## Credits
 

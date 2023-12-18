@@ -17,8 +17,6 @@ export async function GET(request: Request) {
     : undefined
   const id = searchParams.get('publishedId')
 
-  console.log({ pathToRedirect, id })
-
   if (!pathToRedirect || !id) {
     return new Response(
       '`pathToRedirect` and `id` query parameters are required',

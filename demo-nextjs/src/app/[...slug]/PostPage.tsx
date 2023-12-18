@@ -7,7 +7,6 @@ import { type Post } from '~/lib/sanity.queries'
 import { formatDate } from '~/utils'
 
 export default function PostPage({ data: post }: { data: Post }) {
-  console.log({ post })
   return (
     <Container>
       <section className="post">
