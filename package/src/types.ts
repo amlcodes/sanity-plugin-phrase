@@ -497,7 +497,7 @@ export type PhrasePluginOptions = {
   apiEndpoint: string
   /**
    * As defined by your Phrase account's settings
-   * Either `eur` or `us`
+   * Either `eu` or `us`
    */
   phraseRegion: PhraseDatacenterRegion
   /**

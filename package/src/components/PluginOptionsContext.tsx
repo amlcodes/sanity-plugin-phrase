@@ -9,7 +9,7 @@ const defaultAdapter = documentInternationalizationAdapter()
 
 const PluginOptionsContext = createContext<PhrasePluginOptions>({
   apiEndpoint: '',
-  phraseRegion: 'eur',
+  phraseRegion: 'eu',
   phraseTemplates: [],
   sourceLang: '',
   supportedTargetLangs: [],

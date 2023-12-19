@@ -15,7 +15,7 @@ export const PHRASE_CONFIG = definePhraseOptions({
   ),
   sourceLang: SOURCE_LANGUAGE,
   apiEndpoint: process.env.NEXT_PUBLIC_PHRASE_PLUGIN_API_ENDPOINT,
-  phraseRegion: 'us',
+  phraseRegion: process.env.NEXT_PUBLIC_PHRASE_REGION || 'eu',
   phraseTemplates: [
     {
       templateUid: '1dIg0Pc1d8kLUFyM0tgdmt',

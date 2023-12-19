@@ -11,6 +11,7 @@ import {
   PhrasePluginOptions,
 } from './types'
 import { draftId, undraftId } from './utils'
+import { PhraseDatacenterRegion } from './clients/createPhraseClient'
 
 type BackendInput = {
   /** Sanity client with write token (can modify data) */
@@ -198,7 +199,7 @@ function parseInput(input: BackendInput): BackendInput {
   if (
     !credentials.region ||
     typeof credentials.region !== 'string' ||
-    !['eur', 'us'].includes(credentials.region)
+    !['eu', 'us'].includes(credentials.region.toLowerCase())
   ) {
     throw new Error(
       '[sanity-plugin-phrase/backend] Missing or invalid `phraseCredentials.region`',
@@ -213,6 +214,11 @@ function parseInput(input: BackendInput): BackendInput {
 
   return {
     ...input,
+    phraseCredentials: {
+      ...input.phraseCredentials,
+      region:
+        input.phraseCredentials.region.toLowerCase() as PhraseDatacenterRegion,
+    },
     sanityClient: sanityClient.withConfig({
       perspective: 'raw',
       useCdn: false,

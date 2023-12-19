@@ -55,9 +55,9 @@ const PHRASE_CONFIG = definePhraseOptions({
 
   /**
    * As defined by your Phrase account's settings
-   * Either `eur` or `us`
+   * Either `eu` or `us`
    */
-  phraseRegion: 'us|eur',
+  phraseRegion: 'us|eu',
 
   /**
    * The URL to your configured plugin backend API.
@@ -128,7 +128,7 @@ const phraseHandler = createInternalHandler({
   phraseCredentials: {
     userName: process.env.PHRASE_USER_NAME || '',
     password: process.env.PHRASE_PASSWORD || '',
-    region: (process.env.PHRASE_REGION as any) || 'eu',
+    region: process.env.NEXT_PUBLIC_PHRASE_REGION || 'eu',
   },
   sanityClient: client.withConfig({ token: writeToken }),
   pluginOptions: PHRASE_CONFIG,

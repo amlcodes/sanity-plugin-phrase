@@ -2,7 +2,7 @@ import { Fetcher } from '../openapi-typescript-fetch'
 import { operations, paths } from './phraseOpenAPI'
 import { ContentInPhrase } from '../types'
 
-export type PhraseDatacenterRegion = 'us' | 'eur'
+export type PhraseDatacenterRegion = 'us' | 'eu'
 
 export const createPhraseClient = (
   region: PhraseDatacenterRegion,
