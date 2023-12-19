@@ -1,5 +1,11 @@
 # sanity-plugin-phrase
 
+## 0.1.13
+
+### Patch Changes
+
+- Feat: requestPTDRefresh for translation live preview
+
 ## 0.1.12
 
 ### Patch Changes

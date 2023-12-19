@@ -270,10 +270,10 @@ Finally, in order to allow Phrase linguists from refreshing content in the front
 import { MouseEvent, useState } from 'react'
 import { requestPTDRefresh, isPtdId } from 'sanity-plugin-phrase/utils'
 
-function RefreshPTDButton(props: { previewedDocId: string }) {
+function RefreshPTDButton({ previewedDocId }: { previewedDocId: string }) {
   const [state, setState] = useState<'idle' | 'refreshing'>('idle')
 
-  if (!props.previewedDocId || !isPtdId(props.previewedDocId)) {
+  if (!previewedDocId || !isPtdId(previewedDocId)) {
     return null
   }
 
