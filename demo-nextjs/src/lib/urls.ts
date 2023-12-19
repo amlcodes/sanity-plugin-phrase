@@ -4,14 +4,12 @@ import { SupportedLanguage } from '~/utils'
 
 import { Post, PostCard } from './sanity.queries'
 
-export function pathToAbsUrl(path?: string): string | undefined {
-  if (typeof path !== 'string') return
+export function pathToAbsUrl<P extends string | undefined>(path: P): P {
+  if (typeof path !== 'string') return path
 
-  return (
-    process.env.NEXT_PUBLIC_BASE_URL +
+  return (process.env.NEXT_PUBLIC_BASE_URL +
     // When creating absolute URLs, ensure the homepage doesn't have a trailing slash
-    (path === '/' ? '' : formatPath(path))
-  )
+    (path === '/' ? '' : formatPath(path))) as P
 }
 
 function localizePath(path: string, language: SupportedLanguage) {

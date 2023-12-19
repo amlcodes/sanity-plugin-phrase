@@ -137,6 +137,7 @@ export async function isUniqueOtherThanLanguage(
   const id = context.document._id.replace(/^drafts\./, '')
 
   if (
+    context.document.phraseMetadata &&
     typeof context.document.phraseMetadata === 'object' &&
     '_type' in context.document.phraseMetadata &&
     context.document.phraseMetadata._type === 'phrase.ptd.meta'

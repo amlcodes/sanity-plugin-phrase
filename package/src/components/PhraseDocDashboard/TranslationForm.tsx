@@ -42,6 +42,7 @@ import {
   TranslationRequest,
 } from '../../types'
 import {
+  SANITY_API_VERSION,
   getDateDaysFromNow,
   getFieldLabel,
   getIsoDay,
@@ -117,7 +118,7 @@ export default function TranslationForm({
     'idle' | 'submitting' | 'error' | 'success'
   >('idle')
 
-  const sanityClient = useClient()
+  const sanityClient = useClient({ apiVersion: SANITY_API_VERSION })
   const sourceDocId = currentDocument._id
 
   const [formValue, setFormValue] = useState<FormValue>({

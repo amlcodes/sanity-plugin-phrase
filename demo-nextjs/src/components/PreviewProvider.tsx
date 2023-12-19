@@ -18,7 +18,7 @@ export default function PreviewProvider({
 }) {
   const pathname = usePathname()
 
-  if (pathname.startsWith('/studio')) return children
+  if (pathname?.startsWith('/studio')) return children
 
   const { client } = suspend(() => import('~/lib/sanity.client'), [UniqueKey])
   if (!token) throw new TypeError('Missing token')

@@ -41,7 +41,7 @@ export default async function handler(
   )
   const resBody = await phraseRes.json().catch(() => {})
 
-  Array.from(phraseRes.headers.entries()).forEach((value) => {
+  Array.from(phraseRes.headers.entries()).forEach((value: [string, any]) => {
     res.setHeader(value[0], value[1])
   })
   res.status(phraseRes.status).json(resBody)

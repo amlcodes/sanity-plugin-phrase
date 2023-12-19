@@ -12,8 +12,9 @@ export async function GET(request: Request) {
   }
 
   const { searchParams } = new URL(request.url)
-  const pathToRedirect = searchParams.get('pathToRedirect')
-    ? decodeURIComponent(searchParams.get('pathToRedirect'))
+  const rawPathToRedirect = searchParams.get('pathToRedirect')
+  const pathToRedirect = rawPathToRedirect
+    ? decodeURIComponent(rawPathToRedirect)
     : undefined
   const id = searchParams.get('publishedId')
 

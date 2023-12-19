@@ -7,13 +7,14 @@ import { type Post } from '~/lib/sanity.queries'
 import { formatDate } from '~/utils'
 
 export default function PostPage({ data: post }: { data: Post }) {
+  const mainImageUrl = post.mainImage && urlForImage(post.mainImage)?.url()
   return (
     <Container>
       <section className="post">
-        {post.mainImage ? (
+        {mainImageUrl ? (
           <Image
             className="post__cover"
-            src={urlForImage(post.mainImage).url()}
+            src={mainImageUrl}
             height={231}
             width={367}
             alt=""
