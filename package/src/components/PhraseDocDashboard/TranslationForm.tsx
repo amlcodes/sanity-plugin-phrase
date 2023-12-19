@@ -222,7 +222,7 @@ export default function TranslationForm({
     setState('submitting')
 
     try {
-      const body = await submitMultipleTranslations({
+      const { body, status } = await submitMultipleTranslations({
         schema,
         currentDocument: currentDocument,
         formValue,
@@ -233,12 +233,39 @@ export default function TranslationForm({
         pluginOptions,
       })
 
+      if (status === 401 || body.error === 'InvalidPhraseCredentialsError') {
+        toast.push({
+          status: 'error',
+          title: 'Invalid Phrase credentials',
+          description:
+            'Request help from developers to properly authenticate this plugin with Phrase.',
+        })
+        setState('error')
+        return
+      }
+
+      if (
+        body.error === 'SanityFetchError' ||
+        body.error === 'SanityCreateOrReplaceError'
+      ) {
+        toast.push({
+          status: 'error',
+          title: 'The Sanity API responded with an error',
+          description:
+            'Either the server is down or its Sanity credentials are wrong',
+        })
+        setState('error')
+        return
+      }
+
       if (!('successes' in body)) {
         toast.push({
           status: 'error',
           title: body.error,
-          description: JSON.stringify(body.errors),
+          description:
+            'errors' in body ? JSON.stringify(body.errors) : undefined,
         })
+        setState('error')
         return
       }
 
@@ -713,5 +740,8 @@ async function submitMultipleTranslations({
     },
   })
 
-  return (await res.json()) as CreateTranslationsResponse['body']
+  return {
+    body: (await res.json()) as CreateTranslationsResponse['body'],
+    status: res.status as CreateTranslationsResponse['status'],
+  }
 }

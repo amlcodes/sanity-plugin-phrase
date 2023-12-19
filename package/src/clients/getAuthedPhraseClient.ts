@@ -28,7 +28,17 @@ const getFreshToken = (credentials: PhraseCredentialsInput) => {
           password: credentials.password,
           userName: credentials.userName,
         }),
-      catch: (error) => new UnknownPhraseClientError(error),
+      catch: (error) => {
+        if (
+          typeof error === 'object' &&
+          error &&
+          'status' in error &&
+          error.status === 401
+        ) {
+          return new InvalidPhraseCredentialsError()
+        }
+        return new UnknownPhraseClientError(error)
+      },
     }),
     Effect.flatMap((res) => {
       if (!res.ok || !res.data.token) {

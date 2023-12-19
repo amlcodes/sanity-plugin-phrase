@@ -181,7 +181,33 @@ export default function refreshPTDs(input: {
     }),
   )
 
-  return Effect.runPromise(runEffectWithClients(input, withErrorRecovery))
+  return Effect.runPromise(
+    pipe(
+      runEffectWithClients(input, withErrorRecovery),
+      Effect.catchTags({
+        UnknownPhraseClientError: (error) =>
+          Effect.succeed({
+            body: { error: error._tag },
+            status: 500,
+          } as const),
+        SanityCreateOrReplaceError: (error) =>
+          Effect.succeed({
+            body: { error: error._tag },
+            status: 500,
+          } as const),
+        SanityFetchError: (error) =>
+          Effect.succeed({
+            body: { error: error._tag },
+            status: 500,
+          } as const),
+        InvalidPhraseCredentialsError: (error) =>
+          Effect.succeed({
+            body: { error: error._tag },
+            status: 401,
+          } as const),
+      }),
+    ),
+  )
 }
 
 function diffPTD({
