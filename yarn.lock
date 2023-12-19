@@ -3829,7 +3829,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^20":
+"@types/node@npm:*":
   version: 20.10.4
   resolution: "@types/node@npm:20.10.4"
   dependencies:
@@ -3868,7 +3868,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^18, @types/react-dom@npm:latest":
+"@types/react-dom@npm:latest":
   version: 18.2.17
   resolution: "@types/react-dom@npm:18.2.17"
   dependencies:
@@ -3886,7 +3886,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^18, @types/react@npm:^18.0.25, @types/react@npm:latest":
+"@types/react@npm:*, @types/react@npm:^18.0.25, @types/react@npm:latest":
   version: 18.2.42
   resolution: "@types/react@npm:18.2.42"
   dependencies:
@@ -5817,24 +5817,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"demo-backend@workspace:demo-backend":
-  version: 0.0.0-use.local
-  resolution: "demo-backend@workspace:demo-backend"
-  dependencies:
-    "@sanity/client": ^6.9.1
-    "@types/node": ^20
-    "@types/react": ^18
-    "@types/react-dom": ^18
-    next: 14.0.4
-    react: ^18.2.0
-    react-dom: ^18.2.0
-    sanity: ^3.21.1
-    sanity-plugin-phrase: 0.1.5
-    styled-components: ^6.1.1
-    typescript: ^5.3.2
-  languageName: unknown
-  linkType: soft
-
 "demo-nextjs@workspace:demo-nextjs":
   version: 0.0.0-use.local
   resolution: "demo-nextjs@workspace:demo-nextjs"
@@ -5860,7 +5842,7 @@ __metadata:
     react-dropzone: ^14.2.3
     sanity: ^3.21.1
     sanity-plugin-iframe-pane: ^2.6.1
-    sanity-plugin-phrase: 0.1.5
+    sanity-plugin-phrase: 0.1.11
     styled-components: ^6.1.1
     subtitle: ^4.2.1
     suspend-react: ^0.1.3
@@ -12012,7 +11994,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sanity-plugin-phrase@0.1.5, sanity-plugin-phrase@workspace:package":
+"sanity-plugin-phrase@0.1.11, sanity-plugin-phrase@workspace:package":
   version: 0.0.0-use.local
   resolution: "sanity-plugin-phrase@workspace:package"
   dependencies:

@@ -27,7 +27,7 @@
     "react-dropzone": "^14.2.3",
     "sanity": "^3.21.1",
     "sanity-plugin-iframe-pane": "^2.6.1",
-    "sanity-plugin-phrase": "0.1.11",
+    "sanity-plugin-phrase": "0.1.12",
     "styled-components": "^6.1.1",
     "subtitle": "^4.2.1",
     "suspend-react": "^0.1.3"

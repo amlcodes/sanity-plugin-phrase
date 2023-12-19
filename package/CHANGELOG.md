@@ -1,5 +1,11 @@
 # sanity-plugin-phrase
 
+## 0.1.12
+
+### Patch Changes
+
+- Fix: handle auth failure
+
 ## 0.1.11
 
 ### Patch Changes
