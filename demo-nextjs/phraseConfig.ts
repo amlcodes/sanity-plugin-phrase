@@ -1,5 +1,6 @@
 import { documentInternationalizationAdapter } from 'sanity-plugin-phrase/adapters'
 import { definePhraseOptions } from 'sanity-plugin-phrase/config'
+import { getDocPath } from '~/lib/urls'
 import {
   LANGUAGES,
   SOURCE_LANGUAGE,
@@ -22,16 +23,11 @@ export const PHRASE_CONFIG = definePhraseOptions({
       label: '[Sanity.io] Default template',
     },
   ],
-  getDocumentPreview: async (doc, sanityClient) => {
-    const previewSecretId = 'preview.secret'
-    const previewSecret = await sanityClient.fetch(
-      `*[_id == "${previewSecretId}"][0].secret`,
-    )
+  getDocumentPreview: (doc, _sanityClient) => {
     return `${
       process.env.NEXT_PUBLIC_BASE_URL
     }/api/draft?pathToRedirect=${encodeURIComponent(
-      `${doc.language === 'en' ? '' : `/${doc.language}`}/${(doc.slug as any)
-        ?.current}`,
-    )}&publishedId=${undraftId(doc._id)}&secret=${previewSecret}`
+      getDocPath(doc),
+    )}&publishedId=${undraftId(doc._id)}`
   },
 })

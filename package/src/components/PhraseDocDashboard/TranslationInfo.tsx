@@ -20,12 +20,7 @@ import { MouseEvent, PropsWithChildren, useState } from 'react'
 import { SanityDocument, useClient, useEditState, useSchema } from 'sanity'
 import { useOpenInSidePane } from '../../hooks/useOpenInSidepane'
 import mergePTD from '../../mergePTD'
-import {
-  CrossSystemLangCode,
-  EndpointActionTypes,
-  SanityPTD,
-  SanityTMD,
-} from '../../types'
+import { CrossSystemLangCode, SanityPTD, SanityTMD } from '../../types'
 import {
   SANITY_API_VERSION,
   formatDay,
@@ -33,6 +28,7 @@ import {
   jobsMetadataExtractor,
 } from '../../utils'
 import { getReadableLanguageName, langsAreTheSame } from '../../utils/langs'
+import requestPTDRefresh from '../../utils/requestPTDRefresh'
 import { PhraseMonogram } from '../PhraseLogo'
 import { usePluginOptions } from '../PluginOptionsContext'
 import StatusBadge from '../StatusBadge'
@@ -107,17 +103,12 @@ export function TranslationInfo({
     if (!ptdId) return
 
     setState('refreshing')
-    const res = await fetch(apiEndpoint, {
-      method: 'POST',
-      body: JSON.stringify({
-        action: EndpointActionTypes.REFRESH_PTD,
-        ptdId,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
+    const result = await requestPTDRefresh({
+      ptdId,
+      apiEndpoint,
     })
-    if (res.ok) {
+
+    if (result.success === true) {
       toast.push({
         status: 'success',
         title: 'Translation refreshed successfully',
@@ -126,11 +117,10 @@ export function TranslationInfo({
         closable: true,
       })
     } else {
-      const resBody = await res.json().catch(() => 'Unknown error')
       toast.push({
         status: 'error',
         title: 'Could not refresh translation',
-        description: JSON.stringify(resBody),
+        description: 'error' in result ? result.error : undefined,
         closable: true,
       })
     }
@@ -143,11 +133,11 @@ export function TranslationInfo({
   const dueDate = jobsMeta?.due || TMD.projectDueDate
   return (
     <TableRow>
-      <td>
+      <td style={{ verticalAlign: 'middle' }}>
         <Text size={1}>{getReadableLanguageName(targetLang)}</Text>
       </td>
 
-      <td style={{ minWidth: '200px' }}>
+      <td style={{ minWidth: '200px', verticalAlign: 'middle' }}>
         {jobsMeta && (
           <StatusBadge
             label={jobsMeta.stepName}
@@ -156,10 +146,10 @@ export function TranslationInfo({
           />
         )}
       </td>
-      <td>
+      <td style={{ verticalAlign: 'middle' }}>
         <Text size={1}>{dueDate ? formatDay(new Date(dueDate)) : ''}</Text>
       </td>
-      <td>
+      <td style={{ verticalAlign: 'middle' }}>
         <Flex align="center" gap={1}>
           {jobsMeta?.activeJobUid && (
             <Button

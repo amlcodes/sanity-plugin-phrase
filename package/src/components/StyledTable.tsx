@@ -1,5 +1,5 @@
 'use client'
-import { PropsWithChildren } from 'react'
+import { DetailedHTMLProps, HTMLAttributes, PropsWithChildren } from 'react'
 import styled from 'styled-components'
 import { useEffect, useRef, useState } from 'react'
 
@@ -14,7 +14,11 @@ function getTallestCell(rowEl: HTMLTableRowElement) {
   }, 0)
 }
 
-export const TableRow = (props: PropsWithChildren<{}>) => {
+export const TableRow = (
+  props: PropsWithChildren<
+    DetailedHTMLProps<HTMLAttributes<HTMLTableRowElement>, HTMLTableRowElement>
+  >,
+) => {
   const rowRef = useRef<HTMLTableRowElement>(null)
   const [rowHeight, setRowHeight] = useState<number | undefined>(undefined)
 

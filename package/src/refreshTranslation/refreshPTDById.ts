@@ -5,8 +5,10 @@ import {
   PhrasePluginOptions,
   SanityPTDWithExpandedMetadata,
 } from '../types'
-import { draftId, isPTDDoc, undraftId } from '../utils'
+import { draftId, isPTDDoc, isPtdId, undraftId } from '../utils'
 import { PTDWithExpandedDataQuery } from './refreshPTDs'
+
+export type RefreshPTDByIdResponse = Awaited<ReturnType<typeof refreshPTDById>>
 
 export default async function refreshPTDById(input: {
   sanityClient: SanityClient
@@ -14,6 +16,15 @@ export default async function refreshPTDById(input: {
   ptdId: string
   pluginOptions: PhrasePluginOptions
 }) {
+  if (!isPtdId(input.ptdId)) {
+    return {
+      status: 400,
+      body: {
+        error: 'InvalidPTDId',
+      },
+    } as const
+  }
+
   const PTDs = await input.sanityClient.fetch<SanityPTDWithExpandedMetadata[]>(
     `*[_id == $publishedId || _id == $draftId]{
     ...,

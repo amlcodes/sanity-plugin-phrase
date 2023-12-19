@@ -264,6 +264,45 @@ const { data } = await sanityClient.fetch(
 )
 ```
 
+Finally, in order to allow Phrase linguists from refreshing content in the front-end, you'll need to expose a button for them to request fresh data from Phrase. This can be done by adding a button to your front-end that calls the `refresh` action of your plugin's API endpoint. Here's an example with React:
+
+```tsx
+import { MouseEvent, useState } from 'react'
+import { requestPTDRefresh, isPtdId } from 'sanity-plugin-phrase/utils'
+
+function RefreshPTDButton(props: { previewedDocId: string }) {
+  const [state, setState] = useState<'idle' | 'refreshing'>('idle')
+
+  if (!props.previewedDocId || !isPtdId(props.previewedDocId)) {
+    return null
+  }
+
+  async function handleRefresh(e: MouseEvent) {
+    e.preventDefault()
+
+    setState('refreshing')
+    const result = await requestPTDRefresh({
+      ptdId: previewedDocId,
+      apiEndpoint,
+    })
+
+    if (result.success === false) {
+      // Notify users of errors as you see fit
+    }
+
+    setState('idle')
+  }
+
+  return (
+    <button onClick={handleRefresh} disabled={state === 'refreshing'}>
+      Refresh Phrase data
+    </button>
+  )
+}
+```
+
+The above is needed because Phrase's API does not notify webhooks on every translation segment change, only when jobs' statuses change. As a result, we need to manually ask for fresh data when in the middle of a job.
+
 ## Limitations and precautions
 
 ### Exclude PTDs from your queries

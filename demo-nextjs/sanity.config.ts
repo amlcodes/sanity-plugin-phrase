@@ -19,17 +19,16 @@ import { schemaTypes } from '~/schemas'
 import { LANGUAGES, TRANSLATABLE_SCHEMAS, undraftId } from '~/utils'
 import { PHRASE_CONFIG } from './phraseConfig'
 
-function getPreviewUrl(doc: SanityDocument, urlSecret: string) {
+function getPreviewUrl(doc: SanityDocument) {
   return `${
     window.location.origin
   }/api/draft?pathToRedirect=${encodeURIComponent(
     getDocPath(doc),
-  )}&publishedId=${undraftId(doc._id)}&secret=${urlSecret}`
+  )}&publishedId=${undraftId(doc._id)}`
 }
 
 const iframeOptions = {
   url: getPreviewUrl,
-  urlSecretId: previewSecretId,
   reload: { button: true },
 } satisfies IframeOptions
 

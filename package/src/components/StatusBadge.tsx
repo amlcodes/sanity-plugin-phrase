@@ -113,29 +113,34 @@ function getJobTone(jobStatus: PhraseJobInfo['status']): BadgeTone & CardTone {
   return 'default'
 }
 
-const STALE_MAP: Record<
+export const STALE_MAP: Record<
   StaleStatus,
-  { tone: BadgeTone & CardTone; icon: typeof CloseIcon }
+  { tone: BadgeTone & CardTone; icon: typeof CloseIcon; label: string }
 > = {
   [StaleStatus.UNTRANSLATABLE]: {
     tone: 'default',
     icon: CloseIcon,
+    label: 'Unstranslatable',
   },
   [StaleStatus.UNTRANSLATED]: {
     tone: 'caution',
     icon: InfoOutlineIcon,
+    label: 'Untranslated',
   },
   [StaleStatus.STALE]: {
     tone: 'caution',
     icon: WarningOutlineIcon,
+    label: 'Outdated',
   },
   [StaleStatus.FRESH]: {
     tone: 'positive',
     icon: CheckmarkCircleIcon,
+    label: 'Up to date',
   },
   [StaleStatus.ONGOING]: {
     tone: 'primary',
     icon: ClockIcon,
+    label: 'Ongoing',
   },
 }
 
