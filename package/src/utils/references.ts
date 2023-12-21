@@ -3,6 +3,18 @@ import { METADATA_KEY, ReferenceMap } from '../types'
 
 const UNDESIRED_KEYS = [METADATA_KEY]
 
+function isValidRef(data: object): data is Reference {
+  return (
+    '_ref' in data &&
+    typeof data._ref === 'string' &&
+    // Ignore images & files
+    !data._ref.startsWith('image-') &&
+    !data._ref.startsWith('file-') &&
+    // Ignore Sanity internals
+    !data._ref.startsWith('_.')
+  )
+}
+
 /**
  * Can contain duplicates.
  * Ignores images.
@@ -16,16 +28,8 @@ export function parseAllReferences(
   }
 
   if (typeof data === 'object' && data !== null) {
-    if ('_type' in data && data._type === 'reference') {
-      // Ignore images
-      if (
-        !('_ref' in data) ||
-        typeof data._ref !== 'string' ||
-        data._ref.startsWith('image-')
-      )
-        return state
-
-      return [...state, data as Reference]
+    if (isValidRef(data)) {
+      return [...state, data]
     }
 
     return [
@@ -79,13 +83,8 @@ export function injectTranslatedReferences({
   }
 
   if (typeof data === 'object' && data !== null) {
-    if (
-      '_type' in data &&
-      data._type === 'reference' &&
-      '_ref' in data &&
-      typeof data._ref === 'string'
-    ) {
-      return replaceTranslatedReference(data as Reference, referenceMap)
+    if (isValidRef(data)) {
+      return replaceTranslatedReference(data, referenceMap)
     }
 
     return Object.fromEntries(

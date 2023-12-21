@@ -1,5 +1,5 @@
-import { describe, expect, test } from 'bun:test'
-// import { describe, expect, test } from 'vitest'
+// import { describe, expect, test } from 'bun:test'
+import { describe, expect, test } from 'vitest'
 import { mergeDocs } from '../src/mergeDocs'
 import { exampleDocuments } from './exampleDocuments'
 
@@ -141,7 +141,7 @@ describe('Document merging', () => {
       mergeDocs({
         startingDocument: docPt,
         updatedDocument: docEn,
-        diffPaths: [],
+        diffs: [],
       }),
     ).toStrictEqual({
       ...docEn,
@@ -156,7 +156,7 @@ describe('Document merging', () => {
       mergeDocs({
         startingDocument: docPt,
         updatedDocument: docEn,
-        diffPaths: [{ path: ['title'], op: 'set' }],
+        diffs: [{ path: ['title'], op: 'set' }],
       }),
     ).toStrictEqual({
       ...docPt,
@@ -169,7 +169,7 @@ describe('Document merging', () => {
       mergeDocs({
         startingDocument: docPt,
         updatedDocument: docEn,
-        diffPaths: [{ path: ['body'], op: 'set' }],
+        diffs: [{ path: ['body'], op: 'set' }],
       }),
     ).toStrictEqual({
       ...docPt,
@@ -182,7 +182,7 @@ describe('Document merging', () => {
       mergeDocs({
         startingDocument: docPt,
         updatedDocument: docEn,
-        diffPaths: [
+        diffs: [
           {
             path: ['body', { _key: 'block-0' }],
             op: 'insert',
@@ -201,7 +201,7 @@ describe('Document merging', () => {
       mergeDocs({
         startingDocument: docPt,
         updatedDocument: docEn,
-        diffPaths: [
+        diffs: [
           {
             path: ['body', { _key: 'block-2' }],
             op: 'insert',
@@ -228,7 +228,7 @@ describe('Document merging', () => {
       mergeDocs({
         startingDocument: docPt,
         updatedDocument: docEn,
-        diffPaths: [
+        diffs: [
           {
             path: ['body', { _key: 'block-4' }],
             op: 'insert',
@@ -248,7 +248,7 @@ describe('Document merging', () => {
         mergeDocs({
           startingDocument: docPt,
           updatedDocument: docEn,
-          diffPaths: [{ path: ['body', { _key: block._key }], op: 'set' }],
+          diffs: [{ path: ['body', { _key: block._key }], op: 'set' }],
         }),
       ).toStrictEqual({
         ...docPt,
@@ -267,7 +267,7 @@ describe('Document merging', () => {
       mergeDocs({
         startingDocument: docPt,
         updatedDocument: docEn,
-        diffPaths: [{ path: ['arrayNotInPt'], op: 'set' }],
+        diffs: [{ path: ['arrayNotInPt'], op: 'set' }],
       }),
     ).toStrictEqual({
       ...docPt,
@@ -280,7 +280,7 @@ describe('Document merging', () => {
       mergeDocs({
         startingDocument: docPt,
         updatedDocument: docEn,
-        diffPaths: [{ path: ['slug'], op: 'set' }],
+        diffs: [{ path: ['slug'], op: 'set' }],
       }),
     ).toStrictEqual({
       ...docPt,
@@ -293,7 +293,7 @@ describe('Document merging', () => {
       mergeDocs({
         startingDocument: docPt,
         updatedDocument: docEn,
-        diffPaths: [
+        diffs: [
           { path: ['title'], op: 'set' },
           { path: ['body'], op: 'set' },
           { path: ['slug'], op: 'set' },
@@ -348,7 +348,7 @@ describe('Document merging', () => {
               _createdAt: '_createdAt',
               body: [changedBlock],
             },
-            diffPaths: [
+            diffs: [
               {
                 path: [
                   'body',

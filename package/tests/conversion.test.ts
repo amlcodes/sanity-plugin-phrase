@@ -1,5 +1,5 @@
-import { describe, expect, test } from 'bun:test'
-// import { describe, expect, test } from 'vitest'
+// import { describe, expect, test } from 'bun:test'
+import { describe, expect, test } from 'vitest'
 import decodeFromPhrase, { autoWrapTags } from '../src/decodeFromPhrase'
 import encodeToPhrase from '../src/encodeToPhrase'
 import { exampleDocuments } from './exampleDocuments'

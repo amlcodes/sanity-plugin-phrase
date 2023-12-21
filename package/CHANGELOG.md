@@ -1,5 +1,11 @@
 # sanity-plugin-phrase
 
+## 0.1.14
+
+### Patch Changes
+
+- fix: consider references with \_type != 'reference'
+
 ## 0.1.13
 
 ### Patch Changes

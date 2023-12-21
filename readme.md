@@ -345,6 +345,10 @@ Instead, users will need to finish ongoing translations before issuing a new one
 
 This plugin assumes that the target languages of a Phrase project will not change. If they do, the plugin will not be able to keep the translations in sync.
 
+### Maximum translated reference depth: 3
+
+This plugin will automatically translate referenced documents when issuing a translation. However, it will only do so up to 3 levels deep. This is to avoid infinite loops and to keep execution times low.
+
 ### When using the document-internationalization plugin, hide the "Translations" button from PTDs
 
 To avoid confusion, it's recommended to hide the "Translations" button from Sanity's document-internationalization plugin in PTDs.

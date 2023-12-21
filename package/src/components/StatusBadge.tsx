@@ -78,7 +78,9 @@ export default function StatusBadge(
           <Icon />
         </Text>
         <StyledBadge mode="outline" tone={tone} size={1}>
-          {props.label}
+          {'jobStatus' in props && tone === 'positive'
+            ? 'Completed'
+            : props.label}
         </StyledBadge>
       </Flex>
     </StyledCard>

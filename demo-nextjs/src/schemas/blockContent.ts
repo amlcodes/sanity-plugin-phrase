@@ -53,6 +53,13 @@ export default defineType({
               },
             ],
           },
+          {
+            title: 'Linked post',
+            name: 'linkedPost',
+            type: 'reference',
+            to: [{ type: 'post' }],
+            weak: true,
+          },
         ],
       },
       of: [
